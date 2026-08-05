@@ -39,6 +39,7 @@ def make_configuration(
         "model-id",
         800,
         None,
+        None,
         30.0,
         (("ignored", "metadata"),),
     )
@@ -109,6 +110,10 @@ def test_official_client_is_created_when_not_injected() -> None:
         ({"timeout_seconds": 0.0}, "INVALID_GENERATION_CONFIGURATION"),
         ({"temperature": -0.1}, "INVALID_GENERATION_CONFIGURATION"),
         ({"temperature": 2.1}, "INVALID_GENERATION_CONFIGURATION"),
+        (
+            {"reasoning_effort": "unsupported"},
+            "INVALID_GENERATION_CONFIGURATION",
+        ),
     ),
 )
 def test_invalid_configuration_prevents_request(
@@ -155,6 +160,38 @@ def test_temperature_is_included_only_when_present() -> None:
     provider, client = make_provider()
     provider.generate(make_prompt(), make_configuration(temperature=None))
     assert "temperature" not in client.responses.create.call_args.kwargs
+
+
+@pytest.mark.parametrize(
+    "reasoning_effort",
+    ("minimal", "low", "medium", "high"),
+)
+def test_reasoning_effort_is_included_exactly_when_configured(
+    reasoning_effort: str,
+) -> None:
+    """Include each supported reasoning effort using the Responses API shape."""
+    provider, client = make_provider()
+
+    provider.generate(
+        make_prompt(),
+        make_configuration(reasoning_effort=reasoning_effort),
+    )
+
+    assert client.responses.create.call_args.kwargs["reasoning"] == {
+        "effort": reasoning_effort,
+    }
+
+
+def test_reasoning_is_omitted_when_effort_is_none() -> None:
+    """Omit the complete reasoning argument when no effort is configured."""
+    provider, client = make_provider()
+
+    provider.generate(
+        make_prompt(),
+        make_configuration(reasoning_effort=None),
+    )
+
+    assert "reasoning" not in client.responses.create.call_args.kwargs
 
 
 def test_successful_response_is_normalized_without_rewriting() -> None:

@@ -28,6 +28,7 @@ def test_generation_configuration_stores_fields_in_order() -> None:
         model="model-id",
         max_output_tokens=800,
         temperature=0.2,
+        reasoning_effort="low",
         timeout_seconds=30.0,
         request_metadata=metadata,
     )
@@ -35,6 +36,7 @@ def test_generation_configuration_stores_fields_in_order() -> None:
     assert configuration.model == "model-id"
     assert configuration.max_output_tokens == 800
     assert configuration.temperature == 0.2
+    assert configuration.reasoning_effort == "low"
     assert configuration.timeout_seconds == 30.0
     assert configuration.request_metadata is metadata
     assert isinstance(configuration.request_metadata, tuple)
@@ -42,6 +44,7 @@ def test_generation_configuration_stores_fields_in_order() -> None:
         "model",
         "max_output_tokens",
         "temperature",
+        "reasoning_effort",
         "timeout_seconds",
         "request_metadata",
     )
@@ -49,9 +52,17 @@ def test_generation_configuration_stores_fields_in_order() -> None:
 
 def test_generation_configuration_is_immutable_and_accepts_none() -> None:
     """Accept no temperature and prevent configuration reassignment."""
-    configuration = GenerationConfiguration("model-id", 800, None, 30.0, ())
+    configuration = GenerationConfiguration(
+        "model-id",
+        800,
+        None,
+        None,
+        30.0,
+        (),
+    )
 
     assert configuration.temperature is None
+    assert configuration.reasoning_effort is None
     with pytest.raises(FrozenInstanceError):
         configuration.model = "other"  # type: ignore[misc]
 

@@ -75,6 +75,10 @@ class OpenAIProvider(LLMProvider):
         }
         if configuration.temperature is not None:
             request["temperature"] = configuration.temperature
+        if configuration.reasoning_effort is not None:
+            request["reasoning"] = {
+                "effort": configuration.reasoning_effort,
+            }
 
         try:
             response = self.client.responses.create(**request)
@@ -165,6 +169,14 @@ class OpenAIProvider(LLMProvider):
             raise GenerationError("INVALID_GENERATION_CONFIGURATION")
         temperature = configuration.temperature
         if temperature is not None and not 0.0 <= temperature <= 2.0:
+            raise GenerationError("INVALID_GENERATION_CONFIGURATION")
+        if configuration.reasoning_effort not in (
+            None,
+            "minimal",
+            "low",
+            "medium",
+            "high",
+        ):
             raise GenerationError("INVALID_GENERATION_CONFIGURATION")
 
     @staticmethod
