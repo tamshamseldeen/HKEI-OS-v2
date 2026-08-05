@@ -22,7 +22,13 @@ _FACT_CHECK_REQUESTS = ("تحقق من صحة", "تدقيق حقيقة", "fact c
 _INTERVIEW_REQUESTS = ("مقابلة", "حوار", "أسئلة وأجوبة", "interview", "q&a")
 _GUIDE_REQUESTS = ("اكتب دليلًا", "دليل", "كل ما تريد معرفته", "guide")
 _SERVICE_REQUESTS = ("خبر خدمي", "خدمي", "service news")
-_FEATURE_REQUESTS = ("تقرير قصصي", "فيتشر", "feature", "قصة صحفية")
+_FEATURE_REQUESTS = (
+    "تقرير قصصي",
+    "تقريرًا قصصيًا",
+    "فيتشر",
+    "feature",
+    "قصة صحفية",
+)
 _ANALYSIS_REQUESTS = ("تحليل", "تقرير تحليلي", "analysis")
 _PROFILE_REQUESTS = ("بروفايل", "ملف شخصي", "profile")
 _RESULT_REQUESTS = ("تقرير نتيجة", "نتيجة المباراة", "من فاز", "result report")
@@ -377,7 +383,11 @@ class DeterministicEditorialFormatClassifier:
             ), warnings
 
         if self._contains(instruction, _FEATURE_REQUESTS):
-            if depth == "RICH":
+            feature_signals = self._feature_signals(source, facts, text)
+            if depth == "RICH" or (
+                content_type is ContentType.SPORTS_NEWS
+                and len(feature_signals) >= 2
+            ):
                 return self._explicit_result(
                     EditorialFormat.FEATURE,
                     "EXPLICIT_FEATURE_FORMAT",
