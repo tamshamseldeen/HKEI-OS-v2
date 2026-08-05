@@ -1,0 +1,18 @@
+"""Supported reader intent values."""
+
+from enum import Enum
+
+
+class ReaderIntent(str, Enum):
+    """Describe the reader's primary editorial need."""
+
+    GET_UPDATE = "GET_UPDATE"
+    UNDERSTAND_EVENT = "UNDERSTAND_EVENT"
+    KNOW_ACTION = "KNOW_ACTION"
+    CHECK_CLAIM = "CHECK_CLAIM"
+    COMPARE_OPTIONS = "COMPARE_OPTIONS"
+    FOLLOW_DEVELOPMENT = "FOLLOW_DEVELOPMENT"
+    FIND_RESULT = "FIND_RESULT"
+    UNDERSTAND_IMPACT = "UNDERSTAND_IMPACT"
+    GET_GUIDANCE = "GET_GUIDANCE"
+    VERIFY_REQUIREMENTS = "VERIFY_REQUIREMENTS"
