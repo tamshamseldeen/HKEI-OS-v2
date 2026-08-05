@@ -400,3 +400,55 @@ def test_existing_source_assessment_behavior_remains_compatible() -> None:
     )
     assert result.generation_allowed is False
     assert result.reason_codes == ("SOURCE_INCOMPLETE",)
+
+
+@pytest.mark.parametrize("phrase", ("مخالفة مرورية", "غرامة مرورية"))
+def test_public_service_penalties_produce_medium_risk(
+    engine: SourceRiskAssessmentEngine,
+    phrase: str,
+) -> None:
+    """Assess specified public-service penalty phrases as MEDIUM risk."""
+    result = engine.assess(
+        NormalizedSource(
+            "تنبيه مروري",
+            phrase,
+            "Official Source",
+            "https://example.com",
+        )
+    )
+
+    assert result.risk_level is RiskLevel.MEDIUM
+    assert result.risk_topics == ("public_service_penalty",)
+    assert result.warnings == (
+        "OFFICIAL_SOURCE_REQUIRED",
+        "TIME_SENSITIVE_INFORMATION",
+    )
+    assert result.requires_official_source is True
+    assert result.requires_human_review is False
+    assert result.reason_codes == (
+        "SOURCE_OK",
+        "PUBLIC_SERVICE_PENALTY_MEDIUM_RISK",
+    )
+
+
+def test_legal_high_risk_wins_over_public_service_medium(
+    engine: SourceRiskAssessmentEngine,
+) -> None:
+    """Select HIGH when legal and public-service penalty rules both match."""
+    result = engine.assess(
+        NormalizedSource(
+            "حكم قضائي",
+            "فرضت المحكمة غرامة مرورية في الدعوى",
+            "Official Source",
+            "https://example.com",
+        )
+    )
+
+    assert result.risk_level is RiskLevel.HIGH
+    assert result.risk_topics == ("legal", "public_service_penalty")
+    assert result.reason_codes == (
+        "SOURCE_OK",
+        "LEGAL_HIGH_RISK",
+        "PUBLIC_SERVICE_PENALTY_MEDIUM_RISK",
+    )
+    assert result.requires_human_review is True

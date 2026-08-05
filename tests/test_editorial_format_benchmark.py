@@ -36,6 +36,25 @@ def test_exactly_four_cases_with_expected_formats() -> None:
     )
 
 
+def test_fuller_traffic_case_uses_only_supplied_source_facts() -> None:
+    """Retain each specified fact and official X attribution in the fuller body."""
+    traffic = BENCHMARK_CASES[0]
+
+    for supplied_fact in (
+        "المراوغة بين المركبات",
+        "3,000 ريال سعودي",
+        "6,000 ريال سعودي",
+        "فقدان السيطرة",
+        "تصادمات",
+        "مستخدمي الطريق للخطر",
+        "الالتزام بالمسار",
+        "ضبط السرعة",
+        "مسافة أمان",
+        "المرور الرسمية عبر شبكة X",
+    ):
+        assert supplied_fact in traffic.body
+
+
 @pytest.mark.parametrize(
     ("case_index", "expected"),
     tuple(enumerate(EXPECTED_FORMATS)),

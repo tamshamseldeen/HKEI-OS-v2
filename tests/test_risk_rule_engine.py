@@ -142,11 +142,53 @@ def test_built_in_legal_rule() -> None:
     assert rule.code == "LEGAL_HIGH_RISK"
 
 
+def test_isolated_traffic_fine_language_is_not_legal_high_risk() -> None:
+    """Do not treat isolated generic fine and penalty words as legal context."""
+    matches = RiskRuleEngine().evaluate(
+        make_source(body="تبدأ الغرامة من 3,000 ريال وتطبق العقوبة على المخالف")
+    )
+
+    assert "LEGAL_HIGH_RISK" not in tuple(rule.code for rule in matches)
+
+
+def test_public_service_penalty_rule() -> None:
+    """Match traffic violations as ordered medium-risk public service content."""
+    (rule,) = RiskRuleEngine().evaluate(make_source(body="هذه مخالفة مرورية"))
+
+    assert rule.code == "PUBLIC_SERVICE_PENALTY_MEDIUM_RISK"
+    assert rule.topics == ("public_service_penalty",)
+    assert rule.risk_level is RiskLevel.MEDIUM
+    assert rule.warnings == (
+        "OFFICIAL_SOURCE_REQUIRED",
+        "TIME_SENSITIVE_INFORMATION",
+    )
+    assert rule.requires_official_source is True
+    assert rule.requires_human_review is False
+
+
+def test_legal_context_fines_and_punishments_remain_high_risk() -> None:
+    """Keep judicial fines and criminal punishments in the legal HIGH rule."""
+    engine = RiskRuleEngine()
+
+    court = engine.evaluate(make_source(body="أصدرت المحكمة غرامة قضائية"))
+    criminal = engine.evaluate(make_source(body="تتضمن القضية عقوبة جنائية"))
+
+    assert tuple(rule.code for rule in court) == ("LEGAL_HIGH_RISK",)
+    assert tuple(rule.code for rule in criminal) == ("LEGAL_HIGH_RISK",)
+
+
 def test_built_in_financial_rule() -> None:
     """Match the built-in financial rule."""
-    (rule,) = RiskRuleEngine().evaluate(make_source(body="رسوم حكومية"))
+    (rule,) = RiskRuleEngine().evaluate(make_source(body="استثمار في أسهم"))
 
     assert rule.code == "FINANCIAL_HIGH_RISK"
+
+
+def test_government_fees_use_public_service_penalty_rule() -> None:
+    """Treat generic government fees as medium-risk public service content."""
+    (rule,) = RiskRuleEngine().evaluate(make_source(body="تحديث رسوم حكومية"))
+
+    assert rule.code == "PUBLIC_SERVICE_PENALTY_MEDIUM_RISK"
 
 
 def test_built_in_immigration_rule() -> None:

@@ -25,7 +25,18 @@ _MVP_RULES = (
     RiskRule(
         code="LEGAL_HIGH_RISK",
         topics=("legal",),
-        keywords=("قانون", "محكمة", "حكم قضائي", "دعوى", "غرامة", "عقوبة"),
+        keywords=(
+            "قانون",
+            "محكمة",
+            "حكم قضائي",
+            "دعوى",
+            "نيابة",
+            "استئناف",
+            "حق قانوني",
+            "التزام قانوني",
+            "عقوبة جنائية",
+            "غرامة قضائية",
+        ),
         risk_level=RiskLevel.HIGH,
         warnings=_STANDARD_HIGH_RISK_WARNINGS,
         requires_official_source=True,
@@ -34,7 +45,7 @@ _MVP_RULES = (
     RiskRule(
         code="FINANCIAL_HIGH_RISK",
         topics=("financial",),
-        keywords=("استثمار", "أسهم", "بورصة", "قرض", "فائدة", "ضريبة", "رسوم حكومية"),
+        keywords=("استثمار", "أسهم", "بورصة", "قرض", "فائدة", "ضريبة"),
         risk_level=RiskLevel.HIGH,
         warnings=_STANDARD_HIGH_RISK_WARNINGS,
         requires_official_source=True,
@@ -57,6 +68,22 @@ _MVP_RULES = (
         warnings=(*_STANDARD_HIGH_RISK_WARNINGS, "TIME_SENSITIVE_INFORMATION"),
         requires_official_source=True,
         requires_human_review=True,
+    ),
+    RiskRule(
+        code="PUBLIC_SERVICE_PENALTY_MEDIUM_RISK",
+        topics=("public_service_penalty",),
+        keywords=(
+            "مخالفة مرورية",
+            "غرامة مرورية",
+            "مخالفات المرور",
+            "رسوم حكومية",
+            "غرامة مالية مقررة",
+            "مخالفة تنظيمية",
+        ),
+        risk_level=RiskLevel.MEDIUM,
+        warnings=("OFFICIAL_SOURCE_REQUIRED", "TIME_SENSITIVE_INFORMATION"),
+        requires_official_source=True,
+        requires_human_review=False,
     ),
 )
 
