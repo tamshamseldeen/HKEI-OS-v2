@@ -1,0 +1,29 @@
+"""Supported article section identifiers."""
+
+from enum import Enum
+
+
+class ArticleSectionId(str, Enum):
+    """Identify a supported internal article-plan section."""
+
+    LEAD = "LEAD"
+    CORE_UPDATE = "CORE_UPDATE"
+    RESULT = "RESULT"
+    KEY_DETAILS = "KEY_DETAILS"
+    OFFICIAL_INFORMATION = "OFFICIAL_INFORMATION"
+    CLAIM = "CLAIM"
+    EVIDENCE = "EVIDENCE"
+    VERDICT = "VERDICT"
+    REQUIREMENTS = "REQUIREMENTS"
+    PROCEDURE = "PROCEDURE"
+    FEES = "FEES"
+    DEADLINES = "DEADLINES"
+    READER_ACTION = "READER_ACTION"
+    IMPACT = "IMPACT"
+    EXPLANATION = "EXPLANATION"
+    BACKGROUND = "BACKGROUND"
+    TIMELINE = "TIMELINE"
+    COMPARISON = "COMPARISON"
+    QUOTES = "QUOTES"
+    MISSING_INFORMATION = "MISSING_INFORMATION"
+    CLOSING = "CLOSING"
