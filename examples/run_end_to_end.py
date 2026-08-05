@@ -11,15 +11,19 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from src.generation.generation_configuration import GenerationConfiguration
 from src.generation.generation_error import GenerationError
+from src.generation.finish_reason import FinishReason
+from src.generation.generation_result import GenerationResult
 from src.generation.generation_service import GenerationService
 from src.generation.openai_provider import OpenAIProvider
 from src.intake.source_intake import SourceValidationError
 from src.parsing.deterministic_article_parser import DeterministicArticleParser
+from src.parsing.parsed_article import ParsedArticle
 from src.parsing.parsing_error import ParsingError
 from src.prompting.deterministic_prompt_builder import PromptConfigurationError
 from src.workflows.editorial_generation_workflow import (
     EditorialGenerationWorkflow,
 )
+from src.workflows.editorial_generation_result import EditorialGenerationResult
 from src.workflows.editorial_prompt_workflow import EditorialPromptWorkflow
 
 
@@ -46,6 +50,35 @@ USER_INSTRUCTION = (
 def _render_items(values: tuple[str, ...]) -> str:
     """Render tuple values as an ordered list or None."""
     return "\n".join(f"- {value}" for value in values) if values else "None"
+
+
+def _require_complete_generation(result: GenerationResult) -> None:
+    """Reject any result that is not safe to parse and save as complete."""
+    if (
+        result.finish_reason is not FinishReason.COMPLETED
+        or "OUTPUT_TRUNCATED" in result.warnings
+    ):
+        raise GenerationError("GENERATION_INTERRUPTED")
+
+
+def _parse_and_save(
+    *,
+    result: EditorialGenerationResult,
+    parser: DeterministicArticleParser,
+    output_path: Path,
+) -> ParsedArticle:
+    """Parse and save only one explicitly completed generation result."""
+    generation_result = result.generation_result
+    _require_complete_generation(generation_result)
+    prompt_result = result.prompt_result
+    parsed_article = parser.parse(
+        generation_result=generation_result,
+        generation_prompt=prompt_result.generation_prompt,
+        planning_result=prompt_result.planning_result,
+    )
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(parsed_article.full_markdown, encoding="utf-8")
+    return parsed_article
 
 
 def main() -> int:
@@ -89,13 +122,14 @@ def main() -> int:
             tags=("المرور", "السعودية", "غرامات", "السلامة المرورية"),
             user_instruction=USER_INSTRUCTION,
         )
+        output_path = PROJECT_ROOT / "outputs" / "end_to_end_article_v1.md"
+        parsed_article = _parse_and_save(
+            result=result,
+            parser=DeterministicArticleParser(),
+            output_path=output_path,
+        )
         prompt_result = result.prompt_result
         planning_result = prompt_result.planning_result
-        parsed_article = DeterministicArticleParser().parse(
-            generation_result=result.generation_result,
-            generation_prompt=prompt_result.generation_prompt,
-            planning_result=planning_result,
-        )
     except (
         SourceValidationError,
         PromptConfigurationError,
@@ -179,9 +213,6 @@ def main() -> int:
     print()
     print(parsed_article.full_markdown)
 
-    output_path = PROJECT_ROOT / "outputs" / "end_to_end_article_v1.md"
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(parsed_article.full_markdown, encoding="utf-8")
     return 0
 
 

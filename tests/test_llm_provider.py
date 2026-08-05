@@ -50,7 +50,14 @@ def test_concrete_provider_receives_contract_models() -> None:
         (),
         (),
     )
-    configuration = GenerationConfiguration("model-id", 800, None, 30.0, ())
+    configuration = GenerationConfiguration(
+        "model-id",
+        800,
+        None,
+        None,
+        30.0,
+        (),
+    )
     expected = GenerationResult(
         "raw output",
         "provider-id",

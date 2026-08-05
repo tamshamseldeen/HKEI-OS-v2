@@ -55,7 +55,7 @@ def make_prompt() -> GenerationPrompt:
 
 def make_configuration() -> GenerationConfiguration:
     """Create representative provider generation configuration."""
-    return GenerationConfiguration("model-id", 800, None, 30.0, ())
+    return GenerationConfiguration("model-id", 800, None, None, 30.0, ())
 
 
 def make_generation_result() -> GenerationResult:
