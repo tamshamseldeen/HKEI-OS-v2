@@ -2,10 +2,7 @@
 
 ## Purpose
 
-Describe the responsibility of the Source Intake layer.
-
-State clearly that it is responsible only for accepting,
-validating and normalizing incoming source material.
+The Source Intake layer is responsible only for accepting, validating, and normalizing incoming source material.
 
 It must not perform:
 
@@ -16,8 +13,6 @@ It must not perform:
 - prompting
 
 ## Supported Input Types
-
-Include:
 
 - Raw text
 - Headline + body
@@ -31,62 +26,44 @@ Include:
 
 ## Required Fields
 
-title
-
-body
-
-source_name
+- `title`
+- `body`
+- `source_name`
 
 ## Optional Fields
 
-source_url
-
-published_at
-
-language
-
-country
-
-author
-
-images
-
-attachments
-
-category
-
-tags
+- `source_url`
+- `published_at`
+- `language`
+- `country`
+- `author`
+- `images`
+- `attachments`
+- `category`
+- `tags`
 
 ## Validation Rules
 
-Document:
-
-- missing title
-- missing body
-- unsupported language
-- duplicated source
-- empty content
-- malformed URL
+- Missing title: reject input when `title` is absent.
+- Missing body: reject input when `body` is absent.
+- Unsupported language: reject input when its language is not supported.
+- Duplicated source: reject input that duplicates an already accepted source.
+- Empty content: reject input whose title or body contains no meaningful content.
+- Malformed URL: reject input when a supplied `source_url` is not a valid URL.
 
 ## Normalization Rules
 
-Document:
-
-- whitespace normalization
-- HTML removal
-- unicode normalization
-- newline normalization
-- metadata cleanup
+- Whitespace normalization: replace inconsistent spacing with consistent whitespace.
+- HTML removal: remove HTML markup from textual content.
+- Unicode normalization: convert text to a consistent Unicode representation.
+- Newline normalization: convert line endings to a consistent newline format.
+- Metadata cleanup: trim and standardize supplied metadata values.
 
 ## Output
 
-State that Source Intake returns exactly one object:
-
-NormalizedSource
+Source Intake returns exactly one object: `NormalizedSource`.
 
 ## Non Goals
-
-State explicitly:
 
 No AI.
 
@@ -100,12 +77,8 @@ No prompt generation.
 
 ## Future Extensions
 
-RSS
-
-Crawler
-
-API
-
-CMS
-
-Webhook
+- RSS
+- Crawler
+- API
+- CMS
+- Webhook
