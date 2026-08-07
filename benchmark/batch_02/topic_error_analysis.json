@@ -1,0 +1,838 @@
+{
+  "batch": "batch_02",
+  "topic_mismatches": 8,
+  "legacy_contamination_suspected": 3,
+  "substring_collision_suspected": 6,
+  "expected_vocabulary_gap": 4,
+  "human_adjudication_required": 5,
+  "mismatches": [
+    {
+      "id": "011",
+      "expected_topic": "GOVERNMENT",
+      "predicted_topic": "ECONOMY",
+      "predicted_confidence": "MEDIUM",
+      "legacy_content_type": "ECONOMY_NEWS",
+      "legacy_content_confidence": "MEDIUM",
+      "legacy_implied_topic": "ECONOMY",
+      "legacy_support_applied": true,
+      "risk_topics": [],
+      "title_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "body_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [
+          {
+            "matched_term": "التجارة",
+            "matched_text_context": "علنت وزارة التموين والتجارة الداخلية عن افتتاح",
+            "inside_larger_token": true
+          }
+        ],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [
+          {
+            "matched_term": "وزارة",
+            "matched_text_context": "أعلنت وزارة التموين والتجارة ال",
+            "inside_larger_token": false
+          },
+          {
+            "matched_term": "وزارة",
+            "matched_text_context": "يات قياسية. وأكدت الوزارة أن هذه الخطوة تأتي",
+            "inside_larger_token": true
+          }
+        ],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "tag_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "expected_topic_title_matches": [],
+      "expected_topic_body_matches": [
+        {
+          "matched_term": "وزارة",
+          "matched_text_context": "أعلنت وزارة التموين والتجارة ال",
+          "inside_larger_token": false
+        },
+        {
+          "matched_term": "وزارة",
+          "matched_text_context": "يات قياسية. وأكدت الوزارة أن هذه الخطوة تأتي",
+          "inside_larger_token": true
+        }
+      ],
+      "government_entity_evidence": false,
+      "structured_economic_evidence": false,
+      "final_reason_codes": [
+        "BODY_TOPIC_SIGNAL",
+        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL"
+      ],
+      "final_supporting_signals": [
+        "BODY_ECONOMY_SIGNAL",
+        "LEGACY_TOPIC_SUPPORT"
+      ],
+      "final_warnings": [],
+      "diagnostic_flags": [
+        "LEGACY_TOPIC_CONTAMINATION_SUSPECTED",
+        "SUBSTRING_COLLISION_SUSPECTED"
+      ],
+      "failure_classes": [
+        "Legacy dependency",
+        "Substring matching",
+        "Topic scoring / precedence",
+        "Human-label ambiguity"
+      ]
+    },
+    {
+      "id": "013",
+      "expected_topic": "TECHNOLOGY",
+      "predicted_topic": "BUSINESS",
+      "predicted_confidence": "LOW",
+      "legacy_content_type": "LEGAL_FINANCIAL_HIGH_RISK_CONTENT",
+      "legacy_content_confidence": "HIGH",
+      "legacy_implied_topic": null,
+      "legacy_support_applied": false,
+      "risk_topics": [
+        "financial"
+      ],
+      "title_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [
+          {
+            "matched_term": "شركات",
+            "matched_text_context": "شركات السيارات الكهربائية",
+            "inside_larger_token": false
+          }
+        ],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "body_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [
+          {
+            "matched_term": "شركات",
+            "matched_text_context": "تسارع كبرى شركات تصنيع السيارات حول",
+            "inside_larger_token": false
+          }
+        ],
+        "TECHNOLOGY": [
+          {
+            "matched_term": "تقنية",
+            "matched_text_context": "الشرق\" إلى أن هذه التقنية قد تسهم في خفض أسعا",
+            "inside_larger_token": true
+          }
+        ],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [
+          {
+            "matched_term": "أبحاث",
+            "matched_text_context": "م ضخ الاستثمارات في أبحاث بطاريات الحالة الصل",
+            "inside_larger_token": false
+          }
+        ],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "tag_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "expected_topic_title_matches": [],
+      "expected_topic_body_matches": [
+        {
+          "matched_term": "تقنية",
+          "matched_text_context": "الشرق\" إلى أن هذه التقنية قد تسهم في خفض أسعا",
+          "inside_larger_token": true
+        }
+      ],
+      "government_entity_evidence": false,
+      "structured_economic_evidence": true,
+      "final_reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "final_supporting_signals": [
+        "TITLE_BUSINESS_SIGNAL",
+        "BODY_BUSINESS_SIGNAL"
+      ],
+      "final_warnings": [
+        "LOW_TOPIC_CONFIDENCE"
+      ],
+      "diagnostic_flags": [
+        "SUBSTRING_COLLISION_SUSPECTED"
+      ],
+      "failure_classes": [
+        "Substring matching",
+        "Topic scoring / precedence",
+        "Human-label ambiguity"
+      ]
+    },
+    {
+      "id": "014",
+      "expected_topic": "WORLD",
+      "predicted_topic": "GENERAL",
+      "predicted_confidence": "LOW",
+      "legacy_content_type": "STANDARD_NEWS",
+      "legacy_content_confidence": "LOW",
+      "legacy_implied_topic": null,
+      "legacy_support_applied": false,
+      "risk_topics": [],
+      "title_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "body_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [
+          {
+            "matched_term": "ممثل",
+            "matched_text_context": "لتوصل للاتفاق، أبدى ممثلو عدد من الدول القلق",
+            "inside_larger_token": true
+          }
+        ],
+        "WORLD": []
+      },
+      "tag_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "expected_topic_title_matches": [],
+      "expected_topic_body_matches": [],
+      "government_entity_evidence": false,
+      "structured_economic_evidence": false,
+      "final_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "final_supporting_signals": [
+        "INSUFFICIENT_TOPIC_EVIDENCE"
+      ],
+      "final_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "diagnostic_flags": [
+        "SUBSTRING_COLLISION_SUSPECTED",
+        "EXPECTED_TOPIC_VOCABULARY_GAP"
+      ],
+      "failure_classes": [
+        "Substring matching",
+        "Vocabulary coverage",
+        "Human-label ambiguity"
+      ]
+    },
+    {
+      "id": "015",
+      "expected_topic": "GOVERNMENT",
+      "predicted_topic": "GENERAL",
+      "predicted_confidence": "LOW",
+      "legacy_content_type": "LEGAL_FINANCIAL_HIGH_RISK_CONTENT",
+      "legacy_content_confidence": "HIGH",
+      "legacy_implied_topic": null,
+      "legacy_support_applied": false,
+      "risk_topics": [
+        "financial"
+      ],
+      "title_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "body_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [
+          {
+            "matched_term": "شركات",
+            "matched_text_context": "رائب المصرية كافة الشركات والمكلفين المتبقين",
+            "inside_larger_token": true
+          }
+        ],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [
+          {
+            "matched_term": "وزارة",
+            "matched_text_context": "شهر الجاري. وأكدت الوزارة أن الفاتورة الإلكتر",
+            "inside_larger_token": true
+          }
+        ],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "tag_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "expected_topic_title_matches": [],
+      "expected_topic_body_matches": [
+        {
+          "matched_term": "وزارة",
+          "matched_text_context": "شهر الجاري. وأكدت الوزارة أن الفاتورة الإلكتر",
+          "inside_larger_token": true
+        }
+      ],
+      "government_entity_evidence": false,
+      "structured_economic_evidence": false,
+      "final_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "final_supporting_signals": [
+        "INSUFFICIENT_TOPIC_EVIDENCE"
+      ],
+      "final_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "diagnostic_flags": [
+        "SUBSTRING_COLLISION_SUSPECTED"
+      ],
+      "failure_classes": [
+        "Substring matching",
+        "Topic scoring / precedence"
+      ]
+    },
+    {
+      "id": "017",
+      "expected_topic": "ECONOMY",
+      "predicted_topic": "SPORTS",
+      "predicted_confidence": "MEDIUM",
+      "legacy_content_type": "SPORTS_NEWS",
+      "legacy_content_confidence": "MEDIUM",
+      "legacy_implied_topic": "SPORTS",
+      "legacy_support_applied": true,
+      "risk_topics": [],
+      "title_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "body_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [
+          {
+            "matched_term": "هدف",
+            "matched_text_context": "اية المستثمرين. وتستهدف هذه الخطوة الحد من",
+            "inside_larger_token": true
+          }
+        ],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "tag_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "expected_topic_title_matches": [],
+      "expected_topic_body_matches": [],
+      "government_entity_evidence": false,
+      "structured_economic_evidence": false,
+      "final_reason_codes": [
+        "BODY_TOPIC_SIGNAL",
+        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL"
+      ],
+      "final_supporting_signals": [
+        "BODY_SPORTS_SIGNAL",
+        "LEGACY_TOPIC_SUPPORT"
+      ],
+      "final_warnings": [],
+      "diagnostic_flags": [
+        "LEGACY_TOPIC_CONTAMINATION_SUSPECTED",
+        "SUBSTRING_COLLISION_SUSPECTED",
+        "EXPECTED_TOPIC_VOCABULARY_GAP"
+      ],
+      "failure_classes": [
+        "Legacy dependency",
+        "Substring matching",
+        "Vocabulary coverage"
+      ]
+    },
+    {
+      "id": "018",
+      "expected_topic": "SCIENCE",
+      "predicted_topic": "SPORTS",
+      "predicted_confidence": "MEDIUM",
+      "legacy_content_type": "SPORTS_NEWS",
+      "legacy_content_confidence": "MEDIUM",
+      "legacy_implied_topic": "SPORTS",
+      "legacy_support_applied": true,
+      "risk_topics": [],
+      "title_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "body_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [
+          {
+            "matched_term": "فريق",
+            "matched_text_context": "أعلن فريق دولي من علماء الفلك",
+            "inside_larger_token": false
+          }
+        ],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "tag_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "expected_topic_title_matches": [],
+      "expected_topic_body_matches": [],
+      "government_entity_evidence": false,
+      "structured_economic_evidence": false,
+      "final_reason_codes": [
+        "BODY_TOPIC_SIGNAL",
+        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL"
+      ],
+      "final_supporting_signals": [
+        "BODY_SPORTS_SIGNAL",
+        "LEGACY_TOPIC_SUPPORT"
+      ],
+      "final_warnings": [],
+      "diagnostic_flags": [
+        "LEGACY_TOPIC_CONTAMINATION_SUSPECTED",
+        "EXPECTED_TOPIC_VOCABULARY_GAP"
+      ],
+      "failure_classes": [
+        "Legacy dependency",
+        "Vocabulary coverage"
+      ]
+    },
+    {
+      "id": "019",
+      "expected_topic": "CULTURE",
+      "predicted_topic": "GENERAL",
+      "predicted_confidence": "LOW",
+      "legacy_content_type": "STANDARD_NEWS",
+      "legacy_content_confidence": "LOW",
+      "legacy_implied_topic": null,
+      "legacy_support_applied": false,
+      "risk_topics": [],
+      "title_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "body_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "tag_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "expected_topic_title_matches": [],
+      "expected_topic_body_matches": [],
+      "government_entity_evidence": false,
+      "structured_economic_evidence": false,
+      "final_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "final_supporting_signals": [
+        "INSUFFICIENT_TOPIC_EVIDENCE"
+      ],
+      "final_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "diagnostic_flags": [
+        "EXPECTED_TOPIC_VOCABULARY_GAP"
+      ],
+      "failure_classes": [
+        "Vocabulary coverage"
+      ]
+    },
+    {
+      "id": "020",
+      "expected_topic": "TECHNOLOGY",
+      "predicted_topic": "GENERAL",
+      "predicted_confidence": "LOW",
+      "legacy_content_type": "LEGAL_FINANCIAL_HIGH_RISK_CONTENT",
+      "legacy_content_confidence": "HIGH",
+      "legacy_implied_topic": null,
+      "legacy_support_applied": false,
+      "risk_topics": [
+        "financial"
+      ],
+      "title_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "body_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [
+          {
+            "matched_term": "السوق",
+            "matched_text_context": "بية مضاعفة حصتها في السوق العالمية بحلول نهاي",
+            "inside_larger_token": false
+          }
+        ],
+        "BUSINESS": [],
+        "TECHNOLOGY": [
+          {
+            "matched_term": "أشباه الموصلات",
+            "matched_text_context": "لإنشاء مصانع جديدة لأشباه الموصلات داخل دول التكتل. وت",
+            "inside_larger_token": true
+          }
+        ],
+        "SPORTS": [
+          {
+            "matched_term": "هدف",
+            "matched_text_context": "اخل دول التكتل. وتستهدف الإستراتيجية الأورو",
+            "inside_larger_token": true
+          }
+        ],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "tag_topic_signals": {
+        "POLITICS": [],
+        "ECONOMY": [],
+        "BUSINESS": [],
+        "TECHNOLOGY": [],
+        "SPORTS": [],
+        "GOVERNMENT": [],
+        "WEATHER": [],
+        "HEALTH": [],
+        "CULTURE": [],
+        "SCIENCE": [],
+        "EDUCATION": [],
+        "CRIME": [],
+        "ENTERTAINMENT": [],
+        "WORLD": []
+      },
+      "expected_topic_title_matches": [],
+      "expected_topic_body_matches": [
+        {
+          "matched_term": "أشباه الموصلات",
+          "matched_text_context": "لإنشاء مصانع جديدة لأشباه الموصلات داخل دول التكتل. وت",
+          "inside_larger_token": true
+        }
+      ],
+      "government_entity_evidence": false,
+      "structured_economic_evidence": false,
+      "final_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "final_supporting_signals": [
+        "INSUFFICIENT_TOPIC_EVIDENCE"
+      ],
+      "final_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "diagnostic_flags": [
+        "SUBSTRING_COLLISION_SUSPECTED"
+      ],
+      "failure_classes": [
+        "Substring matching",
+        "Topic scoring / precedence",
+        "Human-label ambiguity"
+      ]
+    }
+  ],
+  "human_adjudication_queue": [
+    {
+      "id": "011",
+      "title": "\"التموين\" تعلن زيادة الطاقات التخزينية للصوامع لتأمين المخزون الاستراتيجي للقمح",
+      "expected_topic": "GOVERNMENT",
+      "predicted_topic": "ECONOMY",
+      "possible_competing_topics": [
+        "GOVERNMENT",
+        "ECONOMY"
+      ]
+    },
+    {
+      "id": "013",
+      "title": "شركات السيارات الكهربائية تتجه لتقنيات البطاريات الصلبة لتقليل التكاليف",
+      "expected_topic": "TECHNOLOGY",
+      "predicted_topic": "BUSINESS",
+      "possible_competing_topics": [
+        "TECHNOLOGY",
+        "BUSINESS",
+        "ECONOMY",
+        "SCIENCE"
+      ]
+    },
+    {
+      "id": "014",
+      "title": "مؤتمر الأمم المتحدة للمناخ يختتم أعماله باتفاق على إقرار صندوق الخسائر والأضرار",
+      "expected_topic": "WORLD",
+      "predicted_topic": "GENERAL",
+      "possible_competing_topics": [
+        "WORLD",
+        "WEATHER",
+        "POLITICS"
+      ]
+    },
+    {
+      "id": "016",
+      "title": "شركات الطيران العالمية تتوقع أرباحاً قياسية بفضل انتعاش حركة السفر",
+      "expected_topic": "BUSINESS",
+      "predicted_topic": "BUSINESS",
+      "possible_competing_topics": [
+        "BUSINESS",
+        "ECONOMY"
+      ]
+    },
+    {
+      "id": "020",
+      "title": "أوروبا ترصد مليارات الأورو لتوطين صناعة الرقائق الإلكترونية وتقليل الاعتماد الخارجي",
+      "expected_topic": "TECHNOLOGY",
+      "predicted_topic": "GENERAL",
+      "possible_competing_topics": [
+        "TECHNOLOGY",
+        "ECONOMY",
+        "GOVERNMENT"
+      ]
+    }
+  ]
+}
