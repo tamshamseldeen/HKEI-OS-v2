@@ -1,0 +1,298 @@
+{
+  "batch": "batch_03",
+  "case_count": 5,
+  "required_relationships_passed": 5,
+  "required_primary_domains_passed": 5,
+  "required_secondary_domains_passed": 1,
+  "required_secondary_domains_applicable": 1,
+  "required_format_support_passed": 1,
+  "required_format_support_applicable": 1,
+  "required_intent_support_passed": 1,
+  "required_intent_support_applicable": 1,
+  "provenance_valid_cases": 5,
+  "unexpected_primary_domains": 0,
+  "cases": [
+    {
+      "id": "021",
+      "contextual_item_count": 2,
+      "semantic_relationship_count": 1,
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_GOVERNMENT"
+      ],
+      "secondary_domain_candidates": [],
+      "format_support": [],
+      "format_suppression": [],
+      "intent_support": [],
+      "warnings": [],
+      "relationships": [
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "relationship_type": "INSTITUTION_BELONGS_TO_DOMAIN",
+          "subject_component": "AUTHORITY",
+          "subject_text": "الهيئة القومية للأنفاق",
+          "object_component": "PRIMARY_SUBJECT",
+          "object_text": "المونوريل",
+          "strength": "STRONG",
+          "reason_code": "PUBLIC_INFRASTRUCTURE_DOMAIN_COMPOSITION",
+          "evidence_indexes": [],
+          "supports": [
+            "PRIMARY_DOMAIN_GOVERNMENT"
+          ],
+          "suppresses": []
+        }
+      ],
+      "required_relationship_present": true,
+      "required_primary_domain_present": true,
+      "required_secondary_domain_present": null,
+      "required_format_support_present": null,
+      "required_intent_support_present": null,
+      "unexpected_primary_domain_present": false,
+      "provenance_valid": true
+    },
+    {
+      "id": "022",
+      "contextual_item_count": 1,
+      "semantic_relationship_count": 2,
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "secondary_domain_candidates": [],
+      "format_support": [],
+      "format_suppression": [],
+      "intent_support": [],
+      "warnings": [],
+      "relationships": [
+        {
+          "source_section": "HEADLINE",
+          "sentence_index": 0,
+          "relationship_type": "INDICATOR_DESCRIBES_DOMAIN",
+          "subject_component": "INDICATOR",
+          "subject_text": "النمو الاقتصادي",
+          "object_component": "DOMAIN",
+          "object_text": "ECONOMY",
+          "strength": "STRONG",
+          "reason_code": "ECONOMIC_INDICATOR_DOMAIN_COMPOSITION",
+          "evidence_indexes": [],
+          "supports": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "relationship_type": "INDICATOR_DESCRIBES_DOMAIN",
+          "subject_component": "INDICATOR",
+          "subject_text": "نمو الأنشطة غير النفطية",
+          "object_component": "DOMAIN",
+          "object_text": "ECONOMY",
+          "strength": "STRONG",
+          "reason_code": "ECONOMIC_INDICATOR_DOMAIN_COMPOSITION",
+          "evidence_indexes": [],
+          "supports": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": []
+        }
+      ],
+      "required_relationship_present": true,
+      "required_primary_domain_present": true,
+      "required_secondary_domain_present": null,
+      "required_format_support_present": null,
+      "required_intent_support_present": null,
+      "unexpected_primary_domain_present": false,
+      "provenance_valid": true
+    },
+    {
+      "id": "023",
+      "contextual_item_count": 0,
+      "semantic_relationship_count": 2,
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_POLITICS"
+      ],
+      "secondary_domain_candidates": [
+        "SECONDARY_DOMAIN_ECONOMY"
+      ],
+      "format_support": [],
+      "format_suppression": [],
+      "intent_support": [],
+      "warnings": [],
+      "relationships": [
+        {
+          "source_section": "HEADLINE",
+          "sentence_index": 0,
+          "relationship_type": "ACTOR_PERFORMS_ACTION",
+          "subject_component": "ACTOR",
+          "subject_text": "واشنطن ووبكين",
+          "object_component": "ACTION",
+          "object_text": "مفاوضات",
+          "strength": "STRONG",
+          "reason_code": "INTERNATIONAL_NEGOTIATION_DOMAIN_COMPOSITION",
+          "evidence_indexes": [],
+          "supports": [
+            "PRIMARY_DOMAIN_POLITICS",
+            "SECONDARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "relationship_type": "ACTOR_PERFORMS_ACTION",
+          "subject_component": "ACTOR",
+          "subject_text": "الولايات المتحدة ووالصين",
+          "object_component": "ACTION",
+          "object_text": "اجتماعات رفيعة المستوى",
+          "strength": "STRONG",
+          "reason_code": "INTERNATIONAL_NEGOTIATION_DOMAIN_COMPOSITION",
+          "evidence_indexes": [],
+          "supports": [
+            "PRIMARY_DOMAIN_POLITICS",
+            "SECONDARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": []
+        }
+      ],
+      "required_relationship_present": true,
+      "required_primary_domain_present": true,
+      "required_secondary_domain_present": true,
+      "required_format_support_present": null,
+      "required_intent_support_present": null,
+      "unexpected_primary_domain_present": false,
+      "provenance_valid": true
+    },
+    {
+      "id": "026",
+      "contextual_item_count": 1,
+      "semantic_relationship_count": 4,
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_TECHNOLOGY"
+      ],
+      "secondary_domain_candidates": [],
+      "format_support": [
+        "FORMAT_SERVICE"
+      ],
+      "format_suppression": [],
+      "intent_support": [
+        "INTENT_KNOW_ACTION"
+      ],
+      "warnings": [],
+      "relationships": [
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "relationship_type": "ACTOR_PERFORMS_ACTION",
+          "subject_component": "ACTOR",
+          "subject_text": "خبراء الأمن السيبراني",
+          "object_component": "ACTION",
+          "object_text": "حذر",
+          "strength": "MEDIUM",
+          "reason_code": "ACTOR_ACTION_COMPOSITION",
+          "evidence_indexes": [
+            0
+          ],
+          "supports": [],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "relationship_type": "ACTION_TARGETS_OBJECT",
+          "subject_component": "ACTION",
+          "subject_text": "حذر",
+          "object_component": "OBJECT",
+          "object_text": "الأمن السيبراني",
+          "strength": "MEDIUM",
+          "reason_code": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+          "evidence_indexes": [
+            0
+          ],
+          "supports": [
+            "PRIMARY_DOMAIN_TECHNOLOGY"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "BODY",
+          "sentence_index": 0,
+          "relationship_type": "RECOMMENDATION_TARGETS_AUDIENCE",
+          "subject_component": "RECOMMENDED_ACTION",
+          "subject_text": "بضرورة تحديث برامج الحماية",
+          "object_component": "AFFECTED_AUDIENCE",
+          "object_text": "الشركات",
+          "strength": "STRONG",
+          "reason_code": "RECOMMENDED_ACTION_AUDIENCE_COMPOSITION",
+          "evidence_indexes": [],
+          "supports": [
+            "PRIMARY_DOMAIN_TECHNOLOGY",
+            "FORMAT_SERVICE",
+            "INTENT_KNOW_ACTION"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "BODY",
+          "sentence_index": 0,
+          "relationship_type": "ACTION_TARGETS_OBJECT",
+          "subject_component": "ACTION",
+          "subject_text": "طالب",
+          "object_component": "OBJECT",
+          "object_text": "برامج الحماية",
+          "strength": "MEDIUM",
+          "reason_code": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+          "evidence_indexes": [],
+          "supports": [
+            "PRIMARY_DOMAIN_TECHNOLOGY"
+          ],
+          "suppresses": []
+        }
+      ],
+      "required_relationship_present": true,
+      "required_primary_domain_present": true,
+      "required_secondary_domain_present": null,
+      "required_format_support_present": true,
+      "required_intent_support_present": true,
+      "unexpected_primary_domain_present": false,
+      "provenance_valid": true
+    },
+    {
+      "id": "028",
+      "contextual_item_count": 0,
+      "semantic_relationship_count": 1,
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_WEATHER"
+      ],
+      "secondary_domain_candidates": [],
+      "format_support": [],
+      "format_suppression": [],
+      "intent_support": [],
+      "warnings": [],
+      "relationships": [
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "relationship_type": "EVENT_HAS_OUTCOME",
+          "subject_component": "EVENT",
+          "subject_text": "الأمطار الموسمية الغزيرة",
+          "object_component": "OUTCOME",
+          "object_text": "فيضانات",
+          "strength": "STRONG",
+          "reason_code": "WEATHER_EVENT_DOMAIN_COMPOSITION",
+          "evidence_indexes": [],
+          "supports": [
+            "PRIMARY_DOMAIN_WEATHER"
+          ],
+          "suppresses": []
+        }
+      ],
+      "required_relationship_present": true,
+      "required_primary_domain_present": true,
+      "required_secondary_domain_present": null,
+      "required_format_support_present": null,
+      "required_intent_support_present": null,
+      "unexpected_primary_domain_present": false,
+      "provenance_valid": true
+    }
+  ]
+}
