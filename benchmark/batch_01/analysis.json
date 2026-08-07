@@ -1,0 +1,370 @@
+{
+  "batch": "batch_01",
+  "case_count": 10,
+  "cases": [
+    {
+      "id": "001",
+      "source_name": "اليوم السابع",
+      "benchmark_category": "economy",
+      "risk_level": "HIGH",
+      "risk_topics": [
+        "financial"
+      ],
+      "risk_warnings": [
+        "HIGH_RISK_CONTENT",
+        "OFFICIAL_SOURCE_REQUIRED",
+        "HUMAN_REVIEW_REQUIRED"
+      ],
+      "generation_allowed": true,
+      "content_type": "LEGAL_FINANCIAL_HIGH_RISK_CONTENT",
+      "content_confidence": "HIGH",
+      "content_warnings": [
+        "HIGH_RISK_TREATMENT_REQUIRED"
+      ],
+      "editorial_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_warnings": [],
+      "reader_intent": "FOLLOW_DEVELOPMENT",
+      "reader_intent_confidence": "MEDIUM",
+      "reader_intent_warnings": [],
+      "base_strategy": {
+        "article_length": "SHORT",
+        "article_depth": "EXPLAINED",
+        "writing_mode": "HIGH_RISK_CAUTION",
+        "target_word_count": 220,
+        "warnings": [
+          "UNSUPPORTED_TIMELINE_REQUEST",
+          "HIGH_RISK_REVIEW_REQUIRED"
+        ]
+      },
+      "adapted_strategy": {
+        "article_length": "SHORT",
+        "article_depth": "EXPLAINED",
+        "writing_mode": "HIGH_RISK_CAUTION",
+        "target_word_count": 220,
+        "warnings": [
+          "UNSUPPORTED_TIMELINE_REQUEST",
+          "HIGH_RISK_REVIEW_REQUIRED"
+        ]
+      }
+    },
+    {
+      "id": "002",
+      "source_name": "العربية",
+      "benchmark_category": "economy",
+      "risk_level": "LOW",
+      "risk_topics": [],
+      "risk_warnings": [],
+      "generation_allowed": true,
+      "content_type": "SPORTS_NEWS",
+      "content_confidence": "MEDIUM",
+      "content_warnings": [],
+      "editorial_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_warnings": [],
+      "reader_intent": "FIND_RESULT",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_warnings": [],
+      "base_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "RESULT_REPORT",
+        "target_word_count": 120,
+        "warnings": []
+      },
+      "adapted_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "RESULT_REPORT",
+        "target_word_count": 120,
+        "warnings": []
+      }
+    },
+    {
+      "id": "003",
+      "source_name": "الشرق",
+      "benchmark_category": "technology",
+      "risk_level": "HIGH",
+      "risk_topics": [
+        "financial"
+      ],
+      "risk_warnings": [
+        "HIGH_RISK_CONTENT",
+        "OFFICIAL_SOURCE_REQUIRED",
+        "HUMAN_REVIEW_REQUIRED"
+      ],
+      "generation_allowed": true,
+      "content_type": "LEGAL_FINANCIAL_HIGH_RISK_CONTENT",
+      "content_confidence": "HIGH",
+      "content_warnings": [
+        "HIGH_RISK_TREATMENT_REQUIRED"
+      ],
+      "editorial_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_warnings": [],
+      "reader_intent": "UNDERSTAND_IMPACT",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_warnings": [],
+      "base_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "HIGH_RISK_CAUTION",
+        "target_word_count": 120,
+        "warnings": [
+          "HIGH_RISK_REVIEW_REQUIRED"
+        ]
+      },
+      "adapted_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "HIGH_RISK_CAUTION",
+        "target_word_count": 120,
+        "warnings": [
+          "HIGH_RISK_REVIEW_REQUIRED"
+        ]
+      }
+    },
+    {
+      "id": "004",
+      "source_name": "BBC",
+      "benchmark_category": "weather",
+      "risk_level": "LOW",
+      "risk_topics": [],
+      "risk_warnings": [],
+      "generation_allowed": true,
+      "content_type": "BREAKING_NEWS",
+      "content_confidence": "MEDIUM",
+      "content_warnings": [],
+      "editorial_format": "BREAKING",
+      "format_confidence": "MEDIUM",
+      "format_warnings": [],
+      "reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "MEDIUM",
+      "reader_intent_warnings": [],
+      "base_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "DIRECT_NEWS",
+        "target_word_count": 120,
+        "warnings": []
+      },
+      "adapted_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "DIRECT_NEWS",
+        "target_word_count": 120,
+        "warnings": []
+      }
+    },
+    {
+      "id": "005",
+      "source_name": "اليوم السابع",
+      "benchmark_category": "government",
+      "risk_level": "LOW",
+      "risk_topics": [],
+      "risk_warnings": [],
+      "generation_allowed": true,
+      "content_type": "SPORTS_NEWS",
+      "content_confidence": "MEDIUM",
+      "content_warnings": [],
+      "editorial_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_warnings": [],
+      "reader_intent": "FIND_RESULT",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_warnings": [],
+      "base_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "RESULT_REPORT",
+        "target_word_count": 120,
+        "warnings": []
+      },
+      "adapted_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "RESULT_REPORT",
+        "target_word_count": 120,
+        "warnings": []
+      }
+    },
+    {
+      "id": "006",
+      "source_name": "العربية",
+      "benchmark_category": "economy",
+      "risk_level": "LOW",
+      "risk_topics": [],
+      "risk_warnings": [],
+      "generation_allowed": true,
+      "content_type": "SPORTS_NEWS",
+      "content_confidence": "MEDIUM",
+      "content_warnings": [],
+      "editorial_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_warnings": [],
+      "reader_intent": "FIND_RESULT",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_warnings": [],
+      "base_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "RESULT_REPORT",
+        "target_word_count": 120,
+        "warnings": []
+      },
+      "adapted_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "RESULT_REPORT",
+        "target_word_count": 120,
+        "warnings": []
+      }
+    },
+    {
+      "id": "007",
+      "source_name": "الشرق",
+      "benchmark_category": "economy",
+      "risk_level": "LOW",
+      "risk_topics": [],
+      "risk_warnings": [],
+      "generation_allowed": true,
+      "content_type": "ECONOMY_NEWS",
+      "content_confidence": "HIGH",
+      "content_warnings": [],
+      "editorial_format": "GUIDE",
+      "format_confidence": "MEDIUM",
+      "format_warnings": [],
+      "reader_intent": "UNDERSTAND_IMPACT",
+      "reader_intent_confidence": "MEDIUM",
+      "reader_intent_warnings": [],
+      "base_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "DIRECT_NEWS",
+        "target_word_count": 120,
+        "warnings": []
+      },
+      "adapted_strategy": {
+        "article_length": "MEDIUM",
+        "article_depth": "EXPLAINED",
+        "writing_mode": "SERVICE",
+        "target_word_count": 450,
+        "warnings": []
+      }
+    },
+    {
+      "id": "008",
+      "source_name": "BBC",
+      "benchmark_category": "culture",
+      "risk_level": "LOW",
+      "risk_topics": [],
+      "risk_warnings": [],
+      "generation_allowed": true,
+      "content_type": "STANDARD_NEWS",
+      "content_confidence": "LOW",
+      "content_warnings": [
+        "LOW_CLASSIFICATION_CONFIDENCE"
+      ],
+      "editorial_format": "STANDARD_NEWS",
+      "format_confidence": "LOW",
+      "format_warnings": [
+        "LOW_EDITORIAL_FORMAT_CONFIDENCE"
+      ],
+      "reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "LOW",
+      "reader_intent_warnings": [
+        "LOW_READER_INTENT_CONFIDENCE"
+      ],
+      "base_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "DIRECT_NEWS",
+        "target_word_count": 120,
+        "warnings": []
+      },
+      "adapted_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "DIRECT_NEWS",
+        "target_word_count": 120,
+        "warnings": []
+      }
+    },
+    {
+      "id": "009",
+      "source_name": "اليوم السابع",
+      "benchmark_category": "sports",
+      "risk_level": "LOW",
+      "risk_topics": [],
+      "risk_warnings": [],
+      "generation_allowed": true,
+      "content_type": "SPORTS_NEWS",
+      "content_confidence": "HIGH",
+      "content_warnings": [],
+      "editorial_format": "RESULT_REPORT",
+      "format_confidence": "MEDIUM",
+      "format_warnings": [],
+      "reader_intent": "FIND_RESULT",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_warnings": [],
+      "base_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "RESULT_REPORT",
+        "target_word_count": 120,
+        "warnings": []
+      },
+      "adapted_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "RESULT_REPORT",
+        "target_word_count": 120,
+        "warnings": []
+      }
+    },
+    {
+      "id": "010",
+      "source_name": "الشرق",
+      "benchmark_category": "economy",
+      "risk_level": "HIGH",
+      "risk_topics": [
+        "financial"
+      ],
+      "risk_warnings": [
+        "HIGH_RISK_CONTENT",
+        "OFFICIAL_SOURCE_REQUIRED",
+        "HUMAN_REVIEW_REQUIRED"
+      ],
+      "generation_allowed": true,
+      "content_type": "LEGAL_FINANCIAL_HIGH_RISK_CONTENT",
+      "content_confidence": "HIGH",
+      "content_warnings": [
+        "HIGH_RISK_TREATMENT_REQUIRED"
+      ],
+      "editorial_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_warnings": [],
+      "reader_intent": "UNDERSTAND_IMPACT",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_warnings": [],
+      "base_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "HIGH_RISK_CAUTION",
+        "target_word_count": 120,
+        "warnings": [
+          "HIGH_RISK_REVIEW_REQUIRED"
+        ]
+      },
+      "adapted_strategy": {
+        "article_length": "VERY_SHORT",
+        "article_depth": "UPDATE",
+        "writing_mode": "HIGH_RISK_CAUTION",
+        "target_word_count": 120,
+        "warnings": [
+          "HIGH_RISK_REVIEW_REQUIRED"
+        ]
+      }
+    }
+  ]
+}
