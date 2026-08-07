@@ -147,18 +147,20 @@ def test_batch_contains_only_registered_inputs_and_validation_reports() -> None:
         if path.is_file()
     )
 
-    assert len(files) == 14
+    assert len(files) == 16
     assert set(files) == {
         "manifest.json",
         "expected.json",
         "contextual_full_validation.json",
         "contextual_full_validation.md",
+        "compositional_context_analysis.json",
+        "compositional_context_analysis.md",
         *(f"{case_id}/source.md" for case_id in EXPECTED_IDS),
     }
     assert not any(
         term in path.lower()
         for path in files
-        for term in ("article", "analysis", "report")
+        for term in ("article", "report")
     )
     ordered_paths = [
         BATCH_ROOT / "manifest.json",

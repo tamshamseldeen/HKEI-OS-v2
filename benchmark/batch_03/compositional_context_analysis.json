@@ -1,0 +1,347 @@
+{
+  "batch": "batch_03",
+  "cases_analyzed": 8,
+  "failure_class_counts": {
+    "VOCABULARY_GAP": 0,
+    "COMPOSITIONAL_RELATIONSHIP_MISSING": 8,
+    "AUTHORITY_SUBJECT_CONFUSION": 3,
+    "ACTOR_SUBJECT_CONFUSION": 2,
+    "METHOD_SUBJECT_CONFUSION": 1,
+    "DOMAIN_PRECEDENCE_ERROR": 4,
+    "ACTION_STRUCTURE_MISSING": 1,
+    "EVENT_DOMAIN_MAPPING_MISSING": 1,
+    "FORMAT_ACTION_FALSE_POSITIVE": 1,
+    "INSUFFICIENT_CONTEXT_COMPOSITION": 4
+  },
+  "cases": [
+    {
+      "id": "021",
+      "expected_topic": "GOVERNMENT",
+      "predicted_topic": "GENERAL",
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "predicted_intent": "GET_UPDATE",
+      "current_contextual_support": [
+        "CLAIM_ATTRIBUTED"
+      ],
+      "diagnostic_roles": {
+        "AUTHORITY": [
+          "الهيئة القومية للأنفاق"
+        ],
+        "PRIMARY_SUBJECT": [
+          "منظومة المونوريل"
+        ],
+        "ACTION": [
+          "التشغيل التجريبي"
+        ],
+        "DOMAIN": [
+          "public infrastructure",
+          "government transport"
+        ]
+      },
+      "failure_classes": [
+        "COMPOSITIONAL_RELATIONSHIP_MISSING",
+        "AUTHORITY_SUBJECT_CONFUSION",
+        "INSUFFICIENT_CONTEXT_COMPOSITION"
+      ],
+      "missing_relationships": [
+        "Official transport authority operates a public-infrastructure project.",
+        "Operational project object carries the government-transport domain."
+      ],
+      "general_fix_candidates": [
+        "Compose institution authority with its acted-on subject instead of treating authority as the subject domain.",
+        "Detect domain-bearing objects and weight them above generic actors or institutions."
+      ]
+    },
+    {
+      "id": "022",
+      "expected_topic": "ECONOMY",
+      "predicted_topic": "GENERAL",
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "predicted_intent": "GET_UPDATE",
+      "current_contextual_support": [
+        "CLAIM_ATTRIBUTED"
+      ],
+      "diagnostic_roles": {
+        "ACTOR": [
+          "صندوق النقد الدولي"
+        ],
+        "PRIMARY_SUBJECT": [
+          "النمو الاقتصادي"
+        ],
+        "INDICATOR": [
+          "الأنشطة غير النفطية",
+          "الاستثمار"
+        ],
+        "DOMAIN": [
+          "ECONOMY"
+        ]
+      },
+      "failure_classes": [
+        "COMPOSITIONAL_RELATIONSHIP_MISSING",
+        "ACTOR_SUBJECT_CONFUSION",
+        "INSUFFICIENT_CONTEXT_COMPOSITION"
+      ],
+      "missing_relationships": [
+        "Reporting institution describes macroeconomic subject and indicators.",
+        "Economic indicators jointly establish the primary domain."
+      ],
+      "general_fix_candidates": [
+        "Separate actors from the primary subject through action-object composition.",
+        "Detect domain-bearing objects and weight them above generic actors or institutions."
+      ]
+    },
+    {
+      "id": "023",
+      "expected_topic": "POLITICS",
+      "predicted_topic": "GENERAL",
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "predicted_intent": "GET_UPDATE",
+      "current_contextual_support": [],
+      "diagnostic_roles": {
+        "ACTOR": [
+          "الولايات المتحدة",
+          "الصين",
+          "مسؤولون تجاريون"
+        ],
+        "ACTION": [
+          "مفاوضات"
+        ],
+        "OBJECT": [
+          "التعرفة والقيود التجارية"
+        ],
+        "DOMAIN": [
+          "international politics",
+          "diplomacy"
+        ]
+      },
+      "failure_classes": [
+        "COMPOSITIONAL_RELATIONSHIP_MISSING",
+        "ACTOR_SUBJECT_CONFUSION",
+        "DOMAIN_PRECEDENCE_ERROR"
+      ],
+      "missing_relationships": [
+        "State actors negotiate policy restrictions in an international relationship.",
+        "Diplomatic action is primary while trade is secondary evidence."
+      ],
+      "general_fix_candidates": [
+        "Separate actors from the primary subject through action-object composition.",
+        "Resolve candidate domains through contextual competition among authority, actor, method, object, event, and outcome evidence."
+      ]
+    },
+    {
+      "id": "024",
+      "expected_topic": "HEALTH",
+      "predicted_topic": "TECHNOLOGY",
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "predicted_intent": "GET_UPDATE",
+      "current_contextual_support": [
+        "TOPIC_TECHNOLOGY",
+        "TOPIC_SPORTS"
+      ],
+      "diagnostic_roles": {
+        "METHOD": [
+          "الذكاء الاصطناعي"
+        ],
+        "PRIMARY_SUBJECT": [
+          "تشخيص أورام السرطان"
+        ],
+        "OBJECT": [
+          "الصور الطبية",
+          "الأورام"
+        ],
+        "DOMAIN": [
+          "HEALTH"
+        ]
+      },
+      "failure_classes": [
+        "COMPOSITIONAL_RELATIONSHIP_MISSING",
+        "METHOD_SUBJECT_CONFUSION",
+        "DOMAIN_PRECEDENCE_ERROR"
+      ],
+      "missing_relationships": [
+        "Technology is the diagnostic method, not the primary subject.",
+        "Medical objects and outcome establish health as the dominant domain."
+      ],
+      "general_fix_candidates": [
+        "Distinguish a method or tool from the domain-bearing object it is used to examine.",
+        "Detect domain-bearing objects and weight them above generic actors or institutions.",
+        "Resolve candidate domains through contextual competition among authority, actor, method, object, event, and outcome evidence."
+      ]
+    },
+    {
+      "id": "025",
+      "expected_topic": "HEALTH",
+      "predicted_topic": "GOVERNMENT",
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "predicted_intent": "GET_UPDATE",
+      "current_contextual_support": [
+        "CLAIM_ATTRIBUTED",
+        "TOPIC_GOVERNMENT"
+      ],
+      "diagnostic_roles": {
+        "AUTHORITY": [
+          "وزارة الصحة"
+        ],
+        "ACTION": [
+          "تقديم خدمات وفحوصات"
+        ],
+        "PRIMARY_SUBJECT": [
+          "health screening",
+          "medical services"
+        ],
+        "DOMAIN": [
+          "HEALTH"
+        ]
+      },
+      "failure_classes": [
+        "COMPOSITIONAL_RELATIONSHIP_MISSING",
+        "AUTHORITY_SUBJECT_CONFUSION",
+        "DOMAIN_PRECEDENCE_ERROR"
+      ],
+      "missing_relationships": [
+        "Government authority supplies services whose objects carry the health domain.",
+        "Institution type should not override the acted-on medical subject."
+      ],
+      "general_fix_candidates": [
+        "Compose institution authority with its acted-on subject instead of treating authority as the subject domain.",
+        "Detect domain-bearing objects and weight them above generic actors or institutions.",
+        "Resolve candidate domains through contextual competition among authority, actor, method, object, event, and outcome evidence."
+      ]
+    },
+    {
+      "id": "026",
+      "expected_topic": "TECHNOLOGY",
+      "predicted_topic": "GENERAL",
+      "expected_format": "SERVICE",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "KNOW_ACTION",
+      "predicted_intent": "GET_UPDATE",
+      "current_contextual_support": [
+        "CLAIM_ATTRIBUTED"
+      ],
+      "diagnostic_roles": {
+        "ACTOR": [
+          "cybersecurity experts"
+        ],
+        "PRIMARY_SUBJECT": [
+          "ransomware attacks"
+        ],
+        "AFFECTED_AUDIENCE": [
+          "financial institutions",
+          "companies"
+        ],
+        "RECOMMENDED_ACTION": [
+          "update protection",
+          "apply encryption"
+        ],
+        "DOMAIN": [
+          "TECHNOLOGY"
+        ]
+      },
+      "failure_classes": [
+        "COMPOSITIONAL_RELATIONSHIP_MISSING",
+        "ACTION_STRUCTURE_MISSING",
+        "INSUFFICIENT_CONTEXT_COMPOSITION"
+      ],
+      "missing_relationships": [
+        "Experts direct protective actions to an affected audience.",
+        "Threat, audience, and recommended action jointly support service treatment and action intent."
+      ],
+      "general_fix_candidates": [
+        "Detect recommended-action structures from adviser, affected audience, and requested action relationships.",
+        "Detect domain-bearing objects and weight them above generic actors or institutions."
+      ]
+    },
+    {
+      "id": "028",
+      "expected_topic": "WEATHER",
+      "predicted_topic": "GENERAL",
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "predicted_intent": "GET_UPDATE",
+      "current_contextual_support": [],
+      "diagnostic_roles": {
+        "ENVIRONMENTAL_CONDITION": [
+          "heavy monsoon rain"
+        ],
+        "ACTION": [
+          "flooding",
+          "landslides"
+        ],
+        "OUTCOME": [
+          "displacement",
+          "evacuation"
+        ],
+        "DOMAIN": [
+          "WEATHER"
+        ]
+      },
+      "failure_classes": [
+        "COMPOSITIONAL_RELATIONSHIP_MISSING",
+        "EVENT_DOMAIN_MAPPING_MISSING",
+        "INSUFFICIENT_CONTEXT_COMPOSITION"
+      ],
+      "missing_relationships": [
+        "Environmental condition causes hazardous events and human outcomes.",
+        "The condition-event-outcome chain establishes the weather domain."
+      ],
+      "general_fix_candidates": [
+        "Compose environmental conditions, events, and outcomes into candidate domain evidence.",
+        "Resolve candidate domains through contextual competition among authority, actor, method, object, event, and outcome evidence."
+      ]
+    },
+    {
+      "id": "029",
+      "expected_topic": "EDUCATION",
+      "predicted_topic": "GOVERNMENT",
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "GUIDE",
+      "expected_intent": "GET_UPDATE",
+      "predicted_intent": "VERIFY_REQUIREMENTS",
+      "current_contextual_support": [
+        "CLAIM_ATTRIBUTED",
+        "TOPIC_GOVERNMENT"
+      ],
+      "diagnostic_roles": {
+        "AUTHORITY": [
+          "وزارة التعليم العالي"
+        ],
+        "PRIMARY_SUBJECT": [
+          "الجامعات المصرية"
+        ],
+        "ACTION": [
+          "international rankings"
+        ],
+        "DOMAIN": [
+          "EDUCATION"
+        ]
+      },
+      "failure_classes": [
+        "COMPOSITIONAL_RELATIONSHIP_MISSING",
+        "AUTHORITY_SUBJECT_CONFUSION",
+        "DOMAIN_PRECEDENCE_ERROR",
+        "FORMAT_ACTION_FALSE_POSITIVE"
+      ],
+      "missing_relationships": [
+        "Education authority reports an outcome about universities.",
+        "No requirement, deadline, procedure, eligibility, or reader action exists."
+      ],
+      "general_fix_candidates": [
+        "Compose institution authority with its acted-on subject instead of treating authority as the subject domain.",
+        "Detect domain-bearing objects and weight them above generic actors or institutions.",
+        "Add negative format evidence when requirement, deadline, procedure, eligibility, and reader action are absent."
+      ]
+    }
+  ]
+}
