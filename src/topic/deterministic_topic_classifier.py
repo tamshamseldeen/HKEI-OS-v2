@@ -14,6 +14,9 @@ from src.evidence.evidence_level import EvidenceLevel
 from src.evidence.evidence_strength import EvidenceStrength
 from src.facts.extracted_facts import ExtractedFacts
 from src.intake.normalized_source import NormalizedSource
+from src.semantics.compositional_semantic_evidence import (
+    CompositionalSemanticEvidence,
+)
 
 from .topic import Topic
 from .topic_classification import TopicClassification
@@ -289,6 +292,16 @@ _LEGACY_CORROBORATION_WEIGHT = 1
 _CONTEXTUAL_TOPIC_LABELS = {
     f"TOPIC_{topic.value}": topic for topic in Topic if topic is not Topic.GENERAL
 }
+_SEMANTIC_PRIMARY_LABELS = {
+    f"PRIMARY_DOMAIN_{topic.value}": topic
+    for topic in Topic
+    if topic is not Topic.GENERAL
+}
+_SEMANTIC_SECONDARY_LABELS = {
+    f"SECONDARY_DOMAIN_{topic.value}": topic
+    for topic in Topic
+    if topic is not Topic.GENERAL
+}
 _CONTEXTUAL_WEIGHTS = {
     (EvidenceLevel.STRUCTURAL, EvidenceStrength.STRONG): 14,
     (EvidenceLevel.CONTEXT, EvidenceStrength.STRONG): 12,
@@ -348,6 +361,7 @@ class DeterministicTopicClassifier:
         content_classification: ContentTypeClassification,
         user_instruction: str | None = None,
         contextual_evidence: ContextualEvidence | None = None,
+        semantic_evidence: CompositionalSemanticEvidence | None = None,
     ) -> TopicClassification:
         """Classify one source from supplied deterministic signals only.
 
@@ -358,6 +372,7 @@ class DeterministicTopicClassifier:
             content_classification: Transitional legacy content classification.
             user_instruction: Optional supplied editorial instruction.
             contextual_evidence: Optional deterministic contextual evidence.
+            semantic_evidence: Optional compositional semantic evidence.
 
         Returns:
             Exactly one primary topic classification.
@@ -438,6 +453,10 @@ class DeterministicTopicClassifier:
         contextual_scores, contextual_counts = self._contextual_topic_scores(
             contextual_evidence
         )
+        semantic_primary, semantic_secondary, strong_semantic_primary = (
+            self._semantic_topics(semantic_evidence)
+        )
+        semantic_suppressed = self._semantic_suppressed_topics(semantic_evidence)
         scores_before_suppression = scores.copy()
         for topic, score in contextual_scores.items():
             scores[topic] += score
@@ -462,7 +481,16 @@ class DeterministicTopicClassifier:
             scores[topic] -= penalty
             suppression_applied.add(topic)
 
-        selected = self._select_topic(
+        semantic_suppression_applied: set[Topic] = set()
+        if strong_semantic_primary:
+            for topic in semantic_suppressed:
+                if topic in strong_semantic_primary:
+                    continue
+                if scores[topic] > 0:
+                    scores[topic] = 0
+                    semantic_suppression_applied.add(topic)
+
+        baseline_selected = self._select_topic(
             scores=scores,
             category_topic=category_topic,
             title_matches=title_matches,
@@ -472,6 +500,25 @@ class DeterministicTopicClassifier:
             structured_economic=structured_economic,
             contextual_scores=contextual_scores,
         )
+        selected = baseline_selected
+        if category_topic is None:
+            unsuppressed_strong = tuple(
+                topic
+                for topic in strong_semantic_primary
+                if topic not in semantic_suppressed
+            )
+            if unsuppressed_strong:
+                selected = unsuppressed_strong[0]
+            elif selected is None:
+                unsuppressed_primary = tuple(
+                    topic
+                    for topic in semantic_primary
+                    if topic not in semantic_suppressed
+                )
+                if unsuppressed_primary:
+                    selected = unsuppressed_primary[0]
+                elif semantic_secondary:
+                    selected = semantic_secondary[0]
         if selected is None:
             return TopicClassification(
                 topic=Topic.GENERAL,
@@ -484,8 +531,14 @@ class DeterministicTopicClassifier:
                 ),
             )
 
-        category_conflict = (
-            category_topic is not None and category_topic is not selected
+        semantic_category_conflict = bool(
+            category_topic is not None
+            and semantic_primary
+            and category_topic not in semantic_primary
+        )
+        category_conflict = bool(
+            category_topic is not None
+            and (category_topic is not selected or semantic_category_conflict)
         )
         strong_topics = self._strong_non_category_topics(
             title_matches,
@@ -535,6 +588,44 @@ class DeterministicTopicClassifier:
         if suppression_material:
             reasons += ("CONTEXTUAL_TOPIC_SUPPRESSION",)
             signals += ("CONTEXTUAL_COMPETING_TOPIC_SUPPRESSED",)
+        semantic_primary_material = selected in semantic_primary and (
+            category_topic is None
+            and (
+                baseline_selected is not selected
+                or baseline_selected is None
+                or selected in strong_semantic_primary
+            )
+        )
+        semantic_secondary_material = bool(
+            semantic_primary_material
+            and any(topic is not selected for topic in semantic_secondary)
+        ) or (
+            selected in semantic_secondary and selected not in semantic_primary
+        )
+        semantic_suppression_material = bool(
+            semantic_primary_material
+            and (
+                semantic_suppression_applied
+                or any(
+                    topic is not selected
+                    and topic in semantic_suppressed
+                    and topic in semantic_primary + semantic_secondary
+                    for topic in semantic_suppressed
+                )
+            )
+        )
+        if semantic_primary_material or semantic_secondary_material:
+            reasons += ("COMPOSITIONAL_SEMANTIC_TOPIC_EVIDENCE",)
+        if semantic_suppression_material:
+            reasons += ("COMPOSITIONAL_SEMANTIC_TOPIC_SUPPRESSION",)
+        if semantic_primary_material and semantic_secondary:
+            reasons += ("PRIMARY_SECONDARY_DOMAIN_RESOLUTION",)
+        if semantic_primary_material:
+            signals += ("SEMANTIC_PRIMARY_DOMAIN_SUPPORT",)
+        if semantic_secondary_material:
+            signals += ("SEMANTIC_SECONDARY_DOMAIN_SUPPORT",)
+        if semantic_suppression_material:
+            signals += ("SEMANTIC_COMPETING_DOMAIN_SUPPRESSED",)
         if category_conflict or non_category_conflict:
             reasons += ("TOPIC_CONFLICT_RESOLVED",)
         if category_conflict:
@@ -560,6 +651,19 @@ class DeterministicTopicClassifier:
             scores=scores,
             suppression_material=suppression_material,
         )
+        if semantic_primary_material:
+            unsuppressed_competing = tuple(
+                topic
+                for topic in semantic_primary
+                if topic is not selected and topic not in semantic_suppressed
+            )
+            confidence = (
+                TopicConfidence.HIGH
+                if selected in strong_semantic_primary
+                and not unsuppressed_competing
+                and len(semantic_primary) == 1
+                else TopicConfidence.MEDIUM
+            )
         if confidence is TopicConfidence.LOW:
             warnings += ("LOW_TOPIC_CONFIDENCE",)
         return TopicClassification(
@@ -756,6 +860,53 @@ class DeterministicTopicClassifier:
             if item.strength is EvidenceStrength.STRONG
             for label in item.suppresses
             if (topic := _CONTEXTUAL_TOPIC_LABELS.get(label)) is not None
+        )
+
+    @staticmethod
+    def _semantic_topics(
+        semantic_evidence: CompositionalSemanticEvidence | None,
+    ) -> tuple[tuple[Topic, ...], tuple[Topic, ...], tuple[Topic, ...]]:
+        """Map ordered semantic candidates and detect strong primary support."""
+        if semantic_evidence is None:
+            return (), (), ()
+        primary = tuple(
+            dict.fromkeys(
+                topic
+                for label in semantic_evidence.primary_domain_candidates
+                if (topic := _SEMANTIC_PRIMARY_LABELS.get(label)) is not None
+            )
+        )
+        secondary = tuple(
+            dict.fromkeys(
+                topic
+                for label in semantic_evidence.secondary_domain_candidates
+                if (topic := _SEMANTIC_SECONDARY_LABELS.get(label)) is not None
+            )
+        )
+        strong_labels = {
+            label
+            for relationship in semantic_evidence.relationships
+            if relationship.strength is EvidenceStrength.STRONG
+            for label in relationship.supports
+        }
+        strong_primary = tuple(
+            topic
+            for topic in primary
+            if f"PRIMARY_DOMAIN_{topic.value}" in strong_labels
+        )
+        return primary, secondary, strong_primary
+
+    @staticmethod
+    def _semantic_suppressed_topics(
+        semantic_evidence: CompositionalSemanticEvidence | None,
+    ) -> frozenset[Topic]:
+        """Map recognized semantic primary-domain suppression labels."""
+        if semantic_evidence is None:
+            return frozenset()
+        return frozenset(
+            topic
+            for label in semantic_evidence.all_suppressions
+            if (topic := _SEMANTIC_PRIMARY_LABELS.get(label)) is not None
         )
 
     @staticmethod

@@ -25,6 +25,12 @@ from src.evidence.evidence_role import EvidenceRole
 from src.evidence.evidence_strength import EvidenceStrength
 from src.evidence.source_section import SourceSection
 from src.intake.normalized_source import NormalizedSource
+from src.semantics.compositional_semantic_evidence import (
+    CompositionalSemanticEvidence,
+)
+from src.semantics.semantic_component import SemanticComponent
+from src.semantics.semantic_relationship import SemanticRelationship
+from src.semantics.semantic_relationship_type import SemanticRelationshipType
 from src.topic.deterministic_topic_classifier import DeterministicTopicClassifier
 from src.topic.topic import Topic
 from src.topic.topic_classification import TopicClassification
@@ -108,6 +114,7 @@ def classify(
     content: ContentTypeClassification | None = None,
     user_instruction: str | None = None,
     contextual_evidence: ContextualEvidence | None = None,
+    semantic_evidence: CompositionalSemanticEvidence | None = None,
 ) -> TopicClassification:
     """Classify convenient deterministic defaults."""
     return DeterministicTopicClassifier().classify(
@@ -117,6 +124,7 @@ def classify(
         content_classification=content or make_content(),
         user_instruction=user_instruction,
         contextual_evidence=contextual_evidence,
+        semantic_evidence=semantic_evidence,
     )
 
 
@@ -146,6 +154,257 @@ def make_contextual_evidence(
 ) -> ContextualEvidence:
     """Create contextual evidence with supplied lead items."""
     return ContextualEvidence((), items, (), (), (), ())
+
+
+def make_semantic_evidence(
+    *primary: str,
+    secondary: tuple[str, ...] = (),
+    suppresses: tuple[str, ...] = (),
+    strength: EvidenceStrength = EvidenceStrength.STRONG,
+) -> CompositionalSemanticEvidence:
+    """Create semantic evidence with one relationship per primary label."""
+    relationships = tuple(
+        SemanticRelationship(
+            source_section=SourceSection.LEAD,
+            sentence_index=index,
+            relationship_type=SemanticRelationshipType.SUBJECT_BELONGS_TO_DOMAIN,
+            subject_component=SemanticComponent.PRIMARY_SUBJECT,
+            subject_text=f"subject-{index}",
+            object_component=SemanticComponent.DOMAIN,
+            object_text=label,
+            strength=strength,
+            reason_code="TEST_SEMANTIC_RELATIONSHIP",
+            evidence_indexes=(),
+            supports=(label,),
+            suppresses=suppresses if index == 0 else (),
+        )
+        for index, label in enumerate(primary)
+    )
+    return CompositionalSemanticEvidence(
+        relationships=relationships,
+        primary_domain_candidates=primary,
+        secondary_domain_candidates=secondary,
+        format_support=(),
+        format_suppression=(),
+        intent_support=(),
+        warnings=(),
+    )
+
+
+def test_semantic_evidence_is_optional_and_none_preserves_exact_output() -> None:
+    """Keep all pre-integration output identical when semantics are omitted."""
+    source = make_source(title="البنك المركزي يثبت أسعار الفائدة")
+    classifier = DeterministicTopicClassifier()
+    arguments = {
+        "source": source,
+        "facts": make_facts(),
+        "assessment": make_assessment(),
+        "content_classification": make_content(),
+    }
+
+    assert classifier.classify(**arguments) == classifier.classify(
+        **arguments,
+        semantic_evidence=None,
+    )
+
+
+@pytest.mark.parametrize(
+    ("label", "expected"),
+    (
+        ("PRIMARY_DOMAIN_HEALTH", Topic.HEALTH),
+        ("PRIMARY_DOMAIN_EDUCATION", Topic.EDUCATION),
+        ("PRIMARY_DOMAIN_GOVERNMENT", Topic.GOVERNMENT),
+        ("PRIMARY_DOMAIN_TECHNOLOGY", Topic.TECHNOLOGY),
+        ("PRIMARY_DOMAIN_ECONOMY", Topic.ECONOMY),
+    ),
+)
+def test_semantic_primary_domain_maps_to_topic(
+    label: str,
+    expected: Topic,
+) -> None:
+    """Map supported semantic primary labels to their exact topics."""
+    result = classify(semantic_evidence=make_semantic_evidence(label))
+
+    assert result.topic is expected
+    assert result.confidence is TopicConfidence.HIGH
+    assert "COMPOSITIONAL_SEMANTIC_TOPIC_EVIDENCE" in result.reason_codes
+    assert "SEMANTIC_PRIMARY_DOMAIN_SUPPORT" in result.supporting_signals
+
+
+def test_unknown_semantic_primary_domain_is_ignored() -> None:
+    """Ignore unknown semantic candidate labels safely."""
+    result = classify(
+        semantic_evidence=make_semantic_evidence("PRIMARY_DOMAIN_UNKNOWN")
+    )
+
+    assert result.topic is Topic.GENERAL
+
+
+def test_secondary_domain_never_outranks_primary() -> None:
+    """Resolve a strong primary above a competing weak secondary domain."""
+    semantic = make_semantic_evidence(
+        "PRIMARY_DOMAIN_HEALTH",
+        secondary=("SECONDARY_DOMAIN_TECHNOLOGY",),
+    )
+    result = classify(semantic_evidence=semantic)
+
+    assert result.topic is Topic.HEALTH
+    assert "PRIMARY_SECONDARY_DOMAIN_RESOLUTION" in result.reason_codes
+    assert "SEMANTIC_SECONDARY_DOMAIN_SUPPORT" in result.supporting_signals
+
+
+def test_semantic_primary_outranks_contextual_and_legacy_evidence() -> None:
+    """Place a strong semantic primary above contextual and legacy signals."""
+    result = classify(
+        source=make_source(title="تكنولوجيا جديدة"),
+        content=make_content(ContentType.TECHNOLOGY_NEWS),
+        contextual_evidence=make_contextual_evidence(
+            make_contextual_item("TOPIC_TECHNOLOGY")
+        ),
+        semantic_evidence=make_semantic_evidence("PRIMARY_DOMAIN_HEALTH"),
+    )
+
+    assert result.topic is Topic.HEALTH
+
+
+@pytest.mark.parametrize("conflict_source", ("lexical", "contextual", "legacy"))
+def test_semantic_suppression_blocks_competing_sources(
+    conflict_source: str,
+) -> None:
+    """Block lexical, contextual, and legacy technology competition."""
+    source = make_source()
+    content = make_content()
+    context = None
+    if conflict_source == "lexical":
+        source = make_source(title="الذكاء الاصطناعي وتقنية جديدة")
+    elif conflict_source == "contextual":
+        context = make_contextual_evidence(make_contextual_item("TOPIC_TECHNOLOGY"))
+    else:
+        source = make_source(title="تكنولوجيا")
+        content = make_content(ContentType.TECHNOLOGY_NEWS)
+    semantic = make_semantic_evidence(
+        "PRIMARY_DOMAIN_HEALTH",
+        secondary=("SECONDARY_DOMAIN_TECHNOLOGY",),
+        suppresses=("PRIMARY_DOMAIN_TECHNOLOGY",),
+    )
+
+    result = classify(
+        source=source,
+        content=content,
+        contextual_evidence=context,
+        semantic_evidence=semantic,
+    )
+
+    assert result.topic is Topic.HEALTH
+    assert "COMPOSITIONAL_SEMANTIC_TOPIC_SUPPRESSION" in result.reason_codes
+    assert "SEMANTIC_COMPETING_DOMAIN_SUPPRESSED" in result.supporting_signals
+
+
+def test_supplied_category_is_not_overridden_by_semantics() -> None:
+    """Keep an otherwise winning explicit category above semantic evidence."""
+    result = classify(
+        source=make_source(category="economy"),
+        semantic_evidence=make_semantic_evidence("PRIMARY_DOMAIN_HEALTH"),
+    )
+
+    assert result.topic is Topic.ECONOMY
+    assert "CATEGORY_TOPIC_CONFLICT" in result.warnings
+    assert "TOPIC_CONFLICT_RESOLVED" in result.reason_codes
+
+
+def test_competing_semantic_primaries_have_medium_confidence() -> None:
+    """Lower confidence when multiple unsuppressed primaries compete."""
+    result = classify(
+        semantic_evidence=make_semantic_evidence(
+            "PRIMARY_DOMAIN_HEALTH",
+            "PRIMARY_DOMAIN_TECHNOLOGY",
+        )
+    )
+
+    assert result.topic is Topic.HEALTH
+    assert result.confidence is TopicConfidence.MEDIUM
+
+
+@pytest.mark.parametrize(
+    ("title", "body", "primary", "secondary", "suppression", "expected"),
+    (
+        (
+            "الذكاء الاصطناعي وتشخيص السرطان",
+            "تستخدم التقنية في تشخيص الأورام",
+            "PRIMARY_DOMAIN_HEALTH",
+            ("SECONDARY_DOMAIN_TECHNOLOGY",),
+            ("PRIMARY_DOMAIN_TECHNOLOGY",),
+            Topic.HEALTH,
+        ),
+        (
+            "وزارة الصحة تقدم فحوصات",
+            "الخدمات الطبية للكشف عن الأمراض",
+            "PRIMARY_DOMAIN_HEALTH",
+            (),
+            ("PRIMARY_DOMAIN_GOVERNMENT",),
+            Topic.HEALTH,
+        ),
+        (
+            "وزارة التعليم العالي تعلن التصنيف",
+            "الجامعات في التصنيفات العالمية",
+            "PRIMARY_DOMAIN_EDUCATION",
+            (),
+            ("PRIMARY_DOMAIN_GOVERNMENT",),
+            Topic.EDUCATION,
+        ),
+        (
+            "هيئة تعلن تشغيل المونوريل",
+            "مشروع حكومي للبنية التحتية",
+            "PRIMARY_DOMAIN_GOVERNMENT",
+            (),
+            (),
+            Topic.GOVERNMENT,
+        ),
+        (
+            "تطوير الذكاء الاصطناعي",
+            "تقنية جديدة للرقائق الإلكترونية",
+            "PRIMARY_DOMAIN_TECHNOLOGY",
+            (),
+            (),
+            Topic.TECHNOLOGY,
+        ),
+    ),
+)
+def test_required_semantic_integration_scenarios(
+    title: str,
+    body: str,
+    primary: str,
+    secondary: tuple[str, ...],
+    suppression: tuple[str, ...],
+    expected: Topic,
+) -> None:
+    """Resolve all five representative compositional scenarios."""
+    result = classify(
+        source=make_source(title=title, body=body),
+        semantic_evidence=make_semantic_evidence(
+            primary,
+            secondary=secondary,
+            suppresses=suppression,
+        ),
+    )
+
+    assert result.topic is expected
+
+
+def test_semantic_input_is_unchanged_and_output_is_deterministic() -> None:
+    """Never mutate semantic evidence and return stable equal results."""
+    semantic = make_semantic_evidence(
+        "PRIMARY_DOMAIN_HEALTH",
+        secondary=("SECONDARY_DOMAIN_TECHNOLOGY",),
+        suppresses=("PRIMARY_DOMAIN_TECHNOLOGY",),
+    )
+    snapshot = copy_semantic = semantic
+
+    first = classify(semantic_evidence=semantic)
+    second = classify(semantic_evidence=semantic)
+
+    assert first == second
+    assert semantic == snapshot == copy_semantic
 
 
 def test_contextual_evidence_is_optional_and_none_preserves_output() -> None:
