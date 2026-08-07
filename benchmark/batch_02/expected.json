@@ -1,0 +1,64 @@
+{
+  "expectations": [
+    {
+      "id": "011",
+      "topic": "GOVERNMENT",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "012",
+      "topic": "SCIENCE",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "013",
+      "topic": "TECHNOLOGY",
+      "editorial_format": "ANALYSIS",
+      "reader_intent": "UNDERSTAND_IMPACT"
+    },
+    {
+      "id": "014",
+      "topic": "WORLD",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "015",
+      "topic": "GOVERNMENT",
+      "editorial_format": "SERVICE",
+      "reader_intent": "KNOW_ACTION"
+    },
+    {
+      "id": "016",
+      "topic": "BUSINESS",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "017",
+      "topic": "ECONOMY",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "018",
+      "topic": "SCIENCE",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "019",
+      "topic": "CULTURE",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "020",
+      "topic": "TECHNOLOGY",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    }
+  ]
+}
