@@ -1,0 +1,205 @@
+{
+  "batch": "batch_01",
+  "case_count": 10,
+  "matched": 10,
+  "mismatched": 0,
+  "accuracy": 100.0,
+  "cases": [
+    {
+      "id": "001",
+      "benchmark_category": "economy",
+      "expected_topic": "ECONOMY",
+      "predicted_topic": "ECONOMY",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "SOURCE_CATEGORY_TOPIC_MATCH",
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "supporting_signals": [
+        "CATEGORY_ECONOMY",
+        "TITLE_ECONOMY_SIGNAL",
+        "BODY_ECONOMY_SIGNAL"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "002",
+      "benchmark_category": "economy",
+      "expected_topic": "ECONOMY",
+      "predicted_topic": "ECONOMY",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "SOURCE_CATEGORY_TOPIC_MATCH",
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "supporting_signals": [
+        "CATEGORY_ECONOMY",
+        "TITLE_ECONOMY_SIGNAL",
+        "BODY_ECONOMY_SIGNAL"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "003",
+      "benchmark_category": "technology",
+      "expected_topic": "TECHNOLOGY",
+      "predicted_topic": "TECHNOLOGY",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "SOURCE_CATEGORY_TOPIC_MATCH",
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "supporting_signals": [
+        "CATEGORY_TECHNOLOGY",
+        "TITLE_TECHNOLOGY_SIGNAL",
+        "BODY_TECHNOLOGY_SIGNAL"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "004",
+      "benchmark_category": "weather",
+      "expected_topic": "WEATHER",
+      "predicted_topic": "WEATHER",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "SOURCE_CATEGORY_TOPIC_MATCH",
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "supporting_signals": [
+        "CATEGORY_WEATHER",
+        "TITLE_WEATHER_SIGNAL",
+        "BODY_WEATHER_SIGNAL"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "005",
+      "benchmark_category": "government",
+      "expected_topic": "GOVERNMENT",
+      "predicted_topic": "GOVERNMENT",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "SOURCE_CATEGORY_TOPIC_MATCH",
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "supporting_signals": [
+        "CATEGORY_GOVERNMENT",
+        "TITLE_GOVERNMENT_SIGNAL",
+        "BODY_GOVERNMENT_SIGNAL"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "006",
+      "benchmark_category": "economy",
+      "expected_topic": "ECONOMY",
+      "predicted_topic": "ECONOMY",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "SOURCE_CATEGORY_TOPIC_MATCH",
+        "TITLE_TOPIC_SIGNAL",
+        "ECONOMIC_STRUCTURE_SIGNAL"
+      ],
+      "supporting_signals": [
+        "CATEGORY_ECONOMY",
+        "TITLE_ECONOMY_SIGNAL",
+        "STRUCTURED_ECONOMIC_VALUES"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "007",
+      "benchmark_category": "economy",
+      "expected_topic": "ECONOMY",
+      "predicted_topic": "ECONOMY",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "SOURCE_CATEGORY_TOPIC_MATCH",
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL",
+        "ECONOMIC_STRUCTURE_SIGNAL",
+        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL"
+      ],
+      "supporting_signals": [
+        "CATEGORY_ECONOMY",
+        "TITLE_ECONOMY_SIGNAL",
+        "BODY_ECONOMY_SIGNAL",
+        "STRUCTURED_ECONOMIC_VALUES",
+        "LEGACY_TOPIC_SUPPORT"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "008",
+      "benchmark_category": "culture",
+      "expected_topic": "CULTURE",
+      "predicted_topic": "CULTURE",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "SOURCE_CATEGORY_TOPIC_MATCH",
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "supporting_signals": [
+        "CATEGORY_CULTURE",
+        "TITLE_CULTURE_SIGNAL",
+        "BODY_CULTURE_SIGNAL"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "009",
+      "benchmark_category": "sports",
+      "expected_topic": "SPORTS",
+      "predicted_topic": "SPORTS",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "SOURCE_CATEGORY_TOPIC_MATCH",
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL",
+        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL"
+      ],
+      "supporting_signals": [
+        "CATEGORY_SPORTS",
+        "TITLE_SPORTS_SIGNAL",
+        "BODY_SPORTS_SIGNAL",
+        "LEGACY_TOPIC_SUPPORT"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "010",
+      "benchmark_category": "economy",
+      "expected_topic": "ECONOMY",
+      "predicted_topic": "ECONOMY",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "SOURCE_CATEGORY_TOPIC_MATCH",
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "supporting_signals": [
+        "CATEGORY_ECONOMY",
+        "TITLE_ECONOMY_SIGNAL",
+        "BODY_ECONOMY_SIGNAL"
+      ],
+      "warnings": []
+    }
+  ]
+}
