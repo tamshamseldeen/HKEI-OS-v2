@@ -286,8 +286,8 @@ def test_markdown_preserves_serialized_evidence_order(
 def test_status_uses_all_required_quality_conditions(
     analysis: dict[str, object],
 ) -> None:
-    """Fail the real diagnostic and pass only complete clean evidence metrics."""
-    assert diagnostic_status(analysis) == "FAILED"
+    """Pass complete clean metrics and fail when a quality condition regresses."""
+    assert diagnostic_status(analysis) == "PASSED"
     passing = copy.deepcopy(analysis)
     passing["required_format_support_passed"] = passing[
         "required_format_support_applicable"

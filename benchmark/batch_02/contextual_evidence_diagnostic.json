@@ -1,14 +1,14 @@
 {
   "batch": "batch_02",
   "case_count": 6,
-  "total_evidence_items": 28,
+  "total_evidence_items": 31,
   "cases_with_evidence": 6,
   "cases_without_evidence": 0,
   "required_topic_support_passed": 6,
   "required_topic_support_applicable": 6,
-  "required_format_support_passed": 1,
+  "required_format_support_passed": 2,
   "required_format_support_applicable": 2,
-  "required_intent_support_passed": 1,
+  "required_intent_support_passed": 2,
   "required_intent_support_applicable": 2,
   "unexpected_sports_signals": 0,
   "suppression_cases": 1,
@@ -84,28 +84,32 @@
       "id": "013",
       "headline_item_count": 3,
       "lead_item_count": 2,
-      "body_item_count": 3,
-      "all_item_count": 8,
+      "body_item_count": 6,
+      "all_item_count": 11,
       "supports_summary": {
         "TOPIC_TECHNOLOGY": 4,
         "TOPIC_BUSINESS": 2,
+        "FORMAT_ANALYSIS": 4,
+        "INTENT_UNDERSTAND_IMPACT": 4,
         "CLAIM_UNCERTAIN": 2
       },
       "suppresses_summary": {},
       "roles_summary": {
         "SUBJECT": 4,
         "ACTOR": 2,
+        "INTERPRETATION": 2,
         "UNCERTAINTY": 1,
-        "PREDICTION": 1
+        "PREDICTION": 1,
+        "CONSEQUENCE": 1
       },
       "strength_summary": {
-        "STRONG": 6,
-        "MEDIUM": 0,
+        "STRONG": 7,
+        "MEDIUM": 2,
         "WEAK": 2
       },
       "has_required_topic_support": true,
-      "has_required_format_support": false,
-      "has_required_intent_support": false,
+      "has_required_format_support": true,
+      "has_required_intent_support": true,
       "has_unexpected_sports_signal": false,
       "has_contextual_suppression": false,
       "items": [
@@ -177,6 +181,34 @@
         {
           "source_section": "BODY",
           "sentence_index": 0,
+          "matched_text": "ويشير تحليل",
+          "evidence_level": "CONTEXT",
+          "role": "INTERPRETATION",
+          "strength": "MEDIUM",
+          "reason_code": "INTERPRETATION_CONTEXT_PATTERN",
+          "supports": [
+            "FORMAT_ANALYSIS",
+            "INTENT_UNDERSTAND_IMPACT"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "BODY",
+          "sentence_index": 0,
+          "matched_text": "ويشير تحليل نشرته \"الشرق\" إلى أن هذه التقنية قد تسهم في خفض أسعار السيارات الكهربائية بما يقارب 20% خلال السنوات القليلة القادمة",
+          "evidence_level": "STRUCTURAL",
+          "role": "INTERPRETATION",
+          "strength": "STRONG",
+          "reason_code": "COMBINED_ANALYTICAL_CONTEXT",
+          "supports": [
+            "FORMAT_ANALYSIS",
+            "INTENT_UNDERSTAND_IMPACT"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "BODY",
+          "sentence_index": 0,
           "matched_text": "قد",
           "evidence_level": "CONTEXT",
           "role": "UNCERTAINTY",
@@ -190,13 +222,29 @@
         {
           "source_section": "BODY",
           "sentence_index": 0,
-          "matched_text": "قد",
+          "matched_text": "قد تسهم",
           "evidence_level": "CONTEXT",
           "role": "PREDICTION",
           "strength": "STRONG",
           "reason_code": "PREDICTION_CONTEXT_PATTERN",
           "supports": [
-            "CLAIM_UNCERTAIN"
+            "CLAIM_UNCERTAIN",
+            "FORMAT_ANALYSIS",
+            "INTENT_UNDERSTAND_IMPACT"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "BODY",
+          "sentence_index": 0,
+          "matched_text": "تسهم في",
+          "evidence_level": "CONTEXT",
+          "role": "CONSEQUENCE",
+          "strength": "MEDIUM",
+          "reason_code": "CONSEQUENCE_CONTEXT_PATTERN",
+          "supports": [
+            "FORMAT_ANALYSIS",
+            "INTENT_UNDERSTAND_IMPACT"
           ],
           "suppresses": []
         },

@@ -194,7 +194,7 @@ def test_service_context_supports_format_and_reader_action() -> None:
     assert item.supports == ("FORMAT_SERVICE", "INTENT_KNOW_ACTION")
 
 
-def test_analysis_and_uncertainty_context_mappings() -> None:
+def test_interpretation_prediction_and_uncertainty_context_mappings() -> None:
     """Support analysis, impact, prediction, and uncertain-claim interpretation."""
     evidence = analyze(
         body="يشير تحليل إلى أن التقنية قد تسهم خلال السنوات المقبلة"
@@ -202,7 +202,7 @@ def test_analysis_and_uncertainty_context_mappings() -> None:
     analysis_items = [
         item
         for item in evidence.lead_items
-        if item.reason_code == "ANALYSIS_CONTEXT_PATTERN"
+        if item.reason_code == "INTERPRETATION_CONTEXT_PATTERN"
     ]
     uncertain_items = [
         item
@@ -218,11 +218,141 @@ def test_analysis_and_uncertainty_context_mappings() -> None:
         for item in analysis_items
     )
     assert uncertain_items
-    assert all(item.supports == ("CLAIM_UNCERTAIN",) for item in uncertain_items)
+    assert all("CLAIM_UNCERTAIN" in item.supports for item in uncertain_items)
     assert {item.role for item in uncertain_items} == {
         EvidenceRole.UNCERTAINTY,
         EvidenceRole.PREDICTION,
     }
+
+
+@pytest.mark.parametrize("phrase", ("يشير تحليل", "يرى محللون"))
+def test_interpretation_patterns_create_analysis_support(phrase: str) -> None:
+    """Map reusable interpretation language to analysis and impact support."""
+    item = next(
+        item
+        for item in analyze(body=f"{phrase} أن النتائج مهمة").lead_items
+        if item.reason_code == "INTERPRETATION_CONTEXT_PATTERN"
+    )
+
+    assert item.role is EvidenceRole.INTERPRETATION
+    assert item.strength is EvidenceStrength.MEDIUM
+    assert item.supports == ("FORMAT_ANALYSIS", "INTENT_UNDERSTAND_IMPACT")
+
+
+@pytest.mark.parametrize(
+    "phrase",
+    ("قد يسهم", "قد يؤدي", "من المتوقع أن", "من المرجح أن"),
+)
+def test_prediction_patterns_create_uncertain_analysis_support(phrase: str) -> None:
+    """Map explicit forward-looking language to strong prediction evidence."""
+    item = next(
+        item
+        for item in analyze(body=f"{phrase} القرار في تحسن النتائج").lead_items
+        if item.reason_code == "PREDICTION_CONTEXT_PATTERN"
+    )
+
+    assert item.role is EvidenceRole.PREDICTION
+    assert item.strength is EvidenceStrength.STRONG
+    assert item.supports == (
+        "CLAIM_UNCERTAIN",
+        "FORMAT_ANALYSIS",
+        "INTENT_UNDERSTAND_IMPACT",
+    )
+
+
+@pytest.mark.parametrize("phrase", ("يؤدي إلى", "يسهم في", "ينعكس على"))
+def test_consequence_patterns_create_analysis_support(phrase: str) -> None:
+    """Map deterministic consequence constructions to impact support."""
+    item = next(
+        item
+        for item in analyze(body=f"القرار {phrase} تحسن النتائج").lead_items
+        if item.reason_code == "CONSEQUENCE_CONTEXT_PATTERN"
+    )
+
+    assert item.role is EvidenceRole.CONSEQUENCE
+    assert item.strength is EvidenceStrength.MEDIUM
+    assert item.supports == ("FORMAT_ANALYSIS", "INTENT_UNDERSTAND_IMPACT")
+
+
+@pytest.mark.parametrize(
+    "sentence",
+    (
+        "يشير تحليل إلى أن القرار قد يؤدي إلى تحسن النتائج",
+        "قد يسهم القرار في النمو بما يؤدي إلى زيادة الإنتاج",
+    ),
+)
+def test_multiple_analytical_roles_create_one_structural_item(sentence: str) -> None:
+    """Create at most one combined analytical item for each local sentence."""
+    combined = [
+        item
+        for item in analyze(body=sentence).lead_items
+        if item.reason_code == "COMBINED_ANALYTICAL_CONTEXT"
+    ]
+
+    assert len(combined) == 1
+    assert combined[0].role is EvidenceRole.INTERPRETATION
+    assert combined[0].evidence_level is EvidenceLevel.STRUCTURAL
+    assert combined[0].strength is EvidenceStrength.STRONG
+    assert combined[0].matched_text == sentence
+
+
+@pytest.mark.parametrize(
+    "sentence",
+    (
+        "تقام المباراة الأسبوع المقبل",
+        "تبدأ المرحلة الثانية الشهر المقبل",
+        "يغلق باب التسجيل يوم الخميس",
+    ),
+)
+def test_future_reporting_alone_does_not_create_analysis(sentence: str) -> None:
+    """Avoid treating schedules and deadlines as analytical evidence."""
+    analytical_reasons = {
+        "INTERPRETATION_CONTEXT_PATTERN",
+        "PREDICTION_CONTEXT_PATTERN",
+        "CONSEQUENCE_CONTEXT_PATTERN",
+        "COMBINED_ANALYTICAL_CONTEXT",
+    }
+
+    assert not any(
+        item.reason_code in analytical_reasons
+        for item in analyze(body=sentence).all_items
+    )
+
+
+def test_case_013_style_sentence_creates_complete_analytical_evidence() -> None:
+    """Recognize conjunction-prefixed interpretation and overlapping roles."""
+    sentence = (
+        "ويشير تحليل نشرته الشرق إلى أن هذه التقنية قد تسهم في خفض أسعار "
+        "السيارات الكهربائية بما يقارب 20% خلال السنوات القليلة القادمة"
+    )
+    items = analyze(body=sentence).lead_items
+
+    assert {
+        EvidenceRole.INTERPRETATION,
+        EvidenceRole.PREDICTION,
+        EvidenceRole.CONSEQUENCE,
+    }.issubset({item.role for item in items})
+    supports = {support for item in items for support in item.supports}
+    assert {
+        "FORMAT_ANALYSIS",
+        "INTENT_UNDERSTAND_IMPACT",
+        "CLAIM_UNCERTAIN",
+    }.issubset(supports)
+    assert sum(
+        item.reason_code == "COMBINED_ANALYTICAL_CONTEXT" for item in items
+    ) == 1
+
+
+def test_overlapping_consequence_patterns_are_deduplicated() -> None:
+    """Prefer one consequence item when a longer pattern contains a shorter one."""
+    items = [
+        item
+        for item in analyze(body="تغير السعر بما يؤدي إلى زيادة الطلب").lead_items
+        if item.reason_code == "CONSEQUENCE_CONTEXT_PATTERN"
+    ]
+
+    assert len(items) == 1
+    assert items[0].matched_text == "بما يؤدي إلى"
 
 
 def test_attribution_verb_creates_attributed_claim_support() -> None:
@@ -353,7 +483,7 @@ def test_user_instruction_upgrades_applicable_medium_context() -> None:
     analysis_item = next(
         item
         for item in evidence.user_instruction_items
-        if item.reason_code == "ANALYSIS_CONTEXT_PATTERN"
+        if item.reason_code == "INTERPRETATION_CONTEXT_PATTERN"
     )
 
     assert analysis_item.source_section is SourceSection.USER_INSTRUCTION

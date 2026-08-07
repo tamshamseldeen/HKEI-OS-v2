@@ -6,7 +6,7 @@ Cases:
 6
 
 Total Evidence Items:
-28
+31
 
 Cases With Evidence:
 6
@@ -18,10 +18,10 @@ Required Topic Support Passed:
 6/6
 
 Required Format Support Passed:
-1/2
+2/2
 
 Required Intent Support Passed:
-1/2
+2/2
 
 Unexpected Sports Signals:
 0
@@ -77,7 +77,7 @@ AUTHORITY: 2
 ## Case 013
 
 Evidence Items:
-8
+11
 
 ### Topic Support
 
@@ -86,11 +86,11 @@ TOPIC_BUSINESS: 2
 
 ### Format Support
 
-None
+FORMAT_ANALYSIS: 4
 
 ### Intent Support
 
-None
+INTENT_UNDERSTAND_IMPACT: 4
 
 ### Claim Support
 
@@ -104,8 +104,10 @@ None
 
 SUBJECT: 4
 ACTOR: 2
+INTERPRETATION: 2
 UNCERTAINTY: 1
 PREDICTION: 1
+CONSEQUENCE: 1
 
 ### Evidence Detail
 
@@ -129,13 +131,25 @@ PREDICTION: 1
   Reason: GENERIC_BUSINESS_TOKEN
   Supports: TOPIC_BUSINESS
   Suppresses: None
+- [SECTION:BODY] [SENTENCE:0] [LEVEL:CONTEXT] [ROLE:INTERPRETATION] [STRENGTH:MEDIUM] "ويشير تحليل"
+  Reason: INTERPRETATION_CONTEXT_PATTERN
+  Supports: FORMAT_ANALYSIS, INTENT_UNDERSTAND_IMPACT
+  Suppresses: None
+- [SECTION:BODY] [SENTENCE:0] [LEVEL:STRUCTURAL] [ROLE:INTERPRETATION] [STRENGTH:STRONG] "ويشير تحليل نشرته "الشرق" إلى أن هذه التقنية قد تسهم في خفض أسعار السيارات الكهربائية بما يقارب 20% خلال السنوات القليلة القادمة"
+  Reason: COMBINED_ANALYTICAL_CONTEXT
+  Supports: FORMAT_ANALYSIS, INTENT_UNDERSTAND_IMPACT
+  Suppresses: None
 - [SECTION:BODY] [SENTENCE:0] [LEVEL:CONTEXT] [ROLE:UNCERTAINTY] [STRENGTH:STRONG] "قد"
   Reason: UNCERTAINTY_CONTEXT_PATTERN
   Supports: CLAIM_UNCERTAIN
   Suppresses: None
-- [SECTION:BODY] [SENTENCE:0] [LEVEL:CONTEXT] [ROLE:PREDICTION] [STRENGTH:STRONG] "قد"
+- [SECTION:BODY] [SENTENCE:0] [LEVEL:CONTEXT] [ROLE:PREDICTION] [STRENGTH:STRONG] "قد تسهم"
   Reason: PREDICTION_CONTEXT_PATTERN
-  Supports: CLAIM_UNCERTAIN
+  Supports: CLAIM_UNCERTAIN, FORMAT_ANALYSIS, INTENT_UNDERSTAND_IMPACT
+  Suppresses: None
+- [SECTION:BODY] [SENTENCE:0] [LEVEL:CONTEXT] [ROLE:CONSEQUENCE] [STRENGTH:MEDIUM] "تسهم في"
+  Reason: CONSEQUENCE_CONTEXT_PATTERN
+  Supports: FORMAT_ANALYSIS, INTENT_UNDERSTAND_IMPACT
   Suppresses: None
 - [SECTION:BODY] [SENTENCE:0] [LEVEL:PHRASE] [ROLE:SUBJECT] [STRENGTH:STRONG] "السيارات الكهربائية"
   Reason: TECHNOLOGY_CONTEXT_PHRASE

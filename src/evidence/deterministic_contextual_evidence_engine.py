@@ -88,15 +88,54 @@ _SERVICE_CONTEXT = (
     "اتخاذ الإجراءات",
     "موعد نهائي",
 )
-_ANALYSIS_CONTEXT = (
+_INTERPRETATION_PATTERNS = (
     "يشير تحليل",
+    "يشير التقرير إلى",
+    "تشير البيانات إلى",
+    "يرى محللون",
+    "يرى خبراء",
+    "بحسب تحليل",
     "وفق تحليل",
+    "يعكس ذلك",
+    "يعكس هذا",
+    "يعني ذلك",
+    "يعني هذا",
+    "يشير ذلك إلى",
+    "يشير هذا إلى",
+)
+_PREDICTION_PATTERNS = (
     "قد يسهم",
+    "قد تسهم",
     "قد يؤدي",
+    "قد تؤدي",
+    "قد يدفع",
+    "قد تدفع",
     "من المتوقع أن",
-    "تأثير",
-    "تداعيات",
+    "من المرجح أن",
+    "يُتوقع أن",
+    "يتوقع أن",
+    "يتوقع محللون",
+    "تشير التوقعات إلى",
     "خلال السنوات المقبلة",
+    "خلال الفترة المقبلة",
+    "مستقبلاً",
+    "مستقبلًا",
+)
+_CONSEQUENCE_PATTERNS = (
+    "بما يؤدي إلى",
+    "مما يؤدي إلى",
+    "بما يسهم في",
+    "مما يسهم في",
+    "يؤدي إلى",
+    "تؤدي إلى",
+    "يسهم في",
+    "تسهم في",
+    "ينعكس على",
+    "تنعكس على",
+    "يدفع إلى",
+    "تدفع إلى",
+    "يساهم في",
+    "تساهم في",
 )
 _UNCERTAINTY_CONTEXT = (
     "قد",
@@ -185,14 +224,6 @@ _PHRASE_SPECS: tuple[_PatternSpec, ...] = (
         "SERVICE_CONTEXT_PATTERN",
     ),
     (
-        _ANALYSIS_CONTEXT,
-        EvidenceRole.INTERPRETATION,
-        EvidenceLevel.CONTEXT,
-        EvidenceStrength.MEDIUM,
-        ("FORMAT_ANALYSIS", "INTENT_UNDERSTAND_IMPACT"),
-        "ANALYSIS_CONTEXT_PATTERN",
-    ),
-    (
         _UNCERTAINTY_CONTEXT,
         EvidenceRole.UNCERTAINTY,
         EvidenceLevel.CONTEXT,
@@ -260,16 +291,6 @@ _AFFECTED_AUDIENCE_PATTERNS = (
     "على المواطنين",
     "على الشركات",
     "على الطلاب",
-)
-_PREDICTION_PATTERNS = (
-    "قد",
-    "ربما",
-    "من المتوقع",
-    "توقعات",
-    "تشير التقديرات",
-    "رجحت",
-    "محتمل",
-    "احتمال",
 )
 _SENTENCE_BOUNDARY = re.compile(r"[.؟!؛\n]+")
 _REGISTRATION_INVITATION = re.compile(
@@ -475,7 +496,7 @@ class DeterministicContextualEvidenceEngine:
         sentence_index: int,
         sequence_start: int,
     ) -> list[tuple[int, int, ContextualEvidenceItem]]:
-        """Create deadline, requirement, audience, and prediction evidence."""
+        """Create special service and analytical contextual evidence."""
         matches: list[tuple[int, int, ContextualEvidenceItem]] = []
         sequence = sequence_start
 
@@ -537,13 +558,14 @@ class DeterministicContextualEvidenceEngine:
             supports=("FORMAT_SERVICE", "INTENT_KNOW_ACTION"),
             reason_code="AFFECTED_AUDIENCE_CONTEXT_PATTERN",
         )
-        append_matches(
-            _PREDICTION_PATTERNS,
-            role=EvidenceRole.PREDICTION,
-            strength=EvidenceStrength.STRONG,
-            supports=("CLAIM_UNCERTAIN",),
-            reason_code="PREDICTION_CONTEXT_PATTERN",
+        analytical_matches = self._analytical_context_matches(
+            text=text,
+            source_section=source_section,
+            sentence_index=sentence_index,
+            sequence_start=sequence,
         )
+        matches.extend(analytical_matches)
+        sequence += len(analytical_matches)
 
         for registration_match in _REGISTRATION_INVITATION.finditer(text):
             matches.append(
@@ -565,6 +587,115 @@ class DeterministicContextualEvidenceEngine:
             )
             sequence += 1
         return matches
+
+    def _analytical_context_matches(
+        self,
+        *,
+        text: str,
+        source_section: SourceSection,
+        sentence_index: int,
+        sequence_start: int,
+    ) -> list[tuple[int, int, ContextualEvidenceItem]]:
+        """Create non-overlapping analytical items and one combined item."""
+        matches: list[tuple[int, int, ContextualEvidenceItem]] = []
+        sequence = sequence_start
+        role_spans: dict[EvidenceRole, list[tuple[int, int]]] = {}
+        specifications = (
+            (
+                _INTERPRETATION_PATTERNS,
+                EvidenceRole.INTERPRETATION,
+                EvidenceStrength.MEDIUM,
+                ("FORMAT_ANALYSIS", "INTENT_UNDERSTAND_IMPACT"),
+                "INTERPRETATION_CONTEXT_PATTERN",
+            ),
+            (
+                _PREDICTION_PATTERNS,
+                EvidenceRole.PREDICTION,
+                EvidenceStrength.STRONG,
+                (
+                    "CLAIM_UNCERTAIN",
+                    "FORMAT_ANALYSIS",
+                    "INTENT_UNDERSTAND_IMPACT",
+                ),
+                "PREDICTION_CONTEXT_PATTERN",
+            ),
+            (
+                _CONSEQUENCE_PATTERNS,
+                EvidenceRole.CONSEQUENCE,
+                EvidenceStrength.MEDIUM,
+                ("FORMAT_ANALYSIS", "INTENT_UNDERSTAND_IMPACT"),
+                "CONSEQUENCE_CONTEXT_PATTERN",
+            ),
+        )
+        for patterns, role, strength, supports, reason_code in specifications:
+            occupied = role_spans.setdefault(role, [])
+            candidates = sorted(
+                (
+                    match
+                    for pattern in patterns
+                    for match in self._analytical_term_matches(text, pattern)
+                ),
+                key=lambda match: (match.start(), -(match.end() - match.start())),
+            )
+            for match in candidates:
+                span = (match.start(), match.end())
+                if any(span[0] < end and start < span[1] for start, end in occupied):
+                    continue
+                occupied.append(span)
+                matches.append(
+                    (
+                        match.start(),
+                        sequence,
+                        ContextualEvidenceItem(
+                            source_section=source_section,
+                            sentence_index=sentence_index,
+                            matched_text=match.group(0),
+                            evidence_level=EvidenceLevel.CONTEXT,
+                            role=role,
+                            strength=self._adjust_strength(
+                                strength,
+                                source_section,
+                            ),
+                            reason_code=reason_code,
+                            supports=supports,
+                            suppresses=(),
+                        ),
+                    )
+                )
+                sequence += 1
+
+        if len(role_spans) >= 2 and sum(bool(spans) for spans in role_spans.values()) >= 2:
+            matches.append(
+                (
+                    0,
+                    sequence,
+                    ContextualEvidenceItem(
+                        source_section=source_section,
+                        sentence_index=sentence_index,
+                        matched_text=text,
+                        evidence_level=EvidenceLevel.STRUCTURAL,
+                        role=EvidenceRole.INTERPRETATION,
+                        strength=EvidenceStrength.STRONG,
+                        reason_code="COMBINED_ANALYTICAL_CONTEXT",
+                        supports=("FORMAT_ANALYSIS", "INTENT_UNDERSTAND_IMPACT"),
+                        suppresses=(),
+                    ),
+                )
+            )
+        return matches
+
+    @staticmethod
+    def _analytical_term_matches(text: str, term: str) -> tuple[re.Match[str], ...]:
+        """Match an analytical phrase, allowing an attached Arabic conjunction."""
+        tokens = term.split()
+        expression = r"[\W_]+".join(re.escape(token) for token in tokens)
+        return tuple(
+            re.finditer(
+                rf"(?<!\w)(?:و(?={expression}))?{expression}(?!\w)",
+                text,
+                flags=re.IGNORECASE,
+            )
+        )
 
     @staticmethod
     def _term_matches(text: str, term: str) -> tuple[re.Match[str], ...]:
