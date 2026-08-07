@@ -1,0 +1,349 @@
+{
+  "batch": "batch_02",
+  "case_count": 10,
+  "topic_matched": 2,
+  "topic_accuracy": 20.0,
+  "format_matched": 8,
+  "format_accuracy": 80.0,
+  "reader_intent_matched": 8,
+  "reader_intent_accuracy": 80.0,
+  "fully_matched_cases": 2,
+  "full_case_accuracy": 20.0,
+  "topic_mismatches": 8,
+  "format_mismatches": 2,
+  "reader_intent_mismatches": 2,
+  "cases": [
+    {
+      "id": "011",
+      "source_name": "اليوم السابع",
+      "expected_topic": "GOVERNMENT",
+      "predicted_topic": "ECONOMY",
+      "topic_confidence": "MEDIUM",
+      "topic_match": false,
+      "topic_reason_codes": [
+        "BODY_TOPIC_SIGNAL",
+        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL"
+      ],
+      "topic_warnings": [],
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_warnings": [],
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "reader_intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "reader_intent_warnings": [],
+      "case_match": false
+    },
+    {
+      "id": "012",
+      "source_name": "العربية",
+      "expected_topic": "SCIENCE",
+      "predicted_topic": "SCIENCE",
+      "topic_confidence": "LOW",
+      "topic_match": true,
+      "topic_reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE"
+      ],
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_warnings": [],
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "reader_intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "reader_intent_warnings": [],
+      "case_match": true
+    },
+    {
+      "id": "013",
+      "source_name": "الشرق",
+      "expected_topic": "TECHNOLOGY",
+      "predicted_topic": "BUSINESS",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "topic_reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE"
+      ],
+      "expected_format": "ANALYSIS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": false,
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_warnings": [],
+      "expected_reader_intent": "UNDERSTAND_IMPACT",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": false,
+      "reader_intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "reader_intent_warnings": [],
+      "case_match": false
+    },
+    {
+      "id": "014",
+      "source_name": "BBC",
+      "expected_topic": "WORLD",
+      "predicted_topic": "GENERAL",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "topic_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "LOW",
+      "format_match": true,
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_warnings": [
+        "LOW_EDITORIAL_FORMAT_CONFIDENCE"
+      ],
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "LOW",
+      "reader_intent_match": true,
+      "reader_intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "reader_intent_warnings": [
+        "LOW_READER_INTENT_CONFIDENCE"
+      ],
+      "case_match": false
+    },
+    {
+      "id": "015",
+      "source_name": "اليوم السابع",
+      "expected_topic": "GOVERNMENT",
+      "predicted_topic": "GENERAL",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "topic_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "expected_format": "SERVICE",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": false,
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_warnings": [],
+      "expected_reader_intent": "KNOW_ACTION",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": false,
+      "reader_intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "reader_intent_warnings": [],
+      "case_match": false
+    },
+    {
+      "id": "016",
+      "source_name": "العربية",
+      "expected_topic": "BUSINESS",
+      "predicted_topic": "BUSINESS",
+      "topic_confidence": "LOW",
+      "topic_match": true,
+      "topic_reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE"
+      ],
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_warnings": [],
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "reader_intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "reader_intent_warnings": [],
+      "case_match": true
+    },
+    {
+      "id": "017",
+      "source_name": "الشرق",
+      "expected_topic": "ECONOMY",
+      "predicted_topic": "SPORTS",
+      "topic_confidence": "MEDIUM",
+      "topic_match": false,
+      "topic_reason_codes": [
+        "BODY_TOPIC_SIGNAL",
+        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL"
+      ],
+      "topic_warnings": [],
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_warnings": [],
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "reader_intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "reader_intent_warnings": [],
+      "case_match": false
+    },
+    {
+      "id": "018",
+      "source_name": "BBC",
+      "expected_topic": "SCIENCE",
+      "predicted_topic": "SPORTS",
+      "topic_confidence": "MEDIUM",
+      "topic_match": false,
+      "topic_reason_codes": [
+        "BODY_TOPIC_SIGNAL",
+        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL"
+      ],
+      "topic_warnings": [],
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_warnings": [],
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "reader_intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "reader_intent_warnings": [],
+      "case_match": false
+    },
+    {
+      "id": "019",
+      "source_name": "اليوم السابع",
+      "expected_topic": "CULTURE",
+      "predicted_topic": "GENERAL",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "topic_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "LOW",
+      "format_match": true,
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_warnings": [
+        "LOW_EDITORIAL_FORMAT_CONFIDENCE"
+      ],
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "LOW",
+      "reader_intent_match": true,
+      "reader_intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "reader_intent_warnings": [
+        "LOW_READER_INTENT_CONFIDENCE"
+      ],
+      "case_match": false
+    },
+    {
+      "id": "020",
+      "source_name": "الشرق",
+      "expected_topic": "TECHNOLOGY",
+      "predicted_topic": "GENERAL",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "topic_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_warnings": [],
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "reader_intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "reader_intent_warnings": [],
+      "case_match": false
+    }
+  ]
+}

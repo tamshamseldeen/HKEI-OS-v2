@@ -1,0 +1,266 @@
+# Batch 02 Unseen Validation
+
+| ID | Expected Topic | Predicted Topic | Expected Format | Predicted Format | Expected Intent | Predicted Intent | Full Match |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 011 | GOVERNMENT | ECONOMY | STANDARD_NEWS | STANDARD_NEWS | GET_UPDATE | GET_UPDATE | NO |
+| 012 | SCIENCE | SCIENCE | STANDARD_NEWS | STANDARD_NEWS | GET_UPDATE | GET_UPDATE | YES |
+| 013 | TECHNOLOGY | BUSINESS | ANALYSIS | STANDARD_NEWS | UNDERSTAND_IMPACT | GET_UPDATE | NO |
+| 014 | WORLD | GENERAL | STANDARD_NEWS | STANDARD_NEWS | GET_UPDATE | GET_UPDATE | NO |
+| 015 | GOVERNMENT | GENERAL | SERVICE | STANDARD_NEWS | KNOW_ACTION | GET_UPDATE | NO |
+| 016 | BUSINESS | BUSINESS | STANDARD_NEWS | STANDARD_NEWS | GET_UPDATE | GET_UPDATE | YES |
+| 017 | ECONOMY | SPORTS | STANDARD_NEWS | STANDARD_NEWS | GET_UPDATE | GET_UPDATE | NO |
+| 018 | SCIENCE | SPORTS | STANDARD_NEWS | STANDARD_NEWS | GET_UPDATE | GET_UPDATE | NO |
+| 019 | CULTURE | GENERAL | STANDARD_NEWS | STANDARD_NEWS | GET_UPDATE | GET_UPDATE | NO |
+| 020 | TECHNOLOGY | GENERAL | STANDARD_NEWS | STANDARD_NEWS | GET_UPDATE | GET_UPDATE | NO |
+
+## Summary
+
+Total Cases:
+10
+
+Topic Accuracy:
+20.00%
+
+Editorial Format Accuracy:
+80.00%
+
+Reader Intent Accuracy:
+80.00%
+
+Fully Matched Cases:
+2
+
+Full Case Accuracy:
+20.00%
+
+## Topic Mismatches
+
+ID:
+011
+
+Expected:
+GOVERNMENT
+
+Predicted:
+ECONOMY
+
+Confidence:
+MEDIUM
+
+Reason Codes:
+- BODY_TOPIC_SIGNAL
+- LEGACY_CONTENT_TYPE_TOPIC_SIGNAL
+
+Warnings:
+None
+
+ID:
+013
+
+Expected:
+TECHNOLOGY
+
+Predicted:
+BUSINESS
+
+Confidence:
+LOW
+
+Reason Codes:
+- TITLE_TOPIC_SIGNAL
+- BODY_TOPIC_SIGNAL
+
+Warnings:
+- LOW_TOPIC_CONFIDENCE
+
+ID:
+014
+
+Expected:
+WORLD
+
+Predicted:
+GENERAL
+
+Confidence:
+LOW
+
+Reason Codes:
+- DEFAULT_GENERAL_TOPIC
+
+Warnings:
+- LOW_TOPIC_CONFIDENCE
+- TOPIC_SIGNAL_INSUFFICIENT
+
+ID:
+015
+
+Expected:
+GOVERNMENT
+
+Predicted:
+GENERAL
+
+Confidence:
+LOW
+
+Reason Codes:
+- DEFAULT_GENERAL_TOPIC
+
+Warnings:
+- LOW_TOPIC_CONFIDENCE
+- TOPIC_SIGNAL_INSUFFICIENT
+
+ID:
+017
+
+Expected:
+ECONOMY
+
+Predicted:
+SPORTS
+
+Confidence:
+MEDIUM
+
+Reason Codes:
+- BODY_TOPIC_SIGNAL
+- LEGACY_CONTENT_TYPE_TOPIC_SIGNAL
+
+Warnings:
+None
+
+ID:
+018
+
+Expected:
+SCIENCE
+
+Predicted:
+SPORTS
+
+Confidence:
+MEDIUM
+
+Reason Codes:
+- BODY_TOPIC_SIGNAL
+- LEGACY_CONTENT_TYPE_TOPIC_SIGNAL
+
+Warnings:
+None
+
+ID:
+019
+
+Expected:
+CULTURE
+
+Predicted:
+GENERAL
+
+Confidence:
+LOW
+
+Reason Codes:
+- DEFAULT_GENERAL_TOPIC
+
+Warnings:
+- LOW_TOPIC_CONFIDENCE
+- TOPIC_SIGNAL_INSUFFICIENT
+
+ID:
+020
+
+Expected:
+TECHNOLOGY
+
+Predicted:
+GENERAL
+
+Confidence:
+LOW
+
+Reason Codes:
+- DEFAULT_GENERAL_TOPIC
+
+Warnings:
+- LOW_TOPIC_CONFIDENCE
+- TOPIC_SIGNAL_INSUFFICIENT
+
+## Editorial Format Mismatches
+
+ID:
+013
+
+Expected:
+ANALYSIS
+
+Predicted:
+STANDARD_NEWS
+
+Confidence:
+MEDIUM
+
+Reason Codes:
+- DEFAULT_STANDARD_NEWS_FORMAT
+
+Warnings:
+None
+
+ID:
+015
+
+Expected:
+SERVICE
+
+Predicted:
+STANDARD_NEWS
+
+Confidence:
+MEDIUM
+
+Reason Codes:
+- DEFAULT_STANDARD_NEWS_FORMAT
+
+Warnings:
+None
+
+## Reader Intent Mismatches
+
+ID:
+013
+
+Expected:
+UNDERSTAND_IMPACT
+
+Predicted:
+GET_UPDATE
+
+Confidence:
+HIGH
+
+Reason Codes:
+- FORMAT_READER_INTENT_MAPPING
+- DEFAULT_GET_UPDATE
+
+Warnings:
+None
+
+ID:
+015
+
+Expected:
+KNOW_ACTION
+
+Predicted:
+GET_UPDATE
+
+Confidence:
+HIGH
+
+Reason Codes:
+- FORMAT_READER_INTENT_MAPPING
+- DEFAULT_GET_UPDATE
+
+Warnings:
+None

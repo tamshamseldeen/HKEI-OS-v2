@@ -137,18 +137,21 @@ def test_expected_json_contains_exact_preregistered_labels() -> None:
     assert "risk" not in json.dumps(expected).lower()
 
 
-def test_dataset_has_no_generated_review_or_analysis_artifacts() -> None:
-    """Keep Batch 02 pristine before any classifier benchmark is run."""
+def test_dataset_has_only_registered_inputs_and_validation_reports() -> None:
+    """Keep Batch 02 free of generated articles and editorial review files."""
     files = tuple(
         path.relative_to(BATCH_ROOT).as_posix()
         for path in BATCH_ROOT.rglob("*")
         if path.is_file()
     )
 
-    assert len(files) == 12
+    assert len(files) == 14
     assert not any("article" in path.lower() for path in files)
     assert not any("review" in path.lower() for path in files)
-    assert not any("analysis" in path.lower() for path in files)
+    assert set(path for path in files if "validation" in path) == {
+        "validation.json",
+        "validation.md",
+    }
 
 
 def test_existing_batch_01_is_unchanged() -> None:
