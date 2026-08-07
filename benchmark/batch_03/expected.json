@@ -1,0 +1,64 @@
+{
+  "expectations": [
+    {
+      "id": "021",
+      "topic": "GOVERNMENT",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "022",
+      "topic": "ECONOMY",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "023",
+      "topic": "POLITICS",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "024",
+      "topic": "HEALTH",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "025",
+      "topic": "HEALTH",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "026",
+      "topic": "TECHNOLOGY",
+      "editorial_format": "SERVICE",
+      "reader_intent": "KNOW_ACTION"
+    },
+    {
+      "id": "027",
+      "topic": "ECONOMY",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "028",
+      "topic": "WEATHER",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "029",
+      "topic": "EDUCATION",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "030",
+      "topic": "ECONOMY",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    }
+  ]
+}
