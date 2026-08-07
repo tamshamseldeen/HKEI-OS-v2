@@ -3,6 +3,7 @@
 import re
 from collections.abc import Iterable
 
+from src.assessment.risk_level import RiskLevel
 from src.assessment.source_risk_assessment import SourceRiskAssessment
 from src.assessment.verification_status import VerificationStatus
 from src.classification.classification_confidence import ClassificationConfidence
@@ -10,6 +11,11 @@ from src.classification.content_type import ContentType
 from src.classification.content_type_classification import (
     ContentTypeClassification,
 )
+from src.evidence.contextual_evidence import ContextualEvidence
+from src.evidence.contextual_evidence_item import ContextualEvidenceItem
+from src.evidence.evidence_level import EvidenceLevel
+from src.evidence.evidence_role import EvidenceRole
+from src.evidence.evidence_strength import EvidenceStrength
 from src.facts.extracted_facts import ExtractedFacts
 from src.intake.normalized_source import NormalizedSource
 
@@ -122,6 +128,20 @@ _SOCIAL_TERMS = (
     "إنستجرام",
 )
 
+_CONTEXTUAL_FORMAT_LABELS = {
+    f"FORMAT_{editorial_format.value}": editorial_format
+    for editorial_format in EditorialFormat
+}
+_CONTEXTUAL_FORMAT_WEIGHTS = {
+    (EvidenceLevel.STRUCTURAL, EvidenceStrength.STRONG): 14,
+    (EvidenceLevel.CONTEXT, EvidenceStrength.STRONG): 12,
+    (EvidenceLevel.PHRASE, EvidenceStrength.STRONG): 10,
+    (EvidenceLevel.STRUCTURAL, EvidenceStrength.MEDIUM): 9,
+    (EvidenceLevel.CONTEXT, EvidenceStrength.MEDIUM): 7,
+    (EvidenceLevel.PHRASE, EvidenceStrength.MEDIUM): 5,
+    (EvidenceLevel.TOKEN, EvidenceStrength.WEAK): 1,
+}
+
 
 class DeterministicEditorialFormatClassifier:
     """Classify analyzed material into one deterministic editorial format."""
@@ -134,6 +154,7 @@ class DeterministicEditorialFormatClassifier:
         facts: ExtractedFacts,
         content_classification: ContentTypeClassification,
         user_instruction: str | None = None,
+        contextual_evidence: ContextualEvidence | None = None,
     ) -> EditorialFormatClassification:
         """Classify one source using only supplied deterministic signals.
 
@@ -143,10 +164,33 @@ class DeterministicEditorialFormatClassifier:
             facts: Deterministically extracted source facts.
             content_classification: Existing compatible content classification.
             user_instruction: Optional explicit requested editorial treatment.
+            contextual_evidence: Optional deterministic contextual evidence.
 
         Returns:
             Exactly one editorial format classification.
         """
+        if contextual_evidence is not None:
+            baseline = self.classify(
+                source=source,
+                assessment=assessment,
+                facts=facts,
+                content_classification=content_classification,
+                user_instruction=user_instruction,
+                contextual_evidence=None,
+            )
+            if any(
+                reason.startswith("EXPLICIT_") for reason in baseline.reason_codes
+            ):
+                return baseline
+            contextual = self._contextual_result(
+                evidence=contextual_evidence,
+                assessment=assessment,
+                facts=facts,
+                source=source,
+                baseline=baseline,
+            )
+            return contextual if contextual is not None else baseline
+
         text = self._searchable_text(source, user_instruction)
         instruction = (user_instruction or "").lower()
         depth = self._source_depth(source, facts)
@@ -329,6 +373,161 @@ class DeterministicEditorialFormatClassifier:
             ("DEFAULT_STANDARD_NEWS_FORMAT",),
             ("EXISTING_CONTENT_TYPE_FALLBACK",),
             warnings + (("LOW_EDITORIAL_FORMAT_CONFIDENCE",) if low_confidence else ()),
+        )
+
+    def _contextual_result(
+        self,
+        *,
+        evidence: ContextualEvidence,
+        assessment: SourceRiskAssessment,
+        facts: ExtractedFacts,
+        source: NormalizedSource,
+        baseline: EditorialFormatClassification,
+    ) -> EditorialFormatClassification | None:
+        """Return a qualified contextual format result or no override."""
+        grouped: dict[EditorialFormat, list[ContextualEvidenceItem]] = {}
+        for item in evidence.all_items:
+            for label in item.supports:
+                editorial_format = _CONTEXTUAL_FORMAT_LABELS.get(label)
+                if editorial_format is not None:
+                    grouped.setdefault(editorial_format, []).append(item)
+
+        eligible = {
+            editorial_format: items
+            for editorial_format, items in grouped.items()
+            if self._contextual_format_supported(
+                editorial_format=editorial_format,
+                items=items,
+                all_items=evidence.all_items,
+                assessment=assessment,
+                facts=facts,
+                source=source,
+            )
+        }
+        if not eligible:
+            return None
+        selected, selected_items = max(
+            eligible.items(),
+            key=lambda value: (
+                sum(self._contextual_item_weight(item) for item in value[1]),
+                max(self._contextual_item_weight(item) for item in value[1]),
+                -list(EditorialFormat).index(value[0]),
+            ),
+        )
+        roles = {item.role for item in evidence.all_items}
+        strong_contextual = any(
+            item.evidence_level
+            in (EvidenceLevel.STRUCTURAL, EvidenceLevel.CONTEXT)
+            and item.strength is EvidenceStrength.STRONG
+            for item in selected_items
+        )
+        meaningful_competitor = (
+            baseline.editorial_format is not selected
+            and "DEFAULT_STANDARD_NEWS_FORMAT" not in baseline.reason_codes
+        )
+        contextual_overlap = len(eligible) > 1
+        confidence = (
+            EditorialFormatConfidence.HIGH
+            if strong_contextual
+            and not meaningful_competitor
+            and not contextual_overlap
+            else EditorialFormatConfidence.MEDIUM
+        )
+        reasons = baseline.reason_codes + ("CONTEXTUAL_FORMAT_EVIDENCE",)
+        signals = baseline.supporting_signals + ("CONTEXTUAL_FORMAT_SUPPORT",)
+        if selected is EditorialFormat.SERVICE:
+            reasons += ("CONTEXTUAL_SERVICE_STRUCTURE",)
+            if EvidenceRole.REQUIREMENT in roles:
+                signals += ("CONTEXTUAL_REQUIREMENT_STRUCTURE",)
+            if EvidenceRole.DEADLINE in roles:
+                signals += ("CONTEXTUAL_DEADLINE_STRUCTURE",)
+        if selected is EditorialFormat.ANALYSIS:
+            reasons += ("CONTEXTUAL_ANALYSIS_STRUCTURE",)
+            for role, signal in (
+                (EvidenceRole.INTERPRETATION, "CONTEXTUAL_INTERPRETATION_STRUCTURE"),
+                (EvidenceRole.PREDICTION, "CONTEXTUAL_PREDICTION_STRUCTURE"),
+                (EvidenceRole.CONSEQUENCE, "CONTEXTUAL_CONSEQUENCE_STRUCTURE"),
+            ):
+                if role in roles:
+                    signals += (signal,)
+        warnings = baseline.warnings
+        if confidence is not EditorialFormatConfidence.LOW:
+            warnings = tuple(
+                warning
+                for warning in warnings
+                if warning != "LOW_EDITORIAL_FORMAT_CONFIDENCE"
+            )
+        if selected is EditorialFormat.ANALYSIS:
+            warnings = tuple(
+                warning
+                for warning in warnings
+                if warning != "SOURCE_TOO_THIN_FOR_ANALYSIS"
+            )
+        if meaningful_competitor:
+            warnings += ("CONTEXTUAL_FORMAT_CONFLICT_RESOLVED",)
+        return self._result(selected, confidence, reasons, signals, warnings)
+
+    @staticmethod
+    def _contextual_format_supported(
+        *,
+        editorial_format: EditorialFormat,
+        items: list[ContextualEvidenceItem],
+        all_items: tuple[ContextualEvidenceItem, ...],
+        assessment: SourceRiskAssessment,
+        facts: ExtractedFacts,
+        source: NormalizedSource,
+    ) -> bool:
+        """Apply deterministic format-specific contextual safety gates."""
+        strong = any(item.strength is EvidenceStrength.STRONG for item in items)
+        if editorial_format is EditorialFormat.SERVICE:
+            action_roles = {
+                EvidenceRole.REQUIREMENT,
+                EvidenceRole.DEADLINE,
+                EvidenceRole.AFFECTED_AUDIENCE,
+            }
+            return strong and any(item.role in action_roles for item in all_items)
+        if editorial_format is EditorialFormat.ANALYSIS:
+            if assessment.risk_level is RiskLevel.CRITICAL:
+                return False
+            structural = any(
+                item.evidence_level is EvidenceLevel.STRUCTURAL
+                and item.strength is EvidenceStrength.STRONG
+                for item in items
+            )
+            analytical_roles = {
+                item.role
+                for item in items
+                if item.role
+                in {
+                    EvidenceRole.INTERPRETATION,
+                    EvidenceRole.PREDICTION,
+                    EvidenceRole.CONSEQUENCE,
+                }
+            }
+            return structural or (
+                len(items) >= 2 and len(analytical_roles) >= 2
+            )
+        if editorial_format is EditorialFormat.FACT_CHECK:
+            return strong and bool(facts.claims)
+        if editorial_format is EditorialFormat.INTERVIEW:
+            return strong and (
+                len(facts.quotes) >= 3
+                and DeterministicEditorialFormatClassifier._has_question_answer_structure(
+                    source.body
+                )
+            )
+        if editorial_format is EditorialFormat.FEATURE:
+            return strong and DeterministicEditorialFormatClassifier._source_depth(
+                source, facts
+            ) == "RICH"
+        return strong
+
+    @staticmethod
+    def _contextual_item_weight(item: ContextualEvidenceItem) -> int:
+        """Return the stable integer weight for one contextual item."""
+        return _CONTEXTUAL_FORMAT_WEIGHTS.get(
+            (item.evidence_level, item.strength),
+            0,
         )
 
     def _explicit_format(

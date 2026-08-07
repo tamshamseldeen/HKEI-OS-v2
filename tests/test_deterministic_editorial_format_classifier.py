@@ -12,6 +12,12 @@ from src.classification.classification_confidence import ClassificationConfidenc
 from src.classification.content_type import ContentType
 from src.classification.content_type_classification import ContentTypeClassification
 from src.facts.extracted_facts import ExtractedFacts
+from src.evidence.contextual_evidence import ContextualEvidence
+from src.evidence.contextual_evidence_item import ContextualEvidenceItem
+from src.evidence.evidence_level import EvidenceLevel
+from src.evidence.evidence_role import EvidenceRole
+from src.evidence.evidence_strength import EvidenceStrength
+from src.evidence.source_section import SourceSection
 from src.formatting.deterministic_editorial_format_classifier import (
     DeterministicEditorialFormatClassifier,
 )
@@ -35,12 +41,13 @@ def make_source(
 
 def make_assessment(
     verification: VerificationStatus = VerificationStatus.VERIFIED_EXTERNALLY,
+    risk_level: RiskLevel = RiskLevel.LOW,
 ) -> SourceRiskAssessment:
     """Create a representative source assessment."""
     return SourceRiskAssessment(
         SourceStatus.IDENTIFIED,
         verification,
-        RiskLevel.LOW,
+        risk_level,
         (),
         (),
         False,
@@ -90,6 +97,7 @@ def classify(
     facts: ExtractedFacts | None = None,
     content: ContentTypeClassification | None = None,
     instruction: str | None = None,
+    contextual_evidence: ContextualEvidence | None = None,
 ) -> EditorialFormatClassification:
     """Classify representative inputs with optional replacements."""
     return DeterministicEditorialFormatClassifier().classify(
@@ -98,7 +106,189 @@ def classify(
         facts=facts or make_facts(),
         content_classification=content or make_content(),
         user_instruction=instruction,
+        contextual_evidence=contextual_evidence,
     )
+
+
+def make_context_item(
+    label: str,
+    *,
+    role: EvidenceRole,
+    level: EvidenceLevel = EvidenceLevel.CONTEXT,
+    strength: EvidenceStrength = EvidenceStrength.STRONG,
+) -> ContextualEvidenceItem:
+    """Create one contextual format item for integration tests."""
+    return ContextualEvidenceItem(
+        source_section=SourceSection.LEAD,
+        sentence_index=0,
+        matched_text="إشارة سياقية",
+        evidence_level=level,
+        role=role,
+        strength=strength,
+        reason_code="TEST_CONTEXT",
+        supports=(label,),
+        suppresses=(),
+    )
+
+
+def make_context(*items: ContextualEvidenceItem) -> ContextualEvidence:
+    """Create an immutable contextual evidence collection."""
+    return ContextualEvidence((), items, (), (), (), ())
+
+
+def service_context() -> ContextualEvidence:
+    """Create strong requirement and deadline service evidence."""
+    return make_context(
+        make_context_item("FORMAT_SERVICE", role=EvidenceRole.REQUIREMENT),
+        make_context_item("FORMAT_SERVICE", role=EvidenceRole.DEADLINE),
+    )
+
+
+def analysis_context(*, structural: bool = True) -> ContextualEvidence:
+    """Create qualified analytical contextual evidence."""
+    items = [
+        make_context_item(
+            "FORMAT_ANALYSIS",
+            role=EvidenceRole.INTERPRETATION,
+            level=(EvidenceLevel.STRUCTURAL if structural else EvidenceLevel.CONTEXT),
+        )
+    ]
+    if not structural:
+        items.append(
+            make_context_item(
+                "FORMAT_ANALYSIS",
+                role=EvidenceRole.PREDICTION,
+                strength=EvidenceStrength.MEDIUM,
+            )
+        )
+    return make_context(*items)
+
+
+def test_context_argument_is_optional_and_none_preserves_exact_output() -> None:
+    """Return the identical legacy result when context is omitted or None."""
+    classifier = DeterministicEditorialFormatClassifier()
+    arguments = {
+        "source": make_source(),
+        "assessment": make_assessment(),
+        "facts": make_facts(),
+        "content_classification": make_content(),
+    }
+
+    assert classifier.classify(**arguments) == classifier.classify(
+        **arguments,
+        contextual_evidence=None,
+    )
+
+
+def test_strong_service_context_selects_service_with_structure_signals() -> None:
+    """Select high-confidence service from strong requirement and deadline context."""
+    result = classify(contextual_evidence=service_context())
+
+    assert result.editorial_format is EditorialFormat.SERVICE
+    assert result.confidence is EditorialFormatConfidence.HIGH
+    assert result.reason_codes[-2:] == (
+        "CONTEXTUAL_FORMAT_EVIDENCE",
+        "CONTEXTUAL_SERVICE_STRUCTURE",
+    )
+    assert result.supporting_signals[-3:] == (
+        "CONTEXTUAL_FORMAT_SUPPORT",
+        "CONTEXTUAL_REQUIREMENT_STRUCTURE",
+        "CONTEXTUAL_DEADLINE_STRUCTURE",
+    )
+
+
+@pytest.mark.parametrize(
+    "role",
+    (EvidenceRole.AUTHORITY, EvidenceRole.ATTRIBUTION),
+)
+def test_service_requires_action_deadline_or_audience_role(
+    role: EvidenceRole,
+) -> None:
+    """Do not infer service from authority or other non-action context alone."""
+    context = make_context(make_context_item("FORMAT_SERVICE", role=role))
+
+    assert classify(contextual_evidence=context).editorial_format is EditorialFormat.STANDARD_NEWS
+
+
+def test_structural_or_multi_role_analysis_context_selects_analysis() -> None:
+    """Select analysis from structural evidence or two analytical roles."""
+    structural = classify(contextual_evidence=analysis_context())
+    multi_role = classify(contextual_evidence=analysis_context(structural=False))
+
+    assert structural.editorial_format is EditorialFormat.ANALYSIS
+    assert structural.confidence is EditorialFormatConfidence.HIGH
+    assert multi_role.editorial_format is EditorialFormat.ANALYSIS
+    assert "CONTEXTUAL_ANALYSIS_STRUCTURE" in multi_role.reason_codes
+    assert "CONTEXTUAL_INTERPRETATION_STRUCTURE" in multi_role.supporting_signals
+    assert "CONTEXTUAL_PREDICTION_STRUCTURE" in multi_role.supporting_signals
+
+
+def test_weak_isolated_analysis_and_future_reporting_do_not_select_analysis() -> None:
+    """Reject an isolated weak analysis item and ordinary future timing."""
+    weak = make_context(
+        make_context_item(
+            "FORMAT_ANALYSIS",
+            role=EvidenceRole.INTERPRETATION,
+            level=EvidenceLevel.TOKEN,
+            strength=EvidenceStrength.WEAK,
+        )
+    )
+
+    assert classify(contextual_evidence=weak).editorial_format is EditorialFormat.STANDARD_NEWS
+    assert classify(
+        source=make_source(body="تبدأ المرحلة الثانية الشهر المقبل"),
+        contextual_evidence=make_context(),
+    ).editorial_format is EditorialFormat.STANDARD_NEWS
+
+
+def test_context_outweighs_content_type_but_not_explicit_instruction() -> None:
+    """Prefer qualified context over transition signals and explicit requests over it."""
+    contextual = classify(
+        content=make_content(ContentType.EXPLAINER),
+        contextual_evidence=analysis_context(),
+    )
+    explicit = classify(
+        instruction="اكتب خبرًا عاجلًا",
+        contextual_evidence=service_context(),
+    )
+
+    assert contextual.editorial_format is EditorialFormat.ANALYSIS
+    assert "CONTEXTUAL_FORMAT_CONFLICT_RESOLVED" in contextual.warnings
+    assert explicit.editorial_format is EditorialFormat.BREAKING
+    assert "CONTEXTUAL_FORMAT_EVIDENCE" not in explicit.reason_codes
+
+
+def test_unknown_context_label_is_ignored_without_conflict_warning() -> None:
+    """Ignore unsupported labels and avoid inventing a contextual conflict."""
+    context = make_context(
+        make_context_item("FORMAT_UNKNOWN", role=EvidenceRole.INTERPRETATION)
+    )
+    result = classify(contextual_evidence=context)
+
+    assert result.editorial_format is EditorialFormat.STANDARD_NEWS
+    assert "CONTEXTUAL_FORMAT_CONFLICT_RESOLVED" not in result.warnings
+
+
+def test_critical_risk_does_not_force_contextual_analysis() -> None:
+    """Preserve the critical-risk safety gate for analytical context."""
+    result = classify(
+        assessment=make_assessment(risk_level=RiskLevel.CRITICAL),
+        contextual_evidence=analysis_context(),
+    )
+
+    assert result.editorial_format is not EditorialFormat.ANALYSIS
+
+
+def test_context_input_is_unchanged_and_output_is_deterministic() -> None:
+    """Avoid context mutation and return equal output for identical input."""
+    context = service_context()
+    snapshot = context.all_items
+
+    first = classify(contextual_evidence=context)
+    second = classify(contextual_evidence=context)
+
+    assert first == second
+    assert context.all_items == snapshot
 
 
 @pytest.mark.parametrize(
