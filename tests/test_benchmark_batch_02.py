@@ -152,7 +152,7 @@ def test_dataset_has_only_registered_inputs_and_validation_reports() -> None:
         if path.is_file()
     )
 
-    assert len(files) == 20
+    assert len(files) == 22
     assert not any("article" in path.lower() for path in files)
     assert not any("review" in path.lower() for path in files)
     assert set(path for path in files if "validation" in path) == {
@@ -160,6 +160,8 @@ def test_dataset_has_only_registered_inputs_and_validation_reports() -> None:
         "validation.md",
         "contextual_topic_validation.json",
         "contextual_topic_validation.md",
+        "contextual_full_validation.json",
+        "contextual_full_validation.md",
     }
     assert set(path for path in files if "topic_error_analysis" in path) == {
         "topic_error_analysis.json",

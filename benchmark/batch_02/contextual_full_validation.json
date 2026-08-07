@@ -1,0 +1,227 @@
+{
+  "batch": "batch_02",
+  "case_count": 10,
+  "topic_matched": 10,
+  "topic_accuracy": 100.0,
+  "format_matched": 10,
+  "format_accuracy": 100.0,
+  "reader_intent_matched": 10,
+  "reader_intent_accuracy": 100.0,
+  "fully_matched_cases": 10,
+  "full_case_accuracy": 100.0,
+  "cases": [
+    {
+      "id": "011",
+      "expected_topic": "GOVERNMENT",
+      "predicted_topic": "GOVERNMENT",
+      "topic_confidence": "MEDIUM",
+      "topic_match": true,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_support_labels": [
+        "CLAIM_ATTRIBUTED",
+        "TOPIC_GOVERNMENT"
+      ],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "012",
+      "expected_topic": "SCIENCE",
+      "predicted_topic": "SCIENCE",
+      "topic_confidence": "LOW",
+      "topic_match": true,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_support_labels": [
+        "CLAIM_ATTRIBUTED"
+      ],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "013",
+      "expected_topic": "TECHNOLOGY",
+      "predicted_topic": "TECHNOLOGY",
+      "topic_confidence": "HIGH",
+      "topic_match": true,
+      "expected_format": "ANALYSIS",
+      "predicted_format": "ANALYSIS",
+      "format_confidence": "HIGH",
+      "format_match": true,
+      "expected_reader_intent": "UNDERSTAND_IMPACT",
+      "predicted_reader_intent": "UNDERSTAND_IMPACT",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_support_labels": [
+        "TOPIC_TECHNOLOGY",
+        "TOPIC_BUSINESS",
+        "FORMAT_ANALYSIS",
+        "INTENT_UNDERSTAND_IMPACT",
+        "CLAIM_UNCERTAIN"
+      ],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "014",
+      "expected_topic": "WORLD",
+      "predicted_topic": "WORLD",
+      "topic_confidence": "HIGH",
+      "topic_match": true,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "LOW",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "LOW",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_support_labels": [
+        "TOPIC_WORLD"
+      ],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "015",
+      "expected_topic": "GOVERNMENT",
+      "predicted_topic": "GOVERNMENT",
+      "topic_confidence": "HIGH",
+      "topic_match": true,
+      "expected_format": "SERVICE",
+      "predicted_format": "SERVICE",
+      "format_confidence": "HIGH",
+      "format_match": true,
+      "expected_reader_intent": "KNOW_ACTION",
+      "predicted_reader_intent": "KNOW_ACTION",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_support_labels": [
+        "TOPIC_GOVERNMENT",
+        "CLAIM_ATTRIBUTED",
+        "FORMAT_SERVICE",
+        "INTENT_KNOW_ACTION",
+        "INTENT_VERIFY_REQUIREMENTS"
+      ],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "016",
+      "expected_topic": "BUSINESS",
+      "predicted_topic": "BUSINESS",
+      "topic_confidence": "HIGH",
+      "topic_match": true,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_support_labels": [
+        "TOPIC_BUSINESS"
+      ],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "017",
+      "expected_topic": "ECONOMY",
+      "predicted_topic": "ECONOMY",
+      "topic_confidence": "HIGH",
+      "topic_match": true,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_support_labels": [
+        "TOPIC_ECONOMY"
+      ],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "018",
+      "expected_topic": "SCIENCE",
+      "predicted_topic": "SCIENCE",
+      "topic_confidence": "HIGH",
+      "topic_match": true,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_support_labels": [
+        "CLAIM_ATTRIBUTED",
+        "TOPIC_SCIENCE",
+        "TOPIC_SPORTS"
+      ],
+      "contextual_suppression_labels": [
+        "TOPIC_SPORTS"
+      ]
+    },
+    {
+      "id": "019",
+      "expected_topic": "CULTURE",
+      "predicted_topic": "CULTURE",
+      "topic_confidence": "HIGH",
+      "topic_match": true,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "LOW",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "LOW",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_support_labels": [
+        "TOPIC_CULTURE"
+      ],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "020",
+      "expected_topic": "TECHNOLOGY",
+      "predicted_topic": "TECHNOLOGY",
+      "topic_confidence": "MEDIUM",
+      "topic_match": true,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_support_labels": [
+        "TOPIC_TECHNOLOGY"
+      ],
+      "contextual_suppression_labels": []
+    }
+  ]
+}
