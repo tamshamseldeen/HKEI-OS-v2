@@ -27,6 +27,12 @@ from src.formatting.editorial_format_classification import (
 )
 from src.formatting.editorial_format_confidence import EditorialFormatConfidence
 from src.intake.normalized_source import NormalizedSource
+from src.semantics.compositional_semantic_evidence import (
+    CompositionalSemanticEvidence,
+)
+from src.semantics.semantic_component import SemanticComponent
+from src.semantics.semantic_relationship import SemanticRelationship
+from src.semantics.semantic_relationship_type import SemanticRelationshipType
 
 
 def make_source(
@@ -98,6 +104,7 @@ def classify(
     content: ContentTypeClassification | None = None,
     instruction: str | None = None,
     contextual_evidence: ContextualEvidence | None = None,
+    semantic_evidence: CompositionalSemanticEvidence | None = None,
 ) -> EditorialFormatClassification:
     """Classify representative inputs with optional replacements."""
     return DeterministicEditorialFormatClassifier().classify(
@@ -107,7 +114,108 @@ def classify(
         content_classification=content or make_content(),
         user_instruction=instruction,
         contextual_evidence=contextual_evidence,
+        semantic_evidence=semantic_evidence,
     )
+
+
+def make_semantic_format(
+    *,
+    support: tuple[str, ...] = (),
+    suppression: tuple[str, ...] = (),
+    relationship_type: SemanticRelationshipType = (
+        SemanticRelationshipType.RECOMMENDATION_TARGETS_AUDIENCE
+    ),
+) -> CompositionalSemanticEvidence:
+    """Create strong semantic format evidence for classifier tests."""
+    relationships = (
+        SemanticRelationship(
+            source_section=SourceSection.LEAD,
+            sentence_index=0,
+            relationship_type=relationship_type,
+            subject_component=SemanticComponent.RECOMMENDED_ACTION,
+            subject_text="تحديث الحماية",
+            object_component=SemanticComponent.AFFECTED_AUDIENCE,
+            object_text="الشركات",
+            strength=EvidenceStrength.STRONG,
+            reason_code="TEST_SEMANTIC_FORMAT",
+            evidence_indexes=(),
+            supports=support,
+            suppresses=suppression,
+        ),
+    ) if support or suppression else ()
+    return CompositionalSemanticEvidence(
+        relationships=relationships,
+        primary_domain_candidates=(),
+        secondary_domain_candidates=(),
+        format_support=support,
+        format_suppression=suppression,
+        intent_support=(),
+        warnings=(),
+    )
+
+
+def test_semantic_argument_is_optional_and_none_preserves_exact_output() -> None:
+    """Keep the pre-semantic format result identical when omitted or None."""
+    classifier = DeterministicEditorialFormatClassifier()
+    arguments = {
+        "source": make_source(),
+        "assessment": make_assessment(),
+        "facts": make_facts(),
+        "content_classification": make_content(),
+    }
+
+    assert classifier.classify(**arguments) == classifier.classify(
+        **arguments,
+        semantic_evidence=None,
+    )
+
+
+def test_strong_semantic_recommendation_selects_service() -> None:
+    """Select SERVICE from a strong recommendation-audience relationship."""
+    result = classify(
+        semantic_evidence=make_semantic_format(support=("FORMAT_SERVICE",))
+    )
+
+    assert result.editorial_format is EditorialFormat.SERVICE
+    assert result.confidence is EditorialFormatConfidence.HIGH
+    assert "COMPOSITIONAL_SEMANTIC_FORMAT_EVIDENCE" in result.reason_codes
+    assert "SEMANTIC_FORMAT_SUPPORT" in result.supporting_signals
+
+
+def test_semantic_service_requires_recommendation_relationship() -> None:
+    """Reject SERVICE support without the required relationship type."""
+    result = classify(
+        semantic_evidence=make_semantic_format(
+            support=("FORMAT_SERVICE",),
+            relationship_type=SemanticRelationshipType.ACTOR_PERFORMS_ACTION,
+        )
+    )
+
+    assert result.editorial_format is EditorialFormat.STANDARD_NEWS
+
+
+def test_semantic_suppression_blocks_weak_guide() -> None:
+    """Prevent weak guide inference when semantics suppress GUIDE."""
+    facts = make_facts(dates=("2026-08-01",), numbers=("10",))
+    baseline = classify(facts=facts)
+    result = classify(
+        facts=facts,
+        semantic_evidence=make_semantic_format(suppression=("FORMAT_GUIDE",)),
+    )
+
+    assert baseline.editorial_format is EditorialFormat.GUIDE
+    assert baseline.confidence is EditorialFormatConfidence.MEDIUM
+    assert result.editorial_format is EditorialFormat.STANDARD_NEWS
+    assert "COMPOSITIONAL_SEMANTIC_FORMAT_SUPPRESSION" in result.reason_codes
+
+
+def test_unknown_semantic_format_label_is_ignored() -> None:
+    """Ignore unsupported semantic format labels without changing fallback."""
+    result = classify(
+        semantic_evidence=make_semantic_format(support=("FORMAT_UNKNOWN",))
+    )
+
+    assert result.editorial_format is EditorialFormat.STANDARD_NEWS
 
 
 def make_context_item(

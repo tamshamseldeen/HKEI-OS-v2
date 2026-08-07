@@ -18,6 +18,10 @@ from src.evidence.evidence_role import EvidenceRole
 from src.evidence.evidence_strength import EvidenceStrength
 from src.facts.extracted_facts import ExtractedFacts
 from src.intake.normalized_source import NormalizedSource
+from src.semantics.compositional_semantic_evidence import (
+    CompositionalSemanticEvidence,
+)
+from src.semantics.semantic_relationship_type import SemanticRelationshipType
 
 from .editorial_format import EditorialFormat
 from .editorial_format_classification import EditorialFormatClassification
@@ -132,6 +136,12 @@ _CONTEXTUAL_FORMAT_LABELS = {
     f"FORMAT_{editorial_format.value}": editorial_format
     for editorial_format in EditorialFormat
 }
+_SEMANTIC_FORMAT_LABELS = {
+    "FORMAT_SERVICE": EditorialFormat.SERVICE,
+    "FORMAT_ANALYSIS": EditorialFormat.ANALYSIS,
+    "FORMAT_GUIDE": EditorialFormat.GUIDE,
+    "FORMAT_STANDARD_NEWS": EditorialFormat.STANDARD_NEWS,
+}
 _CONTEXTUAL_FORMAT_WEIGHTS = {
     (EvidenceLevel.STRUCTURAL, EvidenceStrength.STRONG): 14,
     (EvidenceLevel.CONTEXT, EvidenceStrength.STRONG): 12,
@@ -155,6 +165,7 @@ class DeterministicEditorialFormatClassifier:
         content_classification: ContentTypeClassification,
         user_instruction: str | None = None,
         contextual_evidence: ContextualEvidence | None = None,
+        semantic_evidence: CompositionalSemanticEvidence | None = None,
     ) -> EditorialFormatClassification:
         """Classify one source using only supplied deterministic signals.
 
@@ -165,10 +176,31 @@ class DeterministicEditorialFormatClassifier:
             content_classification: Existing compatible content classification.
             user_instruction: Optional explicit requested editorial treatment.
             contextual_evidence: Optional deterministic contextual evidence.
+            semantic_evidence: Optional compositional semantic evidence.
 
         Returns:
             Exactly one editorial format classification.
         """
+        if semantic_evidence is not None:
+            baseline = self.classify(
+                source=source,
+                assessment=assessment,
+                facts=facts,
+                content_classification=content_classification,
+                user_instruction=user_instruction,
+                contextual_evidence=contextual_evidence,
+                semantic_evidence=None,
+            )
+            if any(
+                reason.startswith("EXPLICIT_") for reason in baseline.reason_codes
+            ):
+                return baseline
+            semantic = self._semantic_result(
+                evidence=semantic_evidence,
+                baseline=baseline,
+            )
+            return semantic if semantic is not None else baseline
+
         if contextual_evidence is not None:
             baseline = self.classify(
                 source=source,
@@ -177,6 +209,7 @@ class DeterministicEditorialFormatClassifier:
                 content_classification=content_classification,
                 user_instruction=user_instruction,
                 contextual_evidence=None,
+                semantic_evidence=None,
             )
             if any(
                 reason.startswith("EXPLICIT_") for reason in baseline.reason_codes
@@ -374,6 +407,81 @@ class DeterministicEditorialFormatClassifier:
             ("EXISTING_CONTENT_TYPE_FALLBACK",),
             warnings + (("LOW_EDITORIAL_FORMAT_CONFIDENCE",) if low_confidence else ()),
         )
+
+    def _semantic_result(
+        self,
+        *,
+        evidence: CompositionalSemanticEvidence,
+        baseline: EditorialFormatClassification,
+    ) -> EditorialFormatClassification | None:
+        """Return a qualified semantic format override or suppression result."""
+        strong_supports = {
+            label
+            for relationship in evidence.relationships
+            if relationship.strength is EvidenceStrength.STRONG
+            for label in relationship.supports
+        }
+        supported = tuple(
+            dict.fromkeys(
+                editorial_format
+                for label in evidence.format_support
+                if (editorial_format := _SEMANTIC_FORMAT_LABELS.get(label))
+                is not None
+            )
+        )
+        if EditorialFormat.SERVICE in supported:
+            has_recommendation = any(
+                relationship.strength is EvidenceStrength.STRONG
+                and relationship.relationship_type
+                is SemanticRelationshipType.RECOMMENDATION_TARGETS_AUDIENCE
+                and "FORMAT_SERVICE" in relationship.supports
+                for relationship in evidence.relationships
+            )
+            if not has_recommendation:
+                supported = tuple(
+                    value for value in supported if value is not EditorialFormat.SERVICE
+                )
+
+        if supported:
+            selected = supported[0]
+            reasons = baseline.reason_codes + (
+                "COMPOSITIONAL_SEMANTIC_FORMAT_EVIDENCE",
+            )
+            signals = baseline.supporting_signals + ("SEMANTIC_FORMAT_SUPPORT",)
+            warnings = baseline.warnings
+            if baseline.editorial_format is not selected:
+                warnings += ("SEMANTIC_FORMAT_CONFLICT_RESOLVED",)
+            return self._result(
+                selected,
+                (
+                    EditorialFormatConfidence.HIGH
+                    if f"FORMAT_{selected.value}" in strong_supports
+                    else EditorialFormatConfidence.MEDIUM
+                ),
+                reasons,
+                signals,
+                warnings,
+            )
+
+        suppressed = {
+            editorial_format
+            for label in evidence.format_suppression
+            if (editorial_format := _SEMANTIC_FORMAT_LABELS.get(label))
+            is not None
+        }
+        if baseline.editorial_format in suppressed and baseline.confidence is not (
+            EditorialFormatConfidence.HIGH
+        ):
+            return self._result(
+                EditorialFormat.STANDARD_NEWS,
+                EditorialFormatConfidence.MEDIUM,
+                baseline.reason_codes
+                + ("COMPOSITIONAL_SEMANTIC_FORMAT_SUPPRESSION",),
+                baseline.supporting_signals
+                + ("SEMANTIC_COMPETING_FORMAT_SUPPRESSED",),
+                baseline.warnings,
+            )
+        return None
 
     def _contextual_result(
         self,
