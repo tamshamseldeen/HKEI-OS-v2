@@ -1,0 +1,229 @@
+{
+  "batch": "batch_02",
+  "case_count": 10,
+  "matched": 10,
+  "mismatched": 0,
+  "accuracy": 100.0,
+  "cases": [
+    {
+      "id": "011",
+      "expected_topic": "GOVERNMENT",
+      "predicted_topic": "GOVERNMENT",
+      "confidence": "MEDIUM",
+      "match": true,
+      "reason_codes": [
+        "BODY_TOPIC_SIGNAL",
+        "CONTEXTUAL_TOPIC_EVIDENCE"
+      ],
+      "supporting_signals": [
+        "BODY_GOVERNMENT_SIGNAL",
+        "CONTEXTUAL_TOPIC_SUPPORT"
+      ],
+      "warnings": [],
+      "contextual_support_labels": [
+        "TOPIC_GOVERNMENT"
+      ],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "012",
+      "expected_topic": "SCIENCE",
+      "predicted_topic": "SCIENCE",
+      "confidence": "LOW",
+      "match": true,
+      "reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "supporting_signals": [
+        "TITLE_SCIENCE_SIGNAL",
+        "BODY_SCIENCE_SIGNAL"
+      ],
+      "warnings": [
+        "LOW_TOPIC_CONFIDENCE"
+      ],
+      "contextual_support_labels": [],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "013",
+      "expected_topic": "TECHNOLOGY",
+      "predicted_topic": "TECHNOLOGY",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL",
+        "CONTEXTUAL_TOPIC_EVIDENCE"
+      ],
+      "supporting_signals": [
+        "TITLE_TECHNOLOGY_SIGNAL",
+        "BODY_TECHNOLOGY_SIGNAL",
+        "CONTEXTUAL_TOPIC_SUPPORT"
+      ],
+      "warnings": [],
+      "contextual_support_labels": [
+        "TOPIC_TECHNOLOGY",
+        "TOPIC_BUSINESS"
+      ],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "014",
+      "expected_topic": "WORLD",
+      "predicted_topic": "WORLD",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL",
+        "CONTEXTUAL_TOPIC_EVIDENCE"
+      ],
+      "supporting_signals": [
+        "TITLE_WORLD_SIGNAL",
+        "BODY_WORLD_SIGNAL",
+        "CONTEXTUAL_TOPIC_SUPPORT"
+      ],
+      "warnings": [],
+      "contextual_support_labels": [
+        "TOPIC_WORLD"
+      ],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "015",
+      "expected_topic": "GOVERNMENT",
+      "predicted_topic": "GOVERNMENT",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL",
+        "CONTEXTUAL_TOPIC_EVIDENCE"
+      ],
+      "supporting_signals": [
+        "TITLE_GOVERNMENT_SIGNAL",
+        "BODY_GOVERNMENT_SIGNAL",
+        "CONTEXTUAL_TOPIC_SUPPORT"
+      ],
+      "warnings": [],
+      "contextual_support_labels": [
+        "TOPIC_GOVERNMENT"
+      ],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "016",
+      "expected_topic": "BUSINESS",
+      "predicted_topic": "BUSINESS",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL",
+        "CONTEXTUAL_TOPIC_EVIDENCE"
+      ],
+      "supporting_signals": [
+        "TITLE_BUSINESS_SIGNAL",
+        "BODY_BUSINESS_SIGNAL",
+        "CONTEXTUAL_TOPIC_SUPPORT"
+      ],
+      "warnings": [],
+      "contextual_support_labels": [
+        "TOPIC_BUSINESS"
+      ],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "017",
+      "expected_topic": "ECONOMY",
+      "predicted_topic": "ECONOMY",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL",
+        "CONTEXTUAL_TOPIC_EVIDENCE"
+      ],
+      "supporting_signals": [
+        "TITLE_ECONOMY_SIGNAL",
+        "BODY_ECONOMY_SIGNAL",
+        "CONTEXTUAL_TOPIC_SUPPORT"
+      ],
+      "warnings": [],
+      "contextual_support_labels": [
+        "TOPIC_ECONOMY"
+      ],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "018",
+      "expected_topic": "SCIENCE",
+      "predicted_topic": "SCIENCE",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL",
+        "CONTEXTUAL_TOPIC_EVIDENCE",
+        "CONTEXTUAL_TOPIC_SUPPRESSION"
+      ],
+      "supporting_signals": [
+        "TITLE_SCIENCE_SIGNAL",
+        "BODY_SCIENCE_SIGNAL",
+        "CONTEXTUAL_TOPIC_SUPPORT",
+        "CONTEXTUAL_COMPETING_TOPIC_SUPPRESSED"
+      ],
+      "warnings": [],
+      "contextual_support_labels": [
+        "TOPIC_SCIENCE",
+        "TOPIC_SPORTS"
+      ],
+      "contextual_suppression_labels": [
+        "TOPIC_SPORTS"
+      ]
+    },
+    {
+      "id": "019",
+      "expected_topic": "CULTURE",
+      "predicted_topic": "CULTURE",
+      "confidence": "HIGH",
+      "match": true,
+      "reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL",
+        "CONTEXTUAL_TOPIC_EVIDENCE"
+      ],
+      "supporting_signals": [
+        "TITLE_CULTURE_SIGNAL",
+        "BODY_CULTURE_SIGNAL",
+        "CONTEXTUAL_TOPIC_SUPPORT"
+      ],
+      "warnings": [],
+      "contextual_support_labels": [
+        "TOPIC_CULTURE"
+      ],
+      "contextual_suppression_labels": []
+    },
+    {
+      "id": "020",
+      "expected_topic": "TECHNOLOGY",
+      "predicted_topic": "TECHNOLOGY",
+      "confidence": "MEDIUM",
+      "match": true,
+      "reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "CONTEXTUAL_TOPIC_EVIDENCE"
+      ],
+      "supporting_signals": [
+        "TITLE_TECHNOLOGY_SIGNAL",
+        "CONTEXTUAL_TOPIC_SUPPORT"
+      ],
+      "warnings": [],
+      "contextual_support_labels": [
+        "TOPIC_TECHNOLOGY"
+      ],
+      "contextual_suppression_labels": []
+    }
+  ]
+}
