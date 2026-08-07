@@ -147,7 +147,7 @@ def test_batch_contains_only_registered_inputs_and_validation_reports() -> None:
         if path.is_file()
     )
 
-    assert len(files) == 18
+    assert len(files) == 20
     assert set(files) == {
         "manifest.json",
         "expected.json",
@@ -157,6 +157,8 @@ def test_batch_contains_only_registered_inputs_and_validation_reports() -> None:
         "compositional_context_analysis.md",
         "compositional_semantic_diagnostic.json",
         "compositional_semantic_diagnostic.md",
+        "semantic_topic_diagnostic.json",
+        "semantic_topic_diagnostic.md",
         *(f"{case_id}/source.md" for case_id in EXPECTED_IDS),
     }
     assert not any(

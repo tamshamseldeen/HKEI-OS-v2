@@ -1,0 +1,97 @@
+{
+  "cases": [
+    {
+      "id": "024",
+      "expected_topic": "HEALTH",
+      "predicted_topic": "HEALTH",
+      "confidence": "HIGH",
+      "match": true,
+      "contextual_support_labels": [
+        "TOPIC_TECHNOLOGY",
+        "TOPIC_SPORTS"
+      ],
+      "semantic_primary_domain_candidates": [
+        "PRIMARY_DOMAIN_HEALTH"
+      ],
+      "semantic_secondary_domain_candidates": [
+        "SECONDARY_DOMAIN_TECHNOLOGY"
+      ],
+      "semantic_suppressions": [
+        "PRIMARY_DOMAIN_TECHNOLOGY",
+        "PRIMARY_DOMAIN_TECHNOLOGY"
+      ],
+      "reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL",
+        "COMPOSITIONAL_SEMANTIC_TOPIC_EVIDENCE",
+        "COMPOSITIONAL_SEMANTIC_TOPIC_SUPPRESSION",
+        "PRIMARY_SECONDARY_DOMAIN_RESOLUTION"
+      ],
+      "supporting_signals": [
+        "TITLE_HEALTH_SIGNAL",
+        "LEGACY_TOPIC_SUPPORT",
+        "SEMANTIC_PRIMARY_DOMAIN_SUPPORT",
+        "SEMANTIC_SECONDARY_DOMAIN_SUPPORT",
+        "SEMANTIC_COMPETING_DOMAIN_SUPPRESSED"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "025",
+      "expected_topic": "HEALTH",
+      "predicted_topic": "HEALTH",
+      "confidence": "HIGH",
+      "match": true,
+      "contextual_support_labels": [
+        "CLAIM_ATTRIBUTED",
+        "TOPIC_GOVERNMENT"
+      ],
+      "semantic_primary_domain_candidates": [
+        "PRIMARY_DOMAIN_HEALTH"
+      ],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_suppressions": [
+        "PRIMARY_DOMAIN_GOVERNMENT"
+      ],
+      "reason_codes": [
+        "COMPOSITIONAL_SEMANTIC_TOPIC_EVIDENCE",
+        "COMPOSITIONAL_SEMANTIC_TOPIC_SUPPRESSION"
+      ],
+      "supporting_signals": [
+        "SEMANTIC_PRIMARY_DOMAIN_SUPPORT",
+        "SEMANTIC_COMPETING_DOMAIN_SUPPRESSED"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "029",
+      "expected_topic": "EDUCATION",
+      "predicted_topic": "EDUCATION",
+      "confidence": "HIGH",
+      "match": true,
+      "contextual_support_labels": [
+        "CLAIM_ATTRIBUTED",
+        "TOPIC_GOVERNMENT"
+      ],
+      "semantic_primary_domain_candidates": [
+        "PRIMARY_DOMAIN_EDUCATION"
+      ],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_suppressions": [
+        "PRIMARY_DOMAIN_GOVERNMENT"
+      ],
+      "reason_codes": [
+        "COMPOSITIONAL_SEMANTIC_TOPIC_EVIDENCE",
+        "COMPOSITIONAL_SEMANTIC_TOPIC_SUPPRESSION"
+      ],
+      "supporting_signals": [
+        "SEMANTIC_PRIMARY_DOMAIN_SUPPORT",
+        "SEMANTIC_COMPETING_DOMAIN_SUPPRESSED"
+      ],
+      "warnings": []
+    }
+  ],
+  "matched": 3,
+  "mismatched": 0,
+  "accuracy": 100.0
+}
