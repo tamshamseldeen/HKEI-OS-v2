@@ -18,6 +18,12 @@ from src.classification.deterministic_content_type_classifier import (
 )
 from src.facts.deterministic_fact_extractor import DeterministicFactExtractor
 from src.facts.extracted_facts import ExtractedFacts
+from src.evidence.contextual_evidence import ContextualEvidence
+from src.evidence.contextual_evidence_item import ContextualEvidenceItem
+from src.evidence.evidence_level import EvidenceLevel
+from src.evidence.evidence_role import EvidenceRole
+from src.evidence.evidence_strength import EvidenceStrength
+from src.evidence.source_section import SourceSection
 from src.intake.normalized_source import NormalizedSource
 from src.topic.deterministic_topic_classifier import DeterministicTopicClassifier
 from src.topic.topic import Topic
@@ -101,6 +107,7 @@ def classify(
     assessment: SourceRiskAssessment | None = None,
     content: ContentTypeClassification | None = None,
     user_instruction: str | None = None,
+    contextual_evidence: ContextualEvidence | None = None,
 ) -> TopicClassification:
     """Classify convenient deterministic defaults."""
     return DeterministicTopicClassifier().classify(
@@ -109,7 +116,147 @@ def classify(
         assessment=assessment or make_assessment(),
         content_classification=content or make_content(),
         user_instruction=user_instruction,
+        contextual_evidence=contextual_evidence,
     )
+
+
+def make_contextual_item(
+    *supports: str,
+    suppresses: tuple[str, ...] = (),
+    level: EvidenceLevel = EvidenceLevel.PHRASE,
+    strength: EvidenceStrength = EvidenceStrength.STRONG,
+    section: SourceSection = SourceSection.LEAD,
+) -> ContextualEvidenceItem:
+    """Create one contextual item for classifier integration tests."""
+    return ContextualEvidenceItem(
+        source_section=section,
+        sentence_index=0,
+        matched_text="إشارة سياقية",
+        evidence_level=level,
+        role=EvidenceRole.SUBJECT,
+        strength=strength,
+        reason_code="TEST_CONTEXT",
+        supports=supports,
+        suppresses=suppresses,
+    )
+
+
+def make_contextual_evidence(
+    *items: ContextualEvidenceItem,
+) -> ContextualEvidence:
+    """Create contextual evidence with supplied lead items."""
+    return ContextualEvidence((), items, (), (), (), ())
+
+
+def test_contextual_evidence_is_optional_and_none_preserves_output() -> None:
+    """Keep the pre-integration result identical when context is omitted or None."""
+    source = make_source(title="البنك المركزي يثبت أسعار الفائدة")
+    classifier = DeterministicTopicClassifier()
+    arguments = {
+        "source": source,
+        "facts": make_facts(),
+        "assessment": make_assessment(),
+        "content_classification": make_content(),
+    }
+
+    assert classifier.classify(**arguments) == classifier.classify(
+        **arguments,
+        contextual_evidence=None,
+    )
+
+
+@pytest.mark.parametrize(
+    ("label", "expected"),
+    (
+        ("TOPIC_SCIENCE", Topic.SCIENCE),
+        ("TOPIC_CULTURE", Topic.CULTURE),
+        ("TOPIC_GOVERNMENT", Topic.GOVERNMENT),
+        ("TOPIC_TECHNOLOGY", Topic.TECHNOLOGY),
+        ("TOPIC_ECONOMY", Topic.ECONOMY),
+    ),
+)
+def test_contextual_topic_support_maps_to_topic(label: str, expected: Topic) -> None:
+    """Map recognized contextual support labels to primary topics."""
+    result = classify(
+        contextual_evidence=make_contextual_evidence(make_contextual_item(label))
+    )
+
+    assert result.topic is expected
+    assert "CONTEXTUAL_TOPIC_EVIDENCE" in result.reason_codes
+    assert "CONTEXTUAL_TOPIC_SUPPORT" in result.supporting_signals
+
+
+def test_unknown_contextual_topic_label_is_ignored() -> None:
+    """Ignore unknown contextual labels without changing fallback behavior."""
+    result = classify(
+        contextual_evidence=make_contextual_evidence(
+            make_contextual_item("TOPIC_UNKNOWN")
+        )
+    )
+
+    assert result.topic is Topic.GENERAL
+    assert "CONTEXTUAL_TOPIC_EVIDENCE" not in result.reason_codes
+
+
+def test_strong_context_outweighs_legacy_and_weak_lexical_support() -> None:
+    """Prefer strong science context over a weak team and legacy sports signal."""
+    context = make_contextual_evidence(
+        make_contextual_item(
+            "TOPIC_SCIENCE",
+            level=EvidenceLevel.CONTEXT,
+            suppresses=("TOPIC_SPORTS",),
+        )
+    )
+    result = classify(
+        source=make_source(title="فريق دولي أعلن اكتشافًا"),
+        content=make_content(ContentType.SPORTS_NEWS),
+        contextual_evidence=context,
+    )
+
+    assert result.topic is Topic.SCIENCE
+    assert "CONTEXTUAL_TOPIC_SUPPRESSION" in result.reason_codes
+    assert "CONTEXTUAL_COMPETING_TOPIC_SUPPRESSED" in result.supporting_signals
+
+
+def test_suppression_does_not_erase_genuine_strong_sports_evidence() -> None:
+    """Retain sports when multiple genuine sports terms outweigh suppression."""
+    context = make_contextual_evidence(
+        make_contextual_item(
+            suppresses=("TOPIC_SPORTS",),
+            level=EvidenceLevel.CONTEXT,
+        )
+    )
+    result = classify(
+        source=make_source(
+            title="المنتخب يفوز في المباراة",
+            body="سجل اللاعب هدفًا في بطولة الكأس",
+        ),
+        contextual_evidence=context,
+    )
+
+    assert result.topic is Topic.SPORTS
+
+
+def test_consistent_strong_context_can_raise_confidence() -> None:
+    """Raise confidence to high for multiple consistent strong context items."""
+    context = make_contextual_evidence(
+        make_contextual_item("TOPIC_WORLD"),
+        make_contextual_item("TOPIC_WORLD", level=EvidenceLevel.CONTEXT),
+    )
+
+    assert classify(contextual_evidence=context).confidence is TopicConfidence.HIGH
+
+
+def test_contextual_input_is_unchanged_and_results_are_deterministic() -> None:
+    """Avoid context mutation and return equal results for identical inputs."""
+    context = make_contextual_evidence(make_contextual_item("TOPIC_CULTURE"))
+    snapshot = context.all_items
+
+    first = classify(contextual_evidence=context)
+    second = classify(contextual_evidence=context)
+
+    assert first == second
+    assert context.all_items == snapshot
 
 
 @pytest.mark.parametrize(

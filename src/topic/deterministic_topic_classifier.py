@@ -9,6 +9,9 @@ from src.classification.content_type import ContentType
 from src.classification.content_type_classification import (
     ContentTypeClassification,
 )
+from src.evidence.contextual_evidence import ContextualEvidence
+from src.evidence.evidence_level import EvidenceLevel
+from src.evidence.evidence_strength import EvidenceStrength
 from src.facts.extracted_facts import ExtractedFacts
 from src.intake.normalized_source import NormalizedSource
 
@@ -283,6 +286,24 @@ _STRONG_TAG_WEIGHT = 3
 _WEAK_TAG_WEIGHT = 1
 _LEGACY_CORROBORATION_WEIGHT = 1
 
+_CONTEXTUAL_TOPIC_LABELS = {
+    f"TOPIC_{topic.value}": topic for topic in Topic if topic is not Topic.GENERAL
+}
+_CONTEXTUAL_WEIGHTS = {
+    (EvidenceLevel.STRUCTURAL, EvidenceStrength.STRONG): 14,
+    (EvidenceLevel.CONTEXT, EvidenceStrength.STRONG): 12,
+    (EvidenceLevel.PHRASE, EvidenceStrength.STRONG): 10,
+    (EvidenceLevel.STRUCTURAL, EvidenceStrength.MEDIUM): 10,
+    (EvidenceLevel.CONTEXT, EvidenceStrength.MEDIUM): 7,
+    (EvidenceLevel.PHRASE, EvidenceStrength.MEDIUM): 6,
+    (EvidenceLevel.TOKEN, EvidenceStrength.WEAK): 1,
+}
+_CONTEXTUAL_SECTION_BONUS = {
+    "HEADLINE": 2,
+    "LEAD": 1,
+}
+_STRONG_SUPPRESSION_PENALTY = 4
+
 _ECONOMIC_MARKET_TERMS = (
     "اقتصاد",
     "السوق",
@@ -326,6 +347,7 @@ class DeterministicTopicClassifier:
         assessment: SourceRiskAssessment,
         content_classification: ContentTypeClassification,
         user_instruction: str | None = None,
+        contextual_evidence: ContextualEvidence | None = None,
     ) -> TopicClassification:
         """Classify one source from supplied deterministic signals only.
 
@@ -335,6 +357,7 @@ class DeterministicTopicClassifier:
             assessment: Existing independent source risk assessment.
             content_classification: Transitional legacy content classification.
             user_instruction: Optional supplied editorial instruction.
+            contextual_evidence: Optional deterministic contextual evidence.
 
         Returns:
             Exactly one primary topic classification.
@@ -412,6 +435,33 @@ class DeterministicTopicClassifier:
             if supported is not None and scores[supported] > 0:
                 scores[supported] += 1
 
+        contextual_scores, contextual_counts = self._contextual_topic_scores(
+            contextual_evidence
+        )
+        scores_before_suppression = scores.copy()
+        for topic, score in contextual_scores.items():
+            scores[topic] += score
+            scores_before_suppression[topic] += score
+        suppressed_topics = self._strongly_suppressed_topics(contextual_evidence)
+        suppression_applied: set[Topic] = set()
+        for topic in suppressed_topics:
+            if scores[topic] <= 0:
+                continue
+            has_genuine_support = self._has_strong_textual_support(
+                topic,
+                title_matches,
+                body_matches,
+                tag_matches,
+            ) or contextual_scores.get(topic, 0) >= _CONTEXTUAL_WEIGHTS[
+                (EvidenceLevel.PHRASE, EvidenceStrength.STRONG)
+            ]
+            penalty = min(
+                scores[topic],
+                _STRONG_SUPPRESSION_PENALTY if has_genuine_support else scores[topic],
+            )
+            scores[topic] -= penalty
+            suppression_applied.add(topic)
+
         selected = self._select_topic(
             scores=scores,
             category_topic=category_topic,
@@ -420,6 +470,7 @@ class DeterministicTopicClassifier:
             tag_matches=tag_matches,
             government_entity_support=government_entity_support,
             structured_economic=structured_economic,
+            contextual_scores=contextual_scores,
         )
         if selected is None:
             return TopicClassification(
@@ -470,6 +521,20 @@ class DeterministicTopicClassifier:
         if legacy_topic is selected and legacy_support_applied:
             reasons += ("LEGACY_CONTENT_TYPE_TOPIC_SIGNAL",)
             signals += ("LEGACY_TOPIC_SUPPORT",)
+        contextual_selected = contextual_scores.get(selected, 0) > 0
+        if contextual_selected:
+            reasons += ("CONTEXTUAL_TOPIC_EVIDENCE",)
+            signals += ("CONTEXTUAL_TOPIC_SUPPORT",)
+        suppression_material = bool(
+            suppression_applied
+            and any(
+                topic is not selected and scores_before_suppression[topic] > 0
+                for topic in suppression_applied
+            )
+        )
+        if suppression_material:
+            reasons += ("CONTEXTUAL_TOPIC_SUPPRESSION",)
+            signals += ("CONTEXTUAL_COMPETING_TOPIC_SUPPRESSED",)
         if category_conflict or non_category_conflict:
             reasons += ("TOPIC_CONFLICT_RESOLVED",)
         if category_conflict:
@@ -486,6 +551,14 @@ class DeterministicTopicClassifier:
             legacy_topic=legacy_topic,
             legacy_support_applied=legacy_support_applied,
             has_conflict=category_conflict or non_category_conflict,
+        )
+        confidence = self._contextual_confidence(
+            current=confidence,
+            selected=selected,
+            contextual_scores=contextual_scores,
+            contextual_counts=contextual_counts,
+            scores=scores,
+            suppression_material=suppression_material,
         )
         if confidence is TopicConfidence.LOW:
             warnings += ("LOW_TOPIC_CONFIDENCE",)
@@ -589,6 +662,7 @@ class DeterministicTopicClassifier:
         tag_matches: dict[Topic, tuple[str, ...]],
         government_entity_support: bool,
         structured_economic: bool,
+        contextual_scores: dict[Topic, int],
     ) -> Topic | None:
         """Select the strongest topic with deterministic semantic tie-breaks."""
         evidence_topics = tuple(topic for topic, score in scores.items() if score > 0)
@@ -607,6 +681,7 @@ class DeterministicTopicClassifier:
             )
             or (topic is Topic.GOVERNMENT and government_entity_support)
             or (topic is Topic.ECONOMY and structured_economic)
+            or contextual_scores.get(topic, 0) > 0
         )
         if not eligible_topics:
             return None
@@ -640,9 +715,76 @@ class DeterministicTopicClassifier:
             if not has_strong_text and not (
                 (selected is Topic.ECONOMY and structured_economic)
                 or (selected is Topic.GOVERNMENT and government_entity_support)
+                or contextual_scores.get(selected, 0) > 0
             ):
                 return None
         return selected
+
+    @staticmethod
+    def _contextual_topic_scores(
+        contextual_evidence: ContextualEvidence | None,
+    ) -> tuple[dict[Topic, int], dict[Topic, int]]:
+        """Aggregate recognized contextual topic labels with integer weights."""
+        scores: dict[Topic, int] = {}
+        strong_counts: dict[Topic, int] = {}
+        if contextual_evidence is None:
+            return scores, strong_counts
+        for item in contextual_evidence.all_items:
+            weight = _CONTEXTUAL_WEIGHTS.get((item.evidence_level, item.strength), 0)
+            if weight == 0:
+                continue
+            weight += _CONTEXTUAL_SECTION_BONUS.get(item.source_section.value, 0)
+            for label in item.supports:
+                topic = _CONTEXTUAL_TOPIC_LABELS.get(label)
+                if topic is None:
+                    continue
+                scores[topic] = scores.get(topic, 0) + weight
+                if item.strength is EvidenceStrength.STRONG:
+                    strong_counts[topic] = strong_counts.get(topic, 0) + 1
+        return scores, strong_counts
+
+    @staticmethod
+    def _strongly_suppressed_topics(
+        contextual_evidence: ContextualEvidence | None,
+    ) -> frozenset[Topic]:
+        """Return recognized topics targeted by strong contextual suppression."""
+        if contextual_evidence is None:
+            return frozenset()
+        return frozenset(
+            topic
+            for item in contextual_evidence.all_items
+            if item.strength is EvidenceStrength.STRONG
+            for label in item.suppresses
+            if (topic := _CONTEXTUAL_TOPIC_LABELS.get(label)) is not None
+        )
+
+    @staticmethod
+    def _contextual_confidence(
+        *,
+        current: TopicConfidence,
+        selected: Topic,
+        contextual_scores: dict[Topic, int],
+        contextual_counts: dict[Topic, int],
+        scores: dict[Topic, int],
+        suppression_material: bool,
+    ) -> TopicConfidence:
+        """Increase confidence from consistent contextual evidence when justified."""
+        if not contextual_scores.get(selected):
+            return current
+        competing = any(
+            score > 0 for topic, score in scores.items() if topic is not selected
+        )
+        contextual = TopicConfidence.MEDIUM
+        if contextual_counts.get(selected, 0) >= 2 and not competing:
+            contextual = TopicConfidence.HIGH
+        if suppression_material or competing:
+            contextual = TopicConfidence.MEDIUM
+        rank = {
+            TopicConfidence.LOW: 0,
+            TopicConfidence.MEDIUM: 1,
+            TopicConfidence.HIGH: 2,
+        }
+        return current if rank[current] >= rank[contextual] else contextual
 
     @staticmethod
     def _strong_non_category_topics(
