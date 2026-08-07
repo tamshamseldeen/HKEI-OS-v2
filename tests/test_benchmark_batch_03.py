@@ -139,24 +139,26 @@ def test_expected_labels_are_exactly_preregistered() -> None:
     assert sum(len(item) - 1 for item in expectations) == 30
 
 
-def test_batch_contains_only_registered_inputs_and_expectations() -> None:
-    """Exclude generated articles, validation, and analysis output."""
+def test_batch_contains_only_registered_inputs_and_validation_reports() -> None:
+    """Exclude generated articles and unrelated analysis output."""
     files = tuple(
         path.relative_to(BATCH_ROOT).as_posix()
         for path in BATCH_ROOT.rglob("*")
         if path.is_file()
     )
 
-    assert len(files) == 12
+    assert len(files) == 14
     assert set(files) == {
         "manifest.json",
         "expected.json",
+        "contextual_full_validation.json",
+        "contextual_full_validation.md",
         *(f"{case_id}/source.md" for case_id in EXPECTED_IDS),
     }
     assert not any(
         term in path.lower()
         for path in files
-        for term in ("article", "analysis", "validation", "report")
+        for term in ("article", "analysis", "report")
     )
     ordered_paths = [
         BATCH_ROOT / "manifest.json",
