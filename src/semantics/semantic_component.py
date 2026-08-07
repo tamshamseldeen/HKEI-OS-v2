@@ -1,0 +1,31 @@
+"""Conceptual components used in semantic relationships."""
+
+from enum import Enum
+
+
+class SemanticComponent(Enum):
+    """Identify one conceptual component in a semantic relationship."""
+
+    AUTHORITY = "AUTHORITY"
+    ACTOR = "ACTOR"
+    PRIMARY_SUBJECT = "PRIMARY_SUBJECT"
+    SECONDARY_SUBJECT = "SECONDARY_SUBJECT"
+    ACTION = "ACTION"
+    OBJECT = "OBJECT"
+    METHOD = "METHOD"
+    TOOL = "TOOL"
+    DOMAIN = "DOMAIN"
+    EVENT = "EVENT"
+    INDICATOR = "INDICATOR"
+    OUTCOME = "OUTCOME"
+    AFFECTED_AUDIENCE = "AFFECTED_AUDIENCE"
+    RECOMMENDED_ACTION = "RECOMMENDED_ACTION"
+    REQUIREMENT = "REQUIREMENT"
+    DEADLINE = "DEADLINE"
+    LOCATION = "LOCATION"
+    ATTRIBUTION = "ATTRIBUTION"
+    CLAIM = "CLAIM"
+    PREDICTION = "PREDICTION"
+    UNCERTAINTY = "UNCERTAINTY"
+    INTERPRETATION = "INTERPRETATION"
+    CONSEQUENCE = "CONSEQUENCE"
