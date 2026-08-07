@@ -1,0 +1,265 @@
+{
+  "batch": "batch_01",
+  "case_count": 10,
+  "legacy_matched": 3,
+  "legacy_accuracy": 30.0,
+  "v2_matched": 10,
+  "v2_accuracy": 100.0,
+  "intent_changed": 7,
+  "regressions": 0,
+  "improvements": 7,
+  "cases": [
+    {
+      "id": "001",
+      "benchmark_category": "economy",
+      "legacy_content_type": "LEGAL_FINANCIAL_HIGH_RISK_CONTENT",
+      "topic": "ECONOMY",
+      "editorial_format": "STANDARD_NEWS",
+      "risk_level": "HIGH",
+      "expected_reader_intent": "GET_UPDATE",
+      "legacy_reader_intent": "FOLLOW_DEVELOPMENT",
+      "legacy_confidence": "MEDIUM",
+      "v2_reader_intent": "GET_UPDATE",
+      "v2_confidence": "HIGH",
+      "legacy_match": false,
+      "v2_match": true,
+      "intent_changed": true,
+      "v2_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "v2_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_ECONOMY"
+      ],
+      "v2_warnings": []
+    },
+    {
+      "id": "002",
+      "benchmark_category": "economy",
+      "legacy_content_type": "SPORTS_NEWS",
+      "topic": "ECONOMY",
+      "editorial_format": "STANDARD_NEWS",
+      "risk_level": "LOW",
+      "expected_reader_intent": "GET_UPDATE",
+      "legacy_reader_intent": "FIND_RESULT",
+      "legacy_confidence": "HIGH",
+      "v2_reader_intent": "GET_UPDATE",
+      "v2_confidence": "HIGH",
+      "legacy_match": false,
+      "v2_match": true,
+      "intent_changed": true,
+      "v2_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "v2_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_ECONOMY"
+      ],
+      "v2_warnings": []
+    },
+    {
+      "id": "003",
+      "benchmark_category": "technology",
+      "legacy_content_type": "LEGAL_FINANCIAL_HIGH_RISK_CONTENT",
+      "topic": "TECHNOLOGY",
+      "editorial_format": "STANDARD_NEWS",
+      "risk_level": "HIGH",
+      "expected_reader_intent": "GET_UPDATE",
+      "legacy_reader_intent": "UNDERSTAND_IMPACT",
+      "legacy_confidence": "HIGH",
+      "v2_reader_intent": "GET_UPDATE",
+      "v2_confidence": "HIGH",
+      "legacy_match": false,
+      "v2_match": true,
+      "intent_changed": true,
+      "v2_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "v2_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_TECHNOLOGY"
+      ],
+      "v2_warnings": []
+    },
+    {
+      "id": "004",
+      "benchmark_category": "weather",
+      "legacy_content_type": "BREAKING_NEWS",
+      "topic": "WEATHER",
+      "editorial_format": "BREAKING",
+      "risk_level": "LOW",
+      "expected_reader_intent": "GET_UPDATE",
+      "legacy_reader_intent": "GET_UPDATE",
+      "legacy_confidence": "MEDIUM",
+      "v2_reader_intent": "GET_UPDATE",
+      "v2_confidence": "HIGH",
+      "legacy_match": true,
+      "v2_match": true,
+      "intent_changed": false,
+      "v2_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "v2_supporting_signals": [
+        "FORMAT_BREAKING",
+        "TOPIC_WEATHER"
+      ],
+      "v2_warnings": []
+    },
+    {
+      "id": "005",
+      "benchmark_category": "government",
+      "legacy_content_type": "SPORTS_NEWS",
+      "topic": "GOVERNMENT",
+      "editorial_format": "STANDARD_NEWS",
+      "risk_level": "LOW",
+      "expected_reader_intent": "GET_UPDATE",
+      "legacy_reader_intent": "FIND_RESULT",
+      "legacy_confidence": "HIGH",
+      "v2_reader_intent": "GET_UPDATE",
+      "v2_confidence": "HIGH",
+      "legacy_match": false,
+      "v2_match": true,
+      "intent_changed": true,
+      "v2_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "v2_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_GOVERNMENT"
+      ],
+      "v2_warnings": []
+    },
+    {
+      "id": "006",
+      "benchmark_category": "economy",
+      "legacy_content_type": "SPORTS_NEWS",
+      "topic": "ECONOMY",
+      "editorial_format": "STANDARD_NEWS",
+      "risk_level": "LOW",
+      "expected_reader_intent": "GET_UPDATE",
+      "legacy_reader_intent": "FIND_RESULT",
+      "legacy_confidence": "HIGH",
+      "v2_reader_intent": "GET_UPDATE",
+      "v2_confidence": "HIGH",
+      "legacy_match": false,
+      "v2_match": true,
+      "intent_changed": true,
+      "v2_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "v2_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_ECONOMY"
+      ],
+      "v2_warnings": []
+    },
+    {
+      "id": "007",
+      "benchmark_category": "economy",
+      "legacy_content_type": "ECONOMY_NEWS",
+      "topic": "ECONOMY",
+      "editorial_format": "GUIDE",
+      "risk_level": "LOW",
+      "expected_reader_intent": "VERIFY_REQUIREMENTS",
+      "legacy_reader_intent": "UNDERSTAND_IMPACT",
+      "legacy_confidence": "MEDIUM",
+      "v2_reader_intent": "VERIFY_REQUIREMENTS",
+      "v2_confidence": "HIGH",
+      "legacy_match": false,
+      "v2_match": true,
+      "intent_changed": true,
+      "v2_reason_codes": [
+        "REQUIREMENTS_STRUCTURE_SIGNAL"
+      ],
+      "v2_supporting_signals": [
+        "FORMAT_GUIDE",
+        "TOPIC_ECONOMY",
+        "REQUIREMENTS_TERMS_PRESENT"
+      ],
+      "v2_warnings": []
+    },
+    {
+      "id": "008",
+      "benchmark_category": "culture",
+      "legacy_content_type": "STANDARD_NEWS",
+      "topic": "CULTURE",
+      "editorial_format": "STANDARD_NEWS",
+      "risk_level": "LOW",
+      "expected_reader_intent": "GET_UPDATE",
+      "legacy_reader_intent": "GET_UPDATE",
+      "legacy_confidence": "LOW",
+      "v2_reader_intent": "GET_UPDATE",
+      "v2_confidence": "LOW",
+      "legacy_match": true,
+      "v2_match": true,
+      "intent_changed": false,
+      "v2_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "v2_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_CULTURE"
+      ],
+      "v2_warnings": [
+        "LOW_READER_INTENT_CONFIDENCE"
+      ]
+    },
+    {
+      "id": "009",
+      "benchmark_category": "sports",
+      "legacy_content_type": "SPORTS_NEWS",
+      "topic": "SPORTS",
+      "editorial_format": "RESULT_REPORT",
+      "risk_level": "LOW",
+      "expected_reader_intent": "FIND_RESULT",
+      "legacy_reader_intent": "FIND_RESULT",
+      "legacy_confidence": "HIGH",
+      "v2_reader_intent": "FIND_RESULT",
+      "v2_confidence": "HIGH",
+      "legacy_match": true,
+      "v2_match": true,
+      "intent_changed": false,
+      "v2_reason_codes": [
+        "RESULT_STRUCTURE_SIGNAL"
+      ],
+      "v2_supporting_signals": [
+        "FORMAT_RESULT_REPORT",
+        "TOPIC_SPORTS",
+        "RESULT_TERMS_PRESENT"
+      ],
+      "v2_warnings": []
+    },
+    {
+      "id": "010",
+      "benchmark_category": "economy",
+      "legacy_content_type": "LEGAL_FINANCIAL_HIGH_RISK_CONTENT",
+      "topic": "ECONOMY",
+      "editorial_format": "STANDARD_NEWS",
+      "risk_level": "HIGH",
+      "expected_reader_intent": "GET_UPDATE",
+      "legacy_reader_intent": "UNDERSTAND_IMPACT",
+      "legacy_confidence": "HIGH",
+      "v2_reader_intent": "GET_UPDATE",
+      "v2_confidence": "HIGH",
+      "legacy_match": false,
+      "v2_match": true,
+      "intent_changed": true,
+      "v2_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "v2_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_ECONOMY"
+      ],
+      "v2_warnings": []
+    }
+  ]
+}
