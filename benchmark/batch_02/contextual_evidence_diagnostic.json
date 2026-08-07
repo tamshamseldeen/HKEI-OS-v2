@@ -1,0 +1,560 @@
+{
+  "batch": "batch_02",
+  "case_count": 6,
+  "total_evidence_items": 28,
+  "cases_with_evidence": 6,
+  "cases_without_evidence": 0,
+  "required_topic_support_passed": 6,
+  "required_topic_support_applicable": 6,
+  "required_format_support_passed": 1,
+  "required_format_support_applicable": 2,
+  "required_intent_support_passed": 1,
+  "required_intent_support_applicable": 2,
+  "unexpected_sports_signals": 0,
+  "suppression_cases": 1,
+  "cases": [
+    {
+      "id": "011",
+      "headline_item_count": 0,
+      "lead_item_count": 3,
+      "body_item_count": 0,
+      "all_item_count": 3,
+      "supports_summary": {
+        "CLAIM_ATTRIBUTED": 1,
+        "TOPIC_GOVERNMENT": 2
+      },
+      "suppresses_summary": {},
+      "roles_summary": {
+        "ATTRIBUTION": 1,
+        "AUTHORITY": 2
+      },
+      "strength_summary": {
+        "STRONG": 1,
+        "MEDIUM": 1,
+        "WEAK": 1
+      },
+      "has_required_topic_support": true,
+      "has_required_format_support": null,
+      "has_required_intent_support": null,
+      "has_unexpected_sports_signal": false,
+      "has_contextual_suppression": false,
+      "items": [
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "أعلنت",
+          "evidence_level": "TOKEN",
+          "role": "ATTRIBUTION",
+          "strength": "MEDIUM",
+          "reason_code": "ATTRIBUTION_SIGNAL",
+          "supports": [
+            "CLAIM_ATTRIBUTED"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "وزارة التموين",
+          "evidence_level": "PHRASE",
+          "role": "AUTHORITY",
+          "strength": "STRONG",
+          "reason_code": "GOVERNMENT_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_GOVERNMENT"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "وزارة",
+          "evidence_level": "TOKEN",
+          "role": "AUTHORITY",
+          "strength": "WEAK",
+          "reason_code": "GENERIC_GOVERNMENT_TOKEN",
+          "supports": [
+            "TOPIC_GOVERNMENT"
+          ],
+          "suppresses": []
+        }
+      ]
+    },
+    {
+      "id": "013",
+      "headline_item_count": 3,
+      "lead_item_count": 2,
+      "body_item_count": 3,
+      "all_item_count": 8,
+      "supports_summary": {
+        "TOPIC_TECHNOLOGY": 4,
+        "TOPIC_BUSINESS": 2,
+        "CLAIM_UNCERTAIN": 2
+      },
+      "suppresses_summary": {},
+      "roles_summary": {
+        "SUBJECT": 4,
+        "ACTOR": 2,
+        "UNCERTAINTY": 1,
+        "PREDICTION": 1
+      },
+      "strength_summary": {
+        "STRONG": 6,
+        "MEDIUM": 0,
+        "WEAK": 2
+      },
+      "has_required_topic_support": true,
+      "has_required_format_support": false,
+      "has_required_intent_support": false,
+      "has_unexpected_sports_signal": false,
+      "has_contextual_suppression": false,
+      "items": [
+        {
+          "source_section": "HEADLINE",
+          "sentence_index": 0,
+          "matched_text": "السيارات الكهربائية",
+          "evidence_level": "PHRASE",
+          "role": "SUBJECT",
+          "strength": "STRONG",
+          "reason_code": "TECHNOLOGY_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_TECHNOLOGY"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "HEADLINE",
+          "sentence_index": 0,
+          "matched_text": "البطاريات الصلبة",
+          "evidence_level": "PHRASE",
+          "role": "SUBJECT",
+          "strength": "STRONG",
+          "reason_code": "TECHNOLOGY_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_TECHNOLOGY"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "HEADLINE",
+          "sentence_index": 0,
+          "matched_text": "شركات",
+          "evidence_level": "TOKEN",
+          "role": "ACTOR",
+          "strength": "WEAK",
+          "reason_code": "GENERIC_BUSINESS_TOKEN",
+          "supports": [
+            "TOPIC_BUSINESS"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "بطاريات الحالة الصلبة",
+          "evidence_level": "PHRASE",
+          "role": "SUBJECT",
+          "strength": "STRONG",
+          "reason_code": "TECHNOLOGY_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_TECHNOLOGY"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "شركات",
+          "evidence_level": "TOKEN",
+          "role": "ACTOR",
+          "strength": "WEAK",
+          "reason_code": "GENERIC_BUSINESS_TOKEN",
+          "supports": [
+            "TOPIC_BUSINESS"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "BODY",
+          "sentence_index": 0,
+          "matched_text": "قد",
+          "evidence_level": "CONTEXT",
+          "role": "UNCERTAINTY",
+          "strength": "STRONG",
+          "reason_code": "UNCERTAINTY_CONTEXT_PATTERN",
+          "supports": [
+            "CLAIM_UNCERTAIN"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "BODY",
+          "sentence_index": 0,
+          "matched_text": "قد",
+          "evidence_level": "CONTEXT",
+          "role": "PREDICTION",
+          "strength": "STRONG",
+          "reason_code": "PREDICTION_CONTEXT_PATTERN",
+          "supports": [
+            "CLAIM_UNCERTAIN"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "BODY",
+          "sentence_index": 0,
+          "matched_text": "السيارات الكهربائية",
+          "evidence_level": "PHRASE",
+          "role": "SUBJECT",
+          "strength": "STRONG",
+          "reason_code": "TECHNOLOGY_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_TECHNOLOGY"
+          ],
+          "suppresses": []
+        }
+      ]
+    },
+    {
+      "id": "015",
+      "headline_item_count": 1,
+      "lead_item_count": 5,
+      "body_item_count": 1,
+      "all_item_count": 7,
+      "supports_summary": {
+        "TOPIC_GOVERNMENT": 4,
+        "CLAIM_ATTRIBUTED": 1,
+        "FORMAT_SERVICE": 2,
+        "INTENT_KNOW_ACTION": 2,
+        "INTENT_VERIFY_REQUIREMENTS": 1
+      },
+      "suppresses_summary": {},
+      "roles_summary": {
+        "AUTHORITY": 4,
+        "ATTRIBUTION": 1,
+        "REQUIREMENT": 1,
+        "DEADLINE": 1
+      },
+      "strength_summary": {
+        "STRONG": 6,
+        "MEDIUM": 1,
+        "WEAK": 0
+      },
+      "has_required_topic_support": true,
+      "has_required_format_support": true,
+      "has_required_intent_support": true,
+      "has_unexpected_sports_signal": false,
+      "has_contextual_suppression": false,
+      "items": [
+        {
+          "source_section": "HEADLINE",
+          "sentence_index": 0,
+          "matched_text": "الفاتورة الإلكترونية",
+          "evidence_level": "PHRASE",
+          "role": "AUTHORITY",
+          "strength": "STRONG",
+          "reason_code": "GOVERNMENT_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_GOVERNMENT"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "دعت",
+          "evidence_level": "TOKEN",
+          "role": "ATTRIBUTION",
+          "strength": "MEDIUM",
+          "reason_code": "ATTRIBUTION_SIGNAL",
+          "supports": [
+            "CLAIM_ATTRIBUTED"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "دعت مصلحة الضرائب المصرية كافة الشركات والمكلفين المتبقين للتسجيل",
+          "evidence_level": "CONTEXT",
+          "role": "REQUIREMENT",
+          "strength": "STRONG",
+          "reason_code": "REQUIREMENT_CONTEXT_PATTERN",
+          "supports": [
+            "FORMAT_SERVICE",
+            "INTENT_KNOW_ACTION"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "مصلحة الضرائب",
+          "evidence_level": "PHRASE",
+          "role": "AUTHORITY",
+          "strength": "STRONG",
+          "reason_code": "GOVERNMENT_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_GOVERNMENT"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "الفاتورة الإلكترونية",
+          "evidence_level": "PHRASE",
+          "role": "AUTHORITY",
+          "strength": "STRONG",
+          "reason_code": "GOVERNMENT_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_GOVERNMENT"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "قبل نهاية الشهر",
+          "evidence_level": "CONTEXT",
+          "role": "DEADLINE",
+          "strength": "STRONG",
+          "reason_code": "DEADLINE_CONTEXT_PATTERN",
+          "supports": [
+            "FORMAT_SERVICE",
+            "INTENT_KNOW_ACTION",
+            "INTENT_VERIFY_REQUIREMENTS"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "BODY",
+          "sentence_index": 0,
+          "matched_text": "الفاتورة الإلكترونية",
+          "evidence_level": "PHRASE",
+          "role": "AUTHORITY",
+          "strength": "STRONG",
+          "reason_code": "GOVERNMENT_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_GOVERNMENT"
+          ],
+          "suppresses": []
+        }
+      ]
+    },
+    {
+      "id": "018",
+      "headline_item_count": 0,
+      "lead_item_count": 6,
+      "body_item_count": 1,
+      "all_item_count": 7,
+      "supports_summary": {
+        "CLAIM_ATTRIBUTED": 1,
+        "TOPIC_SCIENCE": 4,
+        "TOPIC_SPORTS": 1
+      },
+      "suppresses_summary": {
+        "TOPIC_SPORTS": 1
+      },
+      "roles_summary": {
+        "ATTRIBUTION": 1,
+        "SUBJECT": 4,
+        "ACTOR": 2
+      },
+      "strength_summary": {
+        "STRONG": 5,
+        "MEDIUM": 1,
+        "WEAK": 1
+      },
+      "has_required_topic_support": true,
+      "has_required_format_support": null,
+      "has_required_intent_support": null,
+      "has_unexpected_sports_signal": false,
+      "has_contextual_suppression": true,
+      "items": [
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "أعلن",
+          "evidence_level": "TOKEN",
+          "role": "ATTRIBUTION",
+          "strength": "MEDIUM",
+          "reason_code": "ATTRIBUTION_SIGNAL",
+          "supports": [
+            "CLAIM_ATTRIBUTED"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "علماء الفلك",
+          "evidence_level": "PHRASE",
+          "role": "SUBJECT",
+          "strength": "STRONG",
+          "reason_code": "SCIENCE_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_SCIENCE"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "اكتشاف كوكب",
+          "evidence_level": "PHRASE",
+          "role": "SUBJECT",
+          "strength": "STRONG",
+          "reason_code": "SCIENCE_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_SCIENCE"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "المجموعة الشمسية",
+          "evidence_level": "PHRASE",
+          "role": "SUBJECT",
+          "strength": "STRONG",
+          "reason_code": "SCIENCE_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_SCIENCE"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "فريق",
+          "evidence_level": "TOKEN",
+          "role": "ACTOR",
+          "strength": "WEAK",
+          "reason_code": "GENERIC_SPORTS_TOKEN",
+          "supports": [
+            "TOPIC_SPORTS"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "أعلن فريق دولي من علماء الفلك اكتشاف كوكب خارج المجموعة الشمسية يدور في المنطقة القابلة للسكن حول نجمه",
+          "evidence_level": "CONTEXT",
+          "role": "ACTOR",
+          "strength": "STRONG",
+          "reason_code": "SCIENCE_CONTEXT_SUPPRESSES_GENERIC_TEAM",
+          "supports": [],
+          "suppresses": [
+            "TOPIC_SPORTS"
+          ]
+        },
+        {
+          "source_section": "BODY",
+          "sentence_index": 0,
+          "matched_text": "المرصد الأوروبي",
+          "evidence_level": "PHRASE",
+          "role": "SUBJECT",
+          "strength": "STRONG",
+          "reason_code": "SCIENCE_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_SCIENCE"
+          ],
+          "suppresses": []
+        }
+      ]
+    },
+    {
+      "id": "019",
+      "headline_item_count": 1,
+      "lead_item_count": 1,
+      "body_item_count": 0,
+      "all_item_count": 2,
+      "supports_summary": {
+        "TOPIC_CULTURE": 2
+      },
+      "suppresses_summary": {},
+      "roles_summary": {
+        "SUBJECT": 2
+      },
+      "strength_summary": {
+        "STRONG": 2,
+        "MEDIUM": 0,
+        "WEAK": 0
+      },
+      "has_required_topic_support": true,
+      "has_required_format_support": null,
+      "has_required_intent_support": null,
+      "has_unexpected_sports_signal": false,
+      "has_contextual_suppression": false,
+      "items": [
+        {
+          "source_section": "HEADLINE",
+          "sentence_index": 0,
+          "matched_text": "هيئة الكتاب",
+          "evidence_level": "PHRASE",
+          "role": "SUBJECT",
+          "strength": "STRONG",
+          "reason_code": "CULTURE_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_CULTURE"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "matched_text": "معرض القاهرة الدولي للكتاب",
+          "evidence_level": "PHRASE",
+          "role": "SUBJECT",
+          "strength": "STRONG",
+          "reason_code": "CULTURE_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_CULTURE"
+          ],
+          "suppresses": []
+        }
+      ]
+    },
+    {
+      "id": "020",
+      "headline_item_count": 1,
+      "lead_item_count": 0,
+      "body_item_count": 0,
+      "all_item_count": 1,
+      "supports_summary": {
+        "TOPIC_TECHNOLOGY": 1
+      },
+      "suppresses_summary": {},
+      "roles_summary": {
+        "SUBJECT": 1
+      },
+      "strength_summary": {
+        "STRONG": 1,
+        "MEDIUM": 0,
+        "WEAK": 0
+      },
+      "has_required_topic_support": true,
+      "has_required_format_support": null,
+      "has_required_intent_support": null,
+      "has_unexpected_sports_signal": false,
+      "has_contextual_suppression": false,
+      "items": [
+        {
+          "source_section": "HEADLINE",
+          "sentence_index": 0,
+          "matched_text": "الرقائق الإلكترونية",
+          "evidence_level": "PHRASE",
+          "role": "SUBJECT",
+          "strength": "STRONG",
+          "reason_code": "TECHNOLOGY_CONTEXT_PHRASE",
+          "supports": [
+            "TOPIC_TECHNOLOGY"
+          ],
+          "suppresses": []
+        }
+      ]
+    }
+  ]
+}
