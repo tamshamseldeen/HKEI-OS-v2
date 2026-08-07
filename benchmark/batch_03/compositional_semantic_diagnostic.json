@@ -1,0 +1,261 @@
+{
+  "batch": "batch_03",
+  "case_count": 3,
+  "required_relationships_passed": 3,
+  "required_primary_domains_passed": 3,
+  "required_secondary_domains_passed": 1,
+  "required_secondary_domains_applicable": 1,
+  "required_suppressions_passed": 3,
+  "provenance_valid_cases": 3,
+  "unexpected_primary_domains": 0,
+  "cases": [
+    {
+      "id": "024",
+      "contextual_item_count": 2,
+      "semantic_relationship_count": 4,
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_HEALTH"
+      ],
+      "secondary_domain_candidates": [
+        "SECONDARY_DOMAIN_TECHNOLOGY"
+      ],
+      "format_support": [],
+      "format_suppression": [],
+      "intent_support": [],
+      "warnings": [],
+      "relationships": [
+        {
+          "source_section": "HEADLINE",
+          "sentence_index": 0,
+          "relationship_type": "METHOD_APPLIED_TO_SUBJECT",
+          "subject_component": "METHOD",
+          "subject_text": "الذكاء الاصطناعي",
+          "object_component": "PRIMARY_SUBJECT",
+          "object_text": "تشخيص أورام السرطان المبكرة",
+          "strength": "STRONG",
+          "reason_code": "METHOD_DOMAIN_SUBJECT_COMPOSITION",
+          "evidence_indexes": [
+            0
+          ],
+          "supports": [
+            "PRIMARY_DOMAIN_HEALTH",
+            "SECONDARY_DOMAIN_TECHNOLOGY"
+          ],
+          "suppresses": [
+            "PRIMARY_DOMAIN_TECHNOLOGY"
+          ]
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "relationship_type": "ACTOR_PERFORMS_ACTION",
+          "subject_component": "ACTOR",
+          "subject_text": "فريق أبحاث بريطاني",
+          "object_component": "ACTION",
+          "object_text": "طور",
+          "strength": "MEDIUM",
+          "reason_code": "ACTOR_ACTION_COMPOSITION",
+          "evidence_indexes": [
+            1
+          ],
+          "supports": [],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "relationship_type": "ACTION_TARGETS_OBJECT",
+          "subject_component": "ACTION",
+          "subject_text": "طور",
+          "object_component": "OBJECT",
+          "object_text": "خوارزمية",
+          "strength": "MEDIUM",
+          "reason_code": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+          "evidence_indexes": [],
+          "supports": [
+            "PRIMARY_DOMAIN_TECHNOLOGY"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "relationship_type": "METHOD_APPLIED_TO_SUBJECT",
+          "subject_component": "METHOD",
+          "subject_text": "خوارزمية",
+          "object_component": "PRIMARY_SUBJECT",
+          "object_text": "الصور الطبية",
+          "strength": "STRONG",
+          "reason_code": "METHOD_DOMAIN_SUBJECT_COMPOSITION",
+          "evidence_indexes": [],
+          "supports": [
+            "PRIMARY_DOMAIN_HEALTH",
+            "SECONDARY_DOMAIN_TECHNOLOGY"
+          ],
+          "suppresses": [
+            "PRIMARY_DOMAIN_TECHNOLOGY"
+          ]
+        }
+      ],
+      "required_relationship_present": true,
+      "required_primary_domain_present": true,
+      "required_secondary_domain_present": true,
+      "required_suppression_present": true,
+      "unexpected_primary_domain_present": false,
+      "provenance_valid": true
+    },
+    {
+      "id": "025",
+      "contextual_item_count": 2,
+      "semantic_relationship_count": 3,
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_HEALTH"
+      ],
+      "secondary_domain_candidates": [],
+      "format_support": [],
+      "format_suppression": [],
+      "intent_support": [],
+      "warnings": [],
+      "relationships": [
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "relationship_type": "AUTHORITY_ACTS_ON_SUBJECT",
+          "subject_component": "AUTHORITY",
+          "subject_text": "وزارة الصحة والسكان",
+          "object_component": "PRIMARY_SUBJECT",
+          "object_text": "الخدمات الطبية والفحوصات المجانية",
+          "strength": "STRONG",
+          "reason_code": "AUTHORITY_DOMAIN_SUBJECT_COMPOSITION",
+          "evidence_indexes": [
+            1
+          ],
+          "supports": [
+            "PRIMARY_DOMAIN_HEALTH"
+          ],
+          "suppresses": [
+            "PRIMARY_DOMAIN_GOVERNMENT"
+          ]
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "relationship_type": "ACTION_TARGETS_OBJECT",
+          "subject_component": "ACTION",
+          "subject_text": "أعلنت",
+          "object_component": "OBJECT",
+          "object_text": "الخدمات الطبية والفحوصات المجانية",
+          "strength": "MEDIUM",
+          "reason_code": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+          "evidence_indexes": [
+            0
+          ],
+          "supports": [
+            "PRIMARY_DOMAIN_HEALTH"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "relationship_type": "ACTION_TARGETS_OBJECT",
+          "subject_component": "ACTION",
+          "subject_text": "تقديم",
+          "object_component": "OBJECT",
+          "object_text": "الخدمات الطبية والفحوصات المجانية",
+          "strength": "MEDIUM",
+          "reason_code": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+          "evidence_indexes": [],
+          "supports": [
+            "PRIMARY_DOMAIN_HEALTH"
+          ],
+          "suppresses": []
+        }
+      ],
+      "required_relationship_present": true,
+      "required_primary_domain_present": true,
+      "required_secondary_domain_present": null,
+      "required_suppression_present": true,
+      "unexpected_primary_domain_present": false,
+      "provenance_valid": true
+    },
+    {
+      "id": "029",
+      "contextual_item_count": 4,
+      "semantic_relationship_count": 3,
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_EDUCATION"
+      ],
+      "secondary_domain_candidates": [],
+      "format_support": [],
+      "format_suppression": [],
+      "intent_support": [],
+      "warnings": [],
+      "relationships": [
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "relationship_type": "AUTHORITY_ACTS_ON_SUBJECT",
+          "subject_component": "AUTHORITY",
+          "subject_text": "وزارة التعليم العالي والبحث العلمي",
+          "object_component": "PRIMARY_SUBJECT",
+          "object_text": "الجامعات",
+          "strength": "STRONG",
+          "reason_code": "AUTHORITY_DOMAIN_SUBJECT_COMPOSITION",
+          "evidence_indexes": [
+            1,
+            2,
+            3
+          ],
+          "supports": [
+            "PRIMARY_DOMAIN_EDUCATION"
+          ],
+          "suppresses": [
+            "PRIMARY_DOMAIN_GOVERNMENT"
+          ]
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "relationship_type": "ACTION_TARGETS_OBJECT",
+          "subject_component": "ACTION",
+          "subject_text": "أعلنت",
+          "object_component": "OBJECT",
+          "object_text": "التعليم العالي",
+          "strength": "MEDIUM",
+          "reason_code": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+          "evidence_indexes": [
+            0,
+            2
+          ],
+          "supports": [
+            "PRIMARY_DOMAIN_EDUCATION"
+          ],
+          "suppresses": []
+        },
+        {
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "relationship_type": "ACTION_TARGETS_OBJECT",
+          "subject_component": "ACTION",
+          "subject_text": "تحقيق",
+          "object_component": "OBJECT",
+          "object_text": "الجامعات",
+          "strength": "MEDIUM",
+          "reason_code": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+          "evidence_indexes": [],
+          "supports": [
+            "PRIMARY_DOMAIN_EDUCATION"
+          ],
+          "suppresses": []
+        }
+      ],
+      "required_relationship_present": true,
+      "required_primary_domain_present": true,
+      "required_secondary_domain_present": null,
+      "required_suppression_present": true,
+      "unexpected_primary_domain_present": false,
+      "provenance_valid": true
+    }
+  ]
+}
