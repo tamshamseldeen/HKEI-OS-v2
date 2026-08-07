@@ -1,0 +1,64 @@
+{
+  "cases": [
+    {
+      "id": "001",
+      "source_name": "اليوم السابع",
+      "benchmark_category": "economy",
+      "source_file": "001/source.md"
+    },
+    {
+      "id": "002",
+      "source_name": "العربية",
+      "benchmark_category": "economy",
+      "source_file": "002/source.md"
+    },
+    {
+      "id": "003",
+      "source_name": "الشرق",
+      "benchmark_category": "technology",
+      "source_file": "003/source.md"
+    },
+    {
+      "id": "004",
+      "source_name": "BBC",
+      "benchmark_category": "weather",
+      "source_file": "004/source.md"
+    },
+    {
+      "id": "005",
+      "source_name": "اليوم السابع",
+      "benchmark_category": "government",
+      "source_file": "005/source.md"
+    },
+    {
+      "id": "006",
+      "source_name": "العربية",
+      "benchmark_category": "economy",
+      "source_file": "006/source.md"
+    },
+    {
+      "id": "007",
+      "source_name": "الشرق",
+      "benchmark_category": "economy",
+      "source_file": "007/source.md"
+    },
+    {
+      "id": "008",
+      "source_name": "BBC",
+      "benchmark_category": "culture",
+      "source_file": "008/source.md"
+    },
+    {
+      "id": "009",
+      "source_name": "اليوم السابع",
+      "benchmark_category": "sports",
+      "source_file": "009/source.md"
+    },
+    {
+      "id": "010",
+      "source_name": "الشرق",
+      "benchmark_category": "economy",
+      "source_file": "010/source.md"
+    }
+  ]
+}
