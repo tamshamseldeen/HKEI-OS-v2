@@ -35,10 +35,10 @@ Secondary Domain Candidates:
 None
 
 Format Support:
-None
+FORMAT_STANDARD_NEWS
 
 Format Suppression:
-None
+FORMAT_GUIDE
 
 Intent Support:
 None
@@ -88,10 +88,10 @@ Secondary Domain Candidates:
 None
 
 Format Support:
-None
+FORMAT_STANDARD_NEWS
 
 Format Suppression:
-None
+FORMAT_GUIDE
 
 Intent Support:
 None

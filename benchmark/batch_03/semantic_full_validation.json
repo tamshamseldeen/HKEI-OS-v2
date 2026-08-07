@@ -3,14 +3,14 @@
   "case_count": 10,
   "topic_matched": 10,
   "topic_accuracy": 100.0,
-  "format_matched": 9,
-  "format_accuracy": 90.0,
-  "reader_intent_matched": 9,
-  "reader_intent_accuracy": 90.0,
-  "fully_matched_cases": 9,
-  "full_case_accuracy": 90.0,
+  "format_matched": 10,
+  "format_accuracy": 100.0,
+  "reader_intent_matched": 10,
+  "reader_intent_accuracy": 100.0,
+  "fully_matched_cases": 10,
+  "full_case_accuracy": 100.0,
   "semantic_evidence_used": 8,
-  "semantic_suppression_used": 3,
+  "semantic_suppression_used": 5,
   "cases": [
     {
       "id": "021",
@@ -34,10 +34,16 @@
         "PRIMARY_DOMAIN_GOVERNMENT"
       ],
       "semantic_secondary_domain_candidates": [],
-      "semantic_format_support": [],
-      "semantic_format_suppression": [],
+      "semantic_format_support": [
+        "FORMAT_STANDARD_NEWS"
+      ],
+      "semantic_format_suppression": [
+        "FORMAT_GUIDE"
+      ],
       "semantic_intent_support": [],
-      "semantic_suppressions": []
+      "semantic_suppressions": [
+        "FORMAT_GUIDE"
+      ]
     },
     {
       "id": "022",
@@ -61,10 +67,16 @@
         "PRIMARY_DOMAIN_ECONOMY"
       ],
       "semantic_secondary_domain_candidates": [],
-      "semantic_format_support": [],
-      "semantic_format_suppression": [],
+      "semantic_format_support": [
+        "FORMAT_STANDARD_NEWS"
+      ],
+      "semantic_format_suppression": [
+        "FORMAT_GUIDE"
+      ],
       "semantic_intent_support": [],
-      "semantic_suppressions": []
+      "semantic_suppressions": [
+        "FORMAT_GUIDE"
+      ]
     },
     {
       "id": "023",
@@ -242,14 +254,14 @@
       "topic_confidence": "HIGH",
       "topic_match": true,
       "expected_format": "STANDARD_NEWS",
-      "predicted_format": "GUIDE",
+      "predicted_format": "STANDARD_NEWS",
       "format_confidence": "MEDIUM",
-      "format_match": false,
+      "format_match": true,
       "expected_reader_intent": "GET_UPDATE",
-      "predicted_reader_intent": "VERIFY_REQUIREMENTS",
+      "predicted_reader_intent": "GET_UPDATE",
       "reader_intent_confidence": "HIGH",
-      "reader_intent_match": false,
-      "full_match": false,
+      "reader_intent_match": true,
+      "full_match": true,
       "contextual_support_labels": [
         "CLAIM_ATTRIBUTED",
         "TOPIC_GOVERNMENT"
@@ -258,11 +270,16 @@
         "PRIMARY_DOMAIN_EDUCATION"
       ],
       "semantic_secondary_domain_candidates": [],
-      "semantic_format_support": [],
-      "semantic_format_suppression": [],
+      "semantic_format_support": [
+        "FORMAT_STANDARD_NEWS"
+      ],
+      "semantic_format_suppression": [
+        "FORMAT_GUIDE"
+      ],
       "semantic_intent_support": [],
       "semantic_suppressions": [
-        "PRIMARY_DOMAIN_GOVERNMENT"
+        "PRIMARY_DOMAIN_GOVERNMENT",
+        "FORMAT_GUIDE"
       ]
     },
     {

@@ -214,17 +214,17 @@ def test_status_thresholds_and_previous_baseline_are_fixed() -> None:
     ) == "PASSED"
 
 
-def test_real_validation_passes_with_raw_remaining_mismatch(
+def test_real_validation_is_excellent_without_remaining_mismatches(
     analysis: dict[str, object],
 ) -> None:
-    """Report current improvements and preserve the raw case 029 mismatch."""
-    assert validation_status(analysis) == "PASSED"
+    """Report the full improvement produced by negative format evidence."""
+    assert validation_status(analysis) == "EXCELLENT"
     assert analysis["topic_accuracy"] == 100.0
-    assert analysis["format_accuracy"] == 90.0
-    assert analysis["reader_intent_accuracy"] == 90.0
-    assert analysis["full_case_accuracy"] == 90.0
+    assert analysis["format_accuracy"] == 100.0
+    assert analysis["reader_intent_accuracy"] == 100.0
+    assert analysis["full_case_accuracy"] == 100.0
     mismatches = [case for case in analysis["cases"] if not case["full_match"]]
-    assert tuple(case["id"] for case in mismatches) == ("029",)
+    assert mismatches == []
 
 
 def test_json_has_no_source_body_and_outputs_are_deterministic(

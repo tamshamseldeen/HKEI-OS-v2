@@ -187,8 +187,12 @@
         "PRIMARY_DOMAIN_EDUCATION"
       ],
       "secondary_domain_candidates": [],
-      "format_support": [],
-      "format_suppression": [],
+      "format_support": [
+        "FORMAT_STANDARD_NEWS"
+      ],
+      "format_suppression": [
+        "FORMAT_GUIDE"
+      ],
       "intent_support": [],
       "warnings": [],
       "relationships": [

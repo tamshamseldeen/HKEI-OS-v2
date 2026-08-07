@@ -313,6 +313,103 @@ _SCIENCE_FRAMING_PATTERNS = (
     r"scientific study",
     r"researchers",
 )
+_REPORTING_INSTITUTION_PATTERNS = (
+    r"وزارة(?: الصحة| التعليم(?: العالي)?| النقل)?",
+    r"الوزارة",
+    r"الهيئة(?: القومية للأنفاق)?",
+    r"الجهاز(?: المركزي)?",
+    r"البنك المركزي",
+    r"صندوق النقد(?: الدولي)?",
+    r"مؤسسة عامة",
+    r"جهة حكومية",
+    r"ministry",
+    r"authority",
+    r"central bank",
+    r"statistical agency",
+)
+_INSTITUTIONAL_REPORTING_ACTIONS = (
+    r"أعلنت",
+    r"أعلن",
+    r"كشفت",
+    r"كشف",
+    r"أكدت",
+    r"أكد",
+    r"أفادت",
+    r"أفاد",
+    r"أوضحت",
+    r"أوضح",
+    r"الانتهاء",
+    r"بدء التشغيل",
+    r"انطلاق",
+    r"حقق(?:ت)?",
+    r"تحقيق",
+    r"reported",
+    r"announced",
+    r"revealed",
+    r"completed",
+    r"launched",
+)
+_NON_ACTIONABLE_REPORTING_SUBJECTS = (
+    r"التصنيفات(?: الدولية| العالمية)?",
+    r"ترتيب الجامعات",
+    r"مراكز متقدمة",
+    r"تقدم",
+    r"ارتفاع",
+    r"انخفاض",
+    r"نمو",
+    r"عدد المستفيدين",
+    r"الاحتياطيات",
+    r"المؤشر",
+    r"الأداء",
+    r"إنجاز",
+    r"الانتهاء من المشروع",
+    r"التشغيل التجريبي",
+    r"المشروع",
+    r"الجامعات",
+    r"القطاع",
+    r"فحص [^\n.؟!؛]{0,40} مواطن",
+    r"ranking",
+    r"performance",
+    r"achievement",
+    r"status",
+    r"result",
+    r"development",
+    r"beneficiaries",
+    r"reserves",
+)
+_ACTIONABLE_GUIDE_PATTERNS = (
+    r"شروط",
+    r"متطلبات",
+    r"المستندات(?: المطلوبة)?",
+    r"مستندات",
+    r"الوثائق(?: المطلوبة)?",
+    r"صورة الهوية",
+    r"رسوم(?: التسجيل| التقديم)?",
+    r"أهلية",
+    r"مؤهل(?:ون|ين)?",
+    r"باب التسجيل",
+    r"تسجيل (?:الطلاب|الرغبات|المواطنين)",
+    r"يمكن (?:للطلاب|للمواطنين|للمستخدمين)",
+    r"عبر الموقع",
+    r"طريقة التقديم",
+    r"كيفية",
+    r"خطوات",
+    r"اتبع",
+    r"يجب",
+    r"يتعين",
+    r"آخر موعد",
+    r"موعد نهائي",
+    r"تغلق[^.؟!؛]{0,60}(?:الأحد|الاثنين|الثلاثاء|الأربعاء|الخميس|الجمعة|السبت)",
+    r"يستمر حتى",
+    r"required documents",
+    r"eligibility",
+    r"registration",
+    r"application procedure",
+    r"required fees",
+    r"step-by-step",
+    r"how to",
+    r"deadline",
+)
 
 
 class DeterministicCompositionalSemanticEngine:
@@ -367,12 +464,32 @@ class DeterministicCompositionalSemanticEngine:
             ordered_relationships,
             prefix="INTENT_",
         )
+        actionable = self._has_actionable_guide_structure(
+            source=source,
+            contextual_evidence=contextual_evidence,
+            relationships=ordered_relationships,
+            format_support=format_support,
+        )
+        non_actionable_reporting = (
+            not actionable
+            and self._has_non_actionable_institutional_reporting(
+                source=source,
+                relationships=ordered_relationships,
+            )
+        )
+        if non_actionable_reporting:
+            format_support = tuple(
+                dict.fromkeys(format_support + ("FORMAT_STANDARD_NEWS",))
+            )
+        format_suppression = (
+            ("FORMAT_GUIDE",) if non_actionable_reporting else ()
+        )
         return CompositionalSemanticEvidence(
             relationships=ordered_relationships,
             primary_domain_candidates=primary,
             secondary_domain_candidates=secondary,
             format_support=format_support,
-            format_suppression=(),
+            format_suppression=format_suppression,
             intent_support=intent_support,
             warnings=() if ordered_relationships else ("SEMANTIC_COMPOSITION_EMPTY",),
         )
@@ -1019,3 +1136,72 @@ class DeterministicCompositionalSemanticEngine:
                 if support.startswith(prefix)
             )
         )
+
+    def _has_actionable_guide_structure(
+        self,
+        *,
+        source: NormalizedSource,
+        contextual_evidence: ContextualEvidence,
+        relationships: tuple[SemanticRelationship, ...],
+        format_support: tuple[str, ...],
+    ) -> bool:
+        """Return whether meaningful reader action exists document-wide."""
+        if "FORMAT_SERVICE" in format_support or "FORMAT_GUIDE" in format_support:
+            return True
+        if any(
+            relationship.relationship_type
+            is SemanticRelationshipType.RECOMMENDATION_TARGETS_AUDIENCE
+            or relationship.subject_component
+            in {
+                SemanticComponent.REQUIREMENT,
+                SemanticComponent.DEADLINE,
+                SemanticComponent.RECOMMENDED_ACTION,
+            }
+            or relationship.object_component
+            in {
+                SemanticComponent.REQUIREMENT,
+                SemanticComponent.DEADLINE,
+                SemanticComponent.RECOMMENDED_ACTION,
+            }
+            for relationship in relationships
+        ):
+            return True
+        if any(
+            item.role in {EvidenceRole.REQUIREMENT, EvidenceRole.DEADLINE}
+            for item in contextual_evidence.all_items
+        ):
+            return True
+        text = f"{source.title}\n{source.body}"
+        return bool(self._pattern_matches(text, _ACTIONABLE_GUIDE_PATTERNS))
+
+    def _has_non_actionable_institutional_reporting(
+        self,
+        *,
+        source: NormalizedSource,
+        relationships: tuple[SemanticRelationship, ...],
+    ) -> bool:
+        """Detect strong institutional status reporting without reader action."""
+        institutional_relationships = {
+            (relationship.source_section, relationship.sentence_index)
+            for relationship in relationships
+            if relationship.relationship_type
+            in {
+                SemanticRelationshipType.AUTHORITY_ACTS_ON_SUBJECT,
+                SemanticRelationshipType.INSTITUTION_BELONGS_TO_DOMAIN,
+                SemanticRelationshipType.INDICATOR_DESCRIBES_DOMAIN,
+            }
+            and relationship.strength is EvidenceStrength.STRONG
+        }
+        for source_section, sentence_index, text in self._source_units(source):
+            institution = bool(
+                self._pattern_matches(text, _REPORTING_INSTITUTION_PATTERNS)
+            ) or (source_section, sentence_index) in institutional_relationships
+            reporting = bool(
+                self._pattern_matches(text, _INSTITUTIONAL_REPORTING_ACTIONS)
+            )
+            subject = bool(
+                self._pattern_matches(text, _NON_ACTIONABLE_REPORTING_SUBJECTS)
+            )
+            if institution and reporting and subject:
+                return True
+        return False

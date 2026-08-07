@@ -10,7 +10,7 @@
 | 026 | TECHNOLOGY | TECHNOLOGY | SERVICE | SERVICE | KNOW_ACTION | KNOW_ACTION | YES |
 | 027 | ECONOMY | ECONOMY | STANDARD_NEWS | STANDARD_NEWS | GET_UPDATE | GET_UPDATE | YES |
 | 028 | WEATHER | WEATHER | STANDARD_NEWS | STANDARD_NEWS | GET_UPDATE | GET_UPDATE | YES |
-| 029 | EDUCATION | EDUCATION | STANDARD_NEWS | GUIDE | GET_UPDATE | VERIFY_REQUIREMENTS | NO |
+| 029 | EDUCATION | EDUCATION | STANDARD_NEWS | STANDARD_NEWS | GET_UPDATE | GET_UPDATE | YES |
 | 030 | ECONOMY | ECONOMY | STANDARD_NEWS | STANDARD_NEWS | GET_UPDATE | GET_UPDATE | YES |
 
 ## Summary
@@ -22,22 +22,22 @@ Topic Accuracy:
 100.00%
 
 Editorial Format Accuracy:
-90.00%
+100.00%
 
 Reader Intent Accuracy:
-90.00%
+100.00%
 
 Full Case Accuracy:
-90.00%
+100.00%
 
 Fully Matched:
-9
+10
 
 Semantic Evidence Used:
 8
 
 Semantic Suppression Used:
-3
+5
 
 ## Previous Batch 03 Context-Aware
 
@@ -59,40 +59,8 @@ None
 
 ## Format Mismatches
 
-ID:
-029
-
-Expected:
-STANDARD_NEWS
-
-Predicted:
-GUIDE
-
-Semantic Primary:
-PRIMARY_DOMAIN_EDUCATION
-
-Semantic Format:
 None
-
-Semantic Suppression:
-PRIMARY_DOMAIN_GOVERNMENT
 
 ## Intent Mismatches
 
-ID:
-029
-
-Expected:
-GET_UPDATE
-
-Predicted:
-VERIFY_REQUIREMENTS
-
-Semantic Primary:
-PRIMARY_DOMAIN_EDUCATION
-
-Semantic Format:
 None
-
-Semantic Suppression:
-PRIMARY_DOMAIN_GOVERNMENT

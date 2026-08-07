@@ -78,7 +78,8 @@
       ],
       "semantic_secondary_domain_candidates": [],
       "semantic_suppressions": [
-        "PRIMARY_DOMAIN_GOVERNMENT"
+        "PRIMARY_DOMAIN_GOVERNMENT",
+        "FORMAT_GUIDE"
       ],
       "reason_codes": [
         "COMPOSITIONAL_SEMANTIC_TOPIC_EVIDENCE",

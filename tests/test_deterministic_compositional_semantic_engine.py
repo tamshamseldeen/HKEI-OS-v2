@@ -520,3 +520,92 @@ def test_expanded_relationships_preserve_valid_local_provenance() -> None:
             contextual_item = contextual.all_items[index]
             assert contextual_item.source_section is item.source_section
             assert contextual_item.sentence_index == item.sentence_index
+
+
+@pytest.mark.parametrize(
+    "body",
+    (
+        "أعلنت وزارة التعليم العالي تحقيق الجامعات مراكز متقدمة في التصنيفات الدولية",
+        "أعلنت الهيئة الانتهاء من المشروع بعد تقدم الأعمال",
+        "أعلنت وزارة الصحة فحص خمسة ملايين مواطن",
+        "أعلن البنك المركزي ارتفاع الاحتياطيات",
+    ),
+)
+def test_non_actionable_institutional_reporting_suppresses_guide(
+    body: str,
+) -> None:
+    """Support standard news and suppress guide for ordinary reporting."""
+    evidence, _ = compose(make_source(body=body))
+
+    assert "FORMAT_STANDARD_NEWS" in evidence.format_support
+    assert "FORMAT_GUIDE" in evidence.format_suppression
+
+
+def test_authority_alone_is_insufficient_for_format_suppression() -> None:
+    """Require reporting action and status subject beyond an authority name."""
+    evidence, _ = compose(make_source(body="وزارة التعليم العالي"))
+
+    assert "FORMAT_STANDARD_NEWS" not in evidence.format_support
+    assert "FORMAT_GUIDE" not in evidence.format_suppression
+
+
+def test_university_ranking_reporting_has_negative_guide_evidence() -> None:
+    """Resolve the reusable education ranking scenario as non-actionable news."""
+    evidence, _ = compose(
+        make_source(
+            body=(
+                "أعلنت وزارة التعليم العالي والبحث العلمي تحقيق عدد من "
+                "الجامعات الحكومية والأهلية مراكز متقدمة في التصنيفات "
+                "العالمية للجامعات"
+            )
+        )
+    )
+
+    assert evidence.primary_domain_candidates == ("PRIMARY_DOMAIN_EDUCATION",)
+    assert evidence.format_support == ("FORMAT_STANDARD_NEWS",)
+    assert evidence.format_suppression == ("FORMAT_GUIDE",)
+
+
+@pytest.mark.parametrize(
+    "body",
+    (
+        "تعرف على شروط القبول بالجامعات والمستندات المطلوبة",
+        "تغلق الوزارة باب التسجيل يوم الأحد",
+        "يمكن للطلاب تسجيل الرغبات عبر الموقع",
+        "تشمل المتطلبات صورة الهوية ورسوم التسجيل",
+        "توضح الوزارة أهلية الطلاب وطريقة التقديم",
+    ),
+)
+def test_actionable_guide_structure_prevents_suppression(body: str) -> None:
+    """Preserve guide capability for requirements, deadlines, and procedures."""
+    evidence, _ = compose(make_source(body=body))
+
+    assert "FORMAT_GUIDE" not in evidence.format_suppression
+
+
+def test_cybersecurity_recommendation_remains_service_capable() -> None:
+    """Preserve semantic SERVICE support without adding GUIDE suppression."""
+    evidence, _ = compose(
+        make_source(
+            body=(
+                "حذر خبراء الأمن السيبراني الشركات بضرورة تحديث "
+                "برامج الحماية"
+            )
+        )
+    )
+
+    assert evidence.format_support == ("FORMAT_SERVICE",)
+    assert evidence.intent_support == ("INTENT_KNOW_ACTION",)
+    assert "FORMAT_GUIDE" not in evidence.format_suppression
+
+
+def test_format_support_and_suppression_remain_deduplicated() -> None:
+    """Deduplicate repeated institutional reporting across source sections."""
+    source = make_source(
+        title="أعلنت الوزارة تقدم الجامعات في التصنيفات الدولية",
+        body="أعلنت الوزارة تقدم الجامعات في التصنيفات الدولية",
+    )
+    evidence, _ = compose(source)
+
+    assert evidence.format_support == ("FORMAT_STANDARD_NEWS",)
+    assert evidence.format_suppression == ("FORMAT_GUIDE",)

@@ -20,8 +20,12 @@
         "PRIMARY_DOMAIN_GOVERNMENT"
       ],
       "secondary_domain_candidates": [],
-      "format_support": [],
-      "format_suppression": [],
+      "format_support": [
+        "FORMAT_STANDARD_NEWS"
+      ],
+      "format_suppression": [
+        "FORMAT_GUIDE"
+      ],
       "intent_support": [],
       "warnings": [],
       "relationships": [
@@ -58,8 +62,12 @@
         "PRIMARY_DOMAIN_ECONOMY"
       ],
       "secondary_domain_candidates": [],
-      "format_support": [],
-      "format_suppression": [],
+      "format_support": [
+        "FORMAT_STANDARD_NEWS"
+      ],
+      "format_suppression": [
+        "FORMAT_GUIDE"
+      ],
       "intent_support": [],
       "warnings": [],
       "relationships": [
