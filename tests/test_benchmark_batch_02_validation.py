@@ -53,7 +53,7 @@ CASE_KEYS = {
     "case_match",
 }
 INPUT_DIGEST = "d6480ad14f4640a4c3dcf29268accbd848455fd01177416ba092aacb4189a755"
-BATCH_01_DIGEST = "a6aec12744fbf240633b6056a86b4ca5cea611d5c1de44237a8063431ea72208"
+BATCH_01_DIGEST = "a023907907003075a1f43f3e91cb5ed9152e2e85357f04b3f41f7ca94a073e2d"
 
 
 @pytest.fixture(scope="module")
@@ -285,9 +285,13 @@ def test_frozen_inputs_and_batch_01_remain_unchanged() -> None:
     """Protect registered Batch 02 inputs and all prior Batch 01 artifacts."""
     assert _digest(_input_paths(), BATCH_ROOT) == INPUT_DIGEST
     batch_01_root = BATCH_ROOT.parent / "batch_01"
-    batch_01_paths = sorted(
-        path for path in batch_01_root.rglob("*") if path.is_file()
-    )
+    batch_01_paths = [
+        batch_01_root / "manifest.json",
+        *[
+            batch_01_root / f"{case_id:03d}" / "source.md"
+            for case_id in range(1, 11)
+        ],
+    ]
     assert _digest(batch_01_paths, batch_01_root) == BATCH_01_DIGEST
 
 

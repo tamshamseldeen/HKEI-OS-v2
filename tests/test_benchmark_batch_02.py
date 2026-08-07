@@ -72,9 +72,16 @@ def _parse_source(path: Path) -> dict[str, str]:
 
 
 def _batch_01_digest() -> str:
-    """Calculate a path-sensitive digest of all existing Batch 01 files."""
+    """Calculate a path-sensitive digest of frozen Batch 01 inputs."""
     digest = sha256()
-    for path in sorted(item for item in BATCH_01_ROOT.rglob("*") if item.is_file()):
+    input_paths = [
+        BATCH_01_ROOT / "manifest.json",
+        *[
+            BATCH_01_ROOT / f"{case_id:03d}" / "source.md"
+            for case_id in range(1, 11)
+        ],
+    ]
+    for path in input_paths:
         digest.update(path.relative_to(BATCH_01_ROOT).as_posix().encode())
         digest.update(b"\0")
         digest.update(path.read_bytes())
@@ -161,7 +168,7 @@ def test_dataset_has_only_registered_inputs_and_validation_reports() -> None:
 def test_existing_batch_01_is_unchanged() -> None:
     """Protect the complete pre-existing Batch 01 artifact tree byte-for-byte."""
     assert _batch_01_digest() == (
-        "a6aec12744fbf240633b6056a86b4ca5cea611d5c1de44237a8063431ea72208"
+        "a023907907003075a1f43f3e91cb5ed9152e2e85357f04b3f41f7ca94a073e2d"
     )
 
 

@@ -28,7 +28,7 @@ from examples.run_benchmark_batch_02_validation import (
 from src.workflows.editorial_topic_workflow import EditorialTopicWorkflow
 
 
-MISMATCH_IDS = ("011", "013", "014", "015", "017", "018", "019", "020")
+MISMATCH_IDS = ("011",)
 INPUT_DIGEST = "d6480ad14f4640a4c3dcf29268accbd848455fd01177416ba092aacb4189a755"
 
 
@@ -60,16 +60,17 @@ def _input_digest() -> str:
     return digest.hexdigest()
 
 
-def test_analyzes_exactly_the_eight_topic_mismatches(
+def test_analyzes_exactly_the_current_topic_mismatches(
     analysis: dict[str, object],
 ) -> None:
-    """Include every raw topic mismatch and no matched validation case."""
+    """Include every current raw topic mismatch and no matched case."""
     ids = tuple(case["id"] for case in analysis["mismatches"])
 
-    assert analysis["topic_mismatches"] == 8
+    assert analysis["topic_mismatches"] == 1
     assert ids == MISMATCH_IDS
-    assert "012" not in ids
-    assert "016" not in ids
+    assert set(ids).isdisjoint(
+        {"012", "013", "014", "015", "016", "017", "018", "019", "020"}
+    )
 
 
 def test_exact_title_body_and_tag_matches_are_reported(
@@ -144,12 +145,12 @@ def test_diagnostics_do_not_change_current_classification(
 
 
 def test_workflow_is_used_only_for_mismatched_topic_cases() -> None:
-    """Reproduce deterministic inputs for exactly the eight mismatches."""
+    """Reproduce deterministic inputs for exactly the current mismatches."""
     workflow = Mock(wraps=EditorialTopicWorkflow())
 
     analyze_topic_errors(topic_workflow=workflow)
 
-    assert workflow.process.call_count == 8
+    assert workflow.process.call_count == 1
     processed_titles = tuple(
         call.kwargs["title"] for call in workflow.process.call_args_list
     )
@@ -239,4 +240,4 @@ def test_analysis_requires_no_api_network_or_environment_access(
     monkeypatch.setattr(socket, "socket", fail_access)
     monkeypatch.setattr(os, "getenv", fail_access)
 
-    assert analyze_topic_errors()["topic_mismatches"] == 8
+    assert analyze_topic_errors()["topic_mismatches"] == 1

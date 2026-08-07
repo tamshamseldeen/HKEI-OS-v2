@@ -3,16 +3,16 @@
 ## Summary
 
 Topic Mismatches:
-8
+1
 
 Legacy Contamination Suspected:
-3
+0
 
 Substring Collision Suspected:
-6
+1
 
 Expected Vocabulary Gap:
-4
+0
 
 Human Adjudication Required:
 5
@@ -25,10 +25,10 @@ Expected:
 GOVERNMENT
 
 Predicted:
-ECONOMY
+GENERAL
 
 Confidence:
-MEDIUM
+LOW
 
 Legacy Content Type:
 ECONOMY_NEWS
@@ -61,382 +61,6 @@ Structured Economic Evidence:
 NO
 
 Reason Codes:
-- BODY_TOPIC_SIGNAL
-- LEGACY_CONTENT_TYPE_TOPIC_SIGNAL
-
-Supporting Signals:
-- BODY_ECONOMY_SIGNAL
-- LEGACY_TOPIC_SUPPORT
-
-Warnings:
-None
-
-Diagnostic Flags:
-- LEGACY_TOPIC_CONTAMINATION_SUSPECTED
-- SUBSTRING_COLLISION_SUSPECTED
-
-### Case 013
-
-Expected:
-TECHNOLOGY
-
-Predicted:
-BUSINESS
-
-Confidence:
-LOW
-
-Legacy Content Type:
-LEGAL_FINANCIAL_HIGH_RISK_CONTENT
-
-Legacy Implied Topic:
-None
-
-Legacy Support Applied:
-NO
-
-Title Matches:
-
-BUSINESS:
-- شركات — شركات السيارات الكهربائية
-
-Body Matches:
-
-BUSINESS:
-- شركات — تسارع كبرى شركات تصنيع السيارات حول
-TECHNOLOGY:
-- تقنية — الشرق" إلى أن هذه التقنية قد تسهم في خفض أسعا
-SCIENCE:
-- أبحاث — م ضخ الاستثمارات في أبحاث بطاريات الحالة الصل
-
-Risk Topics:
-- financial
-
-Government Entity Evidence:
-NO
-
-Structured Economic Evidence:
-YES
-
-Reason Codes:
-- TITLE_TOPIC_SIGNAL
-- BODY_TOPIC_SIGNAL
-
-Supporting Signals:
-- TITLE_BUSINESS_SIGNAL
-- BODY_BUSINESS_SIGNAL
-
-Warnings:
-- LOW_TOPIC_CONFIDENCE
-
-Diagnostic Flags:
-- SUBSTRING_COLLISION_SUSPECTED
-
-### Case 014
-
-Expected:
-WORLD
-
-Predicted:
-GENERAL
-
-Confidence:
-LOW
-
-Legacy Content Type:
-STANDARD_NEWS
-
-Legacy Implied Topic:
-None
-
-Legacy Support Applied:
-NO
-
-Title Matches:
-
-None
-
-Body Matches:
-
-ENTERTAINMENT:
-- ممثل — لتوصل للاتفاق، أبدى ممثلو عدد من الدول القلق
-
-Risk Topics:
-None
-
-Government Entity Evidence:
-NO
-
-Structured Economic Evidence:
-NO
-
-Reason Codes:
-- DEFAULT_GENERAL_TOPIC
-
-Supporting Signals:
-- INSUFFICIENT_TOPIC_EVIDENCE
-
-Warnings:
-- LOW_TOPIC_CONFIDENCE
-- TOPIC_SIGNAL_INSUFFICIENT
-
-Diagnostic Flags:
-- SUBSTRING_COLLISION_SUSPECTED
-- EXPECTED_TOPIC_VOCABULARY_GAP
-
-### Case 015
-
-Expected:
-GOVERNMENT
-
-Predicted:
-GENERAL
-
-Confidence:
-LOW
-
-Legacy Content Type:
-LEGAL_FINANCIAL_HIGH_RISK_CONTENT
-
-Legacy Implied Topic:
-None
-
-Legacy Support Applied:
-NO
-
-Title Matches:
-
-None
-
-Body Matches:
-
-BUSINESS:
-- شركات — رائب المصرية كافة الشركات والمكلفين المتبقين
-GOVERNMENT:
-- وزارة — شهر الجاري. وأكدت الوزارة أن الفاتورة الإلكتر
-
-Risk Topics:
-- financial
-
-Government Entity Evidence:
-NO
-
-Structured Economic Evidence:
-NO
-
-Reason Codes:
-- DEFAULT_GENERAL_TOPIC
-
-Supporting Signals:
-- INSUFFICIENT_TOPIC_EVIDENCE
-
-Warnings:
-- LOW_TOPIC_CONFIDENCE
-- TOPIC_SIGNAL_INSUFFICIENT
-
-Diagnostic Flags:
-- SUBSTRING_COLLISION_SUSPECTED
-
-### Case 017
-
-Expected:
-ECONOMY
-
-Predicted:
-SPORTS
-
-Confidence:
-MEDIUM
-
-Legacy Content Type:
-SPORTS_NEWS
-
-Legacy Implied Topic:
-SPORTS
-
-Legacy Support Applied:
-YES
-
-Title Matches:
-
-None
-
-Body Matches:
-
-SPORTS:
-- هدف — اية المستثمرين. وتستهدف هذه الخطوة الحد من
-
-Risk Topics:
-None
-
-Government Entity Evidence:
-NO
-
-Structured Economic Evidence:
-NO
-
-Reason Codes:
-- BODY_TOPIC_SIGNAL
-- LEGACY_CONTENT_TYPE_TOPIC_SIGNAL
-
-Supporting Signals:
-- BODY_SPORTS_SIGNAL
-- LEGACY_TOPIC_SUPPORT
-
-Warnings:
-None
-
-Diagnostic Flags:
-- LEGACY_TOPIC_CONTAMINATION_SUSPECTED
-- SUBSTRING_COLLISION_SUSPECTED
-- EXPECTED_TOPIC_VOCABULARY_GAP
-
-### Case 018
-
-Expected:
-SCIENCE
-
-Predicted:
-SPORTS
-
-Confidence:
-MEDIUM
-
-Legacy Content Type:
-SPORTS_NEWS
-
-Legacy Implied Topic:
-SPORTS
-
-Legacy Support Applied:
-YES
-
-Title Matches:
-
-None
-
-Body Matches:
-
-SPORTS:
-- فريق — أعلن فريق دولي من علماء الفلك
-
-Risk Topics:
-None
-
-Government Entity Evidence:
-NO
-
-Structured Economic Evidence:
-NO
-
-Reason Codes:
-- BODY_TOPIC_SIGNAL
-- LEGACY_CONTENT_TYPE_TOPIC_SIGNAL
-
-Supporting Signals:
-- BODY_SPORTS_SIGNAL
-- LEGACY_TOPIC_SUPPORT
-
-Warnings:
-None
-
-Diagnostic Flags:
-- LEGACY_TOPIC_CONTAMINATION_SUSPECTED
-- EXPECTED_TOPIC_VOCABULARY_GAP
-
-### Case 019
-
-Expected:
-CULTURE
-
-Predicted:
-GENERAL
-
-Confidence:
-LOW
-
-Legacy Content Type:
-STANDARD_NEWS
-
-Legacy Implied Topic:
-None
-
-Legacy Support Applied:
-NO
-
-Title Matches:
-
-None
-
-Body Matches:
-
-None
-
-Risk Topics:
-None
-
-Government Entity Evidence:
-NO
-
-Structured Economic Evidence:
-NO
-
-Reason Codes:
-- DEFAULT_GENERAL_TOPIC
-
-Supporting Signals:
-- INSUFFICIENT_TOPIC_EVIDENCE
-
-Warnings:
-- LOW_TOPIC_CONFIDENCE
-- TOPIC_SIGNAL_INSUFFICIENT
-
-Diagnostic Flags:
-- EXPECTED_TOPIC_VOCABULARY_GAP
-
-### Case 020
-
-Expected:
-TECHNOLOGY
-
-Predicted:
-GENERAL
-
-Confidence:
-LOW
-
-Legacy Content Type:
-LEGAL_FINANCIAL_HIGH_RISK_CONTENT
-
-Legacy Implied Topic:
-None
-
-Legacy Support Applied:
-NO
-
-Title Matches:
-
-None
-
-Body Matches:
-
-ECONOMY:
-- السوق — بية مضاعفة حصتها في السوق العالمية بحلول نهاي
-TECHNOLOGY:
-- أشباه الموصلات — لإنشاء مصانع جديدة لأشباه الموصلات داخل دول التكتل. وت
-SPORTS:
-- هدف — اخل دول التكتل. وتستهدف الإستراتيجية الأورو
-
-Risk Topics:
-- financial
-
-Government Entity Evidence:
-NO
-
-Structured Economic Evidence:
-NO
-
-Reason Codes:
 - DEFAULT_GENERAL_TOPIC
 
 Supporting Signals:
@@ -460,7 +84,7 @@ Expected Topic:
 GOVERNMENT
 
 Predicted Topic:
-ECONOMY
+GENERAL
 
 Possible Competing Topics:
 - GOVERNMENT
@@ -478,7 +102,7 @@ Expected Topic:
 TECHNOLOGY
 
 Predicted Topic:
-BUSINESS
+TECHNOLOGY
 
 Possible Competing Topics:
 - TECHNOLOGY
@@ -498,7 +122,7 @@ Expected Topic:
 WORLD
 
 Predicted Topic:
-GENERAL
+WORLD
 
 Possible Competing Topics:
 - WORLD
@@ -535,7 +159,7 @@ Expected Topic:
 TECHNOLOGY
 
 Predicted Topic:
-GENERAL
+TECHNOLOGY
 
 Possible Competing Topics:
 - TECHNOLOGY
@@ -556,20 +180,20 @@ Multiple primary-topic labels remain defensible from the supplied title and body
 
 ### Legacy dependency
 
-011, 017, 018
+011
 
 ### Substring matching
 
-011, 013, 014, 015, 017, 020
+011
 
 ### Vocabulary coverage
 
-014, 017, 018, 019
+None
 
 ### Topic scoring / precedence
 
-011, 013, 015, 020
+011
 
 ### Human-label ambiguity
 
-011, 013, 014, 020
+011

@@ -1,15 +1,15 @@
 {
   "batch": "batch_02",
   "case_count": 10,
-  "topic_matched": 2,
-  "topic_accuracy": 20.0,
+  "topic_matched": 9,
+  "topic_accuracy": 90.0,
   "format_matched": 8,
   "format_accuracy": 80.0,
   "reader_intent_matched": 8,
   "reader_intent_accuracy": 80.0,
-  "fully_matched_cases": 2,
-  "full_case_accuracy": 20.0,
-  "topic_mismatches": 8,
+  "fully_matched_cases": 7,
+  "full_case_accuracy": 70.0,
+  "topic_mismatches": 1,
   "format_mismatches": 2,
   "reader_intent_mismatches": 2,
   "cases": [
@@ -17,14 +17,16 @@
       "id": "011",
       "source_name": "اليوم السابع",
       "expected_topic": "GOVERNMENT",
-      "predicted_topic": "ECONOMY",
-      "topic_confidence": "MEDIUM",
+      "predicted_topic": "GENERAL",
+      "topic_confidence": "LOW",
       "topic_match": false,
       "topic_reason_codes": [
-        "BODY_TOPIC_SIGNAL",
-        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL"
+        "DEFAULT_GENERAL_TOPIC"
       ],
-      "topic_warnings": [],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
       "expected_format": "STANDARD_NEWS",
       "predicted_format": "STANDARD_NEWS",
       "format_confidence": "MEDIUM",
@@ -81,16 +83,14 @@
       "id": "013",
       "source_name": "الشرق",
       "expected_topic": "TECHNOLOGY",
-      "predicted_topic": "BUSINESS",
-      "topic_confidence": "LOW",
-      "topic_match": false,
+      "predicted_topic": "TECHNOLOGY",
+      "topic_confidence": "HIGH",
+      "topic_match": true,
       "topic_reason_codes": [
         "TITLE_TOPIC_SIGNAL",
         "BODY_TOPIC_SIGNAL"
       ],
-      "topic_warnings": [
-        "LOW_TOPIC_CONFIDENCE"
-      ],
+      "topic_warnings": [],
       "expected_format": "ANALYSIS",
       "predicted_format": "STANDARD_NEWS",
       "format_confidence": "MEDIUM",
@@ -114,16 +114,14 @@
       "id": "014",
       "source_name": "BBC",
       "expected_topic": "WORLD",
-      "predicted_topic": "GENERAL",
-      "topic_confidence": "LOW",
-      "topic_match": false,
+      "predicted_topic": "WORLD",
+      "topic_confidence": "HIGH",
+      "topic_match": true,
       "topic_reason_codes": [
-        "DEFAULT_GENERAL_TOPIC"
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
       ],
-      "topic_warnings": [
-        "LOW_TOPIC_CONFIDENCE",
-        "TOPIC_SIGNAL_INSUFFICIENT"
-      ],
+      "topic_warnings": [],
       "expected_format": "STANDARD_NEWS",
       "predicted_format": "STANDARD_NEWS",
       "format_confidence": "LOW",
@@ -145,22 +143,20 @@
       "reader_intent_warnings": [
         "LOW_READER_INTENT_CONFIDENCE"
       ],
-      "case_match": false
+      "case_match": true
     },
     {
       "id": "015",
       "source_name": "اليوم السابع",
       "expected_topic": "GOVERNMENT",
-      "predicted_topic": "GENERAL",
-      "topic_confidence": "LOW",
-      "topic_match": false,
+      "predicted_topic": "GOVERNMENT",
+      "topic_confidence": "HIGH",
+      "topic_match": true,
       "topic_reason_codes": [
-        "DEFAULT_GENERAL_TOPIC"
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
       ],
-      "topic_warnings": [
-        "LOW_TOPIC_CONFIDENCE",
-        "TOPIC_SIGNAL_INSUFFICIENT"
-      ],
+      "topic_warnings": [],
       "expected_format": "SERVICE",
       "predicted_format": "STANDARD_NEWS",
       "format_confidence": "MEDIUM",
@@ -185,15 +181,13 @@
       "source_name": "العربية",
       "expected_topic": "BUSINESS",
       "predicted_topic": "BUSINESS",
-      "topic_confidence": "LOW",
+      "topic_confidence": "HIGH",
       "topic_match": true,
       "topic_reason_codes": [
         "TITLE_TOPIC_SIGNAL",
         "BODY_TOPIC_SIGNAL"
       ],
-      "topic_warnings": [
-        "LOW_TOPIC_CONFIDENCE"
-      ],
+      "topic_warnings": [],
       "expected_format": "STANDARD_NEWS",
       "predicted_format": "STANDARD_NEWS",
       "format_confidence": "MEDIUM",
@@ -217,12 +211,12 @@
       "id": "017",
       "source_name": "الشرق",
       "expected_topic": "ECONOMY",
-      "predicted_topic": "SPORTS",
-      "topic_confidence": "MEDIUM",
-      "topic_match": false,
+      "predicted_topic": "ECONOMY",
+      "topic_confidence": "HIGH",
+      "topic_match": true,
       "topic_reason_codes": [
-        "BODY_TOPIC_SIGNAL",
-        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL"
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
       ],
       "topic_warnings": [],
       "expected_format": "STANDARD_NEWS",
@@ -242,18 +236,18 @@
         "DEFAULT_GET_UPDATE"
       ],
       "reader_intent_warnings": [],
-      "case_match": false
+      "case_match": true
     },
     {
       "id": "018",
       "source_name": "BBC",
       "expected_topic": "SCIENCE",
-      "predicted_topic": "SPORTS",
-      "topic_confidence": "MEDIUM",
-      "topic_match": false,
+      "predicted_topic": "SCIENCE",
+      "topic_confidence": "HIGH",
+      "topic_match": true,
       "topic_reason_codes": [
-        "BODY_TOPIC_SIGNAL",
-        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL"
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
       ],
       "topic_warnings": [],
       "expected_format": "STANDARD_NEWS",
@@ -273,22 +267,20 @@
         "DEFAULT_GET_UPDATE"
       ],
       "reader_intent_warnings": [],
-      "case_match": false
+      "case_match": true
     },
     {
       "id": "019",
       "source_name": "اليوم السابع",
       "expected_topic": "CULTURE",
-      "predicted_topic": "GENERAL",
-      "topic_confidence": "LOW",
-      "topic_match": false,
+      "predicted_topic": "CULTURE",
+      "topic_confidence": "HIGH",
+      "topic_match": true,
       "topic_reason_codes": [
-        "DEFAULT_GENERAL_TOPIC"
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
       ],
-      "topic_warnings": [
-        "LOW_TOPIC_CONFIDENCE",
-        "TOPIC_SIGNAL_INSUFFICIENT"
-      ],
+      "topic_warnings": [],
       "expected_format": "STANDARD_NEWS",
       "predicted_format": "STANDARD_NEWS",
       "format_confidence": "LOW",
@@ -310,22 +302,19 @@
       "reader_intent_warnings": [
         "LOW_READER_INTENT_CONFIDENCE"
       ],
-      "case_match": false
+      "case_match": true
     },
     {
       "id": "020",
       "source_name": "الشرق",
       "expected_topic": "TECHNOLOGY",
-      "predicted_topic": "GENERAL",
-      "topic_confidence": "LOW",
-      "topic_match": false,
+      "predicted_topic": "TECHNOLOGY",
+      "topic_confidence": "MEDIUM",
+      "topic_match": true,
       "topic_reason_codes": [
-        "DEFAULT_GENERAL_TOPIC"
+        "TITLE_TOPIC_SIGNAL"
       ],
-      "topic_warnings": [
-        "LOW_TOPIC_CONFIDENCE",
-        "TOPIC_SIGNAL_INSUFFICIENT"
-      ],
+      "topic_warnings": [],
       "expected_format": "STANDARD_NEWS",
       "predicted_format": "STANDARD_NEWS",
       "format_confidence": "MEDIUM",
@@ -343,7 +332,7 @@
         "DEFAULT_GET_UPDATE"
       ],
       "reader_intent_warnings": [],
-      "case_match": false
+      "case_match": true
     }
   ]
 }

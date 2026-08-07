@@ -279,6 +279,144 @@ def test_sports_training_context_creates_sports_topic() -> None:
     assert result.topic is Topic.SPORTS
 
 
+@pytest.mark.parametrize(
+    "text",
+    (
+        "تستهدف هذه الخطوة حماية المستثمرين",
+        "أبدى ممثلو عدد من الدول",
+        "يعتمد العمل على تمثيل دقيق",
+    ),
+)
+def test_larger_arabic_tokens_do_not_create_topic_matches(text: str) -> None:
+    """Reject topic terms embedded inside longer Arabic tokens."""
+    matches = DeterministicTopicClassifier._matches_by_topic(text)
+
+    assert "هدف" not in matches.get(Topic.SPORTS, ())
+    assert "ممثل" not in matches.get(Topic.ENTERTAINMENT, ())
+
+
+def test_standalone_goal_matches_with_genuine_sports_context() -> None:
+    """Keep standalone weak sports terms when strong sports evidence exists."""
+    result = classify(
+        source=make_source(
+            title="مباراة حاسمة",
+            body="سجل اللاعب هدف، ثم حقق الفوز",
+        )
+    )
+
+    assert result.topic is Topic.SPORTS
+    assert "هدف" in DeterministicTopicClassifier._matches_by_topic(
+        "سجل هدف"
+    )[Topic.SPORTS]
+
+
+def test_weak_team_alone_does_not_create_sports() -> None:
+    """Prevent a generic team reference from establishing SPORTS."""
+    result = classify(
+        source=make_source(
+            title="أعلن فريق دولي بيانًا",
+            body="تضمن البيان معلومات جديدة",
+        )
+    )
+
+    assert result.topic is Topic.GENERAL
+
+
+def test_scientist_team_is_science_not_sports() -> None:
+    """Let strong astronomy evidence beat the generic word for team."""
+    result = classify(
+        source=make_source(
+            title="اكتشاف جديد",
+            body="أعلن فريق دولي من علماء الفلك اكتشاف كوكب",
+        ),
+        content=make_content(ContentType.SPORTS_NEWS),
+    )
+
+    assert result.topic is Topic.SCIENCE
+    assert "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL" not in result.reason_codes
+
+
+def test_legacy_sports_does_not_reinforce_accidental_or_weak_evidence() -> None:
+    """Require a genuine strong sports term before transitional reinforcement."""
+    result = classify(
+        source=make_source(
+            title="خطوة جديدة",
+            body="تستهدف هذه الخطوة حماية المستثمرين عبر فريق دولي",
+        ),
+        content=make_content(ContentType.SPORTS_NEWS),
+    )
+
+    assert result.topic is not Topic.SPORTS
+    assert "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL" not in result.reason_codes
+
+
+def test_reliable_legacy_sports_may_reinforce_genuine_evidence() -> None:
+    """Retain transitional support when an independent strong term agrees."""
+    result = classify(
+        source=make_source(
+            title="مباراة اليوم",
+            body="استعدادات جديدة قبل اللقاء",
+        ),
+        content=make_content(ContentType.SPORTS_NEWS),
+    )
+
+    assert result.topic is Topic.SPORTS
+    assert "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL" in result.reason_codes
+
+
+@pytest.mark.parametrize(
+    ("title", "body", "expected"),
+    (
+        ("العملات المشفرة", "تحديث جديد", Topic.ECONOMY),
+        ("الأصول الرقمية", "تحديث جديد", Topic.ECONOMY),
+        ("النظام المالي", "تحديث جديد", Topic.ECONOMY),
+        ("معرض الكتاب", "تبدأ الاستعدادات", Topic.CULTURE),
+        ("هيئة الكتاب", "تعلن ترتيبات جديدة", Topic.CULTURE),
+        ("علماء الفلك", "أعلنوا اكتشافًا", Topic.SCIENCE),
+        ("كوكب جديد", "أعلن العلماء اكتشافه", Topic.SCIENCE),
+        ("مرصد جديد", "نشر بيانات أولية", Topic.SCIENCE),
+        ("وكالة الفضاء", "بيانات جديدة", Topic.SCIENCE),
+        ("توقعات جديدة", "صافي أرباح مرتفع", Topic.BUSINESS),
+        ("الفاتورة الإلكترونية", "تحديث جديد", Topic.GOVERNMENT),
+        ("مصلحة الضرائب", "أعلنت قرارًا", Topic.GOVERNMENT),
+        ("البطاريات الصلبة", "تطور جديد", Topic.TECHNOLOGY),
+        ("أشباه الموصلات", "توسع جديد", Topic.TECHNOLOGY),
+        ("مؤتمر الأمم المتحدة", "اتفقت الدول المشاركة", Topic.WORLD),
+    ),
+)
+def test_general_reusable_vocabulary_supports_topics(
+    title: str,
+    body: str,
+    expected: Topic,
+) -> None:
+    """Classify reusable science, culture, economy, world, and service terms."""
+    assert classify(source=make_source(title=title, body=body)).topic is expected
+
+
+def test_weak_companies_do_not_beat_strong_technology() -> None:
+    """Keep technology primary when generic companies describe its industry."""
+    result = classify(
+        source=make_source(
+            title="شركات السيارات الكهربائية تعتمد البطاريات الصلبة",
+            body="تتوسع تقنيات أشباه الموصلات",
+        )
+    )
+
+    assert result.topic is Topic.TECHNOLOGY
+
+
+def test_weak_ministry_does_not_override_strong_economy() -> None:
+    """Keep macroeconomic evidence primary over one generic ministry mention."""
+    result = classify(
+        source=make_source(
+            title="وزارة تتابع البنك المركزي وأسعار الفائدة",
+            body="يراقب القرار التضخم والأسواق",
+        )
+    )
+
+    assert result.topic is Topic.ECONOMY
+
+
 def test_number_alone_does_not_create_economy() -> None:
     """Ignore an isolated structured number without market terminology."""
     result = classify(facts=make_facts(numbers=("100",)))
@@ -299,23 +437,21 @@ def test_currency_and_market_terminology_support_economy() -> None:
 
 
 @pytest.mark.parametrize(
-    ("content_type", "expected"),
+    "content_type",
     (
-        (ContentType.SPORTS_NEWS, Topic.SPORTS),
-        (ContentType.TECHNOLOGY_NEWS, Topic.TECHNOLOGY),
-        (ContentType.ECONOMY_NEWS, Topic.ECONOMY),
+        ContentType.SPORTS_NEWS,
+        ContentType.TECHNOLOGY_NEWS,
+        ContentType.ECONOMY_NEWS,
     ),
 )
-def test_legacy_topic_values_are_transitional_support(
+def test_legacy_topic_values_cannot_establish_topic_alone(
     content_type: ContentType,
-    expected: Topic,
 ) -> None:
-    """Allow only mapped legacy values to support a primary topic."""
+    """Prevent mapped legacy values from establishing a primary topic."""
     result = classify(content=make_content(content_type))
 
-    assert result.topic is expected
-    assert result.confidence is TopicConfidence.MEDIUM
-    assert result.reason_codes == ("LEGACY_CONTENT_TYPE_TOPIC_SIGNAL",)
+    assert result.topic is Topic.GENERAL
+    assert "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL" not in result.reason_codes
 
 
 def test_low_confidence_legacy_value_does_not_determine_topic_alone() -> None:

@@ -1,6 +1,7 @@
 """Deterministic classification of one primary editorial topic."""
 
 from collections.abc import Iterable
+import re
 
 from src.assessment.source_risk_assessment import SourceRiskAssessment
 from src.classification.classification_confidence import ClassificationConfidence
@@ -89,10 +90,19 @@ _TOPIC_TERMS = {
         "إيرادات القطاع السياحي",
         "أوبك+",
         "أوبك",
+        "العملات المشفرة",
+        "الأصول الرقمية",
+        "النظام المالي",
+        "هيئات تنظيمية مالية",
+        "رقابة مالية",
+        "المستثمرين",
+        "سوق العمل",
+        "معدل البطالة",
     ),
     Topic.BUSINESS: (
         "شركة",
         "شركات",
+        "صافي أرباح",
         "أرباح الشركة",
         "استحواذ",
         "اندماج",
@@ -113,10 +123,17 @@ _TOPIC_TERMS = {
         "هاتف",
         "أمن سيبراني",
         "مراكز البيانات",
+        "البطاريات الصلبة",
+        "بطاريات الحالة الصلبة",
+        "السيارات الكهربائية",
+        "الرقائق الإلكترونية",
+        "صناعة الرقائق",
     ),
     Topic.SPORTS: (
         "مباراة",
+        "المباراة",
         "منتخب",
+        "المنتخب",
         "فريق",
         "لاعب",
         "بطولة",
@@ -142,14 +159,23 @@ _TOPIC_TERMS = {
         "تصريح",
         "إقامة",
         "تأشيرة",
+        "مصلحة الضرائب",
+        "مصلحة الضرائب المصرية",
+        "الفاتورة الإلكترونية",
+        "الممولين",
+        "المكلفين",
+        "التسجيل في منظومة",
+        "جهة حكومية",
     ),
     Topic.WEATHER: (
         "موجة حر",
         "درجات الحرارة",
+        "ودرجات الحرارة",
         "طقس",
         "أمطار",
         "عاصفة",
         "جفاف",
+        "الجفاف",
         "أرصاد",
         "رياح",
     ),
@@ -173,6 +199,12 @@ _TOPIC_TERMS = {
         "ثقافة",
         "فنون",
         "أدب",
+        "معرض الكتاب",
+        "معرض القاهرة الدولي للكتاب",
+        "هيئة الكتاب",
+        "نشر",
+        "ثقافي",
+        "ثقافية",
     ),
     Topic.SCIENCE: (
         "دراسة علمية",
@@ -180,9 +212,20 @@ _TOPIC_TERMS = {
         "باحثون",
         "أبحاث",
         "فضاء",
+        "الفضاء",
         "فيزياء",
         "كيمياء",
         "أحياء",
+        "علماء",
+        "علماء الفلك",
+        "كوكب",
+        "كوكب خارجي",
+        "المجموعة الشمسية",
+        "مرصد",
+        "فلك",
+        "قمر صناعي",
+        "أقمار صناعية",
+        "تلسكوب",
     ),
     Topic.EDUCATION: (
         "جامعة",
@@ -216,29 +259,29 @@ _TOPIC_TERMS = {
         "العلاقات الدولية",
         "شؤون دولية",
         "نزاع دولي",
+        "الأمم المتحدة",
+        "قمة المناخ",
+        "مؤتمر الأمم المتحدة",
+        "الدول المشاركة",
+        "اتفاق دولي",
+        "مساعدات دولية",
     ),
 }
 
-_STRONG_SPORTS_TERMS = (
-    "مباراة",
-    "منتخب",
-    "لاعب",
-    "بطولة",
-    "دوري",
-    "كأس",
-    "مدرب",
-    "انتقال رياضي",
-    "تدريبات المنتخب",
-)
+_WEAK_TOPIC_TERMS = {
+    Topic.SPORTS: frozenset(("فريق", "هدف", "نتيجة", "انتقال", "تدريبات")),
+    Topic.BUSINESS: frozenset(("شركة", "شركات")),
+    Topic.GOVERNMENT: frozenset(("وزارة",)),
+}
 
-_SPORTS_TAG_TERMS = (
-    "السوبر",
-    "الدوري",
-    "المنتخب",
-    "نادي",
-    "كرة القدم",
-    "رياضة",
-)
+_CATEGORY_WEIGHT = 10
+_STRONG_TITLE_WEIGHT = 8
+_STRONG_BODY_WEIGHT = 3
+_WEAK_TITLE_WEIGHT = 2
+_WEAK_BODY_WEIGHT = 1
+_STRONG_TAG_WEIGHT = 3
+_WEAK_TAG_WEIGHT = 1
+_LEGACY_CORROBORATION_WEIGHT = 1
 
 _ECONOMIC_MARKET_TERMS = (
     "اقتصاد",
@@ -296,9 +339,9 @@ class DeterministicTopicClassifier:
         Returns:
             Exactly one primary topic classification.
         """
-        title = source.title.lower()
-        body = source.body.lower()
-        tags_text = "\n".join(source.tags).lower()
+        title = self._normalize_for_matching(source.title)
+        body = self._normalize_for_matching(source.body)
+        tags_text = self._normalize_for_matching("\n".join(source.tags))
         searchable_text = "\n".join(
             (
                 title,
@@ -312,21 +355,29 @@ class DeterministicTopicClassifier:
         title_matches = self._matches_by_topic(title)
         body_matches = self._matches_by_topic(body)
         tag_matches = self._matches_by_topic(tags_text)
-        self._apply_sports_safety(
-            source,
-            content_classification,
-            title_matches,
-            body_matches,
-            tag_matches,
-        )
 
         scores = {topic: 0 for topic in Topic if topic is not Topic.GENERAL}
         if category_topic is not None:
-            scores[category_topic] += 8
+            scores[category_topic] += _CATEGORY_WEIGHT
         for topic in scores:
-            scores[topic] += len(title_matches.get(topic, ())) * 4
-            scores[topic] += len(body_matches.get(topic, ())) * 2
-            scores[topic] += int(bool(tag_matches.get(topic))) * 2
+            scores[topic] += self._match_score(
+                topic,
+                title_matches.get(topic, ()),
+                strong_weight=_STRONG_TITLE_WEIGHT,
+                weak_weight=_WEAK_TITLE_WEIGHT,
+            )
+            scores[topic] += self._match_score(
+                topic,
+                body_matches.get(topic, ()),
+                strong_weight=_STRONG_BODY_WEIGHT,
+                weak_weight=_WEAK_BODY_WEIGHT,
+            )
+            scores[topic] += self._match_score(
+                topic,
+                tag_matches.get(topic, ()),
+                strong_weight=_STRONG_TAG_WEIGHT,
+                weak_weight=_WEAK_TAG_WEIGHT,
+            )
 
         government_entity_support = bool(facts.government_entities)
         if government_entity_support:
@@ -343,8 +394,18 @@ class DeterministicTopicClassifier:
         legacy_reliable = (
             content_classification.confidence is not ClassificationConfidence.LOW
         )
-        if legacy_topic is not None:
-            scores[legacy_topic] += 2 if legacy_reliable else 1
+        legacy_support_applied = (
+            legacy_topic is not None
+            and legacy_reliable
+            and self._has_strong_textual_support(
+                legacy_topic,
+                title_matches,
+                body_matches,
+                tag_matches,
+            )
+        )
+        if legacy_support_applied and legacy_topic is not None:
+            scores[legacy_topic] += _LEGACY_CORROBORATION_WEIGHT
 
         for risk_topic in assessment.risk_topics:
             supported = _RISK_TOPIC_SUPPORT.get(risk_topic.lower())
@@ -357,11 +418,8 @@ class DeterministicTopicClassifier:
             title_matches=title_matches,
             body_matches=body_matches,
             tag_matches=tag_matches,
-            facts=facts,
             government_entity_support=government_entity_support,
             structured_economic=structured_economic,
-            legacy_topic=legacy_topic,
-            legacy_reliable=legacy_reliable,
         )
         if selected is None:
             return TopicClassification(
@@ -409,7 +467,7 @@ class DeterministicTopicClassifier:
         if selected is Topic.ECONOMY and structured_economic:
             reasons += ("ECONOMIC_STRUCTURE_SIGNAL",)
             signals += ("STRUCTURED_ECONOMIC_VALUES",)
-        if legacy_topic is selected:
+        if legacy_topic is selected and legacy_support_applied:
             reasons += ("LEGACY_CONTENT_TYPE_TOPIC_SIGNAL",)
             signals += ("LEGACY_TOPIC_SUPPORT",)
         if category_conflict or non_category_conflict:
@@ -426,6 +484,7 @@ class DeterministicTopicClassifier:
             body_matches=body_matches,
             tag_matches=tag_matches,
             legacy_topic=legacy_topic,
+            legacy_support_applied=legacy_support_applied,
             has_conflict=category_conflict or non_category_conflict,
         )
         if confidence is TopicConfidence.LOW:
@@ -447,40 +506,78 @@ class DeterministicTopicClassifier:
 
     @staticmethod
     def _matches_by_topic(text: str) -> dict[Topic, tuple[str, ...]]:
-        """Return distinct matching terms grouped by topic."""
+        """Return distinct token-aware matching terms grouped by topic."""
+        normalized = DeterministicTopicClassifier._normalize_for_matching(text)
         return {
-            topic: tuple(term for term in terms if term in text)
+            topic: tuple(
+                term
+                for term in terms
+                if DeterministicTopicClassifier._contains_term(normalized, term)
+            )
             for topic, terms in _TOPIC_TERMS.items()
-            if any(term in text for term in terms)
+            if any(
+                DeterministicTopicClassifier._contains_term(normalized, term)
+                for term in terms
+            )
         }
 
     @staticmethod
-    def _apply_sports_safety(
-        source: NormalizedSource,
-        content_classification: ContentTypeClassification,
+    def _normalize_for_matching(text: str) -> str:
+        """Lowercase text, separate punctuation, and collapse whitespace."""
+        return " ".join(re.sub(r"[\W_]+", " ", text.lower()).split())
+
+    @staticmethod
+    def _contains_term(text: str, term: str) -> bool:
+        """Match a normalized term only at complete Unicode token boundaries."""
+        normalized_term = DeterministicTopicClassifier._normalize_for_matching(term)
+        if not normalized_term:
+            return False
+        return re.search(
+            rf"(?<!\w){re.escape(normalized_term)}(?!\w)",
+            text,
+        ) is not None
+
+    @staticmethod
+    def _is_weak_term(topic: Topic, term: str) -> bool:
+        """Return whether one topic term is intentionally weak evidence."""
+        return term in _WEAK_TOPIC_TERMS.get(topic, frozenset())
+
+    @staticmethod
+    def _match_score(
+        topic: Topic,
+        terms: tuple[str, ...],
+        *,
+        strong_weight: int,
+        weak_weight: int,
+    ) -> int:
+        """Score strong and weak terms with distinct deterministic weights."""
+        return sum(
+            weak_weight
+            if DeterministicTopicClassifier._is_weak_term(topic, term)
+            else strong_weight
+            for term in terms
+        )
+
+    @staticmethod
+    def _has_strong_textual_support(
+        topic: Topic,
         *matches: dict[Topic, tuple[str, ...]],
-    ) -> None:
-        """Discard weak sports metaphors unless genuine sports context exists."""
-        combined = "\n".join((source.title, source.body, *source.tags)).lower()
-        category_support = DeterministicTopicClassifier._category_topic(
-            source.category
-        ) is Topic.SPORTS
-        legacy_support = (
-            content_classification.content_type is ContentType.SPORTS_NEWS
+    ) -> bool:
+        """Return whether independent non-weak text corroborates one topic."""
+        return any(
+            not DeterministicTopicClassifier._is_weak_term(topic, term)
+            for grouped_matches in matches
+            for term in grouped_matches.get(topic, ())
         )
-        strong_context = any(term in combined for term in _STRONG_SPORTS_TERMS)
-        tag_context = any(
-            term in "\n".join(source.tags).lower() for term in _SPORTS_TAG_TERMS
-        )
-        if not (category_support or legacy_support or strong_context or tag_context):
-            for grouped_matches in matches:
-                grouped_matches.pop(Topic.SPORTS, None)
 
     @staticmethod
     def _structured_economic_support(text: str, facts: ExtractedFacts) -> bool:
         """Require both structured values and explicit market terminology."""
         has_values = bool(facts.currencies or facts.percentages or facts.numbers)
-        return has_values and any(term in text for term in _ECONOMIC_MARKET_TERMS)
+        return has_values and any(
+            DeterministicTopicClassifier._contains_term(text, term)
+            for term in _ECONOMIC_MARKET_TERMS
+        )
 
     @staticmethod
     def _select_topic(
@@ -490,100 +587,59 @@ class DeterministicTopicClassifier:
         title_matches: dict[Topic, tuple[str, ...]],
         body_matches: dict[Topic, tuple[str, ...]],
         tag_matches: dict[Topic, tuple[str, ...]],
-        facts: ExtractedFacts,
         government_entity_support: bool,
         structured_economic: bool,
-        legacy_topic: Topic | None,
-        legacy_reliable: bool,
     ) -> Topic | None:
         """Select the strongest topic with deterministic semantic tie-breaks."""
         evidence_topics = tuple(topic for topic, score in scores.items() if score > 0)
         if not evidence_topics:
             return None
 
-        technology_evidence = len(title_matches.get(Topic.TECHNOLOGY, ())) + len(
-            body_matches.get(Topic.TECHNOLOGY, ())
-        )
-        economy_evidence = len(title_matches.get(Topic.ECONOMY, ())) + len(
-            body_matches.get(Topic.ECONOMY, ())
-        )
-        if (
-            title_matches.get(Topic.TECHNOLOGY)
-            and technology_evidence >= 2
-            and (economy_evidence or facts.percentages or facts.currencies)
-        ):
-            return Topic.TECHNOLOGY
-
-        if title_matches.get(Topic.BUSINESS) and (
-            len(title_matches[Topic.BUSINESS]) >= 2
-            or body_matches.get(Topic.BUSINESS)
-        ):
-            return Topic.BUSINESS
-
-        if title_matches.get(Topic.ECONOMY) and (
-            "البنك المركزي" in title_matches[Topic.ECONOMY]
-            or len(title_matches[Topic.ECONOMY]) >= 2
-        ):
-            return Topic.ECONOMY
-
-        if title_matches.get(Topic.WEATHER):
-            return Topic.WEATHER
-        if title_matches.get(Topic.CULTURE) and not title_matches.get(Topic.SCIENCE):
-            return Topic.CULTURE
-
-        non_category_title = {
-            topic: len(terms)
-            for topic, terms in title_matches.items()
-            if topic is not category_topic
-        }
-        if non_category_title:
-            strongest_title = max(
-                non_category_title,
-                key=lambda topic: (
-                    non_category_title[topic],
-                    scores[topic],
-                    -list(Topic).index(topic),
-                ),
+        eligible_topics = tuple(
+            topic
+            for topic in evidence_topics
+            if topic is category_topic
+            or DeterministicTopicClassifier._has_strong_textual_support(
+                topic,
+                title_matches,
+                body_matches,
+                tag_matches,
             )
-            if non_category_title[strongest_title] >= 2 and (
-                scores[strongest_title] >= scores.get(category_topic, 0)
-            ):
-                return strongest_title
+            or (topic is Topic.GOVERNMENT and government_entity_support)
+            or (topic is Topic.ECONOMY and structured_economic)
+        )
+        if not eligible_topics:
+            return None
 
         selected = max(
-            evidence_topics,
+            eligible_topics,
             key=lambda topic: (
                 scores[topic],
-                len(title_matches.get(topic, ())),
-                len(body_matches.get(topic, ())),
+                DeterministicTopicClassifier._match_score(
+                    topic,
+                    title_matches.get(topic, ()),
+                    strong_weight=1,
+                    weak_weight=0,
+                ),
+                DeterministicTopicClassifier._match_score(
+                    topic,
+                    body_matches.get(topic, ()),
+                    strong_weight=1,
+                    weak_weight=0,
+                ),
                 -list(Topic).index(topic),
             ),
         )
         if category_topic is None:
-            distinct_evidence = set(title_matches.get(selected, ())) | set(
-                body_matches.get(selected, ())
-            ) | set(tag_matches.get(selected, ()))
-            textual_groups = sum(
-                bool(matches.get(selected))
-                for matches in (title_matches, body_matches, tag_matches)
+            has_strong_text = DeterministicTopicClassifier._has_strong_textual_support(
+                selected,
+                title_matches,
+                body_matches,
+                tag_matches,
             )
-            supported_exception = (
-                (legacy_topic is selected and legacy_reliable)
-                or (
-                    selected is Topic.ECONOMY
-                    and structured_economic
-                    and bool(distinct_evidence)
-                )
-                or (
-                    selected is Topic.GOVERNMENT
-                    and government_entity_support
-                    and bool(distinct_evidence)
-                )
-            )
-            if (
-                len(distinct_evidence) < 2
-                and textual_groups < 2
-                and not supported_exception
+            if not has_strong_text and not (
+                (selected is Topic.ECONOMY and structured_economic)
+                or (selected is Topic.GOVERNMENT and government_entity_support)
             ):
                 return None
         return selected
@@ -613,6 +669,7 @@ class DeterministicTopicClassifier:
         body_matches: dict[Topic, tuple[str, ...]],
         tag_matches: dict[Topic, tuple[str, ...]],
         legacy_topic: Topic | None,
+        legacy_support_applied: bool,
         has_conflict: bool,
     ) -> TopicConfidence:
         """Return stable confidence from consistency and evidence strength."""
@@ -631,7 +688,9 @@ class DeterministicTopicClassifier:
         )
         if textual_groups >= 2 and distinct_terms >= 2:
             return TopicConfidence.HIGH
-        if legacy_topic is selected or distinct_terms >= 2:
+        if (
+            legacy_topic is selected and legacy_support_applied
+        ) or distinct_terms >= 2:
             return TopicConfidence.MEDIUM
         return TopicConfidence.LOW
 

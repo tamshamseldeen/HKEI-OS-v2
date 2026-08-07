@@ -151,13 +151,11 @@
       "match": true,
       "reason_codes": [
         "SOURCE_CATEGORY_TOPIC_MATCH",
-        "TITLE_TOPIC_SIGNAL",
-        "BODY_TOPIC_SIGNAL"
+        "TITLE_TOPIC_SIGNAL"
       ],
       "supporting_signals": [
         "CATEGORY_CULTURE",
-        "TITLE_CULTURE_SIGNAL",
-        "BODY_CULTURE_SIGNAL"
+        "TITLE_CULTURE_SIGNAL"
       ],
       "warnings": []
     },
