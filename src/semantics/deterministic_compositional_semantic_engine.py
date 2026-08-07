@@ -113,6 +113,206 @@ _METHOD_INDICATORS = (
     "يساعد في",
     "تستخدم في",
 )
+_PUBLIC_INSTITUTION_PATTERNS = (
+    r"الهيئة القومية للأنفاق",
+    r"هيئة النقل(?: العامة| الوطنية)?",
+    r"هيئة حكومية",
+    r"وزارة النقل",
+    r"national transport authority",
+    r"public transport authority",
+)
+_PUBLIC_OPERATION_PATTERNS = (
+    r"بدء التشغيل(?: التجريبي)?",
+    r"التشغيل(?: التجريبي)?",
+    r"انطلاق(?: مرحلة)? التشغيل",
+    r"إطلاق",
+    r"تشغيل",
+    r"launch",
+    r"start(?:ing)? operation",
+)
+_PUBLIC_INFRASTRUCTURE_PATTERNS = (
+    r"(?:ل)?منظومة نقل(?: عامة)?",
+    r"(?:ل)?منظومة المونوريل",
+    r"نظام نقل(?: عام)?",
+    r"شبكة سكك حديدية",
+    r"مرفق عام",
+    r"مشروع بنية تحتية",
+    r"بنية تحتية للنقل",
+    r"قطار المونوريل",
+    r"المونوريل",
+    r"مترو(?: الأنفاق)?",
+    r"public transport system",
+    r"rail system",
+    r"public facility",
+    r"infrastructure project",
+    r"public service infrastructure",
+)
+_ECONOMIC_INDICATOR_PATTERNS = (
+    r"معدل البطالة",
+    r"البطالة",
+    r"التضخم",
+    r"النمو الاقتصادي",
+    r"نمو الأنشطة غير النفطية",
+    r"نمو القطاعات غير النفطية",
+    r"الناتج المحلي(?: الإجمالي)?",
+    r"سوق العمل",
+    r"مستويات الاستثمار",
+    r"الاستثمار",
+    r"أسعار الفائدة",
+    r"حجم التجارة",
+    r"المؤشرات المالية",
+    r"unemployment rate",
+    r"inflation",
+    r"economic growth",
+    r"gross domestic product",
+    r"GDP",
+    r"non-oil growth",
+    r"labor market",
+    r"investment levels",
+    r"interest rates",
+    r"trade volumes",
+    r"fiscal indicators",
+)
+_NEGOTIATION_PATTERNS = (
+    r"مفاوضات",
+    r"المحادثات",
+    r"محادثات",
+    r"اجتماعات(?: رفيعة المستوى)?",
+    r"لقاءات دبلوماسية",
+    r"negotiations",
+    r"talks",
+    r"diplomatic meetings",
+)
+_STATE_ACTOR_PATTERNS = (
+    r"دولتين",
+    r"الدولتين",
+    r"حكومتين",
+    r"الحكومتين",
+    r"الولايات المتحدة",
+    r"(?:و)?الصين",
+    r"واشنطن",
+    r"(?:و)?بكين",
+    r"دولتان",
+    r"حكومتان",
+    r"two states",
+    r"two governments",
+)
+_TRADE_NEGOTIATION_PATTERNS = (
+    r"التعرفة الجمركية",
+    r"الرسوم الجمركية",
+    r"القيود التجارية",
+    r"التوتر التجاري",
+    r"التبادل التجاري",
+    r"trade negotiations",
+    r"tariffs",
+    r"trade restrictions",
+    r"sanctions",
+)
+_RECOMMENDATION_ACTOR_PATTERNS = (
+    r"خبراء(?: الأمن السيبراني)?",
+    r"الخبراء",
+    r"جهة مختصة",
+    r"سلطة مختصة",
+    r"experts",
+    r"authority",
+)
+_AUDIENCE_PATTERNS = (
+    r"الشركات",
+    r"المؤسسات(?: المالية)?",
+    r"المواطنين",
+    r"المستخدمين",
+    r"الطلاب",
+    r"companies",
+    r"institutions",
+    r"users",
+)
+_DIRECTIVE_PATTERNS = (
+    r"بضرورة تحديث(?: برامج| أنظمة)? الحماية",
+    r"ضرورة تحديث(?: برامج| أنظمة)? الحماية",
+    r"تحديث برامج الحماية",
+    r"تطبيق أنظمة التشفير",
+    r"اتخاذ إجراءات",
+    r"يجب[^.؟!؛]{0,80}",
+    r"ينصح[^.؟!؛]{0,80}",
+    r"أوص[ىت][^.؟!؛]{0,80}",
+    r"update protection",
+    r"apply encryption",
+    r"take action",
+)
+_CYBERSECURITY_PATTERNS = (
+    r"الأمن السيبراني",
+    r"البرمجيات الخبيثة",
+    r"هجمات الفدية",
+    r"هجمات إلكترونية",
+    r"التشفير",
+    r"حماية البيانات",
+    r"برامج الحماية",
+    r"أنظمة الحماية",
+    r"اختراق",
+    r"ثغرات أمنية",
+    r"cybersecurity",
+    r"malware",
+    r"ransomware",
+    r"encryption",
+    r"data protection",
+)
+_WEATHER_CONDITION_PATTERNS = (
+    r"الأمطار الموسمية الغزيرة",
+    r"أمطار غزيرة",
+    r"عواصف",
+    r"درجات حرارة مرتفعة",
+    r"موجة حر",
+    r"رياح قوية",
+    r"heavy rain",
+    r"monsoon rain",
+    r"storms",
+    r"high temperatures",
+    r"heat wave",
+    r"strong winds",
+)
+_WEATHER_EVENT_PATTERNS = (
+    r"فيضانات",
+    r"سيول مفاجئة",
+    r"انزلاقات تربة",
+    r"انهيارات أرضية",
+    r"أضرار العاصفة",
+    r"flooding",
+    r"floods",
+    r"landslides",
+    r"flash floods",
+    r"storm damage",
+)
+_WEATHER_OUTCOME_PATTERNS = (
+    r"تشرّد",
+    r"تشريد",
+    r"إجلاء",
+    r"ضحايا",
+    r"إغلاق الطرق",
+    r"أضرار",
+    r"displacement",
+    r"evacuation",
+    r"casualties",
+    r"road closures",
+    r"damage",
+)
+_IMMEDIATE_WEATHER_EVENT_PATTERNS = (
+    r"تسببت",
+    r"أدت",
+    r"اجتاحت",
+    r"وقوع",
+    r"ضربت",
+    r"شهدت",
+    r"caused",
+    r"swept",
+    r"hit",
+)
+_SCIENCE_FRAMING_PATTERNS = (
+    r"دراسة علمية",
+    r"بحث علمي",
+    r"باحثون",
+    r"scientific study",
+    r"researchers",
+)
 
 
 class DeterministicCompositionalSemanticEngine:
@@ -159,13 +359,21 @@ class DeterministicCompositionalSemanticEngine:
             ordered_relationships,
             prefix="SECONDARY_DOMAIN_",
         )
+        format_support = self._relationship_supports(
+            ordered_relationships,
+            prefix="FORMAT_",
+        )
+        intent_support = self._relationship_supports(
+            ordered_relationships,
+            prefix="INTENT_",
+        )
         return CompositionalSemanticEvidence(
             relationships=ordered_relationships,
             primary_domain_candidates=primary,
             secondary_domain_candidates=secondary,
-            format_support=(),
+            format_support=format_support,
             format_suppression=(),
-            intent_support=(),
+            intent_support=intent_support,
             warnings=() if ordered_relationships else ("SEMANTIC_COMPOSITION_EMPTY",),
         )
 
@@ -183,6 +391,47 @@ class DeterministicCompositionalSemanticEngine:
         domain_objects = self._domain_object_matches(text)
         authorities = self._authority_matches(text, local_items)
         actors = self._actor_matches(text)
+
+        relationships.extend(
+            self._public_infrastructure_relationships(
+                text=text,
+                source_section=source_section,
+                sentence_index=sentence_index,
+                local_items=local_items,
+            )
+        )
+        relationships.extend(
+            self._economic_indicator_relationships(
+                text=text,
+                source_section=source_section,
+                sentence_index=sentence_index,
+                local_items=local_items,
+            )
+        )
+        relationships.extend(
+            self._international_negotiation_relationships(
+                text=text,
+                source_section=source_section,
+                sentence_index=sentence_index,
+                local_items=local_items,
+            )
+        )
+        relationships.extend(
+            self._recommendation_relationships(
+                text=text,
+                source_section=source_section,
+                sentence_index=sentence_index,
+                local_items=local_items,
+            )
+        )
+        relationships.extend(
+            self._weather_event_relationships(
+                text=text,
+                source_section=source_section,
+                sentence_index=sentence_index,
+                local_items=local_items,
+            )
+        )
 
         if actions and domain_objects:
             authority_objects = tuple(
@@ -321,6 +570,247 @@ class DeterministicCompositionalSemanticEngine:
                 )
             )
         return tuple(relationships)
+
+    @staticmethod
+    def _pattern_matches(
+        text: str,
+        patterns: tuple[str, ...],
+    ) -> tuple[re.Match[str], ...]:
+        """Return longest non-overlapping reusable pattern matches in order."""
+        candidates = sorted(
+            (
+                match
+                for pattern in patterns
+                for match in re.finditer(rf"(?<!\w){pattern}(?!\w)", text, re.IGNORECASE)
+            ),
+            key=lambda match: (match.start(), -len(match.group(0))),
+        )
+        accepted: list[re.Match[str]] = []
+        for candidate in candidates:
+            if any(
+                candidate.start() < existing.end()
+                and existing.start() < candidate.end()
+                for existing in accepted
+            ):
+                continue
+            accepted.append(candidate)
+        return tuple(accepted)
+
+    def _public_infrastructure_relationships(
+        self,
+        *,
+        text: str,
+        source_section: SourceSection,
+        sentence_index: int,
+        local_items: tuple[tuple[int, ContextualEvidenceItem], ...],
+    ) -> tuple[SemanticRelationship, ...]:
+        """Compose official operation of reusable public infrastructure."""
+        institutions = self._pattern_matches(text, _PUBLIC_INSTITUTION_PATTERNS)
+        operations = self._pattern_matches(text, _PUBLIC_OPERATION_PATTERNS)
+        infrastructure = self._pattern_matches(text, _PUBLIC_INFRASTRUCTURE_PATTERNS)
+        if not institutions or not operations or not infrastructure:
+            return ()
+        institution = institutions[0].group(0)
+        subject = infrastructure[0].group(0)
+        return (
+            SemanticRelationship(
+                source_section=source_section,
+                sentence_index=sentence_index,
+                relationship_type=(
+                    SemanticRelationshipType.INSTITUTION_BELONGS_TO_DOMAIN
+                ),
+                subject_component=SemanticComponent.AUTHORITY,
+                subject_text=institution,
+                object_component=SemanticComponent.PRIMARY_SUBJECT,
+                object_text=subject,
+                strength=EvidenceStrength.STRONG,
+                reason_code="PUBLIC_INFRASTRUCTURE_DOMAIN_COMPOSITION",
+                evidence_indexes=self._involved_indexes(
+                    local_items,
+                    institution,
+                    operations[0].group(0),
+                    subject,
+                    role=EvidenceRole.AUTHORITY,
+                ),
+                supports=("PRIMARY_DOMAIN_GOVERNMENT",),
+                suppresses=(),
+            ),
+        )
+
+    def _economic_indicator_relationships(
+        self,
+        *,
+        text: str,
+        source_section: SourceSection,
+        sentence_index: int,
+        local_items: tuple[tuple[int, ContextualEvidenceItem], ...],
+    ) -> tuple[SemanticRelationship, ...]:
+        """Compose macroeconomic indicators with the economy domain."""
+        indicators = self._pattern_matches(text, _ECONOMIC_INDICATOR_PATTERNS)
+        if len(indicators) == 1 and indicators[0].group(0).lower() in {
+            "الاستثمار",
+            "investment levels",
+        }:
+            economy_wide = re.search(
+                r"(?<!\w)(?:اقتصاد|اقتصادي|دول|سوق العمل|مالي|تقرير دولي)(?!\w)",
+                text,
+                re.IGNORECASE,
+            )
+            if economy_wide is None:
+                return ()
+        return tuple(
+            SemanticRelationship(
+                source_section=source_section,
+                sentence_index=sentence_index,
+                relationship_type=(
+                    SemanticRelationshipType.INDICATOR_DESCRIBES_DOMAIN
+                ),
+                subject_component=SemanticComponent.INDICATOR,
+                subject_text=indicator.group(0),
+                object_component=SemanticComponent.DOMAIN,
+                object_text="ECONOMY",
+                strength=EvidenceStrength.STRONG,
+                reason_code="ECONOMIC_INDICATOR_DOMAIN_COMPOSITION",
+                evidence_indexes=self._involved_indexes(
+                    local_items,
+                    indicator.group(0),
+                ),
+                supports=("PRIMARY_DOMAIN_ECONOMY",),
+                suppresses=(),
+            )
+            for indicator in indicators
+        )
+
+    def _international_negotiation_relationships(
+        self,
+        *,
+        text: str,
+        source_section: SourceSection,
+        sentence_index: int,
+        local_items: tuple[tuple[int, ContextualEvidenceItem], ...],
+    ) -> tuple[SemanticRelationship, ...]:
+        """Compose interstate negotiations without matching company talks."""
+        negotiations = self._pattern_matches(text, _NEGOTIATION_PATTERNS)
+        states = self._pattern_matches(text, _STATE_ACTOR_PATTERNS)
+        has_plural_state = any(
+            value.group(0).lower()
+            in {"دولتين", "الدولتين", "حكومتين", "الحكومتين", "دولتان", "حكومتان", "two states", "two governments"}
+            for value in states
+        )
+        if not negotiations or (len(states) < 2 and not has_plural_state):
+            return ()
+        trade = self._pattern_matches(text, _TRADE_NEGOTIATION_PATTERNS)
+        actor_text = " و".join(match.group(0) for match in states[:2])
+        supports = ("PRIMARY_DOMAIN_POLITICS",) + (
+            ("SECONDARY_DOMAIN_ECONOMY",) if trade else ()
+        )
+        return (
+            SemanticRelationship(
+                source_section=source_section,
+                sentence_index=sentence_index,
+                relationship_type=SemanticRelationshipType.ACTOR_PERFORMS_ACTION,
+                subject_component=SemanticComponent.ACTOR,
+                subject_text=actor_text,
+                object_component=SemanticComponent.ACTION,
+                object_text=negotiations[0].group(0),
+                strength=EvidenceStrength.STRONG,
+                reason_code="INTERNATIONAL_NEGOTIATION_DOMAIN_COMPOSITION",
+                evidence_indexes=self._involved_indexes(
+                    local_items,
+                    *(match.group(0) for match in states),
+                    negotiations[0].group(0),
+                    *(match.group(0) for match in trade),
+                ),
+                supports=supports,
+                suppresses=(),
+            ),
+        )
+
+    def _recommendation_relationships(
+        self,
+        *,
+        text: str,
+        source_section: SourceSection,
+        sentence_index: int,
+        local_items: tuple[tuple[int, ContextualEvidenceItem], ...],
+    ) -> tuple[SemanticRelationship, ...]:
+        """Compose cybersecurity guidance directed to an audience."""
+        actors = self._pattern_matches(text, _RECOMMENDATION_ACTOR_PATTERNS)
+        audiences = self._pattern_matches(text, _AUDIENCE_PATTERNS)
+        directives = self._pattern_matches(text, _DIRECTIVE_PATTERNS)
+        cyber = self._pattern_matches(text, _CYBERSECURITY_PATTERNS)
+        if not actors or not audiences or not directives or not cyber:
+            return ()
+        directive = directives[0].group(0)
+        audience = audiences[0].group(0)
+        return (
+            SemanticRelationship(
+                source_section=source_section,
+                sentence_index=sentence_index,
+                relationship_type=(
+                    SemanticRelationshipType.RECOMMENDATION_TARGETS_AUDIENCE
+                ),
+                subject_component=SemanticComponent.RECOMMENDED_ACTION,
+                subject_text=directive,
+                object_component=SemanticComponent.AFFECTED_AUDIENCE,
+                object_text=audience,
+                strength=EvidenceStrength.STRONG,
+                reason_code="RECOMMENDED_ACTION_AUDIENCE_COMPOSITION",
+                evidence_indexes=self._involved_indexes(
+                    local_items,
+                    actors[0].group(0),
+                    audience,
+                    directive,
+                    *(match.group(0) for match in cyber),
+                ),
+                supports=(
+                    "PRIMARY_DOMAIN_TECHNOLOGY",
+                    "FORMAT_SERVICE",
+                    "INTENT_KNOW_ACTION",
+                ),
+                suppresses=(),
+            ),
+        )
+
+    def _weather_event_relationships(
+        self,
+        *,
+        text: str,
+        source_section: SourceSection,
+        sentence_index: int,
+        local_items: tuple[tuple[int, ContextualEvidenceItem], ...],
+    ) -> tuple[SemanticRelationship, ...]:
+        """Compose immediate weather conditions with local hazardous events."""
+        conditions = self._pattern_matches(text, _WEATHER_CONDITION_PATTERNS)
+        events = self._pattern_matches(text, _WEATHER_EVENT_PATTERNS)
+        immediate = self._pattern_matches(text, _IMMEDIATE_WEATHER_EVENT_PATTERNS)
+        science_framing = self._pattern_matches(text, _SCIENCE_FRAMING_PATTERNS)
+        if not events or science_framing or (not conditions and not immediate):
+            return ()
+        outcomes = self._pattern_matches(text, _WEATHER_OUTCOME_PATTERNS)
+        condition = (conditions or events)[0].group(0)
+        outcome = (outcomes or events)[0].group(0)
+        return (
+            SemanticRelationship(
+                source_section=source_section,
+                sentence_index=sentence_index,
+                relationship_type=SemanticRelationshipType.EVENT_HAS_OUTCOME,
+                subject_component=SemanticComponent.EVENT,
+                subject_text=condition,
+                object_component=SemanticComponent.OUTCOME,
+                object_text=outcome,
+                strength=EvidenceStrength.STRONG,
+                reason_code="WEATHER_EVENT_DOMAIN_COMPOSITION",
+                evidence_indexes=self._involved_indexes(
+                    local_items,
+                    condition,
+                    *(match.group(0) for match in events),
+                    *(match.group(0) for match in outcomes),
+                ),
+                supports=("PRIMARY_DOMAIN_WEATHER",),
+                suppresses=(),
+            ),
+        )
 
     @staticmethod
     def _indicator_method_compositions(
@@ -503,6 +993,23 @@ class DeterministicCompositionalSemanticEngine:
         prefix: str,
     ) -> tuple[str, ...]:
         """Collect unique strong domain candidates in first-occurrence order."""
+        return tuple(
+            dict.fromkeys(
+                support
+                for relationship in relationships
+                if relationship.strength is EvidenceStrength.STRONG
+                for support in relationship.supports
+                if support.startswith(prefix)
+            )
+        )
+
+    @staticmethod
+    def _relationship_supports(
+        relationships: Iterable[SemanticRelationship],
+        *,
+        prefix: str,
+    ) -> tuple[str, ...]:
+        """Collect unique strong relationship supports for one namespace."""
         return tuple(
             dict.fromkeys(
                 support

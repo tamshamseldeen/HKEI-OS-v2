@@ -2,10 +2,13 @@
 
 from dataclasses import fields
 
+import pytest
+
 from src.evidence.contextual_evidence import ContextualEvidence
 from src.evidence.deterministic_contextual_evidence_engine import (
     DeterministicContextualEvidenceEngine,
 )
+from src.evidence.evidence_strength import EvidenceStrength
 from src.evidence.source_section import SourceSection
 from src.intake.normalized_source import NormalizedSource
 from src.semantics.compositional_semantic_evidence import (
@@ -297,3 +300,223 @@ def test_inputs_are_unchanged_and_equal_inputs_are_deterministic() -> None:
     assert first == second
     assert tuple(getattr(source, field.name) for field in fields(source)) == source_snapshot
     assert contextual.all_items == contextual_snapshot
+
+
+def test_public_infrastructure_composes_government_domain() -> None:
+    """Compose a public institution operating a generic transport system."""
+    evidence, _ = compose(
+        make_source(
+            body=(
+                "أعلنت الهيئة القومية للأنفاق بدء التشغيل التجريبي "
+                "لمنظومة نقل عامة جديدة"
+            )
+        )
+    )
+    item = next(
+        value
+        for value in evidence.relationships
+        if value.reason_code == "PUBLIC_INFRASTRUCTURE_DOMAIN_COMPOSITION"
+    )
+
+    assert item.relationship_type is (
+        SemanticRelationshipType.INSTITUTION_BELONGS_TO_DOMAIN
+    )
+    assert item.strength is EvidenceStrength.STRONG
+    assert item.supports == ("PRIMARY_DOMAIN_GOVERNMENT",)
+    assert "PRIMARY_DOMAIN_GOVERNMENT" in evidence.primary_domain_candidates
+
+
+def test_official_institution_alone_does_not_create_government_primary() -> None:
+    """Require operation and public infrastructure beyond an institution name."""
+    evidence, _ = compose(make_source(body="أصدرت الهيئة القومية للأنفاق بيانًا"))
+
+    assert "PRIMARY_DOMAIN_GOVERNMENT" not in evidence.primary_domain_candidates
+
+
+@pytest.mark.parametrize(
+    "body",
+    (
+        "سجل معدل البطالة تراجعًا مع تحسن سوق العمل",
+        "أكد تقرير دولي تسارع نمو الأنشطة غير النفطية والاستثمار",
+        "قال صندوق النقد الدولي إن النمو الاقتصادي يواصل التحسن",
+    ),
+)
+def test_macroeconomic_indicators_compose_economy(body: str) -> None:
+    """Treat reusable macroeconomic indicators as the primary subject."""
+    evidence, _ = compose(make_source(body=body))
+    items = [
+        item
+        for item in evidence.relationships
+        if item.relationship_type
+        is SemanticRelationshipType.INDICATOR_DESCRIBES_DOMAIN
+    ]
+
+    assert items
+    assert all(item.subject_component.value == "INDICATOR" for item in items)
+    assert all(item.object_component.value == "DOMAIN" for item in items)
+    assert all(item.reason_code == "ECONOMIC_INDICATOR_DOMAIN_COMPOSITION" for item in items)
+    assert evidence.primary_domain_candidates == ("PRIMARY_DOMAIN_ECONOMY",)
+    assert "PRIMARY_DOMAIN_GOVERNMENT" not in evidence.primary_domain_candidates
+
+
+def test_international_trade_negotiation_composes_primary_and_secondary() -> None:
+    """Compose interstate negotiation as politics with secondary economy."""
+    evidence, _ = compose(
+        make_source(
+            body=(
+                "بدأ مسؤولون من دولتين مفاوضات بشأن الرسوم الجمركية "
+                "والقيود التجارية"
+            )
+        )
+    )
+    item = next(
+        value
+        for value in evidence.relationships
+        if value.reason_code == "INTERNATIONAL_NEGOTIATION_DOMAIN_COMPOSITION"
+    )
+
+    assert item.relationship_type is SemanticRelationshipType.ACTOR_PERFORMS_ACTION
+    assert item.strength is EvidenceStrength.STRONG
+    assert item.supports == (
+        "PRIMARY_DOMAIN_POLITICS",
+        "SECONDARY_DOMAIN_ECONOMY",
+    )
+    assert evidence.primary_domain_candidates == ("PRIMARY_DOMAIN_POLITICS",)
+    assert evidence.secondary_domain_candidates == ("SECONDARY_DOMAIN_ECONOMY",)
+
+
+def test_generic_investment_without_economy_context_does_not_compose() -> None:
+    """Require economy-wide context for an otherwise generic investment term."""
+    evidence, _ = compose(make_source(body="أعلنت شركة الاستثمار في مصنع جديد"))
+
+    assert "PRIMARY_DOMAIN_ECONOMY" not in evidence.primary_domain_candidates
+
+
+def test_company_negotiation_does_not_create_politics() -> None:
+    """Reject ordinary commercial talks without state actors."""
+    evidence, _ = compose(
+        make_source(body="بدأت شركتان مفاوضات بشأن صفقة تجارية جديدة")
+    )
+
+    assert "PRIMARY_DOMAIN_POLITICS" not in evidence.primary_domain_candidates
+
+
+def test_cybersecurity_recommendation_composes_service_and_action_intent() -> None:
+    """Compose expert cybersecurity guidance directed at companies."""
+    evidence, _ = compose(
+        make_source(
+            body=(
+                "حذر خبراء الأمن السيبراني الشركات بضرورة تحديث "
+                "برامج الحماية"
+            )
+        )
+    )
+    item = relationship(
+        evidence,
+        SemanticRelationshipType.RECOMMENDATION_TARGETS_AUDIENCE,
+    )
+
+    assert item.reason_code == "RECOMMENDED_ACTION_AUDIENCE_COMPOSITION"
+    assert item.strength is EvidenceStrength.STRONG
+    assert item.object_text == "الشركات"
+    assert item.supports == (
+        "PRIMARY_DOMAIN_TECHNOLOGY",
+        "FORMAT_SERVICE",
+        "INTENT_KNOW_ACTION",
+    )
+    assert evidence.primary_domain_candidates == ("PRIMARY_DOMAIN_TECHNOLOGY",)
+    assert evidence.format_support == ("FORMAT_SERVICE",)
+    assert evidence.intent_support == ("INTENT_KNOW_ACTION",)
+
+
+def test_recommendation_requires_actor_audience_and_directive() -> None:
+    """Reject generic warnings and guidance without the full action structure."""
+    no_audience, _ = compose(
+        make_source(body="حذر خبراء الأمن السيبراني من هجمات الفدية")
+    )
+    no_directive, _ = compose(
+        make_source(body="حذر خبراء الأمن السيبراني الشركات من المخاطر")
+    )
+
+    for evidence in (no_audience, no_directive):
+        assert "FORMAT_SERVICE" not in evidence.format_support
+        assert "INTENT_KNOW_ACTION" not in evidence.intent_support
+        assert not any(
+            item.relationship_type
+            is SemanticRelationshipType.RECOMMENDATION_TARGETS_AUDIENCE
+            for item in evidence.relationships
+        )
+
+
+@pytest.mark.parametrize(
+    "body",
+    (
+        "تسببت الأمطار الموسمية الغزيرة في فيضانات وأعمال إجلاء",
+        "أدت أمطار غزيرة إلى سيول مفاجئة وإغلاق الطرق",
+        "ضربت عواصف قوية المنطقة وخلفت أضرار العاصفة",
+        "اجتاحت فيضانات القرى وأدت إلى إجلاء السكان",
+    ),
+)
+def test_immediate_weather_event_composes_weather(body: str) -> None:
+    """Compose immediate weather conditions with hazardous local events."""
+    evidence, _ = compose(make_source(body=body))
+    item = relationship(evidence, SemanticRelationshipType.EVENT_HAS_OUTCOME)
+
+    assert item.reason_code == "WEATHER_EVENT_DOMAIN_COMPOSITION"
+    assert item.strength is EvidenceStrength.STRONG
+    assert item.supports == ("PRIMARY_DOMAIN_WEATHER",)
+    assert evidence.primary_domain_candidates == ("PRIMARY_DOMAIN_WEATHER",)
+
+
+def test_scientific_rain_study_does_not_compose_weather_event() -> None:
+    """Keep scientific climate research outside immediate weather reporting."""
+    evidence, _ = compose(
+        make_source(body="نشرت جامعة دراسة علمية عن تغير أنماط هطول الأمطار")
+    )
+
+    assert "PRIMARY_DOMAIN_WEATHER" not in evidence.primary_domain_candidates
+    assert not any(
+        item.relationship_type is SemanticRelationshipType.EVENT_HAS_OUTCOME
+        for item in evidence.relationships
+    )
+
+
+def test_new_support_collections_are_deduplicated_in_first_order() -> None:
+    """Deduplicate repeated primary, secondary, format, and intent supports."""
+    source = make_source(
+        title="بدأت واشنطن وبكين مفاوضات بشأن الرسوم الجمركية",
+        body=(
+            "بدأ مسؤولون من دولتين مفاوضات بشأن القيود التجارية. "
+            "حذر خبراء الأمن السيبراني الشركات بضرورة تحديث برامج الحماية. "
+            "طالب الخبراء الشركات بضرورة تحديث برامج الحماية"
+        ),
+    )
+    evidence, _ = compose(source)
+
+    assert evidence.primary_domain_candidates == (
+        "PRIMARY_DOMAIN_POLITICS",
+        "PRIMARY_DOMAIN_TECHNOLOGY",
+    )
+    assert evidence.secondary_domain_candidates == ("SECONDARY_DOMAIN_ECONOMY",)
+    assert evidence.format_support == ("FORMAT_SERVICE",)
+    assert evidence.intent_support == ("INTENT_KNOW_ACTION",)
+
+
+def test_expanded_relationships_preserve_valid_local_provenance() -> None:
+    """Reference only real local contextual items when indexes are available."""
+    source = make_source(
+        body=(
+            "قال صندوق النقد إن النمو الاقتصادي تحسن. "
+            "حذر خبراء الأمن السيبراني الشركات بضرورة تحديث برامج الحماية. "
+            "تسببت الأمطار الموسمية الغزيرة في فيضانات وأعمال إجلاء"
+        )
+    )
+    evidence, contextual = compose(source)
+
+    assert evidence.relationships
+    for item in evidence.relationships:
+        for index in item.evidence_indexes:
+            assert 0 <= index < len(contextual.all_items)
+            contextual_item = contextual.all_items[index]
+            assert contextual_item.source_section is item.source_section
+            assert contextual_item.sentence_index == item.sentence_index
