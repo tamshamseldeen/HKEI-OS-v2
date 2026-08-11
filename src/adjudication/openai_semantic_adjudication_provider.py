@@ -54,6 +54,7 @@ Return concise rationale and evidence references. Do not provide chain-of-though
 Do not use external tools or external knowledge."""
 
 _SAFE_ERROR_DETAIL = re.compile(r"[A-Za-z0-9_.-]{1,128}").fullmatch
+_GPT_5_MODEL = re.compile(r"gpt-5(?:$|[.-])", re.IGNORECASE).match
 
 
 class OpenAISemanticAdjudicationProvider(SemanticAdjudicationProvider):
@@ -85,18 +86,20 @@ class OpenAISemanticAdjudicationProvider(SemanticAdjudicationProvider):
             raise SemanticAdjudicationProviderConfigurationError(
                 "semantic adjudication provider is disabled"
             )
+        request_parameters = {
+            "model": self.runtime_context.model,
+            "instructions": _INSTRUCTIONS,
+            "input": self._provider_input(request),
+            "max_output_tokens": self.runtime_context.max_output_tokens,
+            "text": {"format": self._structured_output_format(request)},
+            "store": False,
+            "tools": [],
+            "timeout": self.runtime_context.timeout_seconds,
+        }
+        if self._supports_temperature(self.runtime_context.model):
+            request_parameters["temperature"] = self.runtime_context.temperature
         try:
-            response = self.client.responses.create(
-                model=self.runtime_context.model,
-                instructions=_INSTRUCTIONS,
-                input=self._provider_input(request),
-                max_output_tokens=self.runtime_context.max_output_tokens,
-                temperature=self.runtime_context.temperature,
-                text={"format": self._structured_output_format(request)},
-                store=False,
-                tools=[],
-                timeout=self.runtime_context.timeout_seconds,
-            )
+            response = self.client.responses.create(**request_parameters)
         except APITimeoutError:
             raise SemanticAdjudicationProviderTimeoutError(
                 "OpenAI request timed out"
@@ -350,6 +353,12 @@ class OpenAISemanticAdjudicationProvider(SemanticAdjudicationProvider):
             if isinstance(value, str) and _SAFE_ERROR_DETAIL(value):
                 details.append(f"{name}={value}")
         return f"{message} {'; '.join(details)}" if details else message
+
+    @staticmethod
+    def _supports_temperature(model: str) -> bool:
+        # GPT-5 family requests reject configurable temperature. Unknown model
+        # names retain the adapter's established forwarding behavior.
+        return _GPT_5_MODEL(model.strip()) is None
 
     @staticmethod
     def _value(value: Any, name: str, default: Any = None) -> Any:
