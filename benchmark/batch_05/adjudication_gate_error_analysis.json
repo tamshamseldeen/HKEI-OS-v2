@@ -1,0 +1,321 @@
+{
+  "cases_analyzed": 6,
+  "topic_false_negatives": [
+    "046",
+    "050"
+  ],
+  "format_false_negatives": [
+    "044",
+    "045",
+    "047"
+  ],
+  "format_false_positives": [
+    "048"
+  ],
+  "failure_class_counts": {
+    "EVENT_DOMAIN_AMBIGUITY_NOT_EXPOSED": 1,
+    "EXPLAINER_SIGNAL_NOT_AVAILABLE": 1,
+    "FORMAT_FALSE_NEGATIVE": 3,
+    "FORMAT_FALSE_POSITIVE": 1,
+    "GATE_POLICY_TOO_STRICT": 1,
+    "GATE_SIGNAL_AVAILABLE_BUT_UNUSED": 1,
+    "GATE_SIGNAL_NOT_AVAILABLE": 4,
+    "INSTITUTIONAL_CONFLICT_SIGNAL_NOT_AVAILABLE": 1,
+    "METHOD_SUBJECT_AMBIGUITY_NOT_EXPOSED": 1,
+    "PREDICTION_FALSE_ANALYSIS_TRIGGER": 1,
+    "SPECIFIC_TOPIC_FALSE_CONFIDENCE": 2,
+    "TOPIC_FALSE_NEGATIVE": 2,
+    "TOPIC_MEDIUM_CONFIDENCE_AMBIGUITY": 1,
+    "UNCERTAINTY_FALSE_ANALYSIS_TRIGGER": 1
+  },
+  "primary_owner_counts": {
+    "CONTEXTUAL_EVIDENCE": 3,
+    "FORMAT_CLASSIFIER": 1,
+    "GATE": 1,
+    "SHARED_UPSTREAM_AND_GATE": 1
+  },
+  "signals_available_but_unused": [
+    "046"
+  ],
+  "signals_not_available": [
+    "044",
+    "045",
+    "047",
+    "050"
+  ],
+  "counterfactual_signal_analysis": {
+    "MEDIUM_TOPIC_CONFIDENCE_WITHOUT_PRIMARY_DOMAIN": {
+      "cases_triggered": 1,
+      "topic_mismatches_triggered": 1,
+      "format_mismatches_triggered": 1,
+      "matched_cases_triggered": 0
+    },
+    "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN": {
+      "cases_triggered": 3,
+      "topic_mismatches_triggered": 3,
+      "format_mismatches_triggered": 1,
+      "matched_cases_triggered": 0
+    },
+    "CONTEXTUAL_ANALYSIS_SUPPORT_WITH_FORMAT_MISMATCH": {
+      "cases_triggered": 1,
+      "topic_mismatches_triggered": 1,
+      "format_mismatches_triggered": 1,
+      "matched_cases_triggered": 0
+    },
+    "FORMAT_STRUCTURE_ABSENT": {
+      "cases_triggered": 3,
+      "topic_mismatches_triggered": 3,
+      "format_mismatches_triggered": 3,
+      "matched_cases_triggered": 0
+    },
+    "PREDICTION_ONLY_ANALYSIS_SUPPORT": {
+      "cases_triggered": 1,
+      "topic_mismatches_triggered": 1,
+      "format_mismatches_triggered": 0,
+      "matched_cases_triggered": 0
+    },
+    "EVENT_EVIDENCE_WITHOUT_DOMAIN_RESOLUTION": {
+      "cases_triggered": 4,
+      "topic_mismatches_triggered": 4,
+      "format_mismatches_triggered": 1,
+      "matched_cases_triggered": 0
+    }
+  },
+  "control": {
+    "id": "049",
+    "gate_error_type": "CONTROL_CORRECT",
+    "observed_scope": "NOT_REQUIRED",
+    "trigger_signals": [],
+    "available_structured_signals": [
+      "TOPIC_ECONOMY_HIGH_CONFIDENCE",
+      "TOPIC_ECONOMY",
+      "INDICATOR_DESCRIBES_DOMAIN",
+      "PRIMARY_DOMAIN_ECONOMY",
+      "STANDARD_NEWS_MEDIUM_CONFIDENCE"
+    ],
+    "missing_structured_signals": [],
+    "failure_classes": [
+      "CONTROL_CORRECTLY_AVOIDED"
+    ],
+    "primary_owner": "GATE",
+    "counterfactual_signals": [],
+    "architectural_observations": [
+      "Title/body signals, structured economic values, contextual topic support, a semantic relationship, and PRIMARY_DOMAIN_ECONOMY aligned with the HIGH-confidence topic.",
+      "No ambiguity or format-conflict trigger was present, so NOT_REQUIRED correctly preserved deterministic sufficiency."
+    ]
+  },
+  "cases": [
+    {
+      "id": "044",
+      "gate_error_type": "FORMAT_FALSE_NEGATIVE",
+      "observed_scope": "TOPIC_REQUIRED",
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "FORMAT_LOW_CONFIDENCE"
+      ],
+      "available_structured_signals": [
+        "FORMAT_LOW_CONFIDENCE",
+        "STANDARD_NEWS_FALLBACK"
+      ],
+      "missing_structured_signals": [
+        "CAUSE_CONSTRAINT_RESOURCE_DEPLETION_IMPACT_STRUCTURE",
+        "FORMAT_ANALYSIS_SUPPORT"
+      ],
+      "failure_classes": [
+        "FORMAT_FALSE_NEGATIVE",
+        "GATE_SIGNAL_NOT_AVAILABLE"
+      ],
+      "primary_owner": "CONTEXTUAL_EVIDENCE",
+      "counterfactual_signals": [
+        "FORMAT_STRUCTURE_ABSENT"
+      ],
+      "architectural_observations": [
+        "Neither contextual nor semantic evidence exposed cause, constraint, resource depletion, impact, consequence, interpretation, or FORMAT_ANALYSIS support.",
+        "Low format confidence existed, but the missing ANALYSIS distinction was absent upstream; the gate cannot infer it from raw prose without becoming a classifier."
+      ]
+    },
+    {
+      "id": "045",
+      "gate_error_type": "FORMAT_FALSE_NEGATIVE",
+      "observed_scope": "TOPIC_REQUIRED",
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "FORMAT_LOW_CONFIDENCE"
+      ],
+      "available_structured_signals": [
+        "FORMAT_LOW_CONFIDENCE",
+        "STANDARD_NEWS_FALLBACK"
+      ],
+      "missing_structured_signals": [
+        "EXPLANATORY_FRAMING",
+        "MECHANISM_OR_TRANSFORMATION_STRUCTURE",
+        "FORMAT_EXPLAINER_SUPPORT"
+      ],
+      "failure_classes": [
+        "FORMAT_FALSE_NEGATIVE",
+        "GATE_SIGNAL_NOT_AVAILABLE",
+        "EXPLAINER_SIGNAL_NOT_AVAILABLE"
+      ],
+      "primary_owner": "FORMAT_CLASSIFIER",
+      "counterfactual_signals": [
+        "FORMAT_STRUCTURE_ABSENT"
+      ],
+      "architectural_observations": [
+        "No structured output exposed explanatory framing, mechanism, organizational transformation, or how/why structure.",
+        "EXPLAINER_STRUCTURE_UNRESOLVED could not be emitted because no contextual or semantic EXPLAINER target existed upstream."
+      ]
+    },
+    {
+      "id": "046",
+      "gate_error_type": "TOPIC_FALSE_NEGATIVE",
+      "observed_scope": "FORMAT_REQUIRED",
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
+        "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+      ],
+      "available_structured_signals": [
+        "TOPIC_TECHNOLOGY",
+        "TOPIC_MEDIUM_CONFIDENCE",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "ACTION_TARGETS_OBJECT"
+      ],
+      "missing_structured_signals": [
+        "METHOD_SUBJECT_RELATIONSHIP",
+        "SCIENCE_OR_BIOLOGICAL_PRIMARY_DOMAIN"
+      ],
+      "failure_classes": [
+        "TOPIC_FALSE_NEGATIVE",
+        "GATE_POLICY_TOO_STRICT",
+        "GATE_SIGNAL_AVAILABLE_BUT_UNUSED",
+        "TOPIC_MEDIUM_CONFIDENCE_AMBIGUITY",
+        "SPECIFIC_TOPIC_FALSE_CONFIDENCE",
+        "METHOD_SUBJECT_AMBIGUITY_NOT_EXPOSED"
+      ],
+      "primary_owner": "SHARED_UPSTREAM_AND_GATE",
+      "counterfactual_signals": [
+        "MEDIUM_TOPIC_CONFIDENCE_WITHOUT_PRIMARY_DOMAIN",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "architectural_observations": [
+        "MEDIUM topic confidence plus no primary domain was a generic unresolved-domain signal that the gate recorded but did not use to request topic adjudication.",
+        "The particular method-versus-subject distinction was not structurally represented: ACTION_TARGETS_OBJECT did not identify a method/tool component or SCIENCE domain. A generic gate can identify unresolved domain ambiguity, but cannot select SCIENCE."
+      ]
+    },
+    {
+      "id": "047",
+      "gate_error_type": "FORMAT_FALSE_NEGATIVE",
+      "observed_scope": "TOPIC_REQUIRED",
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "available_structured_signals": [
+        "CLAIM_UNCERTAIN",
+        "STANDARD_NEWS_FALLBACK"
+      ],
+      "missing_structured_signals": [
+        "INSTITUTIONAL_CONFLICT",
+        "POLICY_OR_LEGAL_IMPLICATION",
+        "CAUSE_CONSEQUENCE_OR_INTERPRETATION",
+        "FORMAT_ANALYSIS_SUPPORT"
+      ],
+      "failure_classes": [
+        "FORMAT_FALSE_NEGATIVE",
+        "GATE_SIGNAL_NOT_AVAILABLE",
+        "INSTITUTIONAL_CONFLICT_SIGNAL_NOT_AVAILABLE"
+      ],
+      "primary_owner": "CONTEXTUAL_EVIDENCE",
+      "counterfactual_signals": [
+        "FORMAT_STRUCTURE_ABSENT"
+      ],
+      "architectural_observations": [
+        "Only uncertainty was exposed contextually; no relationship, primary domain, format support, institutional conflict, policy/legal implication, or interpretive structure was available.",
+        "The ANALYSIS distinction is missing upstream rather than ignored by the gate."
+      ]
+    },
+    {
+      "id": "048",
+      "gate_error_type": "FORMAT_FALSE_POSITIVE",
+      "observed_scope": "TOPIC_AND_FORMAT_REQUIRED",
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
+        "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+      ],
+      "available_structured_signals": [
+        "CLAIM_UNCERTAIN",
+        "FORMAT_ANALYSIS",
+        "INTENT_UNDERSTAND_IMPACT",
+        "SOURCE_TOO_THIN_FOR_ANALYSIS",
+        "STANDARD_NEWS_MEDIUM_CONFIDENCE"
+      ],
+      "missing_structured_signals": [
+        "PRIMARY_SEMANTIC_DOMAIN",
+        "SEMANTIC_FORMAT_SUPPORT"
+      ],
+      "failure_classes": [
+        "FORMAT_FALSE_POSITIVE",
+        "PREDICTION_FALSE_ANALYSIS_TRIGGER",
+        "UNCERTAINTY_FALSE_ANALYSIS_TRIGGER"
+      ],
+      "primary_owner": "GATE",
+      "counterfactual_signals": [
+        "PREDICTION_ONLY_ANALYSIS_SUPPORT"
+      ],
+      "architectural_observations": [
+        "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK and CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED caused the format request.",
+        "The persisted diagnosis attributes contextual FORMAT_ANALYSIS to prediction, uncertainty, future possibility, and an intelligence estimate, while SOURCE_TOO_THIN_FOR_ANALYSIS shows the final classifier correctly rejected that proxy."
+      ]
+    },
+    {
+      "id": "050",
+      "gate_error_type": "TOPIC_FALSE_NEGATIVE",
+      "observed_scope": "NOT_REQUIRED",
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "FORMAT_LOW_CONFIDENCE"
+      ],
+      "available_structured_signals": [
+        "TOPIC_EDUCATION_HIGH_CONFIDENCE",
+        "CLAIM_ATTRIBUTED",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "missing_structured_signals": [
+        "VIOLENT_INCIDENT_EVENT",
+        "FATALITIES_OR_INJURIES",
+        "POLICE_RESPONSE_OR_INVESTIGATION",
+        "CRIME_PRIMARY_DOMAIN"
+      ],
+      "failure_classes": [
+        "TOPIC_FALSE_NEGATIVE",
+        "GATE_SIGNAL_NOT_AVAILABLE",
+        "SPECIFIC_TOPIC_FALSE_CONFIDENCE",
+        "EVENT_DOMAIN_AMBIGUITY_NOT_EXPOSED"
+      ],
+      "primary_owner": "CONTEXTUAL_EVIDENCE",
+      "counterfactual_signals": [
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
+        "EVENT_EVIDENCE_WITHOUT_DOMAIN_RESOLUTION"
+      ],
+      "architectural_observations": [
+        "The final topic was specific and HIGH confidence, while contextual evidence exposed attribution only and semantic evidence exposed no event relationship or primary domain.",
+        "Violence, casualties, police response, investigation, and CRIME were absent from current structured evidence. Detecting them from text belongs upstream or to the adjudicator, not the gate."
+      ]
+    }
+  ],
+  "architectural_principle": "The gate must not become a second classifier. Reading raw text, recognizing new domain vocabulary, interpreting event semantics, or deciding whether prose is analytical belongs upstream or to the adjudicator.",
+  "gate_precision_recall_conclusion": "Favor recall enough to surface unresolved deterministic errors, but constrain it with structured ambiguity evidence because false positives incur provider cost; Batch 05 supports a measured recall increase, not unconditional low-confidence or contextual-analysis triggers.",
+  "recommended_next_step_category": "D"
+}
