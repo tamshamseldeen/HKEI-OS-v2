@@ -1,14 +1,14 @@
 {
   "batch": "batch_05",
   "case_count": 10,
-  "topic_true_positives": 8,
+  "topic_true_positives": 9,
   "topic_false_positives": 0,
   "topic_true_negatives": 1,
-  "topic_false_negatives": 1,
+  "topic_false_negatives": 0,
   "topic_precision": 100.0,
-  "topic_recall": 88.88888888888889,
+  "topic_recall": 100.0,
   "topic_specificity": 100.0,
-  "topic_accuracy": 90.0,
+  "topic_accuracy": 100.0,
   "format_true_positives": 4,
   "format_false_positives": 0,
   "format_true_negatives": 6,
@@ -17,11 +17,11 @@
   "format_recall": 100.0,
   "format_specificity": 100.0,
   "format_accuracy": 100.0,
-  "provider_call_cases": 8,
-  "provider_call_rate": 80.0,
+  "provider_call_cases": 9,
+  "provider_call_rate": 90.0,
   "correctly_avoided_call_cases": 1,
   "unnecessary_provider_call_cases": 0,
-  "missed_adjudication_cases": 1,
+  "missed_adjudication_cases": 0,
   "topic_captured_cases": [
     "041",
     "042",
@@ -30,7 +30,8 @@
     "045",
     "046",
     "047",
-    "048"
+    "048",
+    "050"
   ],
   "format_captured_cases": [
     "044",
@@ -39,8 +40,8 @@
     "047"
   ],
   "scope_distribution": {
-    "NOT_REQUIRED": 2,
-    "TOPIC_REQUIRED": 4,
+    "NOT_REQUIRED": 1,
+    "TOPIC_REQUIRED": 5,
     "FORMAT_REQUIRED": 0,
     "TOPIC_AND_FORMAT_REQUIRED": 4
   },
@@ -377,24 +378,25 @@
       "format_match": true,
       "intent_match": true,
       "full_match": false,
-      "gate_scope": "NOT_REQUIRED",
-      "topic_required": false,
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
       "format_required": false,
       "trigger_signals": [
         "NO_PRIMARY_SEMANTIC_DOMAIN",
         "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "UNRESOLVED_EVIDENCE_STACK_STRICT",
         "FORMAT_LOW_CONFIDENCE"
       ],
       "reason_codes": [
-        "DETERMINISTIC_RESULT_SUFFICIENT"
+        "TOPIC_ADJUDICATION_REQUIRED"
       ],
       "warnings": [],
       "topic_should_adjudicate": true,
       "format_should_adjudicate": false,
-      "topic_gate_correct": false,
+      "topic_gate_correct": true,
       "format_gate_correct": true,
       "topic_false_positive": false,
-      "topic_false_negative": true,
+      "topic_false_negative": false,
       "format_false_positive": false,
       "format_false_negative": false
     }
