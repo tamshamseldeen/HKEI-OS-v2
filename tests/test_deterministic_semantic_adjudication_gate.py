@@ -433,6 +433,164 @@ def test_semantic_analysis_support_preserves_conservative_format_behavior() -> N
     assert result.format_required is True
 
 
+def test_public_safety_hint_requires_topic_without_selecting_topic() -> None:
+    topic_result = topic(Topic.EDUCATION, TopicConfidence.MEDIUM)
+    result = evaluate(
+        topic_result=topic_result,
+        contextual=context(
+            contextual_item("ADJUDICATION_EVENT_PUBLIC_SAFETY")
+        ),
+    )
+    assert "UNRESOLVED_PUBLIC_SAFETY_EVENT" in result.trigger_signals
+    assert result.topic_required is True
+    assert result.scope is AdjudicationScope.TOPIC_REQUIRED
+    assert topic_result.topic is Topic.EDUCATION
+
+
+@pytest.mark.parametrize(
+    "hint",
+    (
+        "ADJUDICATION_EVENT_PUBLIC_SAFETY",
+        "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT",
+    ),
+)
+def test_hints_preserve_specific_high_confidence_topic_safety(
+    hint: str,
+) -> None:
+    result = evaluate(
+        topic_result=topic(Topic.EDUCATION, TopicConfidence.HIGH),
+        contextual=context(contextual_item(hint)),
+    )
+    assert result.topic_required is False
+    assert result.scope is AdjudicationScope.NOT_REQUIRED
+
+
+def test_institutional_policy_conflict_hint_can_require_topic() -> None:
+    result = evaluate(
+        topic_result=topic(
+            Topic.GENERAL,
+            TopicConfidence.MEDIUM,
+            reasons=("EXPLICIT_GENERAL_SUPPORT",),
+            signals=("GENERAL_SCOPE_CONFIRMED",),
+        ),
+        contextual=context(
+            contextual_item(
+                "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT"
+            )
+        ),
+    )
+    assert "UNRESOLVED_INSTITUTIONAL_POLICY_CONFLICT" in (
+        result.trigger_signals
+    )
+    assert result.topic_required is True
+
+
+@pytest.mark.parametrize(
+    ("hint", "expected_trigger", "final_format"),
+    (
+        (
+            "ADJUDICATION_ANALYTICAL_CONSTRAINT",
+            "UNRESOLVED_ANALYTICAL_CONSTRAINT",
+            EditorialFormat.ANALYSIS,
+        ),
+        (
+            "ADJUDICATION_EXPLANATORY_TRANSFORMATION",
+            "UNRESOLVED_EXPLANATORY_TRANSFORMATION",
+            EditorialFormat.EXPLAINER,
+        ),
+    ),
+)
+def test_structural_format_hint_requires_adjudication_without_selecting_label(
+    hint: str,
+    expected_trigger: str,
+    final_format: EditorialFormat,
+) -> None:
+    format_result = editorial_format(
+        EditorialFormat.STANDARD_NEWS,
+        EditorialFormatConfidence.MEDIUM,
+    )
+    result = evaluate(
+        semantic=semantics(primary=("PRIMARY_DOMAIN_ECONOMY",)),
+        format_result=format_result,
+        contextual=context(contextual_item(hint)),
+    )
+    assert expected_trigger in result.trigger_signals
+    assert result.format_required is True
+    assert result.scope is AdjudicationScope.FORMAT_REQUIRED
+    assert format_result.editorial_format is not final_format
+
+
+def test_institutional_conflict_can_require_standard_news_format() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.POLITICS, TopicConfidence.HIGH),
+        semantic=semantics(primary=("PRIMARY_DOMAIN_POLITICS",)),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.MEDIUM,
+        ),
+        contextual=context(
+            contextual_item(
+                "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT"
+            )
+        ),
+    )
+    assert result.topic_required is False
+    assert result.format_required is True
+    assert result.scope is AdjudicationScope.FORMAT_REQUIRED
+
+
+@pytest.mark.parametrize(
+    "hint",
+    (
+        "ADJUDICATION_ANALYTICAL_CONSTRAINT",
+        "ADJUDICATION_EXPLANATORY_TRANSFORMATION",
+        "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT",
+    ),
+)
+def test_structural_hints_do_not_override_high_confidence_format(
+    hint: str,
+) -> None:
+    result = evaluate(
+        semantic=semantics(primary=("PRIMARY_DOMAIN_ECONOMY",)),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.HIGH,
+        ),
+        contextual=context(contextual_item(hint)),
+    )
+    assert result.format_required is False
+
+
+def test_new_hint_trigger_order_and_deduplication_are_exact() -> None:
+    duplicated = contextual_item(
+        "ADJUDICATION_EVENT_PUBLIC_SAFETY",
+        "ADJUDICATION_EVENT_PUBLIC_SAFETY",
+        "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT",
+        "ADJUDICATION_ANALYTICAL_CONSTRAINT",
+        "ADJUDICATION_EXPLANATORY_TRANSFORMATION",
+    )
+    result = evaluate(
+        topic_result=topic(Topic.HEALTH, TopicConfidence.LOW),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.LOW,
+        ),
+        contextual=context(duplicated, duplicated),
+    )
+    assert result.trigger_signals == (
+        "TOPIC_LOW_CONFIDENCE",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
+        "UNRESOLVED_PUBLIC_SAFETY_EVENT",
+        "UNRESOLVED_INSTITUTIONAL_POLICY_CONFLICT",
+        "FORMAT_LOW_CONFIDENCE",
+        "UNRESOLVED_ANALYTICAL_CONSTRAINT",
+        "UNRESOLVED_EXPLANATORY_TRANSFORMATION",
+    )
+    assert len(result.trigger_signals) == len(set(result.trigger_signals))
+
+
 def test_unpromoted_contextual_format_support_requires_format() -> None:
     result = evaluate(
         format_result=editorial_format(

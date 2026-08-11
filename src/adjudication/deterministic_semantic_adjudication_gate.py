@@ -74,6 +74,13 @@ class DeterministicSemanticAdjudicationGate:
             and no_primary_domain
             and not self._strong_primary_domains(semantic_evidence)
         )
+        unresolved_public_safety_event = (
+            "ADJUDICATION_EVENT_PUBLIC_SAFETY" in contextual_supports
+        )
+        unresolved_institutional_policy_conflict = (
+            "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT"
+            in contextual_supports
+        )
 
         format_low_confidence = (
             format_classification.confidence is EditorialFormatConfidence.LOW
@@ -109,6 +116,13 @@ class DeterministicSemanticAdjudicationGate:
             for target in effective_contextual_format_targets
         )
         format_conflict = self._has_format_conflict(semantic_evidence)
+        unresolved_analytical_constraint = (
+            "ADJUDICATION_ANALYTICAL_CONSTRAINT" in contextual_supports
+        )
+        unresolved_explanatory_transformation = (
+            "ADJUDICATION_EXPLANATORY_TRANSFORMATION"
+            in contextual_supports
+        )
 
         trigger_signals: list[str] = []
         for present, signal in (
@@ -126,6 +140,14 @@ class DeterministicSemanticAdjudicationGate:
                 specific_topic_with_unresolved_domain,
                 "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
             ),
+            (
+                unresolved_public_safety_event,
+                "UNRESOLVED_PUBLIC_SAFETY_EVENT",
+            ),
+            (
+                unresolved_institutional_policy_conflict,
+                "UNRESOLVED_INSTITUTIONAL_POLICY_CONFLICT",
+            ),
             (format_low_confidence, "FORMAT_LOW_CONFIDENCE"),
             (
                 analytical_news_fallback,
@@ -137,6 +159,14 @@ class DeterministicSemanticAdjudicationGate:
                 "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED",
             ),
             (format_conflict, "FORMAT_CONFLICT"),
+            (
+                unresolved_analytical_constraint,
+                "UNRESOLVED_ANALYTICAL_CONSTRAINT",
+            ),
+            (
+                unresolved_explanatory_transformation,
+                "UNRESOLVED_EXPLANATORY_TRANSFORMATION",
+            ),
         ):
             if present and signal not in trigger_signals:
                 trigger_signals.append(signal)
@@ -166,6 +196,27 @@ class DeterministicSemanticAdjudicationGate:
                     or method_subject_ambiguity
                 )
             )
+            or (
+                unresolved_public_safety_event
+                and not self._is_protected_high_confidence_topic(
+                    topic_classification
+                )
+                and (
+                    topic_classification.confidence is not TopicConfidence.HIGH
+                    or no_primary_domain
+                )
+            )
+            or (
+                unresolved_institutional_policy_conflict
+                and not self._is_protected_high_confidence_topic(
+                    topic_classification
+                )
+                and (
+                    topic_classification.confidence is not TopicConfidence.HIGH
+                    or topic_classification.topic is Topic.GENERAL
+                    or no_primary_domain
+                )
+            )
         )
         format_required = (
             format_conflict
@@ -177,6 +228,27 @@ class DeterministicSemanticAdjudicationGate:
             or analytical_news_fallback
             or (
                 explainer_unresolved
+                and format_classification.confidence
+                is not EditorialFormatConfidence.HIGH
+            )
+            or (
+                unresolved_analytical_constraint
+                and format_classification.editorial_format
+                is not EditorialFormat.ANALYSIS
+                and format_classification.confidence
+                is not EditorialFormatConfidence.HIGH
+            )
+            or (
+                unresolved_explanatory_transformation
+                and format_classification.editorial_format
+                is not EditorialFormat.EXPLAINER
+                and format_classification.confidence
+                is not EditorialFormatConfidence.HIGH
+            )
+            or (
+                unresolved_institutional_policy_conflict
+                and format_classification.editorial_format
+                is EditorialFormat.STANDARD_NEWS
                 and format_classification.confidence
                 is not EditorialFormatConfidence.HIGH
             )
@@ -207,6 +279,15 @@ class DeterministicSemanticAdjudicationGate:
             token in indicator
             for indicator in indicators
             for token in ("FALLBACK", "INSUFFICIENT", "DEFAULT_GENERAL")
+        )
+
+    @staticmethod
+    def _is_protected_high_confidence_topic(
+        classification: TopicClassification,
+    ) -> bool:
+        return (
+            classification.topic is not Topic.GENERAL
+            and classification.confidence is TopicConfidence.HIGH
         )
 
     @staticmethod

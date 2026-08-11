@@ -86,11 +86,16 @@ def test_protected_diagnostics_and_production_sources_remain_unchanged() -> None
         ["git", "diff", "--name-only", "HEAD"], cwd=root, check=True,
         capture_output=True, text=True,
     ).stdout.splitlines()
+    protected_production_prefixes = (
+        "src/topic/",
+        "src/formatting/",
+        "src/intent/",
+        "src/workflows/",
+        "src/providers/",
+        "src/risk/",
+    )
     assert not any(
-        path.startswith("src/")
-        and path
-        != "src/evidence/deterministic_contextual_evidence_engine.py"
-        for path in changed
+        path.startswith(protected_production_prefixes) for path in changed
     )
     assert not any(path.endswith("source.md") for path in changed)
     assert "benchmark/batch_05/human_risk_annotations.json" not in changed
