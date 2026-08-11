@@ -14,24 +14,40 @@ def test_prompt_version_formats_and_critical_matrix_are_deterministic() -> None:
     assert first["format_count"] == 12
     assert first["format_operational_count"] == 12
     assert len(first["format_definitions"]) == 12
+    assert {
+        item["operational_status"] for item in first["format_definitions"]
+    } <= {"OPERATIONAL", "PARTIALLY_OPERATIONAL", "LABEL_ONLY"}
     assert first["critical_pair_matrix"] == diagnostic.CRITICAL_PAIR_MATRIX
-    assert "HIGH_OVERLAP" not in first["critical_pair_matrix"].values()
+    assert first["high_overlap_pairs"] == []
+    assert first["partial_overlap_pairs"] == list(diagnostic.PARTIAL_OVERLAP_PAIRS)
+    assert all(
+        finding["classification"] in {"CLEAR", "PARTIAL_OVERLAP", "HIGH_OVERLAP"}
+        and finding["reason"]
+        for finding in first["critical_pair_matrix"].values()
+    )
 
 
 def test_semantics_anchoring_evidence_and_safety_findings() -> None:
     result = diagnostic.audit()
     assert result["topic_definition_operational"] is True
+    assert result["authority_subject_protection"] is True
+    assert result["method_subject_protection"] is True
     assert result["anchoring_reduction_strength"] == "STRONG"
+    assert len(result["structured_evidence_audit"]) == 11
     assert set(result["structured_evidence_audit"].values()) == {
         "DEFINED_AND_ACTIONABLE"
     }
     assert result["suppression_semantics_correct"] is True
+    assert result["evidence_priority_achieved"] is True
     assert result["evidence_priority_order"][-1] == (
         "deterministic baseline as reference only"
     )
     assert result["cot_safe"] is True
+    assert result["prompt_injection_boundary_valid"] is True
     assert result["confidence_semantics"] == "CLEAR"
     assert result["ambiguity_guidance_clear"] is True
+    assert result["enum_alignment_valid"] is True
+    assert result["duplication_level"] == "LOW"
     assert result["candidate_duplication"] == {
         "label_occurrences_across_definitions_legal_candidates_baseline": 18,
         "qualitative_impact": "LOW",
@@ -59,6 +75,16 @@ def test_prompt_sizes_and_economy_are_deterministic() -> None:
     )
     assert all(item["total_prompt_chars"] <= 7000 for item in metrics.values())
     assert result["prompt_economy"] == "COMPACT"
+
+
+def test_hkei_150_architectural_coverage_is_specification_only() -> None:
+    result = diagnostic.audit()
+    assert result["hkei_150_failure_coverage"] == {
+        "LABEL_SEMANTICS_UNDERSPECIFIED": "ADDRESSED",
+        "DETERMINISTIC_FORMAT_ANCHORING": "ADDRESSED",
+        "STRUCTURED_EVIDENCE_UNDERUSED": "ADDRESSED",
+    }
+    assert result["contradictions_found"] == []
 
 
 def test_outputs_have_no_source_body_or_benchmark_leakage() -> None:

@@ -16,7 +16,7 @@
       "overlap_candidates": [
         "STANDARD_NEWS"
       ],
-      "operational_classification": "OPERATIONAL",
+      "operational_status": "OPERATIONAL",
       "treatment_or_purpose": true,
       "observable_structural_cues": true,
       "nearby_format_distinction": true
@@ -34,7 +34,7 @@
         "BREAKING",
         "RESULT_REPORT"
       ],
-      "operational_classification": "OPERATIONAL",
+      "operational_status": "OPERATIONAL",
       "treatment_or_purpose": true,
       "observable_structural_cues": true,
       "nearby_format_distinction": true
@@ -52,7 +52,7 @@
       "overlap_candidates": [
         "GUIDE"
       ],
-      "operational_classification": "OPERATIONAL",
+      "operational_status": "OPERATIONAL",
       "treatment_or_purpose": true,
       "observable_structural_cues": true,
       "nearby_format_distinction": true
@@ -69,7 +69,7 @@
       "overlap_candidates": [
         "SERVICE"
       ],
-      "operational_classification": "OPERATIONAL",
+      "operational_status": "OPERATIONAL",
       "treatment_or_purpose": true,
       "observable_structural_cues": true,
       "nearby_format_distinction": true
@@ -86,7 +86,7 @@
       "overlap_candidates": [
         "ANALYSIS"
       ],
-      "operational_classification": "OPERATIONAL",
+      "operational_status": "OPERATIONAL",
       "treatment_or_purpose": true,
       "observable_structural_cues": true,
       "nearby_format_distinction": true
@@ -104,7 +104,7 @@
       "overlap_candidates": [
         "PROFILE"
       ],
-      "operational_classification": "OPERATIONAL",
+      "operational_status": "OPERATIONAL",
       "treatment_or_purpose": true,
       "observable_structural_cues": true,
       "nearby_format_distinction": true
@@ -118,7 +118,7 @@
         "accuracy"
       ],
       "overlap_candidates": [],
-      "operational_classification": "OPERATIONAL",
+      "operational_status": "OPERATIONAL",
       "treatment_or_purpose": true,
       "observable_structural_cues": true,
       "nearby_format_distinction": true
@@ -136,7 +136,7 @@
       "overlap_candidates": [
         "EXPLAINER"
       ],
-      "operational_classification": "OPERATIONAL",
+      "operational_status": "OPERATIONAL",
       "treatment_or_purpose": true,
       "observable_structural_cues": true,
       "nearby_format_distinction": true
@@ -153,7 +153,7 @@
       "overlap_candidates": [
         "PROFILE"
       ],
-      "operational_classification": "OPERATIONAL",
+      "operational_status": "OPERATIONAL",
       "treatment_or_purpose": true,
       "observable_structural_cues": true,
       "nearby_format_distinction": true
@@ -172,7 +172,7 @@
         "FEATURE",
         "INTERVIEW"
       ],
-      "operational_classification": "OPERATIONAL",
+      "operational_status": "OPERATIONAL",
       "treatment_or_purpose": true,
       "observable_structural_cues": true,
       "nearby_format_distinction": true
@@ -188,7 +188,7 @@
       "overlap_candidates": [
         "STANDARD_NEWS"
       ],
-      "operational_classification": "OPERATIONAL",
+      "operational_status": "OPERATIONAL",
       "treatment_or_purpose": true,
       "observable_structural_cues": true,
       "nearby_format_distinction": true
@@ -206,36 +206,70 @@
         "STANDARD_NEWS",
         "ANALYSIS"
       ],
-      "operational_classification": "OPERATIONAL",
+      "operational_status": "OPERATIONAL",
       "treatment_or_purpose": true,
       "observable_structural_cues": true,
       "nearby_format_distinction": true
     }
   ],
   "critical_pair_matrix": {
-    "STANDARD_NEWS__ANALYSIS": "CLEAR",
-    "STANDARD_NEWS__EXPLAINER": "CLEAR",
-    "STANDARD_NEWS__SERVICE": "CLEAR",
-    "STANDARD_NEWS__GUIDE": "CLEAR",
-    "ANALYSIS__EXPLAINER": "PARTIAL_OVERLAP",
-    "SERVICE__GUIDE": "CLEAR",
-    "BREAKING__STANDARD_NEWS": "PARTIAL_OVERLAP",
-    "STANDARD_NEWS__RESULT_REPORT": "PARTIAL_OVERLAP",
-    "STANDARD_NEWS__TREND_UPDATE": "CLEAR",
-    "FEATURE__PROFILE": "PARTIAL_OVERLAP"
+    "STANDARD_NEWS__ANALYSIS": {
+      "classification": "CLEAR",
+      "reason": "Event reporting is distinguished from structurally important causal interpretation."
+    },
+    "STANDARD_NEWS__EXPLAINER": {
+      "classification": "CLEAR",
+      "reason": "Reporting what happened is distinguished from organizing for mechanism understanding."
+    },
+    "STANDARD_NEWS__SERVICE": {
+      "classification": "CLEAR",
+      "reason": "Event reporting is distinguished from actionable service information."
+    },
+    "STANDARD_NEWS__GUIDE": {
+      "classification": "CLEAR",
+      "reason": "Event reporting is distinguished from ordered practical instruction."
+    },
+    "ANALYSIS__EXPLAINER": {
+      "classification": "PARTIAL_OVERLAP",
+      "reason": "Both explain, but ANALYSIS centers implications and causal tradeoffs while EXPLAINER centers mechanisms or concepts."
+    },
+    "SERVICE__GUIDE": {
+      "classification": "CLEAR",
+      "reason": "Actionable official information is distinguished from an instructional process or decision."
+    },
+    "ANALYSIS__STANDARD_NEWS": {
+      "classification": "CLEAR",
+      "reason": "The reverse comparison preserves the same interpretation-versus-reporting boundary."
+    },
+    "EXPLAINER__GUIDE": {
+      "classification": "CLEAR",
+      "reason": "Understanding a mechanism is distinguished from following practical instructions."
+    }
   },
+  "high_overlap_pairs": [],
+  "partial_overlap_pairs": [
+    "ANALYSIS__EXPLAINER",
+    "BREAKING__STANDARD_NEWS",
+    "FEATURE__PROFILE",
+    "INTERVIEW__PROFILE",
+    "STANDARD_NEWS__RESULT_REPORT"
+  ],
   "topic_definition_operational": true,
+  "authority_subject_protection": true,
+  "method_subject_protection": true,
   "anchoring_reduction_strength": "STRONG",
   "structured_evidence_audit": {
     "contextual_supports": "DEFINED_AND_ACTIONABLE",
     "contextual_suppressions": "DEFINED_AND_ACTIONABLE",
     "semantic_relationships": "DEFINED_AND_ACTIONABLE",
-    "primary_candidates": "DEFINED_AND_ACTIONABLE",
-    "secondary_candidates": "DEFINED_AND_ACTIONABLE",
-    "format_support": "DEFINED_AND_ACTIONABLE",
-    "format_suppression": "DEFINED_AND_ACTIONABLE",
-    "reason_codes": "DEFINED_AND_ACTIONABLE",
-    "warnings": "DEFINED_AND_ACTIONABLE"
+    "primary_domain_candidates": "DEFINED_AND_ACTIONABLE",
+    "secondary_domain_candidates": "DEFINED_AND_ACTIONABLE",
+    "semantic_format_support": "DEFINED_AND_ACTIONABLE",
+    "semantic_format_suppression": "DEFINED_AND_ACTIONABLE",
+    "topic_reason_codes": "DEFINED_AND_ACTIONABLE",
+    "topic_warnings": "DEFINED_AND_ACTIONABLE",
+    "format_reason_codes": "DEFINED_AND_ACTIONABLE",
+    "format_warnings": "DEFINED_AND_ACTIONABLE"
   },
   "suppression_semantics_correct": true,
   "evidence_priority_order": [
@@ -244,6 +278,11 @@
     "structured evidence",
     "deterministic baseline as reference only"
   ],
+  "evidence_priority_achieved": true,
+  "confidence_semantics": "CLEAR",
+  "ambiguity_guidance_clear": true,
+  "prompt_injection_boundary_valid": true,
+  "cot_safe": true,
   "prompt_size_metrics": {
     "TOPIC_REQUIRED": {
       "instruction_chars": 1658,
@@ -265,20 +304,20 @@
     }
   },
   "prompt_economy": "COMPACT",
+  "duplication_level": "LOW",
   "candidate_duplication": {
     "label_occurrences_across_definitions_legal_candidates_baseline": 18,
     "qualitative_impact": "LOW",
     "explanation": "Candidate names recur in definitions, legal candidates, and the baseline only where needed to define, constrain, and contextualize."
   },
   "contradictions_found": [],
-  "cot_safe": true,
+  "enum_alignment_valid": true,
   "benchmark_leakage": false,
-  "schema_alignment": {
-    "format_labels_exact": true,
-    "candidate_topic_labels_exact": true
+  "hkei_150_failure_coverage": {
+    "LABEL_SEMANTICS_UNDERSPECIFIED": "ADDRESSED",
+    "DETERMINISTIC_FORMAT_ANCHORING": "ADDRESSED",
+    "STRUCTURED_EVIDENCE_UNDERUSED": "ADDRESSED"
   },
-  "confidence_semantics": "CLEAR",
-  "ambiguity_guidance_clear": true,
   "overall_quality": "EXCELLENT",
   "recommended_next_step": "READY_FOR_LIVE_AB_COMPARISON"
 }
