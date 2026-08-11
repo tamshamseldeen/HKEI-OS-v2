@@ -1,0 +1,512 @@
+{
+  "case_count": 50,
+  "current_gate_topic_recall": 84.61538461538461,
+  "batch_05_current_gate_topic_recall": 88.88888888888889,
+  "candidate_analysis": {
+    "UNRESOLVED_EVIDENCE_STACK": {
+      "name": "UNRESOLVED_EVIDENCE_STACK",
+      "cases_triggered": 21,
+      "topic_mismatches_triggered": 9,
+      "topic_matches_triggered": 12,
+      "true_positives": 9,
+      "false_positives": 12,
+      "true_negatives": 25,
+      "false_negatives": 4,
+      "precision": 42.857142857142854,
+      "recall": 69.23076923076923,
+      "specificity": 67.56756756756756,
+      "accuracy": 68.0,
+      "incremental_true_positives": 1,
+      "incremental_false_positives": 2,
+      "captures_case_050": true,
+      "triggers_control_049": false,
+      "false_positives_by_batch": {
+        "batch_01": 0,
+        "batch_02": 2,
+        "batch_03": 0,
+        "batch_04": 0,
+        "batch_05": 0
+      },
+      "quality": "POOR"
+    },
+    "UNRESOLVED_EVIDENCE_STACK_STRICT": {
+      "name": "UNRESOLVED_EVIDENCE_STACK_STRICT",
+      "cases_triggered": 1,
+      "topic_mismatches_triggered": 1,
+      "topic_matches_triggered": 0,
+      "true_positives": 1,
+      "false_positives": 0,
+      "true_negatives": 37,
+      "false_negatives": 12,
+      "precision": 100.0,
+      "recall": 7.6923076923076925,
+      "specificity": 100.0,
+      "accuracy": 76.0,
+      "incremental_true_positives": 1,
+      "incremental_false_positives": 0,
+      "captures_case_050": true,
+      "triggers_control_049": false,
+      "false_positives_by_batch": {
+        "batch_01": 0,
+        "batch_02": 0,
+        "batch_03": 0,
+        "batch_04": 0,
+        "batch_05": 0
+      },
+      "quality": "EXCELLENT"
+    }
+  },
+  "recommendation": "IMPLEMENT_STRICT_CANDIDATE",
+  "cases": [
+    {
+      "batch": "batch_01",
+      "id": "001",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_01",
+      "id": "002",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_01",
+      "id": "003",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_01",
+      "id": "004",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_01",
+      "id": "005",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_01",
+      "id": "006",
+      "topic_match": true,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_01",
+      "id": "007",
+      "topic_match": true,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_01",
+      "id": "008",
+      "topic_match": true,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_01",
+      "id": "009",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_01",
+      "id": "010",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_02",
+      "id": "011",
+      "topic_match": true,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_02",
+      "id": "012",
+      "topic_match": true,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_02",
+      "id": "013",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_02",
+      "id": "014",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": true
+    },
+    {
+      "batch": "batch_02",
+      "id": "015",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_02",
+      "id": "016",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_02",
+      "id": "017",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_02",
+      "id": "018",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_02",
+      "id": "019",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": true
+    },
+    {
+      "batch": "batch_02",
+      "id": "020",
+      "topic_match": true,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_03",
+      "id": "021",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_03",
+      "id": "022",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_03",
+      "id": "023",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_03",
+      "id": "024",
+      "topic_match": true,
+      "current_gate_topic_required": true,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_03",
+      "id": "025",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_03",
+      "id": "026",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_03",
+      "id": "027",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_03",
+      "id": "028",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_03",
+      "id": "029",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_03",
+      "id": "030",
+      "topic_match": true,
+      "current_gate_topic_required": true,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_04",
+      "id": "031",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_04",
+      "id": "032",
+      "topic_match": true,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_04",
+      "id": "033",
+      "topic_match": false,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_04",
+      "id": "034",
+      "topic_match": true,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_04",
+      "id": "035",
+      "topic_match": false,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_04",
+      "id": "036",
+      "topic_match": true,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_04",
+      "id": "037",
+      "topic_match": false,
+      "current_gate_topic_required": true,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_04",
+      "id": "038",
+      "topic_match": false,
+      "current_gate_topic_required": true,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_04",
+      "id": "039",
+      "topic_match": true,
+      "current_gate_topic_required": true,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_04",
+      "id": "040",
+      "topic_match": true,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_05",
+      "id": "041",
+      "topic_match": false,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_05",
+      "id": "042",
+      "topic_match": false,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_05",
+      "id": "043",
+      "topic_match": false,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_05",
+      "id": "044",
+      "topic_match": false,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_05",
+      "id": "045",
+      "topic_match": false,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_05",
+      "id": "046",
+      "topic_match": false,
+      "current_gate_topic_required": true,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_05",
+      "id": "047",
+      "topic_match": false,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_05",
+      "id": "048",
+      "topic_match": false,
+      "current_gate_topic_required": true,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_05",
+      "id": "049",
+      "topic_match": true,
+      "current_gate_topic_required": false,
+      "candidate_trigger": false,
+      "strict_candidate_trigger": false,
+      "would_change_gate_decision": false
+    },
+    {
+      "batch": "batch_05",
+      "id": "050",
+      "topic_match": false,
+      "current_gate_topic_required": false,
+      "candidate_trigger": true,
+      "strict_candidate_trigger": true,
+      "would_change_gate_decision": true
+    }
+  ]
+}
