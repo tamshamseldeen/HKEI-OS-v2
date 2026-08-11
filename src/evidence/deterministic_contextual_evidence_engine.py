@@ -292,6 +292,131 @@ _AFFECTED_AUDIENCE_PATTERNS = (
     "على الشركات",
     "على الطلاب",
 )
+_PUBLIC_SAFETY_EVENT_PATTERNS = (
+    "حادث",
+    "واقعة خطيرة",
+    "هجوم",
+    "اعتداء",
+    "انفجار",
+)
+_CASUALTY_PATTERNS = (
+    "قتلى",
+    "ضحايا",
+    "مصابين",
+    "إصابات",
+    "جرحى",
+)
+_PUBLIC_SAFETY_RESPONSE_PATTERNS = (
+    "الشرطة",
+    "فرق الإسعاف",
+    "خدمات الطوارئ",
+    "فرق الطوارئ",
+    "الدفاع المدني",
+)
+_INVESTIGATION_PATTERNS = (
+    "بدأت السلطات التحقيق",
+    "وبدأت السلطات التحقيق",
+    "فتح تحقيق",
+    "بدأ التحقيق",
+    "باشرت التحقيق",
+    "تجري تحقيقا",
+    "تجري تحقيقًا",
+)
+_CONSTRAINT_PATTERNS = (
+    "نقص",
+    "محدودية",
+    "قيود",
+    "عجز",
+)
+_RESOURCE_PRESSURE_PATTERNS = (
+    "الموارد",
+    "الإمدادات",
+    "التمويل",
+    "الضغط على",
+    "ضغطًا على",
+    "ضغطا على",
+)
+_CAUSAL_STRUCTURE_PATTERNS = (
+    "أدى",
+    "يؤدي",
+    "نتيجة لذلك",
+    "ما زاد",
+    "مما زاد",
+    "بسبب",
+)
+_CAPABILITY_IMPACT_PATTERNS = (
+    "القدرة على",
+    "القدرة التشغيلية",
+    "الطاقة الاستيعابية",
+    "أثر في",
+    "أثر على",
+    "أثّر في",
+    "أثّر على",
+    "النتائج",
+)
+_INSTITUTION_SYSTEM_PATTERNS = (
+    "المؤسسة",
+    "المؤسسات",
+    "مؤسسات",
+    "النظام",
+    "المنظمة",
+    "الهيئة",
+)
+_TRANSFORMATION_PATTERNS = (
+    "تعيد هيكلة",
+    "تعيد المؤسسة هيكلة",
+    "إعادة هيكلة",
+    "تحول هيكلي",
+    "تحول مؤسسي",
+    "تغيير هيكلي",
+)
+_STRUCTURAL_CHANGE_PATTERNS = (
+    "إنشاء وحدات",
+    "وحدات جديدة",
+    "تغيير الأدوار",
+    "توزيع الأدوار",
+    "دمج الإدارات",
+    "تغيير العمليات",
+)
+_EXPLANATORY_MECHANISM_PATTERNS = (
+    "استجابة ل",
+    "بهدف",
+    "بسبب",
+    "لمواكبة",
+    "عبر",
+    "من خلال",
+)
+_GOVERNMENT_SCRUTINY_PATTERNS = (
+    "تدقيق حكومي",
+    "تدقيقًا حكوميًا",
+    "تدقيقا حكوميا",
+    "رقابة حكومية",
+    "تدقيق تنظيمي",
+    "رقابة تنظيمية",
+)
+_POLICY_DISAGREEMENT_PATTERNS = (
+    "سياسات داخلية",
+    "خلاف حول السياسات",
+    "نزاع حول السياسات",
+    "اعتراض على السياسات",
+)
+_LEGAL_POLITICAL_DISPUTE_PATTERNS = (
+    "خلاف قانوني",
+    "خلافًا قانونيًا",
+    "خلافا قانونيا",
+    "نزاع قانوني",
+    "خلاف سياسي",
+    "خلافًا سياسيًا",
+    "خلافا سياسيا",
+)
+_GOVERNANCE_CONFLICT_PATTERNS = (
+    "تدخل السلطة",
+    "حدود السلطة",
+    "الاستقلال المؤسسي",
+    "استقلال المؤسسات",
+    "حقوق المؤسسات",
+    "الحوكمة",
+)
 _SENTENCE_BOUNDARY = re.compile(r"[.؟!؛\n]+")
 _REGISTRATION_INVITATION = re.compile(
     r"(?<!\w)دعت(?!\w).{0,80}?(?<!\w)للتسجيل(?!\w)"
@@ -566,6 +691,14 @@ class DeterministicContextualEvidenceEngine:
         )
         matches.extend(analytical_matches)
         sequence += len(analytical_matches)
+        hint_matches = self._adjudication_hint_matches(
+            text=text,
+            source_section=source_section,
+            sentence_index=sentence_index,
+            sequence_start=sequence,
+        )
+        matches.extend(hint_matches)
+        sequence += len(hint_matches)
 
         for registration_match in _REGISTRATION_INVITATION.finditer(text):
             matches.append(
@@ -587,6 +720,94 @@ class DeterministicContextualEvidenceEngine:
             )
             sequence += 1
         return matches
+
+    def _adjudication_hint_matches(
+        self,
+        *,
+        text: str,
+        source_section: SourceSection,
+        sentence_index: int,
+        sequence_start: int,
+    ) -> list[tuple[int, int, ContextualEvidenceItem]]:
+        """Expose unresolved structures found within one bounded text unit."""
+        specifications = (
+            (
+                (
+                    _PUBLIC_SAFETY_EVENT_PATTERNS,
+                    _CASUALTY_PATTERNS,
+                    _PUBLIC_SAFETY_RESPONSE_PATTERNS,
+                    _INVESTIGATION_PATTERNS,
+                ),
+                EvidenceRole.RESULT,
+                "ADJUDICATION_EVENT_PUBLIC_SAFETY",
+                "PUBLIC_SAFETY_EVENT_ADJUDICATION_HINT",
+            ),
+            (
+                (
+                    _CONSTRAINT_PATTERNS,
+                    _RESOURCE_PRESSURE_PATTERNS,
+                    _CAUSAL_STRUCTURE_PATTERNS,
+                    _CAPABILITY_IMPACT_PATTERNS,
+                ),
+                EvidenceRole.CONSEQUENCE,
+                "ADJUDICATION_ANALYTICAL_CONSTRAINT",
+                "ANALYTICAL_CONSTRAINT_ADJUDICATION_HINT",
+            ),
+            (
+                (
+                    _INSTITUTION_SYSTEM_PATTERNS,
+                    _TRANSFORMATION_PATTERNS,
+                    _STRUCTURAL_CHANGE_PATTERNS,
+                    _EXPLANATORY_MECHANISM_PATTERNS,
+                ),
+                EvidenceRole.EXPLANATION,
+                "ADJUDICATION_EXPLANATORY_TRANSFORMATION",
+                "EXPLANATORY_TRANSFORMATION_ADJUDICATION_HINT",
+            ),
+            (
+                (
+                    _INSTITUTION_SYSTEM_PATTERNS,
+                    _GOVERNMENT_SCRUTINY_PATTERNS,
+                    _POLICY_DISAGREEMENT_PATTERNS,
+                    _LEGAL_POLITICAL_DISPUTE_PATTERNS,
+                    _GOVERNANCE_CONFLICT_PATTERNS,
+                ),
+                EvidenceRole.BACKGROUND,
+                "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT",
+                "INSTITUTIONAL_POLICY_CONFLICT_ADJUDICATION_HINT",
+            ),
+        )
+        matches: list[tuple[int, int, ContextualEvidenceItem]] = []
+        sequence = sequence_start
+        for groups, role, support, reason_code in specifications:
+            if not all(self._contains_any(text, patterns) for patterns in groups):
+                continue
+            matches.append(
+                (
+                    0,
+                    sequence,
+                    ContextualEvidenceItem(
+                        source_section=source_section,
+                        sentence_index=sentence_index,
+                        matched_text=text,
+                        evidence_level=EvidenceLevel.STRUCTURAL,
+                        role=role,
+                        strength=self._adjust_strength(
+                            EvidenceStrength.STRONG,
+                            source_section,
+                        ),
+                        reason_code=reason_code,
+                        supports=(support,),
+                        suppresses=(),
+                    ),
+                )
+            )
+            sequence += 1
+        return matches
+
+    @classmethod
+    def _contains_any(cls, text: str, patterns: Iterable[str]) -> bool:
+        return any(cls._term_matches(text, pattern) for pattern in patterns)
 
     def _analytical_context_matches(
         self,

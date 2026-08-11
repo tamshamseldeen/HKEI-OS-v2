@@ -42,6 +42,149 @@ def analyze(
     )
 
 
+def hint_supports(body: str) -> set[str]:
+    return {
+        support
+        for item in analyze(body=body).all_items
+        for support in item.supports
+        if support.startswith("ADJUDICATION_")
+    }
+
+
+def hint_item(body: str, support: str):
+    return next(
+        item
+        for item in analyze(body=body).all_items
+        if support in item.supports
+    )
+
+
+PUBLIC_SAFETY_SCENARIO = (
+    "وقع حادث أسفر عن قتلى ومصابين، وتحركت الشرطة وفرق الإسعاف، "
+    "وبدأت السلطات التحقيق"
+)
+ANALYTICAL_CONSTRAINT_SCENARIO = (
+    "أدى نقص الموارد إلى تراجع القدرة على الاستجابة، ما زاد الضغط على "
+    "النظام وأثر في النتائج"
+)
+TRANSFORMATION_SCENARIO = (
+    "تعيد المؤسسة هيكلة عملياتها عبر إنشاء وحدات جديدة وتغيير الأدوار "
+    "استجابة لتحولات مستمرة"
+)
+INSTITUTIONAL_CONFLICT_SCENARIO = (
+    "تواجه مؤسسات تدقيقًا حكوميًا بسبب سياسات داخلية أثارت خلافًا قانونيًا "
+    "وسياسيًا حول حدود تدخل السلطة"
+)
+
+
+def test_public_safety_event_hint_requires_coherent_local_structure() -> None:
+    item = hint_item(
+        PUBLIC_SAFETY_SCENARIO,
+        "ADJUDICATION_EVENT_PUBLIC_SAFETY",
+    )
+    assert item.evidence_level is EvidenceLevel.STRUCTURAL
+    assert item.strength is EvidenceStrength.STRONG
+    assert item.matched_text == PUBLIC_SAFETY_SCENARIO
+    assert item.supports == ("ADJUDICATION_EVENT_PUBLIC_SAFETY",)
+
+
+def test_public_safety_hint_does_not_overtrigger_simple_incident() -> None:
+    assert "ADJUDICATION_EVENT_PUBLIC_SAFETY" not in hint_supports(
+        "وقع حادث خطير وأصدرت الجهة بيانًا مقتضبًا"
+    )
+
+
+def test_casualties_response_and_investigation_complete_event_hint() -> None:
+    incomplete = "وقع حادث أسفر عن قتلى ومصابين وتحركت الشرطة وفرق الإسعاف"
+    assert "ADJUDICATION_EVENT_PUBLIC_SAFETY" not in hint_supports(incomplete)
+    assert "ADJUDICATION_EVENT_PUBLIC_SAFETY" in hint_supports(
+        f"{incomplete} وبدأت السلطات التحقيق"
+    )
+
+
+def test_analytical_constraint_hint_requires_sustained_structure() -> None:
+    item = hint_item(
+        ANALYTICAL_CONSTRAINT_SCENARIO,
+        "ADJUDICATION_ANALYTICAL_CONSTRAINT",
+    )
+    assert item.role is EvidenceRole.CONSEQUENCE
+    assert item.strength is EvidenceStrength.STRONG
+    assert item.supports == ("ADJUDICATION_ANALYTICAL_CONSTRAINT",)
+
+
+def test_single_consequence_does_not_create_constraint_hint() -> None:
+    assert "ADJUDICATION_ANALYTICAL_CONSTRAINT" not in hint_supports(
+        "أدى القرار إلى تغير النتائج"
+    )
+
+
+def test_explanatory_transformation_hint_requires_mechanism() -> None:
+    item = hint_item(
+        TRANSFORMATION_SCENARIO,
+        "ADJUDICATION_EXPLANATORY_TRANSFORMATION",
+    )
+    assert item.role is EvidenceRole.EXPLANATION
+    assert item.supports == ("ADJUDICATION_EXPLANATORY_TRANSFORMATION",)
+    assert "ADJUDICATION_EXPLANATORY_TRANSFORMATION" not in hint_supports(
+        "أعلنت شركة إعادة هيكلة عملياتها"
+    )
+
+
+def test_question_mark_alone_does_not_create_transformation_hint() -> None:
+    assert "ADJUDICATION_EXPLANATORY_TRANSFORMATION" not in hint_supports(
+        "كيف تتغير المؤسسة؟"
+    )
+
+
+def test_institutional_policy_conflict_hint_requires_full_structure() -> None:
+    item = hint_item(
+        INSTITUTIONAL_CONFLICT_SCENARIO,
+        "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT",
+    )
+    assert item.role is EvidenceRole.BACKGROUND
+    assert item.supports == (
+        "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT",
+    )
+
+
+def test_ordinary_institutional_reporting_does_not_create_conflict_hint() -> None:
+    assert "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT" not in hint_supports(
+        "أعلنت وزارة النقل تحديث إجراءات المؤسسة للعام المقبل"
+    )
+
+
+@pytest.mark.parametrize(
+    "body",
+    (
+        PUBLIC_SAFETY_SCENARIO,
+        ANALYTICAL_CONSTRAINT_SCENARIO,
+        TRANSFORMATION_SCENARIO,
+        INSTITUTIONAL_CONFLICT_SCENARIO,
+    ),
+)
+def test_adjudication_hints_do_not_emit_classification_support(body: str) -> None:
+    hint_items = [
+        item for item in analyze(body=body).all_items
+        if any(value.startswith("ADJUDICATION_") for value in item.supports)
+    ]
+    assert hint_items
+    assert all(
+        not support.startswith(("TOPIC_", "FORMAT_", "INTENT_"))
+        for item in hint_items
+        for support in item.supports
+    )
+
+
+def test_hint_output_is_deterministic_and_input_is_unchanged() -> None:
+    source = make_source(body=PUBLIC_SAFETY_SCENARIO)
+    snapshot = source
+    engine = DeterministicContextualEvidenceEngine()
+    first = engine.analyze(source=source)
+    second = engine.analyze(source=source)
+    assert first == second
+    assert source == snapshot
+
+
 @pytest.mark.parametrize("boundary", (".", "؟", "!", "؛", "\n"))
 def test_sentence_segmentation_supports_every_boundary(boundary: str) -> None:
     """Split body sentences at every supported Latin and Arabic boundary."""

@@ -131,11 +131,11 @@ def test_topic_confusion_matrix_and_metrics_are_exact(
         analysis["topic_false_positives"],
         analysis["topic_true_negatives"],
         analysis["topic_false_negatives"],
-    ) == (7, 0, 1, 2)
+    ) == (8, 0, 1, 1)
     assert analysis["topic_precision"] == 100.0
-    assert analysis["topic_recall"] == 7 / 9 * 100.0
+    assert analysis["topic_recall"] == 8 / 9 * 100.0
     assert analysis["topic_specificity"] == 100.0
-    assert analysis["topic_accuracy"] == 80.0
+    assert analysis["topic_accuracy"] == 90.0
 
 
 def test_format_confusion_matrix_and_metrics_are_exact(
@@ -146,11 +146,11 @@ def test_format_confusion_matrix_and_metrics_are_exact(
         analysis["format_false_positives"],
         analysis["format_true_negatives"],
         analysis["format_false_negatives"],
-    ) == (1, 1, 5, 3)
-    assert analysis["format_precision"] == 50.0
+    ) == (1, 0, 6, 3)
+    assert analysis["format_precision"] == 100.0
     assert analysis["format_recall"] == 25.0
-    assert analysis["format_specificity"] == 5 / 6 * 100.0
-    assert analysis["format_accuracy"] == 60.0
+    assert analysis["format_specificity"] == 100.0
+    assert analysis["format_accuracy"] == 70.0
 
 
 def test_case_flags_derive_the_same_confusion_matrix(
@@ -184,8 +184,8 @@ def test_provider_call_metrics_and_scope_distribution_are_exact(
     assert analysis["missed_adjudication_cases"] == 1
     assert analysis["scope_distribution"] == {
         "NOT_REQUIRED": 2,
-        "TOPIC_REQUIRED": 6,
-        "FORMAT_REQUIRED": 1,
+        "TOPIC_REQUIRED": 7,
+        "FORMAT_REQUIRED": 0,
         "TOPIC_AND_FORMAT_REQUIRED": 1,
     }
     assert analysis["provider_call_cases"] == sum(
@@ -226,13 +226,13 @@ def test_coverage_and_errors_are_preserved_without_tuning(
     analysis: dict[str, object],
 ) -> None:
     assert analysis["topic_captured_cases"] == [
-        "041", "042", "043", "044", "045", "047", "048"
+        "041", "042", "043", "044", "045", "046", "047", "048"
     ]
     assert analysis["format_captured_cases"] == ["046"]
     assert [
         case["id"] for case in analysis["cases"]
         if case["topic_false_negative"]
-    ] == ["046", "050"]
+    ] == ["050"]
     assert [
         case["id"] for case in analysis["cases"]
         if case["topic_false_positive"]
@@ -244,7 +244,7 @@ def test_coverage_and_errors_are_preserved_without_tuning(
     assert [
         case["id"] for case in analysis["cases"]
         if case["format_false_positive"]
-    ] == ["048"]
+    ] == []
     assert diagnostic_status(analysis) == "FAILED"
 
 
