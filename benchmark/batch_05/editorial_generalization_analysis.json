@@ -1,0 +1,454 @@
+{
+  "case_count": 10,
+  "failure_class_counts": {
+    "ACTOR_SUBJECT_CONFUSION": 2,
+    "CONTEXTUAL_FORMAT_OVERTRIGGER": 1,
+    "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED": 1,
+    "CONTEXT_EXTRACTION_GAP": 2,
+    "CONTEXT_PRESENT_BUT_UNCOMPOSED": 6,
+    "CRIME_LEGAL_DOMAIN_GAP": 2,
+    "DETERMINISTIC_GENERALIZATION_LIMIT": 9,
+    "DOWNSTREAM_INTENT_FROM_WRONG_FORMAT": 4,
+    "EVENT_DOMAIN_MODEL_GAP": 4,
+    "FORMAT_ANALYSIS_STRUCTURE_GAP": 3,
+    "FORMAT_EXPLAINER_STRUCTURE_GAP": 1,
+    "GEOPOLITICAL_DOMAIN_GAP": 4,
+    "INSTITUTIONAL_CONFLICT_DOMAIN_GAP": 1,
+    "LOW_CONFIDENCE_FALLBACK": 7,
+    "METHOD_SUBJECT_CONFUSION": 2,
+    "MILITARY_DEFENSE_DOMAIN_GAP": 2,
+    "POLICY_LEGAL_DOMAIN_GAP": 2,
+    "PRIMARY_DOMAIN_MODEL_GAP": 9,
+    "SCIENCE_BIOLOGICAL_DOMAIN_GAP": 1,
+    "SEMANTIC_RELATIONSHIP_WITHOUT_DOMAIN": 1
+  },
+  "topic_failure_count": 9,
+  "format_failure_count": 4,
+  "intent_failure_count": 4,
+  "direct_intent_failure_count": 0,
+  "downstream_intent_failure_count": 4,
+  "deterministically_sufficient_cases": [
+    "049"
+  ],
+  "semantic_adjudication_topic_candidates": [
+    "041",
+    "042",
+    "043",
+    "044",
+    "045",
+    "046",
+    "047",
+    "048",
+    "050"
+  ],
+  "semantic_adjudication_format_candidates": [
+    "044",
+    "045",
+    "046",
+    "047"
+  ],
+  "trigger_analysis": {
+    "TOPIC_LOW_CONFIDENCE": {
+      "cases_triggered": 7,
+      "matched_cases_triggered": 0,
+      "mismatched_cases_triggered": 7,
+      "precision_for_mismatch": 1.0
+    },
+    "TOPIC_GENERAL_FALLBACK": {
+      "cases_triggered": 6,
+      "matched_cases_triggered": 0,
+      "mismatched_cases_triggered": 6,
+      "precision_for_mismatch": 1.0
+    },
+    "NO_PRIMARY_SEMANTIC_DOMAIN": {
+      "cases_triggered": 9,
+      "matched_cases_triggered": 0,
+      "mismatched_cases_triggered": 9,
+      "precision_for_mismatch": 1.0
+    },
+    "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP": {
+      "cases_triggered": 6,
+      "matched_cases_triggered": 0,
+      "mismatched_cases_triggered": 6,
+      "precision_for_mismatch": 1.0
+    },
+    "MULTIPLE_COMPETING_TOPIC_SIGNALS": {
+      "cases_triggered": 1,
+      "matched_cases_triggered": 0,
+      "mismatched_cases_triggered": 1,
+      "precision_for_mismatch": 1.0
+    },
+    "METHOD_SUBJECT_AMBIGUITY": {
+      "cases_triggered": 2,
+      "matched_cases_triggered": 0,
+      "mismatched_cases_triggered": 2,
+      "precision_for_mismatch": 1.0
+    },
+    "SEMANTIC_DOMAIN_CONFLICT": {
+      "cases_triggered": 0,
+      "matched_cases_triggered": 0,
+      "mismatched_cases_triggered": 0,
+      "precision_for_mismatch": null
+    },
+    "FORMAT_LOW_CONFIDENCE": {
+      "cases_triggered": 3,
+      "matched_cases_triggered": 1,
+      "mismatched_cases_triggered": 2,
+      "precision_for_mismatch": 0.6666666666666666
+    },
+    "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK": {
+      "cases_triggered": 2,
+      "matched_cases_triggered": 1,
+      "mismatched_cases_triggered": 1,
+      "precision_for_mismatch": 0.5
+    },
+    "EXPLAINER_STRUCTURE_UNRESOLVED": {
+      "cases_triggered": 0,
+      "matched_cases_triggered": 0,
+      "mismatched_cases_triggered": 0,
+      "precision_for_mismatch": null
+    }
+  },
+  "cases": [
+    {
+      "id": "041",
+      "expected_topic": "POLITICS",
+      "predicted_topic": "GENERAL",
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "predicted_intent": "GET_UPDATE",
+      "contextual_item_count": 3,
+      "semantic_relationship_count": 0,
+      "primary_domain_candidates": [],
+      "failure_classes": [
+        "CONTEXT_PRESENT_BUT_UNCOMPOSED",
+        "PRIMARY_DOMAIN_MODEL_GAP",
+        "EVENT_DOMAIN_MODEL_GAP",
+        "GEOPOLITICAL_DOMAIN_GAP",
+        "LOW_CONFIDENCE_FALLBACK",
+        "DETERMINISTIC_GENERALIZATION_LIMIT"
+      ],
+      "deterministic_topic_sufficient": false,
+      "deterministic_format_sufficient": true,
+      "semantic_adjudication_topic_candidate": true,
+      "semantic_adjudication_format_candidate": false,
+      "candidate_triggers": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "architectural_observations": [
+        "Uncertainty and attribution were extracted, but security authority, preventive government action, and the possible international event were not composed into a domain.",
+        "The GENERAL low-confidence fallback makes this a topic adjudication candidate; STANDARD_NEWS and GET_UPDATE were already sufficient."
+      ]
+    },
+    {
+      "id": "042",
+      "expected_topic": "CRIME",
+      "predicted_topic": "TECHNOLOGY",
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "predicted_intent": "GET_UPDATE",
+      "contextual_item_count": 2,
+      "semantic_relationship_count": 0,
+      "primary_domain_candidates": [],
+      "failure_classes": [
+        "CONTEXT_PRESENT_BUT_UNCOMPOSED",
+        "PRIMARY_DOMAIN_MODEL_GAP",
+        "METHOD_SUBJECT_CONFUSION",
+        "CRIME_LEGAL_DOMAIN_GAP",
+        "EVENT_DOMAIN_MODEL_GAP",
+        "LOW_CONFIDENCE_FALLBACK",
+        "DETERMINISTIC_GENERALIZATION_LIMIT"
+      ],
+      "deterministic_topic_sufficient": false,
+      "deterministic_format_sufficient": true,
+      "semantic_adjudication_topic_candidate": true,
+      "semantic_adjudication_format_candidate": false,
+      "candidate_triggers": [
+        "TOPIC_LOW_CONFIDENCE",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "MULTIPLE_COMPETING_TOPIC_SIGNALS",
+        "METHOD_SUBJECT_AMBIGUITY"
+      ],
+      "architectural_observations": [
+        "Surface phone/SIM signals supported TECHNOLOGY while the criminal conviction, prison sentence, drug case, and legal dispute did not produce a crime/legal event domain.",
+        "This is method/surface-object versus primary-event confusion combined with a crime/legal ontology gap."
+      ]
+    },
+    {
+      "id": "043",
+      "expected_topic": "POLITICS",
+      "predicted_topic": "GENERAL",
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "predicted_intent": "GET_UPDATE",
+      "contextual_item_count": 1,
+      "semantic_relationship_count": 0,
+      "primary_domain_candidates": [],
+      "failure_classes": [
+        "CONTEXT_PRESENT_BUT_UNCOMPOSED",
+        "PRIMARY_DOMAIN_MODEL_GAP",
+        "POLICY_LEGAL_DOMAIN_GAP",
+        "LOW_CONFIDENCE_FALLBACK",
+        "DETERMINISTIC_GENERALIZATION_LIMIT"
+      ],
+      "deterministic_topic_sufficient": false,
+      "deterministic_format_sufficient": true,
+      "semantic_adjudication_topic_candidate": true,
+      "semantic_adjudication_format_candidate": false,
+      "candidate_triggers": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "architectural_observations": [
+        "Executive action, citizenship policy, constitutional challenge, and judicial review produced neither a relationship nor a policy/legal primary domain.",
+        "A reusable policy-plus-legal-plus-executive-action composition is absent; format and intent were already sufficient."
+      ]
+    },
+    {
+      "id": "044",
+      "expected_topic": "WORLD",
+      "predicted_topic": "GENERAL",
+      "expected_format": "ANALYSIS",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "UNDERSTAND_IMPACT",
+      "predicted_intent": "GET_UPDATE",
+      "contextual_item_count": 0,
+      "semantic_relationship_count": 0,
+      "primary_domain_candidates": [],
+      "failure_classes": [
+        "CONTEXT_EXTRACTION_GAP",
+        "PRIMARY_DOMAIN_MODEL_GAP",
+        "EVENT_DOMAIN_MODEL_GAP",
+        "GEOPOLITICAL_DOMAIN_GAP",
+        "MILITARY_DEFENSE_DOMAIN_GAP",
+        "FORMAT_ANALYSIS_STRUCTURE_GAP",
+        "DOWNSTREAM_INTENT_FROM_WRONG_FORMAT",
+        "LOW_CONFIDENCE_FALLBACK",
+        "DETERMINISTIC_GENERALIZATION_LIMIT"
+      ],
+      "deterministic_topic_sufficient": false,
+      "deterministic_format_sufficient": false,
+      "semantic_adjudication_topic_candidate": true,
+      "semantic_adjudication_format_candidate": true,
+      "candidate_triggers": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "FORMAT_LOW_CONFIDENCE"
+      ],
+      "architectural_observations": [
+        "No contextual evidence represented the ongoing war, air-defense constraint, resource depletion, military pressure, or consequences, so WORLD had no domain support.",
+        "ANALYSIS structure was also unresolved; GET_UPDATE followed the wrong STANDARD_NEWS format, making the intent failure downstream."
+      ]
+    },
+    {
+      "id": "045",
+      "expected_topic": "WORLD",
+      "predicted_topic": "GENERAL",
+      "expected_format": "EXPLAINER",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "UNDERSTAND_EVENT",
+      "predicted_intent": "GET_UPDATE",
+      "contextual_item_count": 0,
+      "semantic_relationship_count": 0,
+      "primary_domain_candidates": [],
+      "failure_classes": [
+        "CONTEXT_EXTRACTION_GAP",
+        "PRIMARY_DOMAIN_MODEL_GAP",
+        "GEOPOLITICAL_DOMAIN_GAP",
+        "MILITARY_DEFENSE_DOMAIN_GAP",
+        "FORMAT_EXPLAINER_STRUCTURE_GAP",
+        "DOWNSTREAM_INTENT_FROM_WRONG_FORMAT",
+        "LOW_CONFIDENCE_FALLBACK",
+        "DETERMINISTIC_GENERALIZATION_LIMIT"
+      ],
+      "deterministic_topic_sufficient": false,
+      "deterministic_format_sufficient": false,
+      "semantic_adjudication_topic_candidate": true,
+      "semantic_adjudication_format_candidate": true,
+      "candidate_triggers": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "FORMAT_LOW_CONFIDENCE"
+      ],
+      "architectural_observations": [
+        "Military restructuring, organizational transformation, and unmanned systems produced no contextual items or military/geopolitical domain.",
+        "The explanatory framing was not structurally represented, so EXPLAINER and its downstream UNDERSTAND_EVENT intent were missed."
+      ]
+    },
+    {
+      "id": "046",
+      "expected_topic": "SCIENCE",
+      "predicted_topic": "TECHNOLOGY",
+      "expected_format": "ANALYSIS",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "UNDERSTAND_IMPACT",
+      "predicted_intent": "GET_UPDATE",
+      "contextual_item_count": 7,
+      "semantic_relationship_count": 1,
+      "primary_domain_candidates": [],
+      "failure_classes": [
+        "SEMANTIC_RELATIONSHIP_WITHOUT_DOMAIN",
+        "PRIMARY_DOMAIN_MODEL_GAP",
+        "METHOD_SUBJECT_CONFUSION",
+        "SCIENCE_BIOLOGICAL_DOMAIN_GAP",
+        "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED",
+        "FORMAT_ANALYSIS_STRUCTURE_GAP",
+        "DOWNSTREAM_INTENT_FROM_WRONG_FORMAT",
+        "DETERMINISTIC_GENERALIZATION_LIMIT"
+      ],
+      "deterministic_topic_sufficient": false,
+      "deterministic_format_sufficient": false,
+      "semantic_adjudication_topic_candidate": true,
+      "semantic_adjudication_format_candidate": true,
+      "candidate_triggers": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "METHOD_SUBJECT_AMBIGUITY",
+        "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK"
+      ],
+      "architectural_observations": [
+        "AI was treated as the primary TECHNOLOGY signal while viruses, biological design, dual use, and consequences did not become a SCIENCE primary domain.",
+        "A semantic relationship existed without a domain candidate, and contextual FORMAT_ANALYSIS plus INTENT_UNDERSTAND_IMPACT support was not promoted; the intent failure is downstream from format."
+      ]
+    },
+    {
+      "id": "047",
+      "expected_topic": "POLITICS",
+      "predicted_topic": "GENERAL",
+      "expected_format": "ANALYSIS",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "UNDERSTAND_IMPACT",
+      "predicted_intent": "GET_UPDATE",
+      "contextual_item_count": 1,
+      "semantic_relationship_count": 0,
+      "primary_domain_candidates": [],
+      "failure_classes": [
+        "CONTEXT_PRESENT_BUT_UNCOMPOSED",
+        "PRIMARY_DOMAIN_MODEL_GAP",
+        "ACTOR_SUBJECT_CONFUSION",
+        "POLICY_LEGAL_DOMAIN_GAP",
+        "INSTITUTIONAL_CONFLICT_DOMAIN_GAP",
+        "FORMAT_ANALYSIS_STRUCTURE_GAP",
+        "DOWNSTREAM_INTENT_FROM_WRONG_FORMAT",
+        "LOW_CONFIDENCE_FALLBACK",
+        "DETERMINISTIC_GENERALIZATION_LIMIT"
+      ],
+      "deterministic_topic_sufficient": false,
+      "deterministic_format_sufficient": false,
+      "semantic_adjudication_topic_candidate": true,
+      "semantic_adjudication_format_candidate": true,
+      "candidate_triggers": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "architectural_observations": [
+        "The university surface subject did not compose with federal scrutiny, discrimination allegations, protests, policy, and legal institutional conflict into POLITICS.",
+        "ANALYSIS structure was unresolved, and the resulting intent failure is downstream from STANDARD_NEWS."
+      ]
+    },
+    {
+      "id": "048",
+      "expected_topic": "WORLD",
+      "predicted_topic": "GENERAL",
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "predicted_intent": "GET_UPDATE",
+      "contextual_item_count": 6,
+      "semantic_relationship_count": 0,
+      "primary_domain_candidates": [],
+      "failure_classes": [
+        "CONTEXT_PRESENT_BUT_UNCOMPOSED",
+        "PRIMARY_DOMAIN_MODEL_GAP",
+        "GEOPOLITICAL_DOMAIN_GAP",
+        "CONTEXTUAL_FORMAT_OVERTRIGGER",
+        "LOW_CONFIDENCE_FALLBACK",
+        "DETERMINISTIC_GENERALIZATION_LIMIT"
+      ],
+      "deterministic_topic_sufficient": false,
+      "deterministic_format_sufficient": true,
+      "semantic_adjudication_topic_candidate": true,
+      "semantic_adjudication_format_candidate": false,
+      "candidate_triggers": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK"
+      ],
+      "architectural_observations": [
+        "The intelligence estimate, uncertainty, prediction, Russia, and NATO produced contextual analytical support but no geopolitical primary domain.",
+        "The final STANDARD_NEWS decision correctly resisted treating prediction or uncertainty alone as ANALYSIS; this is a format negative control despite the topic failure."
+      ]
+    },
+    {
+      "id": "049",
+      "expected_topic": "ECONOMY",
+      "predicted_topic": "ECONOMY",
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "predicted_intent": "GET_UPDATE",
+      "contextual_item_count": 7,
+      "semantic_relationship_count": 8,
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "failure_classes": [],
+      "deterministic_topic_sufficient": true,
+      "deterministic_format_sufficient": true,
+      "semantic_adjudication_topic_candidate": false,
+      "semantic_adjudication_format_candidate": false,
+      "candidate_triggers": [],
+      "architectural_observations": [
+        "Existing title, body, structured economic values, contextual economy support, and compositional PRIMARY_DOMAIN_ECONOMY evidence aligned.",
+        "The deterministic pipeline was sufficient for topic, STANDARD_NEWS, and GET_UPDATE; semantic absence must not be inferred because primary-domain evidence was present."
+      ]
+    },
+    {
+      "id": "050",
+      "expected_topic": "CRIME",
+      "predicted_topic": "EDUCATION",
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "predicted_intent": "GET_UPDATE",
+      "contextual_item_count": 1,
+      "semantic_relationship_count": 0,
+      "primary_domain_candidates": [],
+      "failure_classes": [
+        "CONTEXT_PRESENT_BUT_UNCOMPOSED",
+        "PRIMARY_DOMAIN_MODEL_GAP",
+        "ACTOR_SUBJECT_CONFUSION",
+        "CRIME_LEGAL_DOMAIN_GAP",
+        "EVENT_DOMAIN_MODEL_GAP",
+        "DETERMINISTIC_GENERALIZATION_LIMIT"
+      ],
+      "deterministic_topic_sufficient": false,
+      "deterministic_format_sufficient": true,
+      "semantic_adjudication_topic_candidate": true,
+      "semantic_adjudication_format_candidate": false,
+      "candidate_triggers": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "FORMAT_LOW_CONFIDENCE"
+      ],
+      "architectural_observations": [
+        "Education surface signals outranked the shooting event, fatalities, injuries, police response, and investigation because no reusable violent-crime event domain was produced.",
+        "STANDARD_NEWS and GET_UPDATE were sufficient; only topic needs broader event-domain adjudication."
+      ]
+    }
+  ]
+}
