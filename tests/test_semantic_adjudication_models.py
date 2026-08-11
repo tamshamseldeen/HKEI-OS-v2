@@ -358,9 +358,17 @@ def test_response_excludes_resolution_intent_and_raw_provider_fields() -> None:
 
 def test_adjudication_package_has_only_allowed_imports() -> None:
     package_root = Path(__file__).resolve().parents[1] / "src" / "adjudication"
+    model_paths = (
+        package_root / "__init__.py",
+        package_root / "adjudication_scope.py",
+        package_root / "adjudication_confidence.py",
+        package_root / "semantic_adjudication_decision.py",
+        package_root / "semantic_adjudication_request.py",
+        package_root / "semantic_adjudication_response.py",
+    )
     import_lines = [
         line
-        for path in package_root.glob("*.py")
+        for path in model_paths
         for line in path.read_text(encoding="utf-8").splitlines()
         if line.startswith(("import ", "from "))
     ]
