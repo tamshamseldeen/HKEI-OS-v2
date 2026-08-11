@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hkei.example/schemas/live-ab-summary-1.0.json",
+  "type": "object",
+  "required": ["status", "total_unseen_cases", "completed_cases", "candidate_wins", "baseline_wins", "ties", "both_fail", "decisive_comparisons", "candidate_decisive_win_rate", "critical_failures_by_code", "gate_result"],
+  "properties": {
+    "status": {"enum": ["COMPLETE", "INCOMPLETE"]},
+    "total_unseen_cases": {"type": "integer", "minimum": 0},
+    "completed_cases": {"type": "integer", "minimum": 0},
+    "candidate_wins": {"type": "integer", "minimum": 0},
+    "baseline_wins": {"type": "integer", "minimum": 0},
+    "ties": {"type": "integer", "minimum": 0},
+    "both_fail": {"type": "integer", "minimum": 0},
+    "decisive_comparisons": {"type": "integer", "minimum": 0},
+    "candidate_decisive_win_rate": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "critical_failures_by_code": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "gate_result": {"enum": ["PASS_TO_50_CASE_VALIDATION", "FAIL_ROOT_CAUSE_ANALYSIS", "INCOMPLETE"]}
+  }
+}

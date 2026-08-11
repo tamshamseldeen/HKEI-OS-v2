@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hkei.example/schemas/live-ab-writer-packet-1.0.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "content_type", "temporal_frame", "recommended_length", "story_kernel", "must_retain_facts", "direct_facts", "attributed_facts", "original_reporting_sources", "primary_authorities", "approved_quotes", "timeline", "optional_context", "forbidden_inferences", "excluded_facts"],
+  "properties": {
+    "case_id": {"type": "string", "minLength": 1},
+    "content_type": {"type": "string"},
+    "temporal_frame": {"type": "string"},
+    "recommended_length": {"type": "string"},
+    "story_kernel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["central_angle", "primary_development", "central_contrast", "primary_reader_question"],
+      "properties": {
+        "central_angle": {"type": "string"},
+        "primary_development": {"type": "string"},
+        "central_contrast": {"type": "string"},
+        "primary_reader_question": {"type": "string"}
+      }
+    },
+    "must_retain_facts": {"$ref": "#/$defs/auditableArray"},
+    "direct_facts": {"$ref": "#/$defs/auditableArray"},
+    "attributed_facts": {"$ref": "#/$defs/auditableArray"},
+    "original_reporting_sources": {"$ref": "#/$defs/auditableArray"},
+    "primary_authorities": {"$ref": "#/$defs/auditableArray"},
+    "approved_quotes": {"$ref": "#/$defs/auditableArray"},
+    "timeline": {"$ref": "#/$defs/auditableArray"},
+    "optional_context": {"$ref": "#/$defs/auditableArray"},
+    "forbidden_inferences": {"$ref": "#/$defs/auditableArray"},
+    "excluded_facts": {"$ref": "#/$defs/auditableArray"}
+  },
+  "$defs": {
+    "auditableArray": {
+      "type": "array",
+      "items": {"oneOf": [{"type": "string"}, {"type": "object"}]}
+    }
+  }
+}

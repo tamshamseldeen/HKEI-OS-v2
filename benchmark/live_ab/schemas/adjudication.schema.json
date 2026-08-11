@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hkei.example/schemas/live-ab-adjudication-1.0.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "outcome", "confidence", "reason_codes", "writer_packet_scores", "final_article_scores", "editorial_readiness", "added_value", "critical_failures", "failures"],
+  "properties": {
+    "case_id": {"type": "string", "minLength": 1},
+    "outcome": {"enum": ["X_WINS", "Y_WINS", "TIE", "BOTH_FAIL"]},
+    "confidence": {"enum": ["HIGH", "MEDIUM", "LOW"]},
+    "reason_codes": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "writer_packet_scores": {"$ref": "#/$defs/sideScores"},
+    "final_article_scores": {"$ref": "#/$defs/sideScores"},
+    "editorial_readiness": {"$ref": "#/$defs/sideReadiness"},
+    "added_value": {"$ref": "#/$defs/sideAddedValue"},
+    "critical_failures": {"$ref": "#/$defs/sideCriticalFailures"},
+    "failures": {"type": "array", "items": {"$ref": "#/$defs/failure"}}
+  },
+  "$defs": {
+    "scoreMap": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0, "maximum": 2}},
+    "sideScores": {"type": "object", "additionalProperties": false, "required": ["X", "Y"], "properties": {"X": {"$ref": "#/$defs/scoreMap"}, "Y": {"$ref": "#/$defs/scoreMap"}}},
+    "sideReadiness": {"type": "object", "additionalProperties": false, "required": ["X", "Y"], "properties": {"X": {"enum": ["PUBLISH_AS_IS", "MINOR_EDIT", "MAJOR_EDIT", "REJECT"]}, "Y": {"enum": ["PUBLISH_AS_IS", "MINOR_EDIT", "MAJOR_EDIT", "REJECT"]}}},
+    "sideAddedValue": {"type": "object", "additionalProperties": false, "required": ["X", "Y"], "properties": {"X": {"enum": ["AV3_SUBSTANTIAL_VALUE", "AV2_MODERATE_VALUE", "AV1_MINIMAL_VALUE", "AV0_NO_ADDED_VALUE"]}, "Y": {"enum": ["AV3_SUBSTANTIAL_VALUE", "AV2_MODERATE_VALUE", "AV1_MINIMAL_VALUE", "AV0_NO_ADDED_VALUE"]}}},
+    "criticalCode": {"enum": ["CF01_HALLUCINATED_MATERIAL_FACT", "CF02_WRONG_PERSON_OR_ENTITY", "CF03_MATERIAL_NUMBER_DISTORTION", "CF04_CENTRAL_ANGLE_DRIFT", "CF05_FALSE_ORIGINAL_ATTRIBUTION", "CF06_HISTORICAL_CURRENT_TIME_MIX", "CF07_SOURCE_SUBSTITUTION", "CF08_MATERIAL_LEGAL_OR_MEDICAL_MISSTATEMENT"]},
+    "sideCriticalFailures": {"type": "object", "additionalProperties": false, "required": ["X", "Y"], "properties": {"X": {"type": "array", "items": {"$ref": "#/$defs/criticalCode"}, "uniqueItems": true}, "Y": {"type": "array", "items": {"$ref": "#/$defs/criticalCode"}, "uniqueItems": true}}},
+    "failure": {"type": "object", "additionalProperties": false, "required": ["side", "origin", "type"], "properties": {"side": {"enum": ["X", "Y"]}, "origin": {"enum": ["SOURCE_EXTRACTION", "ANALYSIS", "VERIFICATION", "WRITER_PACKET", "WRITING", "SEO_METADATA", "FORMAT"]}, "type": {"enum": ["FACT", "ANGLE", "ATTRIBUTION", "TEMPORAL", "CONTEXT", "LANGUAGE", "SEO", "PROPORTIONALITY"]}, "description": {"type": "string"}}}
+  }
+}

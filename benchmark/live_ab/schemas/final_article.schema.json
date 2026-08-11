@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hkei.example/schemas/live-ab-final-article-1.0.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "seo_title", "google_news_headline", "meta_description", "slug", "summary", "featured_snippet", "article", "key_takeaways", "faq", "tags", "categories"],
+  "properties": {
+    "case_id": {"type": "string", "minLength": 1},
+    "seo_title": {"type": "string"},
+    "google_news_headline": {"type": "string"},
+    "meta_description": {"type": "string"},
+    "slug": {"type": "string"},
+    "summary": {"type": "string"},
+    "featured_snippet": {"type": "string"},
+    "article": {"type": "string"},
+    "key_takeaways": {"type": "array", "items": {"type": "string"}},
+    "faq": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["question", "answer"],
+        "properties": {"question": {"type": "string"}, "answer": {"type": "string"}}
+      }
+    },
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "categories": {"type": "array", "items": {"type": "string"}}
+  }
+}

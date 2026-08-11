@@ -1,0 +1,23 @@
+{
+  "benchmark_version": "1.0",
+  "candidate_prompt_version": "1.1",
+  "frozen_candidate_commit": "4b2b42472aa95f85d5cdf4a0a8c0377160921104",
+  "pilot_target_case_count": 20,
+  "current_unseen_case_count": 0,
+  "current_regression_case_count": 0,
+  "category_targets": {},
+  "gate_thresholds": {
+    "candidate_decisive_win_rate": 0.7,
+    "critical_failure_rate": 0.05,
+    "publish_as_is_plus_minor_edit_rate": 0.85,
+    "false_original_attribution_critical_failures": 0,
+    "material_fact_distortion_critical_failures": 0,
+    "average_added_value_score": 2.0,
+    "systematic_category_failures": 0,
+    "systematic_min_cases": 2,
+    "systematic_failure_rate": 0.5
+  },
+  "randomization_seed": 151,
+  "created_at": "2026-08-11T00:00:00Z",
+  "last_updated_at": "2026-08-11T00:00:00Z"
+}
