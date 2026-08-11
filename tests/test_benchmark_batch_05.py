@@ -182,6 +182,8 @@ def test_batch_contains_only_registered_inputs_and_authorized_outputs() -> None:
         "adjudication_gate_shadow.md",
         "adjudication_gate_error_analysis.json",
         "adjudication_gate_error_analysis.md",
+        "adjudication_hint_coverage_analysis.json",
+        "adjudication_hint_coverage_analysis.md",
         *(f"{case_id}/source.md" for case_id in EXPECTED_IDS),
     }
     assert not any(

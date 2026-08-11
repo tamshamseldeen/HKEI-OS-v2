@@ -1,0 +1,494 @@
+{
+  "cases_analyzed": 6,
+  "target_cases": [
+    "044",
+    "045",
+    "047",
+    "050"
+  ],
+  "negative_controls": [
+    "048",
+    "049"
+  ],
+  "hints_expected": 4,
+  "hints_observed": 0,
+  "failure_class_counts": {
+    "COMPONENTS_PRESENT_BUT_NOT_COMBINED": 4,
+    "CROSS_SENTENCE_STRUCTURE_REQUIRED": 4,
+    "HINT_ENGINE_GENERALIZATION_GAP": 4,
+    "HINT_THRESHOLD_TOO_STRICT": 4,
+    "LEXICAL_SIGNAL_MISSING": 4,
+    "LOCALITY_TOO_STRICT": 4,
+    "ROLE_ASSIGNMENT_MISMATCH": 4
+  },
+  "cases_requiring_cross_sentence_structure": [
+    "044",
+    "045",
+    "047",
+    "050"
+  ],
+  "cases_with_components_present_but_uncombined": [
+    "044",
+    "045",
+    "047",
+    "050"
+  ],
+  "cases_with_missing_component_extraction": [
+    "044",
+    "045",
+    "047",
+    "050"
+  ],
+  "recommendation_class_counts": {
+    "ADD_COMPONENT_AGGREGATION": 4,
+    "ADD_CROSS_SENTENCE_COMPOSITION": 4,
+    "EXPAND_GENERIC_ROLE_COVERAGE": 4,
+    "KEEP_CURRENT_BEHAVIOR": 2,
+    "RELAX_LOCALITY_WITH_BOUNDED_WINDOW": 4
+  },
+  "hint_construction_analysis": {
+    "required_component_count": {
+      "ADJUDICATION_EVENT_PUBLIC_SAFETY": 4,
+      "ADJUDICATION_ANALYTICAL_CONSTRAINT": 4,
+      "ADJUDICATION_EXPLANATORY_TRANSFORMATION": 4,
+      "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT": 5
+    },
+    "locality_constraints": "All component groups must match one segmented sentence.",
+    "accepted_roles": [
+      "RESULT",
+      "CONSEQUENCE",
+      "EXPLANATION",
+      "BACKGROUND"
+    ],
+    "accepted_reason_codes": [
+      "PUBLIC_SAFETY_EVENT_ADJUDICATION_HINT",
+      "ANALYTICAL_CONSTRAINT_ADJUDICATION_HINT",
+      "EXPLANATORY_TRANSFORMATION_ADJUDICATION_HINT",
+      "INSTITUTIONAL_POLICY_CONFLICT_ADJUDICATION_HINT"
+    ],
+    "negative_guards": [],
+    "threshold_behavior": "All literal component groups are mandatory; partial evidence is not retained for later composition."
+  },
+  "dominant_generalization_finding": "E. A mixture: the rules are conceptually aligned but combine literal vocabulary, missing component roles, an all-of threshold, and a synthetic single-sentence shape that does not reflect multi-sentence journalistic prose.",
+  "cases": [
+    {
+      "id": "044",
+      "target_hint": "ADJUDICATION_ANALYTICAL_CONSTRAINT",
+      "hint_observed": false,
+      "component_matrix": [
+        {
+          "component_name": "constraint_pressure",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "ضغوطًا متزايدة"
+        },
+        {
+          "component_name": "resource_limitation",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "BODY",
+          "sentence_index": 0,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "ارتفاع معدلات استخدام الذخائر"
+        },
+        {
+          "component_name": "capability",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "BODY",
+          "sentence_index": 1,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "قدرة أوكرانيا على تأمين"
+        },
+        {
+          "component_name": "consequence_impact",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "BODY",
+          "sentence_index": 3,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "تحولت قضية الدفاع الجوي"
+        }
+      ],
+      "locality_analysis": {
+        "same_sentence_possible": false,
+        "same_paragraph_possible": false,
+        "cross_sentence_required": true,
+        "document_level_pattern_required": false
+      },
+      "failure_classes": [
+        "LEXICAL_SIGNAL_MISSING",
+        "COMPONENTS_PRESENT_BUT_NOT_COMBINED",
+        "LOCALITY_TOO_STRICT",
+        "CROSS_SENTENCE_STRUCTURE_REQUIRED",
+        "ROLE_ASSIGNMENT_MISMATCH",
+        "HINT_THRESHOLD_TOO_STRICT",
+        "HINT_ENGINE_GENERALIZATION_GAP"
+      ],
+      "recommendation_classes": [
+        "RELAX_LOCALITY_WITH_BOUNDED_WINDOW",
+        "ADD_COMPONENT_AGGREGATION",
+        "EXPAND_GENERIC_ROLE_COVERAGE",
+        "ADD_CROSS_SENTENCE_COMPOSITION"
+      ],
+      "architectural_observations": [
+        "Constraint, resource pressure, capability, and impact are present across the lead and three following sentences, but none receives a reusable contextual component role.",
+        "The all-components-in-one-sentence threshold cannot compose the real structure; an adjacent-sentence or same-paragraph bounded window is needed."
+      ]
+    },
+    {
+      "id": "045",
+      "target_hint": "ADJUDICATION_EXPLANATORY_TRANSFORMATION",
+      "hint_observed": false,
+      "component_matrix": [
+        {
+          "component_name": "institution_action",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "روسيا إعادة هيكلة قواتها"
+        },
+        {
+          "component_name": "structural_change",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "تغييرات تنظيمية وقيادية"
+        },
+        {
+          "component_name": "new_organizational_unit",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "BODY",
+          "sentence_index": 0,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "استحداث قوات مستقلة"
+        },
+        {
+          "component_name": "role_evolution",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "BODY",
+          "sentence_index": 3,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "تحول الطائرات غير المأهولة"
+        },
+        {
+          "component_name": "transformation_context",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "في ضوء الخبرات"
+        }
+      ],
+      "locality_analysis": {
+        "same_sentence_possible": false,
+        "same_paragraph_possible": false,
+        "cross_sentence_required": true,
+        "document_level_pattern_required": false
+      },
+      "failure_classes": [
+        "LEXICAL_SIGNAL_MISSING",
+        "COMPONENTS_PRESENT_BUT_NOT_COMBINED",
+        "LOCALITY_TOO_STRICT",
+        "CROSS_SENTENCE_STRUCTURE_REQUIRED",
+        "ROLE_ASSIGNMENT_MISMATCH",
+        "HINT_THRESHOLD_TOO_STRICT",
+        "HINT_ENGINE_GENERALIZATION_GAP"
+      ],
+      "recommendation_classes": [
+        "RELAX_LOCALITY_WITH_BOUNDED_WINDOW",
+        "ADD_COMPONENT_AGGREGATION",
+        "EXPAND_GENERIC_ROLE_COVERAGE",
+        "ADD_CROSS_SENTENCE_COMPOSITION"
+      ],
+      "architectural_observations": [
+        "Restructuring, a new organizational unit, role evolution, and transformation context are distributed from the lead through later paragraphs.",
+        "Literal accepted forms do not cover several journalistic variants, and the one-sentence synthetic shape is absent."
+      ]
+    },
+    {
+      "id": "047",
+      "target_hint": "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT",
+      "hint_observed": false,
+      "component_matrix": [
+        {
+          "component_name": "institution",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "الجامعات الأميركية"
+        },
+        {
+          "component_name": "government_scrutiny",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "تدقيقًا متزايدًا من إدارة"
+        },
+        {
+          "component_name": "policy_disagreement",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "سياسات القبول الجامعي"
+        },
+        {
+          "component_name": "protests_rights_conflict",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "الاحتجاجات داخل الحرم الجامعي"
+        },
+        {
+          "component_name": "legal_political_dispute",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "BODY",
+          "sentence_index": 2,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "مواجهة سياسية وقانونية"
+        },
+        {
+          "component_name": "institutional_autonomy",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "BODY",
+          "sentence_index": 2,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "حدود استقلال الجامعات"
+        }
+      ],
+      "locality_analysis": {
+        "same_sentence_possible": false,
+        "same_paragraph_possible": false,
+        "cross_sentence_required": true,
+        "document_level_pattern_required": false
+      },
+      "failure_classes": [
+        "LEXICAL_SIGNAL_MISSING",
+        "COMPONENTS_PRESENT_BUT_NOT_COMBINED",
+        "LOCALITY_TOO_STRICT",
+        "CROSS_SENTENCE_STRUCTURE_REQUIRED",
+        "ROLE_ASSIGNMENT_MISMATCH",
+        "HINT_THRESHOLD_TOO_STRICT",
+        "HINT_ENGINE_GENERALIZATION_GAP"
+      ],
+      "recommendation_classes": [
+        "RELAX_LOCALITY_WITH_BOUNDED_WINDOW",
+        "ADD_COMPONENT_AGGREGATION",
+        "EXPAND_GENERIC_ROLE_COVERAGE",
+        "ADD_CROSS_SENTENCE_COMPOSITION"
+      ],
+      "architectural_observations": [
+        "Institution, government scrutiny, policy disagreement, protests, legal/political conflict, and autonomy are present, with the decisive legal/autonomy structure appearing later.",
+        "Only generic uncertainty is extracted; actor/authority and conflict component roles are unavailable for bounded composition."
+      ]
+    },
+    {
+      "id": "050",
+      "target_hint": "ADJUDICATION_EVENT_PUBLIC_SAFETY",
+      "hint_observed": false,
+      "component_matrix": [
+        {
+          "component_name": "serious_incident",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "حادث إطلاق نار"
+        },
+        {
+          "component_name": "casualties_injuries",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "القتلى والمصابين"
+        },
+        {
+          "component_name": "police_emergency_response",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "BODY",
+          "sentence_index": 0,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "استنفار أجهزة الشرطة والطوارئ"
+        },
+        {
+          "component_name": "investigation",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "BODY",
+          "sentence_index": 3,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "بدأت السلطات التحقيق"
+        }
+      ],
+      "locality_analysis": {
+        "same_sentence_possible": false,
+        "same_paragraph_possible": false,
+        "cross_sentence_required": true,
+        "document_level_pattern_required": false
+      },
+      "failure_classes": [
+        "LEXICAL_SIGNAL_MISSING",
+        "COMPONENTS_PRESENT_BUT_NOT_COMBINED",
+        "LOCALITY_TOO_STRICT",
+        "CROSS_SENTENCE_STRUCTURE_REQUIRED",
+        "ROLE_ASSIGNMENT_MISMATCH",
+        "HINT_THRESHOLD_TOO_STRICT",
+        "HINT_ENGINE_GENERALIZATION_GAP"
+      ],
+      "recommendation_classes": [
+        "RELAX_LOCALITY_WITH_BOUNDED_WINDOW",
+        "ADD_COMPONENT_AGGREGATION",
+        "EXPAND_GENERIC_ROLE_COVERAGE",
+        "ADD_CROSS_SENTENCE_COMPOSITION"
+      ],
+      "architectural_observations": [
+        "Incident and casualties occur in the lead, response in following sentences, and investigation later; the full event structure is intentionally not repeated in one sentence.",
+        "Attribution is extracted, but incident, casualty, response, and investigation roles are not, so both role coverage and bounded cross-sentence aggregation are required."
+      ]
+    },
+    {
+      "id": "048",
+      "target_hint": null,
+      "hint_observed": false,
+      "component_matrix": [
+        {
+          "component_name": "prediction",
+          "source_present": true,
+          "context_detected": false,
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "evidence_role": null,
+          "reason_code": null,
+          "evidence_span": "قد يحاول"
+        },
+        {
+          "component_name": "uncertainty",
+          "source_present": true,
+          "context_detected": true,
+          "source_section": "BODY",
+          "sentence_index": 0,
+          "evidence_role": "UNCERTAINTY",
+          "reason_code": "UNCERTAINTY_CONTEXT_PATTERN",
+          "evidence_span": "احتمال لجوء"
+        },
+        {
+          "component_name": "future_possibility",
+          "source_present": true,
+          "context_detected": true,
+          "source_section": "BODY",
+          "sentence_index": 3,
+          "evidence_role": "PREDICTION",
+          "reason_code": "PREDICTION_CONTEXT_PATTERN",
+          "evidence_span": "مستقبلًا"
+        },
+        {
+          "component_name": "intelligence_estimate",
+          "source_present": true,
+          "context_detected": true,
+          "source_section": "HEADLINE",
+          "sentence_index": 0,
+          "evidence_role": "UNCERTAINTY",
+          "reason_code": "UNCERTAINTY_CONTEXT_PATTERN",
+          "evidence_span": "تقديرات استخباراتية"
+        }
+      ],
+      "locality_analysis": {
+        "same_sentence_possible": null,
+        "same_paragraph_possible": null,
+        "cross_sentence_required": false,
+        "document_level_pattern_required": false
+      },
+      "failure_classes": [],
+      "recommendation_classes": [
+        "KEEP_CURRENT_BEHAVIOR"
+      ],
+      "architectural_observations": [
+        "Prediction, uncertainty, future possibility, and an intelligence estimate produce uncertainty/prediction evidence but no constraint structure.",
+        "The analytical-constraint hint correctly remains absent; future relaxation must still require constraint, resource/capability, and consequence components."
+      ]
+    },
+    {
+      "id": "049",
+      "target_hint": null,
+      "hint_observed": false,
+      "component_matrix": [
+        {
+          "component_name": "economic_indicator",
+          "source_present": true,
+          "context_detected": true,
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "evidence_role": "SUBJECT",
+          "reason_code": "ECONOMY_CONTEXT_PHRASE",
+          "evidence_span": "معدل البطالة"
+        },
+        {
+          "component_name": "economic_domain",
+          "source_present": true,
+          "context_detected": true,
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "evidence_role": "SUBJECT",
+          "reason_code": "ECONOMY_CONTEXT_PHRASE",
+          "evidence_span": "سوق العمل"
+        }
+      ],
+      "locality_analysis": {
+        "same_sentence_possible": null,
+        "same_paragraph_possible": null,
+        "cross_sentence_required": false,
+        "document_level_pattern_required": false
+      },
+      "failure_classes": [],
+      "recommendation_classes": [
+        "KEEP_CURRENT_BEHAVIOR"
+      ],
+      "architectural_observations": [
+        "Repeated economy context and indicator evidence provide a useful deterministic control, with no unresolved event, transformation, constraint, or institutional-conflict structure."
+      ]
+    }
+  ]
+}
