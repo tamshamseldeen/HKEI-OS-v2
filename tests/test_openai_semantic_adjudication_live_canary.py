@@ -9,7 +9,13 @@ from types import SimpleNamespace
 from unittest.mock import Mock
 
 import httpx
-from openai import APITimeoutError
+from openai import (
+    APITimeoutError,
+    AuthenticationError,
+    BadRequestError,
+    PermissionDeniedError,
+    RateLimitError,
+)
 import pytest
 
 import examples.run_openai_semantic_adjudication_live_canary as canary
@@ -50,6 +56,26 @@ class FakeResponses:
 
     def create(self, **kwargs: object) -> object:
         self.calls.append(kwargs)
+        status_errors = {
+            "authentication": (AuthenticationError, 401, None),
+            "permission": (PermissionDeniedError, 403, None),
+            "bad_request": (
+                BadRequestError,
+                400,
+                {"code": "unsupported_value", "param": "temperature"},
+            ),
+            "rate_limit": (RateLimitError, 429, None),
+        }
+        if self.mode in status_errors:
+            error_type, status_code, body = status_errors[self.mode]
+            raise error_type(
+                "raw sk-test-secret message with Bounded source body.",
+                response=httpx.Response(
+                    status_code,
+                    request=httpx.Request("POST", "https://example.invalid"),
+                ),
+                body=body,
+            )
         if self.mode == "timeout":
             raise APITimeoutError(
                 request=httpx.Request("POST", "https://example.invalid")
@@ -166,6 +192,7 @@ def test_success_runs_one_synthetic_source_and_one_openai_call(
     assert "Input Tokens:\n87" in output
     assert "Output Tokens:\n29" in output
     assert report.input_fingerprint in output
+    assert "Sanitized Provider Error:\nNONE" in output
 
 
 def test_config_validation_resolution_and_runtime_builder_are_used() -> None:
@@ -240,6 +267,42 @@ def test_provider_failures_are_fail_open_and_single_attempt(
     assert report.shadow_format_mutated is False
     assert report.shadow_intent_mutated is False
     assert report.adjudicated_topic is report.adjudicated_format is None
+
+
+@pytest.mark.parametrize(
+    ("mode", "status", "message"),
+    (
+        (
+            "authentication",
+            "CONFIGURATION_ERROR",
+            "OpenAI authentication failed.",
+        ),
+        ("permission", "CONFIGURATION_ERROR", "OpenAI permission denied."),
+        (
+            "bad_request",
+            "CONFIGURATION_ERROR",
+            "OpenAI request configuration was rejected. "
+            "code=unsupported_value; param=temperature",
+        ),
+        ("rate_limit", "PROVIDER_ERROR", "OpenAI rate limit reached."),
+    ),
+)
+def test_summary_preserves_exact_sanitized_provider_error(
+    mode: str,
+    status: str,
+    message: str,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    report, client, _ = run(mode=mode)
+    assert report.status == status
+    assert report.sanitized_provider_error == message
+    assert len(client.responses.calls) == 1
+    canary.print_summary(report)
+    output = capsys.readouterr().out
+    assert f"Sanitized Provider Error:\n{message}" in output
+    assert "raw sk-test-secret message" not in output
+    assert "sk-test-secret" not in output
+    assert "Bounded source body." not in output
 
 
 def test_summary_and_call_never_expose_secret_or_forbidden_content(

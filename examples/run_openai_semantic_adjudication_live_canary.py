@@ -23,11 +23,15 @@ from src.adjudication.openai_semantic_adjudication_provider import (
 from src.adjudication.semantic_adjudication_provider_config import (
     SemanticAdjudicationProviderConfig,
 )
+from src.adjudication.semantic_adjudication_provider import (
+    SemanticAdjudicationProvider,
+)
 from src.adjudication.semantic_adjudication_provider_config_validator import (
     SemanticAdjudicationProviderConfigValidator,
 )
 from src.adjudication.semantic_adjudication_provider_error import (
     SemanticAdjudicationProviderConfigurationError,
+    SemanticAdjudicationProviderError,
 )
 from src.adjudication.semantic_adjudication_runtime_context import (
     SemanticAdjudicationRuntimeContext,
@@ -85,6 +89,7 @@ class CanaryReport:
     shadow_format_mutated: bool
     shadow_intent_mutated: bool
     error_category: str | None
+    sanitized_provider_error: str | None
     exit_code: int
 
 
@@ -103,6 +108,29 @@ class _SingleRequestResponses:
 class _SingleRequestClient:
     def __init__(self, client: Any) -> None:
         self.responses = _SingleRequestResponses(client.responses)
+
+
+class _SanitizedErrorCapturingProvider(SemanticAdjudicationProvider):
+    """Retain only an HKEI provider-neutral sanitized error message."""
+
+    def __init__(self, provider: SemanticAdjudicationProvider) -> None:
+        self._provider = provider
+        self.sanitized_error: str | None = None
+
+    @property
+    def provider_name(self) -> str:
+        return self._provider.provider_name
+
+    @property
+    def model_name(self) -> str:
+        return self._provider.model_name
+
+    def adjudicate(self, request: Any) -> Any:
+        try:
+            return self._provider.adjudicate(request)
+        except SemanticAdjudicationProviderError as error:
+            self.sanitized_error = str(error)
+            raise
 
 
 def _create_openai_client(context: SemanticAdjudicationRuntimeContext) -> Any:
@@ -150,6 +178,7 @@ def _configuration_error_report(model: str) -> CanaryReport:
         shadow_format_mutated=False,
         shadow_intent_mutated=False,
         error_category="SemanticAdjudicationProviderConfigurationError",
+        sanitized_provider_error=None,
         exit_code=EXIT_CONFIGURATION_ERROR,
     )
 
@@ -177,10 +206,11 @@ def run_canary(
         return _configuration_error_report(model)
 
     guarded_client = _SingleRequestClient(raw_client)
-    provider = OpenAISemanticAdjudicationProvider(
+    openai_provider = OpenAISemanticAdjudicationProvider(
         runtime_context=runtime_context,
         client=guarded_client,
     )
+    provider = _SanitizedErrorCapturingProvider(openai_provider)
     workflow_arguments = {"provider": provider}
     if adjudication_gate is not None:
         workflow_arguments["adjudication_gate"] = adjudication_gate
@@ -242,6 +272,7 @@ def run_canary(
         shadow_format_mutated=format_mutated,
         shadow_intent_mutated=False,
         error_category=error_category,
+        sanitized_provider_error=provider.sanitized_error,
         exit_code=exit_code,
     )
 
@@ -276,6 +307,7 @@ def print_summary(report: CanaryReport) -> None:
         ("Shadow Topic Mutated", report.shadow_topic_mutated),
         ("Shadow Format Mutated", report.shadow_format_mutated),
         ("Shadow Intent Mutated", report.shadow_intent_mutated),
+        ("Sanitized Provider Error", report.sanitized_provider_error),
     )
     for label, value in rows:
         print(f"{label}:\n{_display(value)}")
