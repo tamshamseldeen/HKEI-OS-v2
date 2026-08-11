@@ -1,0 +1,284 @@
+{
+  "prompt_version": "1.1",
+  "format_count": 12,
+  "format_operational_count": 12,
+  "format_definitions": [
+    {
+      "label": "BREAKING",
+      "definition_present": true,
+      "definition_length": 117,
+      "core_distinguishing_terms": [
+        "urgently",
+        "unfolding",
+        "time-sensitive",
+        "updates"
+      ],
+      "overlap_candidates": [
+        "STANDARD_NEWS"
+      ],
+      "operational_classification": "OPERATIONAL",
+      "treatment_or_purpose": true,
+      "observable_structural_cues": true,
+      "nearby_format_distinction": true
+    },
+    {
+      "label": "STANDARD_NEWS",
+      "definition_present": true,
+      "definition_length": 195,
+      "core_distinguishing_terms": [
+        "recent event",
+        "what happened",
+        "do not dominate"
+      ],
+      "overlap_candidates": [
+        "BREAKING",
+        "RESULT_REPORT"
+      ],
+      "operational_classification": "OPERATIONAL",
+      "treatment_or_purpose": true,
+      "observable_structural_cues": true,
+      "nearby_format_distinction": true
+    },
+    {
+      "label": "SERVICE",
+      "definition_present": true,
+      "definition_length": 150,
+      "core_distinguishing_terms": [
+        "actionable",
+        "deadlines",
+        "eligibility",
+        "obtain a service"
+      ],
+      "overlap_candidates": [
+        "GUIDE"
+      ],
+      "operational_classification": "OPERATIONAL",
+      "treatment_or_purpose": true,
+      "observable_structural_cues": true,
+      "nearby_format_distinction": true
+    },
+    {
+      "label": "GUIDE",
+      "definition_present": true,
+      "definition_length": 189,
+      "core_distinguishing_terms": [
+        "instructs",
+        "ordered process",
+        "practical decision"
+      ],
+      "overlap_candidates": [
+        "SERVICE"
+      ],
+      "operational_classification": "OPERATIONAL",
+      "treatment_or_purpose": true,
+      "observable_structural_cues": true,
+      "nearby_format_distinction": true
+    },
+    {
+      "label": "EXPLAINER",
+      "definition_present": true,
+      "definition_length": 191,
+      "core_distinguishing_terms": [
+        "understanding",
+        "how something works",
+        "parts fit together"
+      ],
+      "overlap_candidates": [
+        "ANALYSIS"
+      ],
+      "operational_classification": "OPERATIONAL",
+      "treatment_or_purpose": true,
+      "observable_structural_cues": true,
+      "nearby_format_distinction": true
+    },
+    {
+      "label": "FEATURE",
+      "definition_present": true,
+      "definition_length": 136,
+      "core_distinguishing_terms": [
+        "depth",
+        "narrative",
+        "scene",
+        "thematic"
+      ],
+      "overlap_candidates": [
+        "PROFILE"
+      ],
+      "operational_classification": "OPERATIONAL",
+      "treatment_or_purpose": true,
+      "observable_structural_cues": true,
+      "nearby_format_distinction": true
+    },
+    {
+      "label": "FACT_CHECK",
+      "definition_present": true,
+      "definition_length": 120,
+      "core_distinguishing_terms": [
+        "tests a specific factual claim",
+        "accuracy"
+      ],
+      "overlap_candidates": [],
+      "operational_classification": "OPERATIONAL",
+      "treatment_or_purpose": true,
+      "observable_structural_cues": true,
+      "nearby_format_distinction": true
+    },
+    {
+      "label": "ANALYSIS",
+      "definition_present": true,
+      "definition_length": 214,
+      "core_distinguishing_terms": [
+        "causes",
+        "tradeoffs",
+        "implications",
+        "structurally important"
+      ],
+      "overlap_candidates": [
+        "EXPLAINER"
+      ],
+      "operational_classification": "OPERATIONAL",
+      "treatment_or_purpose": true,
+      "observable_structural_cues": true,
+      "nearby_format_distinction": true
+    },
+    {
+      "label": "INTERVIEW",
+      "definition_present": true,
+      "definition_length": 130,
+      "core_distinguishing_terms": [
+        "questions and answers",
+        "direct responses",
+        "exchange"
+      ],
+      "overlap_candidates": [
+        "PROFILE"
+      ],
+      "operational_classification": "OPERATIONAL",
+      "treatment_or_purpose": true,
+      "observable_structural_cues": true,
+      "nearby_format_distinction": true
+    },
+    {
+      "label": "PROFILE",
+      "definition_present": true,
+      "definition_length": 111,
+      "core_distinguishing_terms": [
+        "portrays",
+        "character",
+        "history",
+        "motivations"
+      ],
+      "overlap_candidates": [
+        "FEATURE",
+        "INTERVIEW"
+      ],
+      "operational_classification": "OPERATIONAL",
+      "treatment_or_purpose": true,
+      "observable_structural_cues": true,
+      "nearby_format_distinction": true
+    },
+    {
+      "label": "RESULT_REPORT",
+      "definition_present": true,
+      "definition_length": 113,
+      "core_distinguishing_terms": [
+        "completed measurable outcome",
+        "results"
+      ],
+      "overlap_candidates": [
+        "STANDARD_NEWS"
+      ],
+      "operational_classification": "OPERATIONAL",
+      "treatment_or_purpose": true,
+      "observable_structural_cues": true,
+      "nearby_format_distinction": true
+    },
+    {
+      "label": "TREND_UPDATE",
+      "definition_present": true,
+      "definition_length": 131,
+      "core_distinguishing_terms": [
+        "pattern over time",
+        "multiple observations",
+        "changes"
+      ],
+      "overlap_candidates": [
+        "STANDARD_NEWS",
+        "ANALYSIS"
+      ],
+      "operational_classification": "OPERATIONAL",
+      "treatment_or_purpose": true,
+      "observable_structural_cues": true,
+      "nearby_format_distinction": true
+    }
+  ],
+  "critical_pair_matrix": {
+    "STANDARD_NEWS__ANALYSIS": "CLEAR",
+    "STANDARD_NEWS__EXPLAINER": "CLEAR",
+    "STANDARD_NEWS__SERVICE": "CLEAR",
+    "STANDARD_NEWS__GUIDE": "CLEAR",
+    "ANALYSIS__EXPLAINER": "PARTIAL_OVERLAP",
+    "SERVICE__GUIDE": "CLEAR",
+    "BREAKING__STANDARD_NEWS": "PARTIAL_OVERLAP",
+    "STANDARD_NEWS__RESULT_REPORT": "PARTIAL_OVERLAP",
+    "STANDARD_NEWS__TREND_UPDATE": "CLEAR",
+    "FEATURE__PROFILE": "PARTIAL_OVERLAP"
+  },
+  "topic_definition_operational": true,
+  "anchoring_reduction_strength": "STRONG",
+  "structured_evidence_audit": {
+    "contextual_supports": "DEFINED_AND_ACTIONABLE",
+    "contextual_suppressions": "DEFINED_AND_ACTIONABLE",
+    "semantic_relationships": "DEFINED_AND_ACTIONABLE",
+    "primary_candidates": "DEFINED_AND_ACTIONABLE",
+    "secondary_candidates": "DEFINED_AND_ACTIONABLE",
+    "format_support": "DEFINED_AND_ACTIONABLE",
+    "format_suppression": "DEFINED_AND_ACTIONABLE",
+    "reason_codes": "DEFINED_AND_ACTIONABLE",
+    "warnings": "DEFINED_AND_ACTIONABLE"
+  },
+  "suppression_semantics_correct": true,
+  "evidence_priority_order": [
+    "article central purpose and treatment",
+    "source title, lead, and body excerpt",
+    "structured evidence",
+    "deterministic baseline as reference only"
+  ],
+  "prompt_size_metrics": {
+    "TOPIC_REQUIRED": {
+      "instruction_chars": 1658,
+      "total_prompt_chars": 6069,
+      "label_definition_chars": 2460,
+      "structured_evidence_instruction_chars": 528
+    },
+    "FORMAT_REQUIRED": {
+      "instruction_chars": 1658,
+      "total_prompt_chars": 6058,
+      "label_definition_chars": 2460,
+      "structured_evidence_instruction_chars": 528
+    },
+    "TOPIC_AND_FORMAT_REQUIRED": {
+      "instruction_chars": 1658,
+      "total_prompt_chars": 6152,
+      "label_definition_chars": 2460,
+      "structured_evidence_instruction_chars": 528
+    }
+  },
+  "prompt_economy": "COMPACT",
+  "candidate_duplication": {
+    "label_occurrences_across_definitions_legal_candidates_baseline": 18,
+    "qualitative_impact": "LOW",
+    "explanation": "Candidate names recur in definitions, legal candidates, and the baseline only where needed to define, constrain, and contextualize."
+  },
+  "contradictions_found": [],
+  "cot_safe": true,
+  "benchmark_leakage": false,
+  "schema_alignment": {
+    "format_labels_exact": true,
+    "candidate_topic_labels_exact": true
+  },
+  "confidence_semantics": "CLEAR",
+  "ambiguity_guidance_clear": true,
+  "overall_quality": "EXCELLENT",
+  "recommended_next_step": "READY_FOR_LIVE_AB_COMPARISON"
+}
