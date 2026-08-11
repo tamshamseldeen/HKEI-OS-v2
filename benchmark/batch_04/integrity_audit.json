@@ -1,0 +1,88 @@
+{
+  "batch": "batch_04",
+  "case_count": 10,
+  "compatible_annotations": 0,
+  "incompatible_annotations": 10,
+  "cases": [
+    {
+      "id": "031",
+      "source_title": "الطقس اليوم.. شديد الحرارة رطب ونشاط رياح يلطف الأجواء والمحسوسة بالقاهرة 38",
+      "expected_topic": "WEATHER",
+      "sensitive_context": "SECURITY",
+      "annotation_corresponds_to_source": false,
+      "audit_reason": "The source is a weather report; the annotation describes a potential cross-border security attack."
+    },
+    {
+      "id": "032",
+      "source_title": "استقرار سعر الأسمنت اليوم الجمعة 7 أغسطس 2026.. الطن بـ4000 جنيه",
+      "expected_topic": "ECONOMY",
+      "sensitive_context": "CRIMINAL_LEGAL",
+      "annotation_corresponds_to_source": false,
+      "audit_reason": "The source reports cement pricing; the annotation describes a criminal conviction and disputed family claim."
+    },
+    {
+      "id": "033",
+      "source_title": "الأهلي يبدأ اليوم برنامجه التدريبي بالمعسكر الخارجي",
+      "expected_topic": "SPORTS",
+      "sensitive_context": "LEGAL_POLITICAL",
+      "annotation_corresponds_to_source": false,
+      "audit_reason": "The source reports a football training program; the annotation describes executive action and constitutional litigation."
+    },
+    {
+      "id": "034",
+      "source_title": "تعرف على مواعيد مباريات الأهلي في الدوري الممتاز موسم 2026-2027",
+      "expected_topic": "SPORTS",
+      "sensitive_context": "WAR_SECURITY",
+      "annotation_corresponds_to_source": false,
+      "audit_reason": "The source lists football match dates; the annotation describes war and defense analysis."
+    },
+    {
+      "id": "035",
+      "source_title": "اعرف سعر ومواصفات إم جي ZS الكروس أوفر في مصر",
+      "expected_topic": "TECHNOLOGY",
+      "sensitive_context": "MILITARY_DEFENSE",
+      "annotation_corresponds_to_source": false,
+      "audit_reason": "The source covers a civilian vehicle's price and specifications; the annotation describes military restructuring and unmanned systems."
+    },
+    {
+      "id": "036",
+      "source_title": "قبل فوات الأوان.. 5 نصائح من وزارة الصحة قد تحميك من أخطر الأمراض المزمنة",
+      "expected_topic": "HEALTH",
+      "sensitive_context": "BIOSECURITY",
+      "annotation_corresponds_to_source": false,
+      "audit_reason": "The source gives chronic-disease prevention advice; the annotation describes dual-use biological research and procedural-enablement concerns."
+    },
+    {
+      "id": "037",
+      "source_title": "وزير الصحة يوقع مذكرة تفاهم مع نظيره التشادي لدعم القطاع الصحي",
+      "expected_topic": "HEALTH",
+      "sensitive_context": "POLITICAL_LEGAL",
+      "annotation_corresponds_to_source": false,
+      "audit_reason": "The source reports a bilateral health-sector memorandum; the annotation describes discrimination allegations, protests, and institutional conflict."
+    },
+    {
+      "id": "038",
+      "source_title": "الصحة العالمية: أوغندا تسيطر على إيبولا محليًا واستمرار تفشي الفيروس في الكونغو",
+      "expected_topic": "HEALTH",
+      "sensitive_context": "INTELLIGENCE_SECURITY",
+      "annotation_corresponds_to_source": false,
+      "audit_reason": "The source reports Ebola outbreaks in Uganda and Congo; the annotation describes an intelligence estimate about a possible Russian attack."
+    },
+    {
+      "id": "039",
+      "source_title": "سعر الذهب اليوم الجمعة 7 أغسطس 2026 في مصر.. عيار 21 يسجل 5980 جنيهًا",
+      "expected_topic": "ECONOMY",
+      "sensitive_context": "ECONOMIC_DATA",
+      "annotation_corresponds_to_source": false,
+      "audit_reason": "The source reports a current gold price; the annotation specifically requires distinguishing a reported rate from an economist estimate, which this source does not present."
+    },
+    {
+      "id": "040",
+      "source_title": "البترول تنجح في إضافة 1300 مليون قدم مكعب غاز وأكثر من 21 ألف برميل زيت يوميًا",
+      "expected_topic": "ECONOMY",
+      "sensitive_context": "VIOLENT_CRIME",
+      "annotation_corresponds_to_source": false,
+      "audit_reason": "The source reports petroleum and gas production; the annotation describes a fatal school shooting and casualty attribution."
+    }
+  ]
+}
