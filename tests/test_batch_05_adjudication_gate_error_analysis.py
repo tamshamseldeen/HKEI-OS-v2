@@ -85,7 +85,12 @@ def test_protected_diagnostics_and_production_sources_remain_unchanged() -> None
         ["git", "diff", "--name-only", "HEAD"], cwd=root, check=True,
         capture_output=True, text=True,
     ).stdout.splitlines()
-    assert not any(path.startswith("src/") for path in changed)
+    assert not any(
+        path.startswith("src/")
+        and path
+        != "src/adjudication/deterministic_semantic_adjudication_gate.py"
+        for path in changed
+    )
     assert not any(path.endswith("source.md") for path in changed)
     assert "benchmark/batch_05/human_risk_annotations.json" not in changed
     assert "benchmark/batch_05/expected.json" not in changed

@@ -1,6 +1,9 @@
 """Deterministic gate for deciding whether editorial adjudication is needed."""
 
 from src.evidence.contextual_evidence import ContextualEvidence
+from src.evidence.contextual_evidence_item import ContextualEvidenceItem
+from src.evidence.evidence_role import EvidenceRole
+from src.evidence.evidence_strength import EvidenceStrength
 from src.formatting.editorial_format import EditorialFormat
 from src.formatting.editorial_format_classification import (
     EditorialFormatClassification,
@@ -65,6 +68,12 @@ class DeterministicSemanticAdjudicationGate:
             semantic_supports=semantic_supports,
             primary_domain_candidates=semantic_evidence.primary_domain_candidates,
         )
+        specific_topic_with_unresolved_domain = (
+            topic_classification.topic is not Topic.GENERAL
+            and topic_classification.confidence is not TopicConfidence.HIGH
+            and no_primary_domain
+            and not self._strong_primary_domains(semantic_evidence)
+        )
 
         format_low_confidence = (
             format_classification.confidence is EditorialFormatConfidence.LOW
@@ -73,9 +82,17 @@ class DeterministicSemanticAdjudicationGate:
         semantic_format_targets = self._format_targets(
             semantic_evidence.format_support
         )
+        prediction_only_analysis = self._is_prediction_only_analysis_support(
+            contextual_items=contextual_items,
+            semantic_format_targets=semantic_format_targets,
+            format_warnings=format_classification.warnings,
+        )
+        effective_contextual_format_targets = set(contextual_format_targets)
+        if prediction_only_analysis:
+            effective_contextual_format_targets.discard("ANALYSIS")
         final_format = format_classification.editorial_format.value
         analytical_news_fallback = (
-            "ANALYSIS" in contextual_format_targets
+            "ANALYSIS" in effective_contextual_format_targets
             and format_classification.editorial_format
             is EditorialFormat.STANDARD_NEWS
             and format_classification.confidence
@@ -88,7 +105,8 @@ class DeterministicSemanticAdjudicationGate:
             is not EditorialFormat.EXPLAINER
         )
         contextual_format_not_promoted = any(
-            target != final_format for target in contextual_format_targets
+            target != final_format
+            for target in effective_contextual_format_targets
         )
         format_conflict = self._has_format_conflict(semantic_evidence)
 
@@ -104,6 +122,10 @@ class DeterministicSemanticAdjudicationGate:
             (method_subject_ambiguity, "METHOD_SUBJECT_AMBIGUITY"),
             (semantic_domain_conflict, "SEMANTIC_DOMAIN_CONFLICT"),
             (multiple_topic_signals, "MULTIPLE_COMPETING_TOPIC_SIGNALS"),
+            (
+                specific_topic_with_unresolved_domain,
+                "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
+            ),
             (format_low_confidence, "FORMAT_LOW_CONFIDENCE"),
             (
                 analytical_news_fallback,
@@ -134,6 +156,15 @@ class DeterministicSemanticAdjudicationGate:
             or (
                 method_subject_ambiguity
                 and topic_classification.confidence is not TopicConfidence.HIGH
+            )
+            or (
+                specific_topic_with_unresolved_domain
+                and (
+                    topic_classification.confidence is TopicConfidence.MEDIUM
+                    or context_without_relationship
+                    or multiple_topic_signals
+                    or method_subject_ambiguity
+                )
             )
         )
         format_required = (
@@ -229,6 +260,19 @@ class DeterministicSemanticAdjudicationGate:
             or (not candidates and len(supported) > 1)
         )
 
+    def _strong_primary_domains(
+        self,
+        evidence: CompositionalSemanticEvidence,
+    ) -> set[str]:
+        return self._primary_domains(
+            tuple(
+                support
+                for relationship in evidence.relationships
+                if relationship.strength is EvidenceStrength.STRONG
+                for support in relationship.supports
+            )
+        )
+
     def _has_multiple_competing_topic_signals(
         self,
         *,
@@ -256,6 +300,54 @@ class DeterministicSemanticAdjudicationGate:
         supported = self._format_targets(evidence.format_support)
         suppressed = self._format_targets(evidence.format_suppression)
         return len(supported) > 1 or bool(supported & suppressed)
+
+    @staticmethod
+    def _is_prediction_only_analysis_support(
+        *,
+        contextual_items: tuple[ContextualEvidenceItem, ...],
+        semantic_format_targets: set[str],
+        format_warnings: tuple[str, ...],
+    ) -> bool:
+        """Identify ANALYSIS support explicitly limited to future uncertainty."""
+        analysis_items = tuple(
+            item for item in contextual_items
+            if "FORMAT_ANALYSIS" in item.supports
+        )
+        if (
+            not analysis_items
+            or "ANALYSIS" in semantic_format_targets
+            or "SOURCE_TOO_THIN_FOR_ANALYSIS" not in format_warnings
+        ):
+            return False
+
+        substantive_roles = {
+            EvidenceRole.INTERPRETATION,
+            EvidenceRole.CONSEQUENCE,
+            EvidenceRole.EXPLANATION,
+            EvidenceRole.COMPARISON,
+        }
+        if any(item.role in substantive_roles for item in contextual_items):
+            return False
+
+        uncertainty_roles = {
+            EvidenceRole.PREDICTION,
+            EvidenceRole.UNCERTAINTY,
+        }
+        uncertainty_tokens = (
+            "PREDICTION",
+            "UNCERTAIN",
+            "FUTURE_POSSIBILITY",
+            "INTELLIGENCE_ESTIMATE",
+        )
+        return all(
+            item.role in uncertainty_roles
+            or any(
+                token in value
+                for token in uncertainty_tokens
+                for value in (item.reason_code, *item.supports)
+            )
+            for item in analysis_items
+        )
 
     @staticmethod
     def _resolve_scope(

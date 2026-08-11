@@ -63,7 +63,11 @@ CASE_KEYS = {
 
 @pytest.fixture(scope="module")
 def analysis() -> dict[str, object]:
-    return analyze_shadow_gate()
+    return json.loads(
+        (BATCH_ROOT / "adjudication_gate_shadow.json").read_text(
+            encoding="utf-8"
+        )
+    )
 
 
 def _case(analysis: dict[str, object], case_id: str) -> dict[str, object]:

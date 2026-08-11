@@ -51,19 +51,22 @@ def topic(
 def editorial_format(
     value: EditorialFormat = EditorialFormat.STANDARD_NEWS,
     confidence: EditorialFormatConfidence = EditorialFormatConfidence.HIGH,
+    *,
+    warnings: tuple[str, ...] = (),
 ) -> EditorialFormatClassification:
     return EditorialFormatClassification(
         value,
         confidence,
         ("DEFAULT_STANDARD_NEWS_FORMAT",),
         ("EXISTING_CONTENT_TYPE_FALLBACK",),
-        (),
+        warnings,
     )
 
 
 def contextual_item(
     *supports: str,
     role: EvidenceRole = EvidenceRole.CLAIM,
+    reason_code: str = "STRUCTURED_TEST_EVIDENCE",
 ) -> ContextualEvidenceItem:
     return ContextualEvidenceItem(
         source_section=SourceSection.LEAD,
@@ -72,7 +75,7 @@ def contextual_item(
         evidence_level=EvidenceLevel.CONTEXT,
         role=role,
         strength=EvidenceStrength.STRONG,
-        reason_code="STRUCTURED_TEST_EVIDENCE",
+        reason_code=reason_code,
         supports=supports,
         suppresses=(),
     )
@@ -192,6 +195,7 @@ def test_low_topic_and_no_primary_without_third_signal_is_insufficient() -> None
     assert result.trigger_signals == (
         "TOPIC_LOW_CONFIDENCE",
         "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
     )
     assert result.topic_required is False
 
@@ -210,6 +214,53 @@ def test_low_topic_plus_uncomposed_context_requires_topic() -> None:
         contextual=context(contextual_item("CLAIM_ATTRIBUTED")),
     )
     assert result.scope is AdjudicationScope.TOPIC_REQUIRED
+
+
+def test_specific_medium_topic_without_primary_domain_requires_topic() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.TECHNOLOGY, TopicConfidence.MEDIUM),
+        contextual=context(contextual_item("TOPIC_TECHNOLOGY")),
+        semantic=semantics(relationships=(relationship(),)),
+    )
+    assert result.topic_required is True
+    assert result.scope is AdjudicationScope.TOPIC_REQUIRED
+    assert "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN" in result.trigger_signals
+
+
+def test_specific_high_topic_without_primary_domain_remains_sufficient() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.EDUCATION, TopicConfidence.HIGH),
+        contextual=context(contextual_item("CLAIM_ATTRIBUTED")),
+    )
+    assert "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN" not in result.trigger_signals
+    assert result.scope is AdjudicationScope.NOT_REQUIRED
+    assert result.reason_codes == ("DETERMINISTIC_RESULT_SUFFICIENT",)
+
+
+def test_semantic_primary_support_resolves_specific_topic_domain() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.TECHNOLOGY, TopicConfidence.MEDIUM),
+        semantic=semantics(
+            relationships=(relationship(supports=("PRIMARY_DOMAIN_TECHNOLOGY",)),)
+        ),
+    )
+    assert "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN" not in result.trigger_signals
+    assert result.scope is AdjudicationScope.NOT_REQUIRED
+
+
+def test_unresolved_specific_topic_trigger_order_is_deterministic() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.TECHNOLOGY, TopicConfidence.MEDIUM),
+        contextual=context(
+            contextual_item("TOPIC_TECHNOLOGY", "TOPIC_HEALTH")
+        ),
+    )
+    assert result.trigger_signals == (
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "MULTIPLE_COMPETING_TOPIC_SIGNALS",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
+    )
 
 
 def test_multiple_primary_domains_create_semantic_conflict() -> None:
@@ -273,6 +324,113 @@ def test_contextual_analysis_support_requires_format_adjudication() -> None:
         "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
         "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED",
     )
+
+
+@pytest.mark.parametrize(
+    ("role", "reason_code"),
+    (
+        (EvidenceRole.PREDICTION, "PREDICTION_SIGNAL"),
+        (EvidenceRole.UNCERTAINTY, "UNCERTAINTY_SIGNAL"),
+        (EvidenceRole.CLAIM, "INTELLIGENCE_ESTIMATE_FUTURE_POSSIBILITY"),
+    ),
+)
+def test_prediction_uncertainty_only_analysis_support_does_not_trigger_format(
+    role: EvidenceRole,
+    reason_code: str,
+) -> None:
+    result = evaluate(
+        semantic=semantics(primary=("PRIMARY_DOMAIN_WORLD",)),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.MEDIUM,
+            warnings=("SOURCE_TOO_THIN_FOR_ANALYSIS",),
+        ),
+        contextual=context(
+            contextual_item(
+                "CLAIM_UNCERTAIN",
+                "FORMAT_ANALYSIS",
+                role=role,
+                reason_code=reason_code,
+            )
+        ),
+    )
+    assert "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK" not in (
+        result.trigger_signals
+    )
+    assert "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED" not in (
+        result.trigger_signals
+    )
+    assert result.format_required is False
+
+
+@pytest.mark.parametrize(
+    "role",
+    (EvidenceRole.INTERPRETATION, EvidenceRole.CONSEQUENCE),
+)
+def test_genuine_structured_analysis_support_still_triggers_format(
+    role: EvidenceRole,
+) -> None:
+    result = evaluate(
+        semantic=semantics(primary=("PRIMARY_DOMAIN_WORLD",)),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.MEDIUM,
+        ),
+        contextual=context(contextual_item("FORMAT_ANALYSIS", role=role)),
+    )
+    assert "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK" in (
+        result.trigger_signals
+    )
+    assert result.format_required is True
+
+
+def test_separate_interpretation_evidence_prevents_prediction_only_guard() -> None:
+    result = evaluate(
+        semantic=semantics(primary=("PRIMARY_DOMAIN_WORLD",)),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.MEDIUM,
+        ),
+        contextual=context(
+            contextual_item(
+                "CLAIM_UNCERTAIN",
+                "FORMAT_ANALYSIS",
+                role=EvidenceRole.PREDICTION,
+            ),
+            contextual_item(
+                "INTENT_UNDERSTAND_IMPACT",
+                role=EvidenceRole.INTERPRETATION,
+            ),
+        ),
+    )
+    assert "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK" in (
+        result.trigger_signals
+    )
+    assert result.format_required is True
+
+
+def test_semantic_analysis_support_preserves_conservative_format_behavior() -> None:
+    result = evaluate(
+        semantic=semantics(
+            primary=("PRIMARY_DOMAIN_WORLD",),
+            format_support=("FORMAT_ANALYSIS",),
+        ),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.MEDIUM,
+        ),
+        contextual=context(
+            contextual_item(
+                "CLAIM_UNCERTAIN",
+                "FORMAT_ANALYSIS",
+                role=EvidenceRole.PREDICTION,
+            )
+        ),
+    )
+    assert "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK" in (
+        result.trigger_signals
+    )
+    assert result.format_required is True
 
 
 def test_unpromoted_contextual_format_support_requires_format() -> None:
