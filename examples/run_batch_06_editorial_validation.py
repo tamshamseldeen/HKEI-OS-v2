@@ -32,6 +32,8 @@ BATCH_ROOT = PROJECT_ROOT / "benchmark" / "batch_06"
 RAW_SOURCE = PROJECT_ROOT.parent / "benchmark_sources" / "batch_06_raw.txt"
 OUTPUT_JSON = BATCH_ROOT / "editorial_validation.json"
 OUTPUT_MD = BATCH_ROOT / "editorial_validation.md"
+COMPARISON_JSON = BATCH_ROOT / "post_hkei_157_comparison.json"
+COMPARISON_MD = BATCH_ROOT / "post_hkei_157_comparison.md"
 CASE_IDS = tuple(f"{value:03d}" for value in range(51, 61))
 RAW_SHA256 = "7ef269f70c78816521c8d3228db720b771294c9fb91fcbe31629b7748f115a06"
 
@@ -340,10 +342,228 @@ Batch 06 records observed generalization and gate coverage without tuning. Corre
 """
 
 
+def _mismatch_ids(analysis: dict[str, Any], dimension: str) -> list[str]:
+    """Return mismatching case IDs for one frozen editorial dimension."""
+    field = "intent_match" if dimension == "reader_intent" else f"{dimension}_match"
+    return [case["id"] for case in analysis["cases"] if not case[field]]
+
+
+def _improvement_classification(comparison: dict[str, Any]) -> str:
+    """Classify observed deltas without changing any production decision."""
+    accuracy_deltas = (
+        comparison["topic_accuracy_delta"],
+        comparison["format_accuracy_delta"],
+        comparison["reader_intent_accuracy_delta"],
+        comparison["full_case_accuracy_delta"],
+    )
+    evidence_improved = (
+        comparison["semantic_relationship_count_delta"] > 0
+        or comparison["primary_domain_count_delta"] > 0
+        or comparison["format_support_count_delta"] > 0
+    )
+    if any(delta <= -20.0 for delta in accuracy_deltas):
+        return "REGRESSION"
+    if (
+        max(accuracy_deltas[:2]) >= 20.0
+        and comparison["semantic_relationship_count_delta"] >= 2
+        and comparison["current_semantic_format_support"] > 0
+        and comparison["regression_controls_preserved"]
+    ):
+        return "STRONG_IMPROVEMENT"
+    if sum(delta > 0 for delta in accuracy_deltas) >= 2 and evidence_improved:
+        return "MEANINGFUL_IMPROVEMENT"
+    if any(delta > 0 for delta in accuracy_deltas) and any(
+        delta < 0 for delta in accuracy_deltas
+    ):
+        return "MIXED"
+    if not any(delta > 0 for delta in accuracy_deltas) and not evidence_improved:
+        return "NO_IMPROVEMENT"
+    return "MIXED"
+
+
+def build_comparison(
+    previous: dict[str, Any],
+    current: dict[str, Any],
+) -> dict[str, Any]:
+    """Compare the preserved HKEI-155 baseline with the current blind run."""
+    previous_by_id = {case["id"]: case for case in previous["cases"]}
+    current_by_id = {case["id"]: case for case in current["cases"]}
+    result: dict[str, Any] = {
+        "batch": "batch_06",
+        "baseline": "HKEI-155",
+        "current": "post-HKEI-157",
+        "baseline_snapshot": previous,
+        "case_count": current["case_count"],
+        "provider_calls": current["provider_calls"],
+        "expected_labels_unchanged": (
+            previous["expected_labels_sha256"] == current["expected_labels_sha256"]
+        ),
+        "raw_source_integrity": current["source_integrity"] and (
+            previous["raw_source_sha256"] == current["raw_source_sha256"]
+        ),
+        "regression_controls_preserved": all(
+            current[key] == 100.0
+            for key in (
+                "batch_01_topic_accuracy",
+                "batch_02_full_accuracy",
+                "batch_03_full_accuracy",
+            )
+        ),
+    }
+    for key in (
+        "topic_accuracy",
+        "format_accuracy",
+        "reader_intent_accuracy",
+        "full_case_accuracy",
+    ):
+        result[f"previous_{key}"] = previous[key]
+        result[f"current_{key}"] = current[key]
+        result[f"{key}_delta"] = current[key] - previous[key]
+    evidence_fields = {
+        "semantic_relationship": "cases_with_semantic_relationships",
+        "primary_domain": "cases_with_primary_semantic_domains",
+        "format_support": "cases_with_semantic_format_support",
+    }
+    for label, key in evidence_fields.items():
+        result[f"previous_{label}s"] = previous[key]
+        result[f"current_{label}s"] = current[key]
+        result[f"{label}_count_delta"] = current[key] - previous[key]
+    result["evidence_funnel"] = {
+        key: current[key]
+        for key in (
+            "cases_with_contextual_evidence",
+            "cases_with_semantic_relationships",
+            "cases_with_primary_semantic_domains",
+            "cases_with_secondary_semantic_domains",
+            "cases_with_semantic_format_support",
+            "cases_with_semantic_format_suppression",
+        )
+    }
+    contextual = current["cases_with_contextual_evidence"]
+    relationships = current["cases_with_semantic_relationships"]
+    domains = current["cases_with_primary_semantic_domains"]
+    result["conversion_metrics"] = {
+        "context_to_relationship_conversion_rate": _percentage(relationships, contextual),
+        "relationship_to_primary_domain_conversion_rate": _percentage(domains, relationships),
+        "context_to_primary_domain_conversion_rate": _percentage(domains, contextual),
+        "semantic_format_support_rate": _percentage(
+            current["cases_with_semantic_format_support"], current["case_count"]
+        ),
+    }
+    for dimension in ("topic", "format", "reader_intent"):
+        previous_ids = set(_mismatch_ids(previous, dimension))
+        current_ids = set(_mismatch_ids(current, dimension))
+        result[f"current_{dimension}_mismatches"] = sorted(current_ids)
+        result[f"resolved_{dimension}_mismatches"] = sorted(previous_ids - current_ids)
+        result[f"new_{dimension}_mismatches"] = sorted(current_ids - previous_ids)
+        result[f"unchanged_{dimension}_mismatches"] = sorted(previous_ids & current_ids)
+    result["fully_matched_cases"] = [
+        case["id"] for case in current["cases"] if case["full_match"]
+    ]
+    result["newly_fully_matched_cases"] = [
+        case_id
+        for case_id, case in current_by_id.items()
+        if case["full_match"] and not previous_by_id[case_id]["full_match"]
+    ]
+    for dimension in ("topic", "format"):
+        result[f"previous_{dimension}_gate"] = {
+            key: previous[f"{dimension}_gate_{key}"]
+            for key in ("tp", "fp", "tn", "fn", "precision", "recall")
+        }
+        result[f"current_{dimension}_gate"] = {
+            key: current[f"{dimension}_gate_{key}"]
+            for key in ("tp", "fp", "tn", "fn", "precision", "recall")
+        }
+        result[f"{dimension}_gate_recall_delta"] = (
+            current[f"{dimension}_gate_recall"]
+            - previous[f"{dimension}_gate_recall"]
+        )
+    result["previous_format_fn_cases"] = [
+        case["id"]
+        for case in previous["cases"]
+        if not case["format_match"] and not case["format_required"]
+    ]
+    result["current_format_fn_cases"] = [
+        case["id"]
+        for case in current["cases"]
+        if not case["format_match"] and not case["format_required"]
+    ]
+    result["previous_fn_tracking"] = {
+        case_id: {
+            "previous_format_required": previous_by_id[case_id]["format_required"],
+            "current_format_required": current_by_id[case_id]["format_required"],
+            "previous_semantic_format_support": previous_by_id[case_id]["semantic_format_support"],
+            "current_semantic_format_support": current_by_id[case_id]["semantic_format_support"],
+            "previous_format_confidence": previous_by_id[case_id]["format_confidence"],
+            "current_format_confidence": current_by_id[case_id]["format_confidence"],
+            "previous_predicted_format": previous_by_id[case_id]["predicted_format"],
+            "current_predicted_format": current_by_id[case_id]["predicted_format"],
+            "expected_format": current_by_id[case_id]["expected_format"],
+        }
+        for case_id in ("054", "056", "059")
+    }
+    result["projected_provider_call_cases"] = current["projected_provider_call_cases"]
+    result["projected_provider_call_rate"] = current["projected_provider_call_rate"]
+    improved = (
+        result["semantic_relationship_count_delta"] > 0,
+        result["primary_domain_count_delta"] > 0,
+        result["format_support_count_delta"] > 0,
+    )
+    result["architectural_interpretation"] = (
+        "D_ALL_THREE" if all(improved) else
+        "A_CONTEXT_TO_RELATIONSHIP" if improved == (True, False, False) else
+        "B_RELATIONSHIP_TO_DOMAIN" if improved == (False, True, False) else
+        "C_FORMAT_STRUCTURAL_EVIDENCE" if improved == (False, False, True) else
+        "MIXED_COMPONENTS" if any(improved) else "E_NONE_MATERIALLY"
+    )
+    result["improvement_classification"] = _improvement_classification(result)
+    return result
+
+
+def render_comparison_markdown(comparison: dict[str, Any]) -> str:
+    """Render a compact historical/current comparison without source text."""
+    return f"""# Batch 06 Post-HKEI-157 Comparison
+
+Baseline: {comparison['baseline']}
+
+Current: {comparison['current']}
+
+Improvement classification: {comparison['improvement_classification']}
+
+Topic accuracy: {comparison['previous_topic_accuracy']:.2f}% → {comparison['current_topic_accuracy']:.2f}%
+
+Format accuracy: {comparison['previous_format_accuracy']:.2f}% → {comparison['current_format_accuracy']:.2f}%
+
+Reader Intent accuracy: {comparison['previous_reader_intent_accuracy']:.2f}% → {comparison['current_reader_intent_accuracy']:.2f}%
+
+Full case accuracy: {comparison['previous_full_case_accuracy']:.2f}% → {comparison['current_full_case_accuracy']:.2f}%
+
+Semantic relationships: {comparison['previous_semantic_relationships']} → {comparison['current_semantic_relationships']}
+
+Primary domains: {comparison['previous_primary_domains']} → {comparison['current_primary_domains']}
+
+Semantic format support: {comparison['previous_format_supports']} → {comparison['current_format_supports']}
+
+Architectural interpretation: {comparison['architectural_interpretation']}
+
+Provider calls: {comparison['provider_calls']}
+"""
+
+
 def main() -> int:
+    previous = (
+        json.loads(COMPARISON_JSON.read_text(encoding="utf-8"))["baseline_snapshot"]
+        if COMPARISON_JSON.exists()
+        else json.loads(OUTPUT_JSON.read_text(encoding="utf-8"))
+    )
     analysis = analyze_validation()
+    comparison = build_comparison(previous, analysis)
     OUTPUT_JSON.write_text(render_json(analysis), encoding="utf-8")
     OUTPUT_MD.write_text(render_markdown(analysis), encoding="utf-8")
+    COMPARISON_JSON.write_text(render_json(comparison), encoding="utf-8")
+    COMPARISON_MD.write_text(
+        render_comparison_markdown(comparison), encoding="utf-8"
+    )
     print(json.dumps({key: value for key, value in analysis.items() if key != "cases"}, ensure_ascii=False, indent=2))
     return 0
 

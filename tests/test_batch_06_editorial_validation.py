@@ -4,6 +4,7 @@ import hashlib
 import inspect
 import json
 from pathlib import Path
+import subprocess
 
 import pytest
 
@@ -20,6 +21,18 @@ EXPECTED_SHA256 = "336e5f4f49f8e75c55751599b679b29501e3713af1f8d5514ec0a46168f6a
 @pytest.fixture(scope="module")
 def analysis() -> dict:
     return diagnostic.analyze_validation()
+
+
+@pytest.fixture(scope="module")
+def comparison(analysis: dict) -> dict:
+    previous = (
+        json.loads(diagnostic.COMPARISON_JSON.read_text(encoding="utf-8"))[
+            "baseline_snapshot"
+        ]
+        if diagnostic.COMPARISON_JSON.exists()
+        else json.loads(diagnostic.OUTPUT_JSON.read_text(encoding="utf-8"))
+    )
+    return diagnostic.build_comparison(previous, analysis)
 
 
 def test_exact_cases_integrity_and_no_provider(analysis: dict) -> None:
@@ -127,3 +140,87 @@ def test_module_has_no_provider_prompt_or_benchmark_specific_production_change()
     assert not any(value in source for value in forbidden)
     assert diagnostic.OUTPUT_JSON.parent == diagnostic.BATCH_ROOT
     assert diagnostic.OUTPUT_MD.parent == diagnostic.BATCH_ROOT
+
+
+def test_post_change_comparison_loads_registered_baseline(comparison: dict) -> None:
+    assert comparison["case_count"] == 10
+    assert comparison["baseline"] == "HKEI-155"
+    assert comparison["previous_topic_accuracy"] == 40.0
+    assert comparison["previous_format_accuracy"] == 40.0
+    assert comparison["previous_reader_intent_accuracy"] == 40.0
+    assert comparison["previous_full_case_accuracy"] == 0.0
+    assert comparison["previous_semantic_relationships"] == 3
+    assert comparison["previous_primary_domains"] == 1
+    assert comparison["previous_format_supports"] == 0
+
+
+def test_current_metrics_and_deltas_are_exact(
+    analysis: dict, comparison: dict,
+) -> None:
+    for field in (
+        "topic_accuracy", "format_accuracy", "reader_intent_accuracy",
+        "full_case_accuracy",
+    ):
+        assert comparison[f"current_{field}"] == analysis[field]
+        assert comparison[f"{field}_delta"] == (
+            analysis[field] - comparison[f"previous_{field}"]
+        )
+    assert comparison["fully_matched_cases"] == [
+        case["id"] for case in analysis["cases"] if case["full_match"]
+    ]
+
+
+def test_mismatch_deltas_are_set_differences(comparison: dict) -> None:
+    for dimension in ("topic", "format", "reader_intent"):
+        previous = {
+            case["id"] for case in comparison["baseline_snapshot"]["cases"]
+            if not case["intent_match" if dimension == "reader_intent" else f"{dimension}_match"]
+        }
+        current = set(comparison[f"current_{dimension}_mismatches"])
+        assert comparison[f"resolved_{dimension}_mismatches"] == sorted(previous - current)
+        assert comparison[f"new_{dimension}_mismatches"] == sorted(current - previous)
+        assert comparison[f"unchanged_{dimension}_mismatches"] == sorted(current & previous)
+
+
+def test_evidence_funnel_and_conversion_deltas_are_derived(
+    analysis: dict, comparison: dict,
+) -> None:
+    funnel = comparison["evidence_funnel"]
+    assert funnel["cases_with_semantic_relationships"] == analysis["cases_with_semantic_relationships"]
+    assert comparison["semantic_relationship_count_delta"] == analysis["cases_with_semantic_relationships"] - 3
+    assert comparison["primary_domain_count_delta"] == analysis["cases_with_primary_semantic_domains"] - 1
+    assert comparison["format_support_count_delta"] == analysis["cases_with_semantic_format_support"]
+    assert comparison["conversion_metrics"]["semantic_format_support_rate"] == analysis["cases_with_semantic_format_support"] * 10.0
+
+
+def test_comparison_gate_matrices_and_previous_false_negatives(
+    analysis: dict, comparison: dict,
+) -> None:
+    assert comparison["previous_topic_gate"]["recall"] == 100.0
+    assert comparison["previous_format_gate"]["recall"] == 50.0
+    assert comparison["previous_format_fn_cases"] == ["054", "056", "059"]
+    assert set(comparison["previous_fn_tracking"]) == {"054", "056", "059"}
+    for dimension in ("topic", "format"):
+        for key in ("tp", "fp", "tn", "fn", "precision", "recall"):
+            assert comparison[f"current_{dimension}_gate"][key] == analysis[f"{dimension}_gate_{key}"]
+
+
+def test_comparison_preserves_integrity_and_has_no_provider_call(
+    comparison: dict,
+) -> None:
+    assert comparison["provider_calls"] == 0
+    assert comparison["expected_labels_unchanged"] is True
+    assert comparison["raw_source_integrity"] is True
+    assert comparison["regression_controls_preserved"] is True
+
+
+def test_hkei_158_changes_no_production_files() -> None:
+    root = Path(__file__).resolve().parents[1]
+    changed = subprocess.run(
+        ["git", "diff", "--name-only", "61b2669"],
+        cwd=root,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.splitlines()
+    assert not any(path.startswith("src/") for path in changed)

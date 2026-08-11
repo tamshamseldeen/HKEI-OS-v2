@@ -125,6 +125,8 @@ def test_batch_contains_only_registration_and_authorized_validation_outputs() ->
         "editorial_validation.json", "editorial_validation.md",
         "generalization_failure_analysis.json",
         "generalization_failure_analysis.md",
+        "post_hkei_157_comparison.json",
+        "post_hkei_157_comparison.md",
         *(f"{case_id}/source.md" for case_id in EXPECTED_IDS),
     }
     forbidden = ("contextual", "semantic", "adjudication", "openai", "provider")
