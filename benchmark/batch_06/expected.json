@@ -1,0 +1,14 @@
+{
+  "expectations": [
+    {"id": "051", "topic": "GENERAL", "editorial_format": "STANDARD_NEWS", "reader_intent": "GET_UPDATE"},
+    {"id": "052", "topic": "ECONOMY", "editorial_format": "ANALYSIS", "reader_intent": "UNDERSTAND_IMPACT"},
+    {"id": "053", "topic": "BUSINESS", "editorial_format": "STANDARD_NEWS", "reader_intent": "GET_UPDATE"},
+    {"id": "054", "topic": "BUSINESS", "editorial_format": "RESULT_REPORT", "reader_intent": "FIND_RESULT"},
+    {"id": "055", "topic": "WORLD", "editorial_format": "STANDARD_NEWS", "reader_intent": "GET_UPDATE"},
+    {"id": "056", "topic": "EDUCATION", "editorial_format": "FACT_CHECK", "reader_intent": "CHECK_CLAIM"},
+    {"id": "057", "topic": "SPORTS", "editorial_format": "STANDARD_NEWS", "reader_intent": "GET_UPDATE"},
+    {"id": "058", "topic": "ECONOMY", "editorial_format": "TREND_UPDATE", "reader_intent": "FOLLOW_DEVELOPMENT"},
+    {"id": "059", "topic": "ECONOMY", "editorial_format": "TREND_UPDATE", "reader_intent": "FOLLOW_DEVELOPMENT"},
+    {"id": "060", "topic": "BUSINESS", "editorial_format": "STANDARD_NEWS", "reader_intent": "GET_UPDATE"}
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "batch_id": "batch_06",
+  "case_ids": ["051", "052", "053", "054", "055", "056", "057", "058", "059", "060"],
+  "case_count": 10,
+  "raw_source_path": "/workspaces/HKEI-OS-v2/benchmark_sources/batch_06_raw.txt",
+  "raw_source_sha256": "7ef269f70c78816521c8d3228db720b771294c9fb91fcbe31629b7748f115a06",
+  "registration_status": "REGISTERED",
+  "source_integrity": "VERIFIED",
+  "expected_labels_status": "PREREGISTERED",
+  "validation_status": "NOT_RUN",
+  "cases": [
+    {"id": "051", "source_name": "العربية", "source_file": "051/source.md"},
+    {"id": "052", "source_name": "العربية", "source_file": "052/source.md"},
+    {"id": "053", "source_name": "العربية", "source_file": "053/source.md"},
+    {"id": "054", "source_name": "العربية", "source_file": "054/source.md"},
+    {"id": "055", "source_name": "العربية", "source_file": "055/source.md"},
+    {"id": "056", "source_name": "اليوم السابع", "source_file": "056/source.md"},
+    {"id": "057", "source_name": "اليوم السابع", "source_file": "057/source.md"},
+    {"id": "058", "source_name": "العربية", "source_file": "058/source.md"},
+    {"id": "059", "source_name": "العربية", "source_file": "059/source.md"},
+    {"id": "060", "source_name": "العربية", "source_file": "060/source.md"}
+  ]
+}

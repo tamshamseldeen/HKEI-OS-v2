@@ -1,0 +1,14 @@
+{
+  "annotations": [
+    {"id": "051", "expected_risk_band": "MEDIUM", "attribution_required": true, "uncertainty_present": true, "sensitive_context": "TOPIC_AMBIGUITY", "notes": "Environmental harm has no dedicated Topic enum; avoid substituting the oil method or secondary economic effects for the primary subject."},
+    {"id": "052", "expected_risk_band": "MEDIUM", "attribution_required": true, "uncertainty_present": true, "sensitive_context": "FORMAT_AMBIGUITY", "notes": "Cost argument and systemic consequences create STANDARD_NEWS versus ANALYSIS treatment risk."},
+    {"id": "053", "expected_risk_band": "LOW", "attribution_required": true, "uncertainty_present": false, "sensitive_context": "BUSINESS_REPORTING", "notes": "Company forecast update should remain attributed to the company and distinct from the energy method/domain."},
+    {"id": "054", "expected_risk_band": "MEDIUM", "attribution_required": true, "uncertainty_present": false, "sensitive_context": "FORMAT_AMBIGUITY", "notes": "Financial results dominate, with STANDARD_NEWS versus RESULT_REPORT treatment risk."},
+    {"id": "055", "expected_risk_band": "HIGH", "attribution_required": true, "uncertainty_present": false, "sensitive_context": "ACTOR_SUBJECT_RISK", "notes": "Fatal attack, global shipping, and economic consequences create WORLD versus CRIME/ECONOMY subject risk."},
+    {"id": "056", "expected_risk_band": "MEDIUM", "attribution_required": true, "uncertainty_present": true, "sensitive_context": "CLAIM_VERIFICATION", "notes": "A circulated date claim is checked against official scheduling; preserve the distinction between rumor and official information."},
+    {"id": "057", "expected_risk_band": "LOW", "attribution_required": false, "uncertainty_present": false, "sensitive_context": "FORMAT_AMBIGUITY", "notes": "The reported event is the reception after a result, creating limited STANDARD_NEWS versus RESULT_REPORT risk."},
+    {"id": "058", "expected_risk_band": "HIGH", "attribution_required": true, "uncertainty_present": true, "sensitive_context": "MIXED_DOMAIN_RISK", "notes": "Shipping trend, diplomatic talks, and market implications create TREND_UPDATE versus ANALYSIS and ECONOMY versus WORLD risk."},
+    {"id": "059", "expected_risk_band": "MEDIUM", "attribution_required": true, "uncertainty_present": true, "sensitive_context": "FORMAT_AMBIGUITY", "notes": "Market movement is tracked with causal context and outlook, creating TREND_UPDATE versus ANALYSIS risk."},
+    {"id": "060", "expected_risk_band": "HIGH", "attribution_required": true, "uncertainty_present": true, "sensitive_context": "AUTHORITY_SUBJECT_RISK", "notes": "A government-issued allegation concerns a commercial supply contract; avoid automatically classifying the issuing authority as the subject."}
+  ]
+}
