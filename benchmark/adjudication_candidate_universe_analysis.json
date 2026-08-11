@@ -1,0 +1,3090 @@
+{
+  "cases_analyzed": 50,
+  "requests_analyzed": 26,
+  "strategies": {
+    "CURRENT_STRUCTURED_ONLY": {
+      "topic_required_cases": 25,
+      "expected_topic_available_cases": 13,
+      "topic_candidate_coverage": 52.0,
+      "average_topic_candidate_count": 2.0,
+      "median_topic_candidate_count": 2,
+      "max_topic_candidate_count": 4,
+      "format_required_cases": 7,
+      "expected_format_available_cases": 3,
+      "format_candidate_coverage": 42.857142857142854,
+      "average_format_candidate_count": 1.5714285714285714,
+      "median_format_candidate_count": 2,
+      "max_format_candidate_count": 2,
+      "average_candidate_payload_chars": 81.46153846153847,
+      "max_candidate_payload_chars": 104,
+      "coverage_by_batch": {
+        "batch_01": {
+          "topic_required_cases": 3,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 0,
+          "format_candidate_coverage": 0.0
+        },
+        "batch_02": {
+          "topic_required_cases": 3,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 0,
+          "format_candidate_coverage": 0.0
+        },
+        "batch_03": {
+          "topic_required_cases": 2,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 0,
+          "format_candidate_coverage": 0.0
+        },
+        "batch_04": {
+          "topic_required_cases": 8,
+          "topic_candidate_coverage": 62.5,
+          "format_required_cases": 3,
+          "format_candidate_coverage": 66.66666666666666
+        },
+        "batch_05": {
+          "topic_required_cases": 9,
+          "topic_candidate_coverage": 0.0,
+          "format_required_cases": 4,
+          "format_candidate_coverage": 25.0
+        }
+      },
+      "scope_violations": [],
+      "quality": "POOR"
+    },
+    "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+      "topic_required_cases": 25,
+      "expected_topic_available_cases": 25,
+      "topic_candidate_coverage": 100.0,
+      "average_topic_candidate_count": 15.0,
+      "median_topic_candidate_count": 15,
+      "max_topic_candidate_count": 15,
+      "format_required_cases": 7,
+      "expected_format_available_cases": 7,
+      "format_candidate_coverage": 100.0,
+      "average_format_candidate_count": 12.0,
+      "median_format_candidate_count": 12,
+      "max_format_candidate_count": 12,
+      "average_candidate_payload_chars": 247.8846153846154,
+      "max_candidate_payload_chars": 348,
+      "coverage_by_batch": {
+        "batch_01": {
+          "topic_required_cases": 3,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 0,
+          "format_candidate_coverage": 0.0
+        },
+        "batch_02": {
+          "topic_required_cases": 3,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 0,
+          "format_candidate_coverage": 0.0
+        },
+        "batch_03": {
+          "topic_required_cases": 2,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 0,
+          "format_candidate_coverage": 0.0
+        },
+        "batch_04": {
+          "topic_required_cases": 8,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 3,
+          "format_candidate_coverage": 100.0
+        },
+        "batch_05": {
+          "topic_required_cases": 9,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 4,
+          "format_candidate_coverage": 100.0
+        }
+      },
+      "scope_violations": [],
+      "quality": "EXCELLENT"
+    },
+    "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+      "topic_required_cases": 25,
+      "expected_topic_available_cases": 24,
+      "topic_candidate_coverage": 96.0,
+      "average_topic_candidate_count": 11.68,
+      "median_topic_candidate_count": 15,
+      "max_topic_candidate_count": 15,
+      "format_required_cases": 7,
+      "expected_format_available_cases": 7,
+      "format_candidate_coverage": 100.0,
+      "average_format_candidate_count": 12.0,
+      "median_format_candidate_count": 12,
+      "max_format_candidate_count": 12,
+      "average_candidate_payload_chars": 213.84615384615384,
+      "max_candidate_payload_chars": 348,
+      "coverage_by_batch": {
+        "batch_01": {
+          "topic_required_cases": 3,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 0,
+          "format_candidate_coverage": 0.0
+        },
+        "batch_02": {
+          "topic_required_cases": 3,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 0,
+          "format_candidate_coverage": 0.0
+        },
+        "batch_03": {
+          "topic_required_cases": 2,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 0,
+          "format_candidate_coverage": 0.0
+        },
+        "batch_04": {
+          "topic_required_cases": 8,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 3,
+          "format_candidate_coverage": 100.0
+        },
+        "batch_05": {
+          "topic_required_cases": 9,
+          "topic_candidate_coverage": 88.88888888888889,
+          "format_required_cases": 4,
+          "format_candidate_coverage": 100.0
+        }
+      },
+      "scope_violations": [],
+      "quality": "ACCEPTABLE"
+    },
+    "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+      "topic_required_cases": 25,
+      "expected_topic_available_cases": 25,
+      "topic_candidate_coverage": 100.0,
+      "average_topic_candidate_count": 14.56,
+      "median_topic_candidate_count": 15,
+      "max_topic_candidate_count": 15,
+      "format_required_cases": 7,
+      "expected_format_available_cases": 3,
+      "format_candidate_coverage": 42.857142857142854,
+      "average_format_candidate_count": 1.5714285714285714,
+      "median_format_candidate_count": 2,
+      "max_format_candidate_count": 2,
+      "average_candidate_payload_chars": 210.53846153846155,
+      "max_candidate_payload_chars": 231,
+      "coverage_by_batch": {
+        "batch_01": {
+          "topic_required_cases": 3,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 0,
+          "format_candidate_coverage": 0.0
+        },
+        "batch_02": {
+          "topic_required_cases": 3,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 0,
+          "format_candidate_coverage": 0.0
+        },
+        "batch_03": {
+          "topic_required_cases": 2,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 0,
+          "format_candidate_coverage": 0.0
+        },
+        "batch_04": {
+          "topic_required_cases": 8,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 3,
+          "format_candidate_coverage": 66.66666666666666
+        },
+        "batch_05": {
+          "topic_required_cases": 9,
+          "topic_candidate_coverage": 100.0,
+          "format_required_cases": 4,
+          "format_candidate_coverage": 25.0
+        }
+      },
+      "scope_violations": [],
+      "quality": "POOR"
+    }
+  },
+  "recommendation": "USE_FULL_ENUM_FOR_REQUIRED_SCOPE",
+  "cases": [
+    {
+      "batch": "batch_01",
+      "id": "001",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "ECONOMY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "expected_topic": "ECONOMY",
+      "expected_format": null,
+      "strategies": null
+    },
+    {
+      "batch": "batch_01",
+      "id": "002",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "ECONOMY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "ECONOMY",
+      "expected_format": null,
+      "strategies": null
+    },
+    {
+      "batch": "batch_01",
+      "id": "003",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "TECHNOLOGY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "TECHNOLOGY",
+      "expected_format": null,
+      "strategies": null
+    },
+    {
+      "batch": "batch_01",
+      "id": "004",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "WEATHER",
+      "deterministic_format": "BREAKING",
+      "primary_domain_candidates": [],
+      "expected_topic": "WEATHER",
+      "expected_format": null,
+      "strategies": null
+    },
+    {
+      "batch": "batch_01",
+      "id": "005",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "GOVERNMENT",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "GOVERNMENT",
+      "expected_format": null,
+      "strategies": null
+    },
+    {
+      "batch": "batch_01",
+      "id": "006",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "ECONOMY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "ECONOMY",
+      "expected_format": null,
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GOVERNMENT",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GOVERNMENT",
+            "GENERAL",
+            "POLITICS",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GOVERNMENT",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GOVERNMENT",
+            "GENERAL",
+            "POLITICS",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_01",
+      "id": "007",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "ECONOMY",
+      "deterministic_format": "GUIDE",
+      "primary_domain_candidates": [],
+      "expected_topic": "ECONOMY",
+      "expected_format": null,
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "ECONOMY",
+            "BUSINESS",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "GUIDE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "ECONOMY",
+            "BUSINESS",
+            "GENERAL",
+            "POLITICS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "GUIDE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "ECONOMY",
+            "BUSINESS",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "GUIDE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "ECONOMY",
+            "BUSINESS",
+            "GENERAL",
+            "POLITICS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "GUIDE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_01",
+      "id": "008",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "CULTURE",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "CULTURE",
+      "expected_format": null,
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "CULTURE",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "CULTURE",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "CULTURE",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "CULTURE",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_01",
+      "id": "009",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "SPORTS",
+      "deterministic_format": "RESULT_REPORT",
+      "primary_domain_candidates": [],
+      "expected_topic": "SPORTS",
+      "expected_format": null,
+      "strategies": null
+    },
+    {
+      "batch": "batch_01",
+      "id": "010",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "ECONOMY",
+      "deterministic_format": "ANALYSIS",
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "expected_topic": "ECONOMY",
+      "expected_format": null,
+      "strategies": null
+    },
+    {
+      "batch": "batch_02",
+      "id": "011",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "GOVERNMENT",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "GOVERNMENT",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "GOVERNMENT",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "GOVERNMENT",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "GOVERNMENT",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "GOVERNMENT",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_02",
+      "id": "012",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "SCIENCE",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "SCIENCE",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "SCIENCE",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "SCIENCE",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "SCIENCE",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "SCIENCE",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_02",
+      "id": "013",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "TECHNOLOGY",
+      "deterministic_format": "ANALYSIS",
+      "primary_domain_candidates": [],
+      "expected_topic": "TECHNOLOGY",
+      "expected_format": "ANALYSIS",
+      "strategies": null
+    },
+    {
+      "batch": "batch_02",
+      "id": "014",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "WORLD",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "WORLD",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": null
+    },
+    {
+      "batch": "batch_02",
+      "id": "015",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "GOVERNMENT",
+      "deterministic_format": "SERVICE",
+      "primary_domain_candidates": [],
+      "expected_topic": "GOVERNMENT",
+      "expected_format": "SERVICE",
+      "strategies": null
+    },
+    {
+      "batch": "batch_02",
+      "id": "016",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "BUSINESS",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "BUSINESS",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": null
+    },
+    {
+      "batch": "batch_02",
+      "id": "017",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "ECONOMY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "ECONOMY",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": null
+    },
+    {
+      "batch": "batch_02",
+      "id": "018",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "SCIENCE",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "SCIENCE",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": null
+    },
+    {
+      "batch": "batch_02",
+      "id": "019",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "CULTURE",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "CULTURE",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": null
+    },
+    {
+      "batch": "batch_02",
+      "id": "020",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "TECHNOLOGY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "TECHNOLOGY",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "TECHNOLOGY",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "TECHNOLOGY",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "TECHNOLOGY",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "TECHNOLOGY",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_03",
+      "id": "021",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "GOVERNMENT",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_GOVERNMENT"
+      ],
+      "expected_topic": "GOVERNMENT",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": null
+    },
+    {
+      "batch": "batch_03",
+      "id": "022",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "ECONOMY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "expected_topic": "ECONOMY",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": null
+    },
+    {
+      "batch": "batch_03",
+      "id": "023",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "POLITICS",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_POLITICS"
+      ],
+      "expected_topic": "POLITICS",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": null
+    },
+    {
+      "batch": "batch_03",
+      "id": "024",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "HEALTH",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_HEALTH"
+      ],
+      "expected_topic": "HEALTH",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "HEALTH",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "HEALTH",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "GOVERNMENT",
+            "WEATHER",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "HEALTH",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "HEALTH",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_03",
+      "id": "025",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "HEALTH",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_HEALTH"
+      ],
+      "expected_topic": "HEALTH",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": null
+    },
+    {
+      "batch": "batch_03",
+      "id": "026",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "TECHNOLOGY",
+      "deterministic_format": "SERVICE",
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_TECHNOLOGY"
+      ],
+      "expected_topic": "TECHNOLOGY",
+      "expected_format": "SERVICE",
+      "strategies": null
+    },
+    {
+      "batch": "batch_03",
+      "id": "027",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "ECONOMY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "ECONOMY",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": null
+    },
+    {
+      "batch": "batch_03",
+      "id": "028",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "WEATHER",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_WEATHER"
+      ],
+      "expected_topic": "WEATHER",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": null
+    },
+    {
+      "batch": "batch_03",
+      "id": "029",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "EDUCATION",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_EDUCATION"
+      ],
+      "expected_topic": "EDUCATION",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": null
+    },
+    {
+      "batch": "batch_03",
+      "id": "030",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "ECONOMY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "ECONOMY",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GENERAL",
+            "POLITICS",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GENERAL",
+            "POLITICS",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GENERAL",
+            "POLITICS",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_04",
+      "id": "031",
+      "gate_scope": "FORMAT_REQUIRED",
+      "topic_required": false,
+      "format_required": true,
+      "deterministic_topic": "WEATHER",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "WEATHER",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "WEATHER"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS"
+          ],
+          "expected_topic_available": null,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "WEATHER"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS",
+            "BREAKING",
+            "SERVICE",
+            "GUIDE",
+            "EXPLAINER",
+            "FEATURE",
+            "FACT_CHECK",
+            "INTERVIEW",
+            "PROFILE",
+            "RESULT_REPORT",
+            "TREND_UPDATE"
+          ],
+          "expected_topic_available": null,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "WEATHER"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS",
+            "BREAKING",
+            "SERVICE",
+            "GUIDE",
+            "EXPLAINER",
+            "FEATURE",
+            "FACT_CHECK",
+            "INTERVIEW",
+            "PROFILE",
+            "RESULT_REPORT",
+            "TREND_UPDATE"
+          ],
+          "expected_topic_available": null,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "WEATHER"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS"
+          ],
+          "expected_topic_available": null,
+          "expected_format_available": true
+        }
+      }
+    },
+    {
+      "batch": "batch_04",
+      "id": "032",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "ECONOMY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "ECONOMY",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "ECONOMY",
+            "BUSINESS",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "ECONOMY",
+            "BUSINESS",
+            "GENERAL",
+            "POLITICS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "ECONOMY",
+            "BUSINESS",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "ECONOMY",
+            "BUSINESS",
+            "GENERAL",
+            "POLITICS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_04",
+      "id": "033",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "TECHNOLOGY",
+      "deterministic_format": "GUIDE",
+      "primary_domain_candidates": [],
+      "expected_topic": "SPORTS",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": null
+    },
+    {
+      "batch": "batch_04",
+      "id": "034",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "SPORTS",
+      "deterministic_format": "GUIDE",
+      "primary_domain_candidates": [],
+      "expected_topic": "SPORTS",
+      "expected_format": "GUIDE",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "SPORTS",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "GUIDE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "SPORTS",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "GUIDE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "SPORTS",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "GUIDE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "SPORTS",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "GUIDE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_04",
+      "id": "035",
+      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
+      "topic_required": true,
+      "format_required": true,
+      "deterministic_topic": "ECONOMY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "TECHNOLOGY",
+      "expected_format": "GUIDE",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS"
+          ],
+          "expected_topic_available": false,
+          "expected_format_available": false
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GENERAL",
+            "POLITICS",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS",
+            "BREAKING",
+            "SERVICE",
+            "GUIDE",
+            "EXPLAINER",
+            "FEATURE",
+            "FACT_CHECK",
+            "INTERVIEW",
+            "PROFILE",
+            "RESULT_REPORT",
+            "TREND_UPDATE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GENERAL",
+            "POLITICS",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS",
+            "BREAKING",
+            "SERVICE",
+            "GUIDE",
+            "EXPLAINER",
+            "FEATURE",
+            "FACT_CHECK",
+            "INTERVIEW",
+            "PROFILE",
+            "RESULT_REPORT",
+            "TREND_UPDATE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GENERAL",
+            "POLITICS",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": false
+        }
+      }
+    },
+    {
+      "batch": "batch_04",
+      "id": "036",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "HEALTH",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "HEALTH",
+      "expected_format": "GUIDE",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "HEALTH",
+            "GOVERNMENT",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "HEALTH",
+            "GOVERNMENT",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "WEATHER",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "HEALTH",
+            "GOVERNMENT",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "HEALTH",
+            "GOVERNMENT",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "WEATHER",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_04",
+      "id": "037",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "GENERAL",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "HEALTH",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": false,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_04",
+      "id": "038",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "GENERAL",
+      "deterministic_format": "BREAKING",
+      "primary_domain_candidates": [],
+      "expected_topic": "HEALTH",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "BREAKING"
+          ],
+          "expected_topic_available": false,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "BREAKING"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "BREAKING"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "BREAKING"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_04",
+      "id": "039",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "ECONOMY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "ECONOMY",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GENERAL",
+            "POLITICS",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GENERAL",
+            "POLITICS",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GENERAL",
+            "POLITICS",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_04",
+      "id": "040",
+      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
+      "topic_required": true,
+      "format_required": true,
+      "deterministic_topic": "ECONOMY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "ECONOMY",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GOVERNMENT",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GOVERNMENT",
+            "GENERAL",
+            "POLITICS",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS",
+            "BREAKING",
+            "SERVICE",
+            "GUIDE",
+            "EXPLAINER",
+            "FEATURE",
+            "FACT_CHECK",
+            "INTERVIEW",
+            "PROFILE",
+            "RESULT_REPORT",
+            "TREND_UPDATE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GOVERNMENT",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS",
+            "BREAKING",
+            "SERVICE",
+            "GUIDE",
+            "EXPLAINER",
+            "FEATURE",
+            "FACT_CHECK",
+            "INTERVIEW",
+            "PROFILE",
+            "RESULT_REPORT",
+            "TREND_UPDATE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "ECONOMY",
+            "GOVERNMENT",
+            "GENERAL",
+            "POLITICS",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": true
+        }
+      }
+    },
+    {
+      "batch": "batch_05",
+      "id": "041",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "GENERAL",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "POLITICS",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": false,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_05",
+      "id": "042",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "TECHNOLOGY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "CRIME",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "TECHNOLOGY",
+            "BUSINESS",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": false,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "TECHNOLOGY",
+            "BUSINESS",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "TECHNOLOGY",
+            "BUSINESS",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": false,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "TECHNOLOGY",
+            "BUSINESS",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_05",
+      "id": "043",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "GENERAL",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "POLITICS",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": false,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_05",
+      "id": "044",
+      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
+      "topic_required": true,
+      "format_required": true,
+      "deterministic_topic": "GENERAL",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "WORLD",
+      "expected_format": "ANALYSIS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": false,
+          "expected_format_available": false
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "BREAKING",
+            "SERVICE",
+            "GUIDE",
+            "EXPLAINER",
+            "FEATURE",
+            "FACT_CHECK",
+            "ANALYSIS",
+            "INTERVIEW",
+            "PROFILE",
+            "RESULT_REPORT",
+            "TREND_UPDATE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "BREAKING",
+            "SERVICE",
+            "GUIDE",
+            "EXPLAINER",
+            "FEATURE",
+            "FACT_CHECK",
+            "ANALYSIS",
+            "INTERVIEW",
+            "PROFILE",
+            "RESULT_REPORT",
+            "TREND_UPDATE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": false
+        }
+      }
+    },
+    {
+      "batch": "batch_05",
+      "id": "045",
+      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
+      "topic_required": true,
+      "format_required": true,
+      "deterministic_topic": "GENERAL",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "WORLD",
+      "expected_format": "EXPLAINER",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": false,
+          "expected_format_available": false
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "BREAKING",
+            "SERVICE",
+            "GUIDE",
+            "EXPLAINER",
+            "FEATURE",
+            "FACT_CHECK",
+            "ANALYSIS",
+            "INTERVIEW",
+            "PROFILE",
+            "RESULT_REPORT",
+            "TREND_UPDATE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "BREAKING",
+            "SERVICE",
+            "GUIDE",
+            "EXPLAINER",
+            "FEATURE",
+            "FACT_CHECK",
+            "ANALYSIS",
+            "INTERVIEW",
+            "PROFILE",
+            "RESULT_REPORT",
+            "TREND_UPDATE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": false
+        }
+      }
+    },
+    {
+      "batch": "batch_05",
+      "id": "046",
+      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
+      "topic_required": true,
+      "format_required": true,
+      "deterministic_topic": "TECHNOLOGY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "SCIENCE",
+      "expected_format": "ANALYSIS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "TECHNOLOGY",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS"
+          ],
+          "expected_topic_available": false,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "TECHNOLOGY",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS",
+            "BREAKING",
+            "SERVICE",
+            "GUIDE",
+            "EXPLAINER",
+            "FEATURE",
+            "FACT_CHECK",
+            "INTERVIEW",
+            "PROFILE",
+            "RESULT_REPORT",
+            "TREND_UPDATE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "TECHNOLOGY",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS",
+            "BREAKING",
+            "SERVICE",
+            "GUIDE",
+            "EXPLAINER",
+            "FEATURE",
+            "FACT_CHECK",
+            "INTERVIEW",
+            "PROFILE",
+            "RESULT_REPORT",
+            "TREND_UPDATE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "TECHNOLOGY",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "ANALYSIS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": true
+        }
+      }
+    },
+    {
+      "batch": "batch_05",
+      "id": "047",
+      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
+      "topic_required": true,
+      "format_required": true,
+      "deterministic_topic": "GENERAL",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "POLITICS",
+      "expected_format": "ANALYSIS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": false,
+          "expected_format_available": false
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "BREAKING",
+            "SERVICE",
+            "GUIDE",
+            "EXPLAINER",
+            "FEATURE",
+            "FACT_CHECK",
+            "ANALYSIS",
+            "INTERVIEW",
+            "PROFILE",
+            "RESULT_REPORT",
+            "TREND_UPDATE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS",
+            "BREAKING",
+            "SERVICE",
+            "GUIDE",
+            "EXPLAINER",
+            "FEATURE",
+            "FACT_CHECK",
+            "ANALYSIS",
+            "INTERVIEW",
+            "PROFILE",
+            "RESULT_REPORT",
+            "TREND_UPDATE"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": true
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": false
+        }
+      }
+    },
+    {
+      "batch": "batch_05",
+      "id": "048",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "GENERAL",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "WORLD",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": false,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "EDUCATION",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    },
+    {
+      "batch": "batch_05",
+      "id": "049",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "deterministic_topic": "ECONOMY",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "expected_topic": "ECONOMY",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": null
+    },
+    {
+      "batch": "batch_05",
+      "id": "050",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "deterministic_topic": "EDUCATION",
+      "deterministic_format": "STANDARD_NEWS",
+      "primary_domain_candidates": [],
+      "expected_topic": "CRIME",
+      "expected_format": "STANDARD_NEWS",
+      "strategies": {
+        "CURRENT_STRUCTURED_ONLY": {
+          "candidate_topics": [
+            "EDUCATION",
+            "GENERAL"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": false,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FOR_REQUIRED_SCOPE": {
+          "candidate_topics": [
+            "EDUCATION",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_EVIDENCE_THIN": {
+          "candidate_topics": [
+            "EDUCATION",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        },
+        "FULL_ENUM_FALLBACK_WHEN_NO_SEMANTIC_DOMAIN": {
+          "candidate_topics": [
+            "EDUCATION",
+            "GENERAL",
+            "POLITICS",
+            "ECONOMY",
+            "BUSINESS",
+            "TECHNOLOGY",
+            "SPORTS",
+            "GOVERNMENT",
+            "WEATHER",
+            "HEALTH",
+            "CULTURE",
+            "SCIENCE",
+            "CRIME",
+            "ENTERTAINMENT",
+            "WORLD"
+          ],
+          "candidate_formats": [
+            "STANDARD_NEWS"
+          ],
+          "expected_topic_available": true,
+          "expected_format_available": null
+        }
+      }
+    }
+  ]
+}
