@@ -1,0 +1,945 @@
+{
+  "batch": "batch_04",
+  "case_count": 10,
+  "cases_with_contextual_evidence": 7,
+  "cases_with_semantic_relationships": 1,
+  "cases_with_primary_domain_candidates": 0,
+  "cases_with_secondary_domain_candidates": 0,
+  "cases_with_semantic_format_support": 0,
+  "contextual_missing_cases": [
+    "033",
+    "037",
+    "039"
+  ],
+  "uncomposed_context_cases": [
+    "031",
+    "032",
+    "034",
+    "035",
+    "036",
+    "040"
+  ],
+  "relationship_without_domain_cases": [
+    "038"
+  ],
+  "semantic_domain_cases": [],
+  "failure_class_counts": {
+    "CONTEXTUAL_EVIDENCE_MISSING": 3,
+    "CONTEXTUAL_EVIDENCE_PRESENT_BUT_UNCOMPOSED": 6,
+    "SEMANTIC_RELATIONSHIP_PRESENT_WITHOUT_DOMAIN": 1,
+    "SEMANTIC_DOMAIN_PRESENT_BUT_NOT_RECORDED_AS_USED": 0,
+    "DOMAIN_MODEL_COVERAGE_GAP": 10,
+    "FORMAT_SEMANTIC_COVERAGE_GAP": 4
+  },
+  "why_semantic_evidence_used_was_zero": "The validation usage metric counts primary or secondary domain candidates, semantic format support, or semantic intent support. All four were empty for all ten cases. Seven cases had contextual evidence, but six produced no relationship; case 038 produced one relationship whose health support was not promoted to a domain candidate. Thus the zero reflects observed semantic outputs, not a workflow/reporting omission of an existing domain candidate.",
+  "general_architectural_findings": {
+    "context_extraction_coverage": "Three cases had no contextual items; the other seven mostly exposed generic attribution, authority, uncertainty, consequence, or prediction cues.",
+    "semantic_composition_coverage": "Six context-bearing cases remained uncomposed; only case 038 produced a relationship.",
+    "domain_modeling_coverage": "No case produced a primary or secondary domain candidate; relationship-level health support in 038 was not promoted.",
+    "format_modeling_coverage": "No case produced semantic format support or suppression, including all four prior format mismatches.",
+    "workflow_integration_behavior": "The prior usage calculation accurately reported zero under its documented candidate/support criteria.",
+    "failure_scope": "The evidence shows a mixture of extraction, composition, domain-model, and format-model coverage gaps. Topic and format failures precede and are independent of ReaderIntentClassifierV2.",
+    "corpus_specification_mismatch": "The HKEI-093 case scenarios do not describe the persisted Batch 04 sources, so those requested conceptual structures cannot be evaluated from this corpus."
+  },
+  "recommended_next_architecture": [
+    "Add domain-bearing event/object composition that can promote relationship support into explicit primary and secondary domain candidates.",
+    "Expand reusable security-event, legal-policy, institutional-conflict, military-transformation, biological-science, and intelligence-estimate composition classes only against correctly registered source material.",
+    "Add explanatory-framing and analysis-framing composition based on structural relationships rather than case-specific terms.",
+    "Keep workflow usage accounting aligned with relationship-level supports as well as promoted domain and format candidates.",
+    "Resolve the mismatch between the persisted Batch 04 corpus and the case scenarios before using those scenarios to judge architectural coverage."
+  ],
+  "cases": [
+    {
+      "id": "031",
+      "previous_topic_match": true,
+      "previous_format_match": true,
+      "previous_intent_match": true,
+      "previous_full_match": true,
+      "contextual_item_count": 3,
+      "contextual_role_counts": {
+        "SUBJECT": 0,
+        "ACTOR": 0,
+        "ACTION": 0,
+        "AUTHORITY": 0,
+        "AFFECTED_AUDIENCE": 0,
+        "REQUIREMENT": 0,
+        "DEADLINE": 0,
+        "RESULT": 0,
+        "CONSEQUENCE": 2,
+        "WARNING": 0,
+        "ATTRIBUTION": 0,
+        "CLAIM": 0,
+        "PREDICTION": 0,
+        "UNCERTAINTY": 1,
+        "INTERPRETATION": 0
+      },
+      "contextual_evidence_by_role": {
+        "SUBJECT": [],
+        "ACTOR": [],
+        "ACTION": [],
+        "AUTHORITY": [],
+        "AFFECTED_AUDIENCE": [],
+        "REQUIREMENT": [],
+        "DEADLINE": [],
+        "RESULT": [],
+        "CONSEQUENCE": [
+          {
+            "reason_code": "CONSEQUENCE_CONTEXT_PATTERN",
+            "source_section": "BODY",
+            "sentence_index": 1,
+            "supports": [
+              "FORMAT_ANALYSIS",
+              "INTENT_UNDERSTAND_IMPACT"
+            ],
+            "suppresses": []
+          },
+          {
+            "reason_code": "CONSEQUENCE_CONTEXT_PATTERN",
+            "source_section": "BODY",
+            "sentence_index": 4,
+            "supports": [
+              "FORMAT_ANALYSIS",
+              "INTENT_UNDERSTAND_IMPACT"
+            ],
+            "suppresses": []
+          }
+        ],
+        "WARNING": [],
+        "ATTRIBUTION": [],
+        "CLAIM": [],
+        "PREDICTION": [],
+        "UNCERTAINTY": [
+          {
+            "reason_code": "UNCERTAINTY_CONTEXT_PATTERN",
+            "source_section": "BODY",
+            "sentence_index": 1,
+            "supports": [
+              "CLAIM_UNCERTAIN"
+            ],
+            "suppresses": []
+          }
+        ],
+        "INTERPRETATION": []
+      },
+      "contextual_topic_support": [],
+      "contextual_format_support": [
+        "FORMAT_ANALYSIS"
+      ],
+      "contextual_intent_support": [
+        "INTENT_UNDERSTAND_IMPACT"
+      ],
+      "contextual_claim_support": [
+        "CLAIM_UNCERTAIN"
+      ],
+      "contextual_suppressions": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_relationships": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "semantic_warning_codes": [
+        "SEMANTIC_COMPOSITION_EMPTY"
+      ],
+      "failure_classes": [
+        "CONTEXTUAL_EVIDENCE_PRESENT_BUT_UNCOMPOSED",
+        "DOMAIN_MODEL_COVERAGE_GAP"
+      ],
+      "architectural_observations": [
+        "Persisted case 031 is weather reporting, not the specified security-authority/cross-border-attack scenario.",
+        "The contextual layer exposed uncertainty and consequence cues but no domain-bearing subject, actor, action, or authority evidence, so no security-event composition was possible."
+      ]
+    },
+    {
+      "id": "032",
+      "previous_topic_match": true,
+      "previous_format_match": true,
+      "previous_intent_match": true,
+      "previous_full_match": true,
+      "contextual_item_count": 2,
+      "contextual_role_counts": {
+        "SUBJECT": 0,
+        "ACTOR": 1,
+        "ACTION": 0,
+        "AUTHORITY": 0,
+        "AFFECTED_AUDIENCE": 0,
+        "REQUIREMENT": 0,
+        "DEADLINE": 0,
+        "RESULT": 0,
+        "CONSEQUENCE": 0,
+        "WARNING": 0,
+        "ATTRIBUTION": 1,
+        "CLAIM": 0,
+        "PREDICTION": 0,
+        "UNCERTAINTY": 0,
+        "INTERPRETATION": 0
+      },
+      "contextual_evidence_by_role": {
+        "SUBJECT": [],
+        "ACTOR": [
+          {
+            "reason_code": "GENERIC_BUSINESS_TOKEN",
+            "source_section": "BODY",
+            "sentence_index": 2,
+            "supports": [
+              "TOPIC_BUSINESS"
+            ],
+            "suppresses": []
+          }
+        ],
+        "ACTION": [],
+        "AUTHORITY": [],
+        "AFFECTED_AUDIENCE": [],
+        "REQUIREMENT": [],
+        "DEADLINE": [],
+        "RESULT": [],
+        "CONSEQUENCE": [],
+        "WARNING": [],
+        "ATTRIBUTION": [
+          {
+            "reason_code": "ATTRIBUTION_SIGNAL",
+            "source_section": "BODY",
+            "sentence_index": 0,
+            "supports": [
+              "CLAIM_ATTRIBUTED"
+            ],
+            "suppresses": []
+          }
+        ],
+        "CLAIM": [],
+        "PREDICTION": [],
+        "UNCERTAINTY": [],
+        "INTERPRETATION": []
+      },
+      "contextual_topic_support": [
+        "TOPIC_BUSINESS"
+      ],
+      "contextual_format_support": [],
+      "contextual_intent_support": [],
+      "contextual_claim_support": [
+        "CLAIM_ATTRIBUTED"
+      ],
+      "contextual_suppressions": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_relationships": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "semantic_warning_codes": [
+        "SEMANTIC_COMPOSITION_EMPTY"
+      ],
+      "failure_classes": [
+        "CONTEXTUAL_EVIDENCE_PRESENT_BUT_UNCOMPOSED",
+        "DOMAIN_MODEL_COVERAGE_GAP"
+      ],
+      "architectural_observations": [
+        "Persisted case 032 is cement-price reporting, not the specified criminal/legal conviction and disputed-family-claim scenario.",
+        "Attribution and a generic business actor were exposed, but they did not form a compositional relationship or domain candidate."
+      ]
+    },
+    {
+      "id": "033",
+      "previous_topic_match": false,
+      "previous_format_match": false,
+      "previous_intent_match": false,
+      "previous_full_match": false,
+      "contextual_item_count": 0,
+      "contextual_role_counts": {
+        "SUBJECT": 0,
+        "ACTOR": 0,
+        "ACTION": 0,
+        "AUTHORITY": 0,
+        "AFFECTED_AUDIENCE": 0,
+        "REQUIREMENT": 0,
+        "DEADLINE": 0,
+        "RESULT": 0,
+        "CONSEQUENCE": 0,
+        "WARNING": 0,
+        "ATTRIBUTION": 0,
+        "CLAIM": 0,
+        "PREDICTION": 0,
+        "UNCERTAINTY": 0,
+        "INTERPRETATION": 0
+      },
+      "contextual_evidence_by_role": {
+        "SUBJECT": [],
+        "ACTOR": [],
+        "ACTION": [],
+        "AUTHORITY": [],
+        "AFFECTED_AUDIENCE": [],
+        "REQUIREMENT": [],
+        "DEADLINE": [],
+        "RESULT": [],
+        "CONSEQUENCE": [],
+        "WARNING": [],
+        "ATTRIBUTION": [],
+        "CLAIM": [],
+        "PREDICTION": [],
+        "UNCERTAINTY": [],
+        "INTERPRETATION": []
+      },
+      "contextual_topic_support": [],
+      "contextual_format_support": [],
+      "contextual_intent_support": [],
+      "contextual_claim_support": [],
+      "contextual_suppressions": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_relationships": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "semantic_warning_codes": [
+        "SEMANTIC_COMPOSITION_EMPTY"
+      ],
+      "failure_classes": [
+        "CONTEXTUAL_EVIDENCE_MISSING",
+        "DOMAIN_MODEL_COVERAGE_GAP",
+        "FORMAT_SEMANTIC_COVERAGE_GAP"
+      ],
+      "architectural_observations": [
+        "Persisted case 033 is sports-training reporting, not the specified executive citizenship/immigration action and constitutional challenge.",
+        "No contextual evidence was extracted; consequently both domain composition and format composition were absent."
+      ]
+    },
+    {
+      "id": "034",
+      "previous_topic_match": true,
+      "previous_format_match": true,
+      "previous_intent_match": true,
+      "previous_full_match": true,
+      "contextual_item_count": 1,
+      "contextual_role_counts": {
+        "SUBJECT": 0,
+        "ACTOR": 0,
+        "ACTION": 0,
+        "AUTHORITY": 0,
+        "AFFECTED_AUDIENCE": 0,
+        "REQUIREMENT": 0,
+        "DEADLINE": 0,
+        "RESULT": 0,
+        "CONSEQUENCE": 0,
+        "WARNING": 0,
+        "ATTRIBUTION": 1,
+        "CLAIM": 0,
+        "PREDICTION": 0,
+        "UNCERTAINTY": 0,
+        "INTERPRETATION": 0
+      },
+      "contextual_evidence_by_role": {
+        "SUBJECT": [],
+        "ACTOR": [],
+        "ACTION": [],
+        "AUTHORITY": [],
+        "AFFECTED_AUDIENCE": [],
+        "REQUIREMENT": [],
+        "DEADLINE": [],
+        "RESULT": [],
+        "CONSEQUENCE": [],
+        "WARNING": [],
+        "ATTRIBUTION": [
+          {
+            "reason_code": "ATTRIBUTION_SIGNAL",
+            "source_section": "LEAD",
+            "sentence_index": 0,
+            "supports": [
+              "CLAIM_ATTRIBUTED"
+            ],
+            "suppresses": []
+          }
+        ],
+        "CLAIM": [],
+        "PREDICTION": [],
+        "UNCERTAINTY": [],
+        "INTERPRETATION": []
+      },
+      "contextual_topic_support": [],
+      "contextual_format_support": [],
+      "contextual_intent_support": [],
+      "contextual_claim_support": [
+        "CLAIM_ATTRIBUTED"
+      ],
+      "contextual_suppressions": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_relationships": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "semantic_warning_codes": [
+        "SEMANTIC_COMPOSITION_EMPTY"
+      ],
+      "failure_classes": [
+        "CONTEXTUAL_EVIDENCE_PRESENT_BUT_UNCOMPOSED",
+        "DOMAIN_MODEL_COVERAGE_GAP"
+      ],
+      "architectural_observations": [
+        "Persisted case 034 is a sports schedule, not the specified war/security pressure and resource-constraint analysis.",
+        "The editorial result matched despite semantic non-use; the only contextual item was attribution and it produced no relationship or domain."
+      ]
+    },
+    {
+      "id": "035",
+      "previous_topic_match": false,
+      "previous_format_match": false,
+      "previous_intent_match": false,
+      "previous_full_match": false,
+      "contextual_item_count": 3,
+      "contextual_role_counts": {
+        "SUBJECT": 0,
+        "ACTOR": 0,
+        "ACTION": 0,
+        "AUTHORITY": 0,
+        "AFFECTED_AUDIENCE": 0,
+        "REQUIREMENT": 0,
+        "DEADLINE": 0,
+        "RESULT": 0,
+        "CONSEQUENCE": 1,
+        "WARNING": 0,
+        "ATTRIBUTION": 2,
+        "CLAIM": 0,
+        "PREDICTION": 0,
+        "UNCERTAINTY": 0,
+        "INTERPRETATION": 0
+      },
+      "contextual_evidence_by_role": {
+        "SUBJECT": [],
+        "ACTOR": [],
+        "ACTION": [],
+        "AUTHORITY": [],
+        "AFFECTED_AUDIENCE": [],
+        "REQUIREMENT": [],
+        "DEADLINE": [],
+        "RESULT": [],
+        "CONSEQUENCE": [
+          {
+            "reason_code": "CONSEQUENCE_CONTEXT_PATTERN",
+            "source_section": "BODY",
+            "sentence_index": 5,
+            "supports": [
+              "FORMAT_ANALYSIS",
+              "INTENT_UNDERSTAND_IMPACT"
+            ],
+            "suppresses": []
+          }
+        ],
+        "WARNING": [],
+        "ATTRIBUTION": [
+          {
+            "reason_code": "ATTRIBUTION_SIGNAL",
+            "source_section": "BODY",
+            "sentence_index": 3,
+            "supports": [
+              "CLAIM_ATTRIBUTED"
+            ],
+            "suppresses": []
+          },
+          {
+            "reason_code": "ATTRIBUTION_SIGNAL",
+            "source_section": "BODY",
+            "sentence_index": 5,
+            "supports": [
+              "CLAIM_ATTRIBUTED"
+            ],
+            "suppresses": []
+          }
+        ],
+        "CLAIM": [],
+        "PREDICTION": [],
+        "UNCERTAINTY": [],
+        "INTERPRETATION": []
+      },
+      "contextual_topic_support": [],
+      "contextual_format_support": [
+        "FORMAT_ANALYSIS"
+      ],
+      "contextual_intent_support": [
+        "INTENT_UNDERSTAND_IMPACT"
+      ],
+      "contextual_claim_support": [
+        "CLAIM_ATTRIBUTED"
+      ],
+      "contextual_suppressions": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_relationships": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "semantic_warning_codes": [
+        "SEMANTIC_COMPOSITION_EMPTY"
+      ],
+      "failure_classes": [
+        "CONTEXTUAL_EVIDENCE_PRESENT_BUT_UNCOMPOSED",
+        "DOMAIN_MODEL_COVERAGE_GAP",
+        "FORMAT_SEMANTIC_COVERAGE_GAP"
+      ],
+      "architectural_observations": [
+        "Persisted case 035 is a vehicle price/specification guide, not the specified military restructuring and unmanned-systems explainer.",
+        "Attribution and consequence evidence remained uncomposed, leaving both domain and explanatory-format support empty."
+      ]
+    },
+    {
+      "id": "036",
+      "previous_topic_match": true,
+      "previous_format_match": false,
+      "previous_intent_match": true,
+      "previous_full_match": false,
+      "contextual_item_count": 4,
+      "contextual_role_counts": {
+        "SUBJECT": 0,
+        "ACTOR": 0,
+        "ACTION": 0,
+        "AUTHORITY": 2,
+        "AFFECTED_AUDIENCE": 0,
+        "REQUIREMENT": 0,
+        "DEADLINE": 0,
+        "RESULT": 0,
+        "CONSEQUENCE": 0,
+        "WARNING": 0,
+        "ATTRIBUTION": 0,
+        "CLAIM": 0,
+        "PREDICTION": 0,
+        "UNCERTAINTY": 2,
+        "INTERPRETATION": 0
+      },
+      "contextual_evidence_by_role": {
+        "SUBJECT": [],
+        "ACTOR": [],
+        "ACTION": [],
+        "AUTHORITY": [
+          {
+            "reason_code": "GENERIC_GOVERNMENT_TOKEN",
+            "source_section": "HEADLINE",
+            "sentence_index": 0,
+            "supports": [
+              "TOPIC_GOVERNMENT"
+            ],
+            "suppresses": []
+          },
+          {
+            "reason_code": "GENERIC_GOVERNMENT_TOKEN",
+            "source_section": "LEAD",
+            "sentence_index": 0,
+            "supports": [
+              "TOPIC_GOVERNMENT"
+            ],
+            "suppresses": []
+          }
+        ],
+        "AFFECTED_AUDIENCE": [],
+        "REQUIREMENT": [],
+        "DEADLINE": [],
+        "RESULT": [],
+        "CONSEQUENCE": [],
+        "WARNING": [],
+        "ATTRIBUTION": [],
+        "CLAIM": [],
+        "PREDICTION": [],
+        "UNCERTAINTY": [
+          {
+            "reason_code": "UNCERTAINTY_CONTEXT_PATTERN",
+            "source_section": "HEADLINE",
+            "sentence_index": 0,
+            "supports": [
+              "CLAIM_UNCERTAIN"
+            ],
+            "suppresses": []
+          },
+          {
+            "reason_code": "UNCERTAINTY_CONTEXT_PATTERN",
+            "source_section": "BODY",
+            "sentence_index": 3,
+            "supports": [
+              "CLAIM_UNCERTAIN"
+            ],
+            "suppresses": []
+          }
+        ],
+        "INTERPRETATION": []
+      },
+      "contextual_topic_support": [
+        "TOPIC_GOVERNMENT"
+      ],
+      "contextual_format_support": [],
+      "contextual_intent_support": [],
+      "contextual_claim_support": [
+        "CLAIM_UNCERTAIN"
+      ],
+      "contextual_suppressions": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_relationships": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "semantic_warning_codes": [
+        "SEMANTIC_COMPOSITION_EMPTY"
+      ],
+      "failure_classes": [
+        "CONTEXTUAL_EVIDENCE_PRESENT_BUT_UNCOMPOSED",
+        "DOMAIN_MODEL_COVERAGE_GAP",
+        "FORMAT_SEMANTIC_COVERAGE_GAP"
+      ],
+      "architectural_observations": [
+        "Persisted case 036 is preventive health guidance, not the specified AI/biological-science development and dual-use analysis.",
+        "Authority and uncertainty evidence produced no relationships or analysis-format support; the requested biological-science structure is therefore not tested by this source."
+      ]
+    },
+    {
+      "id": "037",
+      "previous_topic_match": false,
+      "previous_format_match": true,
+      "previous_intent_match": true,
+      "previous_full_match": false,
+      "contextual_item_count": 0,
+      "contextual_role_counts": {
+        "SUBJECT": 0,
+        "ACTOR": 0,
+        "ACTION": 0,
+        "AUTHORITY": 0,
+        "AFFECTED_AUDIENCE": 0,
+        "REQUIREMENT": 0,
+        "DEADLINE": 0,
+        "RESULT": 0,
+        "CONSEQUENCE": 0,
+        "WARNING": 0,
+        "ATTRIBUTION": 0,
+        "CLAIM": 0,
+        "PREDICTION": 0,
+        "UNCERTAINTY": 0,
+        "INTERPRETATION": 0
+      },
+      "contextual_evidence_by_role": {
+        "SUBJECT": [],
+        "ACTOR": [],
+        "ACTION": [],
+        "AUTHORITY": [],
+        "AFFECTED_AUDIENCE": [],
+        "REQUIREMENT": [],
+        "DEADLINE": [],
+        "RESULT": [],
+        "CONSEQUENCE": [],
+        "WARNING": [],
+        "ATTRIBUTION": [],
+        "CLAIM": [],
+        "PREDICTION": [],
+        "UNCERTAINTY": [],
+        "INTERPRETATION": []
+      },
+      "contextual_topic_support": [],
+      "contextual_format_support": [],
+      "contextual_intent_support": [],
+      "contextual_claim_support": [],
+      "contextual_suppressions": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_relationships": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "semantic_warning_codes": [
+        "SEMANTIC_COMPOSITION_EMPTY"
+      ],
+      "failure_classes": [
+        "CONTEXTUAL_EVIDENCE_MISSING",
+        "DOMAIN_MODEL_COVERAGE_GAP"
+      ],
+      "architectural_observations": [
+        "Persisted case 037 is a health-sector memorandum, not the specified university/government institutional conflict and protests.",
+        "No contextual evidence was extracted, so no primary-domain competition was represented semantically."
+      ]
+    },
+    {
+      "id": "038",
+      "previous_topic_match": false,
+      "previous_format_match": false,
+      "previous_intent_match": true,
+      "previous_full_match": false,
+      "contextual_item_count": 1,
+      "contextual_role_counts": {
+        "SUBJECT": 0,
+        "ACTOR": 0,
+        "ACTION": 0,
+        "AUTHORITY": 0,
+        "AFFECTED_AUDIENCE": 0,
+        "REQUIREMENT": 0,
+        "DEADLINE": 0,
+        "RESULT": 0,
+        "CONSEQUENCE": 0,
+        "WARNING": 0,
+        "ATTRIBUTION": 1,
+        "CLAIM": 0,
+        "PREDICTION": 0,
+        "UNCERTAINTY": 0,
+        "INTERPRETATION": 0
+      },
+      "contextual_evidence_by_role": {
+        "SUBJECT": [],
+        "ACTOR": [],
+        "ACTION": [],
+        "AUTHORITY": [],
+        "AFFECTED_AUDIENCE": [],
+        "REQUIREMENT": [],
+        "DEADLINE": [],
+        "RESULT": [],
+        "CONSEQUENCE": [],
+        "WARNING": [],
+        "ATTRIBUTION": [
+          {
+            "reason_code": "ATTRIBUTION_SIGNAL",
+            "source_section": "LEAD",
+            "sentence_index": 0,
+            "supports": [
+              "CLAIM_ATTRIBUTED"
+            ],
+            "suppresses": []
+          }
+        ],
+        "CLAIM": [],
+        "PREDICTION": [],
+        "UNCERTAINTY": [],
+        "INTERPRETATION": []
+      },
+      "contextual_topic_support": [],
+      "contextual_format_support": [],
+      "contextual_intent_support": [],
+      "contextual_claim_support": [
+        "CLAIM_ATTRIBUTED"
+      ],
+      "contextual_suppressions": [],
+      "semantic_relationship_count": 1,
+      "semantic_relationship_types": [
+        "ACTION_TARGETS_OBJECT"
+      ],
+      "semantic_relationships": [
+        {
+          "relationship_type": "ACTION_TARGETS_OBJECT",
+          "source_section": "LEAD",
+          "sentence_index": 0,
+          "subject_component": "ACTION",
+          "subject_text": "دعا",
+          "object_component": "OBJECT",
+          "object_text": "الأمراض",
+          "strength": "MEDIUM",
+          "reason_code": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_HEALTH"
+          ],
+          "suppresses": []
+        }
+      ],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "semantic_warning_codes": [],
+      "failure_classes": [
+        "SEMANTIC_RELATIONSHIP_PRESENT_WITHOUT_DOMAIN",
+        "DOMAIN_MODEL_COVERAGE_GAP",
+        "FORMAT_SEMANTIC_COVERAGE_GAP"
+      ],
+      "architectural_observations": [
+        "Persisted case 038 is Ebola outbreak reporting, not the specified NATO/Russia intelligence estimate and possible future attack.",
+        "One action-to-object relationship supported health, but that support was not promoted to a primary domain candidate and no format or intent support was produced."
+      ]
+    },
+    {
+      "id": "039",
+      "previous_topic_match": true,
+      "previous_format_match": true,
+      "previous_intent_match": true,
+      "previous_full_match": true,
+      "contextual_item_count": 0,
+      "contextual_role_counts": {
+        "SUBJECT": 0,
+        "ACTOR": 0,
+        "ACTION": 0,
+        "AUTHORITY": 0,
+        "AFFECTED_AUDIENCE": 0,
+        "REQUIREMENT": 0,
+        "DEADLINE": 0,
+        "RESULT": 0,
+        "CONSEQUENCE": 0,
+        "WARNING": 0,
+        "ATTRIBUTION": 0,
+        "CLAIM": 0,
+        "PREDICTION": 0,
+        "UNCERTAINTY": 0,
+        "INTERPRETATION": 0
+      },
+      "contextual_evidence_by_role": {
+        "SUBJECT": [],
+        "ACTOR": [],
+        "ACTION": [],
+        "AUTHORITY": [],
+        "AFFECTED_AUDIENCE": [],
+        "REQUIREMENT": [],
+        "DEADLINE": [],
+        "RESULT": [],
+        "CONSEQUENCE": [],
+        "WARNING": [],
+        "ATTRIBUTION": [],
+        "CLAIM": [],
+        "PREDICTION": [],
+        "UNCERTAINTY": [],
+        "INTERPRETATION": []
+      },
+      "contextual_topic_support": [],
+      "contextual_format_support": [],
+      "contextual_intent_support": [],
+      "contextual_claim_support": [],
+      "contextual_suppressions": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_relationships": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "semantic_warning_codes": [
+        "SEMANTIC_COMPOSITION_EMPTY"
+      ],
+      "failure_classes": [
+        "CONTEXTUAL_EVIDENCE_MISSING",
+        "DOMAIN_MODEL_COVERAGE_GAP"
+      ],
+      "architectural_observations": [
+        "Persisted case 039 is gold-price reporting and matched ECONOMY without contextual items, relationships, or semantic candidates.",
+        "The match is therefore a control showing that the prior workflow prediction was sufficient without recorded contextual or semantic contribution; this diagnostic does not invoke the topic classifier to attribute a more specific path."
+      ]
+    },
+    {
+      "id": "040",
+      "previous_topic_match": true,
+      "previous_format_match": true,
+      "previous_intent_match": true,
+      "previous_full_match": true,
+      "contextual_item_count": 3,
+      "contextual_role_counts": {
+        "SUBJECT": 0,
+        "ACTOR": 0,
+        "ACTION": 0,
+        "AUTHORITY": 2,
+        "AFFECTED_AUDIENCE": 0,
+        "REQUIREMENT": 0,
+        "DEADLINE": 0,
+        "RESULT": 0,
+        "CONSEQUENCE": 0,
+        "WARNING": 0,
+        "ATTRIBUTION": 0,
+        "CLAIM": 0,
+        "PREDICTION": 1,
+        "UNCERTAINTY": 0,
+        "INTERPRETATION": 0
+      },
+      "contextual_evidence_by_role": {
+        "SUBJECT": [],
+        "ACTOR": [],
+        "ACTION": [],
+        "AUTHORITY": [
+          {
+            "reason_code": "GENERIC_GOVERNMENT_TOKEN",
+            "source_section": "LEAD",
+            "sentence_index": 0,
+            "supports": [
+              "TOPIC_GOVERNMENT"
+            ],
+            "suppresses": []
+          },
+          {
+            "reason_code": "GENERIC_GOVERNMENT_TOKEN",
+            "source_section": "BODY",
+            "sentence_index": 3,
+            "supports": [
+              "TOPIC_GOVERNMENT"
+            ],
+            "suppresses": []
+          }
+        ],
+        "AFFECTED_AUDIENCE": [],
+        "REQUIREMENT": [],
+        "DEADLINE": [],
+        "RESULT": [],
+        "CONSEQUENCE": [],
+        "WARNING": [],
+        "ATTRIBUTION": [],
+        "CLAIM": [],
+        "PREDICTION": [
+          {
+            "reason_code": "PREDICTION_CONTEXT_PATTERN",
+            "source_section": "BODY",
+            "sentence_index": 5,
+            "supports": [
+              "CLAIM_UNCERTAIN",
+              "FORMAT_ANALYSIS",
+              "INTENT_UNDERSTAND_IMPACT"
+            ],
+            "suppresses": []
+          }
+        ],
+        "UNCERTAINTY": [],
+        "INTERPRETATION": []
+      },
+      "contextual_topic_support": [
+        "TOPIC_GOVERNMENT"
+      ],
+      "contextual_format_support": [
+        "FORMAT_ANALYSIS"
+      ],
+      "contextual_intent_support": [
+        "INTENT_UNDERSTAND_IMPACT"
+      ],
+      "contextual_claim_support": [
+        "CLAIM_UNCERTAIN"
+      ],
+      "contextual_suppressions": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_relationships": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "semantic_warning_codes": [
+        "SEMANTIC_COMPOSITION_EMPTY"
+      ],
+      "failure_classes": [
+        "CONTEXTUAL_EVIDENCE_PRESENT_BUT_UNCOMPOSED",
+        "DOMAIN_MODEL_COVERAGE_GAP"
+      ],
+      "architectural_observations": [
+        "Persisted case 040 is petroleum/gas production reporting, not the specified CRIME control scenario.",
+        "The matched ECONOMY result coexisted with authority and prediction evidence that remained uncomposed, showing the prior prediction did not require recorded semantic evidence."
+      ]
+    }
+  ]
+}
