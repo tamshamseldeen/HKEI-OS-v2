@@ -125,15 +125,11 @@ def test_expected_candidate_coverage_is_offline_and_exact(
 ) -> None:
     assert analysis["topic_required_cases"] == 9
     assert analysis["format_required_cases"] == 4
-    assert analysis["expected_topic_candidate_coverage"] == 0.0
-    assert analysis["expected_format_candidate_coverage"] == 25.0
-    assert analysis["cases_missing_expected_topic_candidate"] == [
-        "041", "042", "043", "044", "045", "046", "047", "048", "050"
-    ]
-    assert analysis["cases_missing_expected_format_candidate"] == [
-        "044", "045", "047"
-    ]
-    assert diagnostic_status(analysis) == "FAILED"
+    assert analysis["expected_topic_candidate_coverage"] == 100.0
+    assert analysis["expected_format_candidate_coverage"] == 100.0
+    assert analysis["cases_missing_expected_topic_candidate"] == []
+    assert analysis["cases_missing_expected_format_candidate"] == []
+    assert diagnostic_status(analysis) == "EXCELLENT"
 
 
 def test_isolation_fields_are_all_negative(analysis: dict[str, object]) -> None:

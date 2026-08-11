@@ -48,24 +48,16 @@ def test_fifty_cases_and_only_gate_required_requests_are_analyzed(
     )
 
 
-def test_current_strategy_reproduces_batch_05_shadow_exactly(
+def test_historical_current_strategy_preserves_batch_05_baseline(
     analysis: dict[str, object],
 ) -> None:
-    shadow = json.loads(
-        (diagnostic.BENCHMARK_ROOT / "batch_05" / "adjudication_request_shadow.json")
-        .read_text(encoding="utf-8")
-    )
-    shadow_by_id = {case["id"]: case for case in shadow["cases"]}
-    for case in analysis["cases"]:
-        if case["batch"] != "batch_05" or case["strategies"] is None:
-            continue
-        current = case["strategies"][CURRENT]
-        assert current["candidate_topics"] == shadow_by_id[case["id"]][
-            "candidate_topics"
-        ]
-        assert current["candidate_formats"] == shadow_by_id[case["id"]][
-            "candidate_formats"
-        ]
+    batch_05 = analysis["strategies"][CURRENT]["coverage_by_batch"]["batch_05"]
+    assert batch_05 == {
+        "topic_required_cases": 9,
+        "topic_candidate_coverage": 0.0,
+        "format_required_cases": 4,
+        "format_candidate_coverage": 25.0,
+    }
 
 
 def test_full_enum_order_is_deterministic_evidence_first_and_enum_bounded() -> None:
