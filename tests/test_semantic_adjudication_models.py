@@ -17,6 +17,7 @@ from src.adjudication.semantic_adjudication_request import (
 from src.adjudication.semantic_adjudication_response import (
     SemanticAdjudicationResponse,
 )
+from src.adjudication.semantic_adjudication_usage import SemanticAdjudicationUsage
 
 
 DECISION_FIELDS = (
@@ -68,8 +69,7 @@ RESPONSE_FIELDS = (
     "request_schema_version",
     "response_schema_version",
     "input_fingerprint",
-    "usage_input_tokens",
-    "usage_output_tokens",
+    "usage",
 )
 
 
@@ -139,8 +139,7 @@ def make_response() -> SemanticAdjudicationResponse:
         request_schema_version="1",
         response_schema_version="1",
         input_fingerprint="sha256:request-fingerprint",
-        usage_input_tokens=123,
-        usage_output_tokens=45,
+        usage=SemanticAdjudicationUsage(123, 45, 12),
     )
 
 
@@ -266,8 +265,9 @@ def test_response_preserves_evidence_warnings_usage_and_fingerprint() -> None:
     assert isinstance(response.topic_evidence_refs, tuple)
     assert isinstance(response.format_evidence_refs, tuple)
     assert isinstance(response.warnings, tuple)
-    assert response.usage_input_tokens == 123
-    assert response.usage_output_tokens == 45
+    assert response.usage == SemanticAdjudicationUsage(123, 45, 12)
+    assert not hasattr(response, "usage_input_tokens")
+    assert not hasattr(response, "usage_output_tokens")
     assert response.input_fingerprint == "sha256:request-fingerprint"
 
 

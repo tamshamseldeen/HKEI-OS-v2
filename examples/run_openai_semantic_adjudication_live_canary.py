@@ -73,6 +73,7 @@ class CanaryReport:
     status: str
     provider: str
     model: str
+    returned_model: str | None
     gate_scope: str
     provider_called: bool
     response_valid: bool
@@ -80,9 +81,15 @@ class CanaryReport:
     deterministic_format: str
     adjudicated_topic: str | None
     adjudicated_format: str | None
+    topic_confidence: str | None
+    format_confidence: str | None
     ambiguity_remaining: bool | None
     input_tokens: int
     output_tokens: int
+    reasoning_tokens: int | None
+    non_reasoning_output_tokens: int | None
+    output_token_headroom: int | None
+    output_token_headroom_ratio: float | None
     latency_milliseconds: int
     input_fingerprint: str | None
     shadow_topic_mutated: bool
@@ -162,6 +169,7 @@ def _configuration_error_report(model: str) -> CanaryReport:
         status="CONFIGURATION_ERROR",
         provider="openai",
         model=model,
+        returned_model=None,
         gate_scope="NONE",
         provider_called=False,
         response_valid=False,
@@ -169,9 +177,15 @@ def _configuration_error_report(model: str) -> CanaryReport:
         deterministic_format="NONE",
         adjudicated_topic=None,
         adjudicated_format=None,
+        topic_confidence=None,
+        format_confidence=None,
         ambiguity_remaining=None,
         input_tokens=0,
         output_tokens=0,
+        reasoning_tokens=None,
+        non_reasoning_output_tokens=None,
+        output_token_headroom=None,
+        output_token_headroom_ratio=None,
         latency_milliseconds=0,
         input_fingerprint=None,
         shadow_topic_mutated=False,
@@ -230,6 +244,23 @@ def run_canary(
     format_mutated = bool(
         request and request.deterministic_format != deterministic_format
     )
+    usage = response.usage if response else None
+    reasoning_tokens = usage.reasoning_tokens if usage else None
+    non_reasoning_output_tokens = (
+        usage.output_tokens - reasoning_tokens
+        if usage and reasoning_tokens is not None
+        else None
+    )
+    output_token_headroom = (
+        runtime_context.max_output_tokens - usage.output_tokens
+        if usage
+        else None
+    )
+    output_token_headroom_ratio = (
+        output_token_headroom / runtime_context.max_output_tokens
+        if output_token_headroom is not None
+        else None
+    )
 
     if request is None:
         status = "SKIPPED"
@@ -256,6 +287,7 @@ def run_canary(
         status=status,
         provider="openai",
         model=runtime_context.model,
+        returned_model=response.model if response else None,
         gate_scope=result.adjudication_decision.scope.value,
         provider_called=result.provider_called,
         response_valid=result.response_valid,
@@ -263,9 +295,15 @@ def run_canary(
         deterministic_format=deterministic_format,
         adjudicated_topic=response.adjudicated_topic if response else None,
         adjudicated_format=response.adjudicated_format if response else None,
+        topic_confidence=response.topic_confidence.value if response else None,
+        format_confidence=response.format_confidence.value if response else None,
         ambiguity_remaining=response.ambiguity_remaining if response else None,
-        input_tokens=response.usage_input_tokens if response else 0,
-        output_tokens=response.usage_output_tokens if response else 0,
+        input_tokens=usage.input_tokens if usage else 0,
+        output_tokens=usage.output_tokens if usage else 0,
+        reasoning_tokens=reasoning_tokens,
+        non_reasoning_output_tokens=non_reasoning_output_tokens,
+        output_token_headroom=output_token_headroom,
+        output_token_headroom_ratio=output_token_headroom_ratio,
         latency_milliseconds=latency_milliseconds,
         input_fingerprint=request.input_fingerprint if request else None,
         shadow_topic_mutated=topic_mutated,
@@ -292,6 +330,7 @@ def print_summary(report: CanaryReport) -> None:
         ("Status", report.status),
         ("Provider", report.provider),
         ("Model", report.model),
+        ("Returned Model", report.returned_model),
         ("Gate Scope", report.gate_scope),
         ("Provider Called", report.provider_called),
         ("Response Valid", report.response_valid),
@@ -299,9 +338,15 @@ def print_summary(report: CanaryReport) -> None:
         ("Deterministic Format", report.deterministic_format),
         ("Adjudicated Topic", report.adjudicated_topic),
         ("Adjudicated Format", report.adjudicated_format),
+        ("Topic Confidence", report.topic_confidence),
+        ("Format Confidence", report.format_confidence),
         ("Ambiguity Remaining", report.ambiguity_remaining),
         ("Input Tokens", report.input_tokens),
         ("Output Tokens", report.output_tokens),
+        ("Reasoning Tokens", report.reasoning_tokens),
+        ("Non-Reasoning Output Tokens", report.non_reasoning_output_tokens),
+        ("Output Token Headroom", report.output_token_headroom),
+        ("Output Token Headroom Ratio", report.output_token_headroom_ratio),
         ("Latency Milliseconds", report.latency_milliseconds),
         ("Input Fingerprint", report.input_fingerprint),
         ("Shadow Topic Mutated", report.shadow_topic_mutated),

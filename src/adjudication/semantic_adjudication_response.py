@@ -3,6 +3,7 @@
 from dataclasses import dataclass
 
 from .adjudication_confidence import AdjudicationConfidence
+from .semantic_adjudication_usage import SemanticAdjudicationUsage
 
 
 @dataclass(frozen=True)
@@ -33,5 +34,4 @@ class SemanticAdjudicationResponse:
 
     input_fingerprint: str
 
-    usage_input_tokens: int
-    usage_output_tokens: int
+    usage: SemanticAdjudicationUsage

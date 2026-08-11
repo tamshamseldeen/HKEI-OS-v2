@@ -31,6 +31,7 @@ from src.adjudication.semantic_adjudication_request_builder import (
 from src.adjudication.semantic_adjudication_response import (
     SemanticAdjudicationResponse,
 )
+from src.adjudication.semantic_adjudication_usage import SemanticAdjudicationUsage
 from src.adjudication.semantic_adjudication_response_validator import (
     SemanticAdjudicationResponseValidator,
 )
@@ -134,8 +135,7 @@ def valid_response(
         request_schema_version="1.0",
         response_schema_version="1.0",
         input_fingerprint=request.input_fingerprint,
-        usage_input_tokens=0,
-        usage_output_tokens=0,
+        usage=SemanticAdjudicationUsage(0, 0, None),
     )
 
 

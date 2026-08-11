@@ -27,10 +27,11 @@ from .semantic_adjudication_response import SemanticAdjudicationResponse
 from .semantic_adjudication_runtime_context import (
     SemanticAdjudicationRuntimeContext,
 )
+from .semantic_adjudication_usage import SemanticAdjudicationUsage
 
 
 OPENAI_ADJUDICATION_REQUEST_SCHEMA_VERSION = "1.0"
-OPENAI_ADJUDICATION_RESPONSE_SCHEMA_VERSION = "1.0"
+OPENAI_ADJUDICATION_RESPONSE_SCHEMA_VERSION = "1.1"
 
 _REQUIRED_OUTPUT_FIELDS = (
     "adjudicated_topic",
@@ -168,8 +169,7 @@ class OpenAISemanticAdjudicationProvider(SemanticAdjudicationProvider):
             request_schema_version=OPENAI_ADJUDICATION_REQUEST_SCHEMA_VERSION,
             response_schema_version=OPENAI_ADJUDICATION_RESPONSE_SCHEMA_VERSION,
             input_fingerprint=request.input_fingerprint,
-            usage_input_tokens=self._usage(response, "input_tokens"),
-            usage_output_tokens=self._usage(response, "output_tokens"),
+            usage=self._usage(response),
         )
 
     @staticmethod
@@ -342,10 +342,27 @@ class OpenAISemanticAdjudicationProvider(SemanticAdjudicationProvider):
             else self.runtime_context.model
         )
 
-    def _usage(self, response: Any, name: str) -> int:
+    def _usage(self, response: Any) -> SemanticAdjudicationUsage:
         usage = self._value(response, "usage")
-        value = self._value(usage, name)
-        return value if isinstance(value, int) and not isinstance(value, bool) else 0
+        details = self._value(usage, "output_tokens_details")
+        return SemanticAdjudicationUsage(
+            input_tokens=self._token_count(usage, "input_tokens", default=0),
+            output_tokens=self._token_count(usage, "output_tokens", default=0),
+            reasoning_tokens=self._token_count(
+                details, "reasoning_tokens", default=None
+            ),
+        )
+
+    @classmethod
+    def _token_count(
+        cls,
+        value: Any,
+        name: str,
+        *,
+        default: int | None,
+    ) -> int | None:
+        count = cls._value(value, name)
+        return count if isinstance(count, int) and not isinstance(count, bool) else default
 
     @staticmethod
     def _bad_request_message(error: BadRequestError) -> str:

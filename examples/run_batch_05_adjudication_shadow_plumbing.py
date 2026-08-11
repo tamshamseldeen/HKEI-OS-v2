@@ -31,6 +31,7 @@ from src.adjudication.semantic_adjudication_request import (
 from src.adjudication.semantic_adjudication_response import (
     SemanticAdjudicationResponse,
 )
+from src.adjudication.semantic_adjudication_usage import SemanticAdjudicationUsage
 from src.workflows.experimental_semantic_adjudication_shadow_workflow import (
     ExperimentalSemanticAdjudicationShadowWorkflow,
 )
@@ -95,8 +96,7 @@ class OfflineOracleProvider(SemanticAdjudicationProvider):
             request_schema_version="1.0",
             response_schema_version="1.0",
             input_fingerprint=request.input_fingerprint,
-            usage_input_tokens=0,
-            usage_output_tokens=0,
+            usage=SemanticAdjudicationUsage(0, 0, None),
         )
 
 

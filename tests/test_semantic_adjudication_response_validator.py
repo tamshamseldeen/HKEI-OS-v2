@@ -24,6 +24,7 @@ from src.adjudication.semantic_adjudication_response import (
 from src.adjudication.semantic_adjudication_response_validator import (
     SemanticAdjudicationResponseValidator,
 )
+from src.adjudication.semantic_adjudication_usage import SemanticAdjudicationUsage
 
 
 class FakeSemanticAdjudicationProvider(SemanticAdjudicationProvider):
@@ -103,9 +104,20 @@ def valid_response(
         request_schema_version="1.0",
         response_schema_version="1.0",
         input_fingerprint=request.input_fingerprint,
-        usage_input_tokens=0,
-        usage_output_tokens=0,
+        usage=SemanticAdjudicationUsage(0, 0, None),
     )
+
+
+def unsafe_usage(
+    input_tokens: object,
+    output_tokens: object,
+    reasoning_tokens: object,
+) -> SemanticAdjudicationUsage:
+    usage = object.__new__(SemanticAdjudicationUsage)
+    object.__setattr__(usage, "input_tokens", input_tokens)
+    object.__setattr__(usage, "output_tokens", output_tokens)
+    object.__setattr__(usage, "reasoning_tokens", reasoning_tokens)
+    return usage
 
 
 def validate(
@@ -145,8 +157,23 @@ def test_valid_response_is_accepted_and_returned_by_identity() -> None:
         ({"format_evidence_refs": (1,)}, "format evidence refs contain an invalid item"),
         ({"warnings": ("ok", 1)}, "warnings must be a tuple of strings"),
         ({"ambiguity_remaining": 1}, "ambiguity remaining is not boolean"),
-        ({"usage_input_tokens": -1}, "usage input tokens must be non-negative"),
-        ({"usage_output_tokens": -1}, "usage output tokens must be non-negative"),
+        ({"usage": object()}, "usage is invalid"),
+        (
+            {"usage": unsafe_usage(-1, 0, None)},
+            "usage input tokens must be non-negative",
+        ),
+        (
+            {"usage": unsafe_usage(0, -1, None)},
+            "usage output tokens must be non-negative",
+        ),
+        (
+            {"usage": unsafe_usage(0, 1, -1)},
+            "usage reasoning tokens must be non-negative",
+        ),
+        (
+            {"usage": unsafe_usage(0, 1, 2)},
+            "usage reasoning tokens exceed output tokens",
+        ),
     ),
 )
 def test_invalid_response_fields_are_rejected_in_deterministic_order(
@@ -179,8 +206,7 @@ def test_warning_tuple_ambiguity_true_and_zero_usage_are_valid() -> None:
         valid_response(request),
         ambiguity_remaining=True,
         warnings=(),
-        usage_input_tokens=0,
-        usage_output_tokens=0,
+        usage=SemanticAdjudicationUsage(0, 0, 0),
     )
     assert validate(response, request) is response
 

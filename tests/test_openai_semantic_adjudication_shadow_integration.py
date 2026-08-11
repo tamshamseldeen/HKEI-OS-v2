@@ -221,9 +221,10 @@ def test_valid_completed_flow_preserves_contract_metadata_and_call_counts() -> N
     assert result.validated_response.provider == "openai"
     assert result.validated_response.model == "fake-openai-model"
     assert result.validated_response.request_schema_version == "1.0"
-    assert result.validated_response.response_schema_version == "1.0"
-    assert result.validated_response.usage_input_tokens == 321
-    assert result.validated_response.usage_output_tokens == 54
+    assert result.validated_response.response_schema_version == "1.1"
+    assert result.validated_response.usage.input_tokens == 321
+    assert result.validated_response.usage.output_tokens == 54
+    assert result.validated_response.usage.reasoning_tokens is None
     assert_deterministic_unchanged(result, parts["baseline"])
 
 

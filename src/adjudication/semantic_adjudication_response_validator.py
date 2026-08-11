@@ -10,6 +10,7 @@ from src.adjudication.semantic_adjudication_request import (
 from src.adjudication.semantic_adjudication_response import (
     SemanticAdjudicationResponse,
 )
+from src.adjudication.semantic_adjudication_usage import SemanticAdjudicationUsage
 
 
 class SemanticAdjudicationResponseValidator:
@@ -70,8 +71,7 @@ class SemanticAdjudicationResponseValidator:
             isinstance(warning, str) for warning in response.warnings
         ):
             self._invalid("warnings must be a tuple of strings")
-        self._validate_usage("input", response.usage_input_tokens)
-        self._validate_usage("output", response.usage_output_tokens)
+        self._validate_usage(response.usage)
         return response
 
     def _validate_evidence_refs(
@@ -90,7 +90,17 @@ class SemanticAdjudicationResponseValidator:
         if required and not values:
             self._invalid(f"{name} evidence refs are required")
 
-    def _validate_usage(self, name: str, value: object) -> None:
+    def _validate_usage(self, usage: object) -> None:
+        if not isinstance(usage, SemanticAdjudicationUsage):
+            self._invalid("usage is invalid")
+        self._validate_token_count("input", usage.input_tokens)
+        self._validate_token_count("output", usage.output_tokens)
+        if usage.reasoning_tokens is not None:
+            self._validate_token_count("reasoning", usage.reasoning_tokens)
+            if usage.reasoning_tokens > usage.output_tokens:
+                self._invalid("usage reasoning tokens exceed output tokens")
+
+    def _validate_token_count(self, name: str, value: object) -> None:
         if not isinstance(value, int) or isinstance(value, bool) or value < 0:
             self._invalid(f"usage {name} tokens must be non-negative")
 

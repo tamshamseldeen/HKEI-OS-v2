@@ -186,10 +186,12 @@ def test_valid_response_maps_domain_fields_and_trusted_metadata() -> None:
     assert result.warnings == ("source evidence is mixed",)
     assert result.provider == "openai"
     assert result.model == "returned-model"
-    assert result.request_schema_version == result.response_schema_version == "1.0"
+    assert result.request_schema_version == "1.0"
+    assert result.response_schema_version == "1.1"
     assert result.input_fingerprint == "a" * 64
-    assert result.usage_input_tokens == 123
-    assert result.usage_output_tokens == 45
+    assert result.usage.input_tokens == 123
+    assert result.usage.output_tokens == 45
+    assert result.usage.reasoning_tokens is None
 
 
 @pytest.mark.parametrize(
@@ -305,8 +307,28 @@ def test_prompt_delimits_untrusted_source_and_preserves_legal_schema() -> None:
 def test_missing_usage_defaults_to_zero_and_model_falls_back() -> None:
     adapter, _ = provider(completed(usage=None, model="  "))
     result = adapter.adjudicate(request())
-    assert result.usage_input_tokens == result.usage_output_tokens == 0
+    assert result.usage.input_tokens == result.usage.output_tokens == 0
+    assert result.usage.reasoning_tokens is None
     assert result.model == "configured-model"
+
+
+def test_reasoning_token_usage_is_mapped_without_raw_details() -> None:
+    details = SimpleNamespace(
+        reasoning_tokens=31,
+        reasoning_summary="must not enter the domain response",
+    )
+    usage = SimpleNamespace(
+        input_tokens=123,
+        output_tokens=45,
+        output_tokens_details=details,
+    )
+    adapter, _ = provider(completed(usage=usage))
+    result = adapter.adjudicate(request())
+    assert result.usage.input_tokens == 123
+    assert result.usage.output_tokens == 45
+    assert result.usage.reasoning_tokens == 31
+    assert not hasattr(result.usage, "reasoning_summary")
+    assert not hasattr(result.usage, "raw_usage")
 
 
 @pytest.mark.parametrize(

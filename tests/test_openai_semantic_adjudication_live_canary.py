@@ -108,7 +108,14 @@ class FakeResponses:
             output=(),
             output_text=json.dumps(payload),
             model="fake-live-model",
-            usage=SimpleNamespace(input_tokens=87, output_tokens=29),
+            usage=SimpleNamespace(
+                input_tokens=87,
+                output_tokens=29,
+                output_tokens_details=SimpleNamespace(
+                    reasoning_tokens=11,
+                    reasoning_summary="never expose this reasoning text",
+                ),
+            ),
         )
 
 
@@ -194,6 +201,13 @@ def test_success_runs_one_synthetic_source_and_one_openai_call(
     assert report.shadow_intent_mutated is False
     assert report.input_tokens == 87
     assert report.output_tokens == 29
+    assert report.reasoning_tokens == 11
+    assert report.non_reasoning_output_tokens == 18
+    assert report.output_token_headroom == 1171
+    assert report.output_token_headroom_ratio == 1171 / 1200
+    assert report.returned_model == "fake-live-model"
+    assert report.topic_confidence == "HIGH"
+    assert report.format_confidence == "MEDIUM"
     assert report.latency_milliseconds == 125
     assert len(report.input_fingerprint) == 64
     canary.print_summary(report)
@@ -201,6 +215,14 @@ def test_success_runs_one_synthetic_source_and_one_openai_call(
     assert "Status:\nSUCCESS" in output
     assert "Input Tokens:\n87" in output
     assert "Output Tokens:\n29" in output
+    assert "Reasoning Tokens:\n11" in output
+    assert "Non-Reasoning Output Tokens:\n18" in output
+    assert "Output Token Headroom:\n1171" in output
+    assert f"Output Token Headroom Ratio:\n{1171 / 1200}" in output
+    assert "Returned Model:\nfake-live-model" in output
+    assert "Topic Confidence:\nHIGH" in output
+    assert "Format Confidence:\nMEDIUM" in output
+    assert "never expose this reasoning text" not in output
     assert report.input_fingerprint in output
     assert "Sanitized Provider Error:\nNONE" in output
 
@@ -235,6 +257,13 @@ def test_gate_skip_creates_client_but_makes_zero_provider_calls() -> None:
     assert client.responses.calls == []
     assert gate.evaluate.call_count == 1
     assert report.input_fingerprint is None
+    assert report.returned_model is None
+    assert report.topic_confidence is None
+    assert report.format_confidence is None
+    assert report.reasoning_tokens is None
+    assert report.non_reasoning_output_tokens is None
+    assert report.output_token_headroom is None
+    assert report.output_token_headroom_ratio is None
 
 
 def test_configuration_error_stops_before_client_or_provider_call(

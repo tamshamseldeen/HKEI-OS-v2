@@ -22,6 +22,7 @@ from src.adjudication.semantic_adjudication_request import (
 from src.adjudication.semantic_adjudication_response import (
     SemanticAdjudicationResponse,
 )
+from src.adjudication.semantic_adjudication_usage import SemanticAdjudicationUsage
 
 
 class StubSemanticAdjudicationProvider(SemanticAdjudicationProvider):
@@ -55,8 +56,7 @@ class StubSemanticAdjudicationProvider(SemanticAdjudicationProvider):
             request_schema_version="1.0",
             response_schema_version="1.0",
             input_fingerprint=request.input_fingerprint,
-            usage_input_tokens=10,
-            usage_output_tokens=5,
+            usage=SemanticAdjudicationUsage(10, 5, None),
         )
 
 
