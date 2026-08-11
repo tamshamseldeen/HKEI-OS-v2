@@ -7,7 +7,15 @@ import os
 from types import SimpleNamespace
 
 import httpx
-from openai import APIConnectionError, APITimeoutError, BadRequestError
+from openai import (
+    APIConnectionError,
+    APITimeoutError,
+    AuthenticationError,
+    BadRequestError,
+    InternalServerError,
+    PermissionDeniedError,
+    RateLimitError,
+)
 import pytest
 
 from src.adjudication.adjudication_confidence import AdjudicationConfidence
@@ -328,43 +336,128 @@ def test_unknown_confidence_is_rejected() -> None:
         adapter.adjudicate(request())
 
 
+def sdk_status_error(
+    error_type: type[Exception],
+    *,
+    status_code: int,
+    body: object = None,
+) -> Exception:
+    return error_type(
+        "raw message with sk-test-only-secret and private source body",
+        response=httpx.Response(
+            status_code,
+            request=httpx.Request("POST", "https://example.invalid"),
+            headers={"x-sensitive": "private-header"},
+        ),
+        body=body,
+    )
+
+
+def test_authentication_error_has_exact_sanitized_mapping() -> None:
+    adapter, _ = provider(error=sdk_status_error(
+        AuthenticationError, status_code=401, body={"secret": "private-body"}
+    ))
+    with pytest.raises(
+        SemanticAdjudicationProviderConfigurationError,
+        match=r"^OpenAI authentication failed\.$",
+    ):
+        adapter.adjudicate(request(body="private source body"))
+
+
+def test_permission_error_is_distinct_and_sanitized() -> None:
+    adapter, _ = provider(error=sdk_status_error(
+        PermissionDeniedError, status_code=403, body={"secret": "private-body"}
+    ))
+    with pytest.raises(
+        SemanticAdjudicationProviderConfigurationError,
+        match=r"^OpenAI permission denied\.$",
+    ):
+        adapter.adjudicate(request(body="private source body"))
+
+
 @pytest.mark.parametrize(
-    ("sdk_error", "domain_error"),
+    ("body", "expected"),
+    (
+        (None, "OpenAI request configuration was rejected."),
+        (
+            {"code": "unsupported_value", "param": "temperature"},
+            "OpenAI request configuration was rejected. "
+            "code=unsupported_value; param=temperature",
+        ),
+        (
+            {"code": 400, "param": ["temperature"]},
+            "OpenAI request configuration was rejected.",
+        ),
+        (
+            {
+                "code": "unsafe code sk-test-only-secret",
+                "param": "private\nsource",
+                "secret": "private-body",
+            },
+            "OpenAI request configuration was rejected.",
+        ),
+    ),
+)
+def test_bad_request_exposes_only_safe_scalar_details(
+    body: object,
+    expected: str,
+) -> None:
+    adapter, _ = provider(error=sdk_status_error(
+        BadRequestError, status_code=400, body=body
+    ))
+    with pytest.raises(SemanticAdjudicationProviderConfigurationError) as caught:
+        adapter.adjudicate(request(body="private source body"))
+    assert str(caught.value) == expected
+    assert "raw message" not in str(caught.value)
+    assert "sk-test-only-secret" not in str(caught.value)
+    assert "private source body" not in str(caught.value)
+    assert "private-body" not in str(caught.value)
+    assert "private-header" not in str(caught.value)
+
+
+def test_rate_limit_error_has_exact_sanitized_mapping() -> None:
+    adapter, _ = provider(error=sdk_status_error(
+        RateLimitError, status_code=429, body={"secret": "private-body"}
+    ))
+    with pytest.raises(
+        SemanticAdjudicationProviderUnavailableError,
+        match=r"^OpenAI rate limit reached\.$",
+    ):
+        adapter.adjudicate(request())
+
+
+@pytest.mark.parametrize(
+    ("sdk_error", "message"),
     (
         (
             APITimeoutError(request=httpx.Request("POST", "https://example.invalid")),
-            SemanticAdjudicationProviderTimeoutError,
+            "OpenAI request timed out",
         ),
         (
             APIConnectionError(
                 request=httpx.Request("POST", "https://example.invalid")
             ),
-            SemanticAdjudicationProviderUnavailableError,
+            "OpenAI connection failed.",
         ),
         (
-            BadRequestError(
-                "bad configuration",
-                response=httpx.Response(
-                    400,
-                    request=httpx.Request("POST", "https://example.invalid"),
-                ),
-                body=None,
-            ),
-            SemanticAdjudicationProviderConfigurationError,
+            sdk_status_error(InternalServerError, status_code=500),
+            "OpenAI service is unavailable.",
         ),
     ),
 )
-def test_known_sdk_errors_are_sanitized_and_mapped(
+def test_transport_errors_are_sanitized_and_mapped(
     sdk_error: Exception,
-    domain_error: type[Exception],
+    message: str,
 ) -> None:
     adapter, _ = provider(error=sdk_error)
-    with pytest.raises(domain_error) as caught:
+    expected_type = (
+        SemanticAdjudicationProviderTimeoutError
+        if isinstance(sdk_error, APITimeoutError)
+        else SemanticAdjudicationProviderUnavailableError
+    )
+    with pytest.raises(expected_type) as caught:
         adapter.adjudicate(request(body="private source body"))
-    message = str(caught.value)
-    assert "test-only-secret" not in message
-    assert "private source body" not in message
-    assert "bad configuration" not in message
+    assert str(caught.value) == message
 
 
 def test_unexpected_programming_error_propagates() -> None:
