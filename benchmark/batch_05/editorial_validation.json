@@ -1,0 +1,603 @@
+{
+  "batch": "batch_05",
+  "case_count": 10,
+  "topic_matched": 1,
+  "topic_accuracy": 10.0,
+  "format_matched": 6,
+  "format_accuracy": 60.0,
+  "reader_intent_matched": 6,
+  "reader_intent_accuracy": 60.0,
+  "fully_matched_cases": 1,
+  "full_case_accuracy": 10.0,
+  "cases_with_contextual_evidence": 8,
+  "cases_with_semantic_relationships": 2,
+  "cases_with_primary_semantic_domain": 1,
+  "cases_with_semantic_format_support": 0,
+  "semantic_evidence_used": 1,
+  "semantic_suppression_used": 0,
+  "cases": [
+    {
+      "id": "041",
+      "expected_topic": "POLITICS",
+      "predicted_topic": "GENERAL",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": false,
+      "contextual_item_count": 3,
+      "contextual_support_labels": [
+        "CLAIM_UNCERTAIN",
+        "CLAIM_ATTRIBUTED"
+      ],
+      "contextual_suppression_labels": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "topic_supporting_signals": [
+        "INSUFFICIENT_TOPIC_EVIDENCE"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_GENERAL"
+      ],
+      "intent_warnings": []
+    },
+    {
+      "id": "042",
+      "expected_topic": "CRIME",
+      "predicted_topic": "TECHNOLOGY",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": false,
+      "contextual_item_count": 2,
+      "contextual_support_labels": [
+        "CLAIM_UNCERTAIN",
+        "TOPIC_BUSINESS"
+      ],
+      "contextual_suppression_labels": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "topic_supporting_signals": [
+        "TITLE_TECHNOLOGY_SIGNAL",
+        "BODY_TECHNOLOGY_SIGNAL"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE"
+      ],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_TECHNOLOGY"
+      ],
+      "intent_warnings": []
+    },
+    {
+      "id": "043",
+      "expected_topic": "POLITICS",
+      "predicted_topic": "GENERAL",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": false,
+      "contextual_item_count": 1,
+      "contextual_support_labels": [
+        "CLAIM_UNCERTAIN"
+      ],
+      "contextual_suppression_labels": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "topic_supporting_signals": [
+        "INSUFFICIENT_TOPIC_EVIDENCE"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_GENERAL"
+      ],
+      "intent_warnings": []
+    },
+    {
+      "id": "044",
+      "expected_topic": "WORLD",
+      "predicted_topic": "GENERAL",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "expected_format": "ANALYSIS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "LOW",
+      "format_match": false,
+      "expected_reader_intent": "UNDERSTAND_IMPACT",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "LOW",
+      "reader_intent_match": false,
+      "full_match": false,
+      "contextual_item_count": 0,
+      "contextual_support_labels": [],
+      "contextual_suppression_labels": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "topic_supporting_signals": [
+        "INSUFFICIENT_TOPIC_EVIDENCE"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [
+        "LOW_EDITORIAL_FORMAT_CONFIDENCE"
+      ],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_GENERAL"
+      ],
+      "intent_warnings": [
+        "LOW_READER_INTENT_CONFIDENCE"
+      ]
+    },
+    {
+      "id": "045",
+      "expected_topic": "WORLD",
+      "predicted_topic": "GENERAL",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "expected_format": "EXPLAINER",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "LOW",
+      "format_match": false,
+      "expected_reader_intent": "UNDERSTAND_EVENT",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "LOW",
+      "reader_intent_match": false,
+      "full_match": false,
+      "contextual_item_count": 0,
+      "contextual_support_labels": [],
+      "contextual_suppression_labels": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "topic_supporting_signals": [
+        "INSUFFICIENT_TOPIC_EVIDENCE"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [
+        "LOW_EDITORIAL_FORMAT_CONFIDENCE"
+      ],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_GENERAL"
+      ],
+      "intent_warnings": [
+        "LOW_READER_INTENT_CONFIDENCE"
+      ]
+    },
+    {
+      "id": "046",
+      "expected_topic": "SCIENCE",
+      "predicted_topic": "TECHNOLOGY",
+      "topic_confidence": "MEDIUM",
+      "topic_match": false,
+      "expected_format": "ANALYSIS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": false,
+      "expected_reader_intent": "UNDERSTAND_IMPACT",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": false,
+      "full_match": false,
+      "contextual_item_count": 7,
+      "contextual_support_labels": [
+        "TOPIC_TECHNOLOGY",
+        "CLAIM_UNCERTAIN",
+        "FORMAT_ANALYSIS",
+        "INTENT_UNDERSTAND_IMPACT"
+      ],
+      "contextual_suppression_labels": [],
+      "semantic_relationship_count": 1,
+      "semantic_relationship_types": [
+        "ACTION_TARGETS_OBJECT"
+      ],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL",
+        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL",
+        "CONTEXTUAL_TOPIC_EVIDENCE"
+      ],
+      "topic_supporting_signals": [
+        "TITLE_TECHNOLOGY_SIGNAL",
+        "BODY_TECHNOLOGY_SIGNAL",
+        "LEGACY_TOPIC_SUPPORT",
+        "CONTEXTUAL_TOPIC_SUPPORT"
+      ],
+      "topic_warnings": [],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_TECHNOLOGY"
+      ],
+      "intent_warnings": []
+    },
+    {
+      "id": "047",
+      "expected_topic": "POLITICS",
+      "predicted_topic": "GENERAL",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "expected_format": "ANALYSIS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": false,
+      "expected_reader_intent": "UNDERSTAND_IMPACT",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": false,
+      "full_match": false,
+      "contextual_item_count": 1,
+      "contextual_support_labels": [
+        "CLAIM_UNCERTAIN"
+      ],
+      "contextual_suppression_labels": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "topic_supporting_signals": [
+        "INSUFFICIENT_TOPIC_EVIDENCE"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_GENERAL"
+      ],
+      "intent_warnings": []
+    },
+    {
+      "id": "048",
+      "expected_topic": "WORLD",
+      "predicted_topic": "GENERAL",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": false,
+      "contextual_item_count": 6,
+      "contextual_support_labels": [
+        "CLAIM_UNCERTAIN",
+        "FORMAT_ANALYSIS",
+        "INTENT_UNDERSTAND_IMPACT"
+      ],
+      "contextual_suppression_labels": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "topic_supporting_signals": [
+        "INSUFFICIENT_TOPIC_EVIDENCE"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [
+        "SOURCE_TOO_THIN_FOR_ANALYSIS"
+      ],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_GENERAL"
+      ],
+      "intent_warnings": []
+    },
+    {
+      "id": "049",
+      "expected_topic": "ECONOMY",
+      "predicted_topic": "ECONOMY",
+      "topic_confidence": "HIGH",
+      "topic_match": true,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_item_count": 7,
+      "contextual_support_labels": [
+        "TOPIC_ECONOMY"
+      ],
+      "contextual_suppression_labels": [],
+      "semantic_relationship_count": 8,
+      "semantic_relationship_types": [
+        "INDICATOR_DESCRIBES_DOMAIN"
+      ],
+      "semantic_primary_domain_candidates": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL",
+        "ECONOMIC_STRUCTURE_SIGNAL",
+        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL",
+        "CONTEXTUAL_TOPIC_EVIDENCE",
+        "COMPOSITIONAL_SEMANTIC_TOPIC_EVIDENCE"
+      ],
+      "topic_supporting_signals": [
+        "TITLE_ECONOMY_SIGNAL",
+        "BODY_ECONOMY_SIGNAL",
+        "STRUCTURED_ECONOMIC_VALUES",
+        "LEGACY_TOPIC_SUPPORT",
+        "CONTEXTUAL_TOPIC_SUPPORT",
+        "SEMANTIC_PRIMARY_DOMAIN_SUPPORT"
+      ],
+      "topic_warnings": [],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_ECONOMY"
+      ],
+      "intent_warnings": []
+    },
+    {
+      "id": "050",
+      "expected_topic": "CRIME",
+      "predicted_topic": "EDUCATION",
+      "topic_confidence": "HIGH",
+      "topic_match": false,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "LOW",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "LOW",
+      "reader_intent_match": true,
+      "full_match": false,
+      "contextual_item_count": 1,
+      "contextual_support_labels": [
+        "CLAIM_ATTRIBUTED"
+      ],
+      "contextual_suppression_labels": [],
+      "semantic_relationship_count": 0,
+      "semantic_relationship_types": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "topic_supporting_signals": [
+        "TITLE_EDUCATION_SIGNAL",
+        "BODY_EDUCATION_SIGNAL"
+      ],
+      "topic_warnings": [],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [
+        "LOW_EDITORIAL_FORMAT_CONFIDENCE"
+      ],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_EDUCATION"
+      ],
+      "intent_warnings": [
+        "LOW_READER_INTENT_CONFIDENCE"
+      ]
+    }
+  ]
+}

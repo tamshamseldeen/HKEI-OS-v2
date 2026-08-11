@@ -164,7 +164,7 @@ def test_human_risk_annotations_are_exactly_preregistered() -> None:
     ) == EXPECTED_RISK_ANNOTATIONS
 
 
-def test_batch_contains_only_registration_artifacts() -> None:
+def test_batch_contains_only_registered_inputs_and_validation_outputs() -> None:
     files = {
         path.relative_to(BATCH_ROOT).as_posix()
         for path in BATCH_ROOT.rglob("*")
@@ -174,12 +174,14 @@ def test_batch_contains_only_registration_artifacts() -> None:
         "manifest.json",
         "expected.json",
         "human_risk_annotations.json",
+        "editorial_validation.json",
+        "editorial_validation.md",
         *(f"{case_id}/source.md" for case_id in EXPECTED_IDS),
     }
     assert not any(
         term in path.casefold()
         for path in files
-        for term in ("validation", "analysis", "diagnostic", "article")
+        for term in ("analysis", "diagnostic", "article")
     )
 
 
