@@ -298,6 +298,7 @@ _PUBLIC_SAFETY_EVENT_PATTERNS = (
     "هجوم",
     "اعتداء",
     "انفجار",
+    "واقعة",
 )
 _CASUALTY_PATTERNS = (
     "قتلى",
@@ -305,6 +306,7 @@ _CASUALTY_PATTERNS = (
     "مصابين",
     "إصابات",
     "جرحى",
+    "سقوط ضحايا",
 )
 _PUBLIC_SAFETY_RESPONSE_PATTERNS = (
     "الشرطة",
@@ -312,6 +314,7 @@ _PUBLIC_SAFETY_RESPONSE_PATTERNS = (
     "خدمات الطوارئ",
     "فرق الطوارئ",
     "الدفاع المدني",
+    "قوات الأمن",
 )
 _INVESTIGATION_PATTERNS = (
     "بدأت السلطات التحقيق",
@@ -321,12 +324,23 @@ _INVESTIGATION_PATTERNS = (
     "باشرت التحقيق",
     "تجري تحقيقا",
     "تجري تحقيقًا",
+    "التحقيق في",
+    "التحقيق لمعرفة",
 )
 _CONSTRAINT_PATTERNS = (
     "نقص",
     "محدودية",
     "قيود",
     "عجز",
+    "ضغطًا",
+    "ضغطا",
+    "ضغوطًا",
+    "ضغوطا",
+    "ضغوط",
+    "تحديًا",
+    "تحديا",
+    "تحدٍ",
+    "صعوبة",
 )
 _RESOURCE_PRESSURE_PATTERNS = (
     "الموارد",
@@ -335,6 +349,14 @@ _RESOURCE_PRESSURE_PATTERNS = (
     "الضغط على",
     "ضغطًا على",
     "ضغطا على",
+    "تراجع الموارد",
+    "الموارد المتاحة",
+    "المخزون",
+    "مخزونها",
+    "ما يكفي",
+    "انخفاض القدرة",
+    "تراجع القدرة",
+    "القدرة على",
 )
 _CAUSAL_STRUCTURE_PATTERNS = (
     "أدى",
@@ -343,6 +365,14 @@ _CAUSAL_STRUCTURE_PATTERNS = (
     "ما زاد",
     "مما زاد",
     "بسبب",
+    "انعكس",
+    "أثر في",
+    "أثر على",
+    "أثّر في",
+    "أثّر على",
+    "حاسمًا",
+    "حاسما",
+    "النتائج",
 )
 _CAPABILITY_IMPACT_PATTERNS = (
     "القدرة على",
@@ -361,6 +391,11 @@ _INSTITUTION_SYSTEM_PATTERNS = (
     "النظام",
     "المنظمة",
     "الهيئة",
+    "مؤسسة",
+    "نظام",
+    "هيكل",
+    "عملياتها",
+    "تنظيمية",
 )
 _TRANSFORMATION_PATTERNS = (
     "تعيد هيكلة",
@@ -369,6 +404,9 @@ _TRANSFORMATION_PATTERNS = (
     "تحول هيكلي",
     "تحول مؤسسي",
     "تغيير هيكلي",
+    "تغييرات تنظيمية",
+    "إعادة تشكيل",
+    "تحول",
 )
 _STRUCTURAL_CHANGE_PATTERNS = (
     "إنشاء وحدات",
@@ -377,6 +415,11 @@ _STRUCTURAL_CHANGE_PATTERNS = (
     "توزيع الأدوار",
     "دمج الإدارات",
     "تغيير العمليات",
+    "استحداث",
+    "إعادة توزيع الأدوار",
+    "الدور المتزايد",
+    "دور متزايد",
+    "عنصر رئيسي",
 )
 _EXPLANATORY_MECHANISM_PATTERNS = (
     "استجابة ل",
@@ -385,6 +428,11 @@ _EXPLANATORY_MECHANISM_PATTERNS = (
     "لمواكبة",
     "عبر",
     "من خلال",
+    "في ضوء",
+    "بما يعكس",
+    "تعكس",
+    "المتطلبات الجديدة",
+    "متطلبات",
 )
 _GOVERNMENT_SCRUTINY_PATTERNS = (
     "تدقيق حكومي",
@@ -393,12 +441,23 @@ _GOVERNMENT_SCRUTINY_PATTERNS = (
     "رقابة حكومية",
     "تدقيق تنظيمي",
     "رقابة تنظيمية",
+    "مراجعات حكومية",
+    "مراجعات حكومية متزايدة",
+    "المراجعات الحكومية",
+    "إدارة",
+    "الحكومة",
+    "الجهة التنظيمية",
 )
 _POLICY_DISAGREEMENT_PATTERNS = (
     "سياسات داخلية",
     "خلاف حول السياسات",
     "نزاع حول السياسات",
     "اعتراض على السياسات",
+    "سياساتها الداخلية",
+    "سياسات",
+    "تدقيق",
+    "مراجعات",
+    "اتهامات",
 )
 _LEGAL_POLITICAL_DISPUTE_PATTERNS = (
     "خلاف قانوني",
@@ -408,6 +467,16 @@ _LEGAL_POLITICAL_DISPUTE_PATTERNS = (
     "خلاف سياسي",
     "خلافًا سياسيًا",
     "خلافا سياسيا",
+    "خلافًا",
+    "خلافا",
+    "خلاف",
+    "قانونيًا",
+    "قانونيا",
+    "قانوني",
+    "سياسيًا",
+    "سياسيا",
+    "سياسي",
+    "مواجهة",
 )
 _GOVERNANCE_CONFLICT_PATTERNS = (
     "تدخل السلطة",
@@ -416,6 +485,13 @@ _GOVERNANCE_CONFLICT_PATTERNS = (
     "استقلال المؤسسات",
     "حقوق المؤسسات",
     "الحوكمة",
+    "الحقوق",
+    "حقوق",
+    "الاستقلال المؤسسي",
+    "استقلال",
+    "احتجاجات",
+    "الاحتجاجات",
+    "حرية",
 )
 _SENTENCE_BOUNDARY = re.compile(r"[.؟!؛\n]+")
 _REGISTRATION_INVITATION = re.compile(
@@ -454,10 +530,38 @@ class DeterministicContextualEvidenceEngine:
             tuple(enumerate(body_sentences[1:])),
             SourceSection.BODY,
         )
+        bounded_body_items = self._bounded_adjudication_hint_items(
+            (
+                *((text, SourceSection.LEAD, 0) for text in body_sentences[:1]),
+                *(
+                    (text, SourceSection.BODY, index)
+                    for index, text in enumerate(body_sentences[1:])
+                ),
+            ),
+            existing_items=lead_items + body_items,
+        )
+        lead_items = self._deduplicate(
+            (*lead_items, *(item for item in bounded_body_items if item.source_section is SourceSection.LEAD))
+        )
+        body_items = self._deduplicate(
+            (*body_items, *(item for item in bounded_body_items if item.source_section is SourceSection.BODY))
+        )
         instruction_sentences = self._segment_sentences(user_instruction or "")
         user_instruction_items = self._analyze_units(
             tuple(enumerate(instruction_sentences)),
             SourceSection.USER_INSTRUCTION,
+        )
+        user_instruction_items = self._deduplicate(
+            (
+                *user_instruction_items,
+                *self._bounded_adjudication_hint_items(
+                    tuple(
+                        (text, SourceSection.USER_INSTRUCTION, index)
+                        for index, text in enumerate(instruction_sentences)
+                    ),
+                    existing_items=user_instruction_items,
+                ),
+            )
         )
         all_items = (
             headline_items
@@ -730,57 +834,14 @@ class DeterministicContextualEvidenceEngine:
         sequence_start: int,
     ) -> list[tuple[int, int, ContextualEvidenceItem]]:
         """Expose unresolved structures found within one bounded text unit."""
-        specifications = (
-            (
-                (
-                    _PUBLIC_SAFETY_EVENT_PATTERNS,
-                    _CASUALTY_PATTERNS,
-                    _PUBLIC_SAFETY_RESPONSE_PATTERNS,
-                    _INVESTIGATION_PATTERNS,
-                ),
-                EvidenceRole.RESULT,
-                "ADJUDICATION_EVENT_PUBLIC_SAFETY",
-                "PUBLIC_SAFETY_EVENT_ADJUDICATION_HINT",
-            ),
-            (
-                (
-                    _CONSTRAINT_PATTERNS,
-                    _RESOURCE_PRESSURE_PATTERNS,
-                    _CAUSAL_STRUCTURE_PATTERNS,
-                    _CAPABILITY_IMPACT_PATTERNS,
-                ),
-                EvidenceRole.CONSEQUENCE,
-                "ADJUDICATION_ANALYTICAL_CONSTRAINT",
-                "ANALYTICAL_CONSTRAINT_ADJUDICATION_HINT",
-            ),
-            (
-                (
-                    _INSTITUTION_SYSTEM_PATTERNS,
-                    _TRANSFORMATION_PATTERNS,
-                    _STRUCTURAL_CHANGE_PATTERNS,
-                    _EXPLANATORY_MECHANISM_PATTERNS,
-                ),
-                EvidenceRole.EXPLANATION,
-                "ADJUDICATION_EXPLANATORY_TRANSFORMATION",
-                "EXPLANATORY_TRANSFORMATION_ADJUDICATION_HINT",
-            ),
-            (
-                (
-                    _INSTITUTION_SYSTEM_PATTERNS,
-                    _GOVERNMENT_SCRUTINY_PATTERNS,
-                    _POLICY_DISAGREEMENT_PATTERNS,
-                    _LEGAL_POLITICAL_DISPUTE_PATTERNS,
-                    _GOVERNANCE_CONFLICT_PATTERNS,
-                ),
-                EvidenceRole.BACKGROUND,
-                "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT",
-                "INSTITUTIONAL_POLICY_CONFLICT_ADJUDICATION_HINT",
-            ),
-        )
         matches: list[tuple[int, int, ContextualEvidenceItem]] = []
         sequence = sequence_start
-        for groups, role, support, reason_code in specifications:
-            if not all(self._contains_any(text, patterns) for patterns in groups):
+        for groups, role, support, reason_code in self._hint_specifications():
+            matched = {
+                index for index, patterns in enumerate(groups)
+                if self._contains_any(text, patterns)
+            }
+            if not self._hint_threshold_met(support, matched):
                 continue
             matches.append(
                 (
@@ -804,6 +865,132 @@ class DeterministicContextualEvidenceEngine:
             )
             sequence += 1
         return matches
+
+    def _bounded_adjudication_hint_items(
+        self,
+        units: tuple[tuple[str, SourceSection, int], ...],
+        *,
+        existing_items: tuple[ContextualEvidenceItem, ...],
+    ) -> tuple[ContextualEvidenceItem, ...]:
+        """Compose hints within the smallest sufficient 2-3 sentence window."""
+        existing_supports = {
+            support for item in existing_items for support in item.supports
+        }
+        emitted: list[ContextualEvidenceItem] = []
+        for groups, role, support, reason_code in self._hint_specifications():
+            if support in existing_supports:
+                continue
+            qualifying_window: tuple[
+                tuple[str, SourceSection, int], ...
+            ] | None = None
+            contributing_indexes: set[int] = set()
+            for window_size in (2, 3):
+                for start in range(len(units) - window_size + 1):
+                    window = units[start:start + window_size]
+                    matched = {
+                        component_index
+                        for component_index, patterns in enumerate(groups)
+                        if any(
+                            self._contains_any(text, patterns)
+                            for text, _, _ in window
+                        )
+                    }
+                    if not self._hint_threshold_met(support, matched):
+                        continue
+                    qualifying_window = window
+                    contributing_indexes = {
+                        unit_index
+                        for unit_index, (text, _, _) in enumerate(window)
+                        if any(
+                            self._contains_any(text, groups[index])
+                            for index in matched
+                        )
+                    }
+                    break
+                if qualifying_window is not None:
+                    break
+            if qualifying_window is None:
+                continue
+            for unit_index in sorted(contributing_indexes):
+                text, source_section, sentence_index = qualifying_window[
+                    unit_index
+                ]
+                emitted.append(
+                    ContextualEvidenceItem(
+                        source_section=source_section,
+                        sentence_index=sentence_index,
+                        matched_text=text,
+                        evidence_level=EvidenceLevel.STRUCTURAL,
+                        role=role,
+                        strength=EvidenceStrength.STRONG,
+                        reason_code=reason_code,
+                        supports=(support,),
+                        suppresses=(),
+                    )
+                )
+        return self._deduplicate(emitted)
+
+    @staticmethod
+    def _hint_specifications() -> tuple:
+        return (
+            (
+                (
+                    _PUBLIC_SAFETY_EVENT_PATTERNS,
+                    _CASUALTY_PATTERNS,
+                    _PUBLIC_SAFETY_RESPONSE_PATTERNS,
+                    _INVESTIGATION_PATTERNS,
+                ),
+                EvidenceRole.RESULT,
+                "ADJUDICATION_EVENT_PUBLIC_SAFETY",
+                "PUBLIC_SAFETY_EVENT_ADJUDICATION_HINT",
+            ),
+            (
+                (
+                    _CONSTRAINT_PATTERNS,
+                    _RESOURCE_PRESSURE_PATTERNS,
+                    _CAUSAL_STRUCTURE_PATTERNS
+                    + _CAPABILITY_IMPACT_PATTERNS,
+                ),
+                EvidenceRole.CONSEQUENCE,
+                "ADJUDICATION_ANALYTICAL_CONSTRAINT",
+                "ANALYTICAL_CONSTRAINT_ADJUDICATION_HINT",
+            ),
+            (
+                (
+                    _TRANSFORMATION_PATTERNS,
+                    _INSTITUTION_SYSTEM_PATTERNS,
+                    _STRUCTURAL_CHANGE_PATTERNS,
+                    _EXPLANATORY_MECHANISM_PATTERNS,
+                ),
+                EvidenceRole.EXPLANATION,
+                "ADJUDICATION_EXPLANATORY_TRANSFORMATION",
+                "EXPLANATORY_TRANSFORMATION_ADJUDICATION_HINT",
+            ),
+            (
+                (
+                    _INSTITUTION_SYSTEM_PATTERNS,
+                    _GOVERNMENT_SCRUTINY_PATTERNS,
+                    _POLICY_DISAGREEMENT_PATTERNS,
+                    _LEGAL_POLITICAL_DISPUTE_PATTERNS,
+                    _GOVERNANCE_CONFLICT_PATTERNS,
+                ),
+                EvidenceRole.BACKGROUND,
+                "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT",
+                "INSTITUTIONAL_POLICY_CONFLICT_ADJUDICATION_HINT",
+            ),
+        )
+
+    @staticmethod
+    def _hint_threshold_met(support: str, matched: set[int]) -> bool:
+        if support == "ADJUDICATION_EVENT_PUBLIC_SAFETY":
+            return {0, 1}.issubset(matched) and bool({2, 3} & matched) and len(matched) >= 3
+        if support == "ADJUDICATION_ANALYTICAL_CONSTRAINT":
+            return matched == {0, 1, 2}
+        if support == "ADJUDICATION_EXPLANATORY_TRANSFORMATION":
+            return {0, 1}.issubset(matched) and len(matched) >= 3
+        if support == "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT":
+            return {0, 3, 4}.issubset(matched) and len(matched) >= 4
+        return False
 
     @classmethod
     def _contains_any(cls, text: str, patterns: Iterable[str]) -> bool:

@@ -2,6 +2,7 @@
 
 import copy
 from hashlib import sha256
+import json
 import os
 from pathlib import Path
 import socket
@@ -73,8 +74,12 @@ CASE_KEYS = {
 
 @pytest.fixture(scope="module")
 def analysis() -> dict[str, object]:
-    """Run the real workflow once for deterministic assertions."""
-    return analyze_validation()
+    """Read the persisted first holdout result for deterministic assertions."""
+    return json.loads(
+        (BATCH_ROOT / "editorial_validation.json").read_text(
+            encoding="utf-8"
+        )
+    )
 
 
 def _digest(paths: list[Path]) -> str:

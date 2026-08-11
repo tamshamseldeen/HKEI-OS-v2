@@ -94,12 +94,131 @@ def test_public_safety_hint_does_not_overtrigger_simple_incident() -> None:
     )
 
 
-def test_casualties_response_and_investigation_complete_event_hint() -> None:
-    incomplete = "وقع حادث أسفر عن قتلى ومصابين وتحركت الشرطة وفرق الإسعاف"
-    assert "ADJUDICATION_EVENT_PUBLIC_SAFETY" not in hint_supports(incomplete)
+def test_casualties_and_response_are_sufficient_event_corrobation() -> None:
+    corroborated = "وقع حادث أسفر عن قتلى ومصابين وتحركت الشرطة وفرق الإسعاف"
+    assert "ADJUDICATION_EVENT_PUBLIC_SAFETY" in hint_supports(corroborated)
     assert "ADJUDICATION_EVENT_PUBLIC_SAFETY" in hint_supports(
-        f"{incomplete} وبدأت السلطات التحقيق"
+        f"{corroborated} وبدأت السلطات التحقيق"
     )
+
+
+def test_two_sentence_public_safety_composition_works() -> None:
+    body = (
+        "وقع حادث خطير وأسفر عن سقوط ضحايا. "
+        "تحركت الشرطة وفرق الطوارئ إلى الموقع وبدأت السلطات التحقيق في الواقعة"
+    )
+    items = [
+        item for item in analyze(body=body).all_items
+        if "ADJUDICATION_EVENT_PUBLIC_SAFETY" in item.supports
+    ]
+    assert items
+    assert {(item.source_section, item.sentence_index) for item in items} == {
+        (SourceSection.LEAD, 0),
+        (SourceSection.BODY, 0),
+    }
+
+
+def test_three_sentence_public_safety_composition_works() -> None:
+    body = (
+        "وقع حادث خطير وأسفر عن سقوط ضحايا. "
+        "تحركت الشرطة وفرق الطوارئ إلى الموقع. "
+        "بدأت السلطات التحقيق في ملابسات الواقعة"
+    )
+    items = [
+        item for item in analyze(body=body).all_items
+        if "ADJUDICATION_EVENT_PUBLIC_SAFETY" in item.supports
+    ]
+    assert {(item.source_section, item.sentence_index) for item in items} == {
+        (SourceSection.LEAD, 0),
+        (SourceSection.BODY, 0),
+    }
+
+
+def test_three_sentence_window_is_used_when_no_pair_is_sufficient() -> None:
+    body = (
+        "وقع حادث خطير في الموقع. أسفر الحادث عن سقوط ضحايا. "
+        "تحركت الشرطة وفرق الطوارئ"
+    )
+    items = [
+        item for item in analyze(body=body).all_items
+        if "ADJUDICATION_EVENT_PUBLIC_SAFETY" in item.supports
+    ]
+    assert {(item.source_section, item.sentence_index) for item in items} == {
+        (SourceSection.LEAD, 0),
+        (SourceSection.BODY, 0),
+        (SourceSection.BODY, 1),
+    }
+
+
+def test_more_than_three_sentence_gap_does_not_compose_event_hint() -> None:
+    body = (
+        "وقع حادث خطير وأسفر عن سقوط ضحايا. تفاصيل أولية محدودة. "
+        "صدر بيان مقتضب. استمر انتظار المعلومات. "
+        "تحركت الشرطة وبدأت السلطات التحقيق في الواقعة"
+    )
+    assert "ADJUDICATION_EVENT_PUBLIC_SAFETY" not in hint_supports(body)
+
+
+def test_analytical_constraint_composes_across_adjacent_sentences() -> None:
+    body = (
+        "يواجه النظام ضغطًا متزايدًا بسبب تراجع الموارد المتاحة. "
+        "أدى النقص إلى انخفاض القدرة على الاستجابة. "
+        "انعكس ذلك على النتائج وزاد المخاطر التشغيلية"
+    )
+    assert "ADJUDICATION_ANALYTICAL_CONSTRAINT" in hint_supports(body)
+
+
+def test_prediction_only_window_does_not_create_constraint_hint() -> None:
+    body = (
+        "تشير التوقعات إلى تغير محتمل. قد يحدث ذلك خلال الفترة المقبلة. "
+        "وتظل النتيجة غير مؤكدة"
+    )
+    assert "ADJUDICATION_ANALYTICAL_CONSTRAINT" not in hint_supports(body)
+
+
+def test_transformation_composes_across_adjacent_sentences() -> None:
+    body = (
+        "بدأت المؤسسة إعادة هيكلة واسعة لعملياتها. "
+        "شملت التغييرات إنشاء وحدات جديدة وإعادة توزيع الأدوار. "
+        "تعكس الخطوة تحولًا في طريقة عمل النظام استجابة للمتطلبات الجديدة"
+    )
+    assert "ADJUDICATION_EXPLANATORY_TRANSFORMATION" in hint_supports(body)
+
+
+def test_simple_restructuring_remains_below_component_threshold() -> None:
+    assert "ADJUDICATION_EXPLANATORY_TRANSFORMATION" not in hint_supports(
+        "الشركة أعادت هيكلة الإدارة"
+    )
+
+
+def test_institutional_conflict_composes_across_adjacent_sentences() -> None:
+    body = (
+        "تواجه المؤسسة مراجعات حكومية متزايدة بشأن سياساتها الداخلية. "
+        "أثارت الإجراءات خلافًا قانونيًا حول حدود تدخل الجهة التنظيمية. "
+        "امتد الجدل إلى قضايا الحقوق والاستقلال المؤسسي"
+    )
+    assert "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT" in hint_supports(body)
+
+
+def test_ordinary_institutional_window_remains_below_conflict_threshold() -> None:
+    body = (
+        "أعلنت المؤسسة تقريرها السنوي. راجعت الحكومة البيانات المنشورة. "
+        "استمرت الأعمال وفق الإجراءات المعتادة"
+    )
+    assert "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT" not in hint_supports(body)
+
+
+def test_headline_and_body_are_not_combined_into_one_hint_window() -> None:
+    evidence = analyze(
+        title="وقع حادث خطير وأسفر عن سقوط ضحايا",
+        body=(
+            "تحركت الشرطة وفرق الطوارئ إلى الموقع. "
+            "بدأت السلطات التحقيق في ملابسات الواقعة"
+        ),
+    )
+    assert "ADJUDICATION_EVENT_PUBLIC_SAFETY" not in {
+        support for item in evidence.all_items for support in item.supports
+    }
 
 
 def test_analytical_constraint_hint_requires_sustained_structure() -> None:
