@@ -9,14 +9,14 @@
   "topic_recall": 88.88888888888889,
   "topic_specificity": 100.0,
   "topic_accuracy": 90.0,
-  "format_true_positives": 1,
+  "format_true_positives": 4,
   "format_false_positives": 0,
   "format_true_negatives": 6,
-  "format_false_negatives": 3,
+  "format_false_negatives": 0,
   "format_precision": 100.0,
-  "format_recall": 25.0,
+  "format_recall": 100.0,
   "format_specificity": 100.0,
-  "format_accuracy": 70.0,
+  "format_accuracy": 100.0,
   "provider_call_cases": 8,
   "provider_call_rate": 80.0,
   "correctly_avoided_call_cases": 1,
@@ -33,13 +33,16 @@
     "048"
   ],
   "format_captured_cases": [
-    "046"
+    "044",
+    "045",
+    "046",
+    "047"
   ],
   "scope_distribution": {
     "NOT_REQUIRED": 2,
-    "TOPIC_REQUIRED": 7,
+    "TOPIC_REQUIRED": 4,
     "FORMAT_REQUIRED": 0,
-    "TOPIC_AND_FORMAT_REQUIRED": 1
+    "TOPIC_AND_FORMAT_REQUIRED": 4
   },
   "trigger_distribution": {
     "TOPIC_LOW_CONFIDENCE": {
@@ -61,9 +64,9 @@
       "fully_matched_cases": 0
     },
     "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP": {
-      "cases_triggered": 6,
-      "topic_mismatch_cases": 6,
-      "format_mismatch_cases": 1,
+      "cases_triggered": 8,
+      "topic_mismatch_cases": 8,
+      "format_mismatch_cases": 3,
       "fully_matched_cases": 0
     },
     "METHOD_SUBJECT_AMBIGUITY": {
@@ -206,27 +209,29 @@
       "format_match": false,
       "intent_match": false,
       "full_match": false,
-      "gate_scope": "TOPIC_REQUIRED",
+      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
       "topic_required": true,
-      "format_required": false,
+      "format_required": true,
       "trigger_signals": [
         "TOPIC_LOW_CONFIDENCE",
         "TOPIC_GENERAL_FALLBACK",
         "NO_PRIMARY_SEMANTIC_DOMAIN",
-        "FORMAT_LOW_CONFIDENCE"
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "FORMAT_LOW_CONFIDENCE",
+        "UNRESOLVED_ANALYTICAL_CONSTRAINT"
       ],
       "reason_codes": [
-        "TOPIC_ADJUDICATION_REQUIRED"
+        "TOPIC_AND_FORMAT_ADJUDICATION_REQUIRED"
       ],
       "warnings": [],
       "topic_should_adjudicate": true,
       "format_should_adjudicate": true,
       "topic_gate_correct": true,
-      "format_gate_correct": false,
+      "format_gate_correct": true,
       "topic_false_positive": false,
       "topic_false_negative": false,
       "format_false_positive": false,
-      "format_false_negative": true
+      "format_false_negative": false
     },
     {
       "id": "045",
@@ -234,27 +239,29 @@
       "format_match": false,
       "intent_match": false,
       "full_match": false,
-      "gate_scope": "TOPIC_REQUIRED",
+      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
       "topic_required": true,
-      "format_required": false,
+      "format_required": true,
       "trigger_signals": [
         "TOPIC_LOW_CONFIDENCE",
         "TOPIC_GENERAL_FALLBACK",
         "NO_PRIMARY_SEMANTIC_DOMAIN",
-        "FORMAT_LOW_CONFIDENCE"
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "FORMAT_LOW_CONFIDENCE",
+        "UNRESOLVED_EXPLANATORY_TRANSFORMATION"
       ],
       "reason_codes": [
-        "TOPIC_ADJUDICATION_REQUIRED"
+        "TOPIC_AND_FORMAT_ADJUDICATION_REQUIRED"
       ],
       "warnings": [],
       "topic_should_adjudicate": true,
       "format_should_adjudicate": true,
       "topic_gate_correct": true,
-      "format_gate_correct": false,
+      "format_gate_correct": true,
       "topic_false_positive": false,
       "topic_false_negative": false,
       "format_false_positive": false,
-      "format_false_negative": true
+      "format_false_negative": false
     },
     {
       "id": "046",
@@ -290,27 +297,28 @@
       "format_match": false,
       "intent_match": false,
       "full_match": false,
-      "gate_scope": "TOPIC_REQUIRED",
+      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
       "topic_required": true,
-      "format_required": false,
+      "format_required": true,
       "trigger_signals": [
         "TOPIC_LOW_CONFIDENCE",
         "TOPIC_GENERAL_FALLBACK",
         "NO_PRIMARY_SEMANTIC_DOMAIN",
-        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "UNRESOLVED_INSTITUTIONAL_POLICY_CONFLICT"
       ],
       "reason_codes": [
-        "TOPIC_ADJUDICATION_REQUIRED"
+        "TOPIC_AND_FORMAT_ADJUDICATION_REQUIRED"
       ],
       "warnings": [],
       "topic_should_adjudicate": true,
       "format_should_adjudicate": true,
       "topic_gate_correct": true,
-      "format_gate_correct": false,
+      "format_gate_correct": true,
       "topic_false_positive": false,
       "topic_false_negative": false,
       "format_false_positive": false,
-      "format_false_negative": true
+      "format_false_negative": false
     },
     {
       "id": "048",
