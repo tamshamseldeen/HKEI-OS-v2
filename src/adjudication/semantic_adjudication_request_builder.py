@@ -126,9 +126,7 @@ class SemanticAdjudicationRequestBuilder:
             deterministic=format_classification.editorial_format.value,
             required=decision.format_required,
             semantic_support=semantic_format_support,
-            semantic_suppression=semantic_format_suppression,
             contextual=contextual_supports,
-            relationships=semantic_evidence.relationships,
         )
 
         payload = {
@@ -287,7 +285,7 @@ class SemanticAdjudicationRequestBuilder:
             value = _label_value(label, "TOPIC_", valid)
             if value is not None and label.startswith("TOPIC_"):
                 candidates.append(value)
-        candidates.append(Topic.GENERAL.value)
+        candidates.extend(topic.value for topic in Topic)
         return _deduplicate(candidates)
 
     @staticmethod
@@ -296,32 +294,20 @@ class SemanticAdjudicationRequestBuilder:
         deterministic: str,
         required: bool,
         semantic_support: tuple[str, ...],
-        semantic_suppression: tuple[str, ...],
         contextual: tuple[str, ...],
-        relationships: tuple[object, ...],
     ) -> tuple[str, ...]:
         if not required:
             return (deterministic,)
         valid = {editorial_format.value for editorial_format in EditorialFormat}
-        suppressed = {
-            value
-            for label in semantic_suppression
-            if (value := _label_value(label, "FORMAT_", valid)) is not None
-        }
-        for relationship in relationships:
-            if relationship.strength is EvidenceStrength.STRONG:
-                suppressed.update(
-                    value
-                    for label in relationship.suppresses
-                    if (value := _label_value(label, "FORMAT_", valid)) is not None
-                )
         candidates: list[str] = [deterministic]
         for label in (*semantic_support, *contextual):
             value = _label_value(label, "FORMAT_", valid)
             if (
                 value is not None
                 and (label.startswith("FORMAT_") or label in valid)
-                and (value == deterministic or value not in suppressed)
             ):
                 candidates.append(value)
+        candidates.extend(
+            editorial_format.value for editorial_format in EditorialFormat
+        )
         return _deduplicate(candidates)

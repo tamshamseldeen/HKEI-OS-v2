@@ -183,29 +183,17 @@ def test_builder_returns_request_and_rejects_not_required() -> None:
 
 
 @pytest.mark.parametrize(
-    ("scope", "topics", "formats"),
+    ("scope", "topic_expanded", "format_expanded"),
     (
-        (
-            AdjudicationScope.TOPIC_REQUIRED,
-            ("EDUCATION", "HEALTH", "SCIENCE", "GENERAL"),
-            ("STANDARD_NEWS",),
-        ),
-        (
-            AdjudicationScope.FORMAT_REQUIRED,
-            ("EDUCATION",),
-            ("STANDARD_NEWS", "ANALYSIS", "EXPLAINER"),
-        ),
-        (
-            AdjudicationScope.TOPIC_AND_FORMAT_REQUIRED,
-            ("EDUCATION", "HEALTH", "SCIENCE", "GENERAL"),
-            ("STANDARD_NEWS", "ANALYSIS", "EXPLAINER"),
-        ),
+        (AdjudicationScope.TOPIC_REQUIRED, True, False),
+        (AdjudicationScope.FORMAT_REQUIRED, False, True),
+        (AdjudicationScope.TOPIC_AND_FORMAT_REQUIRED, True, True),
     ),
 )
 def test_scope_expands_only_required_candidates(
     scope: AdjudicationScope,
-    topics: tuple[str, ...],
-    formats: tuple[str, ...],
+    topic_expanded: bool,
+    format_expanded: bool,
 ) -> None:
     request = build(
         scope=scope,
@@ -218,12 +206,25 @@ def test_scope_expands_only_required_candidates(
             format_support=("FORMAT_ANALYSIS", "FORMAT_ANALYSIS"),
         ),
     )
-    assert request.candidate_topics == topics
-    assert request.candidate_formats == formats
-    assert set(request.candidate_topics) <= {value.value for value in Topic}
-    assert set(request.candidate_formats) <= {
-        value.value for value in EditorialFormat
-    }
+    if topic_expanded:
+        assert request.candidate_topics[:3] == (
+            "EDUCATION", "HEALTH", "SCIENCE"
+        )
+        assert set(request.candidate_topics) == {value.value for value in Topic}
+        assert len(request.candidate_topics) == len(Topic)
+        assert request.candidate_topics.count("GENERAL") == 1
+    else:
+        assert request.candidate_topics == ("EDUCATION",)
+    if format_expanded:
+        assert request.candidate_formats[:3] == (
+            "STANDARD_NEWS", "ANALYSIS", "EXPLAINER"
+        )
+        assert set(request.candidate_formats) == {
+            value.value for value in EditorialFormat
+        }
+        assert len(request.candidate_formats) == len(EditorialFormat)
+    else:
+        assert request.candidate_formats == ("STANDARD_NEWS",)
 
 
 def test_text_is_preserved_bounded_and_missing_title_is_empty() -> None:
@@ -308,15 +309,17 @@ def test_structured_evidence_and_classification_fields_are_preserved() -> None:
     assert request.content_type == "STANDARD_NEWS"
 
 
-def test_suppressed_format_is_not_added_from_contextual_support() -> None:
+def test_suppressed_format_remains_in_full_legal_universe() -> None:
     request = build(
         contextual=context(item(0, "FORMAT_GUIDE", "FORMAT_ANALYSIS")),
         semantic=semantics(format_suppression=("FORMAT_GUIDE",)),
     )
-    assert request.candidate_formats == ("STANDARD_NEWS", "ANALYSIS")
+    assert "GUIDE" in request.candidate_formats
+    assert request.semantic_format_suppression == ("FORMAT_GUIDE",)
+    assert len(request.candidate_formats) == len(EditorialFormat)
 
 
-def test_strong_relationship_suppression_blocks_weak_alternative() -> None:
+def test_strong_relationship_suppression_does_not_prohibit_legal_format() -> None:
     request = build(
         contextual=context(
             item(0, "FORMAT_GUIDE", strength=EvidenceStrength.WEAK)
@@ -325,7 +328,8 @@ def test_strong_relationship_suppression_blocks_weak_alternative() -> None:
             relationships=(relationship(0, suppresses=("FORMAT_GUIDE",)),)
         ),
     )
-    assert request.candidate_formats == ("STANDARD_NEWS",)
+    assert "GUIDE" in request.candidate_formats
+    assert len(request.candidate_formats) == len(EditorialFormat)
 
 
 def test_fingerprint_is_deterministic_sha256_and_changes_with_payload() -> None:
