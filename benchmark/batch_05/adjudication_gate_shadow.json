@@ -1,22 +1,22 @@
 {
   "batch": "batch_05",
   "case_count": 10,
-  "topic_true_positives": 7,
+  "topic_true_positives": 8,
   "topic_false_positives": 0,
   "topic_true_negatives": 1,
-  "topic_false_negatives": 2,
+  "topic_false_negatives": 1,
   "topic_precision": 100.0,
-  "topic_recall": 77.77777777777779,
+  "topic_recall": 88.88888888888889,
   "topic_specificity": 100.0,
-  "topic_accuracy": 80.0,
+  "topic_accuracy": 90.0,
   "format_true_positives": 1,
-  "format_false_positives": 1,
-  "format_true_negatives": 5,
+  "format_false_positives": 0,
+  "format_true_negatives": 6,
   "format_false_negatives": 3,
-  "format_precision": 50.0,
+  "format_precision": 100.0,
   "format_recall": 25.0,
-  "format_specificity": 83.33333333333334,
-  "format_accuracy": 60.0,
+  "format_specificity": 100.0,
+  "format_accuracy": 70.0,
   "provider_call_cases": 8,
   "provider_call_rate": 80.0,
   "correctly_avoided_call_cases": 1,
@@ -28,6 +28,7 @@
     "043",
     "044",
     "045",
+    "046",
     "047",
     "048"
   ],
@@ -36,8 +37,8 @@
   ],
   "scope_distribution": {
     "NOT_REQUIRED": 2,
-    "TOPIC_REQUIRED": 6,
-    "FORMAT_REQUIRED": 1,
+    "TOPIC_REQUIRED": 7,
+    "FORMAT_REQUIRED": 0,
     "TOPIC_AND_FORMAT_REQUIRED": 1
   },
   "trigger_distribution": {
@@ -90,8 +91,8 @@
       "fully_matched_cases": 0
     },
     "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK": {
-      "cases_triggered": 2,
-      "topic_mismatch_cases": 2,
+      "cases_triggered": 1,
+      "topic_mismatch_cases": 1,
       "format_mismatch_cases": 1,
       "fully_matched_cases": 0
     },
@@ -102,8 +103,8 @@
       "fully_matched_cases": 0
     },
     "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED": {
-      "cases_triggered": 2,
-      "topic_mismatch_cases": 2,
+      "cases_triggered": 1,
+      "topic_mismatch_cases": 1,
       "format_mismatch_cases": 1,
       "fully_matched_cases": 0
     },
@@ -155,7 +156,8 @@
       "trigger_signals": [
         "TOPIC_LOW_CONFIDENCE",
         "NO_PRIMARY_SEMANTIC_DOMAIN",
-        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
       ],
       "reason_codes": [
         "TOPIC_ADJUDICATION_REQUIRED"
@@ -260,24 +262,25 @@
       "format_match": false,
       "intent_match": false,
       "full_match": false,
-      "gate_scope": "FORMAT_REQUIRED",
-      "topic_required": false,
+      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
+      "topic_required": true,
       "format_required": true,
       "trigger_signals": [
         "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
         "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
         "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
       ],
       "reason_codes": [
-        "FORMAT_ADJUDICATION_REQUIRED"
+        "TOPIC_AND_FORMAT_ADJUDICATION_REQUIRED"
       ],
       "warnings": [],
       "topic_should_adjudicate": true,
       "format_should_adjudicate": true,
-      "topic_gate_correct": false,
+      "topic_gate_correct": true,
       "format_gate_correct": true,
       "topic_false_positive": false,
-      "topic_false_negative": true,
+      "topic_false_negative": false,
       "format_false_positive": false,
       "format_false_negative": false
     },
@@ -315,28 +318,26 @@
       "format_match": true,
       "intent_match": true,
       "full_match": false,
-      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
+      "gate_scope": "TOPIC_REQUIRED",
       "topic_required": true,
-      "format_required": true,
+      "format_required": false,
       "trigger_signals": [
         "TOPIC_LOW_CONFIDENCE",
         "TOPIC_GENERAL_FALLBACK",
         "NO_PRIMARY_SEMANTIC_DOMAIN",
-        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
-        "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
-        "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
       ],
       "reason_codes": [
-        "TOPIC_AND_FORMAT_ADJUDICATION_REQUIRED"
+        "TOPIC_ADJUDICATION_REQUIRED"
       ],
       "warnings": [],
       "topic_should_adjudicate": true,
       "format_should_adjudicate": false,
       "topic_gate_correct": true,
-      "format_gate_correct": false,
+      "format_gate_correct": true,
       "topic_false_positive": false,
       "topic_false_negative": false,
-      "format_false_positive": true,
+      "format_false_positive": false,
       "format_false_negative": false
     },
     {
