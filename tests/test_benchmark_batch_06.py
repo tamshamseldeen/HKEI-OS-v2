@@ -115,19 +115,17 @@ def test_human_risk_annotations_cover_exact_cases() -> None:
     assert all(set(item) == required for item in annotations)
 
 
-def test_registration_contains_no_validation_or_provider_outputs() -> None:
+def test_batch_contains_only_registration_and_authorized_validation_outputs() -> None:
     files = {
         path.relative_to(BATCH_ROOT).as_posix()
         for path in BATCH_ROOT.rglob("*") if path.is_file()
     }
     assert files == {
         "manifest.json", "expected.json", "human_risk_annotations.json",
+        "editorial_validation.json", "editorial_validation.md",
         *(f"{case_id}/source.md" for case_id in EXPECTED_IDS),
     }
-    forbidden = (
-        "validation", "contextual", "semantic", "adjudication", "openai",
-        "provider", "prediction",
-    )
+    forbidden = ("contextual", "semantic", "adjudication", "openai", "provider")
     assert not any(term in path.casefold() for path in files for term in forbidden)
 
 
