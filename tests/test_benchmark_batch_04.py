@@ -193,8 +193,8 @@ def test_production_modules_do_not_import_human_risk_annotations() -> None:
     )
 
 
-def test_batch_contains_only_registered_inputs_and_expectations() -> None:
-    """Exclude generated articles, validation, and analysis output."""
+def test_batch_contains_only_registered_inputs_and_validation_reports() -> None:
+    """Allow only registered inputs and the authorized editorial validation."""
     files = {
         path.relative_to(BATCH_ROOT).as_posix()
         for path in BATCH_ROOT.rglob("*")
@@ -204,12 +204,14 @@ def test_batch_contains_only_registered_inputs_and_expectations() -> None:
         "manifest.json",
         "expected.json",
         "human_risk_annotations.json",
+        "editorial_validation.json",
+        "editorial_validation.md",
         *(f"{case_id}/source.md" for case_id in EXPECTED_IDS),
     }
     assert not any(
         term in path.lower()
         for path in files
-        for term in ("article", "analysis", "validation", "report")
+        for term in ("article", "analysis", "report")
     )
     frozen_paths = [
         BATCH_ROOT / "manifest.json",

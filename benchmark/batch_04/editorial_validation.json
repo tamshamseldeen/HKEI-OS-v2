@@ -1,0 +1,532 @@
+{
+  "batch": "batch_04",
+  "case_count": 10,
+  "topic_matched": 6,
+  "topic_accuracy": 60.0,
+  "format_matched": 6,
+  "format_accuracy": 60.0,
+  "reader_intent_matched": 8,
+  "reader_intent_accuracy": 80.0,
+  "fully_matched_cases": 5,
+  "full_case_accuracy": 50.0,
+  "semantic_evidence_used": 0,
+  "semantic_suppression_used": 0,
+  "cases": [
+    {
+      "id": "031",
+      "expected_topic": "WEATHER",
+      "predicted_topic": "WEATHER",
+      "topic_confidence": "HIGH",
+      "topic_match": true,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_support_labels": [
+        "CLAIM_UNCERTAIN",
+        "FORMAT_ANALYSIS",
+        "INTENT_UNDERSTAND_IMPACT"
+      ],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "TITLE_TOPIC_SIGNAL",
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "topic_supporting_signals": [
+        "TITLE_WEATHER_SIGNAL",
+        "BODY_WEATHER_SIGNAL"
+      ],
+      "topic_warnings": [],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_WEATHER"
+      ],
+      "intent_warnings": []
+    },
+    {
+      "id": "032",
+      "expected_topic": "ECONOMY",
+      "predicted_topic": "ECONOMY",
+      "topic_confidence": "MEDIUM",
+      "topic_match": true,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_support_labels": [
+        "CLAIM_ATTRIBUTED",
+        "TOPIC_BUSINESS"
+      ],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "BODY_TOPIC_SIGNAL",
+        "ECONOMIC_STRUCTURE_SIGNAL",
+        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL"
+      ],
+      "topic_supporting_signals": [
+        "BODY_ECONOMY_SIGNAL",
+        "STRUCTURED_ECONOMIC_VALUES",
+        "LEGACY_TOPIC_SUPPORT"
+      ],
+      "topic_warnings": [],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_ECONOMY"
+      ],
+      "intent_warnings": []
+    },
+    {
+      "id": "033",
+      "expected_topic": "SPORTS",
+      "predicted_topic": "TECHNOLOGY",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "GUIDE",
+      "format_confidence": "MEDIUM",
+      "format_match": false,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "VERIFY_REQUIREMENTS",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": false,
+      "full_match": false,
+      "contextual_support_labels": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "BODY_TOPIC_SIGNAL"
+      ],
+      "topic_supporting_signals": [
+        "BODY_TECHNOLOGY_SIGNAL"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE"
+      ],
+      "format_reason_codes": [
+        "GUIDE_STRUCTURE_SIGNAL"
+      ],
+      "format_supporting_signals": [
+        "GUIDE_STRUCTURED_VALUES",
+        "GUIDE_PROCEDURAL_TERMS"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_GUIDE",
+        "TOPIC_TECHNOLOGY"
+      ],
+      "intent_warnings": []
+    },
+    {
+      "id": "034",
+      "expected_topic": "SPORTS",
+      "predicted_topic": "SPORTS",
+      "topic_confidence": "MEDIUM",
+      "topic_match": true,
+      "expected_format": "GUIDE",
+      "predicted_format": "GUIDE",
+      "format_confidence": "HIGH",
+      "format_match": true,
+      "expected_reader_intent": "VERIFY_REQUIREMENTS",
+      "predicted_reader_intent": "VERIFY_REQUIREMENTS",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_support_labels": [
+        "CLAIM_ATTRIBUTED"
+      ],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "BODY_TOPIC_SIGNAL",
+        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL"
+      ],
+      "topic_supporting_signals": [
+        "BODY_SPORTS_SIGNAL",
+        "LEGACY_TOPIC_SUPPORT"
+      ],
+      "topic_warnings": [],
+      "format_reason_codes": [
+        "GUIDE_STRUCTURE_SIGNAL"
+      ],
+      "format_supporting_signals": [
+        "GUIDE_STRUCTURED_VALUES",
+        "GUIDE_PROCEDURAL_TERMS",
+        "GUIDE_REFERENCE_ANSWER_TERMS"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "REQUIREMENTS_STRUCTURE_SIGNAL"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_GUIDE",
+        "TOPIC_SPORTS",
+        "REQUIREMENTS_TERMS_PRESENT"
+      ],
+      "intent_warnings": []
+    },
+    {
+      "id": "035",
+      "expected_topic": "TECHNOLOGY",
+      "predicted_topic": "ECONOMY",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "expected_format": "GUIDE",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": false,
+      "expected_reader_intent": "COMPARE_OPTIONS",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": false,
+      "full_match": false,
+      "contextual_support_labels": [
+        "CLAIM_ATTRIBUTED",
+        "FORMAT_ANALYSIS",
+        "INTENT_UNDERSTAND_IMPACT"
+      ],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "BODY_TOPIC_SIGNAL",
+        "ECONOMIC_STRUCTURE_SIGNAL"
+      ],
+      "topic_supporting_signals": [
+        "BODY_ECONOMY_SIGNAL",
+        "STRUCTURED_ECONOMIC_VALUES"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE"
+      ],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_ECONOMY"
+      ],
+      "intent_warnings": []
+    },
+    {
+      "id": "036",
+      "expected_topic": "HEALTH",
+      "predicted_topic": "HEALTH",
+      "topic_confidence": "MEDIUM",
+      "topic_match": true,
+      "expected_format": "GUIDE",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": false,
+      "expected_reader_intent": "GET_GUIDANCE",
+      "predicted_reader_intent": "GET_GUIDANCE",
+      "reader_intent_confidence": "MEDIUM",
+      "reader_intent_match": true,
+      "full_match": false,
+      "contextual_support_labels": [
+        "CLAIM_UNCERTAIN",
+        "TOPIC_GOVERNMENT"
+      ],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "BODY_TOPIC_SIGNAL",
+        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL"
+      ],
+      "topic_supporting_signals": [
+        "BODY_HEALTH_SIGNAL",
+        "LEGACY_TOPIC_SUPPORT"
+      ],
+      "topic_warnings": [],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "GUIDANCE_STRUCTURE_SIGNAL"
+      ],
+      "intent_supporting_signals": [
+        "TOPIC_HEALTH",
+        "GUIDANCE_TERMS_PRESENT"
+      ],
+      "intent_warnings": [
+        "HIGH_RISK_GUIDANCE_REQUIRES_REVIEW"
+      ]
+    },
+    {
+      "id": "037",
+      "expected_topic": "HEALTH",
+      "predicted_topic": "GENERAL",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": false,
+      "contextual_support_labels": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "topic_supporting_signals": [
+        "INSUFFICIENT_TOPIC_EVIDENCE"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_GENERAL"
+      ],
+      "intent_warnings": []
+    },
+    {
+      "id": "038",
+      "expected_topic": "HEALTH",
+      "predicted_topic": "GENERAL",
+      "topic_confidence": "LOW",
+      "topic_match": false,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "BREAKING",
+      "format_confidence": "MEDIUM",
+      "format_match": false,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": false,
+      "contextual_support_labels": [
+        "CLAIM_ATTRIBUTED"
+      ],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "DEFAULT_GENERAL_TOPIC"
+      ],
+      "topic_supporting_signals": [
+        "INSUFFICIENT_TOPIC_EVIDENCE"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE",
+        "TOPIC_SIGNAL_INSUFFICIENT"
+      ],
+      "format_reason_codes": [
+        "BREAKING_IMMEDIACY_SIGNAL"
+      ],
+      "format_supporting_signals": [
+        "IMMEDIACY_TERMS_PRESENT"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_BREAKING",
+        "TOPIC_GENERAL"
+      ],
+      "intent_warnings": []
+    },
+    {
+      "id": "039",
+      "expected_topic": "ECONOMY",
+      "predicted_topic": "ECONOMY",
+      "topic_confidence": "MEDIUM",
+      "topic_match": true,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_support_labels": [],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "BODY_TOPIC_SIGNAL",
+        "ECONOMIC_STRUCTURE_SIGNAL",
+        "LEGACY_CONTENT_TYPE_TOPIC_SIGNAL"
+      ],
+      "topic_supporting_signals": [
+        "BODY_ECONOMY_SIGNAL",
+        "STRUCTURED_ECONOMIC_VALUES",
+        "LEGACY_TOPIC_SUPPORT"
+      ],
+      "topic_warnings": [],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_ECONOMY"
+      ],
+      "intent_warnings": []
+    },
+    {
+      "id": "040",
+      "expected_topic": "ECONOMY",
+      "predicted_topic": "ECONOMY",
+      "topic_confidence": "LOW",
+      "topic_match": true,
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "format_match": true,
+      "expected_reader_intent": "GET_UPDATE",
+      "predicted_reader_intent": "GET_UPDATE",
+      "reader_intent_confidence": "HIGH",
+      "reader_intent_match": true,
+      "full_match": true,
+      "contextual_support_labels": [
+        "TOPIC_GOVERNMENT",
+        "CLAIM_UNCERTAIN",
+        "FORMAT_ANALYSIS",
+        "INTENT_UNDERSTAND_IMPACT"
+      ],
+      "semantic_primary_domain_candidates": [],
+      "semantic_secondary_domain_candidates": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "semantic_intent_support": [],
+      "semantic_suppressions": [],
+      "topic_reason_codes": [
+        "BODY_TOPIC_SIGNAL",
+        "ECONOMIC_STRUCTURE_SIGNAL"
+      ],
+      "topic_supporting_signals": [
+        "BODY_ECONOMY_SIGNAL",
+        "STRUCTURED_ECONOMIC_VALUES"
+      ],
+      "topic_warnings": [
+        "LOW_TOPIC_CONFIDENCE"
+      ],
+      "format_reason_codes": [
+        "DEFAULT_STANDARD_NEWS_FORMAT"
+      ],
+      "format_supporting_signals": [
+        "EXISTING_CONTENT_TYPE_FALLBACK"
+      ],
+      "format_warnings": [],
+      "intent_reason_codes": [
+        "FORMAT_READER_INTENT_MAPPING",
+        "DEFAULT_GET_UPDATE"
+      ],
+      "intent_supporting_signals": [
+        "FORMAT_STANDARD_NEWS",
+        "TOPIC_ECONOMY"
+      ],
+      "intent_warnings": []
+    }
+  ]
+}
