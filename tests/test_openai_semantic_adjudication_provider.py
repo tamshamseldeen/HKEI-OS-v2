@@ -20,6 +20,7 @@ import pytest
 
 from src.adjudication.adjudication_confidence import AdjudicationConfidence
 from src.adjudication.openai_semantic_adjudication_provider import (
+    OPENAI_ADJUDICATION_PROMPT_VERSION,
     OpenAISemanticAdjudicationProvider,
 )
 from src.adjudication.semantic_adjudication_provider import (
@@ -40,6 +41,7 @@ from src.adjudication.semantic_adjudication_reasoning_effort import (
 from src.adjudication.semantic_adjudication_runtime_context import (
     SemanticAdjudicationRuntimeContext,
 )
+from src.formatting.editorial_format import EditorialFormat
 
 
 class FakeResponses:
@@ -357,6 +359,108 @@ def test_prompt_delimits_untrusted_source_and_preserves_legal_schema() -> None:
         "risk_band", "attribution_required", "uncertainty_present",
         "sensitive_context", "human_risk_annotations",
     ))
+
+
+def prompt_payload(
+    *,
+    topics: tuple[str, ...] = ("GENERAL", "POLITICS"),
+    formats: tuple[str, ...] = ("STANDARD_NEWS", "ANALYSIS"),
+) -> tuple[dict[str, object], dict[str, object]]:
+    source_request = request(topics=topics, formats=formats)
+    adapter, client = provider(completed(payload(
+        adjudicated_topic=topics[-1], adjudicated_format=formats[-1]
+    )))
+    adapter.adjudicate(source_request)
+    call = client.responses.calls[0]
+    return json.loads(call["input"]), call
+
+
+def test_prompt_version_and_complete_operational_label_definitions() -> None:
+    sent, _ = prompt_payload()
+    definitions = sent["LABEL_DEFINITIONS"]
+    assert OPENAI_ADJUDICATION_PROMPT_VERSION == "1.1"
+    assert "main subject/domain" in definitions["PRIMARY_EDITORIAL_TOPIC"]
+    assert "not what the subject is about" in definitions["EDITORIAL_FORMAT"]
+    format_definitions = definitions["formats"]
+    assert set(format_definitions) == {item.value for item in EditorialFormat}
+    for required in ("STANDARD_NEWS", "ANALYSIS", "EXPLAINER", "SERVICE", "GUIDE"):
+        assert format_definitions[required].strip()
+
+
+def test_prompt_reframes_baseline_and_orders_evidence_before_it() -> None:
+    sent, call = prompt_payload()
+    section_names = list(sent)
+    assert section_names == [
+        "TASK",
+        "LABEL_DEFINITIONS",
+        "SOURCE_CONTENT_UNTRUSTED",
+        "STRUCTURED_EVIDENCE",
+        "LEGAL_CANDIDATES",
+        "CURRENT_DETERMINISTIC_BASELINE",
+    ]
+    framing = sent["CURRENT_DETERMINISTIC_BASELINE"]["framing"]
+    assert "not authoritative answers" in framing
+    instructions = call["instructions"]
+    assert "preliminary machine classifications" in instructions
+    assert "reference only" in instructions
+
+
+def test_prompt_requires_independent_reconsideration_for_open_dimensions() -> None:
+    sent, _ = prompt_payload()
+    task = " ".join(sent["TASK"]["instructions"])
+    assert "Topic adjudication is required" in task
+    assert "primary domain independently" in task
+    assert "Format adjudication is required" in task
+    assert "treatment independently" in task
+    assert "Do not default to the deterministic Topic" in task
+    assert "Do not default to the deterministic Format" in task
+
+
+def test_prompt_preserves_dimensions_with_one_legal_candidate() -> None:
+    sent, _ = prompt_payload(
+        topics=("POLITICS",), formats=("STANDARD_NEWS",)
+    )
+    task = " ".join(sent["TASK"]["instructions"])
+    assert "Topic has one legal candidate; preserve that candidate" in task
+    assert "Format has one legal candidate; preserve that candidate" in task
+
+
+def test_prompt_explains_structured_evidence_suppression_and_decision_metadata() -> None:
+    sent, call = prompt_payload()
+    guidance = sent["STRUCTURED_EVIDENCE"]["guidance"]
+    assert set(guidance) == {
+        "contextual_supports",
+        "contextual_suppressions",
+        "semantic_relationships",
+        "primary_secondary_domain_candidates",
+        "semantic_format_support",
+        "semantic_format_suppression",
+        "reason_codes_warnings",
+    }
+    instructions = call["instructions"]
+    assert "not decorative metadata" in instructions
+    assert "not an absolute prohibition" in instructions
+    assert "ambiguity_remaining=true" in instructions
+    assert all(level in instructions for level in ("HIGH means", "MEDIUM means", "LOW means"))
+    assert "concise rationale" in instructions
+    assert "chain-of-thought" in instructions
+
+
+def test_prompt_has_no_benchmark_specific_language_and_preserves_request_contract() -> None:
+    source_request = request()
+    original_fingerprint = source_request.input_fingerprint
+    adapter, client = provider()
+    adapter.adjudicate(source_request)
+    call = client.responses.calls[0]
+    prompt = call["instructions"] + call["input"]
+    assert not any(case_id in prompt for case_id in ("044", "045", "046", "048", "050"))
+    assert source_request.input_fingerprint == original_fingerprint
+    assert call["model"] == "configured-model"
+    assert call["temperature"] == 0.3
+    assert call["max_output_tokens"] == 444
+    assert call["timeout"] == 17.5
+    assert call["store"] is False
+    assert call["tools"] == []
 
 
 def test_missing_usage_defaults_to_zero_and_model_falls_back() -> None:
