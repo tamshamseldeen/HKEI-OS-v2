@@ -607,6 +607,72 @@ def test_strict_unresolved_evidence_stack_requires_topic_only() -> None:
     assert result.reason_codes == ("TOPIC_ADJUDICATION_REQUIRED",)
 
 
+def test_matching_contextual_topic_support_blocks_strict_stack() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.WORLD, TopicConfidence.HIGH),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.LOW,
+        ),
+        contextual=context(contextual_item("TOPIC_WORLD")),
+    )
+    assert "UNRESOLVED_EVIDENCE_STACK_STRICT" not in result.trigger_signals
+    assert result.topic_required is False
+    assert result.format_required is False
+    assert result.scope is AdjudicationScope.NOT_REQUIRED
+
+
+def test_topic_and_format_sufficiency_are_evaluated_independently() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.CULTURE, TopicConfidence.HIGH),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.LOW,
+        ),
+        contextual=context(
+            contextual_item("TOPIC_CULTURE", "FORMAT_ANALYSIS")
+        ),
+    )
+    assert "UNRESOLVED_EVIDENCE_STACK_STRICT" not in result.trigger_signals
+    assert result.topic_required is False
+    assert result.format_required is True
+    assert result.scope is AdjudicationScope.FORMAT_REQUIRED
+
+
+def test_strict_stack_fires_without_matching_contextual_topic_support() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.EDUCATION, TopicConfidence.HIGH),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.LOW,
+        ),
+        contextual=context(contextual_item("CLAIM_ATTRIBUTED")),
+    )
+    assert "UNRESOLVED_EVIDENCE_STACK_STRICT" in result.trigger_signals
+    assert result.topic_required is True
+    assert result.format_required is False
+    assert result.scope is AdjudicationScope.TOPIC_REQUIRED
+
+
+def test_deterministic_primary_domain_control_remains_not_required() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.ECONOMY, TopicConfidence.HIGH),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.MEDIUM,
+        ),
+        contextual=context(contextual_item("TOPIC_ECONOMY")),
+        semantic=semantics(
+            primary=("PRIMARY_DOMAIN_ECONOMY",),
+            relationships=(relationship(),),
+        ),
+    )
+    assert result.scope is AdjudicationScope.NOT_REQUIRED
+    assert result.topic_required is False
+    assert result.format_required is False
+    assert "UNRESOLVED_EVIDENCE_STACK_STRICT" not in result.trigger_signals
+
+
 def test_strict_stack_requires_contextual_evidence() -> None:
     result = evaluate(
         topic_result=topic(Topic.EDUCATION, TopicConfidence.HIGH),

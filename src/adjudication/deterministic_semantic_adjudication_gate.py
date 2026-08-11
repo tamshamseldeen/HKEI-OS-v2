@@ -171,27 +171,9 @@ class DeterministicSemanticAdjudicationGate:
                 )
             )
         )
-        unresolved_topic_hint = (
-            unresolved_public_safety_event
-            or unresolved_institutional_policy_conflict
-        )
-        unresolved_format_hint = (
-            unresolved_analytical_constraint
-            or unresolved_explanatory_transformation
-            or unresolved_institutional_policy_conflict
-        )
         deterministic_topic_sufficient = (
-            topic_classification.topic is not Topic.GENERAL
-            and topic_classification.confidence is TopicConfidence.HIGH
-            and not semantic_domain_conflict
-            and not method_subject_ambiguity
-            and not unresolved_topic_hint
-        )
-        deterministic_format_sufficient = (
-            format_classification.confidence
-            is EditorialFormatConfidence.HIGH
-            and not unresolved_format_hint
-            and not format_conflict
+            f"{_TOPIC_PREFIX}{topic_classification.topic.value}"
+            in contextual_supports
         )
         unresolved_evidence_stack_strict = (
             no_primary_domain
@@ -203,10 +185,7 @@ class DeterministicSemanticAdjudicationGate:
                 or format_classification.confidence
                 is EditorialFormatConfidence.LOW
             )
-            and not (
-                deterministic_topic_sufficient
-                and deterministic_format_sufficient
-            )
+            and not deterministic_topic_sufficient
         )
 
         trigger_signals: list[str] = []

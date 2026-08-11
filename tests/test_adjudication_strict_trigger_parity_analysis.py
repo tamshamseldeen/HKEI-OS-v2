@@ -5,8 +5,6 @@ from examples.run_adjudication_strict_trigger_parity_analysis import (
     OUTPUT_JSON,
     OUTPUT_MD,
     analyze_strict_trigger_parity,
-    render_json,
-    render_markdown,
 )
 
 
@@ -30,17 +28,17 @@ def test_hkei_111_candidate_is_reconstructed_independently() -> None:
     }
 
 
-def test_production_trigger_is_inspected_independently() -> None:
+def test_current_production_trigger_is_aligned_with_diagnostic_candidate() -> None:
     result = analyze_strict_trigger_parity()
     assert result["production_trigger_metrics"] == {
-        "cases_triggered": 3,
+        "cases_triggered": 1,
         "incremental_topic_TP": 1,
-        "incremental_topic_FP": 2,
+        "incremental_topic_FP": 0,
     }
-    assert result["cross_batch_false_positive_cases"] == [
-        "batch_02/014",
-        "batch_02/019",
+    assert result["production_trigger_metrics"] == result[
+        "diagnostic_candidate_metrics"
     ]
+    assert result["cross_batch_false_positive_cases"] == []
 
 
 def test_required_cases_expose_deterministic_sufficiency_difference() -> None:
@@ -58,7 +56,7 @@ def test_required_cases_expose_deterministic_sufficiency_difference() -> None:
         assert case["diagnostic_deterministic_sufficiency"] is True
         assert case["production_deterministic_sufficiency"] is False
         assert case["diagnostic_strict_candidate"] is False
-        assert case["production_strict_trigger"] is True
+        assert case["production_strict_trigger"] is False
     case_050 = cases[("batch_05", "050")]
     assert case_050["diagnostic_strict_candidate"] is True
     assert case_050["production_strict_trigger"] is True
@@ -73,22 +71,37 @@ def test_logic_and_metric_comparison_are_deterministic() -> None:
     second = analyze_strict_trigger_parity()
     assert first == second
     assert len(first["logic_differences"]) == 12
-    assert first["primary_discrepancy_cause"] == (
+    assert first["production_trigger_metrics"] == first[
+        "diagnostic_candidate_metrics"
+    ]
+
+
+def test_persisted_outputs_preserve_hkei_114_historical_audit() -> None:
+    persisted = json.loads(OUTPUT_JSON.read_text(encoding="utf-8"))
+    assert persisted["production_trigger_metrics"] == {
+        "cases_triggered": 3,
+        "incremental_topic_TP": 1,
+        "incremental_topic_FP": 2,
+    }
+    assert persisted["cross_batch_false_positive_cases"] == [
+        "batch_02/014",
+        "batch_02/019",
+    ]
+    assert persisted["primary_discrepancy_cause"] == (
         "DETERMINISTIC_SUFFICIENCY_DEFINITION_DRIFT"
     )
-    assert first["primary_conclusion"] == (
+    assert persisted["primary_conclusion"] == (
         "PRODUCTION_TRIGGER_NOT_EQUIVALENT_TO_VALIDATED_CANDIDATE"
     )
-    assert first["recommended_action"] == (
+    assert persisted["recommended_action"] == (
         "ALIGN_PRODUCTION_TO_VALIDATED_STRICT_LOGIC"
     )
-    assert first["gate_freeze_safe"] is False
-
-
-def test_persisted_outputs_match_deterministic_rendering() -> None:
-    result = analyze_strict_trigger_parity()
-    assert OUTPUT_JSON.read_text(encoding="utf-8") == render_json(result)
-    assert OUTPUT_MD.read_text(encoding="utf-8") == render_markdown(result)
+    assert persisted["gate_freeze_safe"] is False
+    markdown = OUTPUT_MD.read_text(encoding="utf-8")
+    assert "Incremental TP:\n1" in markdown
+    assert "Incremental FP:\n2" in markdown
+    assert "batch_02/014" in markdown
+    assert "batch_02/019" in markdown
 
 
 def test_json_contains_no_source_bodies_or_risk_annotations() -> None:
