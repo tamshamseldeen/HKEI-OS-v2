@@ -1,0 +1,64 @@
+{
+  "expectations": [
+    {
+      "id": "041",
+      "topic": "POLITICS",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "042",
+      "topic": "CRIME",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "043",
+      "topic": "POLITICS",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "044",
+      "topic": "WORLD",
+      "editorial_format": "ANALYSIS",
+      "reader_intent": "UNDERSTAND_IMPACT"
+    },
+    {
+      "id": "045",
+      "topic": "WORLD",
+      "editorial_format": "EXPLAINER",
+      "reader_intent": "UNDERSTAND_EVENT"
+    },
+    {
+      "id": "046",
+      "topic": "SCIENCE",
+      "editorial_format": "ANALYSIS",
+      "reader_intent": "UNDERSTAND_IMPACT"
+    },
+    {
+      "id": "047",
+      "topic": "POLITICS",
+      "editorial_format": "ANALYSIS",
+      "reader_intent": "UNDERSTAND_IMPACT"
+    },
+    {
+      "id": "048",
+      "topic": "WORLD",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "049",
+      "topic": "ECONOMY",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "050",
+      "topic": "CRIME",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    }
+  ]
+}

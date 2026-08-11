@@ -1,0 +1,84 @@
+{
+  "annotations": [
+    {
+      "id": "041",
+      "expected_risk_band": "HIGH",
+      "attribution_required": true,
+      "uncertainty_present": true,
+      "sensitive_context": "SECURITY",
+      "notes": "Potential cross-border attack; possibility must not become confirmed event."
+    },
+    {
+      "id": "042",
+      "expected_risk_band": "HIGH",
+      "attribution_required": true,
+      "uncertainty_present": true,
+      "sensitive_context": "CRIMINAL_LEGAL",
+      "notes": "Criminal conviction plus disputed family claim; attribution must be preserved."
+    },
+    {
+      "id": "043",
+      "expected_risk_band": "HIGH",
+      "attribution_required": true,
+      "uncertainty_present": false,
+      "sensitive_context": "LEGAL_POLITICAL",
+      "notes": "Executive action with constitutional and judicial context."
+    },
+    {
+      "id": "044",
+      "expected_risk_band": "HIGH",
+      "attribution_required": false,
+      "uncertainty_present": false,
+      "sensitive_context": "WAR_SECURITY",
+      "notes": "War and defense analysis; avoid unsupported operational inference."
+    },
+    {
+      "id": "045",
+      "expected_risk_band": "HIGH",
+      "attribution_required": false,
+      "uncertainty_present": false,
+      "sensitive_context": "MILITARY_DEFENSE",
+      "notes": "Military restructuring and unmanned systems."
+    },
+    {
+      "id": "046",
+      "expected_risk_band": "HIGH",
+      "attribution_required": false,
+      "uncertainty_present": true,
+      "sensitive_context": "BIOSECURITY",
+      "notes": "Dual-use biological research; descriptive reporting must not become procedural enablement."
+    },
+    {
+      "id": "047",
+      "expected_risk_band": "HIGH",
+      "attribution_required": true,
+      "uncertainty_present": true,
+      "sensitive_context": "POLITICAL_LEGAL",
+      "notes": "Government scrutiny, discrimination allegations, protests, and institutional conflict."
+    },
+    {
+      "id": "048",
+      "expected_risk_band": "HIGH",
+      "attribution_required": true,
+      "uncertainty_present": true,
+      "sensitive_context": "INTELLIGENCE_SECURITY",
+      "notes": "Intelligence estimate; explicitly not a confirmed attack decision."
+    },
+    {
+      "id": "049",
+      "expected_risk_band": "LOW",
+      "attribution_required": true,
+      "uncertainty_present": true,
+      "sensitive_context": "ECONOMIC_DATA",
+      "notes": "Economic data and estimates; distinguish reported rate from economist estimate."
+    },
+    {
+      "id": "050",
+      "expected_risk_band": "HIGH",
+      "attribution_required": true,
+      "uncertainty_present": false,
+      "sensitive_context": "VIOLENT_CRIME",
+      "notes": "Fatal school shooting with casualty reporting attributed to local media/broadcaster."
+    }
+  ]
+}
