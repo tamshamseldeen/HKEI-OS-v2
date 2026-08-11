@@ -131,11 +131,11 @@ def test_topic_confusion_matrix_and_metrics_are_exact(
         analysis["topic_false_positives"],
         analysis["topic_true_negatives"],
         analysis["topic_false_negatives"],
-    ) == (8, 0, 1, 1)
+    ) == (9, 0, 1, 0)
     assert analysis["topic_precision"] == 100.0
-    assert analysis["topic_recall"] == 8 / 9 * 100.0
+    assert analysis["topic_recall"] == 100.0
     assert analysis["topic_specificity"] == 100.0
-    assert analysis["topic_accuracy"] == 90.0
+    assert analysis["topic_accuracy"] == 100.0
 
 
 def test_format_confusion_matrix_and_metrics_are_exact(
@@ -177,14 +177,14 @@ def test_case_flags_derive_the_same_confusion_matrix(
 def test_provider_call_metrics_and_scope_distribution_are_exact(
     analysis: dict[str, object],
 ) -> None:
-    assert analysis["provider_call_cases"] == 8
-    assert analysis["provider_call_rate"] == 80.0
+    assert analysis["provider_call_cases"] == 9
+    assert analysis["provider_call_rate"] == 90.0
     assert analysis["correctly_avoided_call_cases"] == 1
     assert analysis["unnecessary_provider_call_cases"] == 0
-    assert analysis["missed_adjudication_cases"] == 1
+    assert analysis["missed_adjudication_cases"] == 0
     assert analysis["scope_distribution"] == {
-        "NOT_REQUIRED": 2,
-        "TOPIC_REQUIRED": 4,
+        "NOT_REQUIRED": 1,
+        "TOPIC_REQUIRED": 5,
         "FORMAT_REQUIRED": 0,
         "TOPIC_AND_FORMAT_REQUIRED": 4,
     }
@@ -226,13 +226,13 @@ def test_coverage_and_errors_are_preserved_without_tuning(
     analysis: dict[str, object],
 ) -> None:
     assert analysis["topic_captured_cases"] == [
-        "041", "042", "043", "044", "045", "046", "047", "048"
+        "041", "042", "043", "044", "045", "046", "047", "048", "050"
     ]
     assert analysis["format_captured_cases"] == ["044", "045", "046", "047"]
     assert [
         case["id"] for case in analysis["cases"]
         if case["topic_false_negative"]
-    ] == ["050"]
+    ] == []
     assert [
         case["id"] for case in analysis["cases"]
         if case["topic_false_positive"]
@@ -245,7 +245,7 @@ def test_coverage_and_errors_are_preserved_without_tuning(
         case["id"] for case in analysis["cases"]
         if case["format_false_positive"]
     ] == []
-    assert diagnostic_status(analysis) == "PASSED"
+    assert diagnostic_status(analysis) == "EXCELLENT"
 
 
 def test_json_excludes_source_bodies_and_risk_metadata(

@@ -1,0 +1,213 @@
+{
+  "cases_analyzed": 50,
+  "diagnostic_candidate_metrics": {
+    "cases_triggered": 1,
+    "incremental_topic_TP": 1,
+    "incremental_topic_FP": 0
+  },
+  "production_trigger_metrics": {
+    "cases_triggered": 3,
+    "incremental_topic_TP": 1,
+    "incremental_topic_FP": 2
+  },
+  "logic_differences": [
+    {
+      "condition": "no primary semantic domain",
+      "hkei_111_diagnostic_candidate": "required",
+      "production_gate": "required",
+      "equivalent": true,
+      "observed_difference": "Both test an empty primary_domain_candidates collection."
+    },
+    {
+      "condition": "contextual evidence exists",
+      "hkei_111_diagnostic_candidate": "required",
+      "production_gate": "required",
+      "equivalent": true,
+      "observed_difference": "Both test whether contextual items are present."
+    },
+    {
+      "condition": "no semantic relationships",
+      "hkei_111_diagnostic_candidate": "required",
+      "production_gate": "required",
+      "equivalent": true,
+      "observed_difference": "Both require an empty relationships collection."
+    },
+    {
+      "condition": "topic already requires adjudication",
+      "hkei_111_diagnostic_candidate": "must be false",
+      "production_gate": "must be false",
+      "equivalent": true,
+      "observed_difference": "Both use the same pre-strict topic-required baseline."
+    },
+    {
+      "condition": "LOW confidence requirement",
+      "hkei_111_diagnostic_candidate": "any classifier LOW",
+      "production_gate": "topic or format LOW",
+      "equivalent": false,
+      "observed_difference": "The diagnostic also considers reader-intent LOW; it does not affect audited cases."
+    },
+    {
+      "condition": "deterministic sufficiency",
+      "hkei_111_diagnostic_candidate": "predicted TOPIC_* support exists",
+      "production_gate": "topic and format are each sufficient",
+      "equivalent": false,
+      "observed_difference": "Production couples topic sufficiency to format confidence."
+    },
+    {
+      "condition": "topic confidence handling",
+      "hkei_111_diagnostic_candidate": "not part of sufficiency",
+      "production_gate": "HIGH non-GENERAL topic required",
+      "equivalent": false,
+      "observed_difference": "Production defines a separate confidence-based topic sufficiency predicate."
+    },
+    {
+      "condition": "format confidence handling",
+      "hkei_111_diagnostic_candidate": "only contributes to any LOW",
+      "production_gate": "HIGH required for combined sufficiency",
+      "equivalent": false,
+      "observed_difference": "LOW format confidence defeats production sufficiency even with deterministic topic support."
+    },
+    {
+      "condition": "unresolved hint handling",
+      "hkei_111_diagnostic_candidate": "not part of sufficiency",
+      "production_gate": "topic and format hints defeat sufficiency",
+      "equivalent": false,
+      "observed_difference": "Production added hint-aware sufficiency conditions."
+    },
+    {
+      "condition": "semantic conflict handling",
+      "hkei_111_diagnostic_candidate": "not part of sufficiency",
+      "production_gate": "conflict defeats topic or format sufficiency",
+      "equivalent": false,
+      "observed_difference": "Production added conflict-aware sufficiency conditions."
+    },
+    {
+      "condition": "method-subject ambiguity handling",
+      "hkei_111_diagnostic_candidate": "not part of sufficiency",
+      "production_gate": "ambiguity defeats topic sufficiency",
+      "equivalent": false,
+      "observed_difference": "Production added ambiguity-aware topic sufficiency."
+    },
+    {
+      "condition": "evaluation ordering",
+      "hkei_111_diagnostic_candidate": "candidate evaluated after pre-strict decision",
+      "production_gate": "strict evaluated after existing-topic predicate",
+      "equivalent": true,
+      "observed_difference": "Both evaluate strict logic only after the same pre-strict topic decision."
+    }
+  ],
+  "cross_batch_false_positive_cases": [
+    "batch_02/014",
+    "batch_02/019"
+  ],
+  "primary_discrepancy_cause": "DETERMINISTIC_SUFFICIENCY_DEFINITION_DRIFT",
+  "primary_conclusion": "PRODUCTION_TRIGGER_NOT_EQUIVALENT_TO_VALIDATED_CANDIDATE",
+  "recommended_action": "ALIGN_PRODUCTION_TO_VALIDATED_STRICT_LOGIC",
+  "gate_freeze_safe": false,
+  "baseline_consistency": "Both predicates use current pipeline outputs and the same current existing-topic-required state before strict-trigger application.",
+  "temporal_change_audit": {
+    "hkei_111_commit": "583bbc4",
+    "hkei_112_commit": "435f5b0",
+    "hkei_113_commit": "bb1d98c",
+    "upstream_evidence_changed_after_hkei_111": false,
+    "gate_changed_after_hkei_111": true,
+    "tests_changed_after_hkei_111": true,
+    "benchmark_runner_changed_after_hkei_111": false,
+    "finding": "HKEI-112 implemented a different deterministic-sufficiency definition; HKEI-113 refreshed outputs only."
+  },
+  "cases": [
+    {
+      "batch": "batch_02",
+      "id": "014",
+      "expected_topic": "WORLD",
+      "current_predicted_topic": "WORLD",
+      "topic_match": true,
+      "topic_confidence": "HIGH",
+      "format_confidence": "LOW",
+      "primary_domain_candidates": [],
+      "semantic_relationship_count": 0,
+      "contextual_item_count": 4,
+      "existing_topic_required_before_strict": false,
+      "diagnostic_strict_candidate": false,
+      "production_strict_trigger": true,
+      "diagnostic_deterministic_sufficiency": true,
+      "production_deterministic_sufficiency": false,
+      "current_gate_scope": "TOPIC_REQUIRED",
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "UNRESOLVED_EVIDENCE_STACK_STRICT",
+        "FORMAT_LOW_CONFIDENCE"
+      ]
+    },
+    {
+      "batch": "batch_02",
+      "id": "019",
+      "expected_topic": "CULTURE",
+      "current_predicted_topic": "CULTURE",
+      "topic_match": true,
+      "topic_confidence": "HIGH",
+      "format_confidence": "LOW",
+      "primary_domain_candidates": [],
+      "semantic_relationship_count": 0,
+      "contextual_item_count": 2,
+      "existing_topic_required_before_strict": false,
+      "diagnostic_strict_candidate": false,
+      "production_strict_trigger": true,
+      "diagnostic_deterministic_sufficiency": true,
+      "production_deterministic_sufficiency": false,
+      "current_gate_scope": "TOPIC_REQUIRED",
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "UNRESOLVED_EVIDENCE_STACK_STRICT",
+        "FORMAT_LOW_CONFIDENCE"
+      ]
+    },
+    {
+      "batch": "batch_05",
+      "id": "049",
+      "expected_topic": "ECONOMY",
+      "current_predicted_topic": "ECONOMY",
+      "topic_match": true,
+      "topic_confidence": "HIGH",
+      "format_confidence": "MEDIUM",
+      "primary_domain_candidates": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "semantic_relationship_count": 8,
+      "contextual_item_count": 7,
+      "existing_topic_required_before_strict": false,
+      "diagnostic_strict_candidate": false,
+      "production_strict_trigger": false,
+      "diagnostic_deterministic_sufficiency": true,
+      "production_deterministic_sufficiency": false,
+      "current_gate_scope": "NOT_REQUIRED",
+      "trigger_signals": []
+    },
+    {
+      "batch": "batch_05",
+      "id": "050",
+      "expected_topic": "CRIME",
+      "current_predicted_topic": "EDUCATION",
+      "topic_match": false,
+      "topic_confidence": "HIGH",
+      "format_confidence": "LOW",
+      "primary_domain_candidates": [],
+      "semantic_relationship_count": 0,
+      "contextual_item_count": 1,
+      "existing_topic_required_before_strict": false,
+      "diagnostic_strict_candidate": true,
+      "production_strict_trigger": true,
+      "diagnostic_deterministic_sufficiency": false,
+      "production_deterministic_sufficiency": false,
+      "current_gate_scope": "TOPIC_REQUIRED",
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "UNRESOLVED_EVIDENCE_STACK_STRICT",
+        "FORMAT_LOW_CONFIDENCE"
+      ]
+    }
+  ]
+}

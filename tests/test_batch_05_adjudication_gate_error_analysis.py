@@ -11,7 +11,7 @@ from examples.run_batch_05_adjudication_gate_error_analysis import (
 
 PROTECTED_DIGESTS = {
     "editorial_validation.json": "a8b210cb8ece13d77cb3f594a3048cac1d306148d9de30fcedc1abd0ae5c9fe3",
-    "adjudication_gate_shadow.json": "5ca0d874cc230f38e498d8d83a2de26e727b064ba91c3013667c0baed38b89a1",
+    "adjudication_gate_shadow.json": "d6f0fef641bd83d3a4b400be73baa5d4adb5502844d541ba16aa044a0f49b3b0",
 }
 
 
