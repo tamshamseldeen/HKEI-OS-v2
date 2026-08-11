@@ -591,6 +591,123 @@ def test_new_hint_trigger_order_and_deduplication_are_exact() -> None:
     assert len(result.trigger_signals) == len(set(result.trigger_signals))
 
 
+def test_strict_unresolved_evidence_stack_requires_topic_only() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.EDUCATION, TopicConfidence.HIGH),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.LOW,
+        ),
+        contextual=context(contextual_item("CLAIM_ATTRIBUTED")),
+    )
+    assert "UNRESOLVED_EVIDENCE_STACK_STRICT" in result.trigger_signals
+    assert result.topic_required is True
+    assert result.format_required is False
+    assert result.scope is AdjudicationScope.TOPIC_REQUIRED
+    assert result.reason_codes == ("TOPIC_ADJUDICATION_REQUIRED",)
+
+
+def test_strict_stack_requires_contextual_evidence() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.EDUCATION, TopicConfidence.HIGH),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.LOW,
+        ),
+    )
+    assert "UNRESOLVED_EVIDENCE_STACK_STRICT" not in result.trigger_signals
+    assert result.topic_required is False
+
+
+def test_strict_stack_requires_zero_semantic_relationships() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.EDUCATION, TopicConfidence.HIGH),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.LOW,
+        ),
+        contextual=context(contextual_item("CLAIM_ATTRIBUTED")),
+        semantic=semantics(relationships=(relationship(),)),
+    )
+    assert "UNRESOLVED_EVIDENCE_STACK_STRICT" not in result.trigger_signals
+    assert result.topic_required is False
+
+
+def test_strict_stack_requires_no_primary_domain() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.EDUCATION, TopicConfidence.HIGH),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.LOW,
+        ),
+        contextual=context(contextual_item("CLAIM_ATTRIBUTED")),
+        semantic=semantics(primary=("PRIMARY_DOMAIN_EDUCATION",)),
+    )
+    assert "UNRESOLVED_EVIDENCE_STACK_STRICT" not in result.trigger_signals
+    assert result.topic_required is False
+
+
+def test_strict_stack_requires_a_low_classification() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.EDUCATION, TopicConfidence.HIGH),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.MEDIUM,
+        ),
+        contextual=context(contextual_item("CLAIM_ATTRIBUTED")),
+    )
+    assert "UNRESOLVED_EVIDENCE_STACK_STRICT" not in result.trigger_signals
+    assert result.topic_required is False
+
+
+def test_strict_stack_does_not_duplicate_existing_topic_adjudication() -> None:
+    result = evaluate(
+        topic_result=topic(
+            Topic.GENERAL,
+            TopicConfidence.LOW,
+            reasons=("DEFAULT_GENERAL_TOPIC",),
+            signals=("INSUFFICIENT_TOPIC_EVIDENCE",),
+        ),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.LOW,
+        ),
+        contextual=context(contextual_item("CLAIM_ATTRIBUTED")),
+    )
+    assert result.topic_required is True
+    assert "UNRESOLVED_EVIDENCE_STACK_STRICT" not in result.trigger_signals
+
+
+def test_deterministic_sufficiency_blocks_strict_stack() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.ECONOMY, TopicConfidence.HIGH),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.HIGH,
+        ),
+        contextual=context(contextual_item("CLAIM_ATTRIBUTED")),
+    )
+    assert result.scope is AdjudicationScope.NOT_REQUIRED
+    assert "UNRESOLVED_EVIDENCE_STACK_STRICT" not in result.trigger_signals
+
+
+def test_strict_trigger_order_precedes_format_signals() -> None:
+    result = evaluate(
+        topic_result=topic(Topic.EDUCATION, TopicConfidence.HIGH),
+        format_result=editorial_format(
+            EditorialFormat.STANDARD_NEWS,
+            EditorialFormatConfidence.LOW,
+        ),
+        contextual=context(contextual_item("CLAIM_ATTRIBUTED")),
+    )
+    assert result.trigger_signals == (
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "UNRESOLVED_EVIDENCE_STACK_STRICT",
+        "FORMAT_LOW_CONFIDENCE",
+    )
+
+
 def test_unpromoted_contextual_format_support_requires_format() -> None:
     result = evaluate(
         format_result=editorial_format(

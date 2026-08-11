@@ -124,54 +124,7 @@ class DeterministicSemanticAdjudicationGate:
             in contextual_supports
         )
 
-        trigger_signals: list[str] = []
-        for present, signal in (
-            (topic_low_confidence, "TOPIC_LOW_CONFIDENCE"),
-            (topic_general_fallback, "TOPIC_GENERAL_FALLBACK"),
-            (no_primary_domain, "NO_PRIMARY_SEMANTIC_DOMAIN"),
-            (
-                context_without_relationship,
-                "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
-            ),
-            (method_subject_ambiguity, "METHOD_SUBJECT_AMBIGUITY"),
-            (semantic_domain_conflict, "SEMANTIC_DOMAIN_CONFLICT"),
-            (multiple_topic_signals, "MULTIPLE_COMPETING_TOPIC_SIGNALS"),
-            (
-                specific_topic_with_unresolved_domain,
-                "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
-            ),
-            (
-                unresolved_public_safety_event,
-                "UNRESOLVED_PUBLIC_SAFETY_EVENT",
-            ),
-            (
-                unresolved_institutional_policy_conflict,
-                "UNRESOLVED_INSTITUTIONAL_POLICY_CONFLICT",
-            ),
-            (format_low_confidence, "FORMAT_LOW_CONFIDENCE"),
-            (
-                analytical_news_fallback,
-                "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
-            ),
-            (explainer_unresolved, "EXPLAINER_STRUCTURE_UNRESOLVED"),
-            (
-                contextual_format_not_promoted,
-                "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED",
-            ),
-            (format_conflict, "FORMAT_CONFLICT"),
-            (
-                unresolved_analytical_constraint,
-                "UNRESOLVED_ANALYTICAL_CONSTRAINT",
-            ),
-            (
-                unresolved_explanatory_transformation,
-                "UNRESOLVED_EXPLANATORY_TRANSFORMATION",
-            ),
-        ):
-            if present and signal not in trigger_signals:
-                trigger_signals.append(signal)
-
-        topic_required = (
+        existing_topic_required = (
             (topic_general_fallback and topic_low_confidence)
             or (
                 topic_low_confidence
@@ -217,6 +170,98 @@ class DeterministicSemanticAdjudicationGate:
                     or no_primary_domain
                 )
             )
+        )
+        unresolved_topic_hint = (
+            unresolved_public_safety_event
+            or unresolved_institutional_policy_conflict
+        )
+        unresolved_format_hint = (
+            unresolved_analytical_constraint
+            or unresolved_explanatory_transformation
+            or unresolved_institutional_policy_conflict
+        )
+        deterministic_topic_sufficient = (
+            topic_classification.topic is not Topic.GENERAL
+            and topic_classification.confidence is TopicConfidence.HIGH
+            and not semantic_domain_conflict
+            and not method_subject_ambiguity
+            and not unresolved_topic_hint
+        )
+        deterministic_format_sufficient = (
+            format_classification.confidence
+            is EditorialFormatConfidence.HIGH
+            and not unresolved_format_hint
+            and not format_conflict
+        )
+        unresolved_evidence_stack_strict = (
+            no_primary_domain
+            and bool(contextual_items)
+            and not semantic_evidence.relationships
+            and not existing_topic_required
+            and (
+                topic_classification.confidence is TopicConfidence.LOW
+                or format_classification.confidence
+                is EditorialFormatConfidence.LOW
+            )
+            and not (
+                deterministic_topic_sufficient
+                and deterministic_format_sufficient
+            )
+        )
+
+        trigger_signals: list[str] = []
+        for present, signal in (
+            (topic_low_confidence, "TOPIC_LOW_CONFIDENCE"),
+            (topic_general_fallback, "TOPIC_GENERAL_FALLBACK"),
+            (no_primary_domain, "NO_PRIMARY_SEMANTIC_DOMAIN"),
+            (
+                context_without_relationship,
+                "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+            ),
+            (method_subject_ambiguity, "METHOD_SUBJECT_AMBIGUITY"),
+            (semantic_domain_conflict, "SEMANTIC_DOMAIN_CONFLICT"),
+            (multiple_topic_signals, "MULTIPLE_COMPETING_TOPIC_SIGNALS"),
+            (
+                specific_topic_with_unresolved_domain,
+                "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
+            ),
+            (
+                unresolved_public_safety_event,
+                "UNRESOLVED_PUBLIC_SAFETY_EVENT",
+            ),
+            (
+                unresolved_institutional_policy_conflict,
+                "UNRESOLVED_INSTITUTIONAL_POLICY_CONFLICT",
+            ),
+            (
+                unresolved_evidence_stack_strict,
+                "UNRESOLVED_EVIDENCE_STACK_STRICT",
+            ),
+            (format_low_confidence, "FORMAT_LOW_CONFIDENCE"),
+            (
+                analytical_news_fallback,
+                "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
+            ),
+            (explainer_unresolved, "EXPLAINER_STRUCTURE_UNRESOLVED"),
+            (
+                contextual_format_not_promoted,
+                "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED",
+            ),
+            (format_conflict, "FORMAT_CONFLICT"),
+            (
+                unresolved_analytical_constraint,
+                "UNRESOLVED_ANALYTICAL_CONSTRAINT",
+            ),
+            (
+                unresolved_explanatory_transformation,
+                "UNRESOLVED_EXPLANATORY_TRANSFORMATION",
+            ),
+        ):
+            if present and signal not in trigger_signals:
+                trigger_signals.append(signal)
+
+        topic_required = (
+            existing_topic_required or unresolved_evidence_stack_strict
         )
         format_required = (
             format_conflict

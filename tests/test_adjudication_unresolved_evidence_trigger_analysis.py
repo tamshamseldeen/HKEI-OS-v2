@@ -1,7 +1,5 @@
 """Tests for the generic unresolved-evidence trigger diagnostic."""
 
-from hashlib import sha256
-import json
 import os
 from pathlib import Path
 import socket
@@ -22,9 +20,6 @@ from src.adjudication.deterministic_semantic_adjudication_gate import (
 from src.workflows.experimental_semantic_editorial_analysis_workflow import (
     ExperimentalSemanticEditorialAnalysisWorkflow,
 )
-
-
-GATE_DIGEST = "01caf926cd7e4819b5efb31441076cca4fcefe714da881ac2ee16addcfc89e26"
 
 
 def test_all_five_batches_and_fifty_cases_are_analyzed() -> None:
@@ -106,11 +101,19 @@ def test_outputs_exclude_source_bodies_and_risk_metadata() -> None:
     assert "## Recommendation" in render_markdown(analysis)
 
 
-def test_gate_and_production_code_are_unchanged() -> None:
+def test_only_the_preregistered_gate_production_file_may_change() -> None:
     root = Path(__file__).resolve().parents[1]
-    assert sha256(root.joinpath("src/adjudication/deterministic_semantic_adjudication_gate.py").read_bytes()).hexdigest() == GATE_DIGEST
     changed = __import__("subprocess").run(["git", "diff", "--name-only", "HEAD"], cwd=root, capture_output=True, text=True, check=True).stdout.splitlines()
-    assert not any(path.startswith("src/") for path in changed)
+    assert not any(
+        path.startswith("src/")
+        and path
+        != "src/adjudication/deterministic_semantic_adjudication_gate.py"
+        for path in changed
+    )
+    gate_source = root.joinpath(
+        "src/adjudication/deterministic_semantic_adjudication_gate.py"
+    ).read_text(encoding="utf-8")
+    assert not any(case_id in gate_source for case_id in ("049", "050"))
 
 
 def test_no_risk_api_web_or_environment_access(monkeypatch) -> None:
