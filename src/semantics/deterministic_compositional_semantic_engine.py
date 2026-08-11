@@ -411,6 +411,85 @@ _ACTIONABLE_GUIDE_PATTERNS = (
     r"deadline",
 )
 
+# General editorial structures.  Each structure requires independent component
+# groups; isolated keywords therefore cannot become format evidence.
+_EVENT_COMPONENTS = (
+    r"أعلن(?:ت)?", r"قرر(?:ت)?", r"بدأ(?:ت)?", r"أطلق(?:ت)?", r"حدث",
+    r"announced", r"decided", r"launched", r"began", r"event",
+)
+_FACTUAL_REPORTING_COMPONENTS = (
+    r"بيان", r"تفاصيل", r"معلومات", r"أكد",
+    r"statement", r"details", r"update", r"information", r"confirmed",
+)
+_CAUSE_COMPONENTS = (
+    r"بسبب", r"نتيجة", r"يرجع إلى", r"في ظل", r"قيد", r"تحد",
+    r"because", r"due to", r"constraint", r"trade-?off", r"cause",
+)
+_EFFECT_COMPONENTS = (
+    r"أدى إلى", r"يؤدي إلى", r"ينعكس على", r"تأثير", r"تداعيات",
+    r"led to", r"effect", r"impact", r"consequence",
+)
+_SYSTEM_COMPONENTS = (
+    r"نظام", r"منظومة", r"آلية", r"عملية", r"خدمة",
+    r"system", r"mechanism", r"process", r"service",
+)
+_MECHANISM_COMPONENTS = (
+    r"كيف يعمل", r"يعمل عبر", r"يتكون من", r"من خلال", r"الطريقة التي",
+    r"how it works", r"works by", r"consists of", r"through the process",
+)
+_UNDERSTANDING_COMPONENTS = (
+    r"لفهم", r"يوضح", r"شرح", r"ما يعني", r"لماذا",
+    r"to understand", r"explains", r"means that", r"why",
+)
+_SERVICE_COMPONENTS = (
+    r"موعد", r"جدول", r"سعر", r"تعرفة", r"أهلية", r"آخر موعد",
+    r"موقع", r"متاح", r"إجراء رسمي", r"schedule", r"price", r"rate",
+    r"eligibility", r"deadline", r"location", r"available",
+)
+_INSTRUCTION_COMPONENTS = (
+    r"يجب", r"ينصح", r"اتبع", r"تجنب", r"خطوات", r"أولاً", r"ثانياً",
+    r"should", r"must", r"follow", r"avoid", r"steps?", r"first", r"second",
+)
+_RESULT_COMPONENTS = (
+    r"النتيجة النهائية", r"فاز", r"خسر", r"تعادل", r"حسم", r"ترتيب نهائي",
+    r"final result", r"won", r"lost", r"draw", r"final score", r"ranking",
+)
+_CURRENT_LEVEL_COMPONENTS = (
+    r"حالياً", r"اليوم", r"الآن", r"المستوى الحالي", r"سجل [0-9]",
+    r"currently", r"today", r"current level", r"stands at [0-9]",
+)
+_MOVEMENT_COMPONENTS = (
+    r"ارتفع", r"انخفض", r"تراجع", r"زاد", r"واصل", r"مقارنة ب",
+    r"rose", r"fell", r"declined", r"increased", r"continued", r"compared with",
+)
+_TEMPORAL_COMPONENTS = (
+    r"خلال", r"منذ", r"هذا الأسبوع", r"الشهر الماضي", r"العام الماضي",
+    r"over", r"since", r"this week", r"last month", r"last year",
+)
+_CLAIM_COMPONENTS = (r"ادعاء", r"زعم", r"مزاعم", r"claim", r"assertion")
+_VERIFY_COMPONENTS = (
+    r"تحقق", r"دقق", r"راجعت الأدلة", r"فحصت الوثائق",
+    r"verified", r"checked", r"reviewed the evidence",
+)
+_VERDICT_COMPONENTS = (
+    r"صحيح", r"زائف", r"مضلل", r"غير دقيق", r"النتيجة أن",
+    r"true", r"false", r"misleading", r"inaccurate", r"verdict",
+)
+_SPORTS_SUBJECTS = (
+    r"مباراة", r"بطولة", r"دوري", r"فريق", r"نادي", r"رياضة", r"match", r"tournament",
+    r"sports?",
+    r"league", r"team", r"club",
+)
+_HEALTH_SUBJECTS = (
+    r"صحة", r"مرض", r"وقاية", r"لقاح", r"علاج", r"مريض", r"عدوى",
+    r"الخدمات الطبية", r"فحوصات",
+    r"health", r"disease", r"prevention", r"vaccine", r"treatment", r"infection",
+)
+_PRICE_SUBJECTS = (
+    r"سعر", r"أسعار", r"تكلفة", r"تعرفة", r"تضخم", r"فائدة",
+    r"price", r"cost", r"rate", r"inflation", r"interest",
+)
+
 
 class DeterministicCompositionalSemanticEngine:
     """Compose foundational semantic relationships from local source evidence."""
@@ -447,6 +526,7 @@ class DeterministicCompositionalSemanticEngine:
                     local_items=local_items,
                 )
             )
+        relationships.extend(self._bounded_compositions(source))
         ordered_relationships = tuple(dict.fromkeys(relationships))
         primary = self._domain_candidates(
             ordered_relationships,
@@ -481,8 +561,19 @@ class DeterministicCompositionalSemanticEngine:
             format_support = tuple(
                 dict.fromkeys(format_support + ("FORMAT_STANDARD_NEWS",))
             )
-        format_suppression = (
-            ("FORMAT_GUIDE",) if non_actionable_reporting else ()
+        relationship_suppressions = tuple(
+            dict.fromkeys(
+                label
+                for relationship in ordered_relationships
+                for label in relationship.suppresses
+                if label.startswith("FORMAT_")
+            )
+        )
+        format_suppression = tuple(
+            dict.fromkeys(
+                relationship_suppressions
+                + (("FORMAT_GUIDE",) if non_actionable_reporting else ())
+            )
         )
         return CompositionalSemanticEvidence(
             relationships=ordered_relationships,
@@ -492,6 +583,158 @@ class DeterministicCompositionalSemanticEngine:
             format_suppression=format_suppression,
             intent_support=intent_support,
             warnings=() if ordered_relationships else ("SEMANTIC_COMPOSITION_EMPTY",),
+        )
+
+    def _bounded_compositions(
+        self,
+        source: NormalizedSource,
+    ) -> tuple[SemanticRelationship, ...]:
+        """Compose domains and treatment from current/adjacent body sentences."""
+        sentences = tuple(
+            segment.strip()
+            for segment in _SENTENCE_BOUNDARY.split(source.body)
+            if segment.strip()
+        )
+        relationships: list[SemanticRelationship] = []
+        for start in range(len(sentences)):
+            window = ". ".join(sentences[start : start + 2])
+            if not window:
+                continue
+            section = SourceSection.LEAD if start == 0 else SourceSection.BODY
+            sentence_index = 0 if start == 0 else start - 1
+            relationships.extend(
+                self._generic_domain_relationships(window, section, sentence_index)
+            )
+            relationships.extend(
+                self._generic_format_relationships(window, section, sentence_index)
+            )
+        return tuple(dict.fromkeys(relationships))
+
+    def _generic_domain_relationships(
+        self,
+        text: str,
+        source_section: SourceSection,
+        sentence_index: int,
+    ) -> tuple[SemanticRelationship, ...]:
+        """Promote coherent domain-bearing subjects, not actors or methods."""
+        specs = (
+            (_HEALTH_SUBJECTS, "HEALTH", _EVENT_COMPONENTS + _INSTRUCTION_COMPONENTS),
+            (_PRICE_SUBJECTS, "ECONOMY", _EVENT_COMPONENTS + _MOVEMENT_COMPONENTS),
+            (_SPORTS_SUBJECTS, "SPORTS", _SERVICE_COMPONENTS + _RESULT_COMPONENTS),
+        )
+        found: list[SemanticRelationship] = []
+        for subjects, domain, actions in specs:
+            subject = self._pattern_matches(text, subjects)
+            action = self._pattern_matches(text, actions)
+            if (
+                not subject
+                or not action
+                or not self._components_cross_sentence(text, subjects, actions)
+            ):
+                continue
+            found.append(
+                self._structural_relationship(
+                    source_section=source_section,
+                    sentence_index=sentence_index,
+                    relationship_type=SemanticRelationshipType.SUBJECT_BELONGS_TO_DOMAIN,
+                    subject_component=SemanticComponent.PRIMARY_SUBJECT,
+                    subject_text=subject[0].group(0),
+                    object_component=SemanticComponent.DOMAIN,
+                    object_text=domain,
+                    reason_code="BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+                    supports=(f"PRIMARY_DOMAIN_{domain}",),
+                    suppresses=(
+                        "PRIMARY_DOMAIN_GOVERNMENT",
+                        "PRIMARY_DOMAIN_TECHNOLOGY",
+                    ),
+                )
+            )
+        return tuple(found)
+
+    def _generic_format_relationships(
+        self,
+        text: str,
+        source_section: SourceSection,
+        sentence_index: int,
+    ) -> tuple[SemanticRelationship, ...]:
+        """Emit format evidence only for complete reusable structures."""
+        present = lambda patterns: bool(self._pattern_matches(text, patterns))
+        structures: list[tuple[str, SemanticRelationshipType, SemanticComponent, SemanticComponent, tuple[str, ...]]] = []
+        if present(_CLAIM_COMPONENTS) and present(_VERIFY_COMPONENTS) and present(_VERDICT_COMPONENTS):
+            structures.append(("FACT_CHECK", SemanticRelationshipType.CLAIM_ATTRIBUTED_TO_AUTHORITY, SemanticComponent.CLAIM, SemanticComponent.OUTCOME, ()))
+        if present(_CURRENT_LEVEL_COMPONENTS) and present(_MOVEMENT_COMPONENTS) and present(_TEMPORAL_COMPONENTS):
+            structures.append(("TREND_UPDATE", SemanticRelationshipType.INTERPRETATION_OF_INDICATOR, SemanticComponent.INDICATOR, SemanticComponent.INTERPRETATION, ("FORMAT_STANDARD_NEWS",)))
+        if present(_RESULT_COMPONENTS):
+            structures.append(("RESULT_REPORT", SemanticRelationshipType.EVENT_HAS_OUTCOME, SemanticComponent.EVENT, SemanticComponent.OUTCOME, ("FORMAT_TREND_UPDATE",)))
+        if present(_INSTRUCTION_COMPONENTS) and (present(_SERVICE_COMPONENTS) or len(self._pattern_matches(text, _INSTRUCTION_COMPONENTS)) >= 2):
+            structures.append(("GUIDE", SemanticRelationshipType.RECOMMENDATION_TARGETS_AUDIENCE, SemanticComponent.RECOMMENDED_ACTION, SemanticComponent.AFFECTED_AUDIENCE, ("FORMAT_STANDARD_NEWS",)))
+        elif present(_SERVICE_COMPONENTS) and (present(_EVENT_COMPONENTS) or present(_SYSTEM_COMPONENTS) or present(_SPORTS_SUBJECTS)):
+            structures.append(("SERVICE", SemanticRelationshipType.ACTION_HAS_DEADLINE, SemanticComponent.ACTION, SemanticComponent.DEADLINE, ("FORMAT_GUIDE",)))
+        if present(_SYSTEM_COMPONENTS) and present(_MECHANISM_COMPONENTS) and present(_UNDERSTANDING_COMPONENTS):
+            structures.append(("EXPLAINER", SemanticRelationshipType.METHOD_APPLIED_TO_SUBJECT, SemanticComponent.METHOD, SemanticComponent.PRIMARY_SUBJECT, ("FORMAT_STANDARD_NEWS",)))
+        if (present(_EVENT_COMPONENTS) or present(_MOVEMENT_COMPONENTS)) and present(_CAUSE_COMPONENTS) and present(_EFFECT_COMPONENTS):
+            structures.append(("ANALYSIS", SemanticRelationshipType.CONSEQUENCE_OF_EVENT, SemanticComponent.EVENT, SemanticComponent.CONSEQUENCE, ("FORMAT_STANDARD_NEWS",)))
+        if present(_EVENT_COMPONENTS) and present(_FACTUAL_REPORTING_COMPONENTS) and not structures:
+            structures.append(("STANDARD_NEWS", SemanticRelationshipType.ACTOR_PERFORMS_ACTION, SemanticComponent.ACTOR, SemanticComponent.ACTION, ("FORMAT_RESULT_REPORT", "FORMAT_TREND_UPDATE")))
+        if len(tuple(segment for segment in text.split(". ") if segment)) < 2:
+            return ()
+        return tuple(
+            self._structural_relationship(
+                source_section=source_section,
+                sentence_index=sentence_index,
+                relationship_type=relationship_type,
+                subject_component=subject_component,
+                subject_text=label,
+                object_component=object_component,
+                object_text=label,
+                reason_code=f"BOUNDED_{label}_STRUCTURE",
+                supports=(f"FORMAT_{label}",),
+                suppresses=suppresses,
+            )
+            for label, relationship_type, subject_component, object_component, suppresses in structures
+        )
+
+    def _components_cross_sentence(
+        self,
+        text: str,
+        first: tuple[str, ...],
+        second: tuple[str, ...],
+    ) -> bool:
+        """Require two component groups to occur in distinct adjacent units."""
+        segments = tuple(segment for segment in text.split(". ") if segment)
+        first_indexes = {
+            index
+            for index, segment in enumerate(segments)
+            if self._pattern_matches(segment, first)
+        }
+        second_indexes = {
+            index
+            for index, segment in enumerate(segments)
+            if self._pattern_matches(segment, second)
+        }
+        return any(left != right for left in first_indexes for right in second_indexes)
+
+    @staticmethod
+    def _structural_relationship(
+        *, source_section: SourceSection, sentence_index: int,
+        relationship_type: SemanticRelationshipType,
+        subject_component: SemanticComponent, subject_text: str,
+        object_component: SemanticComponent, object_text: str,
+        reason_code: str, supports: tuple[str, ...], suppresses: tuple[str, ...],
+    ) -> SemanticRelationship:
+        return SemanticRelationship(
+            source_section=source_section,
+            sentence_index=sentence_index,
+            relationship_type=relationship_type,
+            subject_component=subject_component,
+            subject_text=subject_text,
+            object_component=object_component,
+            object_text=object_text,
+            strength=EvidenceStrength.STRONG,
+            reason_code=reason_code,
+            evidence_indexes=(),
+            supports=supports,
+            suppresses=suppresses,
         )
 
     def _compose_unit(

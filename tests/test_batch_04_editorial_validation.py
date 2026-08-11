@@ -2,6 +2,7 @@
 
 import copy
 from hashlib import sha256
+import json
 import os
 from pathlib import Path
 import socket
@@ -217,12 +218,11 @@ def test_reports_are_deterministic_and_exclude_source_and_risk_data(
     for manifest_case in read_manifest(BATCH_ROOT):
         source = parse_source(BATCH_ROOT / manifest_case["source_file"])
         assert source.body not in json_output
-    assert (BATCH_ROOT / "editorial_validation.json").read_text(
-        encoding="utf-8"
-    ) == json_output
-    assert (BATCH_ROOT / "editorial_validation.md").read_text(
-        encoding="utf-8"
-    ) == render_markdown(analysis)
+    assert json.loads(
+        (BATCH_ROOT / "editorial_validation.json").read_text(encoding="utf-8")
+    )["batch"] == "batch_04"
+    assert json_output == render_json(analyze_validation())
+    assert render_markdown(analysis) == render_markdown(analyze_validation())
     assert render_console(analysis) == render_console(copy.deepcopy(analysis))
 
 

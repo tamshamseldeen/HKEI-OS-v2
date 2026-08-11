@@ -872,7 +872,7 @@ class DeterministicContextualEvidenceEngine:
         *,
         existing_items: tuple[ContextualEvidenceItem, ...],
     ) -> tuple[ContextualEvidenceItem, ...]:
-        """Compose hints within the smallest sufficient 2-3 sentence window."""
+        """Compose hints within the current sentence and its adjacent neighbors."""
         existing_supports = {
             support for item in existing_items for support in item.supports
         }

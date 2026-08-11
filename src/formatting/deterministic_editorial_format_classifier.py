@@ -141,6 +141,10 @@ _SEMANTIC_FORMAT_LABELS = {
     "FORMAT_ANALYSIS": EditorialFormat.ANALYSIS,
     "FORMAT_GUIDE": EditorialFormat.GUIDE,
     "FORMAT_STANDARD_NEWS": EditorialFormat.STANDARD_NEWS,
+    "FORMAT_EXPLAINER": EditorialFormat.EXPLAINER,
+    "FORMAT_RESULT_REPORT": EditorialFormat.RESULT_REPORT,
+    "FORMAT_TREND_UPDATE": EditorialFormat.TREND_UPDATE,
+    "FORMAT_FACT_CHECK": EditorialFormat.FACT_CHECK,
 }
 _CONTEXTUAL_FORMAT_WEIGHTS = {
     (EvidenceLevel.STRUCTURAL, EvidenceStrength.STRONG): 14,
@@ -429,6 +433,19 @@ class DeterministicEditorialFormatClassifier:
                 is not None
             )
         )
+        if (
+            baseline.confidence is not EditorialFormatConfidence.LOW
+            and baseline.editorial_format not in supported
+        ):
+            supported = tuple(
+                editorial_format
+                for editorial_format in supported
+                if any(
+                    f"FORMAT_{editorial_format.value}" in relationship.supports
+                    and not relationship.reason_code.startswith("BOUNDED_")
+                    for relationship in evidence.relationships
+                )
+            )
         if EditorialFormat.SERVICE in supported:
             has_recommendation = any(
                 relationship.strength is EvidenceStrength.STRONG

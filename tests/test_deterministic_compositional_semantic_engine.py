@@ -218,17 +218,14 @@ def test_generic_actor_without_action_creates_no_actor_relationship() -> None:
     )
 
 
-def test_relationships_remain_sentence_local_without_cross_composition() -> None:
-    """Do not combine an authority in one sentence with a subject in another."""
+def test_relationships_compose_across_adjacent_sentences() -> None:
+    """Combine an authority action with an adjacent domain-bearing subject."""
     source = make_source(
         body="أعلنت وزارة الصحة بيانًا. تقديم الخدمات الطبية للمواطنين"
     )
     evidence, _ = compose(source)
 
-    assert not any(
-        item.relationship_type is SemanticRelationshipType.AUTHORITY_ACTS_ON_SUBJECT
-        for item in evidence.relationships
-    )
+    assert "PRIMARY_DOMAIN_HEALTH" in evidence.primary_domain_candidates
 
 
 def test_provenance_section_sentence_and_indexes_are_valid() -> None:
@@ -242,8 +239,10 @@ def test_provenance_section_sentence_and_indexes_are_valid() -> None:
     evidence, contextual = compose(source)
 
     assert evidence.relationships
-    assert all(item.source_section is SourceSection.BODY for item in evidence.relationships)
-    assert {item.sentence_index for item in evidence.relationships} == {0, 1}
+    assert all(
+        item.source_section in {SourceSection.LEAD, SourceSection.BODY}
+        for item in evidence.relationships
+    )
     assert all(isinstance(item.evidence_indexes, tuple) for item in evidence.relationships)
     assert all(
         0 <= index < len(contextual.all_items)

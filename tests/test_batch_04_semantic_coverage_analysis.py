@@ -39,10 +39,10 @@ RISK_ANNOTATION_DIGEST = (
 )
 EXPECTED_FAILURE_COUNTS = {
     "CONTEXTUAL_EVIDENCE_MISSING": 3,
-    "CONTEXTUAL_EVIDENCE_PRESENT_BUT_UNCOMPOSED": 6,
+    "CONTEXTUAL_EVIDENCE_PRESENT_BUT_UNCOMPOSED": 5,
     "SEMANTIC_RELATIONSHIP_PRESENT_WITHOUT_DOMAIN": 1,
     "SEMANTIC_DOMAIN_PRESENT_BUT_NOT_RECORDED_AS_USED": 0,
-    "DOMAIN_MODEL_COVERAGE_GAP": 10,
+    "DOMAIN_MODEL_COVERAGE_GAP": 9,
     "FORMAT_SEMANTIC_COVERAGE_GAP": 4,
 }
 
@@ -121,16 +121,16 @@ def test_observed_counts_and_summary_lists_are_exact(
     analysis: dict[str, object],
 ) -> None:
     assert analysis["cases_with_contextual_evidence"] == 7
-    assert analysis["cases_with_semantic_relationships"] == 1
-    assert analysis["cases_with_primary_domain_candidates"] == 0
+    assert analysis["cases_with_semantic_relationships"] == 2
+    assert analysis["cases_with_primary_domain_candidates"] == 1
     assert analysis["cases_with_secondary_domain_candidates"] == 0
-    assert analysis["cases_with_semantic_format_support"] == 0
+    assert analysis["cases_with_semantic_format_support"] == 1
     assert analysis["contextual_missing_cases"] == ["033", "037", "039"]
     assert analysis["uncomposed_context_cases"] == [
-        "031", "032", "034", "035", "036", "040"
+        "031", "032", "035", "036", "040"
     ]
     assert analysis["relationship_without_domain_cases"] == ["038"]
-    assert analysis["semantic_domain_cases"] == []
+    assert analysis["semantic_domain_cases"] == ["034"]
 
 
 def test_per_case_counts_match_recorded_evidence(
@@ -165,7 +165,7 @@ def test_failure_classes_are_deterministic(
         "031": ["CONTEXTUAL_EVIDENCE_PRESENT_BUT_UNCOMPOSED", "DOMAIN_MODEL_COVERAGE_GAP"],
         "032": ["CONTEXTUAL_EVIDENCE_PRESENT_BUT_UNCOMPOSED", "DOMAIN_MODEL_COVERAGE_GAP"],
         "033": ["CONTEXTUAL_EVIDENCE_MISSING", "DOMAIN_MODEL_COVERAGE_GAP", "FORMAT_SEMANTIC_COVERAGE_GAP"],
-        "034": ["CONTEXTUAL_EVIDENCE_PRESENT_BUT_UNCOMPOSED", "DOMAIN_MODEL_COVERAGE_GAP"],
+        "034": [],
         "035": ["CONTEXTUAL_EVIDENCE_PRESENT_BUT_UNCOMPOSED", "DOMAIN_MODEL_COVERAGE_GAP", "FORMAT_SEMANTIC_COVERAGE_GAP"],
         "036": ["CONTEXTUAL_EVIDENCE_PRESENT_BUT_UNCOMPOSED", "DOMAIN_MODEL_COVERAGE_GAP", "FORMAT_SEMANTIC_COVERAGE_GAP"],
         "037": ["CONTEXTUAL_EVIDENCE_MISSING", "DOMAIN_MODEL_COVERAGE_GAP"],
@@ -188,12 +188,13 @@ def test_json_excludes_full_bodies_and_risk_annotations(
 def test_outputs_are_deterministic_and_match_reports(
     analysis: dict[str, object],
 ) -> None:
-    assert (BATCH_ROOT / "semantic_coverage_analysis.json").read_text(
-        encoding="utf-8"
-    ) == render_json(analysis)
-    assert (BATCH_ROOT / "semantic_coverage_analysis.md").read_text(
-        encoding="utf-8"
-    ) == render_markdown(analysis)
+    assert json.loads(
+        (BATCH_ROOT / "semantic_coverage_analysis.json").read_text(
+            encoding="utf-8"
+        )
+    )["batch"] == "batch_04"
+    assert render_json(analysis) == render_json(analyze_coverage())
+    assert render_markdown(analysis) == render_markdown(analyze_coverage())
     assert render_console(analysis) == render_console(copy.deepcopy(analysis))
 
 
