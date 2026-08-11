@@ -50,6 +50,18 @@ EXPECTED_LABELS = (
 REGISTERED_BATCH_DIGEST = (
     "20c08c974d31c3bb762437e6a3970a2b31dd16431cf43084cd7470f791f38224"
 )
+EXPECTED_RISK_ANNOTATIONS = (
+    ("031", "HIGH", True, True, "SECURITY", "Potential cross-border attack; possibility must not become confirmed event."),
+    ("032", "HIGH", True, True, "CRIMINAL_LEGAL", "Criminal conviction plus disputed family claim; attribution must be preserved."),
+    ("033", "HIGH", True, False, "LEGAL_POLITICAL", "Executive action with constitutional and judicial context."),
+    ("034", "HIGH", False, False, "WAR_SECURITY", "War and defense analysis; avoid unsupported operational inference."),
+    ("035", "HIGH", False, False, "MILITARY_DEFENSE", "Military restructuring and unmanned systems."),
+    ("036", "HIGH", False, True, "BIOSECURITY", "Dual-use biological research; descriptive reporting must not become procedural enablement."),
+    ("037", "HIGH", True, True, "POLITICAL_LEGAL", "Government scrutiny, discrimination allegations, protests, and institutional conflict."),
+    ("038", "HIGH", True, True, "INTELLIGENCE_SECURITY", "Intelligence estimate; explicitly not a confirmed Russian attack decision."),
+    ("039", "LOW", True, True, "ECONOMIC_DATA", "Economic data and estimates; distinguish reported rate from economist estimate."),
+    ("040", "HIGH", True, False, "VIOLENT_CRIME", "Fatal school shooting with casualty reporting attributed to local media/broadcaster."),
+)
 
 
 def _load_json(filename: str) -> dict[str, object]:
@@ -139,6 +151,48 @@ def test_expected_labels_are_exactly_preregistered() -> None:
     assert sum(len(item) - 1 for item in expectations) == 30
 
 
+def test_human_risk_annotations_are_exactly_preregistered() -> None:
+    """Store exactly the ten frozen human risk annotation records."""
+    annotation_path = BATCH_ROOT / "human_risk_annotations.json"
+    assert annotation_path.is_file()
+
+    document = _load_json("human_risk_annotations.json")
+    annotations = document["annotations"]
+    required_fields = {
+        "id",
+        "expected_risk_band",
+        "attribution_required",
+        "uncertainty_present",
+        "sensitive_context",
+        "notes",
+    }
+
+    assert set(document) == {"annotations"}
+    assert len(annotations) == 10
+    assert tuple(annotation["id"] for annotation in annotations) == EXPECTED_IDS
+    assert all(set(annotation) == required_fields for annotation in annotations)
+    assert tuple(
+        (
+            annotation["id"],
+            annotation["expected_risk_band"],
+            annotation["attribution_required"],
+            annotation["uncertainty_present"],
+            annotation["sensitive_context"],
+            annotation["notes"],
+        )
+        for annotation in annotations
+    ) == EXPECTED_RISK_ANNOTATIONS
+
+
+def test_production_modules_do_not_import_human_risk_annotations() -> None:
+    """Keep benchmark-only risk metadata out of production modules."""
+    source_root = BATCH_ROOT.parents[1] / "src"
+    assert all(
+        "human_risk_annotations" not in path.read_text(encoding="utf-8")
+        for path in source_root.rglob("*.py")
+    )
+
+
 def test_batch_contains_only_registered_inputs_and_expectations() -> None:
     """Exclude generated articles, validation, and analysis output."""
     files = {
@@ -149,6 +203,7 @@ def test_batch_contains_only_registered_inputs_and_expectations() -> None:
     assert files == {
         "manifest.json",
         "expected.json",
+        "human_risk_annotations.json",
         *(f"{case_id}/source.md" for case_id in EXPECTED_IDS),
     }
     assert not any(
@@ -156,6 +211,12 @@ def test_batch_contains_only_registered_inputs_and_expectations() -> None:
         for path in files
         for term in ("article", "analysis", "validation", "report")
     )
+    frozen_paths = [
+        BATCH_ROOT / "manifest.json",
+        BATCH_ROOT / "expected.json",
+        *[BATCH_ROOT / f"{case_id}/source.md" for case_id in EXPECTED_IDS],
+    ]
+    assert _digest(frozen_paths, BATCH_ROOT) == REGISTERED_BATCH_DIGEST
 
 def test_prior_batch_inputs_remain_unchanged() -> None:
     """Protect the registered Batch 01 and Batch 02 input material."""
