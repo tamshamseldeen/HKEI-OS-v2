@@ -21,6 +21,9 @@ from src.adjudication.semantic_adjudication_runtime_context import (
 from src.adjudication.semantic_adjudication_runtime_context_builder import (
     SemanticAdjudicationRuntimeContextBuilder,
 )
+from src.adjudication.semantic_adjudication_reasoning_effort import (
+    SemanticAdjudicationReasoningEffort,
+)
 from src.adjudication.semantic_adjudication_secret_resolver import (
     SemanticAdjudicationSecretResolver,
 )
@@ -57,6 +60,7 @@ def valid_config(**changes: object) -> SemanticAdjudicationProviderConfig:
         "max_retries": 2,
         "max_output_tokens": 700,
         "temperature": 0.25,
+        "reasoning_effort": SemanticAdjudicationReasoningEffort.MEDIUM,
         "enabled": True,
     }
     values.update(changes)
@@ -103,6 +107,7 @@ def test_runtime_context_is_frozen_with_exact_field_order_and_hidden_key() -> No
         "max_retries",
         "max_output_tokens",
         "temperature",
+        "reasoning_effort",
         "enabled",
     )
     assert fields(context)[2].repr is False
@@ -143,6 +148,7 @@ def test_builder_validates_before_resolving_and_copies_exact_values() -> None:
     assert context.max_retries == config.max_retries
     assert context.max_output_tokens == config.max_output_tokens
     assert context.temperature == config.temperature
+    assert context.reasoning_effort is config.reasoning_effort
     assert context.enabled == config.enabled
     assert "api_key_env_var" not in {field.name for field in fields(context)}
 

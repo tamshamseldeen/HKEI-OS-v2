@@ -157,6 +157,7 @@ def context(*, enabled: bool = True) -> SemanticAdjudicationRuntimeContext:
         max_retries=7,
         max_output_tokens=333,
         temperature=0.45,
+        reasoning_effort=None,
         enabled=enabled,
     )
 

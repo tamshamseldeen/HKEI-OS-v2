@@ -53,5 +53,6 @@ class SemanticAdjudicationRuntimeContextBuilder:
             max_retries=validated_config.max_retries,
             max_output_tokens=validated_config.max_output_tokens,
             temperature=validated_config.temperature,
+            reasoning_effort=validated_config.reasoning_effort,
             enabled=validated_config.enabled,
         )

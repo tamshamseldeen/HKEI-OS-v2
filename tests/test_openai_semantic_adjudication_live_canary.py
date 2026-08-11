@@ -32,6 +32,9 @@ from src.adjudication.semantic_adjudication_provider_config_validator import (
 from src.adjudication.semantic_adjudication_provider_error import (
     SemanticAdjudicationProviderConfigurationError,
 )
+from src.adjudication.semantic_adjudication_reasoning_effort import (
+    SemanticAdjudicationReasoningEffort,
+)
 from src.adjudication.semantic_adjudication_secret_resolver import (
     SemanticAdjudicationSecretResolver,
 )
@@ -155,7 +158,7 @@ def run(
     factory_calls: list[object] = []
     times = iter((10.0, 10.125))
     report = canary.run_canary(
-        model="explicit-canary-model",
+        model="gpt-5-mini",
         config_validator=validator,
         secret_resolver=resolver or FakeSecretResolver(),
         client_factory=client_factory(client, factory_calls),
@@ -186,13 +189,13 @@ def test_success_runs_one_synthetic_source_and_one_openai_call(
     assert len(factory_calls) == 1
     assert len(client.responses.calls) == 1
     call = client.responses.calls[0]
-    assert call["model"] == "explicit-canary-model"
+    assert call["model"] == "gpt-5-mini"
     assert call["max_output_tokens"] == 1200
     assert call["timeout"] == 30.0
     assert call["store"] is False
     assert call["tools"] == []
     assert call["text"]["format"]["type"] == "json_schema"
-    assert "reasoning" not in call
+    assert call["reasoning"] == {"effort": "low"}
     assert "reasoning_effort" not in call
     assert "effort" not in call
     assert report.gate_scope != AdjudicationScope.NOT_REQUIRED.value
@@ -235,15 +238,17 @@ def test_config_validation_resolution_and_runtime_builder_are_used() -> None:
     assert report.status == "SUCCESS"
     assert validator.validate.call_count == 1
     config = validator.validate.call_args.args[0]
-    assert config.model == "explicit-canary-model"
+    assert config.model == "gpt-5-mini"
     assert config.max_retries == 0
     assert config.max_output_tokens == 1200
     assert config.temperature == 0.0
+    assert config.reasoning_effort is SemanticAdjudicationReasoningEffort.LOW
     assert resolver.calls == [canary.API_KEY_ENV_VAR]
     context = factory_calls[0]
     assert context.api_key == "test-secret"
     assert context.max_retries == 0
     assert context.max_output_tokens == 1200
+    assert context.reasoning_effort is SemanticAdjudicationReasoningEffort.LOW
 
 
 def test_gate_skip_creates_client_but_makes_zero_provider_calls() -> None:

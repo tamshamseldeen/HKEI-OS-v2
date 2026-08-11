@@ -29,6 +29,9 @@ from src.adjudication.semantic_adjudication_provider import (
 from src.adjudication.semantic_adjudication_provider_config_validator import (
     SemanticAdjudicationProviderConfigValidator,
 )
+from src.adjudication.semantic_adjudication_reasoning_effort import (
+    SemanticAdjudicationReasoningEffort,
+)
 from src.adjudication.semantic_adjudication_provider_error import (
     SemanticAdjudicationProviderConfigurationError,
     SemanticAdjudicationProviderError,
@@ -160,6 +163,7 @@ def _configuration(model: str) -> SemanticAdjudicationProviderConfig:
         max_retries=0,
         max_output_tokens=1200,
         temperature=0.0,
+        reasoning_effort=SemanticAdjudicationReasoningEffort.LOW,
         enabled=True,
     )
 

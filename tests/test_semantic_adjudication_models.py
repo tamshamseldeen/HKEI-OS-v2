@@ -325,6 +325,7 @@ def test_request_excludes_forbidden_fields() -> None:
         "api_key",
         "base_url",
         "temperature",
+        "reasoning_effort",
         "max_tokens",
         "timeout",
         "retries",

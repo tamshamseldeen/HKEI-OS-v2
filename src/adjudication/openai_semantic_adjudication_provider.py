@@ -90,6 +90,13 @@ class OpenAISemanticAdjudicationProvider(SemanticAdjudicationProvider):
             raise SemanticAdjudicationProviderConfigurationError(
                 "semantic adjudication provider is disabled"
             )
+        reasoning_effort = self.runtime_context.reasoning_effort
+        if reasoning_effort is not None and not self._supports_reasoning_effort(
+            self.runtime_context.model
+        ):
+            raise SemanticAdjudicationProviderConfigurationError(
+                "OpenAI model does not support configured reasoning effort."
+            )
         request_parameters = {
             "model": self.runtime_context.model,
             "instructions": _INSTRUCTIONS,
@@ -102,6 +109,10 @@ class OpenAISemanticAdjudicationProvider(SemanticAdjudicationProvider):
         }
         if self._supports_temperature(self.runtime_context.model):
             request_parameters["temperature"] = self.runtime_context.temperature
+        if reasoning_effort is not None:
+            request_parameters["reasoning"] = {
+                "effort": reasoning_effort.value.lower()
+            }
         try:
             response = self.client.responses.create(**request_parameters)
         except APITimeoutError:
@@ -379,6 +390,12 @@ class OpenAISemanticAdjudicationProvider(SemanticAdjudicationProvider):
         # GPT-5 family requests reject configurable temperature. Unknown model
         # names retain the adapter's established forwarding behavior.
         return _GPT_5_MODEL(model.strip()) is None
+
+    @staticmethod
+    def _supports_reasoning_effort(model: str) -> bool:
+        # The adapter has verified explicit reasoning effort only for GPT-5.
+        # Unknown model names are rejected when effort is explicitly configured.
+        return _GPT_5_MODEL(model.strip()) is not None
 
     @classmethod
     def _incomplete_response_message(cls, response: Any) -> str:

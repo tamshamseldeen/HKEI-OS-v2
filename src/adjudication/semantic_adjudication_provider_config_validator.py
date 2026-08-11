@@ -6,6 +6,9 @@ from .semantic_adjudication_provider_config import (
 from .semantic_adjudication_provider_error import (
     SemanticAdjudicationProviderConfigurationError,
 )
+from .semantic_adjudication_reasoning_effort import (
+    SemanticAdjudicationReasoningEffort,
+)
 
 
 class SemanticAdjudicationProviderConfigValidator:
@@ -53,6 +56,11 @@ class SemanticAdjudicationProviderConfigValidator:
             or not 0.0 <= config.temperature <= 2.0
         ):
             self._invalid("temperature must be between zero and two")
+        if config.reasoning_effort is not None and not isinstance(
+            config.reasoning_effort,
+            SemanticAdjudicationReasoningEffort,
+        ):
+            self._invalid("reasoning_effort is invalid")
         if not isinstance(config.enabled, bool):
             self._invalid("enabled must be boolean")
         return config

@@ -14,6 +14,9 @@ from src.adjudication.semantic_adjudication_provider_config_validator import (
 from src.adjudication.semantic_adjudication_provider_error import (
     SemanticAdjudicationProviderConfigurationError,
 )
+from src.adjudication.semantic_adjudication_reasoning_effort import (
+    SemanticAdjudicationReasoningEffort,
+)
 
 
 def valid_config(**changes: object) -> SemanticAdjudicationProviderConfig:
@@ -26,6 +29,7 @@ def valid_config(**changes: object) -> SemanticAdjudicationProviderConfig:
         "max_retries": 0,
         "max_output_tokens": 512,
         "temperature": 0.0,
+        "reasoning_effort": None,
         "enabled": True,
     }
     values.update(changes)
@@ -49,6 +53,7 @@ def test_config_is_frozen_and_has_exact_field_order() -> None:
         "max_retries",
         "max_output_tokens",
         "temperature",
+        "reasoning_effort",
         "enabled",
     )
     with pytest.raises(FrozenInstanceError):
@@ -142,6 +147,25 @@ def test_temperature_boundaries_are_accepted(value: float) -> None:
     assert validate(temperature=value).temperature == value
 
 
+@pytest.mark.parametrize(
+    "value",
+    (None,) + tuple(SemanticAdjudicationReasoningEffort),
+)
+def test_reasoning_effort_accepts_none_and_enum_values(
+    value: SemanticAdjudicationReasoningEffort | None,
+) -> None:
+    assert validate(reasoning_effort=value).reasoning_effort is value
+
+
+@pytest.mark.parametrize("value", ("LOW", "low", 1, object()))
+def test_reasoning_effort_rejects_non_contract_values(value: object) -> None:
+    with pytest.raises(
+        SemanticAdjudicationProviderConfigurationError,
+        match="^reasoning_effort is invalid$",
+    ):
+        validate(reasoning_effort=value)
+
+
 @pytest.mark.parametrize("value", (True, False))
 def test_boolean_enabled_values_are_accepted(value: bool) -> None:
     assert validate(enabled=value).enabled is value
@@ -166,6 +190,7 @@ def test_validation_order_is_deterministic() -> None:
         max_retries=-1,
         max_output_tokens=0,
         temperature=-1.0,
+        reasoning_effort="LOW",
         enabled="yes",
     )
     with pytest.raises(

@@ -34,6 +34,9 @@ from src.adjudication.semantic_adjudication_provider_error import (
 from src.adjudication.semantic_adjudication_request import (
     SemanticAdjudicationRequest,
 )
+from src.adjudication.semantic_adjudication_reasoning_effort import (
+    SemanticAdjudicationReasoningEffort,
+)
 from src.adjudication.semantic_adjudication_runtime_context import (
     SemanticAdjudicationRuntimeContext,
 )
@@ -67,6 +70,7 @@ def runtime(**changes: object) -> SemanticAdjudicationRuntimeContext:
         "max_retries": 2,
         "max_output_tokens": 444,
         "temperature": 0.3,
+        "reasoning_effort": None,
         "enabled": True,
     }
     values.update(changes)
@@ -257,6 +261,57 @@ def test_gpt_5_mini_omits_only_temperature_parameter() -> None:
     assert call["text"]["format"]["strict"] is True
     assert call["text"]["format"]["schema"]["additionalProperties"] is False
     assert gpt5_context.temperature == 0.3
+
+
+@pytest.mark.parametrize(
+    "effort",
+    tuple(SemanticAdjudicationReasoningEffort),
+)
+def test_gpt_5_mini_maps_reasoning_effort_without_temperature(
+    effort: SemanticAdjudicationReasoningEffort,
+) -> None:
+    context = runtime(model="gpt-5-mini", reasoning_effort=effort)
+    adapter, client = provider(context=context)
+    source_request = request()
+    adapter.adjudicate(source_request)
+    call = client.responses.calls[0]
+    assert call["reasoning"] == {"effort": effort.value.lower()}
+    assert "temperature" not in call
+    assert call["max_output_tokens"] == 444
+    assert call["store"] is False
+    assert call["tools"] == []
+    assert source_request.input_fingerprint == "a" * 64
+
+
+def test_none_omits_reasoning_and_runtime_effort_does_not_change_input() -> None:
+    source_request = request()
+    without_effort, without_client = provider(context=runtime(
+        model="gpt-5-mini", reasoning_effort=None
+    ))
+    with_effort, with_client = provider(context=runtime(
+        model="gpt-5-mini",
+        reasoning_effort=SemanticAdjudicationReasoningEffort.LOW,
+    ))
+    without_effort.adjudicate(source_request)
+    with_effort.adjudicate(source_request)
+    assert "reasoning" not in without_client.responses.calls[0]
+    assert without_client.responses.calls[0]["input"] == (
+        with_client.responses.calls[0]["input"]
+    )
+    assert source_request.input_fingerprint == "a" * 64
+
+
+def test_explicit_reasoning_effort_rejects_unknown_model_before_call() -> None:
+    adapter, client = provider(context=runtime(
+        model="future-provider-model",
+        reasoning_effort=SemanticAdjudicationReasoningEffort.LOW,
+    ))
+    with pytest.raises(
+        SemanticAdjudicationProviderConfigurationError,
+        match=r"^OpenAI model does not support configured reasoning effort\.$",
+    ):
+        adapter.adjudicate(request())
+    assert client.responses.calls == []
 
 
 @pytest.mark.parametrize(

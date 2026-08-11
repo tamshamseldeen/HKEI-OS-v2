@@ -2,6 +2,10 @@
 
 from dataclasses import dataclass
 
+from .semantic_adjudication_reasoning_effort import (
+    SemanticAdjudicationReasoningEffort,
+)
+
 
 @dataclass(frozen=True)
 class SemanticAdjudicationProviderConfig:
@@ -21,5 +25,6 @@ class SemanticAdjudicationProviderConfig:
     max_output_tokens: int
 
     temperature: float
+    reasoning_effort: SemanticAdjudicationReasoningEffort | None
 
     enabled: bool

@@ -2,6 +2,10 @@
 
 from dataclasses import dataclass, field
 
+from .semantic_adjudication_reasoning_effort import (
+    SemanticAdjudicationReasoningEffort,
+)
+
 
 @dataclass(frozen=True)
 class SemanticAdjudicationRuntimeContext:
@@ -18,5 +22,6 @@ class SemanticAdjudicationRuntimeContext:
     max_retries: int
     max_output_tokens: int
     temperature: float
+    reasoning_effort: SemanticAdjudicationReasoningEffort | None
 
     enabled: bool
