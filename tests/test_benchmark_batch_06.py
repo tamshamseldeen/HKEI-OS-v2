@@ -123,6 +123,8 @@ def test_batch_contains_only_registration_and_authorized_validation_outputs() ->
     assert files == {
         "manifest.json", "expected.json", "human_risk_annotations.json",
         "editorial_validation.json", "editorial_validation.md",
+        "generalization_failure_analysis.json",
+        "generalization_failure_analysis.md",
         *(f"{case_id}/source.md" for case_id in EXPECTED_IDS),
     }
     forbidden = ("contextual", "semantic", "adjudication", "openai", "provider")
