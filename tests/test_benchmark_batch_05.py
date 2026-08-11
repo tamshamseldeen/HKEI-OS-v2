@@ -192,6 +192,10 @@ def test_batch_contains_only_registered_inputs_and_authorized_outputs() -> None:
             "openai_live_shadow_5case.md",
             "openai_live_shadow_5case_error_analysis.json",
             "openai_live_shadow_5case_error_analysis.md",
+            "openai_live_shadow_5case_prompt_v1_1.json",
+            "openai_live_shadow_5case_prompt_v1_1.md",
+            "openai_live_shadow_5case_ab_comparison.json",
+            "openai_live_shadow_5case_ab_comparison.md",
             *(f"{case_id}/source.md" for case_id in EXPECTED_IDS),
         }
     assert not any(
