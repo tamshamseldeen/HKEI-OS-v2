@@ -55,6 +55,9 @@ Do not use external tools or external knowledge."""
 
 _SAFE_ERROR_DETAIL = re.compile(r"[A-Za-z0-9_.-]{1,128}").fullmatch
 _GPT_5_MODEL = re.compile(r"gpt-5(?:$|[.-])", re.IGNORECASE).match
+_SAFE_INCOMPLETE_REASONS = frozenset(
+    ("max_output_tokens", "max_tokens", "content_filter")
+)
 
 
 class OpenAISemanticAdjudicationProvider(SemanticAdjudicationProvider):
@@ -136,7 +139,7 @@ class OpenAISemanticAdjudicationProvider(SemanticAdjudicationProvider):
             )
         if status == "incomplete":
             raise SemanticAdjudicationProviderInvalidResponseError(
-                "OpenAI response is incomplete"
+                self._incomplete_response_message(response)
             )
         if status != "completed":
             raise SemanticAdjudicationProviderUnavailableError(
@@ -359,6 +362,15 @@ class OpenAISemanticAdjudicationProvider(SemanticAdjudicationProvider):
         # GPT-5 family requests reject configurable temperature. Unknown model
         # names retain the adapter's established forwarding behavior.
         return _GPT_5_MODEL(model.strip()) is None
+
+    @classmethod
+    def _incomplete_response_message(cls, response: Any) -> str:
+        message = "OpenAI response is incomplete."
+        details = cls._value(response, "incomplete_details")
+        reason = cls._value(details, "reason")
+        if isinstance(reason, str) and reason in _SAFE_INCOMPLETE_REASONS:
+            return f"{message} reason={reason}"
+        return message
 
     @staticmethod
     def _value(value: Any, name: str, default: Any = None) -> Any:

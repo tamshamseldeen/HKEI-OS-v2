@@ -352,6 +352,54 @@ def test_non_completed_response_status_is_mapped(
         adapter.adjudicate(request())
 
 
+@pytest.mark.parametrize(
+    "reason",
+    ("max_output_tokens", "max_tokens", "content_filter"),
+)
+def test_incomplete_response_preserves_safe_reason(reason: str) -> None:
+    response = completed(output="raw generated output")
+    response.status = "incomplete"
+    response.incomplete_details = SimpleNamespace(reason=reason)
+    adapter, _ = provider(response)
+    with pytest.raises(
+        SemanticAdjudicationProviderInvalidResponseError,
+        match=rf"^OpenAI response is incomplete\. reason={reason}$",
+    ) as caught:
+        adapter.adjudicate(request(body="private source body"))
+    message = str(caught.value)
+    assert "raw generated output" not in message
+    assert "private source body" not in message
+
+
+@pytest.mark.parametrize(
+    "details",
+    (
+        None,
+        SimpleNamespace(),
+        SimpleNamespace(reason=500),
+        SimpleNamespace(reason=["max_output_tokens"]),
+        SimpleNamespace(reason="sk-test-only-secret"),
+        {"reason": "private_source_body"},
+    ),
+)
+def test_incomplete_response_unsafe_or_missing_reason_uses_base_message(
+    details: object,
+) -> None:
+    response = completed(output="raw generated output with sk-test-only-secret")
+    response.status = "incomplete"
+    response.incomplete_details = details
+    adapter, _ = provider(response)
+    with pytest.raises(
+        SemanticAdjudicationProviderInvalidResponseError,
+        match=r"^OpenAI response is incomplete\.$",
+    ) as caught:
+        adapter.adjudicate(request(body="private source body"))
+    message = str(caught.value)
+    assert "raw generated output" not in message
+    assert "sk-test-only-secret" not in message
+    assert "private source body" not in message
+
+
 @pytest.mark.parametrize("structured", ("not-json", "[]"))
 def test_malformed_structured_output_is_rejected(structured: str) -> None:
     adapter, _ = provider(completed(structured))
