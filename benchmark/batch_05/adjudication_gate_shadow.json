@@ -1,0 +1,393 @@
+{
+  "batch": "batch_05",
+  "case_count": 10,
+  "topic_true_positives": 7,
+  "topic_false_positives": 0,
+  "topic_true_negatives": 1,
+  "topic_false_negatives": 2,
+  "topic_precision": 100.0,
+  "topic_recall": 77.77777777777779,
+  "topic_specificity": 100.0,
+  "topic_accuracy": 80.0,
+  "format_true_positives": 1,
+  "format_false_positives": 1,
+  "format_true_negatives": 5,
+  "format_false_negatives": 3,
+  "format_precision": 50.0,
+  "format_recall": 25.0,
+  "format_specificity": 83.33333333333334,
+  "format_accuracy": 60.0,
+  "provider_call_cases": 8,
+  "provider_call_rate": 80.0,
+  "correctly_avoided_call_cases": 1,
+  "unnecessary_provider_call_cases": 0,
+  "missed_adjudication_cases": 1,
+  "topic_captured_cases": [
+    "041",
+    "042",
+    "043",
+    "044",
+    "045",
+    "047",
+    "048"
+  ],
+  "format_captured_cases": [
+    "046"
+  ],
+  "scope_distribution": {
+    "NOT_REQUIRED": 2,
+    "TOPIC_REQUIRED": 6,
+    "FORMAT_REQUIRED": 1,
+    "TOPIC_AND_FORMAT_REQUIRED": 1
+  },
+  "trigger_distribution": {
+    "TOPIC_LOW_CONFIDENCE": {
+      "cases_triggered": 7,
+      "topic_mismatch_cases": 7,
+      "format_mismatch_cases": 3,
+      "fully_matched_cases": 0
+    },
+    "TOPIC_GENERAL_FALLBACK": {
+      "cases_triggered": 6,
+      "topic_mismatch_cases": 6,
+      "format_mismatch_cases": 3,
+      "fully_matched_cases": 0
+    },
+    "NO_PRIMARY_SEMANTIC_DOMAIN": {
+      "cases_triggered": 9,
+      "topic_mismatch_cases": 9,
+      "format_mismatch_cases": 4,
+      "fully_matched_cases": 0
+    },
+    "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP": {
+      "cases_triggered": 6,
+      "topic_mismatch_cases": 6,
+      "format_mismatch_cases": 1,
+      "fully_matched_cases": 0
+    },
+    "METHOD_SUBJECT_AMBIGUITY": {
+      "cases_triggered": 0,
+      "topic_mismatch_cases": 0,
+      "format_mismatch_cases": 0,
+      "fully_matched_cases": 0
+    },
+    "SEMANTIC_DOMAIN_CONFLICT": {
+      "cases_triggered": 0,
+      "topic_mismatch_cases": 0,
+      "format_mismatch_cases": 0,
+      "fully_matched_cases": 0
+    },
+    "MULTIPLE_COMPETING_TOPIC_SIGNALS": {
+      "cases_triggered": 0,
+      "topic_mismatch_cases": 0,
+      "format_mismatch_cases": 0,
+      "fully_matched_cases": 0
+    },
+    "FORMAT_LOW_CONFIDENCE": {
+      "cases_triggered": 3,
+      "topic_mismatch_cases": 3,
+      "format_mismatch_cases": 2,
+      "fully_matched_cases": 0
+    },
+    "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK": {
+      "cases_triggered": 2,
+      "topic_mismatch_cases": 2,
+      "format_mismatch_cases": 1,
+      "fully_matched_cases": 0
+    },
+    "EXPLAINER_STRUCTURE_UNRESOLVED": {
+      "cases_triggered": 0,
+      "topic_mismatch_cases": 0,
+      "format_mismatch_cases": 0,
+      "fully_matched_cases": 0
+    },
+    "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED": {
+      "cases_triggered": 2,
+      "topic_mismatch_cases": 2,
+      "format_mismatch_cases": 1,
+      "fully_matched_cases": 0
+    },
+    "FORMAT_CONFLICT": {
+      "cases_triggered": 0,
+      "topic_mismatch_cases": 0,
+      "format_mismatch_cases": 0,
+      "fully_matched_cases": 0
+    }
+  },
+  "cases": [
+    {
+      "id": "041",
+      "topic_match": false,
+      "format_match": true,
+      "intent_match": true,
+      "full_match": false,
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "reason_codes": [
+        "TOPIC_ADJUDICATION_REQUIRED"
+      ],
+      "warnings": [],
+      "topic_should_adjudicate": true,
+      "format_should_adjudicate": false,
+      "topic_gate_correct": true,
+      "format_gate_correct": true,
+      "topic_false_positive": false,
+      "topic_false_negative": false,
+      "format_false_positive": false,
+      "format_false_negative": false
+    },
+    {
+      "id": "042",
+      "topic_match": false,
+      "format_match": true,
+      "intent_match": true,
+      "full_match": false,
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "reason_codes": [
+        "TOPIC_ADJUDICATION_REQUIRED"
+      ],
+      "warnings": [],
+      "topic_should_adjudicate": true,
+      "format_should_adjudicate": false,
+      "topic_gate_correct": true,
+      "format_gate_correct": true,
+      "topic_false_positive": false,
+      "topic_false_negative": false,
+      "format_false_positive": false,
+      "format_false_negative": false
+    },
+    {
+      "id": "043",
+      "topic_match": false,
+      "format_match": true,
+      "intent_match": true,
+      "full_match": false,
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "reason_codes": [
+        "TOPIC_ADJUDICATION_REQUIRED"
+      ],
+      "warnings": [],
+      "topic_should_adjudicate": true,
+      "format_should_adjudicate": false,
+      "topic_gate_correct": true,
+      "format_gate_correct": true,
+      "topic_false_positive": false,
+      "topic_false_negative": false,
+      "format_false_positive": false,
+      "format_false_negative": false
+    },
+    {
+      "id": "044",
+      "topic_match": false,
+      "format_match": false,
+      "intent_match": false,
+      "full_match": false,
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "FORMAT_LOW_CONFIDENCE"
+      ],
+      "reason_codes": [
+        "TOPIC_ADJUDICATION_REQUIRED"
+      ],
+      "warnings": [],
+      "topic_should_adjudicate": true,
+      "format_should_adjudicate": true,
+      "topic_gate_correct": true,
+      "format_gate_correct": false,
+      "topic_false_positive": false,
+      "topic_false_negative": false,
+      "format_false_positive": false,
+      "format_false_negative": true
+    },
+    {
+      "id": "045",
+      "topic_match": false,
+      "format_match": false,
+      "intent_match": false,
+      "full_match": false,
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "FORMAT_LOW_CONFIDENCE"
+      ],
+      "reason_codes": [
+        "TOPIC_ADJUDICATION_REQUIRED"
+      ],
+      "warnings": [],
+      "topic_should_adjudicate": true,
+      "format_should_adjudicate": true,
+      "topic_gate_correct": true,
+      "format_gate_correct": false,
+      "topic_false_positive": false,
+      "topic_false_negative": false,
+      "format_false_positive": false,
+      "format_false_negative": true
+    },
+    {
+      "id": "046",
+      "topic_match": false,
+      "format_match": false,
+      "intent_match": false,
+      "full_match": false,
+      "gate_scope": "FORMAT_REQUIRED",
+      "topic_required": false,
+      "format_required": true,
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
+        "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+      ],
+      "reason_codes": [
+        "FORMAT_ADJUDICATION_REQUIRED"
+      ],
+      "warnings": [],
+      "topic_should_adjudicate": true,
+      "format_should_adjudicate": true,
+      "topic_gate_correct": false,
+      "format_gate_correct": true,
+      "topic_false_positive": false,
+      "topic_false_negative": true,
+      "format_false_positive": false,
+      "format_false_negative": false
+    },
+    {
+      "id": "047",
+      "topic_match": false,
+      "format_match": false,
+      "intent_match": false,
+      "full_match": false,
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "reason_codes": [
+        "TOPIC_ADJUDICATION_REQUIRED"
+      ],
+      "warnings": [],
+      "topic_should_adjudicate": true,
+      "format_should_adjudicate": true,
+      "topic_gate_correct": true,
+      "format_gate_correct": false,
+      "topic_false_positive": false,
+      "topic_false_negative": false,
+      "format_false_positive": false,
+      "format_false_negative": true
+    },
+    {
+      "id": "048",
+      "topic_match": false,
+      "format_match": true,
+      "intent_match": true,
+      "full_match": false,
+      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
+      "topic_required": true,
+      "format_required": true,
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
+        "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+      ],
+      "reason_codes": [
+        "TOPIC_AND_FORMAT_ADJUDICATION_REQUIRED"
+      ],
+      "warnings": [],
+      "topic_should_adjudicate": true,
+      "format_should_adjudicate": false,
+      "topic_gate_correct": true,
+      "format_gate_correct": false,
+      "topic_false_positive": false,
+      "topic_false_negative": false,
+      "format_false_positive": true,
+      "format_false_negative": false
+    },
+    {
+      "id": "049",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true,
+      "full_match": true,
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "trigger_signals": [],
+      "reason_codes": [
+        "DETERMINISTIC_RESULT_SUFFICIENT"
+      ],
+      "warnings": [],
+      "topic_should_adjudicate": false,
+      "format_should_adjudicate": false,
+      "topic_gate_correct": true,
+      "format_gate_correct": true,
+      "topic_false_positive": false,
+      "topic_false_negative": false,
+      "format_false_positive": false,
+      "format_false_negative": false
+    },
+    {
+      "id": "050",
+      "topic_match": false,
+      "format_match": true,
+      "intent_match": true,
+      "full_match": false,
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "FORMAT_LOW_CONFIDENCE"
+      ],
+      "reason_codes": [
+        "DETERMINISTIC_RESULT_SUFFICIENT"
+      ],
+      "warnings": [],
+      "topic_should_adjudicate": true,
+      "format_should_adjudicate": false,
+      "topic_gate_correct": false,
+      "format_gate_correct": true,
+      "topic_false_positive": false,
+      "topic_false_negative": true,
+      "format_false_positive": false,
+      "format_false_negative": false
+    }
+  ]
+}
