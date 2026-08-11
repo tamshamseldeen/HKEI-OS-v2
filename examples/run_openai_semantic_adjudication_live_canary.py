@@ -151,7 +151,7 @@ def _configuration(model: str) -> SemanticAdjudicationProviderConfig:
         base_url=None,
         timeout_seconds=30.0,
         max_retries=0,
-        max_output_tokens=500,
+        max_output_tokens=1200,
         temperature=0.0,
         enabled=True,
     )

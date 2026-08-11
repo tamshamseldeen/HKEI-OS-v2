@@ -178,6 +178,16 @@ def test_success_runs_one_synthetic_source_and_one_openai_call(
     assert report.provider_called is report.response_valid is True
     assert len(factory_calls) == 1
     assert len(client.responses.calls) == 1
+    call = client.responses.calls[0]
+    assert call["model"] == "explicit-canary-model"
+    assert call["max_output_tokens"] == 1200
+    assert call["timeout"] == 30.0
+    assert call["store"] is False
+    assert call["tools"] == []
+    assert call["text"]["format"]["type"] == "json_schema"
+    assert "reasoning" not in call
+    assert "reasoning_effort" not in call
+    assert "effort" not in call
     assert report.gate_scope != AdjudicationScope.NOT_REQUIRED.value
     assert report.shadow_topic_mutated is False
     assert report.shadow_format_mutated is False
@@ -205,12 +215,13 @@ def test_config_validation_resolution_and_runtime_builder_are_used() -> None:
     config = validator.validate.call_args.args[0]
     assert config.model == "explicit-canary-model"
     assert config.max_retries == 0
-    assert config.max_output_tokens == 500
+    assert config.max_output_tokens == 1200
     assert config.temperature == 0.0
     assert resolver.calls == [canary.API_KEY_ENV_VAR]
     context = factory_calls[0]
     assert context.api_key == "test-secret"
     assert context.max_retries == 0
+    assert context.max_output_tokens == 1200
 
 
 def test_gate_skip_creates_client_but_makes_zero_provider_calls() -> None:
