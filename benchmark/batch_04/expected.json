@@ -1,0 +1,64 @@
+{
+  "expectations": [
+    {
+      "id": "031",
+      "topic": "WEATHER",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "032",
+      "topic": "ECONOMY",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "033",
+      "topic": "SPORTS",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "034",
+      "topic": "SPORTS",
+      "editorial_format": "GUIDE",
+      "reader_intent": "VERIFY_REQUIREMENTS"
+    },
+    {
+      "id": "035",
+      "topic": "TECHNOLOGY",
+      "editorial_format": "GUIDE",
+      "reader_intent": "COMPARE_OPTIONS"
+    },
+    {
+      "id": "036",
+      "topic": "HEALTH",
+      "editorial_format": "GUIDE",
+      "reader_intent": "GET_GUIDANCE"
+    },
+    {
+      "id": "037",
+      "topic": "HEALTH",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "038",
+      "topic": "HEALTH",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "039",
+      "topic": "ECONOMY",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    },
+    {
+      "id": "040",
+      "topic": "ECONOMY",
+      "editorial_format": "STANDARD_NEWS",
+      "reader_intent": "GET_UPDATE"
+    }
+  ]
+}
