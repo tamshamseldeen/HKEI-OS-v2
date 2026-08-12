@@ -1,0 +1,460 @@
+{
+  "remaining_format_fn_cases": [
+    "061",
+    "062",
+    "063",
+    "065",
+    "066",
+    "068"
+  ],
+  "remaining_format_fn_count": 6,
+  "case_traces": [
+    {
+      "id": "061",
+      "expected_format": "TREND_UPDATE",
+      "deterministic_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "reader_intent": "GET_UPDATE",
+      "expected_reader_intent": "FOLLOW_DEVELOPMENT",
+      "contextual_format_evidence": [
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "semantic_relationships": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "candidate_assessments": [],
+      "candidate_sufficiency": {},
+      "warnings": [],
+      "gate_visible_unresolved_signals": [
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "upstream_funnel": {
+        "raw_article_structure": "AVAILABLE_TO_ORIGINAL_PIPELINE_NOT_PERSISTED",
+        "format_relevant_component_extraction": "CONTEXTUAL_COMPONENT_PRESENT",
+        "format_relationship_composition": "MISSING",
+        "semantic_format_mapping": "MISSING",
+        "format_candidate_assessment": "MISSING",
+        "format_classifier": "STANDARD_NEWS",
+        "format_confidence": "MEDIUM",
+        "gate_visible_signals": [
+          "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+        ]
+      },
+      "primary_failure_stage": "FORMAT_COMPONENT_EXTRACTED_NOT_COMPOSED",
+      "expected_format_reachability": "NO_SIGNAL",
+      "wrong_format_path": "DEFAULT_DOMINANCE",
+      "wrong_format_supporting_structure": [],
+      "wrong_format_semantic_support": [],
+      "wrong_format_confidence_basis": "Persisted classifier confidence; no expected Format signal reached the candidate layer.",
+      "confidence_audit": "FALSE_MEDIUM_CONFIDENCE",
+      "confidence_role": "SYMPTOM_OF_UPSTREAM_REPRESENTATION",
+      "provider_opportunity": "LIKELY_YES"
+    },
+    {
+      "id": "062",
+      "expected_format": "STANDARD_NEWS",
+      "deterministic_format": "BREAKING",
+      "format_confidence": "MEDIUM",
+      "reader_intent": "GET_UPDATE",
+      "expected_reader_intent": "GET_UPDATE",
+      "contextual_format_evidence": [
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "semantic_relationships": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "candidate_assessments": [],
+      "candidate_sufficiency": {},
+      "warnings": [],
+      "gate_visible_unresolved_signals": [
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "upstream_funnel": {
+        "raw_article_structure": "AVAILABLE_TO_ORIGINAL_PIPELINE_NOT_PERSISTED",
+        "format_relevant_component_extraction": "CONTEXTUAL_COMPONENT_PRESENT",
+        "format_relationship_composition": "MISSING",
+        "semantic_format_mapping": "MISSING",
+        "format_candidate_assessment": "MISSING",
+        "format_classifier": "BREAKING",
+        "format_confidence": "MEDIUM",
+        "gate_visible_signals": [
+          "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+          "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+        ]
+      },
+      "primary_failure_stage": "FORMAT_COMPONENT_EXTRACTED_NOT_COMPOSED",
+      "expected_format_reachability": "NO_SIGNAL",
+      "wrong_format_path": "OVERBROAD_STRUCTURE",
+      "wrong_format_supporting_structure": [],
+      "wrong_format_semantic_support": [],
+      "wrong_format_confidence_basis": "Persisted classifier confidence; no expected Format signal reached the candidate layer.",
+      "confidence_audit": "FALSE_MEDIUM_CONFIDENCE",
+      "confidence_role": "SYMPTOM_OF_UPSTREAM_REPRESENTATION",
+      "provider_opportunity": "LIKELY_YES"
+    },
+    {
+      "id": "063",
+      "expected_format": "STANDARD_NEWS",
+      "deterministic_format": "RESULT_REPORT",
+      "format_confidence": "HIGH",
+      "reader_intent": "FIND_RESULT",
+      "expected_reader_intent": "GET_UPDATE",
+      "contextual_format_evidence": [],
+      "semantic_relationships": [
+        "EVENT_HAS_OUTCOME",
+        "EVENT_HAS_OUTCOME"
+      ],
+      "semantic_format_support": [
+        "EVENT_HAS_OUTCOME"
+      ],
+      "semantic_format_suppression": [
+        "EVENT_HAS_OUTCOME"
+      ],
+      "candidate_assessments": [
+        {
+          "candidate": "RESULT_REPORT",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [
+            "RESULT_REPORT"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "candidate_sufficiency": {
+        "RESULT_REPORT": "SUFFICIENT",
+        "TREND_UPDATE": "INSUFFICIENT"
+      },
+      "warnings": [
+        "COMPETING_CANDIDATE"
+      ],
+      "gate_visible_unresolved_signals": [
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "upstream_funnel": {
+        "raw_article_structure": "AVAILABLE_TO_ORIGINAL_PIPELINE_NOT_PERSISTED",
+        "format_relevant_component_extraction": "REPRESENTED",
+        "format_relationship_composition": "PRESENT",
+        "semantic_format_mapping": "PRESENT_BUT_MISREPRESENTED",
+        "format_candidate_assessment": "PRESENT",
+        "format_classifier": "RESULT_REPORT",
+        "format_confidence": "HIGH",
+        "gate_visible_signals": [
+          "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+        ]
+      },
+      "primary_failure_stage": "FORMAT_RELATIONSHIP_WRONG",
+      "expected_format_reachability": "NO_SIGNAL",
+      "wrong_format_path": "WRONG_RESULT_INTERPRETATION",
+      "wrong_format_supporting_structure": [
+        "EVENT_HAS_OUTCOME"
+      ],
+      "wrong_format_semantic_support": [
+        {
+          "candidate": "RESULT_REPORT",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        }
+      ],
+      "wrong_format_confidence_basis": "Persisted semantic relationship and candidate assessment favored the selected Format.",
+      "confidence_audit": "FALSE_HIGH_CONFIDENCE",
+      "confidence_role": "SYMPTOM_OF_UPSTREAM_REPRESENTATION",
+      "provider_opportunity": "LIKELY_YES"
+    },
+    {
+      "id": "065",
+      "expected_format": "RESULT_REPORT",
+      "deterministic_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "reader_intent": "GET_UPDATE",
+      "expected_reader_intent": "FIND_RESULT",
+      "contextual_format_evidence": [
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "semantic_relationships": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "candidate_assessments": [],
+      "candidate_sufficiency": {},
+      "warnings": [],
+      "gate_visible_unresolved_signals": [
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "upstream_funnel": {
+        "raw_article_structure": "AVAILABLE_TO_ORIGINAL_PIPELINE_NOT_PERSISTED",
+        "format_relevant_component_extraction": "CONTEXTUAL_COMPONENT_PRESENT",
+        "format_relationship_composition": "MISSING",
+        "semantic_format_mapping": "MISSING",
+        "format_candidate_assessment": "MISSING",
+        "format_classifier": "STANDARD_NEWS",
+        "format_confidence": "MEDIUM",
+        "gate_visible_signals": [
+          "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+          "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+        ]
+      },
+      "primary_failure_stage": "FORMAT_COMPONENT_EXTRACTED_NOT_COMPOSED",
+      "expected_format_reachability": "NO_SIGNAL",
+      "wrong_format_path": "DEFAULT_DOMINANCE",
+      "wrong_format_supporting_structure": [],
+      "wrong_format_semantic_support": [],
+      "wrong_format_confidence_basis": "Persisted classifier confidence; no expected Format signal reached the candidate layer.",
+      "confidence_audit": "FALSE_MEDIUM_CONFIDENCE",
+      "confidence_role": "SYMPTOM_OF_UPSTREAM_REPRESENTATION",
+      "provider_opportunity": "LIKELY_YES"
+    },
+    {
+      "id": "066",
+      "expected_format": "STANDARD_NEWS",
+      "deterministic_format": "RESULT_REPORT",
+      "format_confidence": "HIGH",
+      "reader_intent": "FIND_RESULT",
+      "expected_reader_intent": "GET_UPDATE",
+      "contextual_format_evidence": [],
+      "semantic_relationships": [
+        "EVENT_HAS_OUTCOME",
+        "EVENT_HAS_OUTCOME"
+      ],
+      "semantic_format_support": [
+        "EVENT_HAS_OUTCOME"
+      ],
+      "semantic_format_suppression": [
+        "EVENT_HAS_OUTCOME"
+      ],
+      "candidate_assessments": [
+        {
+          "candidate": "RESULT_REPORT",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [
+            "RESULT_REPORT"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "candidate_sufficiency": {
+        "RESULT_REPORT": "SUFFICIENT",
+        "TREND_UPDATE": "INSUFFICIENT"
+      },
+      "warnings": [
+        "COMPETING_CANDIDATE"
+      ],
+      "gate_visible_unresolved_signals": [],
+      "upstream_funnel": {
+        "raw_article_structure": "AVAILABLE_TO_ORIGINAL_PIPELINE_NOT_PERSISTED",
+        "format_relevant_component_extraction": "REPRESENTED",
+        "format_relationship_composition": "PRESENT",
+        "semantic_format_mapping": "PRESENT_BUT_MISREPRESENTED",
+        "format_candidate_assessment": "PRESENT",
+        "format_classifier": "RESULT_REPORT",
+        "format_confidence": "HIGH",
+        "gate_visible_signals": []
+      },
+      "primary_failure_stage": "FORMAT_RELATIONSHIP_WRONG",
+      "expected_format_reachability": "NO_SIGNAL",
+      "wrong_format_path": "WRONG_RESULT_INTERPRETATION",
+      "wrong_format_supporting_structure": [
+        "EVENT_HAS_OUTCOME"
+      ],
+      "wrong_format_semantic_support": [
+        {
+          "candidate": "RESULT_REPORT",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        }
+      ],
+      "wrong_format_confidence_basis": "Persisted semantic relationship and candidate assessment favored the selected Format.",
+      "confidence_audit": "FALSE_HIGH_CONFIDENCE",
+      "confidence_role": "SYMPTOM_OF_UPSTREAM_REPRESENTATION",
+      "provider_opportunity": "LIKELY_YES"
+    },
+    {
+      "id": "068",
+      "expected_format": "EXPLAINER",
+      "deterministic_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "reader_intent": "GET_UPDATE",
+      "expected_reader_intent": "UNDERSTAND_EVENT",
+      "contextual_format_evidence": [
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "semantic_relationships": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "candidate_assessments": [],
+      "candidate_sufficiency": {},
+      "warnings": [],
+      "gate_visible_unresolved_signals": [
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "upstream_funnel": {
+        "raw_article_structure": "AVAILABLE_TO_ORIGINAL_PIPELINE_NOT_PERSISTED",
+        "format_relevant_component_extraction": "CONTEXTUAL_COMPONENT_PRESENT",
+        "format_relationship_composition": "MISSING",
+        "semantic_format_mapping": "MISSING",
+        "format_candidate_assessment": "MISSING",
+        "format_classifier": "STANDARD_NEWS",
+        "format_confidence": "MEDIUM",
+        "gate_visible_signals": [
+          "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+          "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+        ]
+      },
+      "primary_failure_stage": "FORMAT_COMPONENT_EXTRACTED_NOT_COMPOSED",
+      "expected_format_reachability": "NO_SIGNAL",
+      "wrong_format_path": "DEFAULT_DOMINANCE",
+      "wrong_format_supporting_structure": [],
+      "wrong_format_semantic_support": [],
+      "wrong_format_confidence_basis": "Persisted classifier confidence; no expected Format signal reached the candidate layer.",
+      "confidence_audit": "FALSE_MEDIUM_CONFIDENCE",
+      "confidence_role": "SYMPTOM_OF_UPSTREAM_REPRESENTATION",
+      "provider_opportunity": "LIKELY_YES"
+    }
+  ],
+  "expected_to_predicted_format_pairs": {
+    "EXPLAINER->STANDARD_NEWS": 1,
+    "RESULT_REPORT->STANDARD_NEWS": 1,
+    "STANDARD_NEWS->BREAKING": 1,
+    "STANDARD_NEWS->RESULT_REPORT": 2,
+    "TREND_UPDATE->STANDARD_NEWS": 1
+  },
+  "structural_family_counts": {
+    "BREAKING vs STANDARD_NEWS": 1,
+    "EXPLAINER vs STANDARD_NEWS": 1,
+    "RESULT_REPORT vs STANDARD_NEWS": 3,
+    "STANDARD_NEWS vs TREND_UPDATE": 1
+  },
+  "direct_intent_failures": 0,
+  "format_downstream_intent_failures": 7,
+  "other_upstream_intent_failures": 0,
+  "false_sufficient_cases": [
+    {
+      "id": "063",
+      "candidate": "RESULT_REPORT",
+      "expected": "STANDARD_NEWS",
+      "concerns_format": true,
+      "among_remaining_format_fn": true,
+      "origin_relative_to_primary_failure": "AFTER_PRIMARY_FAILURE"
+    },
+    {
+      "id": "066",
+      "candidate": "RESULT_REPORT",
+      "expected": "STANDARD_NEWS",
+      "concerns_format": true,
+      "among_remaining_format_fn": true,
+      "origin_relative_to_primary_failure": "AFTER_PRIMARY_FAILURE"
+    }
+  ],
+  "false_sufficient_among_remaining_format_fns": [
+    "063",
+    "066"
+  ],
+  "false_confidence_cases": [
+    "061",
+    "062",
+    "063",
+    "065",
+    "066",
+    "068"
+  ],
+  "provider_opportunity_counts": {
+    "LIKELY_YES": 6
+  },
+  "shared_root_cause": "FORMAT_COMPONENTS_NOT_COMPOSED_INTO_RELATIONSHIPS",
+  "shared_root_cause_count": 4,
+  "fix_scope_classification": "BOUNDED_FORMAT_EVIDENCE_FIX",
+  "fix_value": "HIGH",
+  "overfitting_risk": "HIGH",
+  "resolver_readiness": "YES_LIMITED",
+  "resolver_readiness_explanation": "A resolver can be designed behind Format guardrails, but full authority is unsafe while expected treatment is absent or misrepresented upstream in most remaining cases.",
+  "gate_refinement_budget_remaining": 0,
+  "gate_tuning_closed": true,
+  "maximum_future_bounded_format_implementations": 1,
+  "final_recommendation": "IMPLEMENT_ONE_BOUNDED_UPSTREAM_FORMAT_FIX",
+  "provider_calls": 0
+}
