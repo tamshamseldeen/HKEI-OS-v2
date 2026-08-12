@@ -1,0 +1,91 @@
+{
+  "gate_refinement_assessment": "PARTIALLY_SUCCESSFUL",
+  "product_evaluation": "WEAK",
+  "final_decision": "ANALYZE_UPSTREAM_FORMAT_FAILURES",
+  "previous_provider_calls": 8,
+  "current_provider_calls": 9,
+  "provider_call_delta": 1,
+  "previous_provider_call_rate": 80.0,
+  "current_provider_call_rate": 90.0,
+  "topic_gate_delta": {
+    "tp": 1,
+    "fp": 0,
+    "tn": 0,
+    "fn": -1,
+    "precision": 2.7777777777777857,
+    "recall": 14.285714285714292
+  },
+  "format_gate_delta": {
+    "tp": 1,
+    "fp": 0,
+    "tn": 0,
+    "fn": -1,
+    "precision": 16.666666666666657,
+    "recall": 12.5
+  },
+  "previous_topic_fn": [
+    "063"
+  ],
+  "current_topic_fn": [],
+  "previous_format_fn": [
+    "061",
+    "062",
+    "063",
+    "065",
+    "066",
+    "067",
+    "068"
+  ],
+  "current_format_fn": [
+    "061",
+    "062",
+    "063",
+    "065",
+    "066",
+    "068"
+  ],
+  "previous_topic_fn_status": {
+    "063": "CAPTURED"
+  },
+  "previous_format_fn_status": {
+    "061": "STILL_MISSED",
+    "062": "STILL_MISSED",
+    "063": "STILL_MISSED",
+    "065": "STILL_MISSED",
+    "066": "STILL_MISSED",
+    "067": "CAPTURED",
+    "068": "STILL_MISSED"
+  },
+  "new_gate_false_positives": [],
+  "new_gate_false_positive_count": 0,
+  "new_provider_calls": [
+    {
+      "id": "063",
+      "new_gate_scope": "TOPIC_REQUIRED",
+      "dimensions_opened": [
+        "TOPIC"
+      ],
+      "provider_response_valid": true,
+      "topic_effect": "CORRECT",
+      "format_effect": "NOT_OPENED",
+      "utility": "USEFUL_CORRECTION"
+    }
+  ],
+  "recovered_topic_fn_count": 1,
+  "recovered_topic_fn_corrected_by_provider": 1,
+  "recovered_format_fn_count": 1,
+  "recovered_format_fn_corrected_by_provider": 1,
+  "previous_effective_topic_accuracy": 70.0,
+  "current_effective_topic_accuracy": 80.0,
+  "topic_accuracy_delta": 10.0,
+  "previous_effective_format_accuracy": 30.0,
+  "current_effective_format_accuracy": 40.0,
+  "format_accuracy_delta": 10.0,
+  "previous_effective_full_accuracy": 20.0,
+  "current_effective_full_accuracy": 20.0,
+  "full_accuracy_delta": 0.0,
+  "batch_07_gate_refinement_budget_remaining": 0,
+  "batch_07_scientific_status": "EVALUATED_PREREGISTERED_HOLDOUT",
+  "additional_gate_tuning_recommended": false,
+  "provider_calls": 9
+}

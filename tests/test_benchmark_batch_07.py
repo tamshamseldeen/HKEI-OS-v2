@@ -132,6 +132,10 @@ def test_batch_contains_registration_and_authorized_evaluation_files_only() -> N
         "full_stack_shadow_evaluation.md",
         "gate_failure_analysis.json",
         "gate_failure_analysis.md",
+        "post_gate_refinement_full_stack_evaluation.json",
+        "post_gate_refinement_full_stack_evaluation.md",
+        "gate_refinement_comparison.json",
+        "gate_refinement_comparison.md",
     }
     assert files == {
         "manifest.json", "expected.json", "human_risk_annotations.json",
