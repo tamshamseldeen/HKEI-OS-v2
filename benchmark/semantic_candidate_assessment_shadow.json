@@ -1,0 +1,4210 @@
+{
+  "batch_06_scientific_status": "DIAGNOSTIC_DEVELOPMENT_SET",
+  "cases_analyzed": 41,
+  "case_inventory": [
+    {
+      "batch": "batch_01",
+      "id": "001",
+      "topic": "ECONOMY",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "ECONOMY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "INDICATOR_DESCRIBES_DOMAIN",
+            "CONTEXTUAL_ECONOMY_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "MEASUREMENT",
+            "DOMAIN",
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "DUPLICATE_EVIDENCE_DISCOUNTED"
+          ]
+        }
+      ],
+      "expected_topic": "ECONOMY",
+      "expected_format": null,
+      "expected_intent": null,
+      "topic_match": true,
+      "format_match": null,
+      "intent_match": null
+    },
+    {
+      "batch": "batch_01",
+      "id": "002",
+      "topic": "ECONOMY",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "HIGH",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "ECONOMY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "RESULT_REPORT",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "ACTOR_PERFORMS_ACTION"
+          ],
+          "role_basis": [
+            "ACTOR",
+            "ACTION"
+          ],
+          "competing_candidates": [
+            "STANDARD_NEWS"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "STANDARD_NEWS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "ACTOR_PERFORMS_ACTION"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR",
+            "ACTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "ACTOR_PERFORMS_ACTION"
+          ],
+          "role_basis": [
+            "ACTOR",
+            "ACTION"
+          ],
+          "competing_candidates": [
+            "STANDARD_NEWS"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "expected_topic": "ECONOMY",
+      "expected_format": null,
+      "expected_intent": null,
+      "topic_match": true,
+      "format_match": null,
+      "intent_match": null
+    },
+    {
+      "batch": "batch_01",
+      "id": "003",
+      "topic": "TECHNOLOGY",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "ECONOMY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "CONFLICTING",
+          "strength": "STRONG",
+          "sufficiency": "CONFLICTED",
+          "supporting_relationship_types": [
+            "ACTION_TARGETS_OBJECT",
+            "CONTEXTUAL_TECHNOLOGY_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "ACTION",
+            "OBJECT",
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "SUPPORT_SUPPRESSION_CONFLICT",
+            "DUPLICATE_EVIDENCE_DISCOUNTED",
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "expected_topic": "TECHNOLOGY",
+      "expected_format": null,
+      "expected_intent": null,
+      "topic_match": true,
+      "format_match": null,
+      "intent_match": null
+    },
+    {
+      "batch": "batch_01",
+      "id": "004",
+      "topic": "WEATHER",
+      "topic_confidence": "HIGH",
+      "format": "BREAKING",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "WORLD",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_WORLD_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "WEATHER",
+      "expected_format": null,
+      "expected_intent": null,
+      "topic_match": true,
+      "format_match": null,
+      "intent_match": null
+    },
+    {
+      "batch": "batch_01",
+      "id": "005",
+      "topic": "GOVERNMENT",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GOVERNMENT_CONTEXT_PHRASE",
+            "CONTEXTUAL_GENERIC_GOVERNMENT_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "AUTHORITY"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "AUTHORITY_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED"
+          ]
+        },
+        {
+          "candidate": "GUIDE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SEMANTIC_COLLECTION_SUPPRESSION"
+          ],
+          "role_basis": [],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "STANDARD_NEWS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "SEMANTIC_COLLECTION_SUPPORT"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "GOVERNMENT",
+      "expected_format": null,
+      "expected_intent": null,
+      "topic_match": true,
+      "format_match": null,
+      "intent_match": null
+    },
+    {
+      "batch": "batch_01",
+      "id": "006",
+      "topic": "ECONOMY",
+      "topic_confidence": "LOW",
+      "format": "TREND_UPDATE",
+      "format_confidence": "HIGH",
+      "intent": "CHECK_CLAIM",
+      "gate_scope": "FORMAT_REQUIRED",
+      "topic_required": false,
+      "format_required": true,
+      "assessments": [
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_GOVERNMENT_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "AUTHORITY"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "AUTHORITY_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "GUIDE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SEMANTIC_COLLECTION_SUPPRESSION"
+          ],
+          "role_basis": [],
+          "competing_candidates": [
+            "TREND_UPDATE"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "STANDARD_NEWS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "CONFLICTING",
+          "strength": "MODERATE",
+          "sufficiency": "CONFLICTED",
+          "supporting_relationship_types": [
+            "SEMANTIC_COLLECTION_SUPPORT"
+          ],
+          "suppressing_relationship_types": [
+            "INTERPRETATION_OF_INDICATOR"
+          ],
+          "role_basis": [
+            "MEASUREMENT",
+            "EFFECT"
+          ],
+          "competing_candidates": [
+            "TREND_UPDATE"
+          ],
+          "warnings": [
+            "SUPPORT_SUPPRESSION_CONFLICT",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "INTERPRETATION_OF_INDICATOR"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "MEASUREMENT",
+            "EFFECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "ECONOMY",
+      "expected_format": null,
+      "expected_intent": null,
+      "topic_match": true,
+      "format_match": null,
+      "intent_match": null
+    },
+    {
+      "batch": "batch_01",
+      "id": "007",
+      "topic": "ECONOMY",
+      "topic_confidence": "MEDIUM",
+      "format": "GUIDE",
+      "format_confidence": "MEDIUM",
+      "intent": "VERIFY_REQUIREMENTS",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "ECONOMY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "expected_topic": "ECONOMY",
+      "expected_format": null,
+      "expected_intent": null,
+      "topic_match": true,
+      "format_match": null,
+      "intent_match": null
+    },
+    {
+      "batch": "batch_01",
+      "id": "008",
+      "topic": "CULTURE",
+      "topic_confidence": "MEDIUM",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "LOW",
+      "intent": "GET_UPDATE",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "CULTURE",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_CULTURE_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "CULTURE",
+      "expected_format": null,
+      "expected_intent": null,
+      "topic_match": true,
+      "format_match": null,
+      "intent_match": null
+    },
+    {
+      "batch": "batch_01",
+      "id": "010",
+      "topic": "ECONOMY",
+      "topic_confidence": "HIGH",
+      "format": "ANALYSIS",
+      "format_confidence": "HIGH",
+      "intent": "UNDERSTAND_IMPACT",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "ANALYSIS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_INTERPRETATION_CONTEXT_PATTERN",
+            "CONTEXTUAL_COMBINED_ANALYTICAL_CONTEXT",
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "INTERPRETATION",
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED"
+          ]
+        },
+        {
+          "candidate": "ECONOMY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "INDICATOR_DESCRIBES_DOMAIN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "MEASUREMENT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "UNDERSTAND_IMPACT",
+          "candidate_group": "CANDIDATE_TYPE_NOT_EXPLICIT",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_INTERPRETATION_CONTEXT_PATTERN",
+            "CONTEXTUAL_COMBINED_ANALYTICAL_CONTEXT",
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "INTERPRETATION",
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED"
+          ]
+        }
+      ],
+      "expected_topic": "ECONOMY",
+      "expected_format": null,
+      "expected_intent": null,
+      "topic_match": true,
+      "format_match": null,
+      "intent_match": null
+    },
+    {
+      "batch": "batch_02",
+      "id": "011",
+      "topic": "GOVERNMENT",
+      "topic_confidence": "MEDIUM",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GOVERNMENT_CONTEXT_PHRASE",
+            "CONTEXTUAL_GENERIC_GOVERNMENT_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "AUTHORITY"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "AUTHORITY_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED"
+          ]
+        }
+      ],
+      "expected_topic": "GOVERNMENT",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_02",
+      "id": "012",
+      "topic": "SCIENCE",
+      "topic_confidence": "LOW",
+      "format": "SERVICE",
+      "format_confidence": "HIGH",
+      "intent": "KNOW_ACTION",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "GUIDE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "ACTION_HAS_DEADLINE"
+          ],
+          "role_basis": [
+            "ACTION",
+            "SCHEDULE"
+          ],
+          "competing_candidates": [
+            "SERVICE"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "SERVICE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "ACTION_HAS_DEADLINE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTION",
+            "SCHEDULE"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "SCIENCE",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": false,
+      "intent_match": false
+    },
+    {
+      "batch": "batch_02",
+      "id": "013",
+      "topic": "TECHNOLOGY",
+      "topic_confidence": "HIGH",
+      "format": "ANALYSIS",
+      "format_confidence": "HIGH",
+      "intent": "UNDERSTAND_IMPACT",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "ANALYSIS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_INTERPRETATION_CONTEXT_PATTERN",
+            "CONTEXTUAL_COMBINED_ANALYTICAL_CONTEXT",
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN",
+            "CONTEXTUAL_CONSEQUENCE_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "INTERPRETATION",
+            "PREDICTION",
+            "EFFECT"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [
+            "TECHNOLOGY"
+          ],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_TECHNOLOGY_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "DUPLICATE_EVIDENCE_DISCOUNTED"
+          ]
+        },
+        {
+          "candidate": "UNDERSTAND_IMPACT",
+          "candidate_group": "CANDIDATE_TYPE_NOT_EXPLICIT",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_INTERPRETATION_CONTEXT_PATTERN",
+            "CONTEXTUAL_COMBINED_ANALYTICAL_CONTEXT",
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN",
+            "CONTEXTUAL_CONSEQUENCE_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "INTERPRETATION",
+            "PREDICTION",
+            "EFFECT"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        }
+      ],
+      "expected_topic": "TECHNOLOGY",
+      "expected_format": "ANALYSIS",
+      "expected_intent": "UNDERSTAND_IMPACT",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_02",
+      "id": "014",
+      "topic": "WORLD",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "LOW",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "WORLD",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_WORLD_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "DUPLICATE_EVIDENCE_DISCOUNTED"
+          ]
+        }
+      ],
+      "expected_topic": "WORLD",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_02",
+      "id": "015",
+      "topic": "GOVERNMENT",
+      "topic_confidence": "HIGH",
+      "format": "SERVICE",
+      "format_confidence": "HIGH",
+      "intent": "KNOW_ACTION",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GOVERNMENT_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "AUTHORITY"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "AUTHORITY_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "DUPLICATE_EVIDENCE_DISCOUNTED"
+          ]
+        },
+        {
+          "candidate": "KNOW_ACTION",
+          "candidate_group": "CANDIDATE_TYPE_NOT_EXPLICIT",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_REQUIREMENT_CONTEXT_PATTERN",
+            "CONTEXTUAL_DEADLINE_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "REQUIREMENT",
+            "SCHEDULE"
+          ],
+          "competing_candidates": [
+            "VERIFY_REQUIREMENTS"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "SERVICE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_REQUIREMENT_CONTEXT_PATTERN",
+            "CONTEXTUAL_DEADLINE_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "REQUIREMENT",
+            "SCHEDULE"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "VERIFY_REQUIREMENTS",
+          "candidate_group": "CANDIDATE_TYPE_NOT_EXPLICIT",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_DEADLINE_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SCHEDULE"
+          ],
+          "competing_candidates": [
+            "KNOW_ACTION"
+          ],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "expected_topic": "GOVERNMENT",
+      "expected_format": "SERVICE",
+      "expected_intent": "KNOW_ACTION",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_02",
+      "id": "016",
+      "topic": "BUSINESS",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED"
+          ]
+        }
+      ],
+      "expected_topic": "BUSINESS",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_02",
+      "id": "017",
+      "topic": "ECONOMY",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "ECONOMY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_ECONOMY_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        }
+      ],
+      "expected_topic": "ECONOMY",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_02",
+      "id": "018",
+      "topic": "SCIENCE",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "SCIENCE",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_SCIENCE_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "DUPLICATE_EVIDENCE_DISCOUNTED"
+          ]
+        },
+        {
+          "candidate": "SPORTS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "CONFLICTING",
+          "strength": "MODERATE",
+          "sufficiency": "CONFLICTED",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_SPORTS_TOKEN"
+          ],
+          "suppressing_relationship_types": [
+            "CONTEXTUAL_SCIENCE_CONTEXT_SUPPRESSES_GENERIC_TEAM"
+          ],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [
+            "SCIENCE"
+          ],
+          "warnings": [
+            "SUPPORT_SUPPRESSION_CONFLICT",
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "expected_topic": "SCIENCE",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_02",
+      "id": "019",
+      "topic": "CULTURE",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "LOW",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "CULTURE",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_CULTURE_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        }
+      ],
+      "expected_topic": "CULTURE",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_02",
+      "id": "020",
+      "topic": "TECHNOLOGY",
+      "topic_confidence": "MEDIUM",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_TECHNOLOGY_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "TECHNOLOGY",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_03",
+      "id": "021",
+      "topic": "GOVERNMENT",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "INSTITUTION_BELONGS_TO_DOMAIN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "AUTHORITY",
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "GUIDE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SEMANTIC_COLLECTION_SUPPRESSION"
+          ],
+          "role_basis": [],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "STANDARD_NEWS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "SEMANTIC_COLLECTION_SUPPORT"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "GOVERNMENT",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_03",
+      "id": "022",
+      "topic": "ECONOMY",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "ECONOMY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "INDICATOR_DESCRIBES_DOMAIN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "MEASUREMENT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED"
+          ]
+        },
+        {
+          "candidate": "GUIDE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SEMANTIC_COLLECTION_SUPPRESSION"
+          ],
+          "role_basis": [],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "STANDARD_NEWS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "SEMANTIC_COLLECTION_SUPPORT"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "ECONOMY",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_03",
+      "id": "023",
+      "topic": "POLITICS",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "ECONOMY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "ACTOR_PERFORMS_ACTION"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR",
+            "ACTION"
+          ],
+          "competing_candidates": [
+            "POLITICS"
+          ],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "POLITICS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "ACTOR_PERFORMS_ACTION"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR",
+            "ACTION"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "expected_topic": "POLITICS",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_03",
+      "id": "024",
+      "topic": "HEALTH",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "HEALTH",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "METHOD_APPLIED_TO_SUBJECT"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "METHOD",
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "SPORTS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_SPORTS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [
+            "HEALTH"
+          ],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "CONFLICTING",
+          "strength": "STRONG",
+          "sufficiency": "CONFLICTED",
+          "supporting_relationship_types": [
+            "METHOD_APPLIED_TO_SUBJECT",
+            "ACTION_TARGETS_OBJECT",
+            "CONTEXTUAL_TECHNOLOGY_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [
+            "METHOD_APPLIED_TO_SUBJECT"
+          ],
+          "role_basis": [
+            "METHOD",
+            "SUBJECT",
+            "ACTION",
+            "OBJECT"
+          ],
+          "competing_candidates": [
+            "HEALTH"
+          ],
+          "warnings": [
+            "SUPPORT_SUPPRESSION_CONFLICT",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "expected_topic": "HEALTH",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_03",
+      "id": "025",
+      "topic": "HEALTH",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "CONFLICTING",
+          "strength": "MODERATE",
+          "sufficiency": "CONFLICTED",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_GOVERNMENT_TOKEN"
+          ],
+          "suppressing_relationship_types": [
+            "AUTHORITY_ACTS_ON_SUBJECT",
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "AUTHORITY",
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "HEALTH"
+          ],
+          "warnings": [
+            "SUPPORT_SUPPRESSION_CONFLICT",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "HEALTH",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "AUTHORITY_ACTS_ON_SUBJECT",
+            "ACTION_TARGETS_OBJECT",
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "AUTHORITY",
+            "SUBJECT",
+            "ACTION",
+            "OBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "HEALTH"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "expected_topic": "HEALTH",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_03",
+      "id": "026",
+      "topic": "TECHNOLOGY",
+      "topic_confidence": "HIGH",
+      "format": "SERVICE",
+      "format_confidence": "HIGH",
+      "intent": "KNOW_ACTION",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "KNOW_ACTION",
+          "candidate_group": "CANDIDATE_TYPE_NOT_EXPLICIT",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "RECOMMENDATION_TARGETS_AUDIENCE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTION",
+            "OBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "SERVICE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "RECOMMENDATION_TARGETS_AUDIENCE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTION",
+            "OBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "ACTION_TARGETS_OBJECT",
+            "RECOMMENDATION_TARGETS_AUDIENCE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTION",
+            "OBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        }
+      ],
+      "expected_topic": "TECHNOLOGY",
+      "expected_format": "SERVICE",
+      "expected_intent": "KNOW_ACTION",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_03",
+      "id": "028",
+      "topic": "WEATHER",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "LOW",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "WEATHER",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "WEATHER",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_03",
+      "id": "029",
+      "topic": "EDUCATION",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "EDUCATION",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "AUTHORITY_ACTS_ON_SUBJECT",
+            "ACTION_TARGETS_OBJECT"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "AUTHORITY",
+            "SUBJECT",
+            "ACTION",
+            "OBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "CONFLICTING",
+          "strength": "STRONG",
+          "sufficiency": "CONFLICTED",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GOVERNMENT_CONTEXT_PHRASE",
+            "CONTEXTUAL_GENERIC_GOVERNMENT_TOKEN"
+          ],
+          "suppressing_relationship_types": [
+            "AUTHORITY_ACTS_ON_SUBJECT"
+          ],
+          "role_basis": [
+            "AUTHORITY",
+            "SUBJECT"
+          ],
+          "competing_candidates": [
+            "EDUCATION"
+          ],
+          "warnings": [
+            "SUPPORT_SUPPRESSION_CONFLICT",
+            "DUPLICATE_EVIDENCE_DISCOUNTED",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "GUIDE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SEMANTIC_COLLECTION_SUPPRESSION"
+          ],
+          "role_basis": [],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "STANDARD_NEWS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "SEMANTIC_COLLECTION_SUPPORT"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "EDUCATION",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_05",
+      "id": "041",
+      "topic": "GENERAL",
+      "topic_confidence": "LOW",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "HIGH",
+      "intent": "GET_UPDATE",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "RESULT_REPORT",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "ACTOR_PERFORMS_ACTION"
+          ],
+          "role_basis": [
+            "ACTOR",
+            "ACTION"
+          ],
+          "competing_candidates": [
+            "STANDARD_NEWS"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "STANDARD_NEWS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "ACTOR_PERFORMS_ACTION"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR",
+            "ACTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "ACTOR_PERFORMS_ACTION"
+          ],
+          "role_basis": [
+            "ACTOR",
+            "ACTION"
+          ],
+          "competing_candidates": [
+            "STANDARD_NEWS"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "expected_topic": "POLITICS",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": false,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_05",
+      "id": "042",
+      "topic": "TECHNOLOGY",
+      "topic_confidence": "LOW",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "CRIME",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": false,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_05",
+      "id": "046",
+      "topic": "TECHNOLOGY",
+      "topic_confidence": "MEDIUM",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
+      "topic_required": true,
+      "format_required": true,
+      "assessments": [
+        {
+          "candidate": "ANALYSIS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "ACTION_TARGETS_OBJECT",
+            "CONTEXTUAL_TECHNOLOGY_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTION",
+            "OBJECT",
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "UNDERSTAND_IMPACT",
+          "candidate_group": "CANDIDATE_TYPE_NOT_EXPLICIT",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "SCIENCE",
+      "expected_format": "ANALYSIS",
+      "expected_intent": "UNDERSTAND_IMPACT",
+      "topic_match": false,
+      "format_match": false,
+      "intent_match": false
+    },
+    {
+      "batch": "batch_05",
+      "id": "048",
+      "topic": "GENERAL",
+      "topic_confidence": "LOW",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
+      "topic_required": true,
+      "format_required": true,
+      "assessments": [
+        {
+          "candidate": "ANALYSIS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "UNDERSTAND_IMPACT",
+          "candidate_group": "CANDIDATE_TYPE_NOT_EXPLICIT",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "WORLD",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": false,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_05",
+      "id": "049",
+      "topic": "ECONOMY",
+      "topic_confidence": "HIGH",
+      "format": "TREND_UPDATE",
+      "format_confidence": "HIGH",
+      "intent": "CHECK_CLAIM",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "ECONOMY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "INDICATOR_DESCRIBES_DOMAIN",
+            "SUBJECT_BELONGS_TO_DOMAIN",
+            "CONTEXTUAL_ECONOMY_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "MEASUREMENT",
+            "DOMAIN",
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "DUPLICATE_EVIDENCE_DISCOUNTED"
+          ]
+        },
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "STANDARD_NEWS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "INTERPRETATION_OF_INDICATOR"
+          ],
+          "role_basis": [
+            "MEASUREMENT",
+            "EFFECT"
+          ],
+          "competing_candidates": [
+            "TREND_UPDATE"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "INTERPRETATION_OF_INDICATOR"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "MEASUREMENT",
+            "EFFECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "ECONOMY",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": false,
+      "intent_match": false
+    },
+    {
+      "batch": "batch_06",
+      "id": "052",
+      "topic": "ECONOMY",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "FORMAT_REQUIRED",
+      "topic_required": false,
+      "format_required": true,
+      "assessments": [
+        {
+          "candidate": "ANALYSIS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "ECONOMY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "SPORTS"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY",
+            "SPORTS"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "SPORTS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_SPORTS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY",
+            "SPORTS"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "UNDERSTAND_IMPACT",
+          "candidate_group": "CANDIDATE_TYPE_NOT_EXPLICIT",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "ECONOMY",
+      "expected_format": "ANALYSIS",
+      "expected_intent": "UNDERSTAND_IMPACT",
+      "topic_match": true,
+      "format_match": false,
+      "intent_match": false
+    },
+    {
+      "batch": "batch_06",
+      "id": "053",
+      "topic": "ECONOMY",
+      "topic_confidence": "LOW",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "BUSINESS",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": false,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_06",
+      "id": "054",
+      "topic": "ECONOMY",
+      "topic_confidence": "MEDIUM",
+      "format": "TREND_UPDATE",
+      "format_confidence": "HIGH",
+      "intent": "CHECK_CLAIM",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "STANDARD_NEWS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "INTERPRETATION_OF_INDICATOR"
+          ],
+          "role_basis": [
+            "MEASUREMENT",
+            "EFFECT"
+          ],
+          "competing_candidates": [
+            "TREND_UPDATE"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "INTERPRETATION_OF_INDICATOR"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "MEASUREMENT",
+            "EFFECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "BUSINESS",
+      "expected_format": "RESULT_REPORT",
+      "expected_intent": "FIND_RESULT",
+      "topic_match": false,
+      "format_match": false,
+      "intent_match": false
+    },
+    {
+      "batch": "batch_06",
+      "id": "055",
+      "topic": "BUSINESS",
+      "topic_confidence": "MEDIUM",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "ECONOMY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "expected_topic": "WORLD",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": false,
+      "format_match": true,
+      "intent_match": true
+    },
+    {
+      "batch": "batch_06",
+      "id": "056",
+      "topic": "GOVERNMENT",
+      "topic_confidence": "MEDIUM",
+      "format": "SERVICE",
+      "format_confidence": "HIGH",
+      "intent": "KNOW_ACTION",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "EDUCATION",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "ACTION_TARGETS_OBJECT"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTION",
+            "OBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_GOVERNMENT_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "AUTHORITY"
+          ],
+          "competing_candidates": [
+            "EDUCATION"
+          ],
+          "warnings": [
+            "AUTHORITY_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "GUIDE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "ACTION_HAS_DEADLINE"
+          ],
+          "role_basis": [
+            "ACTION",
+            "SCHEDULE"
+          ],
+          "competing_candidates": [
+            "SERVICE"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "SERVICE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "ACTION_HAS_DEADLINE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTION",
+            "SCHEDULE"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        }
+      ],
+      "expected_topic": "EDUCATION",
+      "expected_format": "FACT_CHECK",
+      "expected_intent": "CHECK_CLAIM",
+      "topic_match": false,
+      "format_match": false,
+      "intent_match": false
+    },
+    {
+      "batch": "batch_06",
+      "id": "057",
+      "topic": "SPORTS",
+      "topic_confidence": "HIGH",
+      "format": "RESULT_REPORT",
+      "format_confidence": "MEDIUM",
+      "intent": "FIND_RESULT",
+      "gate_scope": "FORMAT_REQUIRED",
+      "topic_required": false,
+      "format_required": true,
+      "assessments": [
+        {
+          "candidate": "ANALYSIS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "SPORTS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_SPORTS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "UNDERSTAND_IMPACT",
+          "candidate_group": "CANDIDATE_TYPE_NOT_EXPLICIT",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "SPORTS",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": true,
+      "format_match": false,
+      "intent_match": false
+    },
+    {
+      "batch": "batch_06",
+      "id": "058",
+      "topic": "ECONOMY",
+      "topic_confidence": "MEDIUM",
+      "format": "RESULT_REPORT",
+      "format_confidence": "HIGH",
+      "intent": "FIND_RESULT",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "ANALYSIS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [
+            "RESULT_REPORT"
+          ],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED"
+          ]
+        },
+        {
+          "candidate": "RESULT_REPORT",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [
+            "RESULT_REPORT"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "UNDERSTAND_IMPACT",
+          "candidate_group": "CANDIDATE_TYPE_NOT_EXPLICIT",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "ECONOMY",
+      "expected_format": "TREND_UPDATE",
+      "expected_intent": "FOLLOW_DEVELOPMENT",
+      "topic_match": true,
+      "format_match": false,
+      "intent_match": false
+    },
+    {
+      "batch": "batch_06",
+      "id": "059",
+      "topic": "ECONOMY",
+      "topic_confidence": "HIGH",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "ECONOMY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "INDICATOR_DESCRIBES_DOMAIN",
+            "SUBJECT_BELONGS_TO_DOMAIN",
+            "CONTEXTUAL_ECONOMY_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "MEASUREMENT",
+            "DOMAIN",
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "expected_topic": "ECONOMY",
+      "expected_format": "TREND_UPDATE",
+      "expected_intent": "FOLLOW_DEVELOPMENT",
+      "topic_match": true,
+      "format_match": false,
+      "intent_match": false
+    },
+    {
+      "batch": "batch_06",
+      "id": "060",
+      "topic": "GOVERNMENT",
+      "topic_confidence": "MEDIUM",
+      "format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "intent": "GET_UPDATE",
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "assessments": [
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_GOVERNMENT_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "AUTHORITY"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "AUTHORITY_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_topic": "BUSINESS",
+      "expected_format": "STANDARD_NEWS",
+      "expected_intent": "GET_UPDATE",
+      "topic_match": false,
+      "format_match": true,
+      "intent_match": true
+    }
+  ],
+  "batch_distribution": {
+    "batch_01": {
+      "cases": 9,
+      "assessments": 27,
+      "sufficiency": {
+        "INSUFFICIENT": 15,
+        "PARTIAL": 9,
+        "SUFFICIENT": 1,
+        "CONFLICTED": 2
+      },
+      "strength": {
+        "WEAK": 15,
+        "MODERATE": 10,
+        "STRONG": 2
+      },
+      "direction": {
+        "SUPPORT": 16,
+        "SUPPRESS": 9,
+        "NEUTRAL": 0,
+        "CONFLICTING": 2
+      }
+    },
+    "batch_02": {
+      "cases": 10,
+      "assessments": 18,
+      "sufficiency": {
+        "INSUFFICIENT": 5,
+        "PARTIAL": 4,
+        "SUFFICIENT": 8,
+        "CONFLICTED": 1
+      },
+      "strength": {
+        "WEAK": 5,
+        "MODERATE": 4,
+        "STRONG": 9
+      },
+      "direction": {
+        "SUPPORT": 16,
+        "SUPPRESS": 1,
+        "NEUTRAL": 0,
+        "CONFLICTING": 1
+      }
+    },
+    "batch_03": {
+      "cases": 8,
+      "assessments": 22,
+      "sufficiency": {
+        "INSUFFICIENT": 8,
+        "PARTIAL": 7,
+        "SUFFICIENT": 4,
+        "CONFLICTED": 3
+      },
+      "strength": {
+        "WEAK": 8,
+        "MODERATE": 8,
+        "STRONG": 6
+      },
+      "direction": {
+        "SUPPORT": 15,
+        "SUPPRESS": 4,
+        "NEUTRAL": 0,
+        "CONFLICTING": 3
+      }
+    },
+    "batch_05": {
+      "cases": 5,
+      "assessments": 14,
+      "sufficiency": {
+        "INSUFFICIENT": 10,
+        "PARTIAL": 2,
+        "SUFFICIENT": 2,
+        "CONFLICTED": 0
+      },
+      "strength": {
+        "WEAK": 10,
+        "MODERATE": 2,
+        "STRONG": 2
+      },
+      "direction": {
+        "SUPPORT": 9,
+        "SUPPRESS": 5,
+        "NEUTRAL": 0,
+        "CONFLICTING": 0
+      }
+    },
+    "batch_06": {
+      "cases": 9,
+      "assessments": 30,
+      "sufficiency": {
+        "INSUFFICIENT": 21,
+        "PARTIAL": 6,
+        "SUFFICIENT": 3,
+        "CONFLICTED": 0
+      },
+      "strength": {
+        "WEAK": 21,
+        "MODERATE": 5,
+        "STRONG": 4
+      },
+      "direction": {
+        "SUPPORT": 21,
+        "SUPPRESS": 9,
+        "NEUTRAL": 0,
+        "CONFLICTING": 0
+      }
+    }
+  },
+  "direction_distribution": {
+    "SUPPORT": 77,
+    "SUPPRESS": 28,
+    "NEUTRAL": 0,
+    "CONFLICTING": 6
+  },
+  "strength_distribution": {
+    "WEAK": 59,
+    "MODERATE": 29,
+    "STRONG": 23
+  },
+  "sufficiency_distribution": {
+    "INSUFFICIENT": 59,
+    "PARTIAL": 28,
+    "SUFFICIENT": 18,
+    "CONFLICTED": 6
+  },
+  "batch_06_topic_mismatch_assessments": {
+    "051": {
+      "expected": "GENERAL",
+      "predicted": "ECONOMY",
+      "assessments": [],
+      "expected_sufficiency": "NONE",
+      "predicted_sufficiency": "NONE",
+      "warnings": [],
+      "competition": {},
+      "required": true
+    },
+    "053": {
+      "expected": "BUSINESS",
+      "predicted": "ECONOMY",
+      "assessments": [
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_sufficiency": "INSUFFICIENT",
+      "predicted_sufficiency": "NONE",
+      "warnings": [
+        "ACTOR_DOMINATED",
+        "SUBJECT_ROLE_UNRESOLVED",
+        "INSUFFICIENT_INDEPENDENT_SUPPORT"
+      ],
+      "competition": {},
+      "required": true
+    },
+    "054": {
+      "expected": "BUSINESS",
+      "predicted": "ECONOMY",
+      "assessments": [
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_sufficiency": "INSUFFICIENT",
+      "predicted_sufficiency": "NONE",
+      "warnings": [
+        "ACTOR_DOMINATED",
+        "SUBJECT_ROLE_UNRESOLVED",
+        "INSUFFICIENT_INDEPENDENT_SUPPORT"
+      ],
+      "competition": {},
+      "required": true
+    },
+    "055": {
+      "expected": "WORLD",
+      "predicted": "BUSINESS",
+      "assessments": [
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "ECONOMY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "expected_sufficiency": "NONE",
+      "predicted_sufficiency": "INSUFFICIENT",
+      "warnings": [
+        "ACTOR_DOMINATED",
+        "SUBJECT_ROLE_UNRESOLVED",
+        "COMPETING_CANDIDATE",
+        "INSUFFICIENT_INDEPENDENT_SUPPORT"
+      ],
+      "competition": {
+        "BUSINESS": [
+          "ECONOMY"
+        ],
+        "GOVERNMENT": [
+          "ECONOMY"
+        ],
+        "TECHNOLOGY": [
+          "ECONOMY"
+        ]
+      },
+      "required": false
+    },
+    "056": {
+      "expected": "EDUCATION",
+      "predicted": "GOVERNMENT",
+      "assessments": [
+        {
+          "candidate": "EDUCATION",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "ACTION_TARGETS_OBJECT"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTION",
+            "OBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_GOVERNMENT_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "AUTHORITY"
+          ],
+          "competing_candidates": [
+            "EDUCATION"
+          ],
+          "warnings": [
+            "AUTHORITY_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "expected_sufficiency": "PARTIAL",
+      "predicted_sufficiency": "INSUFFICIENT",
+      "warnings": [
+        "INSUFFICIENT_INDEPENDENT_SUPPORT",
+        "AUTHORITY_DOMINATED",
+        "SUBJECT_ROLE_UNRESOLVED",
+        "COMPETING_CANDIDATE"
+      ],
+      "competition": {
+        "GOVERNMENT": [
+          "EDUCATION"
+        ]
+      },
+      "required": true
+    },
+    "060": {
+      "expected": "BUSINESS",
+      "predicted": "GOVERNMENT",
+      "assessments": [
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_GOVERNMENT_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "AUTHORITY"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "AUTHORITY_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_sufficiency": "NONE",
+      "predicted_sufficiency": "INSUFFICIENT",
+      "warnings": [
+        "AUTHORITY_DOMINATED",
+        "SUBJECT_ROLE_UNRESOLVED",
+        "INSUFFICIENT_INDEPENDENT_SUPPORT"
+      ],
+      "competition": {},
+      "required": true
+    }
+  },
+  "batch_06_format_mismatch_assessments": {
+    "052": {
+      "expected": "ANALYSIS",
+      "predicted": "STANDARD_NEWS",
+      "assessments": [
+        {
+          "candidate": "ANALYSIS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_sufficiency": "INSUFFICIENT",
+      "predicted_sufficiency": "NONE",
+      "warnings": [
+        "SUBJECT_ROLE_UNRESOLVED",
+        "INSUFFICIENT_INDEPENDENT_SUPPORT"
+      ],
+      "competition": {},
+      "required": true
+    },
+    "054": {
+      "expected": "RESULT_REPORT",
+      "predicted": "TREND_UPDATE",
+      "assessments": [
+        {
+          "candidate": "STANDARD_NEWS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "INTERPRETATION_OF_INDICATOR"
+          ],
+          "role_basis": [
+            "MEASUREMENT",
+            "EFFECT"
+          ],
+          "competing_candidates": [
+            "TREND_UPDATE"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "INTERPRETATION_OF_INDICATOR"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "MEASUREMENT",
+            "EFFECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_sufficiency": "NONE",
+      "predicted_sufficiency": "PARTIAL",
+      "warnings": [
+        "COMPETING_CANDIDATE",
+        "INSUFFICIENT_INDEPENDENT_SUPPORT"
+      ],
+      "competition": {
+        "STANDARD_NEWS": [
+          "TREND_UPDATE"
+        ]
+      },
+      "required": false
+    },
+    "056": {
+      "expected": "FACT_CHECK",
+      "predicted": "SERVICE",
+      "assessments": [
+        {
+          "candidate": "GUIDE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "ACTION_HAS_DEADLINE"
+          ],
+          "role_basis": [
+            "ACTION",
+            "SCHEDULE"
+          ],
+          "competing_candidates": [
+            "SERVICE"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "SERVICE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "ACTION_HAS_DEADLINE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTION",
+            "SCHEDULE"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        }
+      ],
+      "expected_sufficiency": "NONE",
+      "predicted_sufficiency": "SUFFICIENT",
+      "warnings": [
+        "COMPETING_CANDIDATE"
+      ],
+      "competition": {
+        "GUIDE": [
+          "SERVICE"
+        ]
+      },
+      "required": false
+    },
+    "057": {
+      "expected": "STANDARD_NEWS",
+      "predicted": "RESULT_REPORT",
+      "assessments": [
+        {
+          "candidate": "ANALYSIS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_sufficiency": "NONE",
+      "predicted_sufficiency": "NONE",
+      "warnings": [
+        "SUBJECT_ROLE_UNRESOLVED",
+        "INSUFFICIENT_INDEPENDENT_SUPPORT"
+      ],
+      "competition": {},
+      "required": true
+    },
+    "058": {
+      "expected": "TREND_UPDATE",
+      "predicted": "RESULT_REPORT",
+      "assessments": [
+        {
+          "candidate": "ANALYSIS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [
+            "RESULT_REPORT"
+          ],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "RESULT_REPORT",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [
+            "RESULT_REPORT"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "expected_sufficiency": "INSUFFICIENT",
+      "predicted_sufficiency": "SUFFICIENT",
+      "warnings": [
+        "SUBJECT_ROLE_UNRESOLVED",
+        "INSUFFICIENT_INDEPENDENT_SUPPORT",
+        "COMPETING_CANDIDATE"
+      ],
+      "competition": {
+        "ANALYSIS": [
+          "RESULT_REPORT"
+        ],
+        "TREND_UPDATE": [
+          "RESULT_REPORT"
+        ]
+      },
+      "required": false
+    },
+    "059": {
+      "expected": "TREND_UPDATE",
+      "predicted": "STANDARD_NEWS",
+      "assessments": [],
+      "expected_sufficiency": "NONE",
+      "predicted_sufficiency": "NONE",
+      "warnings": [],
+      "competition": {},
+      "required": false
+    }
+  },
+  "case_055_safety": {
+    "expected": "WORLD",
+    "predicted": "BUSINESS",
+    "assessments": [
+      {
+        "candidate": "BUSINESS",
+        "candidate_group": "TOPIC_LIKE",
+        "direction": "SUPPORT",
+        "strength": "WEAK",
+        "sufficiency": "INSUFFICIENT",
+        "supporting_relationship_types": [
+          "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+        ],
+        "suppressing_relationship_types": [],
+        "role_basis": [
+          "ACTOR"
+        ],
+        "competing_candidates": [
+          "ECONOMY"
+        ],
+        "warnings": [
+          "ACTOR_DOMINATED",
+          "SUBJECT_ROLE_UNRESOLVED",
+          "COMPETING_CANDIDATE"
+        ]
+      },
+      {
+        "candidate": "ECONOMY",
+        "candidate_group": "TOPIC_LIKE",
+        "direction": "SUPPORT",
+        "strength": "MODERATE",
+        "sufficiency": "PARTIAL",
+        "supporting_relationship_types": [
+          "SUBJECT_BELONGS_TO_DOMAIN"
+        ],
+        "suppressing_relationship_types": [],
+        "role_basis": [
+          "SUBJECT",
+          "DOMAIN"
+        ],
+        "competing_candidates": [],
+        "warnings": [
+          "INSUFFICIENT_INDEPENDENT_SUPPORT"
+        ]
+      },
+      {
+        "candidate": "GOVERNMENT",
+        "candidate_group": "TOPIC_LIKE",
+        "direction": "SUPPRESS",
+        "strength": "WEAK",
+        "sufficiency": "INSUFFICIENT",
+        "supporting_relationship_types": [],
+        "suppressing_relationship_types": [
+          "SUBJECT_BELONGS_TO_DOMAIN"
+        ],
+        "role_basis": [
+          "SUBJECT",
+          "DOMAIN"
+        ],
+        "competing_candidates": [
+          "ECONOMY"
+        ],
+        "warnings": [
+          "COMPETING_CANDIDATE"
+        ]
+      },
+      {
+        "candidate": "TECHNOLOGY",
+        "candidate_group": "TOPIC_LIKE",
+        "direction": "SUPPRESS",
+        "strength": "WEAK",
+        "sufficiency": "INSUFFICIENT",
+        "supporting_relationship_types": [],
+        "suppressing_relationship_types": [
+          "SUBJECT_BELONGS_TO_DOMAIN"
+        ],
+        "role_basis": [
+          "SUBJECT",
+          "DOMAIN"
+        ],
+        "competing_candidates": [
+          "ECONOMY"
+        ],
+        "warnings": [
+          "COMPETING_CANDIDATE"
+        ]
+      }
+    ],
+    "expected_sufficiency": "NONE",
+    "predicted_sufficiency": "INSUFFICIENT",
+    "warnings": [
+      "ACTOR_DOMINATED",
+      "SUBJECT_ROLE_UNRESOLVED",
+      "COMPETING_CANDIDATE",
+      "INSUFFICIENT_INDEPENDENT_SUPPORT"
+    ],
+    "competition": {
+      "BUSINESS": [
+        "ECONOMY"
+      ],
+      "GOVERNMENT": [
+        "ECONOMY"
+      ],
+      "TECHNOLOGY": [
+        "ECONOMY"
+      ]
+    },
+    "required": false,
+    "wrong_semantic_candidate": "BUSINESS",
+    "wrong_candidate_sufficiency": "INSUFFICIENT",
+    "counterfactual_unresolved": true
+  },
+  "critical_format_case_safety": {
+    "054": {
+      "expected": "RESULT_REPORT",
+      "predicted": "TREND_UPDATE",
+      "assessments": [
+        {
+          "candidate": "STANDARD_NEWS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "INTERPRETATION_OF_INDICATOR"
+          ],
+          "role_basis": [
+            "MEASUREMENT",
+            "EFFECT"
+          ],
+          "competing_candidates": [
+            "TREND_UPDATE"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "INTERPRETATION_OF_INDICATOR"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "MEASUREMENT",
+            "EFFECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "expected_sufficiency": "NONE",
+      "predicted_sufficiency": "PARTIAL",
+      "warnings": [
+        "COMPETING_CANDIDATE",
+        "INSUFFICIENT_INDEPENDENT_SUPPORT"
+      ],
+      "competition": {
+        "STANDARD_NEWS": [
+          "TREND_UPDATE"
+        ]
+      },
+      "required": false,
+      "counterfactual_unresolved": true
+    },
+    "056": {
+      "expected": "FACT_CHECK",
+      "predicted": "SERVICE",
+      "assessments": [
+        {
+          "candidate": "GUIDE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "ACTION_HAS_DEADLINE"
+          ],
+          "role_basis": [
+            "ACTION",
+            "SCHEDULE"
+          ],
+          "competing_candidates": [
+            "SERVICE"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "SERVICE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "ACTION_HAS_DEADLINE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTION",
+            "SCHEDULE"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        }
+      ],
+      "expected_sufficiency": "NONE",
+      "predicted_sufficiency": "SUFFICIENT",
+      "warnings": [
+        "COMPETING_CANDIDATE"
+      ],
+      "competition": {
+        "GUIDE": [
+          "SERVICE"
+        ]
+      },
+      "required": false,
+      "counterfactual_unresolved": false
+    },
+    "058": {
+      "expected": "TREND_UPDATE",
+      "predicted": "RESULT_REPORT",
+      "assessments": [
+        {
+          "candidate": "ANALYSIS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [
+            "RESULT_REPORT"
+          ],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "RESULT_REPORT",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [
+            "RESULT_REPORT"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "expected_sufficiency": "INSUFFICIENT",
+      "predicted_sufficiency": "SUFFICIENT",
+      "warnings": [
+        "SUBJECT_ROLE_UNRESOLVED",
+        "INSUFFICIENT_INDEPENDENT_SUPPORT",
+        "COMPETING_CANDIDATE"
+      ],
+      "competition": {
+        "ANALYSIS": [
+          "RESULT_REPORT"
+        ],
+        "TREND_UPDATE": [
+          "RESULT_REPORT"
+        ]
+      },
+      "required": false,
+      "counterfactual_unresolved": false
+    },
+    "059": {
+      "expected": "TREND_UPDATE",
+      "predicted": "STANDARD_NEWS",
+      "assessments": [],
+      "expected_sufficiency": "NONE",
+      "predicted_sufficiency": "NONE",
+      "warnings": [],
+      "competition": {},
+      "required": false,
+      "counterfactual_unresolved": true
+    }
+  },
+  "confidence_sufficiency_divergence": [
+    "054:FORMAT"
+  ],
+  "counterfactual_topic_unresolved": {
+    "051": true,
+    "053": true,
+    "054": true,
+    "055": true,
+    "056": true,
+    "060": true
+  },
+  "counterfactual_format_unresolved": {
+    "054": true,
+    "056": false,
+    "058": false,
+    "059": true
+  },
+  "duplicate_evidence_findings": [
+    "batch_01:001",
+    "batch_01:003",
+    "batch_02:013",
+    "batch_02:014",
+    "batch_02:015",
+    "batch_02:018",
+    "batch_03:029",
+    "batch_05:049"
+  ],
+  "authority_actor_method_findings": {
+    "dominated": {
+      "AUTHORITY": [
+        "batch_01:005:GOVERNMENT",
+        "batch_01:006:GOVERNMENT",
+        "batch_02:011:GOVERNMENT",
+        "batch_02:015:GOVERNMENT",
+        "batch_06:056:GOVERNMENT",
+        "batch_06:060:GOVERNMENT"
+      ],
+      "ACTOR": [
+        "batch_01:003:BUSINESS",
+        "batch_01:007:BUSINESS",
+        "batch_02:013:BUSINESS",
+        "batch_02:016:BUSINESS",
+        "batch_02:018:SPORTS",
+        "batch_03:024:SPORTS",
+        "batch_05:042:BUSINESS",
+        "batch_06:053:BUSINESS",
+        "batch_06:054:BUSINESS",
+        "batch_06:055:BUSINESS",
+        "batch_06:058:BUSINESS"
+      ],
+      "METHOD": []
+    },
+    "dominated_sufficient": {
+      "AUTHORITY": [],
+      "ACTOR": [],
+      "METHOD": []
+    }
+  },
+  "competition_findings": {
+    "cases_with_competing_candidates": [
+      "batch_01:002",
+      "batch_01:003",
+      "batch_01:006",
+      "batch_01:007",
+      "batch_02:012",
+      "batch_02:013",
+      "batch_02:015",
+      "batch_02:018",
+      "batch_03:023",
+      "batch_03:024",
+      "batch_03:025",
+      "batch_03:029",
+      "batch_05:041",
+      "batch_05:049",
+      "batch_06:052",
+      "batch_06:054",
+      "batch_06:055",
+      "batch_06:056",
+      "batch_06:058",
+      "batch_06:059"
+    ],
+    "conflicted_assessments": [
+      "batch_01:003:TECHNOLOGY",
+      "batch_01:006:STANDARD_NEWS",
+      "batch_02:018:SPORTS",
+      "batch_03:024:TECHNOLOGY",
+      "batch_03:025:GOVERNMENT",
+      "batch_03:029:GOVERNMENT"
+    ],
+    "competition_prevented_sufficient": [
+      "batch_01:002:GOVERNMENT",
+      "batch_01:002:RESULT_REPORT",
+      "batch_01:002:TECHNOLOGY",
+      "batch_01:002:TREND_UPDATE",
+      "batch_01:003:BUSINESS",
+      "batch_01:003:GOVERNMENT",
+      "batch_01:003:TECHNOLOGY",
+      "batch_01:006:GUIDE",
+      "batch_01:006:STANDARD_NEWS",
+      "batch_01:007:BUSINESS",
+      "batch_01:007:GOVERNMENT",
+      "batch_01:007:TECHNOLOGY",
+      "batch_02:012:GUIDE",
+      "batch_02:013:BUSINESS",
+      "batch_02:015:KNOW_ACTION",
+      "batch_02:015:VERIFY_REQUIREMENTS",
+      "batch_02:018:SPORTS",
+      "batch_03:023:ECONOMY",
+      "batch_03:023:POLITICS",
+      "batch_03:024:SPORTS",
+      "batch_03:024:TECHNOLOGY",
+      "batch_03:025:GOVERNMENT",
+      "batch_03:025:TECHNOLOGY",
+      "batch_03:029:GOVERNMENT",
+      "batch_05:041:RESULT_REPORT",
+      "batch_05:041:TREND_UPDATE",
+      "batch_05:049:GOVERNMENT",
+      "batch_05:049:STANDARD_NEWS",
+      "batch_05:049:TECHNOLOGY",
+      "batch_06:052:ECONOMY",
+      "batch_06:052:GOVERNMENT",
+      "batch_06:052:SPORTS",
+      "batch_06:052:TECHNOLOGY",
+      "batch_06:054:STANDARD_NEWS",
+      "batch_06:055:BUSINESS",
+      "batch_06:055:GOVERNMENT",
+      "batch_06:055:TECHNOLOGY",
+      "batch_06:056:GOVERNMENT",
+      "batch_06:056:GUIDE",
+      "batch_06:058:ANALYSIS",
+      "batch_06:058:TREND_UPDATE",
+      "batch_06:059:GOVERNMENT",
+      "batch_06:059:TECHNOLOGY"
+    ]
+  },
+  "sufficiency_quality_metrics": {
+    "true_sufficient_count": 1,
+    "false_sufficient_count": 2,
+    "safe_wrong_partial_count": 17,
+    "expected_candidate_sufficient_count": 0,
+    "expected_candidate_partial_count": 1,
+    "expected_candidate_missing_count": 7,
+    "false_sufficiency_rate": 66.66666666666666
+  },
+  "historical_corpus_safety": {
+    "cases": 32,
+    "assessments": 81,
+    "conflicted_count": 6,
+    "insufficient_count": 38,
+    "false_sufficient_count": 1,
+    "dominated_sufficient_count": 0
+  },
+  "diagnostic_quality": "WEAK",
+  "recommended_next_step": "REFINE_FORMAT_DIRECTIONAL_ASSESSMENT",
+  "provider_calls": 0
+}
