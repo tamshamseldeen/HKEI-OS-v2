@@ -188,7 +188,7 @@ def test_no_primary_domain_alone_is_supporting_only() -> None:
     assert result.reason_codes == ("DETERMINISTIC_RESULT_SUFFICIENT",)
 
 
-def test_low_topic_and_no_primary_without_third_signal_is_insufficient() -> None:
+def test_low_topic_and_no_primary_without_structured_stack_is_insufficient() -> None:
     result = evaluate(
         topic_result=topic(Topic.HEALTH, TopicConfidence.LOW),
     )
@@ -462,7 +462,11 @@ def test_hints_preserve_specific_high_confidence_topic_safety(
         contextual=context(contextual_item(hint)),
     )
     assert result.topic_required is False
-    assert result.scope is AdjudicationScope.NOT_REQUIRED
+    if hint == "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT":
+        assert result.format_required is True
+        assert result.scope is AdjudicationScope.FORMAT_REQUIRED
+    else:
+        assert result.scope is AdjudicationScope.NOT_REQUIRED
 
 
 def test_institutional_policy_conflict_hint_can_require_topic() -> None:
@@ -547,7 +551,7 @@ def test_institutional_conflict_can_require_standard_news_format() -> None:
         "ADJUDICATION_INSTITUTIONAL_POLICY_CONFLICT",
     ),
 )
-def test_structural_hints_do_not_override_high_confidence_format(
+def test_structural_hints_override_false_high_confidence_format(
     hint: str,
 ) -> None:
     result = evaluate(
@@ -558,7 +562,7 @@ def test_structural_hints_do_not_override_high_confidence_format(
         ),
         contextual=context(contextual_item(hint)),
     )
-    assert result.format_required is False
+    assert result.format_required is True
 
 
 def test_new_hint_trigger_order_and_deduplication_are_exact() -> None:

@@ -115,6 +115,14 @@ class DeterministicSemanticAdjudicationGate:
             target != final_format
             for target in effective_contextual_format_targets
         )
+        unresolved_contextual_format = (
+            contextual_format_not_promoted
+            and (
+                format_classification.confidence
+                is not EditorialFormatConfidence.HIGH
+                or final_format not in semantic_format_targets
+            )
+        )
         format_conflict = self._has_format_conflict(semantic_evidence)
         unresolved_analytical_constraint = (
             "ADJUDICATION_ANALYTICAL_CONSTRAINT" in contextual_supports
@@ -122,6 +130,34 @@ class DeterministicSemanticAdjudicationGate:
         unresolved_explanatory_transformation = (
             "ADJUDICATION_EXPLANATORY_TRANSFORMATION"
             in contextual_supports
+        )
+        explicit_unresolved_format_warning = (
+            self._has_explicit_unresolved_format_warning(
+                format_classification=format_classification,
+                contextual_evidence=contextual_evidence,
+                semantic_evidence=semantic_evidence,
+            )
+        )
+
+        bounded_unresolved_topic = (
+            topic_low_confidence
+            and specific_topic_with_unresolved_domain
+            and len(semantic_evidence.relationships) > 1
+        )
+        bounded_unresolved_format = (
+            format_classification.confidence
+            in (
+                EditorialFormatConfidence.MEDIUM,
+                EditorialFormatConfidence.HIGH,
+            )
+            and (
+                unresolved_contextual_format
+                or format_conflict
+                or unresolved_analytical_constraint
+                or unresolved_explanatory_transformation
+                or unresolved_institutional_policy_conflict
+                or explicit_unresolved_format_warning
+            )
         )
 
         existing_topic_required = (
@@ -240,10 +276,13 @@ class DeterministicSemanticAdjudicationGate:
                 trigger_signals.append(signal)
 
         topic_required = (
-            existing_topic_required or unresolved_evidence_stack_strict
+            existing_topic_required
+            or unresolved_evidence_stack_strict
+            or bounded_unresolved_topic
         )
         format_required = (
             format_conflict
+            or bounded_unresolved_format
             or (
                 contextual_format_not_promoted
                 and format_classification.confidence
@@ -405,6 +444,26 @@ class DeterministicSemanticAdjudicationGate:
         supported = self._format_targets(evidence.format_support)
         suppressed = self._format_targets(evidence.format_suppression)
         return len(supported) > 1 or bool(supported & suppressed)
+
+    @staticmethod
+    def _has_explicit_unresolved_format_warning(
+        *,
+        format_classification: EditorialFormatClassification,
+        contextual_evidence: ContextualEvidence,
+        semantic_evidence: CompositionalSemanticEvidence,
+    ) -> bool:
+        warnings = (
+            format_classification.warnings
+            + contextual_evidence.warnings
+            + semantic_evidence.warnings
+        )
+        unresolved_tokens = ("UNRESOLVED", "CONFLICT", "INCOMPLETE", "AMBIGU")
+        return any(
+            "FORMAT" in warning
+            and "RESOLVED" not in warning
+            and any(token in warning for token in unresolved_tokens)
+            for warning in warnings
+        )
 
     @staticmethod
     def _is_prediction_only_analysis_support(
