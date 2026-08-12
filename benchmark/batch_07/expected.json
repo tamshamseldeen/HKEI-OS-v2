@@ -1,0 +1,14 @@
+{
+  "expectations": [
+    {"id": "061", "topic": "ECONOMY", "editorial_format": "TREND_UPDATE", "reader_intent": "FOLLOW_DEVELOPMENT"},
+    {"id": "062", "topic": "WORLD", "editorial_format": "STANDARD_NEWS", "reader_intent": "GET_UPDATE"},
+    {"id": "063", "topic": "WORLD", "editorial_format": "STANDARD_NEWS", "reader_intent": "GET_UPDATE"},
+    {"id": "064", "topic": "TECHNOLOGY", "editorial_format": "ANALYSIS", "reader_intent": "UNDERSTAND_IMPACT"},
+    {"id": "065", "topic": "ECONOMY", "editorial_format": "RESULT_REPORT", "reader_intent": "FIND_RESULT"},
+    {"id": "066", "topic": "HEALTH", "editorial_format": "STANDARD_NEWS", "reader_intent": "GET_UPDATE"},
+    {"id": "067", "topic": "GENERAL", "editorial_format": "STANDARD_NEWS", "reader_intent": "GET_UPDATE"},
+    {"id": "068", "topic": "SCIENCE", "editorial_format": "EXPLAINER", "reader_intent": "UNDERSTAND_EVENT"},
+    {"id": "069", "topic": "EDUCATION", "editorial_format": "SERVICE", "reader_intent": "KNOW_ACTION"},
+    {"id": "070", "topic": "SPORTS", "editorial_format": "SERVICE", "reader_intent": "KNOW_ACTION"}
+  ]
+}
