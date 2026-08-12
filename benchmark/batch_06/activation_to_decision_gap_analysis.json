@@ -1,0 +1,560 @@
+{
+  "cases_analyzed": [
+    "051",
+    "052",
+    "053",
+    "054",
+    "055",
+    "056",
+    "057",
+    "058",
+    "059",
+    "060"
+  ],
+  "hkei_161_metrics": {
+    "topic_accuracy": 40.0,
+    "format_accuracy": 40.0,
+    "reader_intent_accuracy": 40.0,
+    "full_case_accuracy": 0.0,
+    "cases_reaching_semantic_components": 10,
+    "cases_with_semantic_relationships": 6,
+    "cases_with_primary_semantic_domains": 3,
+    "cases_with_semantic_format_support": 3,
+    "cases_with_semantic_format_suppression": 3,
+    "topic_gate_recall": 83.33333333333334,
+    "format_gate_recall": 50.0
+  },
+  "topic_mismatch_analysis": {
+    "051": {
+      "expected_topic": "GENERAL",
+      "predicted_topic": "ECONOMY",
+      "new_semantic_components": [
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_RECOMMENDED_ACTION"
+      ],
+      "relationship_count_before": 0,
+      "relationship_count_after": 0,
+      "relationships": [],
+      "primary_domains": [],
+      "secondary_domains": [],
+      "expected_domain_represented": false,
+      "wrong_predicted_domain_stronger": false,
+      "topic_classifier_consumed_primary_domains": false,
+      "precedence_result": "SUBJECT_ROLE_UNRESOLVED",
+      "confidence_before": "MEDIUM",
+      "confidence_after": "MEDIUM",
+      "topic_required_before": true,
+      "topic_required_after": true
+    },
+    "053": {
+      "expected_topic": "BUSINESS",
+      "predicted_topic": "ECONOMY",
+      "new_semantic_components": [
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_CHANGE",
+        "COMPONENT_CAUSE",
+        "COMPONENT_RESULT"
+      ],
+      "relationship_count_before": 0,
+      "relationship_count_after": 0,
+      "relationships": [],
+      "primary_domains": [],
+      "secondary_domains": [],
+      "expected_domain_represented": false,
+      "wrong_predicted_domain_stronger": false,
+      "topic_classifier_consumed_primary_domains": false,
+      "precedence_result": "DOMAIN_MAPPING_MISSING",
+      "confidence_before": "LOW",
+      "confidence_after": "LOW",
+      "topic_required_before": true,
+      "topic_required_after": true
+    },
+    "054": {
+      "expected_topic": "BUSINESS",
+      "predicted_topic": "ECONOMY",
+      "new_semantic_components": [
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_RESULT",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_CHANGE",
+        "COMPONENT_ACTION",
+        "COMPONENT_CAUSE"
+      ],
+      "relationship_count_before": 0,
+      "relationship_count_after": 1,
+      "relationships": [
+        {
+          "type": "INTERPRETATION_OF_INDICATOR",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_TREND_UPDATE_STRUCTURE",
+          "supports": [
+            "FORMAT_TREND_UPDATE"
+          ],
+          "suppresses": [
+            "FORMAT_STANDARD_NEWS"
+          ]
+        }
+      ],
+      "primary_domains": [],
+      "secondary_domains": [],
+      "expected_domain_represented": false,
+      "wrong_predicted_domain_stronger": false,
+      "topic_classifier_consumed_primary_domains": false,
+      "precedence_result": "DOMAIN_MAPPING_MISSING",
+      "confidence_before": "MEDIUM",
+      "confidence_after": "MEDIUM",
+      "topic_required_before": true,
+      "topic_required_after": true
+    },
+    "055": {
+      "expected_topic": "WORLD",
+      "predicted_topic": "ECONOMY",
+      "new_semantic_components": [
+        "COMPONENT_EFFECT",
+        "COMPONENT_PRICE",
+        "COMPONENT_CHANGE"
+      ],
+      "relationship_count_before": 0,
+      "relationship_count_after": 1,
+      "relationships": [
+        {
+          "type": "SUBJECT_BELONGS_TO_DOMAIN",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": [
+            "PRIMARY_DOMAIN_GOVERNMENT",
+            "PRIMARY_DOMAIN_TECHNOLOGY"
+          ]
+        }
+      ],
+      "primary_domains": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "secondary_domains": [],
+      "expected_domain_represented": false,
+      "wrong_predicted_domain_stronger": true,
+      "topic_classifier_consumed_primary_domains": true,
+      "precedence_result": "COMPETING_DOMAIN_PRECEDENCE",
+      "confidence_before": "MEDIUM",
+      "confidence_after": "HIGH",
+      "topic_required_before": true,
+      "topic_required_after": false
+    },
+    "056": {
+      "expected_topic": "EDUCATION",
+      "predicted_topic": "GOVERNMENT",
+      "new_semantic_components": [
+        "COMPONENT_SCHEDULE",
+        "COMPONENT_ACTION",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_INHERITED_SUBJECT"
+      ],
+      "relationship_count_before": 1,
+      "relationship_count_after": 4,
+      "relationships": [
+        {
+          "type": "ACTION_TARGETS_OBJECT",
+          "strength": "MEDIUM",
+          "reason_code": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_EDUCATION"
+          ],
+          "suppresses": []
+        },
+        {
+          "type": "ACTION_HAS_DEADLINE",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+          "supports": [
+            "FORMAT_SERVICE"
+          ],
+          "suppresses": [
+            "FORMAT_GUIDE"
+          ]
+        },
+        {
+          "type": "ACTION_HAS_DEADLINE",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+          "supports": [
+            "FORMAT_SERVICE"
+          ],
+          "suppresses": [
+            "FORMAT_GUIDE"
+          ]
+        },
+        {
+          "type": "ACTION_HAS_DEADLINE",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+          "supports": [
+            "FORMAT_SERVICE"
+          ],
+          "suppresses": [
+            "FORMAT_GUIDE"
+          ]
+        }
+      ],
+      "primary_domains": [],
+      "secondary_domains": [],
+      "expected_domain_represented": true,
+      "wrong_predicted_domain_stronger": false,
+      "topic_classifier_consumed_primary_domains": false,
+      "precedence_result": "RELATIONSHIP_TOO_WEAK",
+      "confidence_before": "MEDIUM",
+      "confidence_after": "MEDIUM",
+      "topic_required_before": true,
+      "topic_required_after": true
+    },
+    "060": {
+      "expected_topic": "BUSINESS",
+      "predicted_topic": "GOVERNMENT",
+      "new_semantic_components": [
+        "COMPONENT_ACTION",
+        "COMPONENT_CAUSE",
+        "COMPONENT_CHANGE",
+        "COMPONENT_RECOMMENDED_ACTION",
+        "COMPONENT_INHERITED_SUBJECT"
+      ],
+      "relationship_count_before": 0,
+      "relationship_count_after": 0,
+      "relationships": [],
+      "primary_domains": [],
+      "secondary_domains": [],
+      "expected_domain_represented": false,
+      "wrong_predicted_domain_stronger": false,
+      "topic_classifier_consumed_primary_domains": false,
+      "precedence_result": "AUTHORITY_DOMINANCE",
+      "confidence_before": "MEDIUM",
+      "confidence_after": "MEDIUM",
+      "topic_required_before": true,
+      "topic_required_after": true
+    }
+  },
+  "expected_domain_reachability": {
+    "051": "EXPECTED_DOMAIN_NOT_EXTRACTED",
+    "053": "EXPECTED_DOMAIN_EXTRACTED_AS_COMPONENT",
+    "054": "EXPECTED_DOMAIN_NOT_EXTRACTED",
+    "055": "ONTOLOGY_BOUNDARY",
+    "056": "EXPECTED_DOMAIN_PRESENT_IN_RELATIONSHIP",
+    "060": "EXPECTED_DOMAIN_EXTRACTED_AS_COMPONENT"
+  },
+  "domain_promotion_failures": {
+    "051": "SUBJECT_ROLE_UNRESOLVED",
+    "053": "DOMAIN_MAPPING_MISSING",
+    "054": "DOMAIN_MAPPING_MISSING",
+    "055": "COMPETING_DOMAIN_PRECEDENCE",
+    "056": "RELATIONSHIP_TOO_WEAK",
+    "060": "AUTHORITY_DOMINANCE"
+  },
+  "domain_promotion_failure_counts": {
+    "SUBJECT_ROLE_UNRESOLVED": 1,
+    "DOMAIN_MAPPING_MISSING": 2,
+    "COMPETING_DOMAIN_PRECEDENCE": 1,
+    "RELATIONSHIP_TOO_WEAK": 1,
+    "AUTHORITY_DOMINANCE": 1
+  },
+  "topic_classifier_consumption_findings": {
+    "primary_semantic_domains": "CONSUMED",
+    "secondary_semantic_domains": "CONSUMED",
+    "relationship_support": "INDIRECT_VIA_PROMOTED_CANDIDATES",
+    "semantic_suppressions": "CONSUMED",
+    "by_case": {
+      "051": "NO_CONSUMPTION_GAP",
+      "053": "NO_CONSUMPTION_GAP",
+      "054": "NO_CONSUMPTION_GAP",
+      "055": "NO_CONSUMPTION_GAP",
+      "056": "NO_CONSUMPTION_GAP",
+      "060": "NO_CONSUMPTION_GAP"
+    }
+  },
+  "topic_gate_recall_regression": {
+    "case_id": "055",
+    "previous_prediction": "BUSINESS",
+    "current_prediction": "ECONOMY",
+    "expected_topic": "WORLD",
+    "previous_confidence": "MEDIUM",
+    "current_confidence": "HIGH",
+    "previous_trigger_signals": [
+      "NO_PRIMARY_SEMANTIC_DOMAIN",
+      "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+      "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+    ],
+    "current_trigger_signals": [],
+    "previous_topic_required": true,
+    "current_topic_required": false,
+    "previous_semantic_components": [],
+    "current_semantic_components": [
+      "COMPONENT_EFFECT",
+      "COMPONENT_PRICE",
+      "COMPONENT_CHANGE"
+    ],
+    "previous_relationship_count": 0,
+    "current_relationships": [
+      {
+        "type": "SUBJECT_BELONGS_TO_DOMAIN",
+        "strength": "STRONG",
+        "reason_code": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+        "supports": [
+          "PRIMARY_DOMAIN_ECONOMY"
+        ],
+        "suppresses": [
+          "PRIMARY_DOMAIN_GOVERNMENT",
+          "PRIMARY_DOMAIN_TECHNOLOGY"
+        ]
+      }
+    ],
+    "previous_primary_domains": [],
+    "current_primary_domains": [
+      "PRIMARY_DOMAIN_ECONOMY"
+    ],
+    "cause": "FALSE_PRIMARY_DOMAIN_SUFFICIENCY",
+    "finding": "A wrong economy primary domain and higher confidence made partial semantics appear resolved, removing unresolved-domain Gate signals."
+  },
+  "format_mismatch_analysis": {
+    "052": {
+      "expected_format": "ANALYSIS",
+      "predicted_format": "STANDARD_NEWS",
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "expected_format_received_support": false,
+      "wrong_format_received_support": false,
+      "classifier_consumed_support": false,
+      "confidence_before": "MEDIUM",
+      "confidence_after": "MEDIUM",
+      "format_required_before": true,
+      "format_required_after": true,
+      "mapping_gap": "EXPECTED_FORMAT_SUPPORT_NOT_EMITTED"
+    },
+    "054": {
+      "expected_format": "RESULT_REPORT",
+      "predicted_format": "STANDARD_NEWS",
+      "semantic_format_support": [
+        "FORMAT_TREND_UPDATE"
+      ],
+      "semantic_format_suppression": [
+        "FORMAT_STANDARD_NEWS"
+      ],
+      "expected_format_received_support": false,
+      "wrong_format_received_support": false,
+      "classifier_consumed_support": false,
+      "confidence_before": "MEDIUM",
+      "confidence_after": "MEDIUM",
+      "format_required_before": false,
+      "format_required_after": false,
+      "mapping_gap": "WRONG_FORMAT_SUPPORT_EMITTED"
+    },
+    "056": {
+      "expected_format": "FACT_CHECK",
+      "predicted_format": "GUIDE",
+      "semantic_format_support": [
+        "FORMAT_SERVICE"
+      ],
+      "semantic_format_suppression": [
+        "FORMAT_GUIDE"
+      ],
+      "expected_format_received_support": false,
+      "wrong_format_received_support": false,
+      "classifier_consumed_support": false,
+      "confidence_before": "HIGH",
+      "confidence_after": "HIGH",
+      "format_required_before": false,
+      "format_required_after": false,
+      "mapping_gap": "WRONG_FORMAT_SUPPORT_EMITTED"
+    },
+    "057": {
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "RESULT_REPORT",
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "expected_format_received_support": false,
+      "wrong_format_received_support": false,
+      "classifier_consumed_support": false,
+      "confidence_before": "MEDIUM",
+      "confidence_after": "MEDIUM",
+      "format_required_before": true,
+      "format_required_after": true,
+      "mapping_gap": "NO_SEMANTIC_FORMAT_SIGNAL"
+    },
+    "058": {
+      "expected_format": "TREND_UPDATE",
+      "predicted_format": "STANDARD_NEWS",
+      "semantic_format_support": [
+        "FORMAT_RESULT_REPORT"
+      ],
+      "semantic_format_suppression": [
+        "FORMAT_TREND_UPDATE"
+      ],
+      "expected_format_received_support": false,
+      "wrong_format_received_support": false,
+      "classifier_consumed_support": false,
+      "confidence_before": "MEDIUM",
+      "confidence_after": "MEDIUM",
+      "format_required_before": true,
+      "format_required_after": true,
+      "mapping_gap": "WRONG_FORMAT_SUPPORT_EMITTED"
+    },
+    "059": {
+      "expected_format": "TREND_UPDATE",
+      "predicted_format": "STANDARD_NEWS",
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "expected_format_received_support": false,
+      "wrong_format_received_support": false,
+      "classifier_consumed_support": false,
+      "confidence_before": "MEDIUM",
+      "confidence_after": "MEDIUM",
+      "format_required_before": false,
+      "format_required_after": false,
+      "mapping_gap": "EXPECTED_FORMAT_SUPPORT_NOT_EMITTED"
+    }
+  },
+  "semantic_format_support_utility": {
+    "054": "E_SUPPORT_IS_CONTRADICTORY",
+    "056": "E_SUPPORT_IS_CONTRADICTORY",
+    "058": "E_SUPPORT_IS_CONTRADICTORY"
+  },
+  "format_classifier_consumption_findings": {
+    "support_cases": [
+      "054",
+      "056",
+      "058"
+    ],
+    "expected_support_emitted": [],
+    "expected_support_emitted_not_selected": [],
+    "wrong_or_contradictory_support_cases": [
+      "054",
+      "056",
+      "058"
+    ],
+    "finding": "The classifier inspects semantic support conditionally, but every emitted signal targeted a non-expected treatment and none altered selection toward the expected format."
+  },
+  "format_gate_fn_analysis": {
+    "054": {
+      "components_before": 0,
+      "components_after": [
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_RESULT",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_CHANGE",
+        "COMPONENT_ACTION",
+        "COMPONENT_CAUSE"
+      ],
+      "relationships_before": 0,
+      "relationships_after": 1,
+      "support_before": [],
+      "support_after": [
+        "FORMAT_TREND_UPDATE"
+      ],
+      "suppression_before": [],
+      "suppression_after": [
+        "FORMAT_STANDARD_NEWS"
+      ],
+      "confidence_before": "MEDIUM",
+      "confidence_after": "MEDIUM",
+      "format_required_before": false,
+      "format_required_after": false,
+      "status": "STILL_FALSE_NEGATIVE"
+    },
+    "056": {
+      "components_before": 0,
+      "components_after": [
+        "COMPONENT_SCHEDULE",
+        "COMPONENT_ACTION",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_INHERITED_SUBJECT"
+      ],
+      "relationships_before": 1,
+      "relationships_after": 4,
+      "support_before": [],
+      "support_after": [
+        "FORMAT_SERVICE"
+      ],
+      "suppression_before": [],
+      "suppression_after": [
+        "FORMAT_GUIDE"
+      ],
+      "confidence_before": "HIGH",
+      "confidence_after": "HIGH",
+      "format_required_before": false,
+      "format_required_after": false,
+      "status": "STILL_FALSE_NEGATIVE"
+    },
+    "059": {
+      "components_before": 0,
+      "components_after": [
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_ECONOMIC_SUBJECT",
+        "COMPONENT_CHANGE"
+      ],
+      "relationships_before": 2,
+      "relationships_after": 3,
+      "support_before": [],
+      "support_after": [],
+      "suppression_before": [],
+      "suppression_after": [],
+      "confidence_before": "MEDIUM",
+      "confidence_after": "MEDIUM",
+      "format_required_before": false,
+      "format_required_after": false,
+      "status": "STILL_FALSE_NEGATIVE"
+    }
+  },
+  "reader_intent_dependency": {
+    "direct_intent_failures": 0,
+    "downstream_intent_failures": 6,
+    "mixed_intent_failures": 0,
+    "all_current_failures_downstream_from_format": true
+  },
+  "evidence_quantity_vs_quality": {
+    "classification": "YES",
+    "components_delta": 7,
+    "relationships_delta": 3,
+    "primary_domains_delta": 2,
+    "format_support_delta": 3,
+    "topic_accuracy_delta": 0.0,
+    "format_accuracy_delta": 0.0
+  },
+  "false_semantic_confidence_cases": [
+    "052",
+    "054",
+    "055",
+    "056",
+    "058",
+    "059"
+  ],
+  "false_semantic_confidence_count": 6,
+  "evidence_alignment_by_case": {
+    "051": "IRRELEVANT",
+    "052": "ALIGNED_WITH_PREDICTION",
+    "053": "MIXED",
+    "054": "ALIGNED_WITH_PREDICTION",
+    "055": "ALIGNED_WITH_PREDICTION",
+    "056": "MIXED",
+    "057": "IRRELEVANT",
+    "058": "ALIGNED_WITH_PREDICTION",
+    "059": "MIXED",
+    "060": "IRRELEVANT"
+  },
+  "architectural_owner_by_failed_case": {
+    "051": "SHARED_UPSTREAM",
+    "052": "FORMAT_SEMANTIC_MAPPING",
+    "053": "DOMAIN_PROMOTION",
+    "054": "FORMAT_SEMANTIC_MAPPING",
+    "055": "DOMAIN_PROMOTION",
+    "056": "DOMAIN_PROMOTION",
+    "057": "FORMAT_SEMANTIC_MAPPING",
+    "058": "FORMAT_SEMANTIC_MAPPING",
+    "059": "FORMAT_SEMANTIC_MAPPING",
+    "060": "DOMAIN_PROMOTION"
+  },
+  "dominant_root_cause": "F_MIXED_ACTIVATION_TO_DECISION_GAP",
+  "recommended_next_step": "COMBINATION_OF_PROMOTION_AND_CONSUMPTION",
+  "provider_calls": 0,
+  "expected_labels_sha256": "336e5f4f49f8e75c55751599b679b29501e3713af1f8d5514ec0a46168f6a4d8",
+  "raw_source_integrity": true
+}
