@@ -1,0 +1,14 @@
+{
+  "expectations": [
+    {"id": "071", "topic": "EDUCATION", "editorial_format": "SERVICE", "reader_intent": "KNOW_ACTION"},
+    {"id": "072", "topic": "EDUCATION", "editorial_format": "GUIDE", "reader_intent": "VERIFY_REQUIREMENTS"},
+    {"id": "073", "topic": "BUSINESS", "editorial_format": "TREND_UPDATE", "reader_intent": "FOLLOW_DEVELOPMENT"},
+    {"id": "074", "topic": "ECONOMY", "editorial_format": "TREND_UPDATE", "reader_intent": "FOLLOW_DEVELOPMENT"},
+    {"id": "075", "topic": "TECHNOLOGY", "editorial_format": "EXPLAINER", "reader_intent": "UNDERSTAND_EVENT"},
+    {"id": "076", "topic": "TECHNOLOGY", "editorial_format": "ANALYSIS", "reader_intent": "UNDERSTAND_IMPACT"},
+    {"id": "077", "topic": "WORLD", "editorial_format": "STANDARD_NEWS", "reader_intent": "GET_UPDATE"},
+    {"id": "078", "topic": "TECHNOLOGY", "editorial_format": "SERVICE", "reader_intent": "KNOW_ACTION"},
+    {"id": "079", "topic": "SCIENCE", "editorial_format": "EXPLAINER", "reader_intent": "UNDERSTAND_EVENT"},
+    {"id": "080", "topic": "EDUCATION", "editorial_format": "GUIDE", "reader_intent": "VERIFY_REQUIREMENTS"}
+  ]
+}
