@@ -41,6 +41,12 @@ _COMPONENT_ROLES = {
     SemanticComponent.RECOMMENDED_ACTION: "ACTION",
     SemanticComponent.AFFECTED_AUDIENCE: "OBJECT",
 }
+_FORMAT_CANDIDATES = frozenset(
+    {
+        "FACT_CHECK", "SERVICE", "GUIDE", "TREND_UPDATE", "RESULT_REPORT",
+        "STANDARD_NEWS", "ANALYSIS", "EXPLAINER",
+    }
+)
 
 
 @dataclass(frozen=True)
@@ -83,7 +89,7 @@ class DeterministicSemanticCandidateAssessor:
             grouped.setdefault(key, []).append(record)
 
         preliminary = {
-            key: self._preliminary(value, family=key[1])
+            key: self._preliminary(value, family=key[1], all_records=records)
             for key, value in grouped.items()
         }
         material_by_family: dict[str, tuple[str, ...]] = {}
@@ -119,6 +125,11 @@ class DeterministicSemanticCandidateAssessor:
                 warnings=tuple(warnings),
                 independent_supports=item["independent_supports"],
                 family=family,
+                structure_complete=bool(item["structure_complete"]),
+                complete_competitors=tuple(
+                    value for value in competitors
+                    if preliminary[(value, family)]["structure_complete"]
+                ),
             )
             assessments.append(
                 SemanticCandidateAssessment(
@@ -251,6 +262,7 @@ class DeterministicSemanticCandidateAssessor:
         records: list[_EvidenceRecord],
         *,
         family: str,
+        all_records: tuple[_EvidenceRecord, ...],
     ) -> dict[str, object]:
         supports = [record for record in records if record.direction == "SUPPORT"]
         suppressions = [record for record in records if record.direction == "SUPPRESS"]
@@ -282,8 +294,23 @@ class DeterministicSemanticCandidateAssessor:
             warnings.append("SUBJECT_ROLE_UNRESOLVED")
         if any(record.secondary for record in supports):
             warnings.append("SUBJECT_ROLE_UNRESOLVED")
+        structure_complete = True
+        if family == "FORMAT":
+            structure_complete = self._format_structure_complete(
+                candidate=records[0].candidate,
+                supports=supports,
+                all_records=all_records,
+            )
+            if supports and not structure_complete:
+                warnings.append("FORMAT_STRUCTURE_INCOMPLETE")
         if not supports or dominated or (independent_supports == 1 and not central):
             strength = SemanticEvidenceStrength.WEAK
+        elif (
+            family == "FORMAT"
+            and structure_complete
+            and records[0].candidate != "TREND_UPDATE"
+        ):
+            strength = SemanticEvidenceStrength.STRONG
         elif independent_supports >= 2 and central:
             strength = SemanticEvidenceStrength.STRONG
         else:
@@ -304,7 +331,90 @@ class DeterministicSemanticCandidateAssessor:
             "independent_supports": independent_supports,
             "neutral_count": len(neutral),
             "family": family,
+            "structure_complete": structure_complete,
         }
+
+    @classmethod
+    def _format_structure_complete(
+        cls,
+        *,
+        candidate: str,
+        supports: list[_EvidenceRecord],
+        all_records: tuple[_EvidenceRecord, ...],
+    ) -> bool:
+        """Require complete, candidate-specific editorial treatment structure."""
+        if candidate not in _FORMAT_CANDIDATES or not supports:
+            return False
+        reasons = {record.provenance[4] for record in supports if len(record.provenance) > 4}
+        all_symbols = {
+            record.relationship_type.upper() for record in all_records
+        } | {
+            role for record in all_records for role in record.roles
+        }
+        if candidate == "RESULT_REPORT" and any(
+            "PREDICTION" in symbol or "FUTURE" in symbol
+            for symbol in all_symbols
+        ):
+            return False
+        if candidate != "SERVICE" and f"BOUNDED_{candidate}_STRUCTURE" in reasons:
+            return True
+        roles = {role for record in supports for role in record.roles}
+        types = {record.relationship_type for record in supports}
+        symbols = {str(value).upper() for value in reasons} | roles | types
+
+        def has(*terms: str) -> bool:
+            return any(term in symbol for term in terms for symbol in symbols)
+
+        if candidate == "FACT_CHECK":
+            return (
+                has("CLAIM", "ASSERTION")
+                and has("VERIF", "EVALUAT", "CHECK")
+                and has("VERDICT", "CONCLUSION", "TRUTH", "STATUS", "OUTCOME")
+            )
+        if candidate == "SERVICE":
+            actionable = has("ACTION", "APPLICATION", "REGISTRATION", "PROCEDURE")
+            access_detail = has(
+                "REQUIREMENT", "ELIGIBILITY", "DEADLINE", "SCHEDULE", "LOCATION",
+                "AVAILABILITY", "PRICE", "RATE",
+            )
+            organizing = (
+                has("APPLICATION", "REGISTRATION", "PROCEDURE", "ELIGIBILITY")
+                or (has("REQUIREMENT") and has("DEADLINE", "SCHEDULE"))
+            )
+            return actionable and access_detail and organizing
+        if candidate == "GUIDE":
+            recommendation = has("RECOMMEND", "INSTRUCTION", "GUIDANCE", "ADVICE")
+            action = has("ACTION")
+            distinct_actions = {
+                record.provenance for record in supports
+                if set(record.roles) & {"ACTION", "OBJECT"}
+            }
+            return recommendation and action and len(distinct_actions) >= 2
+        if candidate == "TREND_UPDATE":
+            current = has("INDICATOR", "MEASUREMENT", "CURRENT", "VALUE", "LEVEL")
+            reference = has("REFERENCE", "PRIOR", "PREVIOUS", "COMPARISON", "PERIOD")
+            movement = has("CHANGE", "MOVEMENT", "INCREASE", "DECREASE", "DIRECTION")
+            return current and reference and movement
+        if candidate == "RESULT_REPORT":
+            completed = has("COMPLETED", "FINAL", "EVENT", "RESULT")
+            outcome = has("OUTCOME", "SCORE", "RANKING", "FINAL", "RESULT")
+            future = has("FUTURE", "PLANNED", "SCHEDULED", "EXPECTED")
+            return completed and outcome and not future
+        if candidate == "ANALYSIS":
+            subject = has("EVENT", "STATE", "CHANGE")
+            explanation = has("CAUSE", "CONSTRAINT", "TRADEOFF")
+            consequence = has("EFFECT", "IMPLICATION", "CONSEQUENCE", "OUTCOME")
+            return subject and explanation and consequence
+        if candidate == "EXPLAINER":
+            subject = has("SYSTEM", "PROCESS", "CONCEPT", "CHANGE", "SUBJECT")
+            mechanism = has("MECHANISM", "METHOD", "HOW")
+            understanding = has("UNDERSTANDING", "EXPLANATION", "EXPLAINER")
+            return subject and mechanism and understanding
+        if candidate == "STANDARD_NEWS":
+            event = has("EVENT", "ANNOUNCEMENT", "DECISION", "DEVELOPMENT", "STATEMENT")
+            reporting = has("REPORT", "NEWS", "ACTOR_PERFORMS_ACTION")
+            return event and reporting
+        return False
 
     @staticmethod
     def _sufficiency(
@@ -316,6 +426,8 @@ class DeterministicSemanticCandidateAssessor:
         warnings: tuple[str, ...],
         independent_supports: int,
         family: str,
+        structure_complete: bool,
+        complete_competitors: tuple[str, ...],
     ) -> SemanticEvidenceSufficiency:
         if direction is SemanticEvidenceDirection.CONFLICTING:
             return SemanticEvidenceSufficiency.CONFLICTED
@@ -325,7 +437,11 @@ class DeterministicSemanticCandidateAssessor:
             return SemanticEvidenceSufficiency.INSUFFICIENT
         if strength is SemanticEvidenceStrength.WEAK:
             return SemanticEvidenceSufficiency.INSUFFICIENT
-        if competitors:
+        if family == "FORMAT" and not structure_complete:
+            return SemanticEvidenceSufficiency.PARTIAL
+        if complete_competitors:
+            return SemanticEvidenceSufficiency.PARTIAL
+        if competitors and family != "FORMAT":
             return SemanticEvidenceSufficiency.PARTIAL
         relevant_roles = (
             _SUBJECT_BEARING_ROLES
@@ -336,7 +452,7 @@ class DeterministicSemanticCandidateAssessor:
         if (
             strength is SemanticEvidenceStrength.STRONG
             and central
-            and independent_supports >= 2
+            and (independent_supports >= 2 or (family == "FORMAT" and structure_complete))
             and "SUBJECT_ROLE_UNRESOLVED" not in warnings
         ):
             return SemanticEvidenceSufficiency.SUFFICIENT

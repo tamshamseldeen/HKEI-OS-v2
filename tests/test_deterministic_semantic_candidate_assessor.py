@@ -220,16 +220,16 @@ def test_collection_only_candidate_presence_is_not_sufficient() -> None:
     assert result.sufficiency is SemanticEvidenceSufficiency.INSUFFICIENT
 
 
-def test_cause_effect_analysis_can_be_strong_and_sufficient() -> None:
+def test_effect_only_analysis_is_strong_but_structurally_partial() -> None:
     item = relation(
         supports=("FORMAT_ANALYSIS",),
         relationship_type=SemanticRelationshipType.CONSEQUENCE_OF_EVENT,
         subject=SemanticComponent.EVENT, object_=SemanticComponent.CONSEQUENCE,
     )
     result = one(item, replace(item, sentence_index=1, reason_code="SECOND_CAUSAL_CHAIN"))
-    assert (result.strength, result.sufficiency) == (
-        SemanticEvidenceStrength.STRONG, SemanticEvidenceSufficiency.SUFFICIENT,
-    )
+    assert result.strength is SemanticEvidenceStrength.STRONG
+    assert result.sufficiency is SemanticEvidenceSufficiency.PARTIAL
+    assert "FORMAT_STRUCTURE_INCOMPLETE" in result.warnings
 
 
 def test_static_measurement_is_not_sufficient_for_trend() -> None:
@@ -241,14 +241,15 @@ def test_static_measurement_is_not_sufficient_for_trend() -> None:
     assert result.sufficiency is SemanticEvidenceSufficiency.PARTIAL
 
 
-def test_completed_result_relationship_supports_result_partially() -> None:
+def test_completed_result_relationship_is_structurally_sufficient() -> None:
     result = one(relation(
         supports=("FORMAT_RESULT_REPORT",),
         relationship_type=SemanticRelationshipType.EVENT_HAS_OUTCOME,
         subject=SemanticComponent.EVENT, object_=SemanticComponent.OUTCOME,
     ))
     assert result.direction is SemanticEvidenceDirection.SUPPORT
-    assert result.strength is SemanticEvidenceStrength.MODERATE
+    assert result.strength is SemanticEvidenceStrength.STRONG
+    assert result.sufficiency is SemanticEvidenceSufficiency.SUFFICIENT
 
 
 def test_incomplete_fact_check_structure_is_not_sufficient() -> None:

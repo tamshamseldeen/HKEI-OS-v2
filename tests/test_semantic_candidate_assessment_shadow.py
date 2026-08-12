@@ -57,10 +57,10 @@ def test_expected_labels_are_loaded_only_after_all_assessments(monkeypatch: pyte
 def test_distributions_are_exact_and_batches_are_included(analysis: dict) -> None:
     assert analysis["cases_analyzed"] == 41
     assert analysis["sufficiency_distribution"] == {
-        "INSUFFICIENT": 59, "PARTIAL": 28, "SUFFICIENT": 18, "CONFLICTED": 6,
+        "INSUFFICIENT": 59, "PARTIAL": 30, "SUFFICIENT": 16, "CONFLICTED": 6,
     }
     assert analysis["strength_distribution"] == {
-        "WEAK": 59, "MODERATE": 29, "STRONG": 23,
+        "WEAK": 59, "MODERATE": 27, "STRONG": 25,
     }
     assert analysis["direction_distribution"] == {
         "SUPPORT": 77, "SUPPRESS": 28, "NEUTRAL": 0, "CONFLICTING": 6,
@@ -71,15 +71,15 @@ def test_distributions_are_exact_and_batches_are_included(analysis: dict) -> Non
 def test_false_sufficiency_quality_metrics_are_exact(analysis: dict) -> None:
     assert analysis["sufficiency_quality_metrics"] == {
         "true_sufficient_count": 1,
-        "false_sufficient_count": 2,
-        "safe_wrong_partial_count": 17,
+        "false_sufficient_count": 0,
+        "safe_wrong_partial_count": 19,
         "expected_candidate_sufficient_count": 0,
         "expected_candidate_partial_count": 1,
         "expected_candidate_missing_count": 7,
-        "false_sufficiency_rate": 66.66666666666666,
+        "false_sufficiency_rate": 0.0,
     }
-    assert analysis["diagnostic_quality"] == "WEAK"
-    assert analysis["recommended_next_step"] == "REFINE_FORMAT_DIRECTIONAL_ASSESSMENT"
+    assert analysis["diagnostic_quality"] == "STRONG"
+    assert analysis["recommended_next_step"] == "REFINE_ASSESSOR_STRENGTH_LOGIC"
 
 
 def test_case_055_and_topic_counterfactual_are_deterministic(analysis: dict) -> None:
@@ -94,16 +94,18 @@ def test_case_055_and_topic_counterfactual_are_deterministic(analysis: dict) -> 
 def test_critical_format_safety_and_counterfactual_are_exact(analysis: dict) -> None:
     critical = analysis["critical_format_case_safety"]
     assert critical["054"]["predicted_sufficiency"] == "PARTIAL"
-    assert critical["056"]["predicted_sufficiency"] == "SUFFICIENT"
-    assert critical["058"]["predicted_sufficiency"] == "SUFFICIENT"
+    assert critical["056"]["predicted_sufficiency"] == "PARTIAL"
+    assert critical["058"]["predicted_sufficiency"] == "PARTIAL"
     assert critical["059"]["expected_sufficiency"] == "NONE"
     assert analysis["counterfactual_format_unresolved"] == {
-        "054": True, "056": False, "058": False, "059": True,
+        "054": True, "056": True, "058": True, "059": True,
     }
 
 
 def test_confidence_duplicate_role_and_competition_audits(analysis: dict) -> None:
-    assert analysis["confidence_sufficiency_divergence"] == ["054:FORMAT"]
+    assert analysis["confidence_sufficiency_divergence"] == [
+        "054:FORMAT", "056:FORMAT", "058:FORMAT",
+    ]
     assert analysis["duplicate_evidence_findings"] == [
         "batch_01:001", "batch_01:003", "batch_02:013", "batch_02:014",
         "batch_02:015", "batch_02:018", "batch_03:029", "batch_05:049",
