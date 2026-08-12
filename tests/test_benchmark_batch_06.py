@@ -138,6 +138,8 @@ def test_batch_contains_only_registration_and_authorized_validation_outputs() ->
         "activation_to_decision_gap_analysis.md",
         "post_hkei_163_comparison.json",
         "post_hkei_163_comparison.md",
+        "semantic_directionality_sufficiency_analysis.json",
+        "semantic_directionality_sufficiency_analysis.md",
     }
     assert required <= files <= required | optional
     forbidden = ("contextual", "semantic", "adjudication", "openai", "provider")

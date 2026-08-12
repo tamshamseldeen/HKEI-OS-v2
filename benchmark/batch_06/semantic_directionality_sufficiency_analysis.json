@@ -1,0 +1,612 @@
+{
+  "batch_scientific_status": "DIAGNOSTIC_DEVELOPMENT_SET",
+  "scientific_use": [
+    "HISTORICAL_COMPARISON",
+    "FAILURE_DIAGNOSIS",
+    "REGRESSION_OBSERVATION"
+  ],
+  "final_generalization_claims_allowed": false,
+  "recommended_future_holdout": "BATCH_07",
+  "cases_analyzed": [
+    "051",
+    "052",
+    "053",
+    "054",
+    "055",
+    "056",
+    "057",
+    "058",
+    "059",
+    "060"
+  ],
+  "current_hkei_164_metrics": {
+    "topic_accuracy": 40.0,
+    "format_accuracy": 40.0,
+    "reader_intent_accuracy": 40.0,
+    "full_case_accuracy": 0.0,
+    "topic_gate_recall": 83.33333333333334,
+    "format_gate_recall": 33.33333333333333
+  },
+  "semantic_directionality_by_case": {
+    "051": [],
+    "052": [
+      {
+        "source_structure": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+        "semantic_relationship": "SUBJECT_BELONGS_TO_DOMAIN",
+        "mapped_support": "PRIMARY_DOMAIN_ECONOMY",
+        "direction": "CORRECT_DIRECTION"
+      },
+      {
+        "source_structure": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+        "semantic_relationship": "SUBJECT_BELONGS_TO_DOMAIN",
+        "mapped_support": "PRIMARY_DOMAIN_ECONOMY",
+        "direction": "CORRECT_DIRECTION"
+      },
+      {
+        "source_structure": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+        "semantic_relationship": "SUBJECT_BELONGS_TO_DOMAIN",
+        "mapped_support": "PRIMARY_DOMAIN_ECONOMY",
+        "direction": "CORRECT_DIRECTION"
+      }
+    ],
+    "053": [],
+    "054": [
+      {
+        "source_structure": "BOUNDED_TREND_UPDATE_STRUCTURE",
+        "semantic_relationship": "INTERPRETATION_OF_INDICATOR",
+        "mapped_support": "FORMAT_TREND_UPDATE",
+        "direction": "WRONG_DIRECTION"
+      }
+    ],
+    "055": [
+      {
+        "source_structure": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+        "semantic_relationship": "SUBJECT_BELONGS_TO_DOMAIN",
+        "mapped_support": "PRIMARY_DOMAIN_ECONOMY",
+        "direction": "IRRELEVANT_DIRECTION"
+      }
+    ],
+    "056": [
+      {
+        "source_structure": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+        "semantic_relationship": "ACTION_TARGETS_OBJECT",
+        "mapped_support": "PRIMARY_DOMAIN_EDUCATION",
+        "direction": "CORRECT_DIRECTION"
+      },
+      {
+        "source_structure": "BOUNDED_SERVICE_STRUCTURE",
+        "semantic_relationship": "ACTION_HAS_DEADLINE",
+        "mapped_support": "FORMAT_SERVICE",
+        "direction": "WRONG_DIRECTION"
+      },
+      {
+        "source_structure": "BOUNDED_SERVICE_STRUCTURE",
+        "semantic_relationship": "ACTION_HAS_DEADLINE",
+        "mapped_support": "FORMAT_SERVICE",
+        "direction": "WRONG_DIRECTION"
+      },
+      {
+        "source_structure": "BOUNDED_SERVICE_STRUCTURE",
+        "semantic_relationship": "ACTION_HAS_DEADLINE",
+        "mapped_support": "FORMAT_SERVICE",
+        "direction": "WRONG_DIRECTION"
+      }
+    ],
+    "057": [],
+    "058": [
+      {
+        "source_structure": "BOUNDED_RESULT_REPORT_STRUCTURE",
+        "semantic_relationship": "EVENT_HAS_OUTCOME",
+        "mapped_support": "FORMAT_RESULT_REPORT",
+        "direction": "WRONG_DIRECTION"
+      },
+      {
+        "source_structure": "BOUNDED_RESULT_REPORT_STRUCTURE",
+        "semantic_relationship": "EVENT_HAS_OUTCOME",
+        "mapped_support": "FORMAT_RESULT_REPORT",
+        "direction": "WRONG_DIRECTION"
+      }
+    ],
+    "059": [
+      {
+        "source_structure": "ECONOMIC_INDICATOR_DOMAIN_COMPOSITION",
+        "semantic_relationship": "INDICATOR_DESCRIBES_DOMAIN",
+        "mapped_support": "PRIMARY_DOMAIN_ECONOMY",
+        "direction": "CORRECT_DIRECTION"
+      },
+      {
+        "source_structure": "ECONOMIC_INDICATOR_DOMAIN_COMPOSITION",
+        "semantic_relationship": "INDICATOR_DESCRIBES_DOMAIN",
+        "mapped_support": "PRIMARY_DOMAIN_ECONOMY",
+        "direction": "CORRECT_DIRECTION"
+      },
+      {
+        "source_structure": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+        "semantic_relationship": "SUBJECT_BELONGS_TO_DOMAIN",
+        "mapped_support": "PRIMARY_DOMAIN_ECONOMY",
+        "direction": "CORRECT_DIRECTION"
+      }
+    ],
+    "060": []
+  },
+  "case_054_analysis": {
+    "components": [
+      "COMPONENT_MEASUREMENT",
+      "COMPONENT_RESULT",
+      "COMPONENT_TEMPORAL_UPDATE",
+      "COMPONENT_CHANGE",
+      "COMPONENT_ACTION",
+      "COMPONENT_CAUSE"
+    ],
+    "relationships": [
+      {
+        "type": "INTERPRETATION_OF_INDICATOR",
+        "strength": "STRONG",
+        "reason_code": "BOUNDED_TREND_UPDATE_STRUCTURE",
+        "supports": [
+          "FORMAT_TREND_UPDATE"
+        ],
+        "suppresses": [
+          "FORMAT_STANDARD_NEWS"
+        ]
+      }
+    ],
+    "mapping_rule_selected": "BOUNDED_TREND_UPDATE_STRUCTURE",
+    "suppression_considered": [
+      "FORMAT_STANDARD_NEWS"
+    ],
+    "confidence_contribution": "STRONG_SUPPORT_TO_HIGH_CONFIDENCE",
+    "root_cause": "RESULT_SIGNAL_UNDERWEIGHTED"
+  },
+  "case_056_analysis": {
+    "claim_assertion_components": [
+      "CLAIM_ATTRIBUTED"
+    ],
+    "verification_components": [],
+    "truth_conclusion_components": [],
+    "procedure_components": [
+      "COMPONENT_SCHEDULE",
+      "COMPONENT_ACTION",
+      "COMPONENT_TEMPORAL_UPDATE",
+      "COMPONENT_INHERITED_SUBJECT"
+    ],
+    "relationships": [
+      {
+        "type": "ACTION_TARGETS_OBJECT",
+        "strength": "MEDIUM",
+        "reason_code": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+        "supports": [
+          "PRIMARY_DOMAIN_EDUCATION"
+        ],
+        "suppresses": []
+      },
+      {
+        "type": "ACTION_HAS_DEADLINE",
+        "strength": "STRONG",
+        "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+        "supports": [
+          "FORMAT_SERVICE"
+        ],
+        "suppresses": [
+          "FORMAT_GUIDE"
+        ]
+      },
+      {
+        "type": "ACTION_HAS_DEADLINE",
+        "strength": "STRONG",
+        "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+        "supports": [
+          "FORMAT_SERVICE"
+        ],
+        "suppresses": [
+          "FORMAT_GUIDE"
+        ]
+      },
+      {
+        "type": "ACTION_HAS_DEADLINE",
+        "strength": "STRONG",
+        "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+        "supports": [
+          "FORMAT_SERVICE"
+        ],
+        "suppresses": [
+          "FORMAT_GUIDE"
+        ]
+      }
+    ],
+    "mapping_path": "ACTION_HAS_DEADLINE_TO_SERVICE",
+    "root_cause": "VERIFICATION_STRUCTURE_MISSING"
+  },
+  "case_058_analysis": {
+    "expected_treatment": "TREND_UPDATE",
+    "emitted_support": [
+      "FORMAT_RESULT_REPORT"
+    ],
+    "components": [
+      "COMPONENT_CHANGE",
+      "COMPONENT_METHOD",
+      "COMPONENT_RESULT",
+      "COMPONENT_TEMPORAL_UPDATE",
+      "COMPONENT_MEASUREMENT",
+      "COMPONENT_CAUSE",
+      "COMPONENT_EFFECT",
+      "COMPONENT_PRICE",
+      "COMPONENT_INHERITED_SUBJECT"
+    ],
+    "mapping_rule": "BOUNDED_RESULT_REPORT_STRUCTURE",
+    "confidence_effect": "HIGH",
+    "root_cause": "COMPLETED_VS_TEMPORAL_EVENT_BOUNDARY_ERROR"
+  },
+  "case_059_analysis": {
+    "expected_treatment": "TREND_UPDATE",
+    "current_state_signal": true,
+    "prior_reference_state": false,
+    "direction_change": true,
+    "continuation": false,
+    "temporal_comparison": false,
+    "relationship_composed": false,
+    "activation_break": "TEMPORAL_COMPARISON_NOT_COMPOSED"
+  },
+  "topic_domain_promotion_analysis": {
+    "051": {
+      "expected_domain": "PRIMARY_DOMAIN_GENERAL",
+      "domain_bearing_components": [
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_RECOMMENDED_ACTION"
+      ],
+      "semantic_relationships": [],
+      "candidate_domains": [],
+      "primary_domain": [],
+      "secondary_domains": [],
+      "promotion_strength": "INSUFFICIENT",
+      "precedence_outcome": "SUBJECT_NOT_IDENTIFIED"
+    },
+    "053": {
+      "expected_domain": "PRIMARY_DOMAIN_BUSINESS",
+      "domain_bearing_components": [
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_CHANGE",
+        "COMPONENT_CAUSE",
+        "COMPONENT_RESULT"
+      ],
+      "semantic_relationships": [],
+      "candidate_domains": [],
+      "primary_domain": [],
+      "secondary_domains": [],
+      "promotion_strength": "INSUFFICIENT",
+      "precedence_outcome": "DOMAIN_MAPPING_MISSING"
+    },
+    "054": {
+      "expected_domain": "PRIMARY_DOMAIN_BUSINESS",
+      "domain_bearing_components": [
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_RESULT",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_CHANGE",
+        "COMPONENT_ACTION",
+        "COMPONENT_CAUSE"
+      ],
+      "semantic_relationships": [
+        {
+          "type": "INTERPRETATION_OF_INDICATOR",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_TREND_UPDATE_STRUCTURE",
+          "supports": [
+            "FORMAT_TREND_UPDATE"
+          ],
+          "suppresses": [
+            "FORMAT_STANDARD_NEWS"
+          ]
+        }
+      ],
+      "candidate_domains": [],
+      "primary_domain": [],
+      "secondary_domains": [],
+      "promotion_strength": "INSUFFICIENT",
+      "precedence_outcome": "DOMAIN_MAPPING_MISSING"
+    },
+    "055": {
+      "expected_domain": "PRIMARY_DOMAIN_WORLD",
+      "domain_bearing_components": [
+        "COMPONENT_EFFECT",
+        "COMPONENT_PRICE",
+        "COMPONENT_CHANGE"
+      ],
+      "semantic_relationships": [
+        {
+          "type": "SUBJECT_BELONGS_TO_DOMAIN",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": [
+            "PRIMARY_DOMAIN_GOVERNMENT",
+            "PRIMARY_DOMAIN_TECHNOLOGY"
+          ]
+        }
+      ],
+      "candidate_domains": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "primary_domain": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "secondary_domains": [],
+      "promotion_strength": "STRONG",
+      "precedence_outcome": "WRONG_DOMAIN_RELATIONSHIP"
+    },
+    "056": {
+      "expected_domain": "PRIMARY_DOMAIN_EDUCATION",
+      "domain_bearing_components": [
+        "COMPONENT_SCHEDULE",
+        "COMPONENT_ACTION",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_INHERITED_SUBJECT"
+      ],
+      "semantic_relationships": [
+        {
+          "type": "ACTION_TARGETS_OBJECT",
+          "strength": "MEDIUM",
+          "reason_code": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_EDUCATION"
+          ],
+          "suppresses": []
+        },
+        {
+          "type": "ACTION_HAS_DEADLINE",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+          "supports": [
+            "FORMAT_SERVICE"
+          ],
+          "suppresses": [
+            "FORMAT_GUIDE"
+          ]
+        },
+        {
+          "type": "ACTION_HAS_DEADLINE",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+          "supports": [
+            "FORMAT_SERVICE"
+          ],
+          "suppresses": [
+            "FORMAT_GUIDE"
+          ]
+        },
+        {
+          "type": "ACTION_HAS_DEADLINE",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+          "supports": [
+            "FORMAT_SERVICE"
+          ],
+          "suppresses": [
+            "FORMAT_GUIDE"
+          ]
+        }
+      ],
+      "candidate_domains": [
+        "PRIMARY_DOMAIN_EDUCATION"
+      ],
+      "primary_domain": [],
+      "secondary_domains": [],
+      "promotion_strength": "INSUFFICIENT",
+      "precedence_outcome": "RELATIONSHIP_TOO_WEAK"
+    },
+    "060": {
+      "expected_domain": "PRIMARY_DOMAIN_BUSINESS",
+      "domain_bearing_components": [
+        "COMPONENT_ACTION",
+        "COMPONENT_CAUSE",
+        "COMPONENT_CHANGE",
+        "COMPONENT_RECOMMENDED_ACTION",
+        "COMPONENT_INHERITED_SUBJECT"
+      ],
+      "semantic_relationships": [],
+      "candidate_domains": [],
+      "primary_domain": [],
+      "secondary_domains": [],
+      "promotion_strength": "INSUFFICIENT",
+      "precedence_outcome": "AUTHORITY_OVERWEIGHTED"
+    }
+  },
+  "expected_domain_failure_reasons": {
+    "051": "SUBJECT_NOT_IDENTIFIED",
+    "053": "DOMAIN_MAPPING_MISSING",
+    "054": "DOMAIN_MAPPING_MISSING",
+    "055": "WRONG_DOMAIN_RELATIONSHIP",
+    "056": "RELATIONSHIP_TOO_WEAK",
+    "060": "AUTHORITY_OVERWEIGHTED"
+  },
+  "primary_domain_sufficiency_analysis": {
+    "052": {
+      "candidate": "PRIMARY_DOMAIN_ECONOMY",
+      "subject_bearing": true,
+      "uniquely_dominant": true,
+      "competing_domains": [],
+      "relationship_strength": "STRONG",
+      "independent_support_count": 3,
+      "classification": "STRONG_SUFFICIENCY"
+    },
+    "055": {
+      "candidate": "PRIMARY_DOMAIN_ECONOMY",
+      "subject_bearing": false,
+      "uniquely_dominant": false,
+      "competing_domains": [
+        "WORLD",
+        "BUSINESS"
+      ],
+      "relationship_strength": "STRONG",
+      "independent_support_count": 1,
+      "classification": "FALSE_SUFFICIENCY"
+    },
+    "059": {
+      "candidate": "PRIMARY_DOMAIN_ECONOMY",
+      "subject_bearing": true,
+      "uniquely_dominant": true,
+      "competing_domains": [],
+      "relationship_strength": "STRONG",
+      "independent_support_count": 3,
+      "classification": "STRONG_SUFFICIENCY"
+    }
+  },
+  "primary_domain_sufficiency_counts": {
+    "STRONG_SUFFICIENCY": 2,
+    "FALSE_SUFFICIENCY": 1
+  },
+  "case_055_gate_safety_analysis": {
+    "primary_domain": [
+      "PRIMARY_DOMAIN_ECONOMY"
+    ],
+    "secondary_domains": [],
+    "confidence": "MEDIUM",
+    "unresolved_evidence": [
+      "EXPECTED_WORLD_ABSENT",
+      "BUSINESS_BASELINE_COMPETES_WITH_ECONOMY"
+    ],
+    "suppressions": [],
+    "trigger_signals": [],
+    "semantic_sufficiency": "FALSE_SUFFICIENCY",
+    "safety_break": "PARTIAL_SEMANTICS_MARKED_RESOLVED"
+  },
+  "format_gate_safety_analysis": {
+    "previous_recall": 50.0,
+    "current_recall": 33.33333333333333,
+    "false_negative_cases": [
+      "054",
+      "056",
+      "058",
+      "059"
+    ],
+    "causes": {
+      "054": "WRONG_FORMAT_SUPPORT_MARKED_RESOLVED",
+      "056": "WRONG_FORMAT_SUPPORT_MARKED_RESOLVED",
+      "058": "WRONG_FORMAT_SUPPORT_MARKED_RESOLVED",
+      "059": "UNRESOLVED_FORMAT_SIGNAL_LOST"
+    }
+  },
+  "confidence_contribution_analysis": {
+    "051:TOPIC": {
+      "confidence": "MEDIUM",
+      "contributors": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "classification": "DETERMINISTICALLY_INFLATED"
+    },
+    "052:FORMAT": {
+      "confidence": "MEDIUM",
+      "contributors": [],
+      "classification": "DETERMINISTICALLY_INFLATED"
+    },
+    "054:TOPIC": {
+      "confidence": "MEDIUM",
+      "contributors": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "classification": "DETERMINISTICALLY_INFLATED"
+    },
+    "054:FORMAT": {
+      "confidence": "HIGH",
+      "contributors": [
+        "FORMAT_TREND_UPDATE"
+      ],
+      "classification": "SEMANTICALLY_INFLATED"
+    },
+    "055:TOPIC": {
+      "confidence": "MEDIUM",
+      "contributors": [],
+      "classification": "SEMANTICALLY_INFLATED"
+    },
+    "056:TOPIC": {
+      "confidence": "MEDIUM",
+      "contributors": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "MULTIPLE_COMPETING_TOPIC_SIGNALS",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "classification": "DETERMINISTICALLY_INFLATED"
+    },
+    "056:FORMAT": {
+      "confidence": "HIGH",
+      "contributors": [
+        "FORMAT_SERVICE"
+      ],
+      "classification": "SEMANTICALLY_INFLATED"
+    },
+    "057:FORMAT": {
+      "confidence": "MEDIUM",
+      "contributors": [],
+      "classification": "DETERMINISTICALLY_INFLATED"
+    },
+    "058:FORMAT": {
+      "confidence": "HIGH",
+      "contributors": [
+        "FORMAT_RESULT_REPORT"
+      ],
+      "classification": "SEMANTICALLY_INFLATED"
+    },
+    "059:FORMAT": {
+      "confidence": "MEDIUM",
+      "contributors": [],
+      "classification": "DETERMINISTICALLY_INFLATED"
+    },
+    "060:TOPIC": {
+      "confidence": "MEDIUM",
+      "contributors": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "classification": "DETERMINISTICALLY_INFLATED"
+    }
+  },
+  "confidence_inflation_cases": [
+    "051:TOPIC",
+    "052:FORMAT",
+    "054:FORMAT",
+    "054:TOPIC",
+    "055:TOPIC",
+    "056:FORMAT",
+    "056:TOPIC",
+    "057:FORMAT",
+    "058:FORMAT",
+    "059:FORMAT",
+    "060:TOPIC"
+  ],
+  "semantic_evidence_direction_metrics": {
+    "aligned_with_expected": 7,
+    "aligned_with_wrong_prediction": 6,
+    "neutral_or_irrelevant": 1,
+    "total_directional_items": 14,
+    "direction_accuracy": 50.0
+  },
+  "format_semantic_mapping_matrix": {
+    "EVENT_UPDATE": "UNDERRECOGNIZED",
+    "TEMPORAL_CHANGE": "OVERBROAD",
+    "RESULT_OUTCOME": "CONFLICTING",
+    "GUIDANCE_ACTION": "UNDERRECOGNIZED",
+    "SERVICE_PROCEDURE": "OVERBROAD",
+    "CLAIM_VERIFICATION": "UNDERRECOGNIZED",
+    "CAUSE_EFFECT": "UNDERRECOGNIZED",
+    "PROCESS_EXPLANATION": "UNDERRECOGNIZED"
+  },
+  "domain_mapping_matrix": {
+    "SUBJECT+ECONOMIC_CONCEPT": "CORRECT",
+    "OBJECT+EDUCATION_CONCEPT": "PROMOTION_MISSING",
+    "CHANGE_RESULT+BUSINESS_CONCEPT": "MAPPING_MISSING",
+    "ACTOR_AUTHORITY+SUBJECT_CONCEPT": "ROLE_INSENSITIVE",
+    "CROSS_BORDER_EVENT+ECONOMIC_CONCEPT": "OVERBROAD"
+  },
+  "evidence_vs_sufficiency_conflation": "PARTIALLY",
+  "dominant_root_cause": "F_MIXED_MAPPING_AND_SUFFICIENCY_FAILURE",
+  "recommended_next_step": "COMBINATION_OF_DIRECTIONALITY_AND_SUFFICIENCY",
+  "provider_calls": 0,
+  "expected_labels_sha256": "336e5f4f49f8e75c55751599b679b29501e3713af1f8d5514ec0a46168f6a4d8",
+  "raw_source_integrity": true
+}
