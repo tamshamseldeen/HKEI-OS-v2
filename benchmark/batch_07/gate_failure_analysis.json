@@ -1,0 +1,523 @@
+{
+  "hkei_178_topic_gate": {
+    "tp": 6,
+    "fp": 2,
+    "tn": 1,
+    "fn": 1,
+    "precision": 75.0,
+    "recall": 85.71428571428571
+  },
+  "hkei_178_format_gate": {
+    "tp": 1,
+    "fp": 1,
+    "tn": 1,
+    "fn": 7,
+    "precision": 50.0,
+    "recall": 12.5
+  },
+  "topic_gate_false_negatives": [
+    {
+      "id": "063",
+      "dimension": "TOPIC",
+      "expected_label": "WORLD",
+      "deterministic_label": "POLITICS",
+      "classifier_confidence": "LOW",
+      "contextual_evidence_present": false,
+      "semantic_relationships_present": true,
+      "candidate_assessments": [
+        {
+          "candidate": "RESULT_REPORT",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [
+            "RESULT_REPORT"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "semantic_sufficiency": [
+        "SUFFICIENT",
+        "INSUFFICIENT"
+      ],
+      "semantic_support": [
+        "EVENT_HAS_OUTCOME"
+      ],
+      "semantic_suppression": [
+        "EVENT_HAS_OUTCOME"
+      ],
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "failure_class": "SIGNAL_PRESENT_GATE_IGNORED",
+      "existing_unresolved_format_signal": null,
+      "existing_signal_gate_failed_to_consume": "TOPIC_LOW_CONFIDENCE",
+      "upstream_missing_representation": null
+    }
+  ],
+  "format_gate_false_negatives": [
+    {
+      "id": "061",
+      "dimension": "FORMAT",
+      "expected_label": "TREND_UPDATE",
+      "deterministic_label": "STANDARD_NEWS",
+      "classifier_confidence": "MEDIUM",
+      "contextual_evidence_present": true,
+      "semantic_relationships_present": false,
+      "candidate_assessments": [],
+      "semantic_sufficiency": [
+        "MISSING"
+      ],
+      "semantic_support": [],
+      "semantic_suppression": [],
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "failure_class": "FALSE_CONFIDENCE",
+      "existing_unresolved_format_signal": true,
+      "existing_signal_gate_failed_to_consume": "FORMAT_MEDIUM_CONFIDENCE",
+      "upstream_missing_representation": null
+    },
+    {
+      "id": "062",
+      "dimension": "FORMAT",
+      "expected_label": "STANDARD_NEWS",
+      "deterministic_label": "BREAKING",
+      "classifier_confidence": "MEDIUM",
+      "contextual_evidence_present": true,
+      "semantic_relationships_present": false,
+      "candidate_assessments": [],
+      "semantic_sufficiency": [
+        "MISSING"
+      ],
+      "semantic_support": [],
+      "semantic_suppression": [],
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "failure_class": "FALSE_CONFIDENCE",
+      "existing_unresolved_format_signal": true,
+      "existing_signal_gate_failed_to_consume": "FORMAT_MEDIUM_CONFIDENCE",
+      "upstream_missing_representation": null
+    },
+    {
+      "id": "063",
+      "dimension": "FORMAT",
+      "expected_label": "STANDARD_NEWS",
+      "deterministic_label": "RESULT_REPORT",
+      "classifier_confidence": "HIGH",
+      "contextual_evidence_present": false,
+      "semantic_relationships_present": true,
+      "candidate_assessments": [
+        {
+          "candidate": "RESULT_REPORT",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [
+            "RESULT_REPORT"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "semantic_sufficiency": [
+        "SUFFICIENT",
+        "INSUFFICIENT"
+      ],
+      "semantic_support": [
+        "EVENT_HAS_OUTCOME"
+      ],
+      "semantic_suppression": [
+        "EVENT_HAS_OUTCOME"
+      ],
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "failure_class": "FALSE_SEMANTIC_SUFFICIENCY",
+      "existing_unresolved_format_signal": false,
+      "existing_signal_gate_failed_to_consume": null,
+      "upstream_missing_representation": "No persisted pre-Gate Format signal represented the expected treatment."
+    },
+    {
+      "id": "065",
+      "dimension": "FORMAT",
+      "expected_label": "RESULT_REPORT",
+      "deterministic_label": "STANDARD_NEWS",
+      "classifier_confidence": "MEDIUM",
+      "contextual_evidence_present": true,
+      "semantic_relationships_present": false,
+      "candidate_assessments": [
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [
+            "SPORTS"
+          ],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "DUPLICATE_EVIDENCE_DISCOUNTED",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "SPORTS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_SPORTS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "semantic_sufficiency": [
+        "INSUFFICIENT",
+        "PARTIAL"
+      ],
+      "semantic_support": [
+        "CONTEXTUAL_GENERIC_BUSINESS_TOKEN",
+        "CONTEXTUAL_GENERIC_SPORTS_TOKEN"
+      ],
+      "semantic_suppression": [],
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "MULTIPLE_COMPETING_TOPIC_SIGNALS",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "failure_class": "FALSE_CONFIDENCE",
+      "existing_unresolved_format_signal": true,
+      "existing_signal_gate_failed_to_consume": "FORMAT_MEDIUM_CONFIDENCE",
+      "upstream_missing_representation": null
+    },
+    {
+      "id": "066",
+      "dimension": "FORMAT",
+      "expected_label": "STANDARD_NEWS",
+      "deterministic_label": "RESULT_REPORT",
+      "classifier_confidence": "HIGH",
+      "contextual_evidence_present": false,
+      "semantic_relationships_present": true,
+      "candidate_assessments": [
+        {
+          "candidate": "RESULT_REPORT",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [
+            "RESULT_REPORT"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "semantic_sufficiency": [
+        "SUFFICIENT",
+        "INSUFFICIENT"
+      ],
+      "semantic_support": [
+        "EVENT_HAS_OUTCOME"
+      ],
+      "semantic_suppression": [
+        "EVENT_HAS_OUTCOME"
+      ],
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN"
+      ],
+      "failure_class": "FALSE_SEMANTIC_SUFFICIENCY",
+      "existing_unresolved_format_signal": false,
+      "existing_signal_gate_failed_to_consume": null,
+      "upstream_missing_representation": "No persisted pre-Gate Format signal represented the expected treatment."
+    },
+    {
+      "id": "067",
+      "dimension": "FORMAT",
+      "expected_label": "STANDARD_NEWS",
+      "deterministic_label": "SERVICE",
+      "classifier_confidence": "HIGH",
+      "contextual_evidence_present": true,
+      "semantic_relationships_present": false,
+      "candidate_assessments": [
+        {
+          "candidate": "ANALYSIS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "FORMAT_STRUCTURE_INCOMPLETE",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "UNDERSTAND_IMPACT",
+          "candidate_group": "CANDIDATE_TYPE_NOT_EXPLICIT",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "semantic_sufficiency": [
+        "INSUFFICIENT"
+      ],
+      "semantic_support": [
+        "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+      ],
+      "semantic_suppression": [],
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
+        "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+      ],
+      "failure_class": "UNRESOLVED_SIGNAL_NOT_PROPAGATED",
+      "existing_unresolved_format_signal": true,
+      "existing_signal_gate_failed_to_consume": "FORMAT_STRUCTURE_INCOMPLETE / CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED",
+      "upstream_missing_representation": null
+    },
+    {
+      "id": "068",
+      "dimension": "FORMAT",
+      "expected_label": "EXPLAINER",
+      "deterministic_label": "STANDARD_NEWS",
+      "classifier_confidence": "MEDIUM",
+      "contextual_evidence_present": true,
+      "semantic_relationships_present": false,
+      "candidate_assessments": [
+        {
+          "candidate": "SCIENCE",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_SCIENCE_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "semantic_sufficiency": [
+        "PARTIAL"
+      ],
+      "semantic_support": [
+        "CONTEXTUAL_SCIENCE_CONTEXT_PHRASE"
+      ],
+      "semantic_suppression": [],
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "failure_class": "FALSE_CONFIDENCE",
+      "existing_unresolved_format_signal": true,
+      "existing_signal_gate_failed_to_consume": "FORMAT_MEDIUM_CONFIDENCE",
+      "upstream_missing_representation": null
+    }
+  ],
+  "topic_fn_count": 1,
+  "format_fn_count": 7,
+  "format_fn_with_existing_unresolved_signal": 5,
+  "format_fn_without_existing_unresolved_signal": 2,
+  "false_sufficient_assessments": [
+    {
+      "id": "063",
+      "dimension": "FORMAT",
+      "candidate": "RESULT_REPORT",
+      "expected": "STANDARD_NEWS",
+      "sufficiency": "SUFFICIENT",
+      "direct_gate_contribution": false
+    },
+    {
+      "id": "066",
+      "dimension": "FORMAT",
+      "candidate": "RESULT_REPORT",
+      "expected": "STANDARD_NEWS",
+      "sufficiency": "SUFFICIENT",
+      "direct_gate_contribution": false
+    }
+  ],
+  "false_sufficient_contributing_to_gate_fn": [],
+  "false_sufficient_gate_note": "Candidate assessments were diagnostic-only in HKEI-178 and did not directly influence Gate decisions.",
+  "topic_fn_diagnosis": {
+    "wrong_topic_false_semantic_sufficiency": false,
+    "classifier_confidence_suppressed_adjudication": true,
+    "unresolved_competing_domain_existed": true,
+    "gate_lacked_existing_signal": false
+  },
+  "counterfactual_topic_fn_captured": 1,
+  "counterfactual_format_fn_captured": 5,
+  "counterfactual_additional_provider_calls": 2,
+  "counterfactual_new_false_positives": 1,
+  "counterfactual_existing_signals_only": true,
+  "gate_only_fix_viability": "HIGH",
+  "dominant_root_cause": "MIXED_GATE_AND_UPSTREAM_GAP",
+  "recommended_next_step": "IMPLEMENT_ONE_BOUNDED_GATE_REFINEMENT",
+  "one_gate_refinement_budget": 1,
+  "provider_calls": 0
+}

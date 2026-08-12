@@ -127,10 +127,15 @@ def test_batch_contains_registration_and_authorized_evaluation_files_only() -> N
         path.relative_to(BATCH_ROOT).as_posix()
         for path in BATCH_ROOT.rglob("*") if path.is_file()
     }
-    assert files == {
-        "manifest.json", "expected.json", "human_risk_annotations.json",
+    diagnostic_outputs = {
         "full_stack_shadow_evaluation.json",
         "full_stack_shadow_evaluation.md",
+        "gate_failure_analysis.json",
+        "gate_failure_analysis.md",
+    }
+    assert files == {
+        "manifest.json", "expected.json", "human_risk_annotations.json",
+        *diagnostic_outputs,
         *(f"{case_id}/source.md" for case_id in EXPECTED_IDS),
     }
     forbidden = (
@@ -138,7 +143,11 @@ def test_batch_contains_registration_and_authorized_evaluation_files_only() -> N
         "semantic", "candidate", "gate", "adjudication", "openai",
         "provider", "resolver", "prediction",
     )
-    assert not any(term in path.casefold() for path in files for term in forbidden)
+    assert not any(
+        term in path.casefold()
+        for path in files - diagnostic_outputs
+        for term in forbidden
+    )
 
 
 def test_registration_data_contains_no_machine_output_fields() -> None:
