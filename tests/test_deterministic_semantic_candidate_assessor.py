@@ -8,6 +8,9 @@ import pytest
 from src.evidence.contextual_evidence import ContextualEvidence
 from src.evidence.deterministic_contextual_evidence_engine import DeterministicContextualEvidenceEngine
 from src.evidence.evidence_strength import EvidenceStrength
+from src.evidence.evidence_level import EvidenceLevel
+from src.evidence.contextual_evidence_item import ContextualEvidenceItem
+from src.evidence.evidence_role import EvidenceRole
 from src.evidence.source_section import SourceSection
 from src.intake.normalized_source import NormalizedSource
 from src.semantics.compositional_semantic_evidence import CompositionalSemanticEvidence
@@ -331,3 +334,222 @@ def test_no_holdout_identifiers_in_assessor_or_tests() -> None:
 
 def test_empty_evidence_emits_no_full_candidate_universe() -> None:
     assert assess() == ()
+
+
+def _context_item(
+    *,
+    supports: tuple[str, ...],
+    reason: str,
+    role: EvidenceRole = EvidenceRole.SUBJECT,
+    strength: EvidenceStrength = EvidenceStrength.STRONG,
+    section: SourceSection = SourceSection.BODY,
+    sentence: int = 0,
+) -> ContextualEvidenceItem:
+    return ContextualEvidenceItem(
+        source_section=section, sentence_index=sentence, matched_text="symbolic",
+        evidence_level=EvidenceLevel.CONTEXT, role=role, strength=strength,
+        reason_code=reason, supports=supports, suppresses=(),
+    )
+
+
+def _context(*items: ContextualEvidenceItem) -> ContextualEvidence:
+    return ContextualEvidence(
+        headline_items=tuple(item for item in items if item.source_section is SourceSection.HEADLINE),
+        lead_items=tuple(item for item in items if item.source_section is SourceSection.LEAD),
+        body_items=tuple(item for item in items if item.source_section is SourceSection.BODY),
+        metadata_items=(), user_instruction_items=(), warnings=(),
+    )
+
+
+def _assess_context(
+    relationships: tuple[SemanticRelationship, ...],
+    *items: ContextualEvidenceItem,
+):
+    return DeterministicSemanticCandidateAssessor().assess(
+        semantic_evidence=evidence(*relationships), contextual_evidence=_context(*items),
+    )
+
+
+def test_explicit_domain_competitor_prevents_sufficiency_without_conflict() -> None:
+    first = relation(supports=("PRIMARY_DOMAIN_HEALTH",))
+    first_2 = replace(first, sentence_index=1, reason_code="HEALTH_STATE")
+    other = replace(first, supports=("PRIMARY_DOMAIN_SCIENCE",), sentence_index=2)
+    other_2 = replace(other, sentence_index=3, reason_code="SCIENCE_STATE")
+    results = {item.candidate: item for item in assess(first, first_2, other, other_2)}
+    assert results["HEALTH"].sufficiency is SemanticEvidenceSufficiency.PARTIAL
+    assert results["HEALTH"].direction is SemanticEvidenceDirection.SUPPORT
+    assert results["HEALTH"].competing_candidates == ("SCIENCE",)
+
+
+def test_latent_mapped_central_competitor_prevents_sufficiency() -> None:
+    support = _context_item(supports=("TOPIC_TECHNOLOGY",), reason="TECH_CONTEXT")
+    latent = _context_item(supports=("COMPONENT_HEALTH_SUBJECT",), reason="HEALTH_COMPONENT", strength=EvidenceStrength.MEDIUM)
+    result = {item.candidate: item for item in _assess_context((), support, latent)}["TECHNOLOGY"]
+    assert result.sufficiency is SemanticEvidenceSufficiency.PARTIAL
+    assert result.competing_candidates == ("HEALTH",)
+    assert "COMPETING_CANDIDATE" in result.warnings
+
+
+def test_latent_unmapped_central_competitor_warns_and_prevents_sufficiency() -> None:
+    support = _context_item(supports=("TOPIC_BUSINESS",), reason="BUSINESS_CONTEXT")
+    latent = _context_item(supports=("COMPONENT_LEGAL_SUBJECT",), reason="LEGAL_COMPONENT")
+    result = {item.candidate: item for item in _assess_context((), support, latent)}["BUSINESS"]
+    assert result.sufficiency is SemanticEvidenceSufficiency.PARTIAL
+    assert result.competing_candidates == ()
+    assert "UNMAPPED_CENTRAL_COMPETITOR" in result.warnings
+
+
+@pytest.mark.parametrize("role", (EvidenceRole.AUTHORITY, EvidenceRole.ACTOR, EvidenceRole.METHOD))
+def test_secondary_latent_component_does_not_block_valid_candidate(role: EvidenceRole) -> None:
+    support = _context_item(supports=("TOPIC_ECONOMY",), reason="ECONOMY_CONTEXT")
+    corroboration = _context_item(supports=("TOPIC_ECONOMY",), reason="ECONOMY_OUTCOME", role=EvidenceRole.OUTCOME, sentence=1)
+    secondary = _context_item(supports=("COMPONENT_LEGAL_SUBJECT",), reason="SECONDARY_COMPONENT", role=role)
+    result = {item.candidate: item for item in _assess_context((), support, corroboration, secondary)}["ECONOMY"]
+    assert result.sufficiency is SemanticEvidenceSufficiency.SUFFICIENT
+    assert "UNMAPPED_CENTRAL_COMPETITOR" not in result.warnings
+
+
+def test_weak_incidental_subject_does_not_block_valid_candidate() -> None:
+    support = _context_item(supports=("TOPIC_ECONOMY",), reason="ECONOMY_CONTEXT")
+    corroboration = _context_item(supports=("TOPIC_ECONOMY",), reason="ECONOMY_STATE", role=EvidenceRole.STATE, sentence=1)
+    incidental = _context_item(supports=("COMPONENT_HEALTH_SUBJECT",), reason="INCIDENTAL", strength=EvidenceStrength.WEAK)
+    result = {item.candidate: item for item in _assess_context((), support, corroboration, incidental)}["ECONOMY"]
+    assert result.sufficiency is SemanticEvidenceSufficiency.SUFFICIENT
+
+
+def test_action_targets_object_alone_does_not_establish_domain_centrality() -> None:
+    result = one(relation(
+        supports=("PRIMARY_DOMAIN_TECHNOLOGY",),
+        relationship_type=SemanticRelationshipType.ACTION_TARGETS_OBJECT,
+        subject=SemanticComponent.ACTION, object_=SemanticComponent.OBJECT,
+    ))
+    assert result.sufficiency is not SemanticEvidenceSufficiency.SUFFICIENT
+    assert "SUBJECT_ROLE_UNRESOLVED" in result.warnings
+
+
+def test_action_object_with_distinct_candidate_relationship_is_independent() -> None:
+    action = relation(
+        supports=("PRIMARY_DOMAIN_TECHNOLOGY",),
+        relationship_type=SemanticRelationshipType.ACTION_TARGETS_OBJECT,
+        subject=SemanticComponent.ACTION, object_=SemanticComponent.OBJECT,
+    )
+    audience = replace(
+        action, sentence_index=1, reason_code="INDEPENDENT_AUDIENCE_ACTION",
+        relationship_type=SemanticRelationshipType.RECOMMENDATION_TARGETS_AUDIENCE,
+    )
+    result = one(action, audience)
+    assert result.strength is SemanticEvidenceStrength.STRONG
+    assert result.sufficiency is SemanticEvidenceSufficiency.SUFFICIENT
+
+
+def test_headline_lead_body_same_context_family_is_discounted() -> None:
+    items = tuple(
+        _context_item(
+            supports=("TOPIC_TECHNOLOGY",), reason="SAME_SIGNAL",
+            section=section, strength=EvidenceStrength.MEDIUM,
+        )
+        for section in (SourceSection.HEADLINE, SourceSection.LEAD, SourceSection.BODY)
+    )
+    result = {item.candidate: item for item in _assess_context((), *items)}["TECHNOLOGY"]
+    assert result.strength is SemanticEvidenceStrength.MODERATE
+    assert result.sufficiency is SemanticEvidenceSufficiency.PARTIAL
+    assert "DUPLICATE_EVIDENCE_DISCOUNTED" in result.warnings
+
+
+def test_distinct_contextual_families_remain_independent() -> None:
+    first = _context_item(supports=("TOPIC_HEALTH",), reason="HEALTH_SUBJECT", strength=EvidenceStrength.MEDIUM)
+    second = _context_item(supports=("TOPIC_HEALTH",), reason="HEALTH_OUTCOME", role=EvidenceRole.OUTCOME, strength=EvidenceStrength.MEDIUM, sentence=1)
+    result = {item.candidate: item for item in _assess_context((), first, second)}["HEALTH"]
+    assert result.strength is SemanticEvidenceStrength.STRONG
+    assert result.sufficiency is SemanticEvidenceSufficiency.SUFFICIENT
+
+
+@pytest.mark.parametrize(
+    ("candidate", "alternative"),
+    (("TECHNOLOGY", "HEALTH"), ("BUSINESS", "HEALTH"), ("GOVERNMENT", "ECONOMY"), ("SPORTS", "GOVERNMENT")),
+)
+def test_generic_prominent_signal_with_other_central_domain_stays_partial(
+    candidate: str, alternative: str,
+) -> None:
+    repeated = tuple(
+        _context_item(
+            supports=(f"TOPIC_{candidate}",), reason=f"{candidate}_CONTEXT",
+            section=section,
+        ) for section in (SourceSection.HEADLINE, SourceSection.LEAD, SourceSection.BODY)
+    )
+    latent = _context_item(
+        supports=(f"COMPONENT_{alternative}_SUBJECT",), reason="ALTERNATIVE_SUBJECT",
+        strength=EvidenceStrength.MEDIUM, sentence=2,
+    )
+    result = {item.candidate: item for item in _assess_context((), *repeated, latent)}[candidate]
+    assert result.direction is SemanticEvidenceDirection.SUPPORT
+    assert result.sufficiency is SemanticEvidenceSufficiency.PARTIAL
+
+
+def test_no_competitor_fabricated_from_unknown_component() -> None:
+    support = _context_item(supports=("TOPIC_HEALTH",), reason="HEALTH_CONTEXT")
+    latent = _context_item(supports=("COMPONENT_BIOLOGICAL_SUBJECT",), reason="BIO_SUBJECT")
+    result = {item.candidate: item for item in _assess_context((), support, latent)}["HEALTH"]
+    assert result.competing_candidates == ()
+    assert "UNMAPPED_CENTRAL_COMPETITOR" in result.warnings
+
+
+def test_candidate_own_component_is_not_a_competitor() -> None:
+    support = _context_item(supports=("TOPIC_HEALTH",), reason="HEALTH_CONTEXT")
+    corroboration = _context_item(supports=("TOPIC_HEALTH",), reason="HEALTH_OUTCOME", role=EvidenceRole.OUTCOME, sentence=1)
+    own = _context_item(supports=("COMPONENT_HEALTH_SUBJECT",), reason="HEALTH_COMPONENT")
+    result = {item.candidate: item for item in _assess_context((), support, corroboration, own)}["HEALTH"]
+    assert result.competing_candidates == ()
+    assert result.sufficiency is SemanticEvidenceSufficiency.SUFFICIENT
+
+
+def test_no_competitor_logic_leaks_benchmark_identifiers() -> None:
+    text = (PROJECT_ROOT / "src/semantics/deterministic_semantic_candidate_assessor.py").read_text(encoding="utf-8")
+    forbidden = ('"046"',) + tuple(f'"{value:03d}"' for value in range(51, 61))
+    assert not any(value in text for value in forbidden)
+
+
+def test_latent_mapped_competitor_is_not_fabricated_as_assessment() -> None:
+    support = _context_item(supports=("TOPIC_BUSINESS",), reason="BUSINESS_CONTEXT")
+    latent = _context_item(supports=("COMPONENT_HEALTH_SUBJECT",), reason="HEALTH_COMPONENT")
+    results = _assess_context((), support, latent)
+    assert tuple(item.candidate for item in results) == ("BUSINESS",)
+    assert results[0].competing_candidates == ("HEALTH",)
+
+
+def test_hierarchical_repetition_warning_does_not_change_direction() -> None:
+    repeated = tuple(
+        _context_item(
+            supports=("TOPIC_WORLD",), reason="WORLD_SIGNAL", section=section,
+            strength=EvidenceStrength.MEDIUM,
+        ) for section in (SourceSection.HEADLINE, SourceSection.LEAD, SourceSection.BODY)
+    )
+    result = _assess_context((), *repeated)[0]
+    assert result.direction is SemanticEvidenceDirection.SUPPORT
+    assert result.sufficiency is SemanticEvidenceSufficiency.PARTIAL
+    assert "DUPLICATE_EVIDENCE_DISCOUNTED" in result.warnings
+
+
+@pytest.mark.parametrize(
+    ("body", "candidate", "must_be_sufficient"),
+    (
+        ("استخدم الأطباء جهازا رقميا لفحص الأمراض. يساعد النظام الذكي في علاج المرضى.", "TECHNOLOGY", False),
+        ("قالت الشركة إن علاج المرضى تحسن. طور الفريق أداة للمستشفى.", "BUSINESS", False),
+        ("أعلنت الوزارة أن معدل البطالة تراجع. تحسن سوق العمل مقارنة بالشهر الماضي.", "GOVERNMENT", False),
+        ("قال النادي إن القواعد القانونية الجديدة تنظم العقود. أعلنت الجهة تفاصيل القرار.", "SPORTS", False),
+        ("نظام رقمي وتقنية حديثة. يكرر البيان معلومات النظام الرقمي والتقنية الحديثة.", "TECHNOLOGY", False),
+        ("أعلن البنك المركزي أن معدل البطالة تراجع مع تحسن سوق العمل. ارتفع السعر مقارنة بالشهر الماضي.", "ECONOMY", True),
+        ("ذكرت المستشفى تطبيقا رقميا عابرا. أعلنت المستشفى تقديم علاج الأمراض. تحسنت صحة المرضى بعد العلاج.", "HEALTH", True),
+        ("أعلنت المستشفى تقديم علاج الأمراض. تحسنت صحة المرضى بعد العلاج.", "HEALTH", True),
+    ),
+)
+def test_raw_arabic_competitor_and_independence_safety(
+    body: str, candidate: str, must_be_sufficient: bool,
+) -> None:
+    results = {item.candidate: item for item in _raw_assess(body)}
+    item = results.get(candidate)
+    if must_be_sufficient:
+        assert item is not None
+        assert item.sufficiency is SemanticEvidenceSufficiency.SUFFICIENT
+    else:
+        assert item is None or item.sufficiency is not SemanticEvidenceSufficiency.SUFFICIENT

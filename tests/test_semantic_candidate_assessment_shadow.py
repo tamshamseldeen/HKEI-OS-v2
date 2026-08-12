@@ -57,10 +57,10 @@ def test_expected_labels_are_loaded_only_after_all_assessments(monkeypatch: pyte
 def test_distributions_are_exact_and_batches_are_included(analysis: dict) -> None:
     assert analysis["cases_analyzed"] == 41
     assert analysis["sufficiency_distribution"] == {
-        "INSUFFICIENT": 59, "PARTIAL": 30, "SUFFICIENT": 16, "CONFLICTED": 6,
+        "INSUFFICIENT": 59, "PARTIAL": 36, "SUFFICIENT": 10, "CONFLICTED": 6,
     }
     assert analysis["strength_distribution"] == {
-        "WEAK": 59, "MODERATE": 27, "STRONG": 25,
+        "WEAK": 59, "MODERATE": 24, "STRONG": 28,
     }
     assert analysis["direction_distribution"] == {
         "SUPPORT": 77, "SUPPRESS": 28, "NEUTRAL": 0, "CONFLICTING": 6,
@@ -74,12 +74,12 @@ def test_false_sufficiency_quality_metrics_are_exact(analysis: dict) -> None:
         "false_sufficient_count": 0,
         "safe_wrong_partial_count": 19,
         "expected_candidate_sufficient_count": 0,
-        "expected_candidate_partial_count": 1,
+        "expected_candidate_partial_count": 0,
         "expected_candidate_missing_count": 7,
         "false_sufficiency_rate": 0.0,
     }
-    assert analysis["diagnostic_quality"] == "STRONG"
-    assert analysis["recommended_next_step"] == "REFINE_ASSESSOR_STRENGTH_LOGIC"
+    assert analysis["diagnostic_quality"] == "EXCELLENT"
+    assert analysis["recommended_next_step"] == "READY_FOR_TOPIC_FORMAT_SHADOW_CONSUMPTION"
 
 
 def test_case_055_and_topic_counterfactual_are_deterministic(analysis: dict) -> None:
@@ -107,13 +107,15 @@ def test_confidence_duplicate_role_and_competition_audits(analysis: dict) -> Non
         "054:FORMAT", "056:FORMAT", "058:FORMAT",
     ]
     assert analysis["duplicate_evidence_findings"] == [
-        "batch_01:001", "batch_01:003", "batch_02:013", "batch_02:014",
-        "batch_02:015", "batch_02:018", "batch_03:029", "batch_05:049",
+        "batch_01:001", "batch_01:003", "batch_01:005", "batch_02:013",
+        "batch_02:014", "batch_02:015", "batch_02:016", "batch_02:017",
+        "batch_02:018", "batch_02:019", "batch_03:029", "batch_05:046",
+        "batch_05:049", "batch_06:055", "batch_06:058", "batch_06:059",
     ]
     dominated = analysis["authority_actor_method_findings"]["dominated_sufficient"]
     assert dominated == {"AUTHORITY": [], "ACTOR": [], "METHOD": []}
     competition = analysis["competition_findings"]
-    assert len(competition["cases_with_competing_candidates"]) == 20
+    assert len(competition["cases_with_competing_candidates"]) == 22
     assert len(competition["conflicted_assessments"]) == 6
 
 

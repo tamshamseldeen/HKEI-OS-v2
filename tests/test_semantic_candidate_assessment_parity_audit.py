@@ -50,10 +50,10 @@ def test_batch_status_and_global_counts(result: dict) -> None:
 
 
 def test_sufficiency_selectivity_metrics(result: dict) -> None:
-    assert result["true_sufficient_count"] == 13
-    assert result["false_sufficient_count"] == 1
-    assert result["false_sufficiency_rate"] == pytest.approx(7.142857142857142)
-    assert result["sufficient_precision"] == pytest.approx(92.85714285714286)
+    assert result["true_sufficient_count"] == 8
+    assert result["false_sufficient_count"] == 0
+    assert result["false_sufficiency_rate"] == 0.0
+    assert result["sufficient_precision"] == 100.0
     assert result["correct_sufficient_preservation_rate"] == pytest.approx(85.71428571428571)
 
 
@@ -65,22 +65,22 @@ def test_format_parity_and_topic_role_safety(result: dict) -> None:
 
 def test_competition_duplicate_and_counterfactual_metrics(result: dict) -> None:
     assert result["competition_metrics"] == {
-        "cases_with_competing_candidates": 20,
-        "assessments_with_competitors": 43,
+        "cases_with_competing_candidates": 22,
+        "assessments_with_competitors": 44,
         "conflicted_assessments": 6,
-        "cases_where_competition_prevented_sufficient": 20,
+        "cases_where_competition_prevented_sufficient": 22,
     }
-    assert result["duplicate_evidence_metrics"]["cases_with_duplicate_evidence_discounting"] == 8
+    assert result["duplicate_evidence_metrics"]["cases_with_duplicate_evidence_discounting"] == 16
     assert result["duplicate_evidence_metrics"]["duplicate_only_sufficient"] == []
     assert result["counterfactual_gate_metrics"] == {
-        "counterfactual_wrong_resolved_count": 1,
-        "counterfactual_correct_resolved_count": 13,
-        "counterfactual_unresolved_wrong_count": 49,
+        "counterfactual_wrong_resolved_count": 0,
+        "counterfactual_correct_resolved_count": 8,
+        "counterfactual_unresolved_wrong_count": 50,
     }
 
 
 def test_safety_utility_and_readiness_are_deterministic(result: dict) -> None:
-    assert result["safety_utility_classification"] == "USEFUL_BUT_UNSAFE"
+    assert result["safety_utility_classification"] == "SAFE_AND_USEFUL"
     assert result["integration_readiness"] == "REFINE_ASSESSOR_BEFORE_INTEGRATION"
     assert result["historical_pathologies"] == []
     assert result["batch_07_required"] is True

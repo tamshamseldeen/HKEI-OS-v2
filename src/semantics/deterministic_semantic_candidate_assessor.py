@@ -12,6 +12,7 @@ from .semantic_component import SemanticComponent
 from .semantic_evidence_direction import SemanticEvidenceDirection
 from .semantic_evidence_strength import SemanticEvidenceStrength
 from .semantic_evidence_sufficiency import SemanticEvidenceSufficiency
+from src.topic.topic import Topic
 
 
 _LABEL_PREFIXES = (
@@ -74,6 +75,7 @@ class DeterministicSemanticCandidateAssessor:
     ) -> tuple[SemanticCandidateAssessment, ...]:
         """Return candidate assessments sorted lexically by candidate string."""
         records = self._records(semantic_evidence, contextual_evidence)
+        latent = self._latent_domain_competitors(contextual_evidence)
         grouped: dict[tuple[str, str], list[_EvidenceRecord]] = {}
         duplicate_candidates: set[tuple[str, str]] = set()
         seen: set[tuple[object, ...]] = set()
@@ -87,6 +89,11 @@ class DeterministicSemanticCandidateAssessor:
                 continue
             seen.add(identity)
             grouped.setdefault(key, []).append(record)
+
+        for key, candidate_records in grouped.items():
+            families = [self._support_family(record) for record in candidate_records]
+            if len(families) != len(set(families)):
+                duplicate_candidates.add(key)
 
         preliminary = {
             key: self._preliminary(value, family=key[1], all_records=records)
@@ -109,14 +116,22 @@ class DeterministicSemanticCandidateAssessor:
         for key, candidate_records in grouped.items():
             candidate, family = key
             item = preliminary[key]
-            competitors = tuple(
+            explicit_competitors = tuple(
                 value for value in material_by_family[family] if value != candidate
             )
+            latent_mapped = (
+                tuple(value for value in latent["mapped"] if value != candidate)
+                if family == "DOMAIN" else ()
+            )
+            competitors = self._unique(explicit_competitors + latent_mapped)
+            unmapped_competitor = family == "DOMAIN" and bool(latent["unmapped"])
             warnings = list(item["warnings"])
             if key in duplicate_candidates:
                 warnings.append("DUPLICATE_EVIDENCE_DISCOUNTED")
             if competitors:
                 warnings.append("COMPETING_CANDIDATE")
+            if unmapped_competitor:
+                warnings.append("UNMAPPED_CENTRAL_COMPETITOR")
             sufficiency = self._sufficiency(
                 direction=item["direction"],
                 strength=item["strength"],
@@ -128,8 +143,10 @@ class DeterministicSemanticCandidateAssessor:
                 structure_complete=bool(item["structure_complete"]),
                 complete_competitors=tuple(
                     value for value in competitors
-                    if preliminary[(value, family)]["structure_complete"]
+                    if (value, family) not in preliminary
+                    or preliminary[(value, family)]["structure_complete"]
                 ),
+                latent_competitor=unmapped_competitor,
             )
             assessments.append(
                 SemanticCandidateAssessment(
@@ -278,13 +295,17 @@ class DeterministicSemanticCandidateAssessor:
             direction = SemanticEvidenceDirection.SUPPRESS
         else:
             direction = SemanticEvidenceDirection.NEUTRAL
-        independent_supports = len(supports)
+        independent_supports = len({self._support_family(record) for record in supports})
         relevant_roles = (
             _SUBJECT_BEARING_ROLES
             if family == "DOMAIN"
             else _SUBJECT_BEARING_ROLES | _TREATMENT_ROLES
         )
-        central = bool(set(roles) & relevant_roles)
+        central = (
+            self._domain_candidate_central(supports)
+            if family == "DOMAIN"
+            else bool(set(roles) & relevant_roles)
+        )
         dominated = set(roles) and set(roles) <= _SECONDARY_ROLES
         if dominated:
             for role in ("AUTHORITY", "ACTOR", "METHOD"):
@@ -313,6 +334,15 @@ class DeterministicSemanticCandidateAssessor:
             strength = SemanticEvidenceStrength.STRONG
         elif independent_supports >= 2 and central:
             strength = SemanticEvidenceStrength.STRONG
+        elif (
+            family == "DOMAIN" and central
+            and any(
+                record.provenance[0] == "CONTEXTUAL"
+                and record.source_strength is EvidenceStrength.STRONG
+                for record in supports
+            )
+        ):
+            strength = SemanticEvidenceStrength.STRONG
         else:
             strength = SemanticEvidenceStrength.MODERATE
         if direction is SemanticEvidenceDirection.CONFLICTING:
@@ -332,6 +362,71 @@ class DeterministicSemanticCandidateAssessor:
             "neutral_count": len(neutral),
             "family": family,
             "structure_complete": structure_complete,
+        }
+
+    @staticmethod
+    def _support_family(record: _EvidenceRecord) -> tuple[object, ...]:
+        """Collapse section repetition while retaining distinct semantic bases."""
+        if record.provenance and record.provenance[0] == "CONTEXTUAL":
+            return (record.candidate, record.direction, "CONTEXTUAL", record.provenance[3])
+        return (record.candidate, record.direction, *record.provenance)
+
+    @staticmethod
+    def _domain_candidate_central(supports: list[_EvidenceRecord]) -> bool:
+        semantic = [record for record in supports if record.provenance[0] == "SEMANTIC"]
+        contextual_subject = any(
+            record.provenance[0] == "CONTEXTUAL" and "SUBJECT" in record.roles
+            for record in supports
+        )
+        directly_domain_bearing = any(
+            "SUBJECT" in record.roles
+            or (
+                record.relationship_type == "INDICATOR_DESCRIBES_DOMAIN"
+                and "MEASUREMENT" in record.roles
+            )
+            or (
+                record.relationship_type == "EVENT_HAS_OUTCOME"
+                and bool(set(record.roles) & {"EVENT", "RESULT", "OUTCOME"})
+            )
+            for record in semantic
+        )
+        distinct_semantic_types = {record.relationship_type for record in semantic}
+        coherent_action_object = (
+            "ACTION_TARGETS_OBJECT" in distinct_semantic_types
+            and len(distinct_semantic_types) >= 2
+        )
+        return directly_domain_bearing or coherent_action_object or contextual_subject
+
+    @staticmethod
+    def _latent_domain_competitors(
+        contextual: ContextualEvidence | None,
+    ) -> dict[str, tuple[str, ...]]:
+        if contextual is None:
+            return {"mapped": (), "unmapped": ()}
+        topic_values = {topic.value for topic in Topic}
+        aliases = {"ECONOMIC": "ECONOMY"}
+        generic_components = {"INHERITED", "PRIMARY", "SECONDARY", "CURRENT"}
+        mapped: list[str] = []
+        unmapped: list[str] = []
+        central_roles = {EvidenceRole.SUBJECT, EvidenceRole.OBJECT, EvidenceRole.RESULT, EvidenceRole.STATE, EvidenceRole.CHANGE, EvidenceRole.OUTCOME}
+        for item in contextual.all_items:
+            if item.role not in central_roles or item.strength is EvidenceStrength.WEAK:
+                continue
+            for label in item.supports:
+                if not label.startswith("COMPONENT_"):
+                    continue
+                symbol = label.removeprefix("COMPONENT_")
+                for suffix in ("_SUBJECT", "_OBJECT", "_EVENT", "_STATE", "_CHANGE", "_RESULT", "_OUTCOME"):
+                    if symbol.endswith(suffix):
+                        candidate = symbol.removesuffix(suffix)
+                        if candidate in generic_components:
+                            break
+                        candidate = aliases.get(candidate, candidate)
+                        (mapped if candidate in topic_values else unmapped).append(candidate)
+                        break
+        return {
+            "mapped": DeterministicSemanticCandidateAssessor._unique(mapped),
+            "unmapped": DeterministicSemanticCandidateAssessor._unique(unmapped),
         }
 
     @classmethod
@@ -428,6 +523,7 @@ class DeterministicSemanticCandidateAssessor:
         family: str,
         structure_complete: bool,
         complete_competitors: tuple[str, ...],
+        latent_competitor: bool,
     ) -> SemanticEvidenceSufficiency:
         if direction is SemanticEvidenceDirection.CONFLICTING:
             return SemanticEvidenceSufficiency.CONFLICTED
@@ -439,6 +535,8 @@ class DeterministicSemanticCandidateAssessor:
             return SemanticEvidenceSufficiency.INSUFFICIENT
         if family == "FORMAT" and not structure_complete:
             return SemanticEvidenceSufficiency.PARTIAL
+        if latent_competitor:
+            return SemanticEvidenceSufficiency.PARTIAL
         if complete_competitors:
             return SemanticEvidenceSufficiency.PARTIAL
         if competitors and family != "FORMAT":
@@ -449,6 +547,8 @@ class DeterministicSemanticCandidateAssessor:
             else _SUBJECT_BEARING_ROLES | _TREATMENT_ROLES
         )
         central = bool(set(roles) & relevant_roles)
+        if family == "DOMAIN" and "SUBJECT_ROLE_UNRESOLVED" in warnings:
+            central = False
         if (
             strength is SemanticEvidenceStrength.STRONG
             and central

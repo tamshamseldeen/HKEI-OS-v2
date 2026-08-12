@@ -13,13 +13,13 @@
         "CONFLICTING": 2
       },
       "strength_distribution": {
-        "WEAK": 15,
-        "MODERATE": 9,
-        "STRONG": 3
+        "WEAK": 14,
+        "MODERATE": 8,
+        "STRONG": 5
       },
       "sufficiency_distribution": {
-        "INSUFFICIENT": 15,
-        "PARTIAL": 8,
+        "INSUFFICIENT": 14,
+        "PARTIAL": 9,
         "SUFFICIENT": 2,
         "CONFLICTED": 2
       },
@@ -33,8 +33,8 @@
         "CONFLICTED": 0
       },
       "expected_candidate_sufficiency_distribution": {
-        "INSUFFICIENT": 2,
-        "PARTIAL": 3,
+        "INSUFFICIENT": 1,
+        "PARTIAL": 4,
         "SUFFICIENT": 1,
         "CONFLICTED": 1
       },
@@ -52,16 +52,16 @@
       },
       "strength_distribution": {
         "WEAK": 5,
-        "MODERATE": 4,
-        "STRONG": 9
+        "MODERATE": 3,
+        "STRONG": 10
       },
       "sufficiency_distribution": {
         "INSUFFICIENT": 5,
-        "PARTIAL": 6,
-        "SUFFICIENT": 6,
+        "PARTIAL": 11,
+        "SUFFICIENT": 1,
         "CONFLICTED": 1
       },
-      "true_sufficient_count": 5,
+      "true_sufficient_count": 0,
       "false_sufficient_count": 0,
       "false_sufficiency_rate": 0.0,
       "safe_wrong_counts": {
@@ -72,11 +72,11 @@
       },
       "expected_candidate_sufficiency_distribution": {
         "INSUFFICIENT": 3,
-        "PARTIAL": 3,
-        "SUFFICIENT": 5,
+        "PARTIAL": 8,
+        "SUFFICIENT": 0,
         "CONFLICTED": 0
       },
-      "sufficient_precision": 100.0
+      "sufficient_precision": null
     },
     "batch_03": {
       "scientific_status": "HISTORICAL_REGRESSION_CORPUS",
@@ -133,16 +133,16 @@
       },
       "sufficiency_distribution": {
         "INSUFFICIENT": 10,
-        "PARTIAL": 1,
-        "SUFFICIENT": 3,
+        "PARTIAL": 2,
+        "SUFFICIENT": 2,
         "CONFLICTED": 0
       },
       "true_sufficient_count": 2,
-      "false_sufficient_count": 1,
-      "false_sufficiency_rate": 33.33333333333333,
+      "false_sufficient_count": 0,
+      "false_sufficiency_rate": 0.0,
       "safe_wrong_counts": {
         "INSUFFICIENT": 6,
-        "PARTIAL": 1,
+        "PARTIAL": 2,
         "SUFFICIENT": 0,
         "CONFLICTED": 0
       },
@@ -152,7 +152,7 @@
         "SUFFICIENT": 2,
         "CONFLICTED": 0
       },
-      "sufficient_precision": 66.66666666666666
+      "sufficient_precision": 100.0
     },
     "batch_06": {
       "scientific_status": "DIAGNOSTIC_DEVELOPMENT_SET",
@@ -165,13 +165,13 @@
         "CONFLICTING": 0
       },
       "strength_distribution": {
-        "WEAK": 21,
-        "MODERATE": 5,
+        "WEAK": 22,
+        "MODERATE": 4,
         "STRONG": 4
       },
       "sufficiency_distribution": {
-        "INSUFFICIENT": 21,
-        "PARTIAL": 8,
+        "INSUFFICIENT": 22,
+        "PARTIAL": 7,
         "SUFFICIENT": 1,
         "CONFLICTED": 0
       },
@@ -185,8 +185,8 @@
         "CONFLICTED": 0
       },
       "expected_candidate_sufficiency_distribution": {
-        "INSUFFICIENT": 4,
-        "PARTIAL": 3,
+        "INSUFFICIENT": 5,
+        "PARTIAL": 2,
         "SUFFICIENT": 1,
         "CONFLICTED": 0
       },
@@ -201,32 +201,32 @@
   },
   "strength_distribution": {
     "WEAK": 59,
-    "MODERATE": 27,
-    "STRONG": 25
+    "MODERATE": 24,
+    "STRONG": 28
   },
   "sufficiency_distribution": {
     "INSUFFICIENT": 59,
-    "PARTIAL": 30,
-    "SUFFICIENT": 16,
+    "PARTIAL": 36,
+    "SUFFICIENT": 10,
     "CONFLICTED": 6
   },
-  "true_sufficient_count": 13,
-  "false_sufficient_count": 1,
-  "false_sufficiency_rate": 7.142857142857142,
+  "true_sufficient_count": 8,
+  "false_sufficient_count": 0,
+  "false_sufficiency_rate": 0.0,
   "safe_wrong_counts": {
     "INSUFFICIENT": 35,
-    "PARTIAL": 10,
+    "PARTIAL": 11,
     "SUFFICIENT": 0,
     "CONFLICTED": 4
   },
   "expected_candidate_sufficiency_distribution": {
     "INSUFFICIENT": 14,
-    "PARTIAL": 14,
-    "SUFFICIENT": 13,
+    "PARTIAL": 19,
+    "SUFFICIENT": 8,
     "CONFLICTED": 1,
     "MISSING": 31
   },
-  "sufficient_precision": 92.85714285714286,
+  "sufficient_precision": 100.0,
   "correct_sufficient_preservation": {
     "SUFFICIENT": 12,
     "PARTIAL": 2
@@ -288,14 +288,14 @@
     "METHOD": 0
   },
   "competition_metrics": {
-    "cases_with_competing_candidates": 20,
-    "assessments_with_competitors": 43,
+    "cases_with_competing_candidates": 22,
+    "assessments_with_competitors": 44,
     "conflicted_assessments": 6,
-    "cases_where_competition_prevented_sufficient": 20
+    "cases_where_competition_prevented_sufficient": 22
   },
   "duplicate_evidence_metrics": {
-    "cases_with_duplicate_evidence_discounting": 8,
-    "cases_where_duplicate_discounting_prevented_strength_inflation": 8,
+    "cases_with_duplicate_evidence_discounting": 16,
+    "cases_where_duplicate_discounting_prevented_strength_inflation": 16,
     "duplicate_only_sufficient": []
   },
   "critical_safety_recheck": {
@@ -306,20 +306,20 @@
     "expected_trend_previously_missing": "NONE"
   },
   "counterfactual_gate_metrics": {
-    "counterfactual_wrong_resolved_count": 1,
-    "counterfactual_correct_resolved_count": 13,
-    "counterfactual_unresolved_wrong_count": 49
+    "counterfactual_wrong_resolved_count": 0,
+    "counterfactual_correct_resolved_count": 8,
+    "counterfactual_unresolved_wrong_count": 50
   },
-  "false_resolution_rate": 2.0,
-  "wrong_candidates_kept_unresolved_rate": 98.0,
+  "false_resolution_rate": 0.0,
+  "wrong_candidates_kept_unresolved_rate": 100.0,
   "correct_resolution_utility": {
-    "correct_resolution_count": 13,
-    "correct_candidates_left_partial": 14,
+    "correct_resolution_count": 8,
+    "correct_candidates_left_partial": 19,
     "correct_candidates_left_insufficient": 14,
     "correct_candidates_left_conflicted": 1,
     "correct_candidates_missing": 31
   },
-  "safety_utility_classification": "USEFUL_BUT_UNSAFE",
+  "safety_utility_classification": "SAFE_AND_USEFUL",
   "historical_pathologies": [],
   "integration_readiness": "REFINE_ASSESSOR_BEFORE_INTEGRATION",
   "batch_07_required": true,
