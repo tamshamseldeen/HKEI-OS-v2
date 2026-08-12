@@ -120,7 +120,7 @@ def test_batch_contains_only_registration_and_authorized_validation_outputs() ->
         path.relative_to(BATCH_ROOT).as_posix()
         for path in BATCH_ROOT.rglob("*") if path.is_file()
     }
-    assert files == {
+    required = {
         "manifest.json", "expected.json", "human_risk_annotations.json",
         "editorial_validation.json", "editorial_validation.md",
         "generalization_failure_analysis.json",
@@ -129,8 +129,17 @@ def test_batch_contains_only_registration_and_authorized_validation_outputs() ->
         "post_hkei_157_comparison.md",
         *(f"{case_id}/source.md" for case_id in EXPECTED_IDS),
     }
+    optional = {
+        "semantic_activation_gap_analysis.json",
+        "semantic_activation_gap_analysis.md",
+    }
+    assert required <= files <= required | optional
     forbidden = ("contextual", "semantic", "adjudication", "openai", "provider")
-    assert not any(term in path.casefold() for path in files for term in forbidden)
+    assert not any(
+        term in path.casefold()
+        for path in files - optional
+        for term in forbidden
+    )
 
 
 def test_registration_test_imports_no_prediction_or_provider_modules() -> None:

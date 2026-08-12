@@ -1,0 +1,1084 @@
+{
+  "cases_analyzed": [
+    "051",
+    "052",
+    "053",
+    "054",
+    "055",
+    "056",
+    "057",
+    "058",
+    "059",
+    "060"
+  ],
+  "provider_calls": 0,
+  "zero_delta_reproduced": {
+    "semantic_relationships": [
+      3,
+      3
+    ],
+    "primary_domains": [
+      1,
+      1
+    ],
+    "semantic_format_support": [
+      0,
+      0
+    ]
+  },
+  "activation_stage_by_case": {
+    "051": "LEXICAL_COMPONENTS",
+    "052": "RELATIONSHIP_ACCEPTED",
+    "053": "CONTEXTUAL_EVIDENCE",
+    "054": "CONTEXTUAL_EVIDENCE",
+    "055": "CONTEXTUAL_EVIDENCE",
+    "056": "DOMAIN_PROMOTED",
+    "057": "CONTEXTUAL_EVIDENCE",
+    "058": "CONTEXTUAL_EVIDENCE",
+    "059": "RELATIONSHIP_ACCEPTED",
+    "060": "CONTEXTUAL_EVIDENCE"
+  },
+  "activation_stage_counts": {
+    "RAW_ONLY": 0,
+    "LEXICAL_COMPONENTS": 1,
+    "CONTEXTUAL_EVIDENCE": 6,
+    "SEMANTIC_COMPONENTS": 0,
+    "RELATIONSHIP_CANDIDATE": 0,
+    "RELATIONSHIP_ACCEPTED": 2,
+    "DOMAIN_PROMOTED": 1,
+    "FORMAT_SUPPORT_EMITTED": 0,
+    "FORMAT_SUPPORT_CONSUMED": 0
+  },
+  "component_role_coverage_by_case": {
+    "051": {
+      "present_roles": [
+        "SUBJECT",
+        "STATE",
+        "CHANGE",
+        "MEASUREMENT",
+        "OUTCOME"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "ACTION",
+        "DOMAIN_NORMALIZATION"
+      ]
+    },
+    "052": {
+      "present_roles": [
+        "ACTOR",
+        "SUBJECT",
+        "METHOD",
+        "ACTION",
+        "CAUSE",
+        "EFFECT",
+        "RESULT",
+        "MEASUREMENT"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "CAUSE_EFFECT_NORMALIZATION"
+      ]
+    },
+    "053": {
+      "present_roles": [
+        "ACTOR",
+        "SUBJECT",
+        "ACTION",
+        "CHANGE",
+        "RESULT",
+        "MEASUREMENT"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "BUSINESS_SUBJECT_NORMALIZATION"
+      ]
+    },
+    "054": {
+      "present_roles": [
+        "ACTOR",
+        "SUBJECT",
+        "ACTION",
+        "RESULT",
+        "MEASUREMENT",
+        "TEMPORAL_UPDATE",
+        "OUTCOME"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "RESULT_NORMALIZATION"
+      ]
+    },
+    "055": {
+      "present_roles": [
+        "ACTOR",
+        "SUBJECT",
+        "ACTION",
+        "RESULT",
+        "OUTCOME"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "WORLD_EVENT_NORMALIZATION"
+      ]
+    },
+    "056": {
+      "present_roles": [
+        "AUTHORITY",
+        "SUBJECT",
+        "ACTION",
+        "STATE",
+        "PROCEDURE",
+        "SCHEDULE",
+        "OUTCOME"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "CLAIM",
+        "VERIFICATION",
+        "VERDICT"
+      ]
+    },
+    "057": {
+      "present_roles": [
+        "ACTOR",
+        "SUBJECT",
+        "ACTION",
+        "RESULT",
+        "OUTCOME"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "FUTURE_RESULT_DISTINCTION"
+      ]
+    },
+    "058": {
+      "present_roles": [
+        "ACTOR",
+        "SUBJECT",
+        "STATE",
+        "CHANGE",
+        "CAUSE",
+        "EFFECT",
+        "MEASUREMENT",
+        "TEMPORAL_UPDATE"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "TEMPORAL_MOVEMENT_NORMALIZATION"
+      ]
+    },
+    "059": {
+      "present_roles": [
+        "SUBJECT",
+        "STATE",
+        "CHANGE",
+        "CAUSE",
+        "MEASUREMENT",
+        "PRICE",
+        "TEMPORAL_UPDATE"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "CURRENT_LEVEL_NORMALIZATION",
+        "TEMPORAL_MOVEMENT_NORMALIZATION"
+      ]
+    },
+    "060": {
+      "present_roles": [
+        "AUTHORITY",
+        "ACTOR",
+        "SUBJECT",
+        "OBJECT",
+        "ACTION",
+        "REQUIREMENT"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "BUSINESS_SUBJECT_NORMALIZATION"
+      ]
+    }
+  },
+  "relationship_candidate_findings": {
+    "051": {
+      "generated": false,
+      "failure": "COMPONENT_NORMALIZATION_MISMATCH"
+    },
+    "052": {
+      "generated": true,
+      "failure": null
+    },
+    "053": {
+      "generated": false,
+      "failure": "COMPONENT_NORMALIZATION_MISMATCH"
+    },
+    "054": {
+      "generated": false,
+      "failure": "COMPONENT_NORMALIZATION_MISMATCH"
+    },
+    "055": {
+      "generated": false,
+      "failure": "COMPONENT_NORMALIZATION_MISMATCH"
+    },
+    "056": {
+      "generated": true,
+      "failure": null
+    },
+    "057": {
+      "generated": false,
+      "failure": "RELATIONSHIP_PATTERN_NOT_REACHED"
+    },
+    "058": {
+      "generated": false,
+      "failure": "COMPONENT_NORMALIZATION_MISMATCH"
+    },
+    "059": {
+      "generated": true,
+      "failure": null
+    },
+    "060": {
+      "generated": false,
+      "failure": "COMPONENT_NORMALIZATION_MISMATCH"
+    }
+  },
+  "locality_findings": {
+    "051": {
+      "classification": "TITLE_TO_BODY",
+      "window_can_compose": false
+    },
+    "052": {
+      "classification": "MULTI_SECTION",
+      "window_can_compose": false
+    },
+    "053": {
+      "classification": "TITLE_TO_BODY",
+      "window_can_compose": false
+    },
+    "054": {
+      "classification": "TITLE_TO_BODY",
+      "window_can_compose": false
+    },
+    "055": {
+      "classification": "LEAD_TO_BODY",
+      "window_can_compose": false
+    },
+    "056": {
+      "classification": "ADJACENT_SENTENCES",
+      "window_can_compose": true
+    },
+    "057": {
+      "classification": "TITLE_TO_BODY",
+      "window_can_compose": false
+    },
+    "058": {
+      "classification": "LEAD_TO_BODY",
+      "window_can_compose": false
+    },
+    "059": {
+      "classification": "ADJACENT_SENTENCES",
+      "window_can_compose": true
+    },
+    "060": {
+      "classification": "LEAD_TO_BODY",
+      "window_can_compose": false
+    }
+  },
+  "synthetic_real_pattern_comparison": {
+    "authority_domain_subject": "REAL_ANALOG_FOUND_BUT_COMPONENTS_MISSING",
+    "actor_domain_subject": "REAL_ANALOG_FOUND_BUT_COMPONENTS_MISSING",
+    "method_subject": "REAL_ANALOG_FOUND_BUT_RELATIONSHIP_NOT_COMPOSED",
+    "event_cause_effect": "REAL_ANALOG_FOUND_BUT_COMPONENTS_MISSING",
+    "system_mechanism": "SYNTHETIC_ONLY",
+    "price_service": "REAL_ANALOG_FOUND_BUT_COMPONENTS_MISSING",
+    "schedule": "REAL_ANALOG_FOUND_BUT_COMPONENTS_MISSING",
+    "guide_action": "REAL_ANALOG_FOUND_BUT_RELATIONSHIP_NOT_COMPOSED",
+    "result": "REAL_ANALOG_FOUND_BUT_COMPONENTS_MISSING",
+    "trend": "REAL_ANALOG_FOUND_BUT_COMPONENTS_MISSING",
+    "fact_check": "REAL_ANALOG_FOUND_BUT_COMPONENTS_MISSING"
+  },
+  "topic_activation_failures": {
+    "051": "DOMAIN_SIGNAL_NOT_EXTRACTED",
+    "053": "DOMAIN_SIGNAL_EXTRACTED_NOT_NORMALIZED",
+    "054": "DOMAIN_SIGNAL_EXTRACTED_NOT_NORMALIZED",
+    "055": "DOMAIN_SIGNAL_NOT_EXTRACTED",
+    "056": "RELATIONSHIP_NOT_PROMOTED",
+    "060": "WRONG_PRECEDENCE"
+  },
+  "format_activation_failures": {
+    "052": {
+      "expected_structure_present_in_text": true,
+      "required_components_extracted": true,
+      "relationship_constructed": true,
+      "semantic_format_support_emitted": false,
+      "semantic_format_suppression_emitted": false,
+      "format_classifier_consumed_support": false
+    },
+    "054": {
+      "expected_structure_present_in_text": true,
+      "required_components_extracted": false,
+      "relationship_constructed": false,
+      "semantic_format_support_emitted": false,
+      "semantic_format_suppression_emitted": false,
+      "format_classifier_consumed_support": false
+    },
+    "056": {
+      "expected_structure_present_in_text": true,
+      "required_components_extracted": false,
+      "relationship_constructed": true,
+      "semantic_format_support_emitted": false,
+      "semantic_format_suppression_emitted": false,
+      "format_classifier_consumed_support": false
+    },
+    "057": {
+      "expected_structure_present_in_text": true,
+      "required_components_extracted": true,
+      "relationship_constructed": false,
+      "semantic_format_support_emitted": false,
+      "semantic_format_suppression_emitted": false,
+      "format_classifier_consumed_support": false
+    },
+    "058": {
+      "expected_structure_present_in_text": true,
+      "required_components_extracted": false,
+      "relationship_constructed": false,
+      "semantic_format_support_emitted": false,
+      "semantic_format_suppression_emitted": false,
+      "format_classifier_consumed_support": false
+    },
+    "059": {
+      "expected_structure_present_in_text": true,
+      "required_components_extracted": true,
+      "relationship_constructed": true,
+      "semantic_format_support_emitted": false,
+      "semantic_format_suppression_emitted": false,
+      "format_classifier_consumed_support": false
+    }
+  },
+  "format_gate_fn_activation_breaks": {
+    "054": {
+      "expected_structure_exists": true,
+      "contextual_components_exist": true,
+      "relationship_candidate_generated": false,
+      "semantic_format_support_emitted": false,
+      "format_confidence_changed": false,
+      "new_gate_signal_received": false,
+      "activation_break": "FORMAT_COMPONENTS_NOT_EXTRACTED"
+    },
+    "056": {
+      "expected_structure_exists": true,
+      "contextual_components_exist": true,
+      "relationship_candidate_generated": true,
+      "semantic_format_support_emitted": false,
+      "format_confidence_changed": false,
+      "new_gate_signal_received": false,
+      "activation_break": "FORMAT_COMPONENTS_NOT_EXTRACTED"
+    },
+    "059": {
+      "expected_structure_exists": true,
+      "contextual_components_exist": true,
+      "relationship_candidate_generated": true,
+      "semantic_format_support_emitted": false,
+      "format_confidence_changed": false,
+      "new_gate_signal_received": false,
+      "activation_break": "RELATIONSHIP_EXISTS_BUT_FORMAT_MAPPING_MISSING"
+    }
+  },
+  "semantic_format_support_zero_causes": {
+    "051": "NO_VALID_FORMAT_STRUCTURE",
+    "052": "FORMAT_COMPONENTS_EXTRACTED_BUT_NOT_COMPOSED",
+    "053": "NO_VALID_FORMAT_STRUCTURE",
+    "054": "FORMAT_COMPONENTS_NOT_EXTRACTED",
+    "055": "NO_VALID_FORMAT_STRUCTURE",
+    "056": "FORMAT_COMPONENTS_NOT_EXTRACTED",
+    "057": "FORMAT_COMPONENTS_EXTRACTED_BUT_NOT_COMPOSED",
+    "058": "FORMAT_COMPONENTS_NOT_EXTRACTED",
+    "059": "RELATIONSHIP_EXISTS_BUT_FORMAT_MAPPING_MISSING",
+    "060": "NO_VALID_FORMAT_STRUCTURE"
+  },
+  "arabic_expression_findings": {
+    "051": [
+      "headline-style ellipsis",
+      "multiword concepts"
+    ],
+    "052": [
+      "nominal constructions",
+      "synonymous journalistic phrasing"
+    ],
+    "053": [
+      "verb inflection",
+      "multiword concepts"
+    ],
+    "054": [
+      "nominal constructions",
+      "temporal phrasing"
+    ],
+    "055": [
+      "implicit subject",
+      "multiword concepts"
+    ],
+    "056": [
+      "headline-style ellipsis",
+      "synonymous journalistic phrasing"
+    ],
+    "057": [
+      "nominal constructions",
+      "headline-style ellipsis"
+    ],
+    "058": [
+      "prepositional constructions",
+      "synonymous journalistic phrasing"
+    ],
+    "059": [
+      "verb inflection",
+      "temporal phrasing"
+    ],
+    "060": [
+      "plural/singular variation",
+      "multiword concepts"
+    ]
+  },
+  "title_lead_usage": {
+    "051": "TITLE_AND_BODY",
+    "052": "BODY_ONLY",
+    "053": "LEAD_ONLY",
+    "054": "BODY_ONLY",
+    "055": "LEAD_AND_BODY",
+    "056": "BODY_ONLY",
+    "057": "BODY_ONLY",
+    "058": "LEAD_AND_BODY",
+    "059": "BODY_ONLY",
+    "060": "LEAD_ONLY"
+  },
+  "test_realism_metrics": {
+    "synthetic_tests_using_raw_text": 25,
+    "synthetic_tests_using_prebuilt_components": 0,
+    "synthetic_tests_using_prebuilt_contextual_evidence": 0,
+    "synthetic_tests_directly_calling_semantic_relationship_logic": 0,
+    "synthetic_tests_bypassing_extraction": 0,
+    "path_classification": "SAME_PATH",
+    "finding": "End-to-end path was exercised, but synthetic vocabulary matched exact generic regex forms more directly than Arabic corpus expression."
+  },
+  "architectural_owner_by_case": {
+    "051": "SEMANTIC_COMPONENT_EXTRACTION",
+    "052": "COMPOSITIONAL_RELATIONSHIP_ENGINE",
+    "053": "LEXICAL_EXTRACTION",
+    "054": "SEMANTIC_COMPONENT_EXTRACTION",
+    "055": "SEMANTIC_COMPONENT_EXTRACTION",
+    "056": "SEMANTIC_COMPONENT_EXTRACTION",
+    "057": "COMPOSITIONAL_RELATIONSHIP_ENGINE",
+    "058": "SEMANTIC_COMPONENT_EXTRACTION",
+    "059": "FORMAT_SEMANTIC_MAPPING",
+    "060": "SEMANTIC_COMPONENT_EXTRACTION"
+  },
+  "dominant_root_cause": "B_REAL_TEXT_COMPONENT_EXTRACTION_GAP",
+  "recommended_next_step": "IMPROVE_GENERIC_COMPONENT_EXTRACTION",
+  "expected_labels_sha256": "336e5f4f49f8e75c55751599b679b29501e3713af1f8d5514ec0a46168f6a4d8",
+  "raw_source_integrity": true,
+  "cases": [
+    {
+      "id": "051",
+      "furthest_activation_stage": "LEXICAL_COMPONENTS",
+      "contextual_evidence_inventory": [],
+      "present_roles": [
+        "SUBJECT",
+        "STATE",
+        "CHANGE",
+        "MEASUREMENT",
+        "OUTCOME"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "ACTION",
+        "DOMAIN_NORMALIZATION"
+      ],
+      "relationship_candidate_generated": false,
+      "relationship_candidate_failure": "COMPONENT_NORMALIZATION_MISMATCH",
+      "accepted_relationship_count": 0,
+      "primary_domains": [],
+      "secondary_domains": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "locality": "TITLE_TO_BODY",
+      "current_window_can_compose": false,
+      "title_lead_usage": "TITLE_AND_BODY",
+      "real_vocabulary_structural_gap": "VOCABULARY_TO_COMPONENT_GAP",
+      "arabic_expression_findings": [
+        "headline-style ellipsis",
+        "multiword concepts"
+      ],
+      "primary_architectural_owner": "SEMANTIC_COMPONENT_EXTRACTION",
+      "semantic_format_support_zero_cause": "NO_VALID_FORMAT_STRUCTURE",
+      "format_classifier_consumed_support": false,
+      "gate_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ]
+    },
+    {
+      "id": "052",
+      "furthest_activation_stage": "RELATIONSHIP_ACCEPTED",
+      "contextual_evidence_inventory": [
+        {
+          "evidence_level": "TOKEN",
+          "role": "SUBJECT",
+          "strength": "WEAK",
+          "source_section": "BODY",
+          "support_labels": [
+            "TOPIC_SPORTS"
+          ],
+          "suppression_labels": []
+        },
+        {
+          "evidence_level": "CONTEXT",
+          "role": "PREDICTION",
+          "strength": "STRONG",
+          "source_section": "BODY",
+          "support_labels": [
+            "CLAIM_UNCERTAIN",
+            "FORMAT_ANALYSIS",
+            "INTENT_UNDERSTAND_IMPACT"
+          ],
+          "suppression_labels": []
+        }
+      ],
+      "present_roles": [
+        "ACTOR",
+        "SUBJECT",
+        "METHOD",
+        "ACTION",
+        "CAUSE",
+        "EFFECT",
+        "RESULT",
+        "MEASUREMENT"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "CAUSE_EFFECT_NORMALIZATION"
+      ],
+      "relationship_candidate_generated": true,
+      "relationship_candidate_failure": null,
+      "accepted_relationship_count": 1,
+      "primary_domains": [],
+      "secondary_domains": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "locality": "MULTI_SECTION",
+      "current_window_can_compose": false,
+      "title_lead_usage": "BODY_ONLY",
+      "real_vocabulary_structural_gap": "COMPONENT_TO_RELATIONSHIP_GAP",
+      "arabic_expression_findings": [
+        "nominal constructions",
+        "synonymous journalistic phrasing"
+      ],
+      "primary_architectural_owner": "COMPOSITIONAL_RELATIONSHIP_ENGINE",
+      "semantic_format_support_zero_cause": "FORMAT_COMPONENTS_EXTRACTED_BUT_NOT_COMPOSED",
+      "format_classifier_consumed_support": false,
+      "gate_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
+        "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
+        "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+      ]
+    },
+    {
+      "id": "053",
+      "furthest_activation_stage": "CONTEXTUAL_EVIDENCE",
+      "contextual_evidence_inventory": [
+        {
+          "evidence_level": "TOKEN",
+          "role": "ACTOR",
+          "strength": "WEAK",
+          "source_section": "LEAD",
+          "support_labels": [
+            "TOPIC_BUSINESS"
+          ],
+          "suppression_labels": []
+        }
+      ],
+      "present_roles": [
+        "ACTOR",
+        "SUBJECT",
+        "ACTION",
+        "CHANGE",
+        "RESULT",
+        "MEASUREMENT"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "BUSINESS_SUBJECT_NORMALIZATION"
+      ],
+      "relationship_candidate_generated": false,
+      "relationship_candidate_failure": "COMPONENT_NORMALIZATION_MISMATCH",
+      "accepted_relationship_count": 0,
+      "primary_domains": [],
+      "secondary_domains": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "locality": "TITLE_TO_BODY",
+      "current_window_can_compose": false,
+      "title_lead_usage": "LEAD_ONLY",
+      "real_vocabulary_structural_gap": "VOCABULARY_TO_COMPONENT_GAP",
+      "arabic_expression_findings": [
+        "verb inflection",
+        "multiword concepts"
+      ],
+      "primary_architectural_owner": "LEXICAL_EXTRACTION",
+      "semantic_format_support_zero_cause": "NO_VALID_FORMAT_STRUCTURE",
+      "format_classifier_consumed_support": false,
+      "gate_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ]
+    },
+    {
+      "id": "054",
+      "furthest_activation_stage": "CONTEXTUAL_EVIDENCE",
+      "contextual_evidence_inventory": [
+        {
+          "evidence_level": "TOKEN",
+          "role": "ACTOR",
+          "strength": "WEAK",
+          "source_section": "BODY",
+          "support_labels": [
+            "TOPIC_BUSINESS"
+          ],
+          "suppression_labels": []
+        }
+      ],
+      "present_roles": [
+        "ACTOR",
+        "SUBJECT",
+        "ACTION",
+        "RESULT",
+        "MEASUREMENT",
+        "TEMPORAL_UPDATE",
+        "OUTCOME"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "RESULT_NORMALIZATION"
+      ],
+      "relationship_candidate_generated": false,
+      "relationship_candidate_failure": "COMPONENT_NORMALIZATION_MISMATCH",
+      "accepted_relationship_count": 0,
+      "primary_domains": [],
+      "secondary_domains": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "locality": "TITLE_TO_BODY",
+      "current_window_can_compose": false,
+      "title_lead_usage": "BODY_ONLY",
+      "real_vocabulary_structural_gap": "VOCABULARY_TO_COMPONENT_GAP",
+      "arabic_expression_findings": [
+        "nominal constructions",
+        "temporal phrasing"
+      ],
+      "primary_architectural_owner": "SEMANTIC_COMPONENT_EXTRACTION",
+      "semantic_format_support_zero_cause": "FORMAT_COMPONENTS_NOT_EXTRACTED",
+      "format_classifier_consumed_support": false,
+      "gate_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ]
+    },
+    {
+      "id": "055",
+      "furthest_activation_stage": "CONTEXTUAL_EVIDENCE",
+      "contextual_evidence_inventory": [
+        {
+          "evidence_level": "TOKEN",
+          "role": "ATTRIBUTION",
+          "strength": "MEDIUM",
+          "source_section": "LEAD",
+          "support_labels": [
+            "CLAIM_ATTRIBUTED"
+          ],
+          "suppression_labels": []
+        },
+        {
+          "evidence_level": "TOKEN",
+          "role": "ATTRIBUTION",
+          "strength": "MEDIUM",
+          "source_section": "LEAD",
+          "support_labels": [
+            "CLAIM_ATTRIBUTED"
+          ],
+          "suppression_labels": []
+        },
+        {
+          "evidence_level": "TOKEN",
+          "role": "ACTOR",
+          "strength": "WEAK",
+          "source_section": "BODY",
+          "support_labels": [
+            "TOPIC_BUSINESS"
+          ],
+          "suppression_labels": []
+        },
+        {
+          "evidence_level": "TOKEN",
+          "role": "ACTOR",
+          "strength": "WEAK",
+          "source_section": "BODY",
+          "support_labels": [
+            "TOPIC_BUSINESS"
+          ],
+          "suppression_labels": []
+        }
+      ],
+      "present_roles": [
+        "ACTOR",
+        "SUBJECT",
+        "ACTION",
+        "RESULT",
+        "OUTCOME"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "WORLD_EVENT_NORMALIZATION"
+      ],
+      "relationship_candidate_generated": false,
+      "relationship_candidate_failure": "COMPONENT_NORMALIZATION_MISMATCH",
+      "accepted_relationship_count": 0,
+      "primary_domains": [],
+      "secondary_domains": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "locality": "LEAD_TO_BODY",
+      "current_window_can_compose": false,
+      "title_lead_usage": "LEAD_AND_BODY",
+      "real_vocabulary_structural_gap": "VOCABULARY_TO_COMPONENT_GAP",
+      "arabic_expression_findings": [
+        "implicit subject",
+        "multiword concepts"
+      ],
+      "primary_architectural_owner": "SEMANTIC_COMPONENT_EXTRACTION",
+      "semantic_format_support_zero_cause": "NO_VALID_FORMAT_STRUCTURE",
+      "format_classifier_consumed_support": false,
+      "gate_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ]
+    },
+    {
+      "id": "056",
+      "furthest_activation_stage": "DOMAIN_PROMOTED",
+      "contextual_evidence_inventory": [
+        {
+          "evidence_level": "TOKEN",
+          "role": "AUTHORITY",
+          "strength": "WEAK",
+          "source_section": "BODY",
+          "support_labels": [
+            "TOPIC_GOVERNMENT"
+          ],
+          "suppression_labels": []
+        },
+        {
+          "evidence_level": "TOKEN",
+          "role": "ATTRIBUTION",
+          "strength": "MEDIUM",
+          "source_section": "BODY",
+          "support_labels": [
+            "CLAIM_ATTRIBUTED"
+          ],
+          "suppression_labels": []
+        }
+      ],
+      "present_roles": [
+        "AUTHORITY",
+        "SUBJECT",
+        "ACTION",
+        "STATE",
+        "PROCEDURE",
+        "SCHEDULE",
+        "OUTCOME"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "CLAIM",
+        "VERIFICATION",
+        "VERDICT"
+      ],
+      "relationship_candidate_generated": true,
+      "relationship_candidate_failure": null,
+      "accepted_relationship_count": 1,
+      "primary_domains": [],
+      "secondary_domains": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "locality": "ADJACENT_SENTENCES",
+      "current_window_can_compose": true,
+      "title_lead_usage": "BODY_ONLY",
+      "real_vocabulary_structural_gap": "VOCABULARY_TO_COMPONENT_GAP",
+      "arabic_expression_findings": [
+        "headline-style ellipsis",
+        "synonymous journalistic phrasing"
+      ],
+      "primary_architectural_owner": "SEMANTIC_COMPONENT_EXTRACTION",
+      "semantic_format_support_zero_cause": "FORMAT_COMPONENTS_NOT_EXTRACTED",
+      "format_classifier_consumed_support": false,
+      "gate_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "MULTIPLE_COMPETING_TOPIC_SIGNALS",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ]
+    },
+    {
+      "id": "057",
+      "furthest_activation_stage": "CONTEXTUAL_EVIDENCE",
+      "contextual_evidence_inventory": [
+        {
+          "evidence_level": "TOKEN",
+          "role": "SUBJECT",
+          "strength": "WEAK",
+          "source_section": "BODY",
+          "support_labels": [
+            "TOPIC_SPORTS"
+          ],
+          "suppression_labels": []
+        },
+        {
+          "evidence_level": "CONTEXT",
+          "role": "PREDICTION",
+          "strength": "STRONG",
+          "source_section": "BODY",
+          "support_labels": [
+            "CLAIM_UNCERTAIN",
+            "FORMAT_ANALYSIS",
+            "INTENT_UNDERSTAND_IMPACT"
+          ],
+          "suppression_labels": []
+        }
+      ],
+      "present_roles": [
+        "ACTOR",
+        "SUBJECT",
+        "ACTION",
+        "RESULT",
+        "OUTCOME"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "FUTURE_RESULT_DISTINCTION"
+      ],
+      "relationship_candidate_generated": false,
+      "relationship_candidate_failure": "RELATIONSHIP_PATTERN_NOT_REACHED",
+      "accepted_relationship_count": 0,
+      "primary_domains": [],
+      "secondary_domains": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "locality": "TITLE_TO_BODY",
+      "current_window_can_compose": false,
+      "title_lead_usage": "BODY_ONLY",
+      "real_vocabulary_structural_gap": "COMPONENT_TO_RELATIONSHIP_GAP",
+      "arabic_expression_findings": [
+        "nominal constructions",
+        "headline-style ellipsis"
+      ],
+      "primary_architectural_owner": "COMPOSITIONAL_RELATIONSHIP_ENGINE",
+      "semantic_format_support_zero_cause": "FORMAT_COMPONENTS_EXTRACTED_BUT_NOT_COMPOSED",
+      "format_classifier_consumed_support": false,
+      "gate_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+      ]
+    },
+    {
+      "id": "058",
+      "furthest_activation_stage": "CONTEXTUAL_EVIDENCE",
+      "contextual_evidence_inventory": [
+        {
+          "evidence_level": "TOKEN",
+          "role": "ACTOR",
+          "strength": "WEAK",
+          "source_section": "LEAD",
+          "support_labels": [
+            "TOPIC_BUSINESS"
+          ],
+          "suppression_labels": []
+        },
+        {
+          "evidence_level": "TOKEN",
+          "role": "ACTOR",
+          "strength": "WEAK",
+          "source_section": "BODY",
+          "support_labels": [
+            "TOPIC_BUSINESS"
+          ],
+          "suppression_labels": []
+        },
+        {
+          "evidence_level": "CONTEXT",
+          "role": "UNCERTAINTY",
+          "strength": "STRONG",
+          "source_section": "BODY",
+          "support_labels": [
+            "CLAIM_UNCERTAIN"
+          ],
+          "suppression_labels": []
+        },
+        {
+          "evidence_level": "CONTEXT",
+          "role": "PREDICTION",
+          "strength": "STRONG",
+          "source_section": "BODY",
+          "support_labels": [
+            "CLAIM_UNCERTAIN",
+            "FORMAT_ANALYSIS",
+            "INTENT_UNDERSTAND_IMPACT"
+          ],
+          "suppression_labels": []
+        },
+        {
+          "evidence_level": "TOKEN",
+          "role": "ACTOR",
+          "strength": "WEAK",
+          "source_section": "BODY",
+          "support_labels": [
+            "TOPIC_BUSINESS"
+          ],
+          "suppression_labels": []
+        }
+      ],
+      "present_roles": [
+        "ACTOR",
+        "SUBJECT",
+        "STATE",
+        "CHANGE",
+        "CAUSE",
+        "EFFECT",
+        "MEASUREMENT",
+        "TEMPORAL_UPDATE"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "TEMPORAL_MOVEMENT_NORMALIZATION"
+      ],
+      "relationship_candidate_generated": false,
+      "relationship_candidate_failure": "COMPONENT_NORMALIZATION_MISMATCH",
+      "accepted_relationship_count": 0,
+      "primary_domains": [],
+      "secondary_domains": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "locality": "LEAD_TO_BODY",
+      "current_window_can_compose": false,
+      "title_lead_usage": "LEAD_AND_BODY",
+      "real_vocabulary_structural_gap": "VOCABULARY_TO_COMPONENT_GAP",
+      "arabic_expression_findings": [
+        "prepositional constructions",
+        "synonymous journalistic phrasing"
+      ],
+      "primary_architectural_owner": "SEMANTIC_COMPONENT_EXTRACTION",
+      "semantic_format_support_zero_cause": "FORMAT_COMPONENTS_NOT_EXTRACTED",
+      "format_classifier_consumed_support": false,
+      "gate_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
+        "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
+        "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+      ]
+    },
+    {
+      "id": "059",
+      "furthest_activation_stage": "RELATIONSHIP_ACCEPTED",
+      "contextual_evidence_inventory": [
+        {
+          "evidence_level": "PHRASE",
+          "role": "SUBJECT",
+          "strength": "STRONG",
+          "source_section": "BODY",
+          "support_labels": [
+            "TOPIC_ECONOMY"
+          ],
+          "suppression_labels": []
+        },
+        {
+          "evidence_level": "PHRASE",
+          "role": "SUBJECT",
+          "strength": "STRONG",
+          "source_section": "BODY",
+          "support_labels": [
+            "TOPIC_ECONOMY"
+          ],
+          "suppression_labels": []
+        }
+      ],
+      "present_roles": [
+        "SUBJECT",
+        "STATE",
+        "CHANGE",
+        "CAUSE",
+        "MEASUREMENT",
+        "PRICE",
+        "TEMPORAL_UPDATE"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "CURRENT_LEVEL_NORMALIZATION",
+        "TEMPORAL_MOVEMENT_NORMALIZATION"
+      ],
+      "relationship_candidate_generated": true,
+      "relationship_candidate_failure": null,
+      "accepted_relationship_count": 2,
+      "primary_domains": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "secondary_domains": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "locality": "ADJACENT_SENTENCES",
+      "current_window_can_compose": true,
+      "title_lead_usage": "BODY_ONLY",
+      "real_vocabulary_structural_gap": "RELATIONSHIP_TO_FORMAT_GAP",
+      "arabic_expression_findings": [
+        "verb inflection",
+        "temporal phrasing"
+      ],
+      "primary_architectural_owner": "FORMAT_SEMANTIC_MAPPING",
+      "semantic_format_support_zero_cause": "RELATIONSHIP_EXISTS_BUT_FORMAT_MAPPING_MISSING",
+      "format_classifier_consumed_support": false,
+      "gate_signals": []
+    },
+    {
+      "id": "060",
+      "furthest_activation_stage": "CONTEXTUAL_EVIDENCE",
+      "contextual_evidence_inventory": [
+        {
+          "evidence_level": "TOKEN",
+          "role": "AUTHORITY",
+          "strength": "WEAK",
+          "source_section": "LEAD",
+          "support_labels": [
+            "TOPIC_GOVERNMENT"
+          ],
+          "suppression_labels": []
+        }
+      ],
+      "present_roles": [
+        "AUTHORITY",
+        "ACTOR",
+        "SUBJECT",
+        "OBJECT",
+        "ACTION",
+        "REQUIREMENT"
+      ],
+      "missing_roles_needed_for_expected_composition": [
+        "BUSINESS_SUBJECT_NORMALIZATION"
+      ],
+      "relationship_candidate_generated": false,
+      "relationship_candidate_failure": "COMPONENT_NORMALIZATION_MISMATCH",
+      "accepted_relationship_count": 0,
+      "primary_domains": [],
+      "secondary_domains": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "locality": "LEAD_TO_BODY",
+      "current_window_can_compose": false,
+      "title_lead_usage": "LEAD_ONLY",
+      "real_vocabulary_structural_gap": "VOCABULARY_TO_COMPONENT_GAP",
+      "arabic_expression_findings": [
+        "plural/singular variation",
+        "multiword concepts"
+      ],
+      "primary_architectural_owner": "SEMANTIC_COMPONENT_EXTRACTION",
+      "semantic_format_support_zero_cause": "NO_VALID_FORMAT_STRUCTURE",
+      "format_classifier_consumed_support": false,
+      "gate_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ]
+    }
+  ]
+}
