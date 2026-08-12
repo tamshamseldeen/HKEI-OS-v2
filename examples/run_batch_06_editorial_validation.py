@@ -36,6 +36,9 @@ COMPARISON_JSON = BATCH_ROOT / "post_hkei_157_comparison.json"
 COMPARISON_MD = BATCH_ROOT / "post_hkei_157_comparison.md"
 POST_HKEI_160_JSON = BATCH_ROOT / "post_hkei_160_comparison.json"
 POST_HKEI_160_MD = BATCH_ROOT / "post_hkei_160_comparison.md"
+POST_HKEI_163_JSON = BATCH_ROOT / "post_hkei_163_comparison.json"
+POST_HKEI_163_MD = BATCH_ROOT / "post_hkei_163_comparison.md"
+ACTIVATION_DECISION_JSON = BATCH_ROOT / "activation_to_decision_gap_analysis.json"
 CASE_IDS = tuple(f"{value:03d}" for value in range(51, 61))
 RAW_SHA256 = "7ef269f70c78816521c8d3228db720b771294c9fb91fcbe31629b7748f115a06"
 
@@ -180,6 +183,16 @@ def analyze_validation(
                 label for evidence in result.contextual_evidence.all_items for label in evidence.suppresses
             ),
             "semantic_relationship_count": len(semantic.relationships),
+            "semantic_relationships": [
+                {
+                    "type": relationship.relationship_type.value,
+                    "strength": relationship.strength.value,
+                    "reason_code": relationship.reason_code,
+                    "supports": list(relationship.supports),
+                    "suppresses": list(relationship.suppresses),
+                }
+                for relationship in semantic.relationships
+            ],
             "semantic_component_labels": component_labels,
             "relationship_candidate_generated": len(component_labels) >= 2,
             "primary_semantic_domains": list(semantic.primary_domain_candidates),
@@ -743,6 +756,219 @@ Provider calls: {result['provider_calls']}
 """
 
 
+def build_post_hkei_163_comparison(
+    hkei_155: dict[str, Any],
+    hkei_161: dict[str, Any],
+    current: dict[str, Any],
+) -> dict[str, Any]:
+    """Measure decision quality after HKEI-163 without provider execution."""
+    prior = {case["id"]: case for case in hkei_161["cases"]}
+    now = {case["id"]: case for case in current["cases"]}
+    topic_mismatches = _mismatch_ids(current, "topic")
+    format_mismatches = _mismatch_ids(current, "format")
+    intent_mismatches = _mismatch_ids(current, "reader_intent")
+    reachability: dict[str, str] = {}
+    primary_quality: dict[str, Any] = {}
+    for case_id in topic_mismatches:
+        case = now[case_id]
+        expected = f"PRIMARY_DOMAIN_{case['expected_topic']}"
+        relationship_supports = {
+            label
+            for relationship in case["semantic_relationships"]
+            for label in relationship["supports"]
+        }
+        component_signal = any(
+            case["expected_topic"] in label
+            for label in case["semantic_component_labels"]
+        )
+        reachability[case_id] = (
+            "PRIMARY_DOMAIN" if expected in case["primary_semantic_domains"] else
+            "SECONDARY_DOMAIN" if f"SECONDARY_DOMAIN_{case['expected_topic']}" in case["secondary_semantic_domains"] else
+            "RELATIONSHIP_SUPPORT" if expected in relationship_supports else
+            "COMPONENT_ONLY" if component_signal else "NO_SIGNAL"
+        )
+    for case in current["cases"]:
+        if not case["primary_semantic_domains"]:
+            continue
+        strong = [
+            relationship for relationship in case["semantic_relationships"]
+            if relationship["strength"] == "STRONG"
+            and any(label in case["primary_semantic_domains"] for label in relationship["supports"])
+        ]
+        primary_quality[case["id"]] = {
+            "primary_domains": case["primary_semantic_domains"],
+            "aligned_with_expected_topic": f"PRIMARY_DOMAIN_{case['expected_topic']}" in case["primary_semantic_domains"],
+            "promotion_strength": "STRONG" if strong else "PARTIAL",
+            "subject_role_basis": [item["type"] for item in strong],
+            "competing_domains": case["primary_semantic_domains"][1:],
+        }
+    format_tracking: dict[str, Any] = {}
+    alignment_counts = Counter()
+    expected_support_cases: list[str] = []
+    for case_id in format_mismatches:
+        case = now[case_id]
+        expected = f"FORMAT_{case['expected_format']}"
+        predicted = f"FORMAT_{case['predicted_format']}"
+        support = case["semantic_format_support"]
+        if expected in support:
+            expected_support_cases.append(case_id)
+        classifications = []
+        for label in support:
+            classification = (
+                "ALIGNED_WITH_EXPECTED" if label == expected else
+                "ALIGNED_WITH_WRONG_PREDICTION" if label == predicted else
+                "IRRELEVANT"
+            )
+            classifications.append(classification)
+            alignment_counts[classification] += 1
+        format_tracking[case_id] = {
+            "expected_format": case["expected_format"],
+            "predicted_format": case["predicted_format"],
+            "semantic_format_support": support,
+            "semantic_format_suppression": case["semantic_format_suppression"],
+            "expected_format_received_support": expected in support,
+            "wrong_prediction_received_support": predicted in support,
+            "support_alignment": classifications,
+        }
+    prior_false = {"052", "054", "055", "056", "058", "059"}
+    confidence_rank = {"LOW": 0, "MEDIUM": 1, "HIGH": 2}
+    activation = json.loads(ACTIVATION_DECISION_JSON.read_text(encoding="utf-8"))
+    prior_confidence = {
+        "052": activation["format_mismatch_analysis"]["052"]["confidence_after"],
+        "054": activation["format_mismatch_analysis"]["054"]["confidence_after"],
+        "055": activation["topic_mismatch_analysis"]["055"]["confidence_after"],
+        "056": activation["format_mismatch_analysis"]["056"]["confidence_after"],
+        "058": activation["format_mismatch_analysis"]["058"]["confidence_after"],
+        "059": activation["format_mismatch_analysis"]["059"]["confidence_after"],
+    }
+    current_false = {
+        case_id for case_id in prior_false
+        if (case := now[case_id])["semantic_component_labels"]
+        and confidence_rank[
+            case["topic_confidence"] if case_id == "055" else case["format_confidence"]
+        ] >= confidence_rank[prior_confidence[case_id]]
+    }
+    topic_primary = sum(value["aligned_with_expected_topic"] for value in primary_quality.values())
+    context = current["cases_with_contextual_evidence"]
+    components = current["cases_reaching_semantic_components"]
+    relationships = current["cases_with_semantic_relationships"]
+    domains = current["cases_with_primary_semantic_domains"]
+    expected_alignment_rate = _percentage(len(expected_support_cases), current["cases_with_semantic_format_support"])
+    accuracy_improved = current["topic_accuracy"] > hkei_161["topic_accuracy"] or current["format_accuracy"] > hkei_161["format_accuracy"]
+    expected_primary = [key for key, value in reachability.items() if value == "PRIMARY_DOMAIN"]
+    quality_improved = bool(expected_primary or expected_support_cases or len(current_false) < len(prior_false))
+    safety_regressed = current["format_gate_recall"] < hkei_161["format_gate_recall"]
+    if quality_improved and safety_regressed:
+        improvement = "MIXED"
+    elif accuracy_improved and quality_improved:
+        improvement = "MEANINGFUL_IMPROVEMENT"
+    elif quality_improved:
+        improvement = "DECISION_QUALITY_IMPROVEMENT_ONLY"
+    elif any(current[key] < hkei_161[key] for key in ("topic_accuracy", "format_accuracy")):
+        improvement = "REGRESSION"
+    else:
+        improvement = "NO_IMPROVEMENT"
+    interpretation = (
+        "G_MIXED" if quality_improved and safety_regressed else
+        "A_PROMOTION_AND_MAPPING_FIX_REACHED_DECISIONS" if expected_primary and expected_support_cases else
+        "B_PROMOTION_IMPROVED_FORMAT_MAPPING_STILL_BLOCKED" if expected_primary else
+        "C_FORMAT_MAPPING_IMPROVED_DOMAIN_PROMOTION_STILL_BLOCKED" if expected_support_cases else
+        "E_FALSE_CONFIDENCE_REDUCED_WITHOUT_CLASSIFICATION_CHANGE" if len(current_false) < len(prior_false) else
+        "F_NO_MATERIAL_DECISION_QUALITY_GAIN"
+    )
+    return {
+        "batch": "batch_06", "validation_status": current["validation_status"],
+        "baselines": {
+            "HKEI-155": hkei_155,
+            "HKEI-158": hkei_161,
+            "HKEI-161": {
+                "topic_accuracy": 40.0, "format_accuracy": 40.0,
+                "reader_intent_accuracy": 40.0, "full_case_accuracy": 0.0,
+                "topic_gate_recall": 83.33333333333334,
+                "format_gate_recall": 50.0,
+                "false_semantic_confidence_cases": sorted(prior_false),
+            },
+        },
+        "provider_calls": 0, "case_count": current["case_count"],
+        "expected_labels_unchanged": current["expected_labels_sha256"] == hkei_161["expected_labels_sha256"],
+        "raw_source_integrity": current["source_integrity"],
+        "improvement_classification": improvement,
+        "architectural_interpretation": interpretation,
+        "evidence_decision_quality_improved": "YES" if accuracy_improved and quality_improved else "PARTIALLY" if quality_improved else "NO",
+        "current_topic_mismatches": topic_mismatches,
+        "current_format_mismatches": format_mismatches,
+        "current_reader_intent_mismatches": intent_mismatches,
+        "fully_matched_cases": [case["id"] for case in current["cases"] if case["full_match"]],
+        "expected_domain_reachability": reachability,
+        "expected_domains_reaching_primary_candidate": expected_primary,
+        "primary_domain_quality": primary_quality,
+        "primary_domains_aligned_with_expected_topic": topic_primary,
+        "format_mismatch_tracking": format_tracking,
+        "expected_format_support_emitted_cases": expected_support_cases,
+        "format_support_alignment_counts": dict(alignment_counts),
+        "previous_false_semantic_confidence_cases": sorted(prior_false),
+        "current_false_semantic_confidence_cases": sorted(current_false),
+        "resolved_false_semantic_confidence_cases": sorted(prior_false - current_false),
+        "new_false_semantic_confidence_cases": sorted(current_false - prior_false),
+        "case_055_gate_status": {
+            "expected_topic": now["055"]["expected_topic"], "current_topic": now["055"]["predicted_topic"],
+            "previous_topic": prior["055"]["predicted_topic"], "previous_primary_domain": prior["055"]["primary_semantic_domains"],
+            "current_primary_domain": now["055"]["primary_semantic_domains"], "previous_confidence": prior["055"]["topic_confidence"],
+            "current_confidence": now["055"]["topic_confidence"], "previous_topic_required": prior["055"]["topic_required"],
+            "current_topic_required": now["055"]["topic_required"], "previous_triggers": prior["055"]["trigger_signals"],
+            "current_triggers": now["055"]["trigger_signals"],
+            "false_primary_domain_sufficiency_resolved": (
+                now["055"]["topic_match"] or now["055"]["topic_required"]
+            ),
+        },
+        "previous_format_fn_cases": [case["id"] for case in hkei_161["cases"] if not case["format_match"] and not case["format_required"]],
+        "current_format_fn_cases": [case["id"] for case in current["cases"] if not case["format_match"] and not case["format_required"]],
+        "previous_fn_tracking": {case_id: now[case_id] for case_id in ("054", "056", "059")},
+        "direct_intent_failures": sum(not case["intent_match"] and case["format_match"] for case in current["cases"]),
+        "downstream_intent_failures": sum(not case["intent_match"] and not case["format_match"] for case in current["cases"]),
+        "conversion_rates": {
+            "context_to_semantic_component_conversion": _percentage(components, context),
+            "semantic_component_to_relationship_conversion": _percentage(relationships, components),
+            "relationship_to_primary_domain_conversion": _percentage(domains, relationships),
+            "context_to_primary_domain_conversion": _percentage(domains, context),
+            "semantic_format_support_rate": _percentage(current["cases_with_semantic_format_support"], current["case_count"]),
+            "semantic_format_expected_alignment_rate": expected_alignment_rate,
+        },
+        "projected_provider_call_cases": current["projected_provider_call_cases"],
+        "projected_provider_call_rate": current["projected_provider_call_rate"],
+        "current": current,
+    }
+
+
+def render_post_hkei_163_markdown(result: dict[str, Any]) -> str:
+    """Render decision-quality comparison without source text."""
+    current = result["current"]
+    return f"""# Batch 06 Post-HKEI-163 Comparison
+
+Improvement classification: {result['improvement_classification']}
+
+Architectural interpretation: {result['architectural_interpretation']}
+
+Topic accuracy: {current['topic_accuracy']:.2f}%
+
+Format accuracy: {current['format_accuracy']:.2f}%
+
+Reader Intent accuracy: {current['reader_intent_accuracy']:.2f}%
+
+Expected domains reaching primary: {len(result['expected_domains_reaching_primary_candidate'])}
+
+Expected Format support cases: {len(result['expected_format_support_emitted_cases'])}
+
+False semantic confidence cases: {len(result['current_false_semantic_confidence_cases'])}
+
+Topic Gate recall: {current['topic_gate_recall']:.2f}%
+
+Format Gate recall: {current['format_gate_recall']:.2f}%
+
+Provider calls: 0
+"""
+
+
 def main() -> int:
     prior_comparison = (
         json.loads(POST_HKEI_160_JSON.read_text(encoding="utf-8"))
@@ -758,12 +984,12 @@ def main() -> int:
         else json.loads(COMPARISON_JSON.read_text(encoding="utf-8"))["baseline_snapshot"]
     )
     analysis = analyze_validation()
-    comparison = build_post_hkei_160_comparison(hkei_155, hkei_158, analysis)
+    comparison = build_post_hkei_163_comparison(hkei_155, hkei_158, analysis)
     OUTPUT_JSON.write_text(render_json(analysis), encoding="utf-8")
     OUTPUT_MD.write_text(render_markdown(analysis), encoding="utf-8")
-    POST_HKEI_160_JSON.write_text(render_json(comparison), encoding="utf-8")
-    POST_HKEI_160_MD.write_text(
-        render_post_hkei_160_markdown(comparison), encoding="utf-8"
+    POST_HKEI_163_JSON.write_text(render_json(comparison), encoding="utf-8")
+    POST_HKEI_163_MD.write_text(
+        render_post_hkei_163_markdown(comparison), encoding="utf-8"
     )
     print(json.dumps({key: value for key, value in analysis.items() if key != "cases"}, ensure_ascii=False, indent=2))
     return 0

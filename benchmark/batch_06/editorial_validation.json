@@ -41,9 +41,9 @@
   "cases_with_semantic_format_suppression": 3,
   "scope_distribution": {
     "NOT_REQUIRED": 2,
-    "TOPIC_REQUIRED": 5,
+    "TOPIC_REQUIRED": 6,
     "FORMAT_REQUIRED": 2,
-    "TOPIC_AND_FORMAT_REQUIRED": 1
+    "TOPIC_AND_FORMAT_REQUIRED": 0
   },
   "projected_provider_call_cases": 8,
   "projected_provider_call_rate": 80.0,
@@ -103,6 +103,7 @@
       ],
       "contextual_suppressions": [],
       "semantic_relationship_count": 0,
+      "semantic_relationships": [],
       "semantic_component_labels": [
         "COMPONENT_MEASUREMENT",
         "COMPONENT_RECOMMENDED_ACTION"
@@ -150,6 +151,51 @@
       ],
       "contextual_suppressions": [],
       "semantic_relationship_count": 4,
+      "semantic_relationships": [
+        {
+          "type": "ACTOR_PERFORMS_ACTION",
+          "strength": "MEDIUM",
+          "reason_code": "ACTOR_ACTION_COMPOSITION",
+          "supports": [],
+          "suppresses": []
+        },
+        {
+          "type": "SUBJECT_BELONGS_TO_DOMAIN",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": [
+            "PRIMARY_DOMAIN_GOVERNMENT",
+            "PRIMARY_DOMAIN_TECHNOLOGY"
+          ]
+        },
+        {
+          "type": "SUBJECT_BELONGS_TO_DOMAIN",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": [
+            "PRIMARY_DOMAIN_GOVERNMENT",
+            "PRIMARY_DOMAIN_TECHNOLOGY"
+          ]
+        },
+        {
+          "type": "SUBJECT_BELONGS_TO_DOMAIN",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": [
+            "PRIMARY_DOMAIN_GOVERNMENT",
+            "PRIMARY_DOMAIN_TECHNOLOGY"
+          ]
+        }
+      ],
       "semantic_component_labels": [
         "COMPONENT_PRICE",
         "COMPONENT_RECOMMENDED_ACTION",
@@ -197,6 +243,7 @@
       ],
       "contextual_suppressions": [],
       "semantic_relationship_count": 0,
+      "semantic_relationships": [],
       "semantic_component_labels": [
         "COMPONENT_TEMPORAL_UPDATE",
         "COMPONENT_CHANGE",
@@ -229,9 +276,9 @@
       "id": "054",
       "predicted_topic": "ECONOMY",
       "topic_confidence": "MEDIUM",
-      "predicted_format": "STANDARD_NEWS",
-      "format_confidence": "MEDIUM",
-      "predicted_reader_intent": "GET_UPDATE",
+      "predicted_format": "TREND_UPDATE",
+      "format_confidence": "HIGH",
+      "predicted_reader_intent": "CHECK_CLAIM",
       "contextual_support_labels": [
         "COMPONENT_MEASUREMENT",
         "COMPONENT_RESULT",
@@ -243,6 +290,19 @@
       ],
       "contextual_suppressions": [],
       "semantic_relationship_count": 1,
+      "semantic_relationships": [
+        {
+          "type": "INTERPRETATION_OF_INDICATOR",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_TREND_UPDATE_STRUCTURE",
+          "supports": [
+            "FORMAT_TREND_UPDATE"
+          ],
+          "suppresses": [
+            "FORMAT_STANDARD_NEWS"
+          ]
+        }
+      ],
       "semantic_component_labels": [
         "COMPONENT_MEASUREMENT",
         "COMPONENT_RESULT",
@@ -277,8 +337,8 @@
     },
     {
       "id": "055",
-      "predicted_topic": "ECONOMY",
-      "topic_confidence": "HIGH",
+      "predicted_topic": "BUSINESS",
+      "topic_confidence": "MEDIUM",
       "predicted_format": "STANDARD_NEWS",
       "format_confidence": "MEDIUM",
       "predicted_reader_intent": "GET_UPDATE",
@@ -291,6 +351,20 @@
       ],
       "contextual_suppressions": [],
       "semantic_relationship_count": 1,
+      "semantic_relationships": [
+        {
+          "type": "SUBJECT_BELONGS_TO_DOMAIN",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": [
+            "PRIMARY_DOMAIN_GOVERNMENT",
+            "PRIMARY_DOMAIN_TECHNOLOGY"
+          ]
+        }
+      ],
       "semantic_component_labels": [
         "COMPONENT_EFFECT",
         "COMPONENT_PRICE",
@@ -319,9 +393,9 @@
       "id": "056",
       "predicted_topic": "GOVERNMENT",
       "topic_confidence": "MEDIUM",
-      "predicted_format": "GUIDE",
+      "predicted_format": "SERVICE",
       "format_confidence": "HIGH",
-      "predicted_reader_intent": "VERIFY_REQUIREMENTS",
+      "predicted_reader_intent": "KNOW_ACTION",
       "contextual_support_labels": [
         "COMPONENT_SCHEDULE",
         "COMPONENT_ACTION",
@@ -332,6 +406,50 @@
       ],
       "contextual_suppressions": [],
       "semantic_relationship_count": 4,
+      "semantic_relationships": [
+        {
+          "type": "ACTION_TARGETS_OBJECT",
+          "strength": "MEDIUM",
+          "reason_code": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_EDUCATION"
+          ],
+          "suppresses": []
+        },
+        {
+          "type": "ACTION_HAS_DEADLINE",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+          "supports": [
+            "FORMAT_SERVICE"
+          ],
+          "suppresses": [
+            "FORMAT_GUIDE"
+          ]
+        },
+        {
+          "type": "ACTION_HAS_DEADLINE",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+          "supports": [
+            "FORMAT_SERVICE"
+          ],
+          "suppresses": [
+            "FORMAT_GUIDE"
+          ]
+        },
+        {
+          "type": "ACTION_HAS_DEADLINE",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+          "supports": [
+            "FORMAT_SERVICE"
+          ],
+          "suppresses": [
+            "FORMAT_GUIDE"
+          ]
+        }
+      ],
       "semantic_component_labels": [
         "COMPONENT_SCHEDULE",
         "COMPONENT_ACTION",
@@ -380,6 +498,7 @@
       ],
       "contextual_suppressions": [],
       "semantic_relationship_count": 0,
+      "semantic_relationships": [],
       "semantic_component_labels": [
         "COMPONENT_RESULT",
         "COMPONENT_CAUSE"
@@ -409,9 +528,9 @@
       "id": "058",
       "predicted_topic": "ECONOMY",
       "topic_confidence": "MEDIUM",
-      "predicted_format": "STANDARD_NEWS",
-      "format_confidence": "MEDIUM",
-      "predicted_reader_intent": "GET_UPDATE",
+      "predicted_format": "RESULT_REPORT",
+      "format_confidence": "HIGH",
+      "predicted_reader_intent": "FIND_RESULT",
       "contextual_support_labels": [
         "COMPONENT_CHANGE",
         "COMPONENT_METHOD",
@@ -429,6 +548,30 @@
       ],
       "contextual_suppressions": [],
       "semantic_relationship_count": 2,
+      "semantic_relationships": [
+        {
+          "type": "EVENT_HAS_OUTCOME",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_RESULT_REPORT_STRUCTURE",
+          "supports": [
+            "FORMAT_RESULT_REPORT"
+          ],
+          "suppresses": [
+            "FORMAT_TREND_UPDATE"
+          ]
+        },
+        {
+          "type": "EVENT_HAS_OUTCOME",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_RESULT_REPORT_STRUCTURE",
+          "supports": [
+            "FORMAT_RESULT_REPORT"
+          ],
+          "suppresses": [
+            "FORMAT_TREND_UPDATE"
+          ]
+        }
+      ],
       "semantic_component_labels": [
         "COMPONENT_CHANGE",
         "COMPONENT_METHOD",
@@ -449,13 +592,12 @@
       "semantic_format_suppression": [
         "FORMAT_TREND_UPDATE"
       ],
-      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
+      "gate_scope": "TOPIC_REQUIRED",
       "topic_required": true,
-      "format_required": true,
+      "format_required": false,
       "trigger_signals": [
         "NO_PRIMARY_SEMANTIC_DOMAIN",
         "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
-        "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
         "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
       ],
       "expected_topic": "ECONOMY",
@@ -482,6 +624,38 @@
       ],
       "contextual_suppressions": [],
       "semantic_relationship_count": 3,
+      "semantic_relationships": [
+        {
+          "type": "INDICATOR_DESCRIBES_DOMAIN",
+          "strength": "STRONG",
+          "reason_code": "ECONOMIC_INDICATOR_DOMAIN_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": []
+        },
+        {
+          "type": "INDICATOR_DESCRIBES_DOMAIN",
+          "strength": "STRONG",
+          "reason_code": "ECONOMIC_INDICATOR_DOMAIN_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": []
+        },
+        {
+          "type": "SUBJECT_BELONGS_TO_DOMAIN",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": [
+            "PRIMARY_DOMAIN_GOVERNMENT",
+            "PRIMARY_DOMAIN_TECHNOLOGY"
+          ]
+        }
+      ],
       "semantic_component_labels": [
         "COMPONENT_MEASUREMENT",
         "COMPONENT_TEMPORAL_UPDATE",
@@ -524,6 +698,7 @@
       ],
       "contextual_suppressions": [],
       "semantic_relationship_count": 0,
+      "semantic_relationships": [],
       "semantic_component_labels": [
         "COMPONENT_ACTION",
         "COMPONENT_CAUSE",
@@ -559,12 +734,12 @@
   "topic_gate_fn": 1,
   "topic_gate_precision": 83.33333333333334,
   "topic_gate_recall": 83.33333333333334,
-  "format_gate_tp": 3,
+  "format_gate_tp": 2,
   "format_gate_fp": 0,
   "format_gate_tn": 4,
-  "format_gate_fn": 3,
+  "format_gate_fn": 4,
   "format_gate_precision": 100.0,
-  "format_gate_recall": 50.0,
+  "format_gate_recall": 33.33333333333333,
   "generalization_assessment": "WEAK",
   "gate_assessment": "WEAK"
 }

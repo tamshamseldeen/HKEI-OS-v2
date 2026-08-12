@@ -1,0 +1,2092 @@
+{
+  "batch": "batch_06",
+  "validation_status": "PASSED",
+  "baselines": {
+    "HKEI-155": {
+      "batch": "batch_06",
+      "validation_status": "PASSED",
+      "case_count": 10,
+      "case_ids": [
+        "051",
+        "052",
+        "053",
+        "054",
+        "055",
+        "056",
+        "057",
+        "058",
+        "059",
+        "060"
+      ],
+      "raw_source_sha256": "7ef269f70c78816521c8d3228db720b771294c9fb91fcbe31629b7748f115a06",
+      "expected_labels_sha256": "336e5f4f49f8e75c55751599b679b29501e3713af1f8d5514ec0a46168f6a4d8",
+      "source_integrity": true,
+      "risk_annotations_isolated": true,
+      "provider_calls": 0,
+      "topic_matches": 4,
+      "topic_mismatches": 6,
+      "topic_accuracy": 40.0,
+      "format_matches": 4,
+      "format_mismatches": 6,
+      "format_accuracy": 40.0,
+      "reader_intent_matches": 4,
+      "reader_intent_mismatches": 6,
+      "reader_intent_accuracy": 40.0,
+      "fully_matched_cases": 0,
+      "full_case_accuracy": 0.0,
+      "cases_with_contextual_evidence": 9,
+      "cases_with_contextual_suppression": 0,
+      "cases_with_semantic_relationships": 3,
+      "cases_with_primary_semantic_domains": 1,
+      "cases_with_secondary_semantic_domains": 0,
+      "cases_with_semantic_format_support": 0,
+      "cases_with_semantic_format_suppression": 0,
+      "scope_distribution": {
+        "NOT_REQUIRED": 1,
+        "TOPIC_REQUIRED": 6,
+        "FORMAT_REQUIRED": 2,
+        "TOPIC_AND_FORMAT_REQUIRED": 1
+      },
+      "projected_provider_call_cases": 9,
+      "projected_provider_call_rate": 90.0,
+      "unnecessary_projected_call_cases": 0,
+      "unnecessary_projected_call_rate": 0.0,
+      "risk_stratification": {
+        "TOPIC_AMBIGUITY": {
+          "cases": 1,
+          "full_matches": 0,
+          "gate_calls": 1
+        },
+        "FORMAT_AMBIGUITY": {
+          "cases": 4,
+          "full_matches": 0,
+          "gate_calls": 3
+        },
+        "BUSINESS_REPORTING": {
+          "cases": 1,
+          "full_matches": 0,
+          "gate_calls": 1
+        },
+        "ACTOR_SUBJECT_RISK": {
+          "cases": 1,
+          "full_matches": 0,
+          "gate_calls": 1
+        },
+        "CLAIM_VERIFICATION": {
+          "cases": 1,
+          "full_matches": 0,
+          "gate_calls": 1
+        },
+        "MIXED_DOMAIN_RISK": {
+          "cases": 1,
+          "full_matches": 0,
+          "gate_calls": 1
+        },
+        "AUTHORITY_SUBJECT_RISK": {
+          "cases": 1,
+          "full_matches": 0,
+          "gate_calls": 1
+        }
+      },
+      "batch_01_topic_accuracy": 100.0,
+      "batch_02_full_accuracy": 100.0,
+      "batch_03_full_accuracy": 100.0,
+      "cases": [
+        {
+          "id": "051",
+          "predicted_topic": "ECONOMY",
+          "topic_confidence": "MEDIUM",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 0,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "TOPIC_REQUIRED",
+          "topic_required": true,
+          "format_required": false,
+          "trigger_signals": [
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+          ],
+          "expected_topic": "GENERAL",
+          "topic_match": false,
+          "expected_format": "STANDARD_NEWS",
+          "format_match": true,
+          "expected_reader_intent": "GET_UPDATE",
+          "intent_match": true,
+          "full_match": false
+        },
+        {
+          "id": "052",
+          "predicted_topic": "ECONOMY",
+          "topic_confidence": "LOW",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [
+            "TOPIC_SPORTS",
+            "CLAIM_UNCERTAIN",
+            "FORMAT_ANALYSIS",
+            "INTENT_UNDERSTAND_IMPACT"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 1,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "FORMAT_REQUIRED",
+          "topic_required": false,
+          "format_required": true,
+          "trigger_signals": [
+            "TOPIC_LOW_CONFIDENCE",
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
+            "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
+            "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+          ],
+          "expected_topic": "ECONOMY",
+          "topic_match": true,
+          "expected_format": "ANALYSIS",
+          "format_match": false,
+          "expected_reader_intent": "UNDERSTAND_IMPACT",
+          "intent_match": false,
+          "full_match": false
+        },
+        {
+          "id": "053",
+          "predicted_topic": "ECONOMY",
+          "topic_confidence": "LOW",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [
+            "TOPIC_BUSINESS"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 0,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "TOPIC_REQUIRED",
+          "topic_required": true,
+          "format_required": false,
+          "trigger_signals": [
+            "TOPIC_LOW_CONFIDENCE",
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+          ],
+          "expected_topic": "BUSINESS",
+          "topic_match": false,
+          "expected_format": "STANDARD_NEWS",
+          "format_match": true,
+          "expected_reader_intent": "GET_UPDATE",
+          "intent_match": true,
+          "full_match": false
+        },
+        {
+          "id": "054",
+          "predicted_topic": "ECONOMY",
+          "topic_confidence": "MEDIUM",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [
+            "TOPIC_BUSINESS"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 0,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "TOPIC_REQUIRED",
+          "topic_required": true,
+          "format_required": false,
+          "trigger_signals": [
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+          ],
+          "expected_topic": "BUSINESS",
+          "topic_match": false,
+          "expected_format": "RESULT_REPORT",
+          "format_match": false,
+          "expected_reader_intent": "FIND_RESULT",
+          "intent_match": false,
+          "full_match": false
+        },
+        {
+          "id": "055",
+          "predicted_topic": "BUSINESS",
+          "topic_confidence": "MEDIUM",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [
+            "CLAIM_ATTRIBUTED",
+            "TOPIC_BUSINESS"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 0,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "TOPIC_REQUIRED",
+          "topic_required": true,
+          "format_required": false,
+          "trigger_signals": [
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+          ],
+          "expected_topic": "WORLD",
+          "topic_match": false,
+          "expected_format": "STANDARD_NEWS",
+          "format_match": true,
+          "expected_reader_intent": "GET_UPDATE",
+          "intent_match": true,
+          "full_match": false
+        },
+        {
+          "id": "056",
+          "predicted_topic": "GOVERNMENT",
+          "topic_confidence": "MEDIUM",
+          "predicted_format": "GUIDE",
+          "format_confidence": "HIGH",
+          "predicted_reader_intent": "VERIFY_REQUIREMENTS",
+          "contextual_support_labels": [
+            "TOPIC_GOVERNMENT",
+            "CLAIM_ATTRIBUTED"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 1,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "TOPIC_REQUIRED",
+          "topic_required": true,
+          "format_required": false,
+          "trigger_signals": [
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "MULTIPLE_COMPETING_TOPIC_SIGNALS",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+          ],
+          "expected_topic": "EDUCATION",
+          "topic_match": false,
+          "expected_format": "FACT_CHECK",
+          "format_match": false,
+          "expected_reader_intent": "CHECK_CLAIM",
+          "intent_match": false,
+          "full_match": false
+        },
+        {
+          "id": "057",
+          "predicted_topic": "SPORTS",
+          "topic_confidence": "HIGH",
+          "predicted_format": "RESULT_REPORT",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "FIND_RESULT",
+          "contextual_support_labels": [
+            "TOPIC_SPORTS",
+            "CLAIM_UNCERTAIN",
+            "FORMAT_ANALYSIS",
+            "INTENT_UNDERSTAND_IMPACT"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 0,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "FORMAT_REQUIRED",
+          "topic_required": false,
+          "format_required": true,
+          "trigger_signals": [
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+            "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+          ],
+          "expected_topic": "SPORTS",
+          "topic_match": true,
+          "expected_format": "STANDARD_NEWS",
+          "format_match": false,
+          "expected_reader_intent": "GET_UPDATE",
+          "intent_match": false,
+          "full_match": false
+        },
+        {
+          "id": "058",
+          "predicted_topic": "ECONOMY",
+          "topic_confidence": "MEDIUM",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [
+            "TOPIC_BUSINESS",
+            "CLAIM_UNCERTAIN",
+            "FORMAT_ANALYSIS",
+            "INTENT_UNDERSTAND_IMPACT"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 0,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
+          "topic_required": true,
+          "format_required": true,
+          "trigger_signals": [
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
+            "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
+            "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+          ],
+          "expected_topic": "ECONOMY",
+          "topic_match": true,
+          "expected_format": "TREND_UPDATE",
+          "format_match": false,
+          "expected_reader_intent": "FOLLOW_DEVELOPMENT",
+          "intent_match": false,
+          "full_match": false
+        },
+        {
+          "id": "059",
+          "predicted_topic": "ECONOMY",
+          "topic_confidence": "HIGH",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [
+            "TOPIC_ECONOMY"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 2,
+          "primary_semantic_domains": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "NOT_REQUIRED",
+          "topic_required": false,
+          "format_required": false,
+          "trigger_signals": [],
+          "expected_topic": "ECONOMY",
+          "topic_match": true,
+          "expected_format": "TREND_UPDATE",
+          "format_match": false,
+          "expected_reader_intent": "FOLLOW_DEVELOPMENT",
+          "intent_match": false,
+          "full_match": false
+        },
+        {
+          "id": "060",
+          "predicted_topic": "GOVERNMENT",
+          "topic_confidence": "MEDIUM",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [
+            "TOPIC_GOVERNMENT"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 0,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "TOPIC_REQUIRED",
+          "topic_required": true,
+          "format_required": false,
+          "trigger_signals": [
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+          ],
+          "expected_topic": "BUSINESS",
+          "topic_match": false,
+          "expected_format": "STANDARD_NEWS",
+          "format_match": true,
+          "expected_reader_intent": "GET_UPDATE",
+          "intent_match": true,
+          "full_match": false
+        }
+      ],
+      "topic_gate_tp": 6,
+      "topic_gate_fp": 1,
+      "topic_gate_tn": 3,
+      "topic_gate_fn": 0,
+      "topic_gate_precision": 85.71428571428571,
+      "topic_gate_recall": 100.0,
+      "format_gate_tp": 3,
+      "format_gate_fp": 0,
+      "format_gate_tn": 4,
+      "format_gate_fn": 3,
+      "format_gate_precision": 100.0,
+      "format_gate_recall": 50.0,
+      "generalization_assessment": "WEAK",
+      "gate_assessment": "WEAK"
+    },
+    "HKEI-158": {
+      "batch": "batch_06",
+      "validation_status": "PASSED",
+      "case_count": 10,
+      "case_ids": [
+        "051",
+        "052",
+        "053",
+        "054",
+        "055",
+        "056",
+        "057",
+        "058",
+        "059",
+        "060"
+      ],
+      "raw_source_sha256": "7ef269f70c78816521c8d3228db720b771294c9fb91fcbe31629b7748f115a06",
+      "expected_labels_sha256": "336e5f4f49f8e75c55751599b679b29501e3713af1f8d5514ec0a46168f6a4d8",
+      "source_integrity": true,
+      "risk_annotations_isolated": true,
+      "provider_calls": 0,
+      "topic_matches": 4,
+      "topic_mismatches": 6,
+      "topic_accuracy": 40.0,
+      "format_matches": 4,
+      "format_mismatches": 6,
+      "format_accuracy": 40.0,
+      "reader_intent_matches": 4,
+      "reader_intent_mismatches": 6,
+      "reader_intent_accuracy": 40.0,
+      "fully_matched_cases": 0,
+      "full_case_accuracy": 0.0,
+      "cases_with_contextual_evidence": 9,
+      "cases_with_contextual_suppression": 0,
+      "cases_with_semantic_relationships": 3,
+      "cases_with_primary_semantic_domains": 1,
+      "cases_with_secondary_semantic_domains": 0,
+      "cases_with_semantic_format_support": 0,
+      "cases_with_semantic_format_suppression": 0,
+      "scope_distribution": {
+        "NOT_REQUIRED": 1,
+        "TOPIC_REQUIRED": 6,
+        "FORMAT_REQUIRED": 2,
+        "TOPIC_AND_FORMAT_REQUIRED": 1
+      },
+      "projected_provider_call_cases": 9,
+      "projected_provider_call_rate": 90.0,
+      "unnecessary_projected_call_cases": 0,
+      "unnecessary_projected_call_rate": 0.0,
+      "risk_stratification": {
+        "TOPIC_AMBIGUITY": {
+          "cases": 1,
+          "full_matches": 0,
+          "gate_calls": 1
+        },
+        "FORMAT_AMBIGUITY": {
+          "cases": 4,
+          "full_matches": 0,
+          "gate_calls": 3
+        },
+        "BUSINESS_REPORTING": {
+          "cases": 1,
+          "full_matches": 0,
+          "gate_calls": 1
+        },
+        "ACTOR_SUBJECT_RISK": {
+          "cases": 1,
+          "full_matches": 0,
+          "gate_calls": 1
+        },
+        "CLAIM_VERIFICATION": {
+          "cases": 1,
+          "full_matches": 0,
+          "gate_calls": 1
+        },
+        "MIXED_DOMAIN_RISK": {
+          "cases": 1,
+          "full_matches": 0,
+          "gate_calls": 1
+        },
+        "AUTHORITY_SUBJECT_RISK": {
+          "cases": 1,
+          "full_matches": 0,
+          "gate_calls": 1
+        }
+      },
+      "batch_01_topic_accuracy": 100.0,
+      "batch_02_full_accuracy": 100.0,
+      "batch_03_full_accuracy": 100.0,
+      "cases": [
+        {
+          "id": "051",
+          "predicted_topic": "ECONOMY",
+          "topic_confidence": "MEDIUM",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 0,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "TOPIC_REQUIRED",
+          "topic_required": true,
+          "format_required": false,
+          "trigger_signals": [
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+          ],
+          "expected_topic": "GENERAL",
+          "topic_match": false,
+          "expected_format": "STANDARD_NEWS",
+          "format_match": true,
+          "expected_reader_intent": "GET_UPDATE",
+          "intent_match": true,
+          "full_match": false
+        },
+        {
+          "id": "052",
+          "predicted_topic": "ECONOMY",
+          "topic_confidence": "LOW",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [
+            "TOPIC_SPORTS",
+            "CLAIM_UNCERTAIN",
+            "FORMAT_ANALYSIS",
+            "INTENT_UNDERSTAND_IMPACT"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 1,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "FORMAT_REQUIRED",
+          "topic_required": false,
+          "format_required": true,
+          "trigger_signals": [
+            "TOPIC_LOW_CONFIDENCE",
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
+            "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
+            "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+          ],
+          "expected_topic": "ECONOMY",
+          "topic_match": true,
+          "expected_format": "ANALYSIS",
+          "format_match": false,
+          "expected_reader_intent": "UNDERSTAND_IMPACT",
+          "intent_match": false,
+          "full_match": false
+        },
+        {
+          "id": "053",
+          "predicted_topic": "ECONOMY",
+          "topic_confidence": "LOW",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [
+            "TOPIC_BUSINESS"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 0,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "TOPIC_REQUIRED",
+          "topic_required": true,
+          "format_required": false,
+          "trigger_signals": [
+            "TOPIC_LOW_CONFIDENCE",
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+          ],
+          "expected_topic": "BUSINESS",
+          "topic_match": false,
+          "expected_format": "STANDARD_NEWS",
+          "format_match": true,
+          "expected_reader_intent": "GET_UPDATE",
+          "intent_match": true,
+          "full_match": false
+        },
+        {
+          "id": "054",
+          "predicted_topic": "ECONOMY",
+          "topic_confidence": "MEDIUM",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [
+            "TOPIC_BUSINESS"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 0,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "TOPIC_REQUIRED",
+          "topic_required": true,
+          "format_required": false,
+          "trigger_signals": [
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+          ],
+          "expected_topic": "BUSINESS",
+          "topic_match": false,
+          "expected_format": "RESULT_REPORT",
+          "format_match": false,
+          "expected_reader_intent": "FIND_RESULT",
+          "intent_match": false,
+          "full_match": false
+        },
+        {
+          "id": "055",
+          "predicted_topic": "BUSINESS",
+          "topic_confidence": "MEDIUM",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [
+            "CLAIM_ATTRIBUTED",
+            "TOPIC_BUSINESS"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 0,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "TOPIC_REQUIRED",
+          "topic_required": true,
+          "format_required": false,
+          "trigger_signals": [
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+          ],
+          "expected_topic": "WORLD",
+          "topic_match": false,
+          "expected_format": "STANDARD_NEWS",
+          "format_match": true,
+          "expected_reader_intent": "GET_UPDATE",
+          "intent_match": true,
+          "full_match": false
+        },
+        {
+          "id": "056",
+          "predicted_topic": "GOVERNMENT",
+          "topic_confidence": "MEDIUM",
+          "predicted_format": "GUIDE",
+          "format_confidence": "HIGH",
+          "predicted_reader_intent": "VERIFY_REQUIREMENTS",
+          "contextual_support_labels": [
+            "TOPIC_GOVERNMENT",
+            "CLAIM_ATTRIBUTED"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 1,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "TOPIC_REQUIRED",
+          "topic_required": true,
+          "format_required": false,
+          "trigger_signals": [
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "MULTIPLE_COMPETING_TOPIC_SIGNALS",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+          ],
+          "expected_topic": "EDUCATION",
+          "topic_match": false,
+          "expected_format": "FACT_CHECK",
+          "format_match": false,
+          "expected_reader_intent": "CHECK_CLAIM",
+          "intent_match": false,
+          "full_match": false
+        },
+        {
+          "id": "057",
+          "predicted_topic": "SPORTS",
+          "topic_confidence": "HIGH",
+          "predicted_format": "RESULT_REPORT",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "FIND_RESULT",
+          "contextual_support_labels": [
+            "TOPIC_SPORTS",
+            "CLAIM_UNCERTAIN",
+            "FORMAT_ANALYSIS",
+            "INTENT_UNDERSTAND_IMPACT"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 0,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "FORMAT_REQUIRED",
+          "topic_required": false,
+          "format_required": true,
+          "trigger_signals": [
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+            "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+          ],
+          "expected_topic": "SPORTS",
+          "topic_match": true,
+          "expected_format": "STANDARD_NEWS",
+          "format_match": false,
+          "expected_reader_intent": "GET_UPDATE",
+          "intent_match": false,
+          "full_match": false
+        },
+        {
+          "id": "058",
+          "predicted_topic": "ECONOMY",
+          "topic_confidence": "MEDIUM",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [
+            "TOPIC_BUSINESS",
+            "CLAIM_UNCERTAIN",
+            "FORMAT_ANALYSIS",
+            "INTENT_UNDERSTAND_IMPACT"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 0,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
+          "topic_required": true,
+          "format_required": true,
+          "trigger_signals": [
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
+            "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
+            "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+          ],
+          "expected_topic": "ECONOMY",
+          "topic_match": true,
+          "expected_format": "TREND_UPDATE",
+          "format_match": false,
+          "expected_reader_intent": "FOLLOW_DEVELOPMENT",
+          "intent_match": false,
+          "full_match": false
+        },
+        {
+          "id": "059",
+          "predicted_topic": "ECONOMY",
+          "topic_confidence": "HIGH",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [
+            "TOPIC_ECONOMY"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 2,
+          "primary_semantic_domains": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "NOT_REQUIRED",
+          "topic_required": false,
+          "format_required": false,
+          "trigger_signals": [],
+          "expected_topic": "ECONOMY",
+          "topic_match": true,
+          "expected_format": "TREND_UPDATE",
+          "format_match": false,
+          "expected_reader_intent": "FOLLOW_DEVELOPMENT",
+          "intent_match": false,
+          "full_match": false
+        },
+        {
+          "id": "060",
+          "predicted_topic": "GOVERNMENT",
+          "topic_confidence": "MEDIUM",
+          "predicted_format": "STANDARD_NEWS",
+          "format_confidence": "MEDIUM",
+          "predicted_reader_intent": "GET_UPDATE",
+          "contextual_support_labels": [
+            "TOPIC_GOVERNMENT"
+          ],
+          "contextual_suppressions": [],
+          "semantic_relationship_count": 0,
+          "primary_semantic_domains": [],
+          "secondary_semantic_domains": [],
+          "semantic_format_support": [],
+          "semantic_format_suppression": [],
+          "gate_scope": "TOPIC_REQUIRED",
+          "topic_required": true,
+          "format_required": false,
+          "trigger_signals": [
+            "NO_PRIMARY_SEMANTIC_DOMAIN",
+            "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+            "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+          ],
+          "expected_topic": "BUSINESS",
+          "topic_match": false,
+          "expected_format": "STANDARD_NEWS",
+          "format_match": true,
+          "expected_reader_intent": "GET_UPDATE",
+          "intent_match": true,
+          "full_match": false
+        }
+      ],
+      "topic_gate_tp": 6,
+      "topic_gate_fp": 1,
+      "topic_gate_tn": 3,
+      "topic_gate_fn": 0,
+      "topic_gate_precision": 85.71428571428571,
+      "topic_gate_recall": 100.0,
+      "format_gate_tp": 3,
+      "format_gate_fp": 0,
+      "format_gate_tn": 4,
+      "format_gate_fn": 3,
+      "format_gate_precision": 100.0,
+      "format_gate_recall": 50.0,
+      "generalization_assessment": "WEAK",
+      "gate_assessment": "WEAK"
+    },
+    "HKEI-161": {
+      "topic_accuracy": 40.0,
+      "format_accuracy": 40.0,
+      "reader_intent_accuracy": 40.0,
+      "full_case_accuracy": 0.0,
+      "topic_gate_recall": 83.33333333333334,
+      "format_gate_recall": 50.0,
+      "false_semantic_confidence_cases": [
+        "052",
+        "054",
+        "055",
+        "056",
+        "058",
+        "059"
+      ]
+    }
+  },
+  "provider_calls": 0,
+  "case_count": 10,
+  "expected_labels_unchanged": true,
+  "raw_source_integrity": true,
+  "improvement_classification": "MIXED",
+  "architectural_interpretation": "G_MIXED",
+  "evidence_decision_quality_improved": "PARTIALLY",
+  "current_topic_mismatches": [
+    "051",
+    "053",
+    "054",
+    "055",
+    "056",
+    "060"
+  ],
+  "current_format_mismatches": [
+    "052",
+    "054",
+    "056",
+    "057",
+    "058",
+    "059"
+  ],
+  "current_reader_intent_mismatches": [
+    "052",
+    "054",
+    "056",
+    "057",
+    "058",
+    "059"
+  ],
+  "fully_matched_cases": [],
+  "expected_domain_reachability": {
+    "051": "NO_SIGNAL",
+    "053": "NO_SIGNAL",
+    "054": "NO_SIGNAL",
+    "055": "NO_SIGNAL",
+    "056": "RELATIONSHIP_SUPPORT",
+    "060": "NO_SIGNAL"
+  },
+  "expected_domains_reaching_primary_candidate": [],
+  "primary_domain_quality": {
+    "052": {
+      "primary_domains": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "aligned_with_expected_topic": true,
+      "promotion_strength": "STRONG",
+      "subject_role_basis": [
+        "SUBJECT_BELONGS_TO_DOMAIN",
+        "SUBJECT_BELONGS_TO_DOMAIN",
+        "SUBJECT_BELONGS_TO_DOMAIN"
+      ],
+      "competing_domains": []
+    },
+    "055": {
+      "primary_domains": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "aligned_with_expected_topic": false,
+      "promotion_strength": "STRONG",
+      "subject_role_basis": [
+        "SUBJECT_BELONGS_TO_DOMAIN"
+      ],
+      "competing_domains": []
+    },
+    "059": {
+      "primary_domains": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "aligned_with_expected_topic": true,
+      "promotion_strength": "STRONG",
+      "subject_role_basis": [
+        "INDICATOR_DESCRIBES_DOMAIN",
+        "INDICATOR_DESCRIBES_DOMAIN",
+        "SUBJECT_BELONGS_TO_DOMAIN"
+      ],
+      "competing_domains": []
+    }
+  },
+  "primary_domains_aligned_with_expected_topic": 2,
+  "format_mismatch_tracking": {
+    "052": {
+      "expected_format": "ANALYSIS",
+      "predicted_format": "STANDARD_NEWS",
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "expected_format_received_support": false,
+      "wrong_prediction_received_support": false,
+      "support_alignment": []
+    },
+    "054": {
+      "expected_format": "RESULT_REPORT",
+      "predicted_format": "TREND_UPDATE",
+      "semantic_format_support": [
+        "FORMAT_TREND_UPDATE"
+      ],
+      "semantic_format_suppression": [
+        "FORMAT_STANDARD_NEWS"
+      ],
+      "expected_format_received_support": false,
+      "wrong_prediction_received_support": true,
+      "support_alignment": [
+        "ALIGNED_WITH_WRONG_PREDICTION"
+      ]
+    },
+    "056": {
+      "expected_format": "FACT_CHECK",
+      "predicted_format": "SERVICE",
+      "semantic_format_support": [
+        "FORMAT_SERVICE"
+      ],
+      "semantic_format_suppression": [
+        "FORMAT_GUIDE"
+      ],
+      "expected_format_received_support": false,
+      "wrong_prediction_received_support": true,
+      "support_alignment": [
+        "ALIGNED_WITH_WRONG_PREDICTION"
+      ]
+    },
+    "057": {
+      "expected_format": "STANDARD_NEWS",
+      "predicted_format": "RESULT_REPORT",
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "expected_format_received_support": false,
+      "wrong_prediction_received_support": false,
+      "support_alignment": []
+    },
+    "058": {
+      "expected_format": "TREND_UPDATE",
+      "predicted_format": "RESULT_REPORT",
+      "semantic_format_support": [
+        "FORMAT_RESULT_REPORT"
+      ],
+      "semantic_format_suppression": [
+        "FORMAT_TREND_UPDATE"
+      ],
+      "expected_format_received_support": false,
+      "wrong_prediction_received_support": true,
+      "support_alignment": [
+        "ALIGNED_WITH_WRONG_PREDICTION"
+      ]
+    },
+    "059": {
+      "expected_format": "TREND_UPDATE",
+      "predicted_format": "STANDARD_NEWS",
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "expected_format_received_support": false,
+      "wrong_prediction_received_support": false,
+      "support_alignment": []
+    }
+  },
+  "expected_format_support_emitted_cases": [],
+  "format_support_alignment_counts": {
+    "ALIGNED_WITH_WRONG_PREDICTION": 3
+  },
+  "previous_false_semantic_confidence_cases": [
+    "052",
+    "054",
+    "055",
+    "056",
+    "058",
+    "059"
+  ],
+  "current_false_semantic_confidence_cases": [
+    "052",
+    "054",
+    "056",
+    "058",
+    "059"
+  ],
+  "resolved_false_semantic_confidence_cases": [
+    "055"
+  ],
+  "new_false_semantic_confidence_cases": [],
+  "case_055_gate_status": {
+    "expected_topic": "WORLD",
+    "current_topic": "BUSINESS",
+    "previous_topic": "BUSINESS",
+    "previous_primary_domain": [],
+    "current_primary_domain": [
+      "PRIMARY_DOMAIN_ECONOMY"
+    ],
+    "previous_confidence": "MEDIUM",
+    "current_confidence": "MEDIUM",
+    "previous_topic_required": true,
+    "current_topic_required": false,
+    "previous_triggers": [
+      "NO_PRIMARY_SEMANTIC_DOMAIN",
+      "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+      "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+    ],
+    "current_triggers": [],
+    "false_primary_domain_sufficiency_resolved": false
+  },
+  "previous_format_fn_cases": [
+    "054",
+    "056",
+    "059"
+  ],
+  "current_format_fn_cases": [
+    "054",
+    "056",
+    "058",
+    "059"
+  ],
+  "previous_fn_tracking": {
+    "054": {
+      "id": "054",
+      "predicted_topic": "ECONOMY",
+      "topic_confidence": "MEDIUM",
+      "predicted_format": "TREND_UPDATE",
+      "format_confidence": "HIGH",
+      "predicted_reader_intent": "CHECK_CLAIM",
+      "contextual_support_labels": [
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_RESULT",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_CHANGE",
+        "COMPONENT_ACTION",
+        "COMPONENT_CAUSE",
+        "TOPIC_BUSINESS"
+      ],
+      "contextual_suppressions": [],
+      "semantic_relationship_count": 1,
+      "semantic_relationships": [
+        {
+          "type": "INTERPRETATION_OF_INDICATOR",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_TREND_UPDATE_STRUCTURE",
+          "supports": [
+            "FORMAT_TREND_UPDATE"
+          ],
+          "suppresses": [
+            "FORMAT_STANDARD_NEWS"
+          ]
+        }
+      ],
+      "semantic_component_labels": [
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_RESULT",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_CHANGE",
+        "COMPONENT_ACTION",
+        "COMPONENT_CAUSE"
+      ],
+      "relationship_candidate_generated": true,
+      "primary_semantic_domains": [],
+      "secondary_semantic_domains": [],
+      "semantic_format_support": [
+        "FORMAT_TREND_UPDATE"
+      ],
+      "semantic_format_suppression": [
+        "FORMAT_STANDARD_NEWS"
+      ],
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "expected_topic": "BUSINESS",
+      "topic_match": false,
+      "expected_format": "RESULT_REPORT",
+      "format_match": false,
+      "expected_reader_intent": "FIND_RESULT",
+      "intent_match": false,
+      "full_match": false
+    },
+    "056": {
+      "id": "056",
+      "predicted_topic": "GOVERNMENT",
+      "topic_confidence": "MEDIUM",
+      "predicted_format": "SERVICE",
+      "format_confidence": "HIGH",
+      "predicted_reader_intent": "KNOW_ACTION",
+      "contextual_support_labels": [
+        "COMPONENT_SCHEDULE",
+        "COMPONENT_ACTION",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "TOPIC_GOVERNMENT",
+        "CLAIM_ATTRIBUTED",
+        "COMPONENT_INHERITED_SUBJECT"
+      ],
+      "contextual_suppressions": [],
+      "semantic_relationship_count": 4,
+      "semantic_relationships": [
+        {
+          "type": "ACTION_TARGETS_OBJECT",
+          "strength": "MEDIUM",
+          "reason_code": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_EDUCATION"
+          ],
+          "suppresses": []
+        },
+        {
+          "type": "ACTION_HAS_DEADLINE",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+          "supports": [
+            "FORMAT_SERVICE"
+          ],
+          "suppresses": [
+            "FORMAT_GUIDE"
+          ]
+        },
+        {
+          "type": "ACTION_HAS_DEADLINE",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+          "supports": [
+            "FORMAT_SERVICE"
+          ],
+          "suppresses": [
+            "FORMAT_GUIDE"
+          ]
+        },
+        {
+          "type": "ACTION_HAS_DEADLINE",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+          "supports": [
+            "FORMAT_SERVICE"
+          ],
+          "suppresses": [
+            "FORMAT_GUIDE"
+          ]
+        }
+      ],
+      "semantic_component_labels": [
+        "COMPONENT_SCHEDULE",
+        "COMPONENT_ACTION",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_INHERITED_SUBJECT"
+      ],
+      "relationship_candidate_generated": true,
+      "primary_semantic_domains": [],
+      "secondary_semantic_domains": [],
+      "semantic_format_support": [
+        "FORMAT_SERVICE"
+      ],
+      "semantic_format_suppression": [
+        "FORMAT_GUIDE"
+      ],
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "MULTIPLE_COMPETING_TOPIC_SIGNALS",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "expected_topic": "EDUCATION",
+      "topic_match": false,
+      "expected_format": "FACT_CHECK",
+      "format_match": false,
+      "expected_reader_intent": "CHECK_CLAIM",
+      "intent_match": false,
+      "full_match": false
+    },
+    "059": {
+      "id": "059",
+      "predicted_topic": "ECONOMY",
+      "topic_confidence": "HIGH",
+      "predicted_format": "STANDARD_NEWS",
+      "format_confidence": "MEDIUM",
+      "predicted_reader_intent": "GET_UPDATE",
+      "contextual_support_labels": [
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "TOPIC_ECONOMY",
+        "COMPONENT_ECONOMIC_SUBJECT",
+        "COMPONENT_CHANGE"
+      ],
+      "contextual_suppressions": [],
+      "semantic_relationship_count": 3,
+      "semantic_relationships": [
+        {
+          "type": "INDICATOR_DESCRIBES_DOMAIN",
+          "strength": "STRONG",
+          "reason_code": "ECONOMIC_INDICATOR_DOMAIN_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": []
+        },
+        {
+          "type": "INDICATOR_DESCRIBES_DOMAIN",
+          "strength": "STRONG",
+          "reason_code": "ECONOMIC_INDICATOR_DOMAIN_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": []
+        },
+        {
+          "type": "SUBJECT_BELONGS_TO_DOMAIN",
+          "strength": "STRONG",
+          "reason_code": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+          "supports": [
+            "PRIMARY_DOMAIN_ECONOMY"
+          ],
+          "suppresses": [
+            "PRIMARY_DOMAIN_GOVERNMENT",
+            "PRIMARY_DOMAIN_TECHNOLOGY"
+          ]
+        }
+      ],
+      "semantic_component_labels": [
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_ECONOMIC_SUBJECT",
+        "COMPONENT_CHANGE"
+      ],
+      "relationship_candidate_generated": true,
+      "primary_semantic_domains": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
+      "secondary_semantic_domains": [],
+      "semantic_format_support": [],
+      "semantic_format_suppression": [],
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "trigger_signals": [],
+      "expected_topic": "ECONOMY",
+      "topic_match": true,
+      "expected_format": "TREND_UPDATE",
+      "format_match": false,
+      "expected_reader_intent": "FOLLOW_DEVELOPMENT",
+      "intent_match": false,
+      "full_match": false
+    }
+  },
+  "direct_intent_failures": 0,
+  "downstream_intent_failures": 6,
+  "conversion_rates": {
+    "context_to_semantic_component_conversion": 100.0,
+    "semantic_component_to_relationship_conversion": 60.0,
+    "relationship_to_primary_domain_conversion": 50.0,
+    "context_to_primary_domain_conversion": 30.0,
+    "semantic_format_support_rate": 30.0,
+    "semantic_format_expected_alignment_rate": 0.0
+  },
+  "projected_provider_call_cases": 8,
+  "projected_provider_call_rate": 80.0,
+  "current": {
+    "batch": "batch_06",
+    "validation_status": "PASSED",
+    "case_count": 10,
+    "case_ids": [
+      "051",
+      "052",
+      "053",
+      "054",
+      "055",
+      "056",
+      "057",
+      "058",
+      "059",
+      "060"
+    ],
+    "raw_source_sha256": "7ef269f70c78816521c8d3228db720b771294c9fb91fcbe31629b7748f115a06",
+    "expected_labels_sha256": "336e5f4f49f8e75c55751599b679b29501e3713af1f8d5514ec0a46168f6a4d8",
+    "source_integrity": true,
+    "risk_annotations_isolated": true,
+    "provider_calls": 0,
+    "topic_matches": 4,
+    "topic_mismatches": 6,
+    "topic_accuracy": 40.0,
+    "format_matches": 4,
+    "format_mismatches": 6,
+    "format_accuracy": 40.0,
+    "reader_intent_matches": 4,
+    "reader_intent_mismatches": 6,
+    "reader_intent_accuracy": 40.0,
+    "fully_matched_cases": 0,
+    "full_case_accuracy": 0.0,
+    "cases_with_contextual_evidence": 10,
+    "cases_with_contextual_suppression": 0,
+    "cases_reaching_semantic_components": 10,
+    "cases_generating_relationship_candidates": 10,
+    "cases_with_semantic_relationships": 6,
+    "cases_with_primary_semantic_domains": 3,
+    "cases_with_secondary_semantic_domains": 0,
+    "cases_with_semantic_format_support": 3,
+    "cases_with_semantic_format_suppression": 3,
+    "scope_distribution": {
+      "NOT_REQUIRED": 2,
+      "TOPIC_REQUIRED": 6,
+      "FORMAT_REQUIRED": 2,
+      "TOPIC_AND_FORMAT_REQUIRED": 0
+    },
+    "projected_provider_call_cases": 8,
+    "projected_provider_call_rate": 80.0,
+    "unnecessary_projected_call_cases": 0,
+    "unnecessary_projected_call_rate": 0.0,
+    "risk_stratification": {
+      "TOPIC_AMBIGUITY": {
+        "cases": 1,
+        "full_matches": 0,
+        "gate_calls": 1
+      },
+      "FORMAT_AMBIGUITY": {
+        "cases": 4,
+        "full_matches": 0,
+        "gate_calls": 3
+      },
+      "BUSINESS_REPORTING": {
+        "cases": 1,
+        "full_matches": 0,
+        "gate_calls": 1
+      },
+      "ACTOR_SUBJECT_RISK": {
+        "cases": 1,
+        "full_matches": 0,
+        "gate_calls": 0
+      },
+      "CLAIM_VERIFICATION": {
+        "cases": 1,
+        "full_matches": 0,
+        "gate_calls": 1
+      },
+      "MIXED_DOMAIN_RISK": {
+        "cases": 1,
+        "full_matches": 0,
+        "gate_calls": 1
+      },
+      "AUTHORITY_SUBJECT_RISK": {
+        "cases": 1,
+        "full_matches": 0,
+        "gate_calls": 1
+      }
+    },
+    "batch_01_topic_accuracy": 100.0,
+    "batch_02_full_accuracy": 100.0,
+    "batch_03_full_accuracy": 100.0,
+    "cases": [
+      {
+        "id": "051",
+        "predicted_topic": "ECONOMY",
+        "topic_confidence": "MEDIUM",
+        "predicted_format": "STANDARD_NEWS",
+        "format_confidence": "MEDIUM",
+        "predicted_reader_intent": "GET_UPDATE",
+        "contextual_support_labels": [
+          "COMPONENT_MEASUREMENT",
+          "COMPONENT_RECOMMENDED_ACTION"
+        ],
+        "contextual_suppressions": [],
+        "semantic_relationship_count": 0,
+        "semantic_relationships": [],
+        "semantic_component_labels": [
+          "COMPONENT_MEASUREMENT",
+          "COMPONENT_RECOMMENDED_ACTION"
+        ],
+        "relationship_candidate_generated": true,
+        "primary_semantic_domains": [],
+        "secondary_semantic_domains": [],
+        "semantic_format_support": [],
+        "semantic_format_suppression": [],
+        "gate_scope": "TOPIC_REQUIRED",
+        "topic_required": true,
+        "format_required": false,
+        "trigger_signals": [
+          "NO_PRIMARY_SEMANTIC_DOMAIN",
+          "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+          "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+        ],
+        "expected_topic": "GENERAL",
+        "topic_match": false,
+        "expected_format": "STANDARD_NEWS",
+        "format_match": true,
+        "expected_reader_intent": "GET_UPDATE",
+        "intent_match": true,
+        "full_match": false
+      },
+      {
+        "id": "052",
+        "predicted_topic": "ECONOMY",
+        "topic_confidence": "HIGH",
+        "predicted_format": "STANDARD_NEWS",
+        "format_confidence": "MEDIUM",
+        "predicted_reader_intent": "GET_UPDATE",
+        "contextual_support_labels": [
+          "COMPONENT_PRICE",
+          "COMPONENT_RECOMMENDED_ACTION",
+          "COMPONENT_METHOD",
+          "COMPONENT_CHANGE",
+          "COMPONENT_MEASUREMENT",
+          "COMPONENT_RESULT",
+          "TOPIC_SPORTS",
+          "CLAIM_UNCERTAIN",
+          "FORMAT_ANALYSIS",
+          "INTENT_UNDERSTAND_IMPACT",
+          "COMPONENT_INHERITED_SUBJECT"
+        ],
+        "contextual_suppressions": [],
+        "semantic_relationship_count": 4,
+        "semantic_relationships": [
+          {
+            "type": "ACTOR_PERFORMS_ACTION",
+            "strength": "MEDIUM",
+            "reason_code": "ACTOR_ACTION_COMPOSITION",
+            "supports": [],
+            "suppresses": []
+          },
+          {
+            "type": "SUBJECT_BELONGS_TO_DOMAIN",
+            "strength": "STRONG",
+            "reason_code": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+            "supports": [
+              "PRIMARY_DOMAIN_ECONOMY"
+            ],
+            "suppresses": [
+              "PRIMARY_DOMAIN_GOVERNMENT",
+              "PRIMARY_DOMAIN_TECHNOLOGY"
+            ]
+          },
+          {
+            "type": "SUBJECT_BELONGS_TO_DOMAIN",
+            "strength": "STRONG",
+            "reason_code": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+            "supports": [
+              "PRIMARY_DOMAIN_ECONOMY"
+            ],
+            "suppresses": [
+              "PRIMARY_DOMAIN_GOVERNMENT",
+              "PRIMARY_DOMAIN_TECHNOLOGY"
+            ]
+          },
+          {
+            "type": "SUBJECT_BELONGS_TO_DOMAIN",
+            "strength": "STRONG",
+            "reason_code": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+            "supports": [
+              "PRIMARY_DOMAIN_ECONOMY"
+            ],
+            "suppresses": [
+              "PRIMARY_DOMAIN_GOVERNMENT",
+              "PRIMARY_DOMAIN_TECHNOLOGY"
+            ]
+          }
+        ],
+        "semantic_component_labels": [
+          "COMPONENT_PRICE",
+          "COMPONENT_RECOMMENDED_ACTION",
+          "COMPONENT_METHOD",
+          "COMPONENT_CHANGE",
+          "COMPONENT_MEASUREMENT",
+          "COMPONENT_RESULT",
+          "COMPONENT_INHERITED_SUBJECT"
+        ],
+        "relationship_candidate_generated": true,
+        "primary_semantic_domains": [
+          "PRIMARY_DOMAIN_ECONOMY"
+        ],
+        "secondary_semantic_domains": [],
+        "semantic_format_support": [],
+        "semantic_format_suppression": [],
+        "gate_scope": "FORMAT_REQUIRED",
+        "topic_required": false,
+        "format_required": true,
+        "trigger_signals": [
+          "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
+          "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+        ],
+        "expected_topic": "ECONOMY",
+        "topic_match": true,
+        "expected_format": "ANALYSIS",
+        "format_match": false,
+        "expected_reader_intent": "UNDERSTAND_IMPACT",
+        "intent_match": false,
+        "full_match": false
+      },
+      {
+        "id": "053",
+        "predicted_topic": "ECONOMY",
+        "topic_confidence": "LOW",
+        "predicted_format": "STANDARD_NEWS",
+        "format_confidence": "MEDIUM",
+        "predicted_reader_intent": "GET_UPDATE",
+        "contextual_support_labels": [
+          "TOPIC_BUSINESS",
+          "COMPONENT_TEMPORAL_UPDATE",
+          "COMPONENT_CHANGE",
+          "COMPONENT_CAUSE",
+          "COMPONENT_RESULT"
+        ],
+        "contextual_suppressions": [],
+        "semantic_relationship_count": 0,
+        "semantic_relationships": [],
+        "semantic_component_labels": [
+          "COMPONENT_TEMPORAL_UPDATE",
+          "COMPONENT_CHANGE",
+          "COMPONENT_CAUSE",
+          "COMPONENT_RESULT"
+        ],
+        "relationship_candidate_generated": true,
+        "primary_semantic_domains": [],
+        "secondary_semantic_domains": [],
+        "semantic_format_support": [],
+        "semantic_format_suppression": [],
+        "gate_scope": "TOPIC_REQUIRED",
+        "topic_required": true,
+        "format_required": false,
+        "trigger_signals": [
+          "TOPIC_LOW_CONFIDENCE",
+          "NO_PRIMARY_SEMANTIC_DOMAIN",
+          "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+          "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+        ],
+        "expected_topic": "BUSINESS",
+        "topic_match": false,
+        "expected_format": "STANDARD_NEWS",
+        "format_match": true,
+        "expected_reader_intent": "GET_UPDATE",
+        "intent_match": true,
+        "full_match": false
+      },
+      {
+        "id": "054",
+        "predicted_topic": "ECONOMY",
+        "topic_confidence": "MEDIUM",
+        "predicted_format": "TREND_UPDATE",
+        "format_confidence": "HIGH",
+        "predicted_reader_intent": "CHECK_CLAIM",
+        "contextual_support_labels": [
+          "COMPONENT_MEASUREMENT",
+          "COMPONENT_RESULT",
+          "COMPONENT_TEMPORAL_UPDATE",
+          "COMPONENT_CHANGE",
+          "COMPONENT_ACTION",
+          "COMPONENT_CAUSE",
+          "TOPIC_BUSINESS"
+        ],
+        "contextual_suppressions": [],
+        "semantic_relationship_count": 1,
+        "semantic_relationships": [
+          {
+            "type": "INTERPRETATION_OF_INDICATOR",
+            "strength": "STRONG",
+            "reason_code": "BOUNDED_TREND_UPDATE_STRUCTURE",
+            "supports": [
+              "FORMAT_TREND_UPDATE"
+            ],
+            "suppresses": [
+              "FORMAT_STANDARD_NEWS"
+            ]
+          }
+        ],
+        "semantic_component_labels": [
+          "COMPONENT_MEASUREMENT",
+          "COMPONENT_RESULT",
+          "COMPONENT_TEMPORAL_UPDATE",
+          "COMPONENT_CHANGE",
+          "COMPONENT_ACTION",
+          "COMPONENT_CAUSE"
+        ],
+        "relationship_candidate_generated": true,
+        "primary_semantic_domains": [],
+        "secondary_semantic_domains": [],
+        "semantic_format_support": [
+          "FORMAT_TREND_UPDATE"
+        ],
+        "semantic_format_suppression": [
+          "FORMAT_STANDARD_NEWS"
+        ],
+        "gate_scope": "TOPIC_REQUIRED",
+        "topic_required": true,
+        "format_required": false,
+        "trigger_signals": [
+          "NO_PRIMARY_SEMANTIC_DOMAIN",
+          "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+        ],
+        "expected_topic": "BUSINESS",
+        "topic_match": false,
+        "expected_format": "RESULT_REPORT",
+        "format_match": false,
+        "expected_reader_intent": "FIND_RESULT",
+        "intent_match": false,
+        "full_match": false
+      },
+      {
+        "id": "055",
+        "predicted_topic": "BUSINESS",
+        "topic_confidence": "MEDIUM",
+        "predicted_format": "STANDARD_NEWS",
+        "format_confidence": "MEDIUM",
+        "predicted_reader_intent": "GET_UPDATE",
+        "contextual_support_labels": [
+          "CLAIM_ATTRIBUTED",
+          "COMPONENT_EFFECT",
+          "COMPONENT_PRICE",
+          "TOPIC_BUSINESS",
+          "COMPONENT_CHANGE"
+        ],
+        "contextual_suppressions": [],
+        "semantic_relationship_count": 1,
+        "semantic_relationships": [
+          {
+            "type": "SUBJECT_BELONGS_TO_DOMAIN",
+            "strength": "STRONG",
+            "reason_code": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+            "supports": [
+              "PRIMARY_DOMAIN_ECONOMY"
+            ],
+            "suppresses": [
+              "PRIMARY_DOMAIN_GOVERNMENT",
+              "PRIMARY_DOMAIN_TECHNOLOGY"
+            ]
+          }
+        ],
+        "semantic_component_labels": [
+          "COMPONENT_EFFECT",
+          "COMPONENT_PRICE",
+          "COMPONENT_CHANGE"
+        ],
+        "relationship_candidate_generated": true,
+        "primary_semantic_domains": [
+          "PRIMARY_DOMAIN_ECONOMY"
+        ],
+        "secondary_semantic_domains": [],
+        "semantic_format_support": [],
+        "semantic_format_suppression": [],
+        "gate_scope": "NOT_REQUIRED",
+        "topic_required": false,
+        "format_required": false,
+        "trigger_signals": [],
+        "expected_topic": "WORLD",
+        "topic_match": false,
+        "expected_format": "STANDARD_NEWS",
+        "format_match": true,
+        "expected_reader_intent": "GET_UPDATE",
+        "intent_match": true,
+        "full_match": false
+      },
+      {
+        "id": "056",
+        "predicted_topic": "GOVERNMENT",
+        "topic_confidence": "MEDIUM",
+        "predicted_format": "SERVICE",
+        "format_confidence": "HIGH",
+        "predicted_reader_intent": "KNOW_ACTION",
+        "contextual_support_labels": [
+          "COMPONENT_SCHEDULE",
+          "COMPONENT_ACTION",
+          "COMPONENT_TEMPORAL_UPDATE",
+          "TOPIC_GOVERNMENT",
+          "CLAIM_ATTRIBUTED",
+          "COMPONENT_INHERITED_SUBJECT"
+        ],
+        "contextual_suppressions": [],
+        "semantic_relationship_count": 4,
+        "semantic_relationships": [
+          {
+            "type": "ACTION_TARGETS_OBJECT",
+            "strength": "MEDIUM",
+            "reason_code": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+            "supports": [
+              "PRIMARY_DOMAIN_EDUCATION"
+            ],
+            "suppresses": []
+          },
+          {
+            "type": "ACTION_HAS_DEADLINE",
+            "strength": "STRONG",
+            "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+            "supports": [
+              "FORMAT_SERVICE"
+            ],
+            "suppresses": [
+              "FORMAT_GUIDE"
+            ]
+          },
+          {
+            "type": "ACTION_HAS_DEADLINE",
+            "strength": "STRONG",
+            "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+            "supports": [
+              "FORMAT_SERVICE"
+            ],
+            "suppresses": [
+              "FORMAT_GUIDE"
+            ]
+          },
+          {
+            "type": "ACTION_HAS_DEADLINE",
+            "strength": "STRONG",
+            "reason_code": "BOUNDED_SERVICE_STRUCTURE",
+            "supports": [
+              "FORMAT_SERVICE"
+            ],
+            "suppresses": [
+              "FORMAT_GUIDE"
+            ]
+          }
+        ],
+        "semantic_component_labels": [
+          "COMPONENT_SCHEDULE",
+          "COMPONENT_ACTION",
+          "COMPONENT_TEMPORAL_UPDATE",
+          "COMPONENT_INHERITED_SUBJECT"
+        ],
+        "relationship_candidate_generated": true,
+        "primary_semantic_domains": [],
+        "secondary_semantic_domains": [],
+        "semantic_format_support": [
+          "FORMAT_SERVICE"
+        ],
+        "semantic_format_suppression": [
+          "FORMAT_GUIDE"
+        ],
+        "gate_scope": "TOPIC_REQUIRED",
+        "topic_required": true,
+        "format_required": false,
+        "trigger_signals": [
+          "NO_PRIMARY_SEMANTIC_DOMAIN",
+          "MULTIPLE_COMPETING_TOPIC_SIGNALS",
+          "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+        ],
+        "expected_topic": "EDUCATION",
+        "topic_match": false,
+        "expected_format": "FACT_CHECK",
+        "format_match": false,
+        "expected_reader_intent": "CHECK_CLAIM",
+        "intent_match": false,
+        "full_match": false
+      },
+      {
+        "id": "057",
+        "predicted_topic": "SPORTS",
+        "topic_confidence": "HIGH",
+        "predicted_format": "RESULT_REPORT",
+        "format_confidence": "MEDIUM",
+        "predicted_reader_intent": "FIND_RESULT",
+        "contextual_support_labels": [
+          "COMPONENT_RESULT",
+          "TOPIC_SPORTS",
+          "COMPONENT_CAUSE",
+          "CLAIM_UNCERTAIN",
+          "FORMAT_ANALYSIS",
+          "INTENT_UNDERSTAND_IMPACT"
+        ],
+        "contextual_suppressions": [],
+        "semantic_relationship_count": 0,
+        "semantic_relationships": [],
+        "semantic_component_labels": [
+          "COMPONENT_RESULT",
+          "COMPONENT_CAUSE"
+        ],
+        "relationship_candidate_generated": true,
+        "primary_semantic_domains": [],
+        "secondary_semantic_domains": [],
+        "semantic_format_support": [],
+        "semantic_format_suppression": [],
+        "gate_scope": "FORMAT_REQUIRED",
+        "topic_required": false,
+        "format_required": true,
+        "trigger_signals": [
+          "NO_PRIMARY_SEMANTIC_DOMAIN",
+          "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+          "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+        ],
+        "expected_topic": "SPORTS",
+        "topic_match": true,
+        "expected_format": "STANDARD_NEWS",
+        "format_match": false,
+        "expected_reader_intent": "GET_UPDATE",
+        "intent_match": false,
+        "full_match": false
+      },
+      {
+        "id": "058",
+        "predicted_topic": "ECONOMY",
+        "topic_confidence": "MEDIUM",
+        "predicted_format": "RESULT_REPORT",
+        "format_confidence": "HIGH",
+        "predicted_reader_intent": "FIND_RESULT",
+        "contextual_support_labels": [
+          "COMPONENT_CHANGE",
+          "COMPONENT_METHOD",
+          "COMPONENT_RESULT",
+          "TOPIC_BUSINESS",
+          "COMPONENT_TEMPORAL_UPDATE",
+          "COMPONENT_MEASUREMENT",
+          "COMPONENT_CAUSE",
+          "CLAIM_UNCERTAIN",
+          "FORMAT_ANALYSIS",
+          "INTENT_UNDERSTAND_IMPACT",
+          "COMPONENT_EFFECT",
+          "COMPONENT_PRICE",
+          "COMPONENT_INHERITED_SUBJECT"
+        ],
+        "contextual_suppressions": [],
+        "semantic_relationship_count": 2,
+        "semantic_relationships": [
+          {
+            "type": "EVENT_HAS_OUTCOME",
+            "strength": "STRONG",
+            "reason_code": "BOUNDED_RESULT_REPORT_STRUCTURE",
+            "supports": [
+              "FORMAT_RESULT_REPORT"
+            ],
+            "suppresses": [
+              "FORMAT_TREND_UPDATE"
+            ]
+          },
+          {
+            "type": "EVENT_HAS_OUTCOME",
+            "strength": "STRONG",
+            "reason_code": "BOUNDED_RESULT_REPORT_STRUCTURE",
+            "supports": [
+              "FORMAT_RESULT_REPORT"
+            ],
+            "suppresses": [
+              "FORMAT_TREND_UPDATE"
+            ]
+          }
+        ],
+        "semantic_component_labels": [
+          "COMPONENT_CHANGE",
+          "COMPONENT_METHOD",
+          "COMPONENT_RESULT",
+          "COMPONENT_TEMPORAL_UPDATE",
+          "COMPONENT_MEASUREMENT",
+          "COMPONENT_CAUSE",
+          "COMPONENT_EFFECT",
+          "COMPONENT_PRICE",
+          "COMPONENT_INHERITED_SUBJECT"
+        ],
+        "relationship_candidate_generated": true,
+        "primary_semantic_domains": [],
+        "secondary_semantic_domains": [],
+        "semantic_format_support": [
+          "FORMAT_RESULT_REPORT"
+        ],
+        "semantic_format_suppression": [
+          "FORMAT_TREND_UPDATE"
+        ],
+        "gate_scope": "TOPIC_REQUIRED",
+        "topic_required": true,
+        "format_required": false,
+        "trigger_signals": [
+          "NO_PRIMARY_SEMANTIC_DOMAIN",
+          "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
+          "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+        ],
+        "expected_topic": "ECONOMY",
+        "topic_match": true,
+        "expected_format": "TREND_UPDATE",
+        "format_match": false,
+        "expected_reader_intent": "FOLLOW_DEVELOPMENT",
+        "intent_match": false,
+        "full_match": false
+      },
+      {
+        "id": "059",
+        "predicted_topic": "ECONOMY",
+        "topic_confidence": "HIGH",
+        "predicted_format": "STANDARD_NEWS",
+        "format_confidence": "MEDIUM",
+        "predicted_reader_intent": "GET_UPDATE",
+        "contextual_support_labels": [
+          "COMPONENT_MEASUREMENT",
+          "COMPONENT_TEMPORAL_UPDATE",
+          "TOPIC_ECONOMY",
+          "COMPONENT_ECONOMIC_SUBJECT",
+          "COMPONENT_CHANGE"
+        ],
+        "contextual_suppressions": [],
+        "semantic_relationship_count": 3,
+        "semantic_relationships": [
+          {
+            "type": "INDICATOR_DESCRIBES_DOMAIN",
+            "strength": "STRONG",
+            "reason_code": "ECONOMIC_INDICATOR_DOMAIN_COMPOSITION",
+            "supports": [
+              "PRIMARY_DOMAIN_ECONOMY"
+            ],
+            "suppresses": []
+          },
+          {
+            "type": "INDICATOR_DESCRIBES_DOMAIN",
+            "strength": "STRONG",
+            "reason_code": "ECONOMIC_INDICATOR_DOMAIN_COMPOSITION",
+            "supports": [
+              "PRIMARY_DOMAIN_ECONOMY"
+            ],
+            "suppresses": []
+          },
+          {
+            "type": "SUBJECT_BELONGS_TO_DOMAIN",
+            "strength": "STRONG",
+            "reason_code": "BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+            "supports": [
+              "PRIMARY_DOMAIN_ECONOMY"
+            ],
+            "suppresses": [
+              "PRIMARY_DOMAIN_GOVERNMENT",
+              "PRIMARY_DOMAIN_TECHNOLOGY"
+            ]
+          }
+        ],
+        "semantic_component_labels": [
+          "COMPONENT_MEASUREMENT",
+          "COMPONENT_TEMPORAL_UPDATE",
+          "COMPONENT_ECONOMIC_SUBJECT",
+          "COMPONENT_CHANGE"
+        ],
+        "relationship_candidate_generated": true,
+        "primary_semantic_domains": [
+          "PRIMARY_DOMAIN_ECONOMY"
+        ],
+        "secondary_semantic_domains": [],
+        "semantic_format_support": [],
+        "semantic_format_suppression": [],
+        "gate_scope": "NOT_REQUIRED",
+        "topic_required": false,
+        "format_required": false,
+        "trigger_signals": [],
+        "expected_topic": "ECONOMY",
+        "topic_match": true,
+        "expected_format": "TREND_UPDATE",
+        "format_match": false,
+        "expected_reader_intent": "FOLLOW_DEVELOPMENT",
+        "intent_match": false,
+        "full_match": false
+      },
+      {
+        "id": "060",
+        "predicted_topic": "GOVERNMENT",
+        "topic_confidence": "MEDIUM",
+        "predicted_format": "STANDARD_NEWS",
+        "format_confidence": "MEDIUM",
+        "predicted_reader_intent": "GET_UPDATE",
+        "contextual_support_labels": [
+          "COMPONENT_ACTION",
+          "TOPIC_GOVERNMENT",
+          "COMPONENT_CAUSE",
+          "COMPONENT_CHANGE",
+          "COMPONENT_RECOMMENDED_ACTION",
+          "COMPONENT_INHERITED_SUBJECT"
+        ],
+        "contextual_suppressions": [],
+        "semantic_relationship_count": 0,
+        "semantic_relationships": [],
+        "semantic_component_labels": [
+          "COMPONENT_ACTION",
+          "COMPONENT_CAUSE",
+          "COMPONENT_CHANGE",
+          "COMPONENT_RECOMMENDED_ACTION",
+          "COMPONENT_INHERITED_SUBJECT"
+        ],
+        "relationship_candidate_generated": true,
+        "primary_semantic_domains": [],
+        "secondary_semantic_domains": [],
+        "semantic_format_support": [],
+        "semantic_format_suppression": [],
+        "gate_scope": "TOPIC_REQUIRED",
+        "topic_required": true,
+        "format_required": false,
+        "trigger_signals": [
+          "NO_PRIMARY_SEMANTIC_DOMAIN",
+          "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+          "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+        ],
+        "expected_topic": "BUSINESS",
+        "topic_match": false,
+        "expected_format": "STANDARD_NEWS",
+        "format_match": true,
+        "expected_reader_intent": "GET_UPDATE",
+        "intent_match": true,
+        "full_match": false
+      }
+    ],
+    "topic_gate_tp": 5,
+    "topic_gate_fp": 1,
+    "topic_gate_tn": 3,
+    "topic_gate_fn": 1,
+    "topic_gate_precision": 83.33333333333334,
+    "topic_gate_recall": 83.33333333333334,
+    "format_gate_tp": 2,
+    "format_gate_fp": 0,
+    "format_gate_tn": 4,
+    "format_gate_fn": 4,
+    "format_gate_precision": 100.0,
+    "format_gate_recall": 33.33333333333333,
+    "generalization_assessment": "WEAK",
+    "gate_assessment": "WEAK"
+  }
+}
