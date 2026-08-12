@@ -161,6 +161,7 @@ def make_semantic_evidence(
     secondary: tuple[str, ...] = (),
     suppresses: tuple[str, ...] = (),
     strength: EvidenceStrength = EvidenceStrength.STRONG,
+    reason_code: str = "TEST_SEMANTIC_RELATIONSHIP",
 ) -> CompositionalSemanticEvidence:
     """Create semantic evidence with one relationship per primary label."""
     relationships = tuple(
@@ -173,7 +174,7 @@ def make_semantic_evidence(
             object_component=SemanticComponent.DOMAIN,
             object_text=label,
             strength=strength,
-            reason_code="TEST_SEMANTIC_RELATIONSHIP",
+            reason_code=reason_code,
             evidence_indexes=(),
             supports=(label,),
             suppresses=suppresses if index == 0 else (),
@@ -189,6 +190,35 @@ def make_semantic_evidence(
         intent_support=(),
         warnings=(),
     )
+
+
+def test_single_bounded_primary_does_not_inflate_topic_confidence() -> None:
+    """Separate existence of generic domain evidence from strong sufficiency."""
+    result = classify(
+        semantic_evidence=make_semantic_evidence(
+            "PRIMARY_DOMAIN_ECONOMY",
+            reason_code="BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+        )
+    )
+
+    assert result.topic is Topic.ECONOMY
+    assert result.confidence is TopicConfidence.MEDIUM
+
+
+def test_repeated_bounded_primary_can_establish_topic_sufficiency() -> None:
+    """Allow independent repeated central evidence to establish confidence."""
+    semantic = make_semantic_evidence(
+        "PRIMARY_DOMAIN_ECONOMY",
+        reason_code="BOUNDED_SUBJECT_DOMAIN_COMPOSITION",
+    )
+    semantic = replace(
+        semantic,
+        relationships=semantic.relationships + (
+            replace(semantic.relationships[0], sentence_index=1, subject_text="subject-1"),
+        ),
+    )
+
+    assert classify(semantic_evidence=semantic).confidence is TopicConfidence.HIGH
 
 
 def test_semantic_evidence_is_optional_and_none_preserves_exact_output() -> None:

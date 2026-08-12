@@ -883,11 +883,21 @@ class DeterministicTopicClassifier:
                 if (topic := _SEMANTIC_SECONDARY_LABELS.get(label)) is not None
             )
         )
-        strong_labels = {
-            label
+        strong_relationships = tuple(
+            relationship
             for relationship in semantic_evidence.relationships
             if relationship.strength is EvidenceStrength.STRONG
+        )
+        strong_labels = {
+            label
+            for relationship in strong_relationships
             for label in relationship.supports
+            if not relationship.reason_code.startswith("BOUNDED_")
+            or sum(
+                label in other.supports
+                and other.reason_code.startswith("BOUNDED_")
+                for other in strong_relationships
+            ) >= 2
         }
         strong_primary = tuple(
             topic

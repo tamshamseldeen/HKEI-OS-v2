@@ -433,32 +433,20 @@ class DeterministicEditorialFormatClassifier:
                 is not None
             )
         )
-        if (
-            baseline.confidence is not EditorialFormatConfidence.LOW
-            and baseline.editorial_format not in supported
-        ):
-            supported = tuple(
-                editorial_format
-                for editorial_format in supported
-                if any(
-                    f"FORMAT_{editorial_format.value}" in relationship.supports
-                    and not relationship.reason_code.startswith("BOUNDED_")
-                    for relationship in evidence.relationships
-                )
-            )
         if EditorialFormat.SERVICE in supported:
-            has_recommendation = any(
+            service_is_structural = any(
                 relationship.strength is EvidenceStrength.STRONG
-                and relationship.relationship_type
-                is SemanticRelationshipType.RECOMMENDATION_TARGETS_AUDIENCE
+                and relationship.relationship_type in {
+                    SemanticRelationshipType.RECOMMENDATION_TARGETS_AUDIENCE,
+                    SemanticRelationshipType.ACTION_HAS_DEADLINE,
+                }
                 and "FORMAT_SERVICE" in relationship.supports
                 for relationship in evidence.relationships
             )
-            if not has_recommendation:
+            if not service_is_structural:
                 supported = tuple(
                     value for value in supported if value is not EditorialFormat.SERVICE
                 )
-
         if supported:
             selected = supported[0]
             reasons = baseline.reason_codes + (
@@ -468,11 +456,13 @@ class DeterministicEditorialFormatClassifier:
             warnings = baseline.warnings
             if baseline.editorial_format is not selected:
                 warnings += ("SEMANTIC_FORMAT_CONFLICT_RESOLVED",)
+            selected_label = f"FORMAT_{selected.value}"
+            conflicting = selected_label in evidence.format_suppression
             return self._result(
                 selected,
                 (
                     EditorialFormatConfidence.HIGH
-                    if f"FORMAT_{selected.value}" in strong_supports
+                    if selected_label in strong_supports and not conflicting
                     else EditorialFormatConfidence.MEDIUM
                 ),
                 reasons,

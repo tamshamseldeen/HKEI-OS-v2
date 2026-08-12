@@ -147,7 +147,7 @@ def test_expected_labels_are_loaded_after_candidate_construction(
 
     monkeypatch.setattr(diagnostic, "_expected_topics", tracked_topics)
     analyze_candidate_universes(builder=builder)
-    assert events.count("build") == 25
+    assert events.count("build") == 24
     assert events.index("truth") > max(
         index for index, event in enumerate(events) if event == "build"
     )

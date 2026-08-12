@@ -1,6 +1,7 @@
 """Tests for foundational deterministic semantic composition."""
 
 from dataclasses import fields
+from pathlib import Path
 
 import pytest
 
@@ -608,3 +609,114 @@ def test_format_support_and_suppression_remain_deduplicated() -> None:
 
     assert evidence.format_support == ("FORMAT_STANDARD_NEWS",)
     assert evidence.format_suppression == ("FORMAT_GUIDE",)
+
+
+def test_single_bounded_subject_is_evidence_but_not_primary_sufficiency() -> None:
+    """Keep one generic subject/action composition below promotion sufficiency."""
+    evidence, _ = compose(
+        make_source(body="أعلنت الجهة بيانًا. بدأت حملة مرض جديدة")
+    )
+
+    assert any("PRIMARY_DOMAIN_HEALTH" in item.supports for item in evidence.relationships)
+    assert evidence.primary_domain_candidates == ("PRIMARY_DOMAIN_HEALTH",)
+    bounded = next(
+        item for item in evidence.relationships
+        if "PRIMARY_DOMAIN_HEALTH" in item.supports
+    )
+    assert bounded.reason_code == "BOUNDED_SUBJECT_DOMAIN_COMPOSITION"
+
+
+def test_repeated_central_economic_subject_reaches_primary_sufficiency() -> None:
+    """Promote independently repeated subject-bearing market evidence."""
+    evidence, _ = compose(
+        make_source(
+            body=(
+                "أعلنت الشركة تفاصيل عن أسعار السوق. بدأت المبيعات في الارتفاع. "
+                "وأكد بيان آخر أن أسعار السوق ارتفعت مقارنة بالعام الماضي"
+            )
+        )
+    )
+
+    assert evidence.primary_domain_candidates == ("PRIMARY_DOMAIN_ECONOMY",)
+
+
+def test_competing_repeated_subject_domains_remain_explicitly_unresolved() -> None:
+    """Retain competing strong subject domains instead of choosing by occurrence."""
+    evidence, _ = compose(
+        make_source(
+            body=(
+                "أعلنت الجهة بيانًا. بدأت حملة مرض. "
+                "أكدت الجهة تفاصيل علاج. بدأ برنامج جديد. "
+                "وأعلنت الجهة جدولًا. بدأت مباراة غدًا. "
+                "وأكدت موعد بطولة. بدأ حدث جديد"
+            )
+        )
+    )
+
+    assert set(evidence.primary_domain_candidates) == {
+        "PRIMARY_DOMAIN_HEALTH", "PRIMARY_DOMAIN_SPORTS",
+    }
+
+
+def test_authority_only_never_creates_false_primary_sufficiency() -> None:
+    evidence, _ = compose(make_source(body="أعلنت الوزارة بيانًا رسميًا"))
+
+    assert evidence.primary_domain_candidates == ()
+
+
+def test_reporting_authority_does_not_displace_economic_subject() -> None:
+    """Prefer a central economic indicator over the identity reporting it."""
+    evidence, _ = compose(
+        make_source(body="أعلن البنك المركزي أن معدل البطالة تراجع مع تحسن سوق العمل")
+    )
+
+    assert evidence.primary_domain_candidates == ("PRIMARY_DOMAIN_ECONOMY",)
+    assert "PRIMARY_DOMAIN_GOVERNMENT" not in evidence.primary_domain_candidates
+
+
+def test_new_generic_quality_rules_contain_no_holdout_case_identifiers() -> None:
+    """Prevent numeric holdout identifiers from entering generic production rules."""
+    project_root = Path(__file__).resolve().parents[1]
+    production = "\n".join(
+        (project_root / relative).read_text(encoding="utf-8")
+        for relative in (
+            "src/semantics/deterministic_compositional_semantic_engine.py",
+            "src/formatting/deterministic_editorial_format_classifier.py",
+        )
+    )
+    forbidden = tuple(f'"{value:03d}"' for value in range(51, 61))
+
+    assert not any(identifier in production for identifier in forbidden)
+
+
+@pytest.mark.parametrize(
+    ("body", "support", "suppression"),
+    (
+        ("بلغ السعر الحالي مئة جنيه. صدر البيان اليوم", None, "FORMAT_TREND_UPDATE"),
+        ("بلغ السعر مئة جنيه. ارتفع مقارنة بالشهر الماضي", "FORMAT_TREND_UPDATE", None),
+        ("تقام المباراة غدًا. أعلن النادي جدول البطولة", "FORMAT_SERVICE", None),
+        ("انتهت المباراة بفوز الفريق. النتيجة النهائية هدفان", "FORMAT_RESULT_REPORT", None),
+        ("ينصح الأطباء بتجنب التدخين. يجب اتباع خطوات الوقاية", "FORMAT_GUIDE", None),
+        ("أعلنت الجهة موعد التسجيل. تشمل الخدمة شروط الأهلية", "FORMAT_SERVICE", None),
+        ("ذكر المسؤول نصائح عامة. صدر بيان رسمي", None, "FORMAT_GUIDE"),
+        ("انتشر ادعاء جديد. أعادت الصحيفة نشر المزاعم", None, "FORMAT_FACT_CHECK"),
+        ("انتشر ادعاء. تحقق الفريق من الأدلة وثبت أنه زائف", "FORMAT_FACT_CHECK", None),
+        ("بدأ الحدث بسبب نقص الموارد. أدى ذلك إلى تأثير واسع", "FORMAT_ANALYSIS", None),
+        ("أعلنت الجهة قرارًا. أكد البيان تفاصيل التطور", "FORMAT_STANDARD_NEWS", None),
+        ("يوضح التقرير كيف يعمل النظام. شرح الآلية لفهم العملية", "FORMAT_EXPLAINER", None),
+    ),
+)
+def test_raw_arabic_format_structures_are_mapped_compositionally(
+    body: str,
+    support: str | None,
+    suppression: str | None,
+) -> None:
+    """Exercise treatment mapping through real raw-text composition."""
+    evidence, _ = compose(make_source(body=body))
+
+    if support is None:
+        assert not evidence.format_support
+    else:
+        assert support in evidence.format_support
+    if suppression is not None:
+        assert suppression not in evidence.format_support

@@ -154,6 +154,43 @@ def make_semantic_format(
     )
 
 
+def test_bounded_compositional_treatment_can_override_medium_baseline() -> None:
+    """Consume complete bounded structure instead of discarding its provenance."""
+    semantic = make_semantic_format(support=("FORMAT_TREND_UPDATE",))
+    semantic = replace(
+        semantic,
+        relationships=(replace(semantic.relationships[0], reason_code="BOUNDED_TREND_UPDATE_STRUCTURE"),),
+    )
+
+    result = classify(semantic_evidence=semantic)
+
+    assert result.editorial_format is EditorialFormat.TREND_UPDATE
+    assert "COMPOSITIONAL_SEMANTIC_FORMAT_EVIDENCE" in result.reason_codes
+
+
+def test_logistical_service_does_not_require_recommendation_relationship() -> None:
+    """Allow structural logistics to select SERVICE independently of GUIDE."""
+    semantic = make_semantic_format(
+        support=("FORMAT_SERVICE",),
+        relationship_type=SemanticRelationshipType.ACTION_HAS_DEADLINE,
+    )
+
+    assert classify(semantic_evidence=semantic).editorial_format is EditorialFormat.SERVICE
+
+
+def test_conflicting_semantic_support_never_inflates_format_confidence() -> None:
+    """Keep contradictory support at medium confidence despite strong evidence."""
+    semantic = make_semantic_format(
+        support=("FORMAT_ANALYSIS",),
+        suppression=("FORMAT_ANALYSIS",),
+    )
+
+    result = classify(semantic_evidence=semantic)
+
+    assert result.editorial_format is EditorialFormat.ANALYSIS
+    assert result.confidence is EditorialFormatConfidence.MEDIUM
+
+
 def test_semantic_argument_is_optional_and_none_preserves_exact_output() -> None:
     """Keep the pre-semantic format result identical when omitted or None."""
     classifier = DeterministicEditorialFormatClassifier()
