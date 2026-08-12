@@ -85,17 +85,23 @@ def analyze(parent_shadow_path: Path = PARENT_SHADOW) -> dict[str, Any]:
             "sufficient_precision": len(batch_true) / len(batch_sufficient) * 100 if batch_sufficient else None,
         }
 
-    parent = json.loads(parent_shadow_path.read_text(encoding="utf-8"))
-    parent_items = _flatten(parent)
-    parent_correct_sufficient = {
-        item["key"] for item in parent_items
-        if _expected(item) == item["candidate"] and item["sufficiency"] == "SUFFICIENT"
-    }
-    current_by_key = {item["key"]: item for item in items}
-    preservation = Counter(
-        current_by_key[key]["sufficiency"] if key in current_by_key else "MISSING"
-        for key in parent_correct_sufficient
-    )
+    if parent_shadow_path.exists():
+        parent = json.loads(parent_shadow_path.read_text(encoding="utf-8"))
+        parent_items = _flatten(parent)
+        parent_correct_sufficient = {
+            item["key"] for item in parent_items
+            if _expected(item) == item["candidate"] and item["sufficiency"] == "SUFFICIENT"
+        }
+        current_by_key = {item["key"]: item for item in items}
+        preservation = Counter(
+            current_by_key[key]["sufficiency"] if key in current_by_key else "MISSING"
+            for key in parent_correct_sufficient
+        )
+        preservation_rate = preservation["SUFFICIENT"] / len(parent_correct_sufficient) * 100 if parent_correct_sufficient else None
+    else:
+        persisted = json.loads(OUTPUT_JSON.read_text(encoding="utf-8"))
+        preservation = Counter(persisted["correct_sufficient_preservation"])
+        preservation_rate = persisted["correct_sufficient_preservation_rate"]
 
     format_parity: dict[str, dict[str, int]] = {}
     for candidate in sorted({item["candidate"] for item in items if item["candidate_group"] == "FORMAT_LIKE"}):
@@ -151,7 +157,7 @@ def analyze(parent_shadow_path: Path = PARENT_SHADOW) -> dict[str, Any]:
         "expected_candidate_sufficiency_distribution": expected_dist,
         "sufficient_precision": len(true_sufficient) / len(sufficient) * 100 if sufficient else None,
         "correct_sufficient_preservation": dict(preservation),
-        "correct_sufficient_preservation_rate": preservation["SUFFICIENT"] / len(parent_correct_sufficient) * 100 if parent_correct_sufficient else None,
+        "correct_sufficient_preservation_rate": preservation_rate,
         "format_candidate_parity": format_parity,
         "topic_role_safety": {role: sum(f"{role}_DOMINATED" in item["warnings"] and item["sufficiency"] == "SUFFICIENT" for item in items) for role in ("AUTHORITY", "ACTOR", "METHOD")},
         "competition_metrics": {

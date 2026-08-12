@@ -1,0 +1,300 @@
+{
+  "false_sufficient_count": 1,
+  "target_assessment": {
+    "batch": "batch_05",
+    "case_id": "046",
+    "corpus_status": "SEMANTIC_ADJUDICATION_DEVELOPMENT_CORPUS",
+    "candidate": "TECHNOLOGY",
+    "candidate_group": "TOPIC_LIKE",
+    "expected_label": "SCIENCE",
+    "direction": "SUPPORT",
+    "strength": "STRONG",
+    "sufficiency": "SUFFICIENT",
+    "supporting_relationship_types": [
+      "ACTION_TARGETS_OBJECT",
+      "CONTEXTUAL_TECHNOLOGY_CONTEXT_PHRASE"
+    ],
+    "suppressing_relationship_types": [],
+    "role_basis": [
+      "ACTION",
+      "OBJECT",
+      "SUBJECT"
+    ],
+    "competing_candidates": [],
+    "warnings": []
+  },
+  "assessment_path": {
+    "normalized_evidence": {
+      "source_sections_present": [
+        "BODY",
+        "HEADLINE",
+        "LEAD"
+      ],
+      "raw_text_persisted": false
+    },
+    "semantic_components": [
+      "COMPONENT_HEALTH_SUBJECT"
+    ],
+    "contextual_candidate_support": [
+      {
+        "stage": "CONTEXTUAL_EVIDENCE",
+        "section": "HEADLINE",
+        "sentence_index": 0,
+        "role": "SUBJECT",
+        "strength": "STRONG",
+        "reason_code": "TECHNOLOGY_CONTEXT_PHRASE",
+        "supports": [
+          "TOPIC_TECHNOLOGY"
+        ],
+        "suppresses": []
+      },
+      {
+        "stage": "CONTEXTUAL_EVIDENCE",
+        "section": "LEAD",
+        "sentence_index": 0,
+        "role": "SUBJECT",
+        "strength": "STRONG",
+        "reason_code": "TECHNOLOGY_CONTEXT_PHRASE",
+        "supports": [
+          "TOPIC_TECHNOLOGY"
+        ],
+        "suppresses": []
+      },
+      {
+        "stage": "CONTEXTUAL_EVIDENCE",
+        "section": "BODY",
+        "sentence_index": 0,
+        "role": "SUBJECT",
+        "strength": "STRONG",
+        "reason_code": "TECHNOLOGY_CONTEXT_PHRASE",
+        "supports": [
+          "TOPIC_TECHNOLOGY"
+        ],
+        "suppresses": []
+      },
+      {
+        "stage": "CONTEXTUAL_EVIDENCE",
+        "section": "BODY",
+        "sentence_index": 4,
+        "role": "SUBJECT",
+        "strength": "STRONG",
+        "reason_code": "TECHNOLOGY_CONTEXT_PHRASE",
+        "supports": [
+          "TOPIC_TECHNOLOGY"
+        ],
+        "suppresses": []
+      }
+    ],
+    "semantic_relationships": [
+      {
+        "stage": "SEMANTIC_RELATIONSHIP",
+        "section": "BODY",
+        "sentence_index": 4,
+        "relationship_type": "ACTION_TARGETS_OBJECT",
+        "subject_component": "ACTION",
+        "object_component": "OBJECT",
+        "strength": "MEDIUM",
+        "reason_code": "ACTION_DOMAIN_OBJECT_COMPOSITION",
+        "supports": [
+          "PRIMARY_DOMAIN_TECHNOLOGY"
+        ],
+        "suppresses": [],
+        "evidence_indexes": [
+          7
+        ]
+      }
+    ],
+    "candidate_support": [
+      "ACTION_TARGETS_OBJECT",
+      "CONTEXTUAL_TECHNOLOGY_CONTEXT_PHRASE"
+    ],
+    "candidate_suppression": [],
+    "role_basis": [
+      "ACTION",
+      "OBJECT",
+      "SUBJECT"
+    ],
+    "competition_detection": [],
+    "strength_decision": "STRONG",
+    "sufficiency_decision": "SUFFICIENT",
+    "eligibility_stage": "STRENGTH_FROM_REPEATED_CONTEXTUAL_SUBJECT_SUPPORT_PLUS_ACTION_OBJECT_RELATIONSHIP"
+  },
+  "evidence_independence_analysis": {
+    "pair_classifications": [
+      {
+        "left": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:HEADLINE:0",
+        "right": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:LEAD:0",
+        "classification": "DERIVED_FROM_SAME_SIGNAL"
+      },
+      {
+        "left": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:HEADLINE:0",
+        "right": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:BODY:0",
+        "classification": "DERIVED_FROM_SAME_SIGNAL"
+      },
+      {
+        "left": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:HEADLINE:0",
+        "right": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:BODY:4",
+        "classification": "DERIVED_FROM_SAME_SIGNAL"
+      },
+      {
+        "left": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:HEADLINE:0",
+        "right": "SEMANTIC_RELATIONSHIP:ACTION_DOMAIN_OBJECT_COMPOSITION:BODY:4",
+        "classification": "INDEPENDENT"
+      },
+      {
+        "left": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:LEAD:0",
+        "right": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:BODY:0",
+        "classification": "DERIVED_FROM_SAME_SIGNAL"
+      },
+      {
+        "left": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:LEAD:0",
+        "right": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:BODY:4",
+        "classification": "DERIVED_FROM_SAME_SIGNAL"
+      },
+      {
+        "left": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:LEAD:0",
+        "right": "SEMANTIC_RELATIONSHIP:ACTION_DOMAIN_OBJECT_COMPOSITION:BODY:4",
+        "classification": "INDEPENDENT"
+      },
+      {
+        "left": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:BODY:0",
+        "right": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:BODY:4",
+        "classification": "DERIVED_FROM_SAME_SIGNAL"
+      },
+      {
+        "left": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:BODY:0",
+        "right": "SEMANTIC_RELATIONSHIP:ACTION_DOMAIN_OBJECT_COMPOSITION:BODY:4",
+        "classification": "INDEPENDENT"
+      },
+      {
+        "left": "CONTEXTUAL_EVIDENCE:TECHNOLOGY_CONTEXT_PHRASE:BODY:4",
+        "right": "SEMANTIC_RELATIONSHIP:ACTION_DOMAIN_OBJECT_COMPOSITION:BODY:4",
+        "classification": "INDEPENDENT"
+      }
+    ],
+    "finding": "CONTEXTUAL_OCCURRENCES_SHARE_ONE_TECHNOLOGY_SIGNAL_FAMILY_AND_ARE_NOT_FULLY_INDEPENDENT",
+    "duplicate_protection_failure": "HIERARCHICAL_DUPLICATION_NOT_DISCOUNTED"
+  },
+  "role_quality": {
+    "classification": "MIXED",
+    "finding": "TOOL_METHOD_TECHNOLOGY_MENTIONS_ARE_NORMALIZED_AS_SUBJECT_WHILE_ACTION_OBJECT_SUPPORT_IS_NOT_DOMAIN_BEARING"
+  },
+  "directionality_analysis": [
+    {
+      "relationship_type": "CONTEXTUAL_TECHNOLOGY_CONTEXT_PHRASE",
+      "classification": "OVERGENERALIZED_SUPPORT"
+    },
+    {
+      "relationship_type": "ACTION_TARGETS_OBJECT",
+      "classification": "OVERGENERALIZED_SUPPORT"
+    }
+  ],
+  "suppression_analysis": {
+    "classification": "SUPPRESSION_NOT_MAPPED",
+    "finding": "UPSTREAM_NON_TECHNOLOGY_SUBJECT_COMPONENT_EXISTS_BUT_DOES_NOT_SUPPRESS_OR_COMPETE_WITH_TECHNOLOGY"
+  },
+  "competition_analysis": {
+    "expected_candidate_assessment_exists": false,
+    "expected_candidate_strength": "NONE",
+    "expected_candidate_sufficiency": "NONE",
+    "expected_candidate_relationship_support": [],
+    "expected_candidate_should_be_competitor": true,
+    "classification": "EXPECTED_CANDIDATE_MISSING"
+  },
+  "structural_completeness": {
+    "classification": "STRUCTURE_MISIDENTIFIED",
+    "finding": "CENTRAL_SUBJECT_DOMAIN_SUPPORT_IS_NOT ESTABLISHED_FOR_THE_TECHNOLOGY_CANDIDATE"
+  },
+  "strength_audit": {
+    "contributing_factors": [
+      "MULTIPLE_CONTEXTUAL_SUBJECT_RECORDS",
+      "ACTION_OBJECT_RELATIONSHIP",
+      "NO_COMPETITOR",
+      "NO_SUPPRESSION"
+    ],
+    "classification": "MIXED_INFLATION"
+  },
+  "sufficiency_prerequisite_audit": {
+    "SUPPORT_DIRECTION": "PASS",
+    "STRONG_STRENGTH": "PASS",
+    "STRUCTURAL_COMPLETENESS": "FAIL",
+    "CENTRAL_ROLE": "FAIL",
+    "NO_MATERIAL_SUPPRESSION": "FAIL",
+    "NO_MEANINGFUL_COMPETITOR": "FAIL",
+    "INDEPENDENT_EVIDENCE": "FAIL",
+    "COHERENT_EVIDENCE": "FAIL"
+  },
+  "expected_label_clarity": "EXPECTED_LABEL_CLEAR",
+  "true_sufficient_controls": [
+    {
+      "batch": "batch_03",
+      "case_id": "025",
+      "candidate": "HEALTH",
+      "role_quality": "CENTRAL_SUBJECT_BEARING",
+      "independent_evidence_count": 3,
+      "support_types": [
+        "AUTHORITY_ACTS_ON_SUBJECT",
+        "ACTION_TARGETS_OBJECT",
+        "SUBJECT_BELONGS_TO_DOMAIN"
+      ],
+      "suppression": [],
+      "competition": [],
+      "structural_completeness": "STRUCTURE_COMPLETE",
+      "strength": "STRONG",
+      "sufficiency": "SUFFICIENT"
+    },
+    {
+      "batch": "batch_03",
+      "case_id": "029",
+      "candidate": "EDUCATION",
+      "role_quality": "CENTRAL_SUBJECT_BEARING",
+      "independent_evidence_count": 2,
+      "support_types": [
+        "AUTHORITY_ACTS_ON_SUBJECT",
+        "ACTION_TARGETS_OBJECT"
+      ],
+      "suppression": [],
+      "competition": [],
+      "structural_completeness": "STRUCTURE_COMPLETE",
+      "strength": "STRONG",
+      "sufficiency": "SUFFICIENT"
+    },
+    {
+      "batch": "batch_03",
+      "case_id": "026",
+      "candidate": "TECHNOLOGY",
+      "role_quality": "MIXED",
+      "independent_evidence_count": 2,
+      "support_types": [
+        "ACTION_TARGETS_OBJECT",
+        "RECOMMENDATION_TARGETS_AUDIENCE"
+      ],
+      "suppression": [],
+      "competition": [],
+      "structural_completeness": "STRUCTURE_COMPLETE",
+      "strength": "STRONG",
+      "sufficiency": "SUFFICIENT"
+    }
+  ],
+  "primary_failure_class": "DIRECTIONAL_MAPPING_OVERGENERALIZATION",
+  "secondary_failure_classes": [
+    "DUPLICATE_INDEPENDENCE_FAILURE",
+    "ROLE_BASIS_OVERCLAIM",
+    "MISSING_COMPETITOR",
+    "MISSING_SUPPRESSION",
+    "STRENGTH_CALIBRATION_ERROR"
+  ],
+  "generic_counterfactual_fix": "TIGHTEN_DIRECTIONAL_MAPPING",
+  "overcorrection_risk": {
+    "TIGHTEN_DIRECTIONAL_MAPPING": "MODERATE",
+    "TIGHTEN_EVIDENCE_INDEPENDENCE": "MODERATE",
+    "TIGHTEN_ROLE_BASIS_REQUIREMENT": "HIGH",
+    "PROPAGATE_SUPPRESSION": "MODERATE",
+    "STRENGTHEN_COMPETITOR_DETECTION": "LOW",
+    "TIGHTEN_SUFFICIENCY_FINAL_CHECK": "HIGH",
+    "safest_minimal_change": "STRENGTHEN_COMPETITOR_DETECTION"
+  },
+  "integration_safety": "SHADOW_ONLY",
+  "batch_07_required": true,
+  "provider_calls": 0
+}
