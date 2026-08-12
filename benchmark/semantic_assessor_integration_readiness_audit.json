@@ -1,0 +1,319 @@
+{
+  "current_safety_metrics": {
+    "true_sufficient_count": 8,
+    "false_sufficient_count": 0,
+    "sufficient_precision": 100.0,
+    "false_resolution_rate": 0.0,
+    "counterfactual_wrong_resolved_count": 0,
+    "counterfactual_correct_resolved_count": 8,
+    "authority_dominated_sufficient": 0,
+    "actor_dominated_sufficient": 0,
+    "method_dominated_sufficient": 0,
+    "critical_wrong_format_sufficient": 0
+  },
+  "current_utility_metrics": {
+    "true_sufficient_count": 8,
+    "correct_sufficient_preservation_rate": 85.71428571428571,
+    "expected_candidate_sufficiency_distribution": {
+      "INSUFFICIENT": 14,
+      "PARTIAL": 19,
+      "SUFFICIENT": 8,
+      "CONFLICTED": 1,
+      "MISSING": 31
+    },
+    "material_utility_reduction": true
+  },
+  "before_after": {
+    "before_commit": "573fa95",
+    "true_sufficient": {
+      "before": 13,
+      "after": 8,
+      "denominator": "correct candidate assessments with known expected dimension"
+    },
+    "false_sufficient": {
+      "before": 1,
+      "after": 0
+    },
+    "sufficient_precision": {
+      "before": 92.85714285714286,
+      "after": 100.0,
+      "denominator": "all SUFFICIENT assessments with a known expected dimension"
+    },
+    "correct_sufficient_preservation": {
+      "before": 85.71428571428571,
+      "after": 85.71428571428571,
+      "denominator": "correct SUFFICIENT controls from the older HKEI-170 baseline, not current true-sufficient count"
+    },
+    "counterfactual_wrong_resolved": {
+      "before": 1,
+      "after": 0
+    },
+    "denominator_explanation": "True-sufficient count is a current-corpus count. Preservation rate tracks a fixed older control cohort, so five current true downgrades do not imply a five-point change in that separately anchored percentage."
+  },
+  "lost_sufficient_assessments": [
+    {
+      "batch": "batch_02",
+      "case": "013",
+      "candidate": "TECHNOLOGY",
+      "candidate_group": "TOPIC_LIKE",
+      "expected_label": "TECHNOLOGY",
+      "expected_label_alignment": "TRUE_SUFFICIENT",
+      "before_sufficiency": "SUFFICIENT",
+      "after_sufficiency": "PARTIAL",
+      "reason_for_downgrade": "HIERARCHICAL_REPETITION_NO_LONGER_COUNTS_AS_INDEPENDENT_SUPPORT",
+      "warning_changes": {
+        "added": [
+          "INSUFFICIENT_INDEPENDENT_SUPPORT"
+        ],
+        "removed": []
+      },
+      "competitor_changes": {
+        "added": []
+      },
+      "duplicate_evidence_changes": "DUPLICATE_DISCOUNT_NOW_REDUCES_INDEPENDENCE",
+      "overcorrection_classification": "POSSIBLE_OVERCORRECTION"
+    },
+    {
+      "batch": "batch_02",
+      "case": "014",
+      "candidate": "WORLD",
+      "candidate_group": "TOPIC_LIKE",
+      "expected_label": "WORLD",
+      "expected_label_alignment": "TRUE_SUFFICIENT",
+      "before_sufficiency": "SUFFICIENT",
+      "after_sufficiency": "PARTIAL",
+      "reason_for_downgrade": "HIERARCHICAL_REPETITION_NO_LONGER_COUNTS_AS_INDEPENDENT_SUPPORT",
+      "warning_changes": {
+        "added": [
+          "INSUFFICIENT_INDEPENDENT_SUPPORT"
+        ],
+        "removed": []
+      },
+      "competitor_changes": {
+        "added": []
+      },
+      "duplicate_evidence_changes": "DUPLICATE_DISCOUNT_NOW_REDUCES_INDEPENDENCE",
+      "overcorrection_classification": "POSSIBLE_OVERCORRECTION"
+    },
+    {
+      "batch": "batch_02",
+      "case": "017",
+      "candidate": "ECONOMY",
+      "candidate_group": "TOPIC_LIKE",
+      "expected_label": "ECONOMY",
+      "expected_label_alignment": "TRUE_SUFFICIENT",
+      "before_sufficiency": "SUFFICIENT",
+      "after_sufficiency": "PARTIAL",
+      "reason_for_downgrade": "HIERARCHICAL_REPETITION_NO_LONGER_COUNTS_AS_INDEPENDENT_SUPPORT",
+      "warning_changes": {
+        "added": [
+          "DUPLICATE_EVIDENCE_DISCOUNTED",
+          "INSUFFICIENT_INDEPENDENT_SUPPORT"
+        ],
+        "removed": []
+      },
+      "competitor_changes": {
+        "added": []
+      },
+      "duplicate_evidence_changes": "DUPLICATE_DISCOUNT_NOW_REDUCES_INDEPENDENCE",
+      "overcorrection_classification": "POSSIBLE_OVERCORRECTION"
+    },
+    {
+      "batch": "batch_02",
+      "case": "018",
+      "candidate": "SCIENCE",
+      "candidate_group": "TOPIC_LIKE",
+      "expected_label": "SCIENCE",
+      "expected_label_alignment": "TRUE_SUFFICIENT",
+      "before_sufficiency": "SUFFICIENT",
+      "after_sufficiency": "PARTIAL",
+      "reason_for_downgrade": "HIERARCHICAL_REPETITION_NO_LONGER_COUNTS_AS_INDEPENDENT_SUPPORT",
+      "warning_changes": {
+        "added": [
+          "INSUFFICIENT_INDEPENDENT_SUPPORT"
+        ],
+        "removed": []
+      },
+      "competitor_changes": {
+        "added": []
+      },
+      "duplicate_evidence_changes": "DUPLICATE_DISCOUNT_NOW_REDUCES_INDEPENDENCE",
+      "overcorrection_classification": "POSSIBLE_OVERCORRECTION"
+    },
+    {
+      "batch": "batch_02",
+      "case": "019",
+      "candidate": "CULTURE",
+      "candidate_group": "TOPIC_LIKE",
+      "expected_label": "CULTURE",
+      "expected_label_alignment": "TRUE_SUFFICIENT",
+      "before_sufficiency": "SUFFICIENT",
+      "after_sufficiency": "PARTIAL",
+      "reason_for_downgrade": "LATENT_COMPETITOR_ADDED",
+      "warning_changes": {
+        "added": [
+          "COMPETING_CANDIDATE",
+          "DUPLICATE_EVIDENCE_DISCOUNTED",
+          "INSUFFICIENT_INDEPENDENT_SUPPORT"
+        ],
+        "removed": []
+      },
+      "competitor_changes": {
+        "added": [
+          "ECONOMY"
+        ]
+      },
+      "duplicate_evidence_changes": "DUPLICATE_DISCOUNT_NOW_REDUCES_INDEPENDENCE",
+      "overcorrection_classification": "POSSIBLE_OVERCORRECTION"
+    },
+    {
+      "batch": "batch_05",
+      "case": "046",
+      "candidate": "TECHNOLOGY",
+      "candidate_group": "TOPIC_LIKE",
+      "expected_label": "SCIENCE",
+      "expected_label_alignment": "FALSE_SUFFICIENT",
+      "before_sufficiency": "SUFFICIENT",
+      "after_sufficiency": "PARTIAL",
+      "reason_for_downgrade": "LATENT_COMPETITOR_ADDED",
+      "warning_changes": {
+        "added": [
+          "COMPETING_CANDIDATE",
+          "DUPLICATE_EVIDENCE_DISCOUNTED"
+        ],
+        "removed": []
+      },
+      "competitor_changes": {
+        "added": [
+          "HEALTH"
+        ]
+      },
+      "duplicate_evidence_changes": "NO_DUPLICATE_CHANGE",
+      "overcorrection_classification": "JUSTIFIED_SAFETY_DOWNGRADE"
+    }
+  ],
+  "lost_sufficient_counts": {
+    "true_sufficient": 5,
+    "false_sufficient": 1,
+    "unevaluable_sufficient": 0
+  },
+  "overcorrection_findings": {
+    "JUSTIFIED_SAFETY_DOWNGRADE": 1,
+    "POSSIBLE_OVERCORRECTION": 5,
+    "CLEAR_OVERCORRECTION": 0,
+    "materially_too_conservative": "POSSIBLE_NOT_ESTABLISHED"
+  },
+  "readiness_decision_trace": [
+    {
+      "condition_name": "FALSE_SUFFICIENT_ZERO",
+      "required_value": 0,
+      "observed_value": 0,
+      "status": "PASS"
+    },
+    {
+      "condition_name": "SUFFICIENT_PRECISION_COMPLETE",
+      "required_value": 100.0,
+      "observed_value": 100.0,
+      "status": "PASS"
+    },
+    {
+      "condition_name": "COUNTERFACTUAL_WRONG_RESOLVED_ZERO",
+      "required_value": 0,
+      "observed_value": 0,
+      "status": "PASS"
+    },
+    {
+      "condition_name": "ROLE_DOMINATED_SUFFICIENT_ZERO",
+      "required_value": {
+        "AUTHORITY": 0,
+        "ACTOR": 0,
+        "METHOD": 0
+      },
+      "observed_value": {
+        "AUTHORITY": 0,
+        "ACTOR": 0,
+        "METHOD": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "condition_name": "CRITICAL_WRONG_FORMAT_SUFFICIENT_ZERO",
+      "required_value": 0,
+      "observed_value": 0,
+      "status": "PASS"
+    },
+    {
+      "condition_name": "TRUE_SUFFICIENT_NONZERO",
+      "required_value": ">0",
+      "observed_value": 8,
+      "status": "PASS"
+    },
+    {
+      "condition_name": "NO_HISTORICAL_PATHOLOGY",
+      "required_value": [],
+      "observed_value": [],
+      "status": "PASS"
+    },
+    {
+      "condition_name": "NO_NEW_SUITE_REGRESSION",
+      "required_value": 0,
+      "observed_value": 0,
+      "status": "PASS"
+    },
+    {
+      "condition_name": "READINESS_DERIVED_FROM_OBSERVED_METRICS",
+      "required_value": true,
+      "observed_value": false,
+      "status": "FAIL"
+    }
+  ],
+  "persisted_integration_readiness": "REFINE_ASSESSOR_BEFORE_INTEGRATION",
+  "integration_readiness_blocker": "RULE_NOT_UPDATED_FOR_NEW_METRICS",
+  "blocker_class": "DIAGNOSTIC_RULE_DRIFT",
+  "safe_and_useful_consistency": {
+    "classification": "INCONSISTENT",
+    "explanation": "Safety/utility is metric-derived, while integration_readiness is an unconditional literal in the parity diagnostic."
+  },
+  "shadow_readiness_requirements": [
+    "NO_OUTPUT_MUTATION",
+    "NO_CONFIDENCE_MUTATION",
+    "NO_GATE_MUTATION",
+    "NO_PROVIDER_CHANGE",
+    "ZERO_FALSE_SUFFICIENT_IN_AUDITED_CORPUS",
+    "NONZERO_CORRECT_RESOLUTION",
+    "OBSERVABILITY_AND_ROLLBACK"
+  ],
+  "production_readiness_requirements": {
+    "classifier_consumption": [
+      "PREREGISTERED_SHADOW_SUCCESS",
+      "EXPLICIT_PRECEDENCE_CONTRACT",
+      "REGRESSION_BOUNDS"
+    ],
+    "confidence_influence": [
+      "CALIBRATED_CONFIDENCE_CONTRACT",
+      "FALSE_CONFIDENCE_AUDIT"
+    ],
+    "gate_consumption": [
+      "SEPARATE_GATE_POLICY",
+      "COUNTERFACTUAL_FALSE_NEGATIVE_AUDIT"
+    ],
+    "resolver_usage": [
+      "RESOLVER_CONTRACT",
+      "FAILURE_AND_FALLBACK_POLICY",
+      "PROVIDER_SAFETY_REVIEW"
+    ]
+  },
+  "shadow_consumption_risk": {
+    "classification": "LOW",
+    "maximum_harm": "DIAGNOSTIC_TELEMETRY_NOISE_OR_MISLEADING_OFFLINE_CONCLUSIONS; DETERMINISTIC OUTPUTS CANNOT MUTATE"
+  },
+  "shadow_consumption_value": {
+    "classification": "HIGH_VALUE",
+    "finding": "Exposes classifier-assessor agreement, disagreement, and counterfactual interaction at the real workflow boundary."
+  },
+  "final_recommendation": "FIX_READINESS_RULE_DRIFT",
+  "stop_assessor_refinement_now": "YES",
+  "batch_06_status": "DIAGNOSTIC_DEVELOPMENT_SET",
+  "batch_07_required": true,
+  "provider_calls": 0
+}
