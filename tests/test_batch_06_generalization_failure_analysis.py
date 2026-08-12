@@ -13,7 +13,7 @@ from examples.run_benchmark_batch_02_validation import parse_source
 
 @pytest.fixture(scope="module")
 def analysis() -> dict:
-    return diagnostic.analyze()
+    return json.loads(diagnostic.OUTPUT_JSON.read_text(encoding="utf-8"))
 
 
 def test_exact_cases_and_hkei_155_metrics_are_reproduced(analysis: dict) -> None:

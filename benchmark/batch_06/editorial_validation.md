@@ -23,7 +23,7 @@ Full Case Accuracy: 0.00%
 - 051: GENERAL → ECONOMY
 - 053: BUSINESS → ECONOMY
 - 054: BUSINESS → ECONOMY
-- 055: WORLD → BUSINESS
+- 055: WORLD → ECONOMY
 - 056: EDUCATION → GOVERNMENT
 - 060: BUSINESS → GOVERNMENT
 
@@ -47,25 +47,25 @@ Full Case Accuracy: 0.00%
 
 ## Contextual / Semantic Evidence
 
-Contextual Evidence Cases: 9
+Contextual Evidence Cases: 10
 
-Semantic Relationship Cases: 3
+Semantic Relationship Cases: 6
 
-Primary Semantic Domain Cases: 1
+Primary Semantic Domain Cases: 3
 
-Semantic Format Support Cases: 0
+Semantic Format Support Cases: 3
 
 ## Gate Coverage
 
-Topic Gate Precision: 85.71%
+Topic Gate Precision: 83.33%
 
-Topic Gate Recall: 100.00%
+Topic Gate Recall: 83.33%
 
 Format Gate Precision: 100.00%
 
 Format Gate Recall: 50.00%
 
-Projected Provider Calls: 9/10
+Projected Provider Calls: 8/10
 
 ## Generalization Assessment
 

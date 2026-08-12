@@ -35,6 +35,22 @@ def comparison(analysis: dict) -> dict:
     return diagnostic.build_comparison(previous, analysis)
 
 
+@pytest.fixture(scope="module")
+def post_hkei_160(analysis: dict) -> dict:
+    if diagnostic.POST_HKEI_160_JSON.exists():
+        baselines = json.loads(
+            diagnostic.POST_HKEI_160_JSON.read_text(encoding="utf-8")
+        )["baselines"]
+        hkei_155 = baselines["HKEI-155"]
+        hkei_158 = baselines["HKEI-158"]
+    else:
+        hkei_155 = json.loads(
+            diagnostic.COMPARISON_JSON.read_text(encoding="utf-8")
+        )["baseline_snapshot"]
+        hkei_158 = json.loads(diagnostic.OUTPUT_JSON.read_text(encoding="utf-8"))
+    return diagnostic.build_post_hkei_160_comparison(hkei_155, hkei_158, analysis)
+
+
 def test_exact_cases_integrity_and_no_provider(analysis: dict) -> None:
     assert analysis["validation_status"] == "PASSED"
     assert analysis["case_count"] == 10
@@ -232,3 +248,52 @@ def test_hkei_158_changes_no_production_files() -> None:
         path.startswith("src/") and path not in authorized_later_evidence_work
         for path in changed
     )
+
+
+def test_post_hkei_160_preserves_both_prior_baselines(post_hkei_160: dict) -> None:
+    assert post_hkei_160["case_count"] == 10
+    assert set(post_hkei_160["baselines"]) == {"HKEI-155", "HKEI-158"}
+    for baseline in post_hkei_160["baselines"].values():
+        assert baseline["topic_accuracy"] == 40.0
+        assert baseline["format_accuracy"] == 40.0
+        assert baseline["reader_intent_accuracy"] == 40.0
+        assert baseline["full_case_accuracy"] == 0.0
+        assert baseline["cases_with_semantic_relationships"] == 3
+        assert baseline["cases_with_primary_semantic_domains"] == 1
+        assert baseline["cases_with_semantic_format_support"] == 0
+
+
+def test_post_hkei_160_current_metrics_and_activation_are_derived(
+    analysis: dict, post_hkei_160: dict,
+) -> None:
+    assert post_hkei_160["current_topic_accuracy"] == analysis["topic_accuracy"]
+    assert post_hkei_160["current_format_accuracy"] == analysis["format_accuracy"]
+    assert post_hkei_160["current_reader_intent_accuracy"] == analysis["reader_intent_accuracy"]
+    assert post_hkei_160["current_full_case_accuracy"] == analysis["full_case_accuracy"]
+    assert post_hkei_160["current_cases_reaching_semantic_components"] == analysis["cases_reaching_semantic_components"]
+    assert post_hkei_160["current_relationship_cases"] == analysis["cases_with_semantic_relationships"]
+    assert post_hkei_160["current_primary_domains"] == analysis["cases_with_primary_semantic_domains"]
+    assert post_hkei_160["current_semantic_format_support"] == analysis["cases_with_semantic_format_support"]
+
+
+def test_post_hkei_160_mismatch_and_gate_deltas_are_exact(
+    analysis: dict, post_hkei_160: dict,
+) -> None:
+    for dimension in ("topic", "format", "reader_intent"):
+        assert set(post_hkei_160[f"current_{dimension}_mismatches"]) == {
+            case["id"] for case in analysis["cases"]
+            if not case["intent_match" if dimension == "reader_intent" else f"{dimension}_match"]
+        }
+    assert post_hkei_160["previous_format_fn_cases"] == ["054", "056", "059"]
+    assert post_hkei_160["provider_calls"] == 0
+    assert post_hkei_160["expected_labels_unchanged"] is True
+    assert post_hkei_160["raw_source_integrity"] is True
+
+
+def test_hkei_161_changes_no_production_files() -> None:
+    root = Path(__file__).resolve().parents[1]
+    changed = subprocess.run(
+        ["git", "diff", "--name-only", "6fbb5f7"], cwd=root, check=True,
+        capture_output=True, text=True,
+    ).stdout.splitlines()
+    assert not any(path.startswith("src/") for path in changed)

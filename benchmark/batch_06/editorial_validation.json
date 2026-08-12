@@ -30,21 +30,23 @@
   "reader_intent_accuracy": 40.0,
   "fully_matched_cases": 0,
   "full_case_accuracy": 0.0,
-  "cases_with_contextual_evidence": 9,
+  "cases_with_contextual_evidence": 10,
   "cases_with_contextual_suppression": 0,
-  "cases_with_semantic_relationships": 3,
-  "cases_with_primary_semantic_domains": 1,
+  "cases_reaching_semantic_components": 10,
+  "cases_generating_relationship_candidates": 10,
+  "cases_with_semantic_relationships": 6,
+  "cases_with_primary_semantic_domains": 3,
   "cases_with_secondary_semantic_domains": 0,
-  "cases_with_semantic_format_support": 0,
-  "cases_with_semantic_format_suppression": 0,
+  "cases_with_semantic_format_support": 3,
+  "cases_with_semantic_format_suppression": 3,
   "scope_distribution": {
-    "NOT_REQUIRED": 1,
-    "TOPIC_REQUIRED": 6,
+    "NOT_REQUIRED": 2,
+    "TOPIC_REQUIRED": 5,
     "FORMAT_REQUIRED": 2,
     "TOPIC_AND_FORMAT_REQUIRED": 1
   },
-  "projected_provider_call_cases": 9,
-  "projected_provider_call_rate": 90.0,
+  "projected_provider_call_cases": 8,
+  "projected_provider_call_rate": 80.0,
   "unnecessary_projected_call_cases": 0,
   "unnecessary_projected_call_rate": 0.0,
   "risk_stratification": {
@@ -66,7 +68,7 @@
     "ACTOR_SUBJECT_RISK": {
       "cases": 1,
       "full_matches": 0,
-      "gate_calls": 1
+      "gate_calls": 0
     },
     "CLAIM_VERIFICATION": {
       "cases": 1,
@@ -95,9 +97,17 @@
       "predicted_format": "STANDARD_NEWS",
       "format_confidence": "MEDIUM",
       "predicted_reader_intent": "GET_UPDATE",
-      "contextual_support_labels": [],
+      "contextual_support_labels": [
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_RECOMMENDED_ACTION"
+      ],
       "contextual_suppressions": [],
       "semantic_relationship_count": 0,
+      "semantic_component_labels": [
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_RECOMMENDED_ACTION"
+      ],
+      "relationship_candidate_generated": true,
       "primary_semantic_domains": [],
       "secondary_semantic_domains": [],
       "semantic_format_support": [],
@@ -107,6 +117,7 @@
       "format_required": false,
       "trigger_signals": [
         "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
         "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
       ],
       "expected_topic": "GENERAL",
@@ -120,19 +131,38 @@
     {
       "id": "052",
       "predicted_topic": "ECONOMY",
-      "topic_confidence": "LOW",
+      "topic_confidence": "HIGH",
       "predicted_format": "STANDARD_NEWS",
       "format_confidence": "MEDIUM",
       "predicted_reader_intent": "GET_UPDATE",
       "contextual_support_labels": [
+        "COMPONENT_PRICE",
+        "COMPONENT_RECOMMENDED_ACTION",
+        "COMPONENT_METHOD",
+        "COMPONENT_CHANGE",
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_RESULT",
         "TOPIC_SPORTS",
         "CLAIM_UNCERTAIN",
         "FORMAT_ANALYSIS",
-        "INTENT_UNDERSTAND_IMPACT"
+        "INTENT_UNDERSTAND_IMPACT",
+        "COMPONENT_INHERITED_SUBJECT"
       ],
       "contextual_suppressions": [],
-      "semantic_relationship_count": 1,
-      "primary_semantic_domains": [],
+      "semantic_relationship_count": 4,
+      "semantic_component_labels": [
+        "COMPONENT_PRICE",
+        "COMPONENT_RECOMMENDED_ACTION",
+        "COMPONENT_METHOD",
+        "COMPONENT_CHANGE",
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_RESULT",
+        "COMPONENT_INHERITED_SUBJECT"
+      ],
+      "relationship_candidate_generated": true,
+      "primary_semantic_domains": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
       "secondary_semantic_domains": [],
       "semantic_format_support": [],
       "semantic_format_suppression": [],
@@ -140,9 +170,6 @@
       "topic_required": false,
       "format_required": true,
       "trigger_signals": [
-        "TOPIC_LOW_CONFIDENCE",
-        "NO_PRIMARY_SEMANTIC_DOMAIN",
-        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
         "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
         "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
       ],
@@ -162,10 +189,21 @@
       "format_confidence": "MEDIUM",
       "predicted_reader_intent": "GET_UPDATE",
       "contextual_support_labels": [
-        "TOPIC_BUSINESS"
+        "TOPIC_BUSINESS",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_CHANGE",
+        "COMPONENT_CAUSE",
+        "COMPONENT_RESULT"
       ],
       "contextual_suppressions": [],
       "semantic_relationship_count": 0,
+      "semantic_component_labels": [
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_CHANGE",
+        "COMPONENT_CAUSE",
+        "COMPONENT_RESULT"
+      ],
+      "relationship_candidate_generated": true,
       "primary_semantic_domains": [],
       "secondary_semantic_domains": [],
       "semantic_format_support": [],
@@ -195,20 +233,38 @@
       "format_confidence": "MEDIUM",
       "predicted_reader_intent": "GET_UPDATE",
       "contextual_support_labels": [
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_RESULT",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_CHANGE",
+        "COMPONENT_ACTION",
+        "COMPONENT_CAUSE",
         "TOPIC_BUSINESS"
       ],
       "contextual_suppressions": [],
-      "semantic_relationship_count": 0,
+      "semantic_relationship_count": 1,
+      "semantic_component_labels": [
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_RESULT",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_CHANGE",
+        "COMPONENT_ACTION",
+        "COMPONENT_CAUSE"
+      ],
+      "relationship_candidate_generated": true,
       "primary_semantic_domains": [],
       "secondary_semantic_domains": [],
-      "semantic_format_support": [],
-      "semantic_format_suppression": [],
+      "semantic_format_support": [
+        "FORMAT_TREND_UPDATE"
+      ],
+      "semantic_format_suppression": [
+        "FORMAT_STANDARD_NEWS"
+      ],
       "gate_scope": "TOPIC_REQUIRED",
       "topic_required": true,
       "format_required": false,
       "trigger_signals": [
         "NO_PRIMARY_SEMANTIC_DOMAIN",
-        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
         "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
       ],
       "expected_topic": "BUSINESS",
@@ -221,29 +277,36 @@
     },
     {
       "id": "055",
-      "predicted_topic": "BUSINESS",
-      "topic_confidence": "MEDIUM",
+      "predicted_topic": "ECONOMY",
+      "topic_confidence": "HIGH",
       "predicted_format": "STANDARD_NEWS",
       "format_confidence": "MEDIUM",
       "predicted_reader_intent": "GET_UPDATE",
       "contextual_support_labels": [
         "CLAIM_ATTRIBUTED",
-        "TOPIC_BUSINESS"
+        "COMPONENT_EFFECT",
+        "COMPONENT_PRICE",
+        "TOPIC_BUSINESS",
+        "COMPONENT_CHANGE"
       ],
       "contextual_suppressions": [],
-      "semantic_relationship_count": 0,
-      "primary_semantic_domains": [],
+      "semantic_relationship_count": 1,
+      "semantic_component_labels": [
+        "COMPONENT_EFFECT",
+        "COMPONENT_PRICE",
+        "COMPONENT_CHANGE"
+      ],
+      "relationship_candidate_generated": true,
+      "primary_semantic_domains": [
+        "PRIMARY_DOMAIN_ECONOMY"
+      ],
       "secondary_semantic_domains": [],
       "semantic_format_support": [],
       "semantic_format_suppression": [],
-      "gate_scope": "TOPIC_REQUIRED",
-      "topic_required": true,
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
       "format_required": false,
-      "trigger_signals": [
-        "NO_PRIMARY_SEMANTIC_DOMAIN",
-        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
-        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
-      ],
+      "trigger_signals": [],
       "expected_topic": "WORLD",
       "topic_match": false,
       "expected_format": "STANDARD_NEWS",
@@ -260,15 +323,30 @@
       "format_confidence": "HIGH",
       "predicted_reader_intent": "VERIFY_REQUIREMENTS",
       "contextual_support_labels": [
+        "COMPONENT_SCHEDULE",
+        "COMPONENT_ACTION",
+        "COMPONENT_TEMPORAL_UPDATE",
         "TOPIC_GOVERNMENT",
-        "CLAIM_ATTRIBUTED"
+        "CLAIM_ATTRIBUTED",
+        "COMPONENT_INHERITED_SUBJECT"
       ],
       "contextual_suppressions": [],
-      "semantic_relationship_count": 1,
+      "semantic_relationship_count": 4,
+      "semantic_component_labels": [
+        "COMPONENT_SCHEDULE",
+        "COMPONENT_ACTION",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_INHERITED_SUBJECT"
+      ],
+      "relationship_candidate_generated": true,
       "primary_semantic_domains": [],
       "secondary_semantic_domains": [],
-      "semantic_format_support": [],
-      "semantic_format_suppression": [],
+      "semantic_format_support": [
+        "FORMAT_SERVICE"
+      ],
+      "semantic_format_suppression": [
+        "FORMAT_GUIDE"
+      ],
       "gate_scope": "TOPIC_REQUIRED",
       "topic_required": true,
       "format_required": false,
@@ -293,13 +371,20 @@
       "format_confidence": "MEDIUM",
       "predicted_reader_intent": "FIND_RESULT",
       "contextual_support_labels": [
+        "COMPONENT_RESULT",
         "TOPIC_SPORTS",
+        "COMPONENT_CAUSE",
         "CLAIM_UNCERTAIN",
         "FORMAT_ANALYSIS",
         "INTENT_UNDERSTAND_IMPACT"
       ],
       "contextual_suppressions": [],
       "semantic_relationship_count": 0,
+      "semantic_component_labels": [
+        "COMPONENT_RESULT",
+        "COMPONENT_CAUSE"
+      ],
+      "relationship_candidate_generated": true,
       "primary_semantic_domains": [],
       "secondary_semantic_domains": [],
       "semantic_format_support": [],
@@ -328,23 +413,47 @@
       "format_confidence": "MEDIUM",
       "predicted_reader_intent": "GET_UPDATE",
       "contextual_support_labels": [
+        "COMPONENT_CHANGE",
+        "COMPONENT_METHOD",
+        "COMPONENT_RESULT",
         "TOPIC_BUSINESS",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_CAUSE",
         "CLAIM_UNCERTAIN",
         "FORMAT_ANALYSIS",
-        "INTENT_UNDERSTAND_IMPACT"
+        "INTENT_UNDERSTAND_IMPACT",
+        "COMPONENT_EFFECT",
+        "COMPONENT_PRICE",
+        "COMPONENT_INHERITED_SUBJECT"
       ],
       "contextual_suppressions": [],
-      "semantic_relationship_count": 0,
+      "semantic_relationship_count": 2,
+      "semantic_component_labels": [
+        "COMPONENT_CHANGE",
+        "COMPONENT_METHOD",
+        "COMPONENT_RESULT",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_CAUSE",
+        "COMPONENT_EFFECT",
+        "COMPONENT_PRICE",
+        "COMPONENT_INHERITED_SUBJECT"
+      ],
+      "relationship_candidate_generated": true,
       "primary_semantic_domains": [],
       "secondary_semantic_domains": [],
-      "semantic_format_support": [],
-      "semantic_format_suppression": [],
+      "semantic_format_support": [
+        "FORMAT_RESULT_REPORT"
+      ],
+      "semantic_format_suppression": [
+        "FORMAT_TREND_UPDATE"
+      ],
       "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
       "topic_required": true,
       "format_required": true,
       "trigger_signals": [
         "NO_PRIMARY_SEMANTIC_DOMAIN",
-        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
         "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
         "ANALYTICAL_CONTEXT_WITH_STANDARD_NEWS_FALLBACK",
         "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
@@ -365,10 +474,21 @@
       "format_confidence": "MEDIUM",
       "predicted_reader_intent": "GET_UPDATE",
       "contextual_support_labels": [
-        "TOPIC_ECONOMY"
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "TOPIC_ECONOMY",
+        "COMPONENT_ECONOMIC_SUBJECT",
+        "COMPONENT_CHANGE"
       ],
       "contextual_suppressions": [],
-      "semantic_relationship_count": 2,
+      "semantic_relationship_count": 3,
+      "semantic_component_labels": [
+        "COMPONENT_MEASUREMENT",
+        "COMPONENT_TEMPORAL_UPDATE",
+        "COMPONENT_ECONOMIC_SUBJECT",
+        "COMPONENT_CHANGE"
+      ],
+      "relationship_candidate_generated": true,
       "primary_semantic_domains": [
         "PRIMARY_DOMAIN_ECONOMY"
       ],
@@ -395,10 +515,23 @@
       "format_confidence": "MEDIUM",
       "predicted_reader_intent": "GET_UPDATE",
       "contextual_support_labels": [
-        "TOPIC_GOVERNMENT"
+        "COMPONENT_ACTION",
+        "TOPIC_GOVERNMENT",
+        "COMPONENT_CAUSE",
+        "COMPONENT_CHANGE",
+        "COMPONENT_RECOMMENDED_ACTION",
+        "COMPONENT_INHERITED_SUBJECT"
       ],
       "contextual_suppressions": [],
       "semantic_relationship_count": 0,
+      "semantic_component_labels": [
+        "COMPONENT_ACTION",
+        "COMPONENT_CAUSE",
+        "COMPONENT_CHANGE",
+        "COMPONENT_RECOMMENDED_ACTION",
+        "COMPONENT_INHERITED_SUBJECT"
+      ],
+      "relationship_candidate_generated": true,
       "primary_semantic_domains": [],
       "secondary_semantic_domains": [],
       "semantic_format_support": [],
@@ -420,12 +553,12 @@
       "full_match": false
     }
   ],
-  "topic_gate_tp": 6,
+  "topic_gate_tp": 5,
   "topic_gate_fp": 1,
   "topic_gate_tn": 3,
-  "topic_gate_fn": 0,
-  "topic_gate_precision": 85.71428571428571,
-  "topic_gate_recall": 100.0,
+  "topic_gate_fn": 1,
+  "topic_gate_precision": 83.33333333333334,
+  "topic_gate_recall": 83.33333333333334,
   "format_gate_tp": 3,
   "format_gate_fp": 0,
   "format_gate_tn": 4,

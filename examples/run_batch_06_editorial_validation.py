@@ -34,6 +34,8 @@ OUTPUT_JSON = BATCH_ROOT / "editorial_validation.json"
 OUTPUT_MD = BATCH_ROOT / "editorial_validation.md"
 COMPARISON_JSON = BATCH_ROOT / "post_hkei_157_comparison.json"
 COMPARISON_MD = BATCH_ROOT / "post_hkei_157_comparison.md"
+POST_HKEI_160_JSON = BATCH_ROOT / "post_hkei_160_comparison.json"
+POST_HKEI_160_MD = BATCH_ROOT / "post_hkei_160_comparison.md"
 CASE_IDS = tuple(f"{value:03d}" for value in range(51, 61))
 RAW_SHA256 = "7ef269f70c78816521c8d3228db720b771294c9fb91fcbe31629b7748f115a06"
 
@@ -158,6 +160,12 @@ def analyze_validation(
             semantic_evidence=result.semantic_evidence,
         )
         semantic = result.semantic_evidence
+        component_labels = _unique(
+            label
+            for evidence in result.contextual_evidence.all_items
+            for label in evidence.supports
+            if label.startswith("COMPONENT_")
+        )
         cases.append({
             "id": source.case_id,
             "predicted_topic": result.topic_classification.topic.value,
@@ -172,6 +180,8 @@ def analyze_validation(
                 label for evidence in result.contextual_evidence.all_items for label in evidence.suppresses
             ),
             "semantic_relationship_count": len(semantic.relationships),
+            "semantic_component_labels": component_labels,
+            "relationship_candidate_generated": len(component_labels) >= 2,
             "primary_semantic_domains": list(semantic.primary_domain_candidates),
             "secondary_semantic_domains": list(semantic.secondary_domain_candidates),
             "semantic_format_support": list(semantic.format_support),
@@ -238,6 +248,8 @@ def analyze_validation(
         "full_case_accuracy": _percentage(full_matches, total),
         "cases_with_contextual_evidence": sum(bool(case["contextual_support_labels"]) for case in cases),
         "cases_with_contextual_suppression": sum(bool(case["contextual_suppressions"]) for case in cases),
+        "cases_reaching_semantic_components": sum(bool(case["semantic_component_labels"]) for case in cases),
+        "cases_generating_relationship_candidates": sum(case["relationship_candidate_generated"] for case in cases),
         "cases_with_semantic_relationships": sum(case["semantic_relationship_count"] > 0 for case in cases),
         "cases_with_primary_semantic_domains": sum(bool(case["primary_semantic_domains"]) for case in cases),
         "cases_with_secondary_semantic_domains": sum(bool(case["secondary_semantic_domains"]) for case in cases),
@@ -550,19 +562,208 @@ Provider calls: {comparison['provider_calls']}
 """
 
 
+def build_post_hkei_160_comparison(
+    hkei_155: dict[str, Any],
+    hkei_158: dict[str, Any],
+    current: dict[str, Any],
+) -> dict[str, Any]:
+    """Compare current extraction behavior with both preserved checkpoints."""
+    previous_by_id = {case["id"]: case for case in hkei_158["cases"]}
+    current_by_id = {case["id"]: case for case in current["cases"]}
+    result: dict[str, Any] = {
+        "batch": "batch_06",
+        "baselines": {"HKEI-155": hkei_155, "HKEI-158": hkei_158},
+        "case_count": current["case_count"],
+        "provider_calls": current["provider_calls"],
+        "expected_labels_unchanged": all(
+            value["expected_labels_sha256"] == current["expected_labels_sha256"]
+            for value in (hkei_155, hkei_158)
+        ),
+        "raw_source_integrity": current["source_integrity"] and all(
+            value["raw_source_sha256"] == current["raw_source_sha256"]
+            for value in (hkei_155, hkei_158)
+        ),
+        "regression_controls_preserved": all(
+            current[key] == 100.0 for key in (
+                "batch_01_topic_accuracy", "batch_02_full_accuracy",
+                "batch_03_full_accuracy",
+            )
+        ),
+        "previous_cases_reaching_semantic_components": 3,
+        "current_cases_reaching_semantic_components": current["cases_reaching_semantic_components"],
+        "previous_relationship_candidate_cases": 3,
+        "current_relationship_candidate_cases": current["cases_generating_relationship_candidates"],
+    }
+    for field in (
+        "topic_accuracy", "format_accuracy", "reader_intent_accuracy",
+        "full_case_accuracy",
+    ):
+        result[f"previous_{field}"] = hkei_158[field]
+        result[f"current_{field}"] = current[field]
+        result[f"{field}_delta"] = current[field] - hkei_158[field]
+    evidence_fields = {
+        "relationship_cases": "cases_with_semantic_relationships",
+        "primary_domains": "cases_with_primary_semantic_domains",
+        "secondary_domains": "cases_with_secondary_semantic_domains",
+        "semantic_format_support": "cases_with_semantic_format_support",
+        "semantic_format_suppression": "cases_with_semantic_format_suppression",
+    }
+    for label, field in evidence_fields.items():
+        result[f"previous_{label}"] = hkei_158[field]
+        result[f"current_{label}"] = current[field]
+        result[f"{label}_delta"] = current[field] - hkei_158[field]
+    context = current["cases_with_contextual_evidence"]
+    components = current["cases_reaching_semantic_components"]
+    relationships = current["cases_with_semantic_relationships"]
+    domains = current["cases_with_primary_semantic_domains"]
+    result["conversion_rates"] = {
+        "context_to_semantic_component_conversion": _percentage(components, context),
+        "semantic_component_to_relationship_conversion": _percentage(relationships, components),
+        "context_to_relationship_conversion": _percentage(relationships, context),
+        "relationship_to_primary_domain_conversion": _percentage(domains, relationships),
+        "context_to_primary_domain_conversion": _percentage(domains, context),
+        "semantic_format_support_rate": _percentage(current["cases_with_semantic_format_support"], current["case_count"]),
+    }
+    for dimension in ("topic", "format", "reader_intent"):
+        previous_ids = set(_mismatch_ids(hkei_158, dimension))
+        current_ids = set(_mismatch_ids(current, dimension))
+        result[f"current_{dimension}_mismatches"] = sorted(current_ids)
+        result[f"resolved_{dimension}_mismatches"] = sorted(previous_ids - current_ids)
+        result[f"new_{dimension}_mismatches"] = sorted(current_ids - previous_ids)
+        result[f"unchanged_{dimension}_mismatches"] = sorted(previous_ids & current_ids)
+    result["fully_matched_cases"] = [case["id"] for case in current["cases"] if case["full_match"]]
+    result["topic_failure_tracking"] = {
+        case_id: {
+            "previous_prediction": previous_by_id[case_id]["predicted_topic"],
+            "current_prediction": current_by_id[case_id]["predicted_topic"],
+            "expected_topic": current_by_id[case_id]["expected_topic"],
+            "previous_relationship_count": previous_by_id[case_id]["semantic_relationship_count"],
+            "current_relationship_count": current_by_id[case_id]["semantic_relationship_count"],
+            "previous_primary_domains": previous_by_id[case_id]["primary_semantic_domains"],
+            "current_primary_domains": current_by_id[case_id]["primary_semantic_domains"],
+            "topic_required": current_by_id[case_id]["topic_required"],
+        } for case_id in ("051", "053", "054", "055", "056", "060")
+    }
+    result["format_failure_tracking"] = {
+        case_id: {
+            "previous_prediction": previous_by_id[case_id]["predicted_format"],
+            "current_prediction": current_by_id[case_id]["predicted_format"],
+            "expected_format": current_by_id[case_id]["expected_format"],
+            "previous_support": previous_by_id[case_id]["semantic_format_support"],
+            "current_support": current_by_id[case_id]["semantic_format_support"],
+            "previous_suppression": previous_by_id[case_id]["semantic_format_suppression"],
+            "current_suppression": current_by_id[case_id]["semantic_format_suppression"],
+            "current_confidence": current_by_id[case_id]["format_confidence"],
+            "format_required": current_by_id[case_id]["format_required"],
+        } for case_id in ("052", "054", "056", "057", "058", "059")
+    }
+    for dimension in ("topic", "format"):
+        result[f"previous_{dimension}_gate_recall"] = hkei_158[f"{dimension}_gate_recall"]
+        result[f"current_{dimension}_gate_recall"] = current[f"{dimension}_gate_recall"]
+        result[f"current_{dimension}_gate"] = {
+            key: current[f"{dimension}_gate_{key}"]
+            for key in ("tp", "fp", "tn", "fn", "precision", "recall")
+        }
+    result["previous_format_fn_cases"] = [
+        case["id"] for case in hkei_158["cases"]
+        if not case["format_match"] and not case["format_required"]
+    ]
+    result["current_format_fn_cases"] = [
+        case["id"] for case in current["cases"]
+        if not case["format_match"] and not case["format_required"]
+    ]
+    direct = sum(not case["intent_match"] and case["format_match"] for case in current["cases"])
+    downstream = sum(not case["intent_match"] and not case["format_match"] for case in current["cases"])
+    result["direct_intent_failures"] = direct
+    result["downstream_intent_failures"] = downstream
+    result["mixed_intent_failures"] = 0
+    result["projected_provider_call_cases"] = current["projected_provider_call_cases"]
+    result["projected_provider_call_rate"] = current["projected_provider_call_rate"]
+    activation_improved = components > 3 or relationships > 3
+    editorial_deltas = (
+        result["topic_accuracy_delta"], result["format_accuracy_delta"],
+        result["reader_intent_accuracy_delta"], result["full_case_accuracy_delta"],
+    )
+    if any(delta <= -20.0 for delta in editorial_deltas):
+        classification = "REGRESSION"
+    elif (
+        activation_improved and max(editorial_deltas[:2]) >= 20.0
+        and result["current_semantic_format_support"] > 0
+        and result["regression_controls_preserved"]
+    ):
+        classification = "STRONG_IMPROVEMENT"
+    elif activation_improved and any(delta > 0 for delta in editorial_deltas):
+        classification = "MEANINGFUL_IMPROVEMENT"
+    elif activation_improved and not any(editorial_deltas):
+        classification = "ACTIVATION_IMPROVEMENT_ONLY"
+    elif any(delta > 0 for delta in editorial_deltas) and any(delta < 0 for delta in editorial_deltas):
+        classification = "MIXED"
+    else:
+        classification = "NO_IMPROVEMENT"
+    result["improvement_classification"] = classification
+    result["architectural_interpretation"] = (
+        "A_EXTRACTION_FIX_ACTIVATED_COMPOSITION"
+        if relationships > 3 and domains > 1 and current["cases_with_semantic_format_support"] > 0
+        else "B_EXTRACTION_IMPROVED_BUT_COMPOSITION_STILL_BLOCKED"
+        if components > 3 and relationships == 3
+        else "C_EXTRACTION_IMPROVED_BUT_DOMAIN_PROMOTION_STILL_BLOCKED"
+        if relationships > 3 and domains == 1
+        else "D_EXTRACTION_IMPROVED_BUT_FORMAT_MAPPING_STILL_BLOCKED"
+        if relationships > 3 and current["cases_with_semantic_format_support"] == 0
+        else "E_NO_REAL_TEXT_ACTIVATION_GAIN" if not activation_improved else "F_MIXED"
+    )
+    return result
+
+
+def render_post_hkei_160_markdown(result: dict[str, Any]) -> str:
+    """Render the post-extraction holdout comparison without source bodies."""
+    return f"""# Batch 06 Post-HKEI-160 Comparison
+
+Improvement classification: {result['improvement_classification']}
+
+Architectural interpretation: {result['architectural_interpretation']}
+
+Topic accuracy: {result['previous_topic_accuracy']:.2f}% → {result['current_topic_accuracy']:.2f}%
+
+Format accuracy: {result['previous_format_accuracy']:.2f}% → {result['current_format_accuracy']:.2f}%
+
+Reader Intent accuracy: {result['previous_reader_intent_accuracy']:.2f}% → {result['current_reader_intent_accuracy']:.2f}%
+
+Full accuracy: {result['previous_full_case_accuracy']:.2f}% → {result['current_full_case_accuracy']:.2f}%
+
+Semantic component cases: {result['previous_cases_reaching_semantic_components']} → {result['current_cases_reaching_semantic_components']}
+
+Relationship cases: {result['previous_relationship_cases']} → {result['current_relationship_cases']}
+
+Primary domains: {result['previous_primary_domains']} → {result['current_primary_domains']}
+
+Semantic format support: {result['previous_semantic_format_support']} → {result['current_semantic_format_support']}
+
+Provider calls: {result['provider_calls']}
+"""
+
+
 def main() -> int:
-    previous = (
-        json.loads(COMPARISON_JSON.read_text(encoding="utf-8"))["baseline_snapshot"]
-        if COMPARISON_JSON.exists()
-        else json.loads(OUTPUT_JSON.read_text(encoding="utf-8"))
+    prior_comparison = (
+        json.loads(POST_HKEI_160_JSON.read_text(encoding="utf-8"))
+        if POST_HKEI_160_JSON.exists() else None
+    )
+    hkei_158 = (
+        prior_comparison["baselines"]["HKEI-158"]
+        if prior_comparison else json.loads(OUTPUT_JSON.read_text(encoding="utf-8"))
+    )
+    hkei_155 = (
+        prior_comparison["baselines"]["HKEI-155"]
+        if prior_comparison
+        else json.loads(COMPARISON_JSON.read_text(encoding="utf-8"))["baseline_snapshot"]
     )
     analysis = analyze_validation()
-    comparison = build_comparison(previous, analysis)
+    comparison = build_post_hkei_160_comparison(hkei_155, hkei_158, analysis)
     OUTPUT_JSON.write_text(render_json(analysis), encoding="utf-8")
     OUTPUT_MD.write_text(render_markdown(analysis), encoding="utf-8")
-    COMPARISON_JSON.write_text(render_json(comparison), encoding="utf-8")
-    COMPARISON_MD.write_text(
-        render_comparison_markdown(comparison), encoding="utf-8"
+    POST_HKEI_160_JSON.write_text(render_json(comparison), encoding="utf-8")
+    POST_HKEI_160_MD.write_text(
+        render_post_hkei_160_markdown(comparison), encoding="utf-8"
     )
     print(json.dumps({key: value for key, value in analysis.items() if key != "cases"}, ensure_ascii=False, indent=2))
     return 0

@@ -132,6 +132,8 @@ def test_batch_contains_only_registration_and_authorized_validation_outputs() ->
     optional = {
         "semantic_activation_gap_analysis.json",
         "semantic_activation_gap_analysis.md",
+        "post_hkei_160_comparison.json",
+        "post_hkei_160_comparison.md",
     }
     assert required <= files <= required | optional
     forbidden = ("contextual", "semantic", "adjudication", "openai", "provider")
