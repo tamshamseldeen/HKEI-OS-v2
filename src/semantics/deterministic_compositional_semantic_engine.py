@@ -418,9 +418,14 @@ _EVENT_COMPONENTS = (
     r"بدأ(?:ت)?", r"بدء", r"يبدأ", r"أطلق(?:ت)?", r"حدث",
     r"announced", r"decided", r"launched", r"began", r"event",
 )
+_NEWS_EVENT_COMPONENTS = _EVENT_COMPONENTS + (r"شهد(?:ت)?",)
 _FACTUAL_REPORTING_COMPONENTS = (
-    r"بيان", r"تفاصيل", r"معلومات", r"أكد",
+    r"بيان", r"تفاصيل", r"معلومات", r"أكد", r"قرار(?:ا|ًا)?", r"تصريح(?:ا|ًا)?", r"تطور(?:ا|ًا)?",
     r"statement", r"details", r"update", r"information", r"confirmed",
+)
+_NEGATED_NEWS_COMPONENTS = (
+    r"(?:و)?ليست? إعلان(?:ا|ًا)?", r"لا يوجد قرار", r"لم يصدر قرار",
+    r"قرار غير مؤكد", r"not an announcement", r"no decision was made",
 )
 _CAUSE_COMPONENTS = (
     r"بسبب", r"نتيجة(?:\s*ل)?", r"يرجع إلى", r"في ظل", r"بالتزامن مع",
@@ -455,20 +460,43 @@ _INSTRUCTION_COMPONENTS = (
     r"إرشادات", r"توصيات", r"نصائح", r"أولاً", r"ثانياً",
     r"should", r"must", r"follow", r"avoid", r"steps?", r"first", r"second",
 )
-_RESULT_COMPONENTS = (
+_COMPLETED_EVENT_COMPONENTS = (
+    r"انته(?:ى|ت)", r"اختتم(?:ت)?", r"اكتم(?:ت)?", r"أنجز(?:ت)?",
+    r"حقق(?:ت)?", r"بعد انتهاء", r"عقب اختتام", r"completed", r"concluded", r"finished", r"ended",
+)
+_OBSERVED_RESULT_COMPONENTS = (
+    r"(?:ال)?نتيجة (?:ال)?نهائية", r"(?:ال)?نتائج (?:ال)?نهائية", r"(?:ال)?حصيلة (?:ال)?نهائية",
+    r"نتائج(?: جديدة)?",
+    r"فاز", r"(?:ب)?فوز", r"خسر", r"خسارة", r"تعادل", r"المركز (?:الأول|الثاني|الثالث)",
+    r"ترتيب نهائي", r"مجموع نهائي", r"final result", r"won", r"lost",
+    r"draw", r"final score", r"final ranking",
+)
+_FUTURE_OR_PLANNED_COMPONENTS = (
+    r"سيقام", r"ستقام", r"من المقرر", r"مقرر أن", r"مخطط", r"مزمع",
+    r"متوقع", r"يتوقع", r"محتمل", r"احتمال", r"مستهدف", r"غد(?:ًا|ا)?", r"الأسبوع المقبل",
+    r"scheduled", r"planned", r"expected", r"target", r"tomorrow", r"next week",
+)
+_ONGOING_COMPONENTS = (
+    r"ما زال", r"لا يزال", r"قيد التنفيذ", r"(?:ال)?جاري(?:ة)?", r"مستمر(?:ة)?",
+    r"مرحلة وسيطة", r"ongoing", r"in progress", r"under way",
+)
+_DOMAIN_RESULT_COMPONENTS = (
     r"النتيجة النهائية", r"نتائج", r"حصيلة", r"فاز", r"فوز", r"خسر",
     r"خسارة", r"تعادل", r"حسم", r"انته(?:ى|ت)", r"ترتيب نهائي",
     r"final result", r"won", r"lost", r"draw", r"final score", r"ranking",
 )
 _CURRENT_LEVEL_COMPONENTS = (
     r"حالياً", r"حاليا", r"اليوم", r"الآن", r"المستوى الحالي",
-    r"بلغ(?:ت)?", r"وصل(?:ت)? إلى", r"سجل(?:ت)?", r"(?:ال)?معدل", r"(?:ال)?نسبة",
+    r"بلغ(?:ت)?", r"وصل(?:ت)?(?: [^.؟!؛]{1,30})? إلى", r"سجل(?:ت)?", r"(?:ال)?معدل", r"(?:ال)?نسبة",
     r"currently", r"today", r"current level", r"stands at [0-9]",
 )
 _MOVEMENT_COMPONENTS = (
     r"ارتفع(?:ت)?", r"ارتفاع", r"انخفض(?:ت)?", r"انخفاض", r"تراجع(?:ت)?",
     r"يتراجع", r"زاد(?:ت)?", r"زيادة", r"(?:و)?واصل(?:ت)?", r"(?:و)?استمر(?:ت)?", r"مقارنة\s*ب(?:ال)?",
     r"rose", r"fell", r"declined", r"increased", r"continued", r"compared with",
+)
+_FORMAT_MOVEMENT_COMPONENTS = _MOVEMENT_COMPONENTS + (
+    r"وارتفع(?:ت)?", r"وانخفض(?:ت)?",
 )
 _TEMPORAL_COMPONENTS = (
     r"خلال", r"منذ", r"هذا الأسبوع", r"الفترة الماضية", r"الشهر الماضي",
@@ -620,9 +648,31 @@ class DeterministicCompositionalSemanticEngine:
             relationships.extend(
                 self._generic_domain_relationships(window, section, sentence_index)
             )
-            relationships.extend(
-                self._generic_format_relationships(window, section, sentence_index)
+            if len(sentences) == 1:
+                relationships.extend(self._generic_format_relationships(
+                    sentences[start], section, sentence_index,
+                    bounded_targets_only=True,
+                ))
+            if start + 1 < len(sentences):
+                relationships.extend(
+                    self._generic_format_relationships(window, section, sentence_index)
+                )
+        if source.title.strip() and sentences:
+            headline_relationships = self._generic_format_relationships(
+                source.title.strip(), SourceSection.HEADLINE, 0,
+                bounded_targets_only=True,
             )
+            lead_relationships = self._generic_format_relationships(
+                sentences[0], SourceSection.LEAD, 0,
+                bounded_targets_only=True,
+            )
+            if not headline_relationships and not lead_relationships:
+                relationships.extend(self._generic_format_relationships(
+                    f"{source.title.strip()}. {sentences[0]}",
+                    SourceSection.HEADLINE,
+                    0,
+                    bounded_targets_only=True,
+                ))
         return tuple(dict.fromkeys(relationships))
 
     def _generic_domain_relationships(
@@ -635,7 +685,12 @@ class DeterministicCompositionalSemanticEngine:
         specs = (
             (_HEALTH_SUBJECTS, "HEALTH", _EVENT_COMPONENTS + _INSTRUCTION_COMPONENTS),
             (_PRICE_SUBJECTS, "ECONOMY", _EVENT_COMPONENTS + _MOVEMENT_COMPONENTS),
-            (_SPORTS_SUBJECTS, "SPORTS", _SERVICE_COMPONENTS + _RESULT_COMPONENTS),
+            (
+                _SPORTS_SUBJECTS,
+                "SPORTS",
+                _SERVICE_COMPONENTS
+                + _DOMAIN_RESULT_COMPONENTS,
+            ),
         )
         found: list[SemanticRelationship] = []
         for subjects, domain, actions in specs:
@@ -671,28 +726,36 @@ class DeterministicCompositionalSemanticEngine:
         text: str,
         source_section: SourceSection,
         sentence_index: int,
+        *,
+        bounded_targets_only: bool = False,
     ) -> tuple[SemanticRelationship, ...]:
         """Emit format evidence only for complete reusable structures."""
         present = lambda patterns: bool(self._pattern_matches(text, patterns))
         structures: list[tuple[str, SemanticRelationshipType, SemanticComponent, SemanticComponent, tuple[str, ...]]] = []
-        if present(_CLAIM_COMPONENTS) and present(_VERIFY_COMPONENTS) and present(_VERDICT_COMPONENTS):
+        trend_structure = present(_CURRENT_LEVEL_COMPONENTS) and present(_FORMAT_MOVEMENT_COMPONENTS) and present(_TEMPORAL_COMPONENTS)
+        completed_result = present(_COMPLETED_EVENT_COMPONENTS) and present(_OBSERVED_RESULT_COMPONENTS)
+        result_blocked = present(_FUTURE_OR_PLANNED_COMPONENTS) or present(_ONGOING_COMPONENTS) or (present(_EFFECT_COMPONENTS) and not present(_OBSERVED_RESULT_COMPONENTS))
+        if not bounded_targets_only and present(_CLAIM_COMPONENTS) and present(_VERIFY_COMPONENTS) and present(_VERDICT_COMPONENTS):
             structures.append(("FACT_CHECK", SemanticRelationshipType.CLAIM_ATTRIBUTED_TO_AUTHORITY, SemanticComponent.CLAIM, SemanticComponent.OUTCOME, ()))
-        if present(_CURRENT_LEVEL_COMPONENTS) and present(_MOVEMENT_COMPONENTS) and present(_TEMPORAL_COMPONENTS):
+        if trend_structure:
             structures.append(("TREND_UPDATE", SemanticRelationshipType.INTERPRETATION_OF_INDICATOR, SemanticComponent.INDICATOR, SemanticComponent.INTERPRETATION, ("FORMAT_STANDARD_NEWS",)))
-        if present(_RESULT_COMPONENTS):
+        if completed_result and not result_blocked and not trend_structure:
             structures.append(("RESULT_REPORT", SemanticRelationshipType.EVENT_HAS_OUTCOME, SemanticComponent.EVENT, SemanticComponent.OUTCOME, ("FORMAT_TREND_UPDATE",)))
-        if present(_INSTRUCTION_COMPONENTS) and (present(_SERVICE_COMPONENTS) or len(self._pattern_matches(text, _INSTRUCTION_COMPONENTS)) >= 2):
+        if not bounded_targets_only and present(_INSTRUCTION_COMPONENTS) and (present(_SERVICE_COMPONENTS) or len(self._pattern_matches(text, _INSTRUCTION_COMPONENTS)) >= 2):
             structures.append(("GUIDE", SemanticRelationshipType.RECOMMENDATION_TARGETS_AUDIENCE, SemanticComponent.RECOMMENDED_ACTION, SemanticComponent.AFFECTED_AUDIENCE, ("FORMAT_STANDARD_NEWS",)))
-        elif present(_SERVICE_COMPONENTS) and (present(_EVENT_COMPONENTS) or present(_SYSTEM_COMPONENTS) or present(_SPORTS_SUBJECTS)):
+        elif not bounded_targets_only and present(_SERVICE_COMPONENTS) and (present(_EVENT_COMPONENTS) or present(_SYSTEM_COMPONENTS) or present(_SPORTS_SUBJECTS)):
             structures.append(("SERVICE", SemanticRelationshipType.ACTION_HAS_DEADLINE, SemanticComponent.ACTION, SemanticComponent.DEADLINE, ("FORMAT_GUIDE",)))
         if present(_SYSTEM_COMPONENTS) and present(_MECHANISM_COMPONENTS) and present(_UNDERSTANDING_COMPONENTS):
             structures.append(("EXPLAINER", SemanticRelationshipType.METHOD_APPLIED_TO_SUBJECT, SemanticComponent.METHOD, SemanticComponent.PRIMARY_SUBJECT, ("FORMAT_STANDARD_NEWS",)))
-        if (present(_EVENT_COMPONENTS) or present(_MOVEMENT_COMPONENTS)) and present(_CAUSE_COMPONENTS) and present(_EFFECT_COMPONENTS):
+        if not bounded_targets_only and (present(_EVENT_COMPONENTS) or present(_MOVEMENT_COMPONENTS)) and present(_CAUSE_COMPONENTS) and present(_EFFECT_COMPONENTS):
             structures.append(("ANALYSIS", SemanticRelationshipType.CONSEQUENCE_OF_EVENT, SemanticComponent.EVENT, SemanticComponent.CONSEQUENCE, ("FORMAT_STANDARD_NEWS",)))
-        if present(_EVENT_COMPONENTS) and present(_FACTUAL_REPORTING_COMPONENTS) and not structures:
+        if (
+            present(_NEWS_EVENT_COMPONENTS)
+            and present(_FACTUAL_REPORTING_COMPONENTS)
+            and not present(_NEGATED_NEWS_COMPONENTS)
+            and not structures
+        ):
             structures.append(("STANDARD_NEWS", SemanticRelationshipType.ACTOR_PERFORMS_ACTION, SemanticComponent.ACTOR, SemanticComponent.ACTION, ("FORMAT_RESULT_REPORT", "FORMAT_TREND_UPDATE")))
-        if len(tuple(segment for segment in text.split(". ") if segment)) < 2:
-            return ()
         return tuple(
             self._structural_relationship(
                 source_section=source_section,

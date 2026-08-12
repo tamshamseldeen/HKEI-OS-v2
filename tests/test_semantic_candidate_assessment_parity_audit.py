@@ -43,7 +43,7 @@ def test_expected_labels_are_joined_after_assessments(monkeypatch: pytest.Monkey
 
 def test_batch_status_and_global_counts(result: dict) -> None:
     assert result["cases_analyzed"] == 41
-    assert result["assessments_analyzed"] == 111
+    assert result["assessments_analyzed"] == 109
     assert result["batch_metrics"]["batch_06"]["scientific_status"] == "DIAGNOSTIC_DEVELOPMENT_SET"
     assert result["batch_metrics"]["batch_05"]["scientific_status"] == "SEMANTIC_ADJUDICATION_DEVELOPMENT_CORPUS"
     assert all(result["batch_metrics"][batch]["scientific_status"] == "HISTORICAL_REGRESSION_CORPUS" for batch in ("batch_01", "batch_02", "batch_03"))
@@ -65,17 +65,17 @@ def test_format_parity_and_topic_role_safety(result: dict) -> None:
 
 def test_competition_duplicate_and_counterfactual_metrics(result: dict) -> None:
     assert result["competition_metrics"] == {
-        "cases_with_competing_candidates": 22,
-        "assessments_with_competitors": 44,
+        "cases_with_competing_candidates": 21,
+        "assessments_with_competitors": 42,
         "conflicted_assessments": 6,
-        "cases_where_competition_prevented_sufficient": 22,
+        "cases_where_competition_prevented_sufficient": 21,
     }
     assert result["duplicate_evidence_metrics"]["cases_with_duplicate_evidence_discounting"] == 16
     assert result["duplicate_evidence_metrics"]["duplicate_only_sufficient"] == []
     assert result["counterfactual_gate_metrics"] == {
         "counterfactual_wrong_resolved_count": 0,
         "counterfactual_correct_resolved_count": 8,
-        "counterfactual_unresolved_wrong_count": 50,
+        "counterfactual_unresolved_wrong_count": 49,
     }
 
 
