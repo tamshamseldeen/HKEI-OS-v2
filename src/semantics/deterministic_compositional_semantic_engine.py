@@ -414,7 +414,8 @@ _ACTIONABLE_GUIDE_PATTERNS = (
 # General editorial structures.  Each structure requires independent component
 # groups; isolated keywords therefore cannot become format evidence.
 _EVENT_COMPONENTS = (
-    r"أعلن(?:ت)?", r"قرر(?:ت)?", r"بدأ(?:ت)?", r"أطلق(?:ت)?", r"حدث",
+    r"[أا]علن(?:ت|وا)?", r"يعلن(?:ون)?", r"إعلان", r"قرر(?:ت)?",
+    r"بدأ(?:ت)?", r"بدء", r"يبدأ", r"أطلق(?:ت)?", r"حدث",
     r"announced", r"decided", r"launched", r"began", r"event",
 )
 _FACTUAL_REPORTING_COMPONENTS = (
@@ -422,15 +423,17 @@ _FACTUAL_REPORTING_COMPONENTS = (
     r"statement", r"details", r"update", r"information", r"confirmed",
 )
 _CAUSE_COMPONENTS = (
-    r"بسبب", r"نتيجة", r"يرجع إلى", r"في ظل", r"قيد", r"تحد",
+    r"بسبب", r"نتيجة(?:\s*ل)?", r"يرجع إلى", r"في ظل", r"بالتزامن مع",
+    r"قيد", r"تحد",
     r"because", r"due to", r"constraint", r"trade-?off", r"cause",
 )
 _EFFECT_COMPONENTS = (
-    r"أدى إلى", r"يؤدي إلى", r"ينعكس على", r"تأثير", r"تداعيات",
+    r"[أا]د(?:ى|ت) إلى", r"يؤدي إلى", r"تسبب(?:ت)?", r"ينعكس على",
+    r"تأثير", r"تداعيات",
     r"led to", r"effect", r"impact", r"consequence",
 )
 _SYSTEM_COMPONENTS = (
-    r"نظام", r"منظومة", r"آلية", r"عملية", r"خدمة",
+    r"(?:ال)?نظام", r"(?:ال)?منظومة", r"(?:ال)?آلية", r"(?:ال)?عملية", r"(?:ال)?خدمة",
     r"system", r"mechanism", r"process", r"service",
 )
 _MECHANISM_COMPONENTS = (
@@ -442,37 +445,46 @@ _UNDERSTANDING_COMPONENTS = (
     r"to understand", r"explains", r"means that", r"why",
 )
 _SERVICE_COMPONENTS = (
-    r"موعد", r"جدول", r"سعر", r"تعرفة", r"أهلية", r"آخر موعد",
+    r"موعد", r"مواعيد", r"جدول", r"التوقيت", r"تنطلق", r"تقام",
+    r"سعر", r"أسعار", r"تعرفة", r"أهلية", r"آخر موعد",
     r"موقع", r"متاح", r"إجراء رسمي", r"schedule", r"price", r"rate",
     r"eligibility", r"deadline", r"location", r"available",
 )
 _INSTRUCTION_COMPONENTS = (
-    r"يجب", r"ينصح", r"اتبع", r"تجنب", r"خطوات", r"أولاً", r"ثانياً",
+    r"يجب", r"ينصح", r"احرص", r"اتبع", r"اتباع", r"تجنب", r"خطوات",
+    r"إرشادات", r"توصيات", r"نصائح", r"أولاً", r"ثانياً",
     r"should", r"must", r"follow", r"avoid", r"steps?", r"first", r"second",
 )
 _RESULT_COMPONENTS = (
-    r"النتيجة النهائية", r"فاز", r"خسر", r"تعادل", r"حسم", r"ترتيب نهائي",
+    r"النتيجة النهائية", r"نتائج", r"حصيلة", r"فاز", r"فوز", r"خسر",
+    r"خسارة", r"تعادل", r"حسم", r"انته(?:ى|ت)", r"ترتيب نهائي",
     r"final result", r"won", r"lost", r"draw", r"final score", r"ranking",
 )
 _CURRENT_LEVEL_COMPONENTS = (
-    r"حالياً", r"اليوم", r"الآن", r"المستوى الحالي", r"سجل [0-9]",
+    r"حالياً", r"حاليا", r"اليوم", r"الآن", r"المستوى الحالي",
+    r"بلغ(?:ت)?", r"وصل(?:ت)? إلى", r"سجل(?:ت)?", r"(?:ال)?معدل", r"(?:ال)?نسبة",
     r"currently", r"today", r"current level", r"stands at [0-9]",
 )
 _MOVEMENT_COMPONENTS = (
-    r"ارتفع", r"انخفض", r"تراجع", r"زاد", r"واصل", r"مقارنة ب",
+    r"ارتفع(?:ت)?", r"ارتفاع", r"انخفض(?:ت)?", r"انخفاض", r"تراجع(?:ت)?",
+    r"يتراجع", r"زاد(?:ت)?", r"زيادة", r"(?:و)?واصل(?:ت)?", r"(?:و)?استمر(?:ت)?", r"مقارنة\s*ب(?:ال)?",
     r"rose", r"fell", r"declined", r"increased", r"continued", r"compared with",
 )
 _TEMPORAL_COMPONENTS = (
-    r"خلال", r"منذ", r"هذا الأسبوع", r"الشهر الماضي", r"العام الماضي",
+    r"خلال", r"منذ", r"هذا الأسبوع", r"الفترة الماضية", r"الشهر الماضي",
+    r"العام الماضي", r"لليوم الثاني", r"على مدار", r"مقارنة",
+    r"بعد (?:ارتفاع|تراجع)",
     r"over", r"since", r"this week", r"last month", r"last year",
 )
-_CLAIM_COMPONENTS = (r"ادعاء", r"زعم", r"مزاعم", r"claim", r"assertion")
+_CLAIM_COMPONENTS = (r"ادعاء", r"زعم", r"مزاعم", r"حقيقة", r"claim", r"assertion")
 _VERIFY_COMPONENTS = (
-    r"تحقق", r"دقق", r"راجعت الأدلة", r"فحصت الوثائق",
+    r"تحقق", r"التحقق", r"دقق", r"تدقيق", r"تقييم", r"فحص الادعاء",
+    r"راجعت الأدلة", r"فحصت الوثائق",
     r"verified", r"checked", r"reviewed the evidence",
 )
 _VERDICT_COMPONENTS = (
-    r"صحيح", r"زائف", r"مضلل", r"غير دقيق", r"النتيجة أن",
+    r"صحيح", r"زائف", r"مضلل", r"غير دقيق", r"(?:و)?ثبتت صحته",
+    r"(?:و)?ثبت بطلانه", r"النتيجة أن",
     r"true", r"false", r"misleading", r"inaccurate", r"verdict",
 )
 _SPORTS_SUBJECTS = (
@@ -482,11 +494,14 @@ _SPORTS_SUBJECTS = (
 )
 _HEALTH_SUBJECTS = (
     r"صحة", r"مرض", r"وقاية", r"لقاح", r"علاج", r"مريض", r"عدوى",
-    r"الخدمات الطبية", r"فحوصات",
+    r"الخدمات الطبية", r"فحوصات", r"ضغط الدم", r"سكر الدم",
+    r"الأمراض المزمنة", r"مبادرة صحية",
     r"health", r"disease", r"prevention", r"vaccine", r"treatment", r"infection",
 )
 _PRICE_SUBJECTS = (
-    r"سعر", r"أسعار", r"تكلفة", r"تعرفة", r"تضخم", r"فائدة",
+    r"سعر", r"أسعار", r"سعر الصرف", r"تكلفة", r"تكاليف", r"تعرفة",
+    r"سوق", r"الطلب", r"العرض", r"الإنتاج", r"مبيعات", r"استثمار",
+    r"مواد البناء", r"تضخم", r"فائدة",
     r"price", r"cost", r"rate", r"inflation", r"interest",
 )
 

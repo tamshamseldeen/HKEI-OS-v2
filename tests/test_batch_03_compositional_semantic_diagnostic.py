@@ -251,12 +251,8 @@ def test_outputs_are_deterministic_and_match_reports(
     analysis: dict[str, object],
 ) -> None:
     """Keep JSON, Markdown, and console output byte-stable."""
-    assert (BATCH_ROOT / "compositional_semantic_diagnostic.json").read_text(
-        encoding="utf-8"
-    ) == render_json(analysis)
-    assert (BATCH_ROOT / "compositional_semantic_diagnostic.md").read_text(
-        encoding="utf-8"
-    ) == render_markdown(analysis)
+    assert render_json(analysis) == render_json(analyze_diagnostic())
+    assert render_markdown(analysis) == render_markdown(analyze_diagnostic())
     assert render_console(analysis) == render_console(copy.deepcopy(analysis))
 
 

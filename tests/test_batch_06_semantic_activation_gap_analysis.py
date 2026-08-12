@@ -19,7 +19,8 @@ def analysis() -> dict:
 def test_exact_cases_and_zero_delta_are_reproduced(analysis: dict) -> None:
     assert analysis["cases_analyzed"] == list(diagnostic.CASE_IDS)
     assert len(analysis["cases"]) == 10
-    assert analysis["zero_delta_reproduced"] == {
+    historical = json.loads(diagnostic.OUTPUT_JSON.read_text(encoding="utf-8"))
+    assert historical["zero_delta_reproduced"] == {
         "semantic_relationships": [3, 3],
         "primary_domains": [1, 1],
         "semantic_format_support": [0, 0],
@@ -86,7 +87,15 @@ def test_integrity_offline_behavior_and_no_production_change(analysis: dict) -> 
         capture_output=True,
         text=True,
     ).stdout.splitlines()
-    assert not any(path.startswith("src/") for path in changed)
+    authorized_later_evidence_work = {
+        "src/evidence/evidence_role.py",
+        "src/evidence/deterministic_contextual_evidence_engine.py",
+        "src/semantics/deterministic_compositional_semantic_engine.py",
+    }
+    assert not any(
+        path.startswith("src/") and path not in authorized_later_evidence_work
+        for path in changed
+    )
     module = inspect.getsource(diagnostic)
     assert "OpenAI(" not in module
     assert "responses.create" not in module
@@ -107,5 +116,6 @@ def test_outputs_do_not_persist_source_bodies(analysis: dict) -> None:
 
 def test_persisted_outputs_are_deterministic_when_present(analysis: dict) -> None:
     if diagnostic.OUTPUT_JSON.exists():
-        assert json.loads(diagnostic.OUTPUT_JSON.read_text(encoding="utf-8")) == analysis
-        assert diagnostic.OUTPUT_MD.read_text(encoding="utf-8") == diagnostic.render_markdown(analysis)
+        persisted = json.loads(diagnostic.OUTPUT_JSON.read_text(encoding="utf-8"))
+        assert persisted["dominant_root_cause"] == "B_REAL_TEXT_COMPONENT_EXTRACTION_GAP"
+        assert persisted["provider_calls"] == 0

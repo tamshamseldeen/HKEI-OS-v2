@@ -498,6 +498,32 @@ _REGISTRATION_INVITATION = re.compile(
     r"(?<!\w)دعت(?!\w).{0,80}?(?<!\w)للتسجيل(?!\w)"
 )
 
+# Component-only Arabic patterns.  They expose reusable semantic roles without
+# assigning an editorial Topic or Format.  Original text is retained; the
+# expressions merely tolerate common clitics, inflection, and orthography.
+_ARABIC_COMPONENT_SPECS = (
+    (r"(?:أ|ا|إ)?علن(?:ت|وا)?|يعلن(?:ون)?|إعلان", EvidenceRole.ACTION, "ACTION"),
+    (r"(?:بدأ|بدات|بدأت|يبدأ|بدء)", EvidenceRole.ACTION, "ACTION"),
+    (r"(?:ارتفع(?:ت)?|يرتفع|ارتفاع|زاد(?:ت)?|زيادة)", EvidenceRole.CHANGE, "CHANGE"),
+    (r"(?:انخفض(?:ت)?|انخفاض|تراجع(?:ت)?|يتراجع|واصل(?:ت)?|استمر(?:ت)?)", EvidenceRole.CHANGE, "CHANGE"),
+    (r"(?:ال)?(?:نتيجة|نتائج|حصيلة|فوز|خسارة|ترتيب)|انته(?:ى|ت)|حقق(?:ت)?|يسجل", EvidenceRole.RESULT, "RESULT"),
+    (r"(?:بسبب|نتيجة\s*ل|في\s+ظل|بالتزامن\s+مع)", EvidenceRole.CONSEQUENCE, "CAUSE"),
+    (r"(?:أدى|ادت|أدت|يؤدي|تسبب(?:ت)?|ينعكس|تأثير|تداعيات)", EvidenceRole.EFFECT, "EFFECT"),
+    (r"(?:اليوم|خلال(?:\s+تعاملات)?\s+اليوم|مقارنة\s*ب|منذ|خلال\s+الفترة|لليوم\s+الثاني|علي\s+مدار|بعد\s+(?:ارتفاع|تراجع))", EvidenceRole.TEMPORAL_UPDATE, "TEMPORAL_UPDATE"),
+    (r"(?:سعر|أسعار|سعر\s+الصرف|تكلفة|تكاليف)", EvidenceRole.PRICE, "PRICE"),
+    (r"(?:متوسط|بلغ(?:ت)?|وصل(?:ت)?\s+إلى|سجل(?:ت)?|نحو|قرابة|معدل|نسبة|درجة\s+الحرارة|ضغط\s+الدم|سكر\s+الدم)", EvidenceRole.MEASUREMENT, "MEASUREMENT"),
+    (r"(?:موعد|مواعيد|جدول|تنطلق|تقام|الجولة|التوقيت)", EvidenceRole.SCHEDULE, "SCHEDULE"),
+    (r"(?:خطوات|طريقة|إجراءات|إجراء|التسجيل|التقديم)", EvidenceRole.PROCEDURE, "PROCEDURE"),
+    (r"(?:ال)?(?:نصيحة|نصائح|إرشادات|توصيات)|ينصح|احرص|تجنب|اتباع|ممارسة|تقليل", EvidenceRole.REQUIREMENT, "RECOMMENDED_ACTION"),
+    (r"(?:ال)?(?:مرض|أمراض|امراض)|الامراض\s+المزمنة|وقاية|تشخيص|فحص|فحوصات|علاج|مبادرة\s+صحية", EvidenceRole.SUBJECT, "HEALTH_SUBJECT"),
+    (r"(?:سوق|الطلب|العرض|إنتاج|الإنتاج|مبيعات|استثمار|مواد\s+البناء|عمليات\s+الشركة)", EvidenceRole.SUBJECT, "ECONOMIC_SUBJECT"),
+    (r"(?:مباراة|مباريات)", EvidenceRole.SUBJECT, "SPORTS_SUBJECT"),
+    (r"(?:من\s+خلال|عبر|بهدف|كيفية|كيف\s+يعمل|آلية)", EvidenceRole.METHOD, "METHOD"),
+    (r"(?:ادعاء|مزاعم|زعم)", EvidenceRole.CLAIM, "CLAIM"),
+    (r"(?:تحقق|التحقق|تدقيق|فحص\s+الادعاء|تقييم)", EvidenceRole.ACTION, "VERIFICATION"),
+    (r"(?:زائف|مضلل|غير\s+دقيق|ثبتت\s+صحته|ثبت\s+بطلانه)", EvidenceRole.OUTCOME, "VERDICT"),
+)
+
 
 class DeterministicContextualEvidenceEngine:
     """Extract reusable contextual evidence from supplied source text."""
@@ -540,11 +566,14 @@ class DeterministicContextualEvidenceEngine:
             ),
             existing_items=lead_items + body_items,
         )
+        implicit_items = self._bounded_implicit_subject_items(
+            lead_items + body_items,
+        )
         lead_items = self._deduplicate(
-            (*lead_items, *(item for item in bounded_body_items if item.source_section is SourceSection.LEAD))
+            (*lead_items, *(item for item in bounded_body_items + implicit_items if item.source_section is SourceSection.LEAD))
         )
         body_items = self._deduplicate(
-            (*body_items, *(item for item in bounded_body_items if item.source_section is SourceSection.BODY))
+            (*body_items, *(item for item in bounded_body_items + implicit_items if item.source_section is SourceSection.BODY))
         )
         instruction_sentences = self._segment_sentences(user_instruction or "")
         user_instruction_items = self._analyze_units(
@@ -787,6 +816,33 @@ class DeterministicContextualEvidenceEngine:
             supports=("FORMAT_SERVICE", "INTENT_KNOW_ACTION"),
             reason_code="AFFECTED_AUDIENCE_CONTEXT_PATTERN",
         )
+        for pattern, role, component in _ARABIC_COMPONENT_SPECS:
+            for match in re.finditer(
+                rf"(?<!\w)(?:و|ف|ب|ل)?(?:{pattern})(?!\w)",
+                self._normalized_arabic_for_matching(text),
+                flags=re.IGNORECASE,
+            ):
+                matches.append(
+                    (
+                        match.start(),
+                        sequence,
+                        ContextualEvidenceItem(
+                            source_section=source_section,
+                            sentence_index=sentence_index,
+                            matched_text=text[match.start():match.end()],
+                            evidence_level=EvidenceLevel.CONTEXT,
+                            role=role,
+                            strength=self._adjust_strength(
+                                EvidenceStrength.MEDIUM,
+                                source_section,
+                            ),
+                            reason_code=f"ARABIC_{component}_COMPONENT",
+                            supports=(f"COMPONENT_{component}",),
+                            suppresses=(),
+                        ),
+                    )
+                )
+                sequence += 1
         analytical_matches = self._analytical_context_matches(
             text=text,
             source_section=source_section,
@@ -929,6 +985,55 @@ class DeterministicContextualEvidenceEngine:
                     )
                 )
         return self._deduplicate(emitted)
+
+    @staticmethod
+    def _bounded_implicit_subject_items(
+        existing_items: tuple[ContextualEvidenceItem, ...],
+    ) -> tuple[ContextualEvidenceItem, ...]:
+        """Mark one-step subject inheritance when no competing entity appears."""
+        grouped: dict[tuple[SourceSection, int], list[ContextualEvidenceItem]] = {}
+        for item in existing_items:
+            grouped.setdefault((item.source_section, item.sentence_index), []).append(item)
+        ordered = sorted(
+            grouped,
+            key=lambda value: (
+                0 if value[0] is SourceSection.LEAD else 1,
+                value[1],
+            ),
+        )
+        emitted: list[ContextualEvidenceItem] = []
+        for previous_key, current_key in zip(ordered, ordered[1:]):
+            previous = grouped[previous_key]
+            current = grouped[current_key]
+            prior_entities = [
+                item for item in previous
+                if item.role in {EvidenceRole.SUBJECT, EvidenceRole.ACTOR, EvidenceRole.AUTHORITY}
+            ]
+            current_entities = [
+                item for item in current
+                if item.role in {EvidenceRole.SUBJECT, EvidenceRole.ACTOR, EvidenceRole.AUTHORITY}
+            ]
+            current_predicates = [
+                item for item in current
+                if item.role in {EvidenceRole.ACTION, EvidenceRole.CHANGE, EvidenceRole.EFFECT, EvidenceRole.STATE}
+            ]
+            if not prior_entities or current_entities or not current_predicates:
+                continue
+            predicate = current_predicates[0]
+            emitted.append(
+                ContextualEvidenceItem(
+                    source_section=predicate.source_section,
+                    sentence_index=predicate.sentence_index,
+                    matched_text=predicate.matched_text,
+                    evidence_level=EvidenceLevel.STRUCTURAL,
+                    role=EvidenceRole.SUBJECT,
+                    strength=EvidenceStrength.MEDIUM,
+                    reason_code="ADJACENT_IMPLICIT_SUBJECT_COMPONENT",
+                    supports=("COMPONENT_INHERITED_SUBJECT",),
+                    suppresses=(),
+                )
+            )
+        return tuple(emitted)
 
     @staticmethod
     def _hint_specifications() -> tuple:
@@ -1116,6 +1221,17 @@ class DeterministicContextualEvidenceEngine:
                 text,
                 flags=re.IGNORECASE,
             )
+        )
+
+    @staticmethod
+    def _normalized_arabic_for_matching(text: str) -> str:
+        """Apply length-preserving conservative Arabic match normalization."""
+        return "".join(
+            {
+                "أ": "ا", "إ": "ا", "آ": "ا", "ٱ": "ا",
+                "ى": "ي",
+            }.get(character, " " if character in "ـ\u064b\u064c\u064d\u064e\u064f\u0650\u0651\u0652" else character)
+            for character in text
         )
 
     @staticmethod

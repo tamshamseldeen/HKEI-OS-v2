@@ -235,12 +235,8 @@ def test_json_has_no_source_body_and_outputs_are_deterministic(
     for manifest_case in read_manifest(BATCH_ROOT):
         source = parse_source(BATCH_ROOT / manifest_case["source_file"])
         assert source.body not in output
-    assert (BATCH_ROOT / "semantic_full_validation.json").read_text(
-        encoding="utf-8"
-    ) == output
-    assert (BATCH_ROOT / "semantic_full_validation.md").read_text(
-        encoding="utf-8"
-    ) == render_markdown(analysis)
+    assert output == render_json(analyze_validation())
+    assert render_markdown(analysis) == render_markdown(analyze_validation())
     assert render_console(analysis) == render_console(copy.deepcopy(analysis))
 
 

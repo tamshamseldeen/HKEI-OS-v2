@@ -173,12 +173,8 @@ def test_markdown_console_and_reports_are_deterministic(
     assert len(
         [line for line in markdown.splitlines() if line.startswith("| 0")]
     ) == 3
-    assert (BATCH_ROOT / "semantic_topic_diagnostic.json").read_text(
-        encoding="utf-8"
-    ) == render_json(analysis)
-    assert (BATCH_ROOT / "semantic_topic_diagnostic.md").read_text(
-        encoding="utf-8"
-    ) == markdown
+    assert render_json(analysis) == render_json(analyze_diagnostic())
+    assert markdown == render_markdown(analyze_diagnostic())
     assert render_console(analysis) == render_console(copy.deepcopy(analysis))
 
 

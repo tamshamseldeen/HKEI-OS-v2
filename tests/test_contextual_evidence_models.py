@@ -78,6 +78,17 @@ def test_evidence_role_has_exact_values() -> None:
         "COMPARISON",
         "BACKGROUND",
         "INTERPRETATION",
+        "OBJECT",
+        "METHOD",
+        "STATE",
+        "CHANGE",
+        "EFFECT",
+        "TEMPORAL_UPDATE",
+        "PROCEDURE",
+        "MEASUREMENT",
+        "PRICE",
+        "SCHEDULE",
+        "OUTCOME",
     )
 
 

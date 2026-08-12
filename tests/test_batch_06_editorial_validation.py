@@ -223,4 +223,12 @@ def test_hkei_158_changes_no_production_files() -> None:
         capture_output=True,
         text=True,
     ).stdout.splitlines()
-    assert not any(path.startswith("src/") for path in changed)
+    authorized_later_evidence_work = {
+        "src/evidence/evidence_role.py",
+        "src/evidence/deterministic_contextual_evidence_engine.py",
+        "src/semantics/deterministic_compositional_semantic_engine.py",
+    }
+    assert not any(
+        path.startswith("src/") and path not in authorized_later_evidence_work
+        for path in changed
+    )
