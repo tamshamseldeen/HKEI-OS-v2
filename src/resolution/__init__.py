@@ -8,6 +8,12 @@ from .editorial_resolution_result import EditorialResolutionResult
 from .editorial_resolution_source import EditorialResolutionSource
 from .editorial_resolution_status import EditorialResolutionStatus
 from .editorial_resolution_warning import EditorialResolutionWarning
+from .limited_editorial_resolver import (
+    EditorialFormatV2TrustSignal,
+    EditorialResolverProviderStatus,
+    LimitedEditorialResolver,
+    LimitedEditorialResolverInput,
+)
 
 __all__ = (
     "EditorialDimensionResolution",
@@ -16,4 +22,8 @@ __all__ = (
     "EditorialResolutionSource",
     "EditorialResolutionStatus",
     "EditorialResolutionWarning",
+    "EditorialFormatV2TrustSignal",
+    "EditorialResolverProviderStatus",
+    "LimitedEditorialResolver",
+    "LimitedEditorialResolverInput",
 )

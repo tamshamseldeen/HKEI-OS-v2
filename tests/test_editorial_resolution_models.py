@@ -223,8 +223,15 @@ def test_model_fields_exclude_sensitive_source_benchmark_and_provider_config() -
 
 
 def test_models_have_no_resolver_behavior_gate_openai_or_v2_execution_dependency() -> None:
-    package_files = tuple((PROJECT_ROOT / "src/resolution").glob("*.py"))
-    source = "\n".join(path.read_text(encoding="utf-8") for path in package_files)
+    model_files = (
+        "editorial_resolution_status.py", "editorial_resolution_source.py",
+        "editorial_resolution_warning.py", "editorial_dimension_resolution.py",
+        "editorial_resolution_result.py",
+    )
+    source = "\n".join(
+        (PROJECT_ROOT / "src/resolution" / name).read_text(encoding="utf-8")
+        for name in model_files
+    )
     assert "def resolve(" not in source
     assert "adjudication_gate" not in source.casefold()
     assert "openai" not in source.casefold()
