@@ -176,6 +176,13 @@ disclosure scope remains unchanged: only its bounded title, lead, body excerpt,
 and structured deterministic/semantic evidence are sent when the Gate requests
 adjudication. The pilot adds no content or retrieval.
 
+Operational failures that block authority consumption must be represented by
+canonical sanitized warnings; raw exception strings must never enter authority
+results or observations. `AUTHORITY_OBSERVATION_FAILED` means the canary could
+not safely record its required authority observation. It is an operational,
+provider-neutral condition and requires fail-closed consumption; it does not
+change editorial resolution or grant Format or Reader Intent authority.
+
 ## Observability
 
 The implementation must expose monotonic counters, partitionable by pilot

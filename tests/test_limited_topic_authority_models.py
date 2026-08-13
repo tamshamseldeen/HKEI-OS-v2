@@ -388,3 +388,48 @@ def test_new_models_have_no_gate_or_provider_dependency() -> None:
     assert "openai" not in source.lower()
     assert "semantic_adjudication_gate" not in source
     assert "LimitedEditorialResolver" not in source
+
+
+def test_authority_observation_failed_warning_has_exact_symbolic_value() -> None:
+    assert (
+        EditorialResolutionWarning.AUTHORITY_OBSERVATION_FAILED.value
+        == "AUTHORITY_OBSERVATION_FAILED"
+    )
+
+
+def test_existing_resolution_warnings_are_preserved_without_duplicates() -> None:
+    existing = {
+        "ADJUDICATION_AMBIGUITY_REMAINS", "FORMAT_FALLBACK_USED",
+        "FORMAT_V1_V2_DISAGREEMENT", "PROVIDER_UNAVAILABLE",
+        "PROVIDER_CONFIGURATION_ERROR", "PROVIDER_AUTHENTICATION_ERROR",
+        "PROVIDER_PERMISSION_ERROR", "PROVIDER_RATE_LIMITED", "PROVIDER_TIMEOUT",
+        "INCOMPLETE_ADJUDICATION_RESPONSE", "INVALID_ADJUDICATION_RESPONSE",
+        "FINGERPRINT_MISMATCH", "ILLEGAL_ADJUDICATED_CANDIDATE",
+        "FORMAT_STRUCTURE_INCOMPLETE", "FORMAT_UNRESOLVED", "TOPIC_UNRESOLVED",
+    }
+    values = tuple(item.value for item in EditorialResolutionWarning)
+    assert existing <= set(values)
+    assert len(values) == 17
+    assert len(values) == len(set(values))
+
+
+def test_operational_warning_is_usable_in_decision_and_observation() -> None:
+    warning = EditorialResolutionWarning.AUTHORITY_OBSERVATION_FAILED
+    decision = _decision(warnings=(warning,))
+    observation = _observation(warnings=(warning,))
+    assert decision.warnings == (warning,)
+    assert observation.warnings == (warning,)
+
+
+def test_operational_warning_is_symbolic_sanitized_and_authority_neutral() -> None:
+    value = EditorialResolutionWarning.AUTHORITY_OBSERVATION_FAILED.value
+    forbidden = ("exception", "article", "prompt", "response body", "api key", "format", "reader intent")
+    assert all(item not in value.lower() for item in forbidden)
+
+
+def test_specification_documents_operational_warning_contract() -> None:
+    specification = (
+        PROJECT_ROOT / "docs" / "LIMITED_TOPIC_AUTHORITY_PILOT_SPECIFICATION.md"
+    ).read_text(encoding="utf-8")
+    assert "`AUTHORITY_OBSERVATION_FAILED`" in specification
+    assert "raw exception strings must never enter" in specification
