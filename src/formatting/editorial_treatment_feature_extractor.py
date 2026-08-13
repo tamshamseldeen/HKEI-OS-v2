@@ -14,6 +14,17 @@ class EditorialTreatmentFeatureExtractor:
     _EVENT = (
         "اعلن", "اعلنت", "قرر", "قررت", "افاد", "افادت", "اصدر", "اصدرت",
         "كشف", "كشفت", "وقع", "وقعت", "شهد", "شهدت", "بيان", "تطور",
+        "دشن", "دشنت", "اطلق", "اطلقت", "افتتح", "افتتحت", "اعتمد",
+        "اعتمدت", "وافق", "وافقت", "جرى الاعلان", "تم الاعلان", "تم توقيع",
+    )
+    _EVENT_NOMINAL = (
+        "اعلان", "قرار", "بدء", "انطلاق", "توقيع", "اجتماع", "موافقة",
+        "افتتاح", "اطلاق", "اعتماد", "تحديث", "تطورات",
+    )
+    _EVENT_CONTEXT = (
+        "المجلس", "اللجنة", "الوزارة", "الهيئة", "المؤسسة", "الشركة",
+        "الادارة", "الاتحاد", "الجهة", "السلطات", "المشروع", "البرنامج",
+        "المبادرة", "الخطة", "التنفيذ", "التفاصيل", "رسميا",
     )
     _DIRECTION = (
         "ارتفع", "ارتفعت", "انخفض", "انخفضت", "زاد", "زادت", "تراجع",
@@ -28,10 +39,13 @@ class EditorialTreatmentFeatureExtractor:
     _OUTCOME_FINAL = (
         "النتيجة النهائية", "نتيجة نهائية", "انتهت", "اختتمت", "حسم",
         "حسمت", "اكتمل", "اكتملت", "نهائي", "الترتيب النهائي",
+        "انتهى", "اختتم", "انجز", "انجزت", "اكتمل العدد", "الحصيلة النهائية",
+        "الارقام النهائية", "النتائج الرسمية", "النتيجة الرسمية",
     )
     _OUTCOME_OBSERVED = (
         "فاز", "فازت", "خسر", "خسرت", "تعادل", "سجل", "حصل على",
         "جاء في المركز", "بلغت الحصيلة", "اظهرت النتائج", "اسفرت النتائج",
+        "حل في المركز", "احرز", "احرزت", "بلغ العدد", "سجلت الحصيلة",
     )
     _FUTURE = (
         "سيقام", "ستقام", "سيعقد", "ستعقد", "من المقرر", "متوقع",
@@ -48,36 +62,46 @@ class EditorialTreatmentFeatureExtractor:
     _MECHANISM = (
         "كيف يعمل", "الية عمل", "كيف تتم", "تعمل المنظومة", "يتكون النظام",
         "تمر العملية", "تجري العملية", "تعتمد الالية", "مراحل العملية",
+        "طريقة عمل", "كيفية عمل", "ما هي الالية", "يعمل النظام", "تتم العملية",
+        "يقوم النظام", "تنتقل البيانات", "مسار العملية",
     )
     _PROCESS = (
         "المرحلة الاولى", "المرحلة الثانية", "اولا", "ثانيا", "بعد ذلك", "وبعد ذلك",
         "ثم", "ينتقل", "تبدأ", "تنتهي", "خطوة",
+        "تبدا", "يتبعها", "تليها", "في البداية", "في النهاية", "مرحلة",
     )
     _GUIDANCE = (
-        "عليك", "ينبغي", "ينصح", "احرص", "تجنب", "اتبع", "اختر",
-        "تاكد", "لا تفعل", "افعل", "للقارئ",
+        "عليك", "ينبغي", "ينصح", "احرص", "اتبع",
+        "لا تفعل", "افعل", "للقارئ",
+        "يوصى", "نوصي", "يفضل", "من المهم", "من الضروري", "حافظ على",
+        "ابتعد عن", "استعمل",
     )
     _ACTION_DETAIL = (
         "اولا", "ثانيا", "خطوات", "نصائح", "قم ب", "بعد ذلك", "وبعد ذلك", "قبل ان",
         "يجب ان", "من الافضل", "اختر", "تجنب", "تاكد",
+        "ينبغي", "يوصى", "حافظ على", "استخدم", "راجع", "احذر", "احرص",
     )
     _SERVICE_ANCHOR = (
         "التقديم", "التسجيل", "الحجز", "طلب الخدمة", "الحصول على",
         "استلام", "التجديد", "التسجيل متاح", "باب التسجيل",
+        "تقديم الطلب", "رفع الطلب", "حجز موعد", "اصدار", "استخراج",
+        "الاشتراك", "الوصول الى الخدمة", "اجراءات التقديم",
     )
     _SERVICE_GROUPS = (
-        ("موعد", "الموعد", "ابتداء من", "حتى", "المهلة", "اخر موعد"),
-        ("الشروط", "يشترط", "الاهلية", "المؤهلون"),
-        ("المستندات", "الوثائق", "صورة الهوية", "اثبات"),
-        ("الموقع", "المراكز", "الفرع", "المنصة", "الكترونيا"),
+        ("موعد", "الموعد", "ابتداء من", "حتى", "المهلة", "اخر موعد", "المواعيد"),
+        ("الشروط", "يشترط", "الاهلية", "المؤهلون", "الفئات المستحقة"),
+        ("المستندات", "الوثائق", "صورة الهوية", "اثبات", "الاوراق المطلوبة"),
+        ("الموقع", "المراكز", "الفرع", "المنصة", "الكترونيا", "عبر الموقع"),
         ("الرسوم", "السعر", "التكلفة", "جنيه", "ريال", "دولار"),
-        ("متاح", "التوافر", "ساعات العمل"),
+        ("متاح", "التوافر", "ساعات العمل", "ايام العمل"),
     )
-    _CLAIM = ("ادعاء", "يزعم", "زعم", "القول المتداول", "منشور متداول", "شائعة")
-    _VERIFY = ("تحققنا", "التحقق", "راجعنا", "فحصنا", "قارن فريق التدقيق", "دققنا")
+    _CLAIM = ("ادعاء", "يزعم", "زعم", "القول المتداول", "منشور متداول", "شائعة", "معلومة متداولة", "تصريح منسوب")
+    _VERIFY = ("تحققنا", "التحقق", "راجعنا", "فحصنا", "قارن فريق التدقيق", "دققنا", "بمراجعة", "بفحص", "تتبعت المصادر", "اظهرت الوثائق")
     _VERDICT = (
         "الادعاء صحيح", "الادعاء خاطئ", "غير صحيح", "مضلل", "صحيح جزئيا",
         "لا دليل", "النتيجة: صحيح", "النتيجة: خاطئ",
+        "ثبتت صحته", "ثبت بطلانه", "تؤكد الادلة", "تنفي الادلة", "الخبر صحيح",
+        "الخبر زائف", "خلاصة التحقق",
     )
     _URGENT = ("عاجل", "الان", "منذ قليل", "قبل قليل", "تطور عاجل", "خبر عاجل")
     _UNFOLDING = (
@@ -122,12 +146,30 @@ class EditorialTreatmentFeatureExtractor:
             (headline, normalized_lead, normalized_body),
             (headline_features, lead_features, body_features),
         )
-        all_features = self._ordered(
+        aggregate = (
             set(headline_features)
             | set(lead_features)
             | set(body_features)
             | set(cross_features)
         )
+        # A single contextual cause/effect passage does not make an otherwise
+        # event-framed report an analysis.  Causal framing in the headline or
+        # sustained causal treatment outside the body remains eligible.
+        event_framed = Feature.EVENT_REPORTING in (
+            set(headline_features) | set(lead_features)
+        )
+        causal_framed = self._has(headline, self._CAUSE) or self._has(
+            headline, ("اسباب", "لماذا", "تداعيات", "اثر", "اثار")
+        )
+        if (
+            event_framed
+            and not causal_framed
+            and Feature.CAUSAL_EXPLANATION not in headline_features
+            and Feature.CAUSAL_EXPLANATION not in lead_features
+            and Feature.CAUSAL_EXPLANATION in body_features
+        ):
+            aggregate.discard(Feature.CAUSAL_EXPLANATION)
+        all_features = self._ordered(aggregate)
         warnings = (
             ("DUPLICATED_LEAD_REMOVED_FROM_BODY_ANALYSIS",)
             if duplicate_removed else ()
@@ -182,7 +224,10 @@ class EditorialTreatmentFeatureExtractor:
 
     def _detect_window(self, text: str) -> set[Feature]:
         found: set[Feature] = set()
-        if self._has(text, self._EVENT):
+        if self._has(text, self._EVENT) or (
+            self._has(text, self._EVENT_NOMINAL)
+            and self._has(text, self._EVENT_CONTEXT)
+        ):
             found.add(Feature.EVENT_REPORTING)
         if self._has(text, self._DIRECTION) and self._has(text, self._REFERENCE):
             found.add(Feature.TEMPORAL_MOVEMENT)
@@ -216,7 +261,9 @@ class EditorialTreatmentFeatureExtractor:
 
     def _contributes(self, feature: Feature, text: str) -> bool:
         groups = {
-            Feature.EVENT_REPORTING: (self._EVENT,),
+            Feature.EVENT_REPORTING: (
+                self._EVENT, self._EVENT_NOMINAL, self._EVENT_CONTEXT,
+            ),
             Feature.TEMPORAL_MOVEMENT: (self._DIRECTION, self._REFERENCE),
             Feature.COMPLETED_OUTCOME: (self._OUTCOME_FINAL, self._OUTCOME_OBSERVED),
             Feature.CAUSAL_EXPLANATION: (self._CAUSE, self._EFFECT),
@@ -290,7 +337,7 @@ class EditorialTreatmentFeatureExtractor:
     def _has(cls, text: str, terms: tuple[str, ...]) -> bool:
         return any(
             re.search(
-                rf"(?<!\w){re.escape(cls._normalize(term))}(?!\w)", text,
+                rf"(?<!\w)(?:و)?{re.escape(cls._normalize(term))}(?!\w)", text,
             ) is not None
             for term in terms
         )
