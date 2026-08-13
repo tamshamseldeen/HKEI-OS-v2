@@ -2,6 +2,8 @@
 
 from dataclasses import dataclass
 
+from src.topic.topic import Topic
+
 from .editorial_dimension_resolution import (
     EditorialDimensionResolution,
     EditorialResolutionDimension,
@@ -13,6 +15,7 @@ from .editorial_resolution_warning import EditorialResolutionWarning
 class EditorialResolutionResult:
     """Collect three independently produced dimension resolutions."""
 
+    deterministic_topic: Topic
     topic_resolution: EditorialDimensionResolution
     format_resolution: EditorialDimensionResolution
     reader_intent_resolution: EditorialDimensionResolution
@@ -22,6 +25,8 @@ class EditorialResolutionResult:
     input_fingerprint: str | None
 
     def __post_init__(self) -> None:
+        if not isinstance(self.deterministic_topic, Topic):
+            raise ValueError("deterministic_topic must be a Topic")
         expected = (
             (self.topic_resolution, EditorialResolutionDimension.TOPIC),
             (self.format_resolution, EditorialResolutionDimension.FORMAT),

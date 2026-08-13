@@ -168,6 +168,7 @@ class LimitedEditorialResolver:
         )
         warnings = self._ordered_warnings(topic.warnings + editorial_format.warnings)
         return EditorialResolutionResult(
+            deterministic_topic=inputs.deterministic_topic,
             topic_resolution=topic,
             format_resolution=editorial_format,
             reader_intent_resolution=reader_intent,

@@ -48,6 +48,7 @@ def _dimension(
 
 def _result() -> EditorialResolutionResult:
     return EditorialResolutionResult(
+        deterministic_topic=Topic.SCIENCE,
         topic_resolution=_dimension(),
         format_resolution=_dimension(
             EditorialResolutionDimension.FORMAT,
@@ -98,6 +99,60 @@ def test_dimension_and_final_result_are_frozen() -> None:
         dimension.value = Topic.HEALTH
     with pytest.raises(FrozenInstanceError):
         result.provider_used = True
+    with pytest.raises(FrozenInstanceError):
+        result.deterministic_topic = Topic.HEALTH
+
+
+def test_result_preserves_deterministic_topic_provenance() -> None:
+    result = _result()
+    assert result.deterministic_topic is Topic.SCIENCE
+    assert result.topic_resolution.value is Topic.SCIENCE
+
+
+def test_deterministic_topic_may_differ_from_resolved_topic() -> None:
+    result = EditorialResolutionResult(
+        deterministic_topic=Topic.SCIENCE,
+        topic_resolution=_dimension(
+            value=Topic.HEALTH,
+            status=EditorialResolutionStatus.ADJUDICATED_ACCEPTED,
+            source=EditorialResolutionSource.ADJUDICATION,
+            confidence_source=EditorialResolutionSource.ADJUDICATION,
+        ),
+        format_resolution=_dimension(
+            EditorialResolutionDimension.FORMAT,
+            EditorialFormat.STANDARD_NEWS,
+        ),
+        reader_intent_resolution=_dimension(
+            EditorialResolutionDimension.READER_INTENT,
+            ReaderIntent.GET_UPDATE,
+        ),
+        review_required=False,
+        warnings=(),
+        provider_used=True,
+        input_fingerprint="sha256:fixture",
+    )
+    assert result.deterministic_topic is Topic.SCIENCE
+    assert result.topic_resolution.value is Topic.HEALTH
+
+
+def test_result_rejects_invalid_deterministic_topic() -> None:
+    with pytest.raises(ValueError, match="deterministic_topic"):
+        EditorialResolutionResult(
+            deterministic_topic="SCIENCE",
+            topic_resolution=_dimension(),
+            format_resolution=_dimension(
+                EditorialResolutionDimension.FORMAT,
+                EditorialFormat.STANDARD_NEWS,
+            ),
+            reader_intent_resolution=_dimension(
+                EditorialResolutionDimension.READER_INTENT,
+                ReaderIntent.GET_UPDATE,
+            ),
+            review_required=False,
+            warnings=(),
+            provider_used=False,
+            input_fingerprint="sha256:fixture",
+        )
 
 
 @pytest.mark.parametrize("value", tuple(Topic))
@@ -244,6 +299,6 @@ def test_canonical_contract_aligns_with_specification_without_parsing_prose() ->
     assert EditorialResolutionWarning.FORMAT_FALLBACK_USED.value == "FORMAT_FALLBACK_USED"
     signature = inspect.signature(EditorialResolutionResult)
     assert tuple(signature.parameters) == (
-        "topic_resolution", "format_resolution", "reader_intent_resolution",
+        "deterministic_topic", "topic_resolution", "format_resolution", "reader_intent_resolution",
         "review_required", "warnings", "provider_used", "input_fingerprint",
     )

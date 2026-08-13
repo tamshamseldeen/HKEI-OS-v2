@@ -85,6 +85,7 @@ def _resolve(**changes):
 
 def test_no_adjudication_accepts_all_deterministic_values() -> None:
     result = _resolve()
+    assert result.deterministic_topic is Topic.SCIENCE
     assert result.topic_resolution.value is Topic.SCIENCE
     assert result.format_resolution.value is EditorialFormat.STANDARD_NEWS
     assert result.reader_intent_resolution.value is ReaderIntent.GET_UPDATE
@@ -100,6 +101,7 @@ def test_topic_only_valid_adjudication_overrides_topic() -> None:
         provider_status=ProviderStatus.SUCCESS,
         validated_adjudication_response=_response(),
     )
+    assert result.deterministic_topic is Topic.SCIENCE
     assert result.topic_resolution.value is Topic.HEALTH
     assert result.topic_resolution.status is EditorialResolutionStatus.ADJUDICATED_ACCEPTED
     assert result.topic_resolution.source is EditorialResolutionSource.ADJUDICATION
@@ -113,6 +115,7 @@ def test_format_only_valid_adjudication_overrides_format() -> None:
         provider_status=ProviderStatus.SUCCESS,
         validated_adjudication_response=_response(),
     )
+    assert result.deterministic_topic is Topic.SCIENCE
     assert result.topic_resolution.value is Topic.SCIENCE
     assert result.format_resolution.value is EditorialFormat.EXPLAINER
     assert result.format_resolution.status is EditorialResolutionStatus.ADJUDICATED_ACCEPTED
@@ -145,6 +148,7 @@ def test_topic_and_format_valid_adjudication_accepts_both() -> None:
 )
 def test_topic_provider_failures_preserve_deterministic_fallback(status, warning) -> None:
     result = _resolve(scope=AdjudicationScope.TOPIC_REQUIRED, provider_status=status)
+    assert result.deterministic_topic is Topic.SCIENCE
     assert result.topic_resolution.value is Topic.SCIENCE
     assert result.topic_resolution.status is EditorialResolutionStatus.FALLBACK_ACCEPTED
     assert result.topic_resolution.source is EditorialResolutionSource.FALLBACK
