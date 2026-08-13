@@ -1,0 +1,72 @@
+{
+  "diagnostic_type": "OFFLINE_RETAINED_EVIDENCE_ONLY",
+  "failure_stage": "POST_WRITE_VALIDATION_FAILURE",
+  "live_runner_started": true,
+  "classifier_execution": "CONFIRMED_10_CASES",
+  "semantic_execution": "CONFIRMED_10_CASES",
+  "gate_execution": "CONFIRMED_10_CASES",
+  "provider_execution": "CONFIRMED",
+  "provider_call_reconstruction": "CONFIRMED_6",
+  "provider_call_cases": [
+    "071",
+    "073",
+    "075",
+    "077",
+    "079",
+    "080"
+  ],
+  "partial_cases_processed": 10,
+  "partial_sanitized_results_found": false,
+  "complete_sanitized_results_found": true,
+  "untracked_diagnostic_files": [
+    {
+      "path": "examples/run_batch_08_full_stack_shadow_evaluation.py",
+      "purpose": "Batch 08 full-stack shadow runner",
+      "contains_source_body": false,
+      "contains_secret": false,
+      "contains_raw_prompt": false,
+      "contains_raw_provider_response": false,
+      "safe_to_preserve": true
+    },
+    {
+      "path": "tests/test_batch_08_full_stack_shadow_evaluation.py",
+      "purpose": "Offline fake-provider contract tests",
+      "contains_source_body": false,
+      "contains_secret": false,
+      "contains_raw_prompt": false,
+      "contains_raw_provider_response": false,
+      "safe_to_preserve": true
+    },
+    {
+      "path": "benchmark/batch_08/full_stack_shadow_evaluation.json",
+      "purpose": "Sanitized completed evaluation",
+      "contains_source_body": false,
+      "contains_secret": false,
+      "contains_raw_prompt": false,
+      "contains_raw_provider_response": false,
+      "safe_to_preserve": true
+    },
+    {
+      "path": "benchmark/batch_08/full_stack_shadow_evaluation.md",
+      "purpose": "Sanitized evaluation summary",
+      "contains_source_body": false,
+      "contains_secret": false,
+      "contains_raw_prompt": false,
+      "contains_raw_provider_response": false,
+      "safe_to_preserve": true
+    }
+  ],
+  "sensitive_data_findings": "NONE",
+  "batch_08_recommended_scientific_status": "EVALUATED_PREREGISTERED_HOLDOUT",
+  "duplicate_live_call_risk": "YES: a retry would repeat provider calls for 6 cases and violate the one-call-per-case/no-repeated-case policy.",
+  "artifact_failure_root_cause": "POST_RUN_VALIDATION_BUG",
+  "root_cause_detail": "The runner completed and atomically produced both sanitized artifacts. The initial absence report was made before those writes became observable.",
+  "retry_safety": "DO_NOT_RETRY_BATCH_08",
+  "required_fix_scope": "DIAGNOSTIC_FIX_ONLY",
+  "provider_calls_during_diagnostic": 0,
+  "retry_executed": false,
+  "evaluation_artifact_timestamp_utc": "2026-08-13T15:34:24.270088+00:00",
+  "evaluation_commit": "c1dfe3e6eb85338f2a1cb6e31b0e21ea67c8cd83",
+  "evaluation_provider_calls": 6,
+  "evaluation_valid_responses": 6
+}
