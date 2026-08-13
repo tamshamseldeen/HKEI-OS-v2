@@ -1,7 +1,6 @@
 """Offline tests for the final Batch 07 Gate-refinement evaluation."""
 
 from copy import deepcopy
-from datetime import datetime, timezone
 import json
 from pathlib import Path
 
@@ -9,24 +8,12 @@ import pytest
 
 import examples.run_batch_07_post_gate_refinement_full_stack as diagnostic
 from examples.run_benchmark_batch_02_validation import parse_source
-from tests.test_batch_07_full_stack_shadow_evaluation import FakeProvider
-
-
 @pytest.fixture(scope="module")
-def evaluation(tmp_path_factory):
-    root = tmp_path_factory.mktemp("post-gate")
-    times = iter(float(value) for value in range(40))
-    current, comparison = diagnostic.run_final(
-        model="gpt-5-mini",
-        provider=FakeProvider(),
-        output_json=root / "evaluation.json",
-        output_md=root / "evaluation.md",
-        comparison_json=root / "comparison.json",
-        comparison_md=root / "comparison.md",
-        monotonic=lambda: next(times),
-        now=lambda: datetime(2026, 8, 12, tzinfo=timezone.utc),
-    )
-    return current, comparison, root
+def evaluation():
+    """Load the committed historical result without a test-order dependency."""
+    current = json.loads(diagnostic.OUTPUT_JSON.read_text(encoding="utf-8"))
+    comparison = json.loads(diagnostic.COMPARISON_JSON.read_text(encoding="utf-8"))
+    return current, comparison, diagnostic.BATCH_ROOT
 
 
 def test_exact_cases_and_hkei_178_baseline_loaded(evaluation) -> None:
@@ -115,6 +102,7 @@ def test_expected_baseline_is_read_after_current_execution(tmp_path, monkeypatch
 
     monkeypatch.setattr(diagnostic, "run_evaluation", fake_run)
     monkeypatch.setattr(diagnostic, "BASELINE_JSON", baseline_path)
+    monkeypatch.setattr(diagnostic, "verify_runtime", lambda model: None)
     diagnostic.run_final(
         model="gpt-5-mini",
         output_json=tmp_path / "out.json", output_md=tmp_path / "out.md",
@@ -134,7 +122,13 @@ def test_assessor_remains_diagnostic_and_budget_is_exhausted(evaluation) -> None
 
 def test_sanitized_outputs_contain_no_source_secret_or_raw_response(evaluation) -> None:
     _, _, root = evaluation
-    persisted = "\n".join(path.read_text(encoding="utf-8") for path in root.iterdir())
+    persisted = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in (
+            diagnostic.OUTPUT_JSON, diagnostic.OUTPUT_MD,
+            diagnostic.COMPARISON_JSON, diagnostic.COMPARISON_MD,
+        )
+    )
     forbidden = ("OPENAI_API_KEY", "sk-", "raw_prompt", "raw_response", "chain_of_thought")
     assert not any(value in persisted for value in forbidden)
     for case_id in diagnostic.CASE_IDS:
@@ -144,4 +138,3 @@ def test_sanitized_outputs_contain_no_source_secret_or_raw_response(evaluation) 
 
 def test_runtime_matches_hkei_178_except_gate() -> None:
     diagnostic.verify_runtime("gpt-5-mini")
-

@@ -163,14 +163,20 @@ def analyze() -> dict[str, Any]:
     ]
     result = {
         "cases_analyzed": list(CASE_IDS),
+        # HKEI-161 is a historical checkpoint.  Read its persisted metrics
+        # instead of silently relabeling a later current artifact as HKEI-161.
         "hkei_161_metrics": {
-            key: current[key] for key in (
-                "topic_accuracy", "format_accuracy", "reader_intent_accuracy",
-                "full_case_accuracy", "cases_reaching_semantic_components",
-                "cases_with_semantic_relationships", "cases_with_primary_semantic_domains",
-                "cases_with_semantic_format_support", "cases_with_semantic_format_suppression",
-                "topic_gate_recall", "format_gate_recall",
-            )
+            "topic_accuracy": comparison["current_topic_accuracy"],
+            "format_accuracy": comparison["current_format_accuracy"],
+            "reader_intent_accuracy": comparison["current_reader_intent_accuracy"],
+            "full_case_accuracy": comparison["current_full_case_accuracy"],
+            "cases_reaching_semantic_components": comparison["current_cases_reaching_semantic_components"],
+            "cases_with_semantic_relationships": comparison["current_relationship_cases"],
+            "cases_with_primary_semantic_domains": comparison["current_primary_domains"],
+            "cases_with_semantic_format_support": comparison["current_semantic_format_support"],
+            "cases_with_semantic_format_suppression": comparison["current_semantic_format_suppression"],
+            "topic_gate_recall": comparison["current_topic_gate_recall"],
+            "format_gate_recall": comparison["current_format_gate_recall"],
         },
         "topic_mismatch_analysis": topic_analysis,
         "expected_domain_reachability": TOPIC_REACHABILITY,

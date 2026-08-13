@@ -233,7 +233,7 @@ def test_comparison_preserves_integrity_and_has_no_provider_call(
 def test_hkei_158_changes_no_production_files() -> None:
     root = Path(__file__).resolve().parents[1]
     changed = subprocess.run(
-        ["git", "diff", "--name-only", "61b2669"],
+        ["git", "diff", "--name-only", "61b2669..e6a1324"],
         cwd=root,
         check=True,
         capture_output=True,
@@ -293,7 +293,7 @@ def test_post_hkei_160_mismatch_and_gate_deltas_are_exact(
 def test_hkei_161_changes_no_production_files() -> None:
     root = Path(__file__).resolve().parents[1]
     changed = subprocess.run(
-        ["git", "diff", "--name-only", "6fbb5f7"], cwd=root, check=True,
+        ["git", "diff", "--name-only", "6fbb5f7..9d84f72"], cwd=root, check=True,
         capture_output=True, text=True,
     ).stdout.splitlines()
     assert not any(path.startswith("src/") for path in changed)

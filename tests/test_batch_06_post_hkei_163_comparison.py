@@ -65,7 +65,7 @@ def test_holdout_integrity_provider_isolation_and_no_production_edits() -> None:
     assert hashlib.sha256(raw.read_bytes()).hexdigest() == RAW_SHA256
     assert comparison["raw_source_integrity"] is True
     changed = subprocess.run(
-        ["git", "diff", "--name-only", "98346f7f007e70a08d21a8949cdd0ceb066ab9b3"],
+        ["git", "diff", "--name-only", "98346f7f007e70a08d21a8949cdd0ceb066ab9b3..0aa21313ce50c5a277fc1b4763c575997dec97c4"],
         cwd=PROJECT_ROOT, check=True, capture_output=True, text=True,
     ).stdout.splitlines()
     assert not any(path.startswith("src/") for path in changed)

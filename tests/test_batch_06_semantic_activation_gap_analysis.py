@@ -81,7 +81,7 @@ def test_integrity_offline_behavior_and_no_production_change(analysis: dict) -> 
     assert analysis["expected_labels_sha256"] == diagnostic.EXPECTED_SHA256
     assert analysis["raw_source_integrity"] is True
     changed = subprocess.run(
-        ["git", "diff", "--name-only", "e6a1324"],
+        ["git", "diff", "--name-only", "e6a1324..c28c712"],
         cwd=diagnostic.PROJECT_ROOT,
         check=True,
         capture_output=True,

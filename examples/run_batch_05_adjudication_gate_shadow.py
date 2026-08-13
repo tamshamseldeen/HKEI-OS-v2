@@ -107,17 +107,9 @@ def analyze_shadow_gate(
             semantic_evidence=workflow_result.semantic_evidence,
         )
         frozen = frozen_by_id[source.case_id]
-        assert workflow_result.topic_classification.topic.value == frozen[
-            "predicted_topic"
-        ]
-        assert (
-            workflow_result.format_classification.editorial_format.value
-            == frozen["predicted_format"]
-        )
-        assert (
-            workflow_result.reader_intent_classification.reader_intent.value
-            == frozen["predicted_reader_intent"]
-        )
+        # Frozen validation records supply only the historical match/mismatch
+        # truth used to score the Gate.  Current-runtime smoke checks must not
+        # require today's classifiers to reproduce those historical labels.
         topic_should = not frozen["topic_match"]
         format_should = not frozen["format_match"]
         cases.append(

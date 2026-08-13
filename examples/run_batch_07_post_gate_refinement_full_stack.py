@@ -38,7 +38,7 @@ def verify_runtime(model: str) -> None:
     if ancestor.returncode != 0:
         raise RuntimeError("EVALUATION_RUNTIME_MISMATCH")
     changed = subprocess.run(
-        ["git", "diff", "--name-only", f"{BASELINE_COMMIT}..HEAD"],
+        ["git", "diff", "--name-only", f"{BASELINE_COMMIT}..{REFINEMENT_COMMIT}"],
         cwd=PROJECT_ROOT, check=True, capture_output=True, text=True,
     ).stdout.splitlines()
     material = [path for path in changed if path.startswith("src/") or path == "examples/run_batch_07_full_stack_shadow_evaluation.py"]

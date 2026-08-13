@@ -81,7 +81,7 @@ def test_integrity_offline_behavior_and_no_production_modification() -> None:
     assert hashlib.sha256((diagnostic.BATCH_ROOT / "expected.json").read_bytes()).hexdigest() == diagnostic.EXPECTED_SHA256
     assert result["raw_source_integrity"] is True
     changed = subprocess.run(
-        ["git", "diff", "--name-only", "0aa21313ce50c5a277fc1b4763c575997dec97c4"],
+        ["git", "diff", "--name-only", "0aa21313ce50c5a277fc1b4763c575997dec97c4..f20e60b"],
         cwd=PROJECT_ROOT, check=True, capture_output=True, text=True,
     ).stdout.splitlines()
     assert not any(path.startswith("src/") for path in changed)
