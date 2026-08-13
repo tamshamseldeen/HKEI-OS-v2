@@ -136,13 +136,17 @@ def test_human_risk_annotations_cover_exactly_the_holdout() -> None:
     } for item in annotations)
 
 
-def test_batch_contains_registration_files_only() -> None:
+def test_batch_contains_registration_and_authorized_sanitized_outputs_only() -> None:
     files = {
         path.relative_to(BATCH_ROOT).as_posix()
         for path in BATCH_ROOT.rglob("*") if path.is_file()
     }
     assert files == {
         "manifest.json", "expected.json", "human_risk_annotations.json",
+        "full_stack_shadow_evaluation.json",
+        "full_stack_shadow_evaluation.md",
+        "execution_artifact_failure_analysis.json",
+        "execution_artifact_failure_analysis.md",
         *(f"{case_id}/source.md" for case_id in EXPECTED_IDS),
     }
 

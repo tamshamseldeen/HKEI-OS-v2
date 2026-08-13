@@ -1,0 +1,1421 @@
+{
+  "cases_evaluated": 10,
+  "case_ids": [
+    "071",
+    "072",
+    "073",
+    "074",
+    "075",
+    "076",
+    "077",
+    "078",
+    "079",
+    "080"
+  ],
+  "provider_call_cases": [
+    "071",
+    "073",
+    "075",
+    "077",
+    "079",
+    "080"
+  ],
+  "provider_calls": 6,
+  "provider_call_rate": 60.0,
+  "valid_responses": 6,
+  "invalid_responses": 0,
+  "provider_errors": 0,
+  "retry_attempts": 0,
+  "candidate_compliance": 100.0,
+  "fingerprint_integrity": 100.0,
+  "topic": {
+    "deterministic_correct": 5,
+    "deterministic_accuracy": 50.0,
+    "effective_correct": 8,
+    "effective_accuracy": 80.0,
+    "delta": 3,
+    "improvements": 3,
+    "regressions": 0,
+    "wrong_to_wrong_changes": 0,
+    "unchanged_correct": 5,
+    "unchanged_wrong": 2,
+    "changed_decisions": 3,
+    "correct_changes": 3,
+    "incorrect_changes": 0,
+    "change_precision": 100.0
+  },
+  "format": {
+    "deterministic_correct": 1,
+    "deterministic_accuracy": 10.0,
+    "effective_correct": 2,
+    "effective_accuracy": 20.0,
+    "delta": 1,
+    "improvements": 1,
+    "regressions": 0,
+    "wrong_to_wrong_changes": 0,
+    "unchanged_correct": 1,
+    "unchanged_wrong": 8,
+    "changed_decisions": 1,
+    "correct_changes": 1,
+    "incorrect_changes": 0,
+    "change_precision": 100.0
+  },
+  "reader_intent_accuracy": 10.0,
+  "deterministic_full_case_accuracy": 10.0,
+  "effective_full_case_accuracy": 10.0,
+  "full_case_delta": 0,
+  "fully_correct_cases": 1,
+  "topic_gate": {
+    "tp": 3,
+    "fp": 3,
+    "tn": 2,
+    "fn": 2,
+    "precision": 50.0,
+    "recall": 60.0
+  },
+  "format_gate": {
+    "tp": 1,
+    "fp": 0,
+    "tn": 1,
+    "fn": 8,
+    "precision": 100.0,
+    "recall": 11.11111111111111
+  },
+  "cases_with_any_sufficient_assessment": 2,
+  "cases_with_topic_sufficient": 0,
+  "cases_with_format_sufficient": 1,
+  "true_sufficient_count": 0,
+  "false_sufficient_count": 1,
+  "sufficiency_correlation": {
+    "SUFFICIENT": {},
+    "PARTIAL": {
+      "dimensions": 1,
+      "deterministic_correct": 1,
+      "provider_correct": 1,
+      "ambiguity_false": 1
+    },
+    "INSUFFICIENT": {
+      "dimensions": 2,
+      "deterministic_correct": 1,
+      "provider_correct": 2,
+      "ambiguity_false": 2,
+      "deterministic_wrong": 1
+    },
+    "CONFLICTED": {},
+    "MISSING": {
+      "dimensions": 4,
+      "deterministic_correct": 1,
+      "provider_correct": 4,
+      "ambiguity_false": 4,
+      "deterministic_wrong": 3
+    }
+  },
+  "confidence_calibration": {
+    "correct_HIGH": 7,
+    "correct_MEDIUM": 0,
+    "correct_LOW": 0,
+    "wrong_HIGH": 0,
+    "wrong_MEDIUM": 0,
+    "wrong_LOW": 0
+  },
+  "ambiguity_true_count": 0,
+  "ambiguity_false_count": 6,
+  "ambiguity_rate": 0.0,
+  "correct_when_ambiguity_true": 0,
+  "wrong_when_ambiguity_true": 0,
+  "correct_when_ambiguity_false": 6,
+  "wrong_when_ambiguity_false": 0,
+  "average_input_tokens": 1842.8333333333333,
+  "average_output_tokens": 505,
+  "average_reasoning_tokens": 96,
+  "average_non_reasoning_output_tokens": 409,
+  "average_reasoning_share": 0.1881480481878612,
+  "average_latency_ms": 9667.833333333334,
+  "median_latency_ms": 8414.0,
+  "maximum_latency_ms": 20678,
+  "shadow_topic_mutated": false,
+  "shadow_format_mutated": false,
+  "shadow_intent_mutated": false,
+  "actual_confidence_mutated": false,
+  "gate_mutated": false,
+  "resolver_used": false,
+  "scientific_status_before": "UNTOUCHED_PREREGISTERED_HOLDOUT",
+  "scientific_status_after": "EVALUATED_PREREGISTERED_HOLDOUT",
+  "evaluation_timestamp_utc": "2026-08-13T15:34:24.270088+00:00",
+  "evaluation_commit": "c1dfe3e6eb85338f2a1cb6e31b0e21ea67c8cd83",
+  "cases": [
+    {
+      "id": "071",
+      "deterministic_topic": "EDUCATION",
+      "deterministic_format": "STANDARD_NEWS",
+      "deterministic_reader_intent": "GET_UPDATE",
+      "deterministic_topic_confidence": "LOW",
+      "deterministic_format_confidence": "LOW",
+      "candidate_assessment_summary": [],
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
+        "FORMAT_LOW_CONFIDENCE"
+      ],
+      "provider_called": true,
+      "provider_error": null,
+      "provider_error_category": null,
+      "response_valid": true,
+      "adjudicated_topic": "EDUCATION",
+      "adjudicated_format": "STANDARD_NEWS",
+      "topic_confidence": "HIGH",
+      "format_confidence": "HIGH",
+      "ambiguity_remaining": false,
+      "input_tokens": 1867,
+      "output_tokens": 427,
+      "reasoning_tokens": 64,
+      "non_reasoning_output_tokens": 363,
+      "latency_ms": 9382,
+      "returned_model": "gpt-5-mini-2025-08-07",
+      "input_fingerprint": "55d1c9299ce1a495b2ef623eb1fcc974daab9f470a4cbb9ef1e898178c9ed1d2",
+      "candidate_compliant": true,
+      "fingerprint_valid": true,
+      "shadow_topic_mutated": false,
+      "shadow_format_mutated": false,
+      "shadow_intent_mutated": false,
+      "actual_confidence_mutated": false,
+      "gate_mutated": false,
+      "expected_topic": "EDUCATION",
+      "expected_format": "SERVICE",
+      "expected_reader_intent": "KNOW_ACTION",
+      "topic_match_before": true,
+      "format_match_before": false,
+      "intent_match": false,
+      "effective_shadow_topic": "EDUCATION",
+      "effective_shadow_format": "STANDARD_NEWS",
+      "effective_shadow_reader_intent": "GET_UPDATE",
+      "topic_match_after": true,
+      "format_match_after": false,
+      "full_match_before": false,
+      "full_match_after": false,
+      "topic_improvement": false,
+      "topic_regression": false,
+      "format_improvement": false,
+      "format_regression": false,
+      "format_component_present": false,
+      "semantic_format_relationship_present": false,
+      "semantic_format_support_present": false,
+      "semantic_format_suppression_present": false,
+      "expected_format_received_support": false,
+      "wrong_format_received_support": false,
+      "expected_format_reachability": "NO_SIGNAL"
+    },
+    {
+      "id": "072",
+      "deterministic_topic": "SPORTS",
+      "deterministic_format": "SERVICE",
+      "deterministic_reader_intent": "KNOW_ACTION",
+      "deterministic_topic_confidence": "MEDIUM",
+      "deterministic_format_confidence": "HIGH",
+      "candidate_assessment_summary": [
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "SPORTS"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "GUIDE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "ACTION_HAS_DEADLINE"
+          ],
+          "role_basis": [
+            "ACTION",
+            "SCHEDULE"
+          ],
+          "competing_candidates": [
+            "SERVICE"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "KNOW_ACTION",
+          "candidate_group": "CANDIDATE_TYPE_NOT_EXPLICIT",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_AFFECTED_AUDIENCE_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "AFFECTED_AUDIENCE"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "SERVICE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "ACTION_HAS_DEADLINE",
+            "CONTEXTUAL_AFFECTED_AUDIENCE_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTION",
+            "SCHEDULE",
+            "AFFECTED_AUDIENCE"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "FORMAT_STRUCTURE_INCOMPLETE"
+          ]
+        },
+        {
+          "candidate": "SPORTS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "SPORTS"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "trigger_signals": [],
+      "provider_called": false,
+      "provider_error": null,
+      "provider_error_category": null,
+      "response_valid": false,
+      "adjudicated_topic": null,
+      "adjudicated_format": null,
+      "topic_confidence": null,
+      "format_confidence": null,
+      "ambiguity_remaining": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_tokens": null,
+      "non_reasoning_output_tokens": null,
+      "latency_ms": 299,
+      "returned_model": null,
+      "input_fingerprint": null,
+      "candidate_compliant": null,
+      "fingerprint_valid": null,
+      "shadow_topic_mutated": false,
+      "shadow_format_mutated": false,
+      "shadow_intent_mutated": false,
+      "actual_confidence_mutated": false,
+      "gate_mutated": false,
+      "expected_topic": "EDUCATION",
+      "expected_format": "GUIDE",
+      "expected_reader_intent": "VERIFY_REQUIREMENTS",
+      "topic_match_before": false,
+      "format_match_before": false,
+      "intent_match": false,
+      "effective_shadow_topic": "SPORTS",
+      "effective_shadow_format": "SERVICE",
+      "effective_shadow_reader_intent": "KNOW_ACTION",
+      "topic_match_after": false,
+      "format_match_after": false,
+      "full_match_before": false,
+      "full_match_after": false,
+      "topic_improvement": false,
+      "topic_regression": false,
+      "format_improvement": false,
+      "format_regression": false,
+      "format_component_present": true,
+      "semantic_format_relationship_present": true,
+      "semantic_format_support_present": true,
+      "semantic_format_suppression_present": true,
+      "expected_format_received_support": false,
+      "wrong_format_received_support": true,
+      "expected_format_reachability": "CANDIDATE_INSUFFICIENT"
+    },
+    {
+      "id": "073",
+      "deterministic_topic": "BUSINESS",
+      "deterministic_format": "STANDARD_NEWS",
+      "deterministic_reader_intent": "GET_UPDATE",
+      "deterministic_topic_confidence": "MEDIUM",
+      "deterministic_format_confidence": "MEDIUM",
+      "candidate_assessment_summary": [
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "provider_called": true,
+      "provider_error": null,
+      "provider_error_category": null,
+      "response_valid": true,
+      "adjudicated_topic": "BUSINESS",
+      "adjudicated_format": "STANDARD_NEWS",
+      "topic_confidence": "HIGH",
+      "format_confidence": "HIGH",
+      "ambiguity_remaining": false,
+      "input_tokens": 1662,
+      "output_tokens": 398,
+      "reasoning_tokens": 64,
+      "non_reasoning_output_tokens": 334,
+      "latency_ms": 5369,
+      "returned_model": "gpt-5-mini-2025-08-07",
+      "input_fingerprint": "9c33e2f93fd5c5168030b4a0c253a79f546c08aeecaffbbb44c8ecdfc54951f7",
+      "candidate_compliant": true,
+      "fingerprint_valid": true,
+      "shadow_topic_mutated": false,
+      "shadow_format_mutated": false,
+      "shadow_intent_mutated": false,
+      "actual_confidence_mutated": false,
+      "gate_mutated": false,
+      "expected_topic": "BUSINESS",
+      "expected_format": "TREND_UPDATE",
+      "expected_reader_intent": "FOLLOW_DEVELOPMENT",
+      "topic_match_before": true,
+      "format_match_before": false,
+      "intent_match": false,
+      "effective_shadow_topic": "BUSINESS",
+      "effective_shadow_format": "STANDARD_NEWS",
+      "effective_shadow_reader_intent": "GET_UPDATE",
+      "topic_match_after": true,
+      "format_match_after": false,
+      "full_match_before": false,
+      "full_match_after": false,
+      "topic_improvement": false,
+      "topic_regression": false,
+      "format_improvement": false,
+      "format_regression": false,
+      "format_component_present": false,
+      "semantic_format_relationship_present": false,
+      "semantic_format_support_present": false,
+      "semantic_format_suppression_present": false,
+      "expected_format_received_support": false,
+      "wrong_format_received_support": false,
+      "expected_format_reachability": "NO_SIGNAL"
+    },
+    {
+      "id": "074",
+      "deterministic_topic": "ECONOMY",
+      "deterministic_format": "STANDARD_NEWS",
+      "deterministic_reader_intent": "GET_UPDATE",
+      "deterministic_topic_confidence": "HIGH",
+      "deterministic_format_confidence": "MEDIUM",
+      "candidate_assessment_summary": [
+        {
+          "candidate": "ECONOMY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "INDICATOR_DESCRIBES_DOMAIN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "MEASUREMENT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "trigger_signals": [],
+      "provider_called": false,
+      "provider_error": null,
+      "provider_error_category": null,
+      "response_valid": false,
+      "adjudicated_topic": null,
+      "adjudicated_format": null,
+      "topic_confidence": null,
+      "format_confidence": null,
+      "ambiguity_remaining": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_tokens": null,
+      "non_reasoning_output_tokens": null,
+      "latency_ms": 324,
+      "returned_model": null,
+      "input_fingerprint": null,
+      "candidate_compliant": null,
+      "fingerprint_valid": null,
+      "shadow_topic_mutated": false,
+      "shadow_format_mutated": false,
+      "shadow_intent_mutated": false,
+      "actual_confidence_mutated": false,
+      "gate_mutated": false,
+      "expected_topic": "ECONOMY",
+      "expected_format": "TREND_UPDATE",
+      "expected_reader_intent": "FOLLOW_DEVELOPMENT",
+      "topic_match_before": true,
+      "format_match_before": false,
+      "intent_match": false,
+      "effective_shadow_topic": "ECONOMY",
+      "effective_shadow_format": "STANDARD_NEWS",
+      "effective_shadow_reader_intent": "GET_UPDATE",
+      "topic_match_after": true,
+      "format_match_after": false,
+      "full_match_before": false,
+      "full_match_after": false,
+      "topic_improvement": false,
+      "topic_regression": false,
+      "format_improvement": false,
+      "format_regression": false,
+      "format_component_present": false,
+      "semantic_format_relationship_present": false,
+      "semantic_format_support_present": false,
+      "semantic_format_suppression_present": false,
+      "expected_format_received_support": false,
+      "wrong_format_received_support": false,
+      "expected_format_reachability": "NO_SIGNAL"
+    },
+    {
+      "id": "075",
+      "deterministic_topic": "TECHNOLOGY",
+      "deterministic_format": "GUIDE",
+      "deterministic_reader_intent": "VERIFY_REQUIREMENTS",
+      "deterministic_topic_confidence": "MEDIUM",
+      "deterministic_format_confidence": "MEDIUM",
+      "candidate_assessment_summary": [
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [
+            "TECHNOLOGY"
+          ],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "DUPLICATE_EVIDENCE_DISCOUNTED",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_TECHNOLOGY_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "DUPLICATE_EVIDENCE_DISCOUNTED"
+          ]
+        }
+      ],
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "MULTIPLE_COMPETING_TOPIC_SIGNALS",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+      ],
+      "provider_called": true,
+      "provider_error": null,
+      "provider_error_category": null,
+      "response_valid": true,
+      "adjudicated_topic": "TECHNOLOGY",
+      "adjudicated_format": "GUIDE",
+      "topic_confidence": "HIGH",
+      "format_confidence": "MEDIUM",
+      "ambiguity_remaining": false,
+      "input_tokens": 1901,
+      "output_tokens": 546,
+      "reasoning_tokens": 128,
+      "non_reasoning_output_tokens": 418,
+      "latency_ms": 7446,
+      "returned_model": "gpt-5-mini-2025-08-07",
+      "input_fingerprint": "b1a46e93f2c313f85ab8862f4e4a951c69193d437690062629c613e1dcd332df",
+      "candidate_compliant": true,
+      "fingerprint_valid": true,
+      "shadow_topic_mutated": false,
+      "shadow_format_mutated": false,
+      "shadow_intent_mutated": false,
+      "actual_confidence_mutated": false,
+      "gate_mutated": false,
+      "expected_topic": "TECHNOLOGY",
+      "expected_format": "EXPLAINER",
+      "expected_reader_intent": "UNDERSTAND_EVENT",
+      "topic_match_before": true,
+      "format_match_before": false,
+      "intent_match": false,
+      "effective_shadow_topic": "TECHNOLOGY",
+      "effective_shadow_format": "GUIDE",
+      "effective_shadow_reader_intent": "VERIFY_REQUIREMENTS",
+      "topic_match_after": true,
+      "format_match_after": false,
+      "full_match_before": false,
+      "full_match_after": false,
+      "topic_improvement": false,
+      "topic_regression": false,
+      "format_improvement": false,
+      "format_regression": false,
+      "format_component_present": false,
+      "semantic_format_relationship_present": false,
+      "semantic_format_support_present": false,
+      "semantic_format_suppression_present": false,
+      "expected_format_received_support": false,
+      "wrong_format_received_support": false,
+      "expected_format_reachability": "NO_SIGNAL"
+    },
+    {
+      "id": "076",
+      "deterministic_topic": "SCIENCE",
+      "deterministic_format": "STANDARD_NEWS",
+      "deterministic_reader_intent": "GET_UPDATE",
+      "deterministic_topic_confidence": "HIGH",
+      "deterministic_format_confidence": "MEDIUM",
+      "candidate_assessment_summary": [
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [
+            "SCIENCE"
+          ],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "SCIENCE",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_SCIENCE_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "MULTIPLE_COMPETING_TOPIC_SIGNALS"
+      ],
+      "provider_called": false,
+      "provider_error": null,
+      "provider_error_category": null,
+      "response_valid": false,
+      "adjudicated_topic": null,
+      "adjudicated_format": null,
+      "topic_confidence": null,
+      "format_confidence": null,
+      "ambiguity_remaining": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_tokens": null,
+      "non_reasoning_output_tokens": null,
+      "latency_ms": 248,
+      "returned_model": null,
+      "input_fingerprint": null,
+      "candidate_compliant": null,
+      "fingerprint_valid": null,
+      "shadow_topic_mutated": false,
+      "shadow_format_mutated": false,
+      "shadow_intent_mutated": false,
+      "actual_confidence_mutated": false,
+      "gate_mutated": false,
+      "expected_topic": "TECHNOLOGY",
+      "expected_format": "ANALYSIS",
+      "expected_reader_intent": "UNDERSTAND_IMPACT",
+      "topic_match_before": false,
+      "format_match_before": false,
+      "intent_match": false,
+      "effective_shadow_topic": "SCIENCE",
+      "effective_shadow_format": "STANDARD_NEWS",
+      "effective_shadow_reader_intent": "GET_UPDATE",
+      "topic_match_after": false,
+      "format_match_after": false,
+      "full_match_before": false,
+      "full_match_after": false,
+      "topic_improvement": false,
+      "topic_regression": false,
+      "format_improvement": false,
+      "format_regression": false,
+      "format_component_present": false,
+      "semantic_format_relationship_present": false,
+      "semantic_format_support_present": false,
+      "semantic_format_suppression_present": false,
+      "expected_format_received_support": false,
+      "wrong_format_received_support": false,
+      "expected_format_reachability": "NO_SIGNAL"
+    },
+    {
+      "id": "077",
+      "deterministic_topic": "GENERAL",
+      "deterministic_format": "GUIDE",
+      "deterministic_reader_intent": "VERIFY_REQUIREMENTS",
+      "deterministic_topic_confidence": "LOW",
+      "deterministic_format_confidence": "MEDIUM",
+      "candidate_assessment_summary": [
+        {
+          "candidate": "ANALYSIS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "FORMAT_STRUCTURE_INCOMPLETE",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "UNDERSTAND_IMPACT",
+          "candidate_group": "CANDIDATE_TYPE_NOT_EXPLICIT",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        }
+      ],
+      "gate_scope": "TOPIC_AND_FORMAT_REQUIRED",
+      "topic_required": true,
+      "format_required": true,
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+        "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+      ],
+      "provider_called": true,
+      "provider_error": null,
+      "provider_error_category": null,
+      "response_valid": true,
+      "adjudicated_topic": "WORLD",
+      "adjudicated_format": "STANDARD_NEWS",
+      "topic_confidence": "HIGH",
+      "format_confidence": "HIGH",
+      "ambiguity_remaining": false,
+      "input_tokens": 1788,
+      "output_tokens": 630,
+      "reasoning_tokens": 128,
+      "non_reasoning_output_tokens": 502,
+      "latency_ms": 9547,
+      "returned_model": "gpt-5-mini-2025-08-07",
+      "input_fingerprint": "f573c28c70ebcc7e224d28eeb63b4127fe2d84d2d6cd7fc1f988a08b228fbff6",
+      "candidate_compliant": true,
+      "fingerprint_valid": true,
+      "shadow_topic_mutated": false,
+      "shadow_format_mutated": false,
+      "shadow_intent_mutated": false,
+      "actual_confidence_mutated": false,
+      "gate_mutated": false,
+      "expected_topic": "WORLD",
+      "expected_format": "STANDARD_NEWS",
+      "expected_reader_intent": "GET_UPDATE",
+      "topic_match_before": false,
+      "format_match_before": false,
+      "intent_match": false,
+      "effective_shadow_topic": "WORLD",
+      "effective_shadow_format": "STANDARD_NEWS",
+      "effective_shadow_reader_intent": "VERIFY_REQUIREMENTS",
+      "topic_match_after": true,
+      "format_match_after": true,
+      "full_match_before": false,
+      "full_match_after": false,
+      "topic_improvement": true,
+      "topic_regression": false,
+      "format_improvement": true,
+      "format_regression": false,
+      "format_component_present": true,
+      "semantic_format_relationship_present": true,
+      "semantic_format_support_present": true,
+      "semantic_format_suppression_present": false,
+      "expected_format_received_support": false,
+      "wrong_format_received_support": false,
+      "expected_format_reachability": "RELATIONSHIP_PRESENT"
+    },
+    {
+      "id": "078",
+      "deterministic_topic": "TECHNOLOGY",
+      "deterministic_format": "SERVICE",
+      "deterministic_reader_intent": "KNOW_ACTION",
+      "deterministic_topic_confidence": "MEDIUM",
+      "deterministic_format_confidence": "HIGH",
+      "candidate_assessment_summary": [
+        {
+          "candidate": "ANALYSIS",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_CONSEQUENCE_CONTEXT_PATTERN",
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "EFFECT",
+            "PREDICTION"
+          ],
+          "competing_candidates": [
+            "SERVICE"
+          ],
+          "warnings": [
+            "FORMAT_STRUCTURE_INCOMPLETE",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "BUSINESS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_BUSINESS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTOR"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "ACTOR_DOMINATED",
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "ECONOMY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "GOVERNMENT",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "GUIDE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "ACTION_HAS_DEADLINE"
+          ],
+          "role_basis": [
+            "ACTION",
+            "SCHEDULE"
+          ],
+          "competing_candidates": [
+            "SERVICE",
+            "ANALYSIS"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "SERVICE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "ACTION_HAS_DEADLINE"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTION",
+            "SCHEDULE"
+          ],
+          "competing_candidates": [
+            "ANALYSIS"
+          ],
+          "warnings": [
+            "FORMAT_STRUCTURE_INCOMPLETE",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "TECHNOLOGY",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "CONFLICTING",
+          "strength": "STRONG",
+          "sufficiency": "CONFLICTED",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_TECHNOLOGY_CONTEXT_PHRASE"
+          ],
+          "suppressing_relationship_types": [
+            "SUBJECT_BELONGS_TO_DOMAIN"
+          ],
+          "role_basis": [
+            "SUBJECT",
+            "DOMAIN"
+          ],
+          "competing_candidates": [
+            "ECONOMY"
+          ],
+          "warnings": [
+            "SUPPORT_SUPPRESSION_CONFLICT",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "DUPLICATE_EVIDENCE_DISCOUNTED",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "UNDERSTAND_IMPACT",
+          "candidate_group": "CANDIDATE_TYPE_NOT_EXPLICIT",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_CONSEQUENCE_CONTEXT_PATTERN",
+            "CONTEXTUAL_PREDICTION_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "EFFECT",
+            "PREDICTION"
+          ],
+          "competing_candidates": [],
+          "warnings": []
+        }
+      ],
+      "gate_scope": "NOT_REQUIRED",
+      "topic_required": false,
+      "format_required": false,
+      "trigger_signals": [
+        "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+      ],
+      "provider_called": false,
+      "provider_error": null,
+      "provider_error_category": null,
+      "response_valid": false,
+      "adjudicated_topic": null,
+      "adjudicated_format": null,
+      "topic_confidence": null,
+      "format_confidence": null,
+      "ambiguity_remaining": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_tokens": null,
+      "non_reasoning_output_tokens": null,
+      "latency_ms": 278,
+      "returned_model": null,
+      "input_fingerprint": null,
+      "candidate_compliant": null,
+      "fingerprint_valid": null,
+      "shadow_topic_mutated": false,
+      "shadow_format_mutated": false,
+      "shadow_intent_mutated": false,
+      "actual_confidence_mutated": false,
+      "gate_mutated": false,
+      "expected_topic": "TECHNOLOGY",
+      "expected_format": "SERVICE",
+      "expected_reader_intent": "KNOW_ACTION",
+      "topic_match_before": true,
+      "format_match_before": true,
+      "intent_match": true,
+      "effective_shadow_topic": "TECHNOLOGY",
+      "effective_shadow_format": "SERVICE",
+      "effective_shadow_reader_intent": "KNOW_ACTION",
+      "topic_match_after": true,
+      "format_match_after": true,
+      "full_match_before": true,
+      "full_match_after": true,
+      "topic_improvement": false,
+      "topic_regression": false,
+      "format_improvement": false,
+      "format_regression": false,
+      "format_component_present": true,
+      "semantic_format_relationship_present": true,
+      "semantic_format_support_present": true,
+      "semantic_format_suppression_present": true,
+      "expected_format_received_support": true,
+      "wrong_format_received_support": false,
+      "expected_format_reachability": null
+    },
+    {
+      "id": "079",
+      "deterministic_topic": "GENERAL",
+      "deterministic_format": "GUIDE",
+      "deterministic_reader_intent": "VERIFY_REQUIREMENTS",
+      "deterministic_topic_confidence": "LOW",
+      "deterministic_format_confidence": "HIGH",
+      "candidate_assessment_summary": [],
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "TOPIC_LOW_CONFIDENCE",
+        "TOPIC_GENERAL_FALLBACK",
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP"
+      ],
+      "provider_called": true,
+      "provider_error": null,
+      "provider_error_category": null,
+      "response_valid": true,
+      "adjudicated_topic": "SCIENCE",
+      "adjudicated_format": "GUIDE",
+      "topic_confidence": "HIGH",
+      "format_confidence": "HIGH",
+      "ambiguity_remaining": false,
+      "input_tokens": 1888,
+      "output_tokens": 488,
+      "reasoning_tokens": 128,
+      "non_reasoning_output_tokens": 360,
+      "latency_ms": 5585,
+      "returned_model": "gpt-5-mini-2025-08-07",
+      "input_fingerprint": "9af206fad89e2d03e2207a4bd9202b84b7148b287fe122441a86f2a08f6df7cf",
+      "candidate_compliant": true,
+      "fingerprint_valid": true,
+      "shadow_topic_mutated": false,
+      "shadow_format_mutated": false,
+      "shadow_intent_mutated": false,
+      "actual_confidence_mutated": false,
+      "gate_mutated": false,
+      "expected_topic": "SCIENCE",
+      "expected_format": "EXPLAINER",
+      "expected_reader_intent": "UNDERSTAND_EVENT",
+      "topic_match_before": false,
+      "format_match_before": false,
+      "intent_match": false,
+      "effective_shadow_topic": "SCIENCE",
+      "effective_shadow_format": "GUIDE",
+      "effective_shadow_reader_intent": "VERIFY_REQUIREMENTS",
+      "topic_match_after": true,
+      "format_match_after": false,
+      "full_match_before": false,
+      "full_match_after": false,
+      "topic_improvement": true,
+      "topic_regression": false,
+      "format_improvement": false,
+      "format_regression": false,
+      "format_component_present": false,
+      "semantic_format_relationship_present": false,
+      "semantic_format_support_present": false,
+      "semantic_format_suppression_present": false,
+      "expected_format_received_support": false,
+      "wrong_format_received_support": false,
+      "expected_format_reachability": "NO_SIGNAL"
+    },
+    {
+      "id": "080",
+      "deterministic_topic": "SPORTS",
+      "deterministic_format": "RESULT_REPORT",
+      "deterministic_reader_intent": "FIND_RESULT",
+      "deterministic_topic_confidence": "MEDIUM",
+      "deterministic_format_confidence": "HIGH",
+      "candidate_assessment_summary": [
+        {
+          "candidate": "EDUCATION",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [
+            "ACTION_TARGETS_OBJECT"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "ACTION",
+            "OBJECT"
+          ],
+          "competing_candidates": [
+            "SPORTS"
+          ],
+          "warnings": [
+            "SUBJECT_ROLE_UNRESOLVED",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "KNOW_ACTION",
+          "candidate_group": "CANDIDATE_TYPE_NOT_EXPLICIT",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_REQUIREMENT_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "REQUIREMENT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT"
+          ]
+        },
+        {
+          "candidate": "RESULT_REPORT",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "STRONG",
+          "sufficiency": "SUFFICIENT",
+          "supporting_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [
+            "SERVICE"
+          ],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "SERVICE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_REQUIREMENT_CONTEXT_PATTERN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "REQUIREMENT"
+          ],
+          "competing_candidates": [
+            "RESULT_REPORT"
+          ],
+          "warnings": [
+            "FORMAT_STRUCTURE_INCOMPLETE",
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "COMPETING_CANDIDATE"
+          ]
+        },
+        {
+          "candidate": "SPORTS",
+          "candidate_group": "TOPIC_LIKE",
+          "direction": "SUPPORT",
+          "strength": "MODERATE",
+          "sufficiency": "PARTIAL",
+          "supporting_relationship_types": [
+            "CONTEXTUAL_GENERIC_SPORTS_TOKEN"
+          ],
+          "suppressing_relationship_types": [],
+          "role_basis": [
+            "SUBJECT"
+          ],
+          "competing_candidates": [],
+          "warnings": [
+            "INSUFFICIENT_INDEPENDENT_SUPPORT",
+            "DUPLICATE_EVIDENCE_DISCOUNTED"
+          ]
+        },
+        {
+          "candidate": "TREND_UPDATE",
+          "candidate_group": "FORMAT_LIKE",
+          "direction": "SUPPRESS",
+          "strength": "WEAK",
+          "sufficiency": "INSUFFICIENT",
+          "supporting_relationship_types": [],
+          "suppressing_relationship_types": [
+            "EVENT_HAS_OUTCOME"
+          ],
+          "role_basis": [
+            "EVENT",
+            "OUTCOME"
+          ],
+          "competing_candidates": [
+            "RESULT_REPORT",
+            "SERVICE"
+          ],
+          "warnings": [
+            "COMPETING_CANDIDATE"
+          ]
+        }
+      ],
+      "gate_scope": "TOPIC_REQUIRED",
+      "topic_required": true,
+      "format_required": false,
+      "trigger_signals": [
+        "NO_PRIMARY_SEMANTIC_DOMAIN",
+        "MULTIPLE_COMPETING_TOPIC_SIGNALS",
+        "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN",
+        "CONTEXTUAL_FORMAT_SUPPORT_NOT_PROMOTED"
+      ],
+      "provider_called": true,
+      "provider_error": null,
+      "provider_error_category": null,
+      "response_valid": true,
+      "adjudicated_topic": "EDUCATION",
+      "adjudicated_format": "RESULT_REPORT",
+      "topic_confidence": "HIGH",
+      "format_confidence": "HIGH",
+      "ambiguity_remaining": false,
+      "input_tokens": 1951,
+      "output_tokens": 541,
+      "reasoning_tokens": 64,
+      "non_reasoning_output_tokens": 477,
+      "latency_ms": 20678,
+      "returned_model": "gpt-5-mini-2025-08-07",
+      "input_fingerprint": "e649c5c8216960bf1334d2a34ab4ff348c01a25337d0777e64e3cd73236a396e",
+      "candidate_compliant": true,
+      "fingerprint_valid": true,
+      "shadow_topic_mutated": false,
+      "shadow_format_mutated": false,
+      "shadow_intent_mutated": false,
+      "actual_confidence_mutated": false,
+      "gate_mutated": false,
+      "expected_topic": "EDUCATION",
+      "expected_format": "GUIDE",
+      "expected_reader_intent": "VERIFY_REQUIREMENTS",
+      "topic_match_before": false,
+      "format_match_before": false,
+      "intent_match": false,
+      "effective_shadow_topic": "EDUCATION",
+      "effective_shadow_format": "RESULT_REPORT",
+      "effective_shadow_reader_intent": "FIND_RESULT",
+      "topic_match_after": true,
+      "format_match_after": false,
+      "full_match_before": false,
+      "full_match_after": false,
+      "topic_improvement": true,
+      "topic_regression": false,
+      "format_improvement": false,
+      "format_regression": false,
+      "format_component_present": true,
+      "semantic_format_relationship_present": true,
+      "semantic_format_support_present": true,
+      "semantic_format_suppression_present": true,
+      "expected_format_received_support": false,
+      "wrong_format_received_support": true,
+      "expected_format_reachability": "RELATIONSHIP_PRESENT"
+    }
+  ],
+  "evaluation_status": "WEAK",
+  "product_readiness_decision": "REFINE_GATE_BEFORE_RESOLVER",
+  "format_mismatch_cases": [
+    "071",
+    "072",
+    "073",
+    "074",
+    "075",
+    "076",
+    "077",
+    "079",
+    "080"
+  ],
+  "format_reachability": {
+    "071": "NO_SIGNAL",
+    "072": "CANDIDATE_INSUFFICIENT",
+    "073": "NO_SIGNAL",
+    "074": "NO_SIGNAL",
+    "075": "NO_SIGNAL",
+    "076": "NO_SIGNAL",
+    "077": "RELATIONSHIP_PRESENT",
+    "079": "NO_SIGNAL",
+    "080": "RELATIONSHIP_PRESENT"
+  },
+  "cases_with_semantic_format_relationships": 4,
+  "cases_with_semantic_format_support": 4,
+  "cases_with_semantic_format_suppression": 3,
+  "expected_format_semantic_support_cases": [
+    "078"
+  ],
+  "wrong_format_semantic_support_cases": [
+    "072",
+    "080"
+  ],
+  "format_component_to_relationship_conversion": 100.0,
+  "format_relationship_to_support_conversion": 100.0,
+  "expected_format_reachable_cases": 3,
+  "expected_format_semantic_reachability_rate": 33.33333333333333,
+  "batch_07_failure_pattern_comparison": "POST_HOC_AGGREGATE_ONLY_NO_CAUSAL_CLAIM",
+  "format_generalization_decision": "FORMAT_FIX_PARTIALLY_GENERALIZED",
+  "product_decision": "REDESIGN_FORMAT_SUBSYSTEM"
+}
