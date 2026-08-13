@@ -15,6 +15,7 @@ from .limited_editorial_resolver import (
     LimitedEditorialResolverInput,
 )
 from .limited_topic_authority_config import LimitedTopicAuthorityConfig
+from .limited_topic_authority_applicator import LimitedTopicAuthorityApplicator
 from .resolver_authority_mode import ResolverAuthorityMode
 from .topic_authority_audit_record import TopicAuthorityAuditRecord, TopicAuthorityAuditStatus
 from .topic_authority_block_reason import TopicAuthorityBlockReason
@@ -34,6 +35,7 @@ __all__ = (
     "LimitedEditorialResolver",
     "LimitedEditorialResolverInput",
     "LimitedTopicAuthorityConfig",
+    "LimitedTopicAuthorityApplicator",
     "ResolverAuthorityMode",
     "TopicAuthorityAuditRecord",
     "TopicAuthorityAuditStatus",

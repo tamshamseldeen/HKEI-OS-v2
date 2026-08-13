@@ -16,7 +16,7 @@ class TopicAuthorityDecision:
     """Store caller-calculated Topic authority fields without applying them."""
 
     deterministic_topic: Topic
-    resolved_topic: Topic
+    resolved_topic: Topic | None
     authoritative_topic: Topic
     authority_applied: bool
     authority_source: EditorialResolutionSource
@@ -25,13 +25,15 @@ class TopicAuthorityDecision:
     ambiguity_remaining: bool
     review_required: bool
     warnings: tuple[EditorialResolutionWarning, ...]
-    input_fingerprint: str
+    input_fingerprint: str | None
     block_reasons: tuple[TopicAuthorityBlockReason, ...] = ()
 
     def __post_init__(self) -> None:
-        for name in ("deterministic_topic", "resolved_topic", "authoritative_topic"):
+        for name in ("deterministic_topic", "authoritative_topic"):
             if not isinstance(getattr(self, name), Topic):
                 raise ValueError(f"{name} must be a Topic")
+        if self.resolved_topic is not None and not isinstance(self.resolved_topic, Topic):
+            raise ValueError("resolved_topic must be a Topic or None")
         if not isinstance(self.authority_applied, bool):
             raise ValueError("authority_applied must be a boolean")
         if not isinstance(self.authority_source, EditorialResolutionSource):
@@ -62,5 +64,9 @@ class TopicAuthorityDecision:
             raise ValueError("authority-applied decisions require ADJUDICATION source")
         if self.authority_applied and self.authoritative_topic is not self.resolved_topic:
             raise ValueError("authority-applied decisions require the resolved Topic")
-        if not isinstance(self.input_fingerprint, str) or not self.input_fingerprint.strip():
-            raise ValueError("input_fingerprint must be a non-empty string")
+        if self.input_fingerprint is not None and (
+            not isinstance(self.input_fingerprint, str)
+            or not self.input_fingerprint.strip()
+            or self.input_fingerprint != self.input_fingerprint.strip()
+        ):
+            raise ValueError("input_fingerprint must be a normalized string or None")
