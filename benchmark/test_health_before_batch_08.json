@@ -1,0 +1,235 @@
+{
+  "suite_counts": {
+    "passed": 2008,
+    "failed": 11,
+    "errors": 9,
+    "skipped": 9
+  },
+  "issues": [
+    {
+      "test_path": "tests/test_batch_05_adjudication_gate_shadow.py",
+      "test_name": "test_workflow_and_gate_run_once_per_case_without_truth_inputs",
+      "failure_type": "ASSERTION_FAILURE",
+      "first_relevant_assertion_or_exception": "AssertionError: current Format differs from frozen predicted_format",
+      "module_involved": "examples.run_batch_05_adjudication_gate_shadow",
+      "phase": "TEST BODY",
+      "classification": "PRE_EXISTING_BASELINE_FAILURE"
+    },
+    {
+      "test_path": "tests/test_batch_05_adjudication_gate_shadow.py",
+      "test_name": "test_shadow_never_reads_human_risk_annotations",
+      "failure_type": "ASSERTION_FAILURE",
+      "first_relevant_assertion_or_exception": "AssertionError: current Format differs from frozen predicted_format",
+      "module_involved": "examples.run_batch_05_adjudication_gate_shadow",
+      "phase": "TEST BODY",
+      "classification": "PRE_EXISTING_BASELINE_FAILURE"
+    },
+    {
+      "test_path": "tests/test_batch_05_adjudication_gate_shadow.py",
+      "test_name": "test_shadow_uses_no_api_network_or_environment",
+      "failure_type": "ASSERTION_FAILURE",
+      "first_relevant_assertion_or_exception": "AssertionError: current Format differs from frozen predicted_format",
+      "module_involved": "examples.run_batch_05_adjudication_gate_shadow",
+      "phase": "TEST BODY",
+      "classification": "PRE_EXISTING_BASELINE_FAILURE"
+    },
+    {
+      "test_path": "tests/test_batch_06_activation_to_decision_gap_analysis.py",
+      "test_name": "test_exactly_ten_cases_and_hkei_161_metrics_are_reproduced",
+      "failure_type": "ASSERTION_FAILURE",
+      "first_relevant_assertion_or_exception": "AssertionError: format_gate_recall 33.3333 != 50.0",
+      "module_involved": "examples.run_batch_06_activation_to_decision_gap_analysis",
+      "phase": "TEST BODY",
+      "classification": "PRE_EXISTING_BASELINE_FAILURE"
+    },
+    {
+      "test_path": "tests/test_batch_06_editorial_validation.py",
+      "test_name": "test_hkei_158_changes_no_production_files",
+      "failure_type": "ASSERTION_FAILURE",
+      "first_relevant_assertion_or_exception": "AssertionError: later committed src changes violate historical diff assertion",
+      "module_involved": "git history integrity diagnostic",
+      "phase": "TEST BODY",
+      "classification": "PRE_EXISTING_BASELINE_FAILURE"
+    },
+    {
+      "test_path": "tests/test_batch_06_editorial_validation.py",
+      "test_name": "test_hkei_161_changes_no_production_files",
+      "failure_type": "ASSERTION_FAILURE",
+      "first_relevant_assertion_or_exception": "AssertionError: later committed src changes violate historical diff assertion",
+      "module_involved": "git history integrity diagnostic",
+      "phase": "TEST BODY",
+      "classification": "PRE_EXISTING_BASELINE_FAILURE"
+    },
+    {
+      "test_path": "tests/test_batch_06_post_hkei_163_comparison.py",
+      "test_name": "test_holdout_integrity_provider_isolation_and_no_production_edits",
+      "failure_type": "ASSERTION_FAILURE",
+      "first_relevant_assertion_or_exception": "AssertionError: later committed src changes violate historical diff assertion",
+      "module_involved": "git history integrity diagnostic",
+      "phase": "TEST BODY",
+      "classification": "PRE_EXISTING_BASELINE_FAILURE"
+    },
+    {
+      "test_path": "tests/test_batch_06_semantic_activation_gap_analysis.py",
+      "test_name": "test_integrity_offline_behavior_and_no_production_change",
+      "failure_type": "ASSERTION_FAILURE",
+      "first_relevant_assertion_or_exception": "AssertionError: later committed src changes violate historical diff assertion",
+      "module_involved": "git history integrity diagnostic",
+      "phase": "TEST BODY",
+      "classification": "PRE_EXISTING_BASELINE_FAILURE"
+    },
+    {
+      "test_path": "tests/test_batch_06_semantic_directionality_sufficiency_analysis.py",
+      "test_name": "test_integrity_offline_behavior_and_no_production_modification",
+      "failure_type": "ASSERTION_FAILURE",
+      "first_relevant_assertion_or_exception": "AssertionError: later committed src changes violate historical diff assertion",
+      "module_involved": "git history integrity diagnostic",
+      "phase": "TEST BODY",
+      "classification": "PRE_EXISTING_BASELINE_FAILURE"
+    },
+    {
+      "test_path": "tests/test_batch_07_post_gate_refinement_full_stack.py",
+      "test_name": "test_expected_baseline_is_read_after_current_execution",
+      "failure_type": "RUNTIME_CONTRACT_FAILURE",
+      "first_relevant_assertion_or_exception": "RuntimeError: EVALUATION_RUNTIME_MISMATCH",
+      "module_involved": "examples.run_batch_07_post_gate_refinement_full_stack.verify_runtime",
+      "phase": "TEST BODY",
+      "classification": "STALE_DIAGNOSTIC_ASSERTION"
+    },
+    {
+      "test_path": "tests/test_batch_07_post_gate_refinement_full_stack.py",
+      "test_name": "test_runtime_matches_hkei_178_except_gate",
+      "failure_type": "RUNTIME_CONTRACT_FAILURE",
+      "first_relevant_assertion_or_exception": "RuntimeError: EVALUATION_RUNTIME_MISMATCH",
+      "module_involved": "examples.run_batch_07_post_gate_refinement_full_stack.verify_runtime",
+      "phase": "TEST BODY",
+      "classification": "STALE_DIAGNOSTIC_ASSERTION"
+    },
+    {
+      "test_path": "tests/test_batch_07_post_gate_refinement_full_stack.py",
+      "test_name": "test_exact_cases_and_hkei_178_baseline_loaded",
+      "failure_type": "FIXTURE_SETUP_ERROR",
+      "first_relevant_assertion_or_exception": "RuntimeError: EVALUATION_RUNTIME_MISMATCH",
+      "module_involved": "examples.run_batch_07_post_gate_refinement_full_stack.verify_runtime",
+      "phase": "SETUP",
+      "classification": "SETUP_CONTRACT_DRIFT"
+    },
+    {
+      "test_path": "tests/test_batch_07_post_gate_refinement_full_stack.py",
+      "test_name": "test_current_gate_metrics_and_deltas_are_derived",
+      "failure_type": "FIXTURE_SETUP_ERROR",
+      "first_relevant_assertion_or_exception": "RuntimeError: EVALUATION_RUNTIME_MISMATCH",
+      "module_involved": "examples.run_batch_07_post_gate_refinement_full_stack.verify_runtime",
+      "phase": "SETUP",
+      "classification": "SETUP_CONTRACT_DRIFT"
+    },
+    {
+      "test_path": "tests/test_batch_07_post_gate_refinement_full_stack.py",
+      "test_name": "test_previous_false_negative_tracking_is_post_hoc",
+      "failure_type": "FIXTURE_SETUP_ERROR",
+      "first_relevant_assertion_or_exception": "RuntimeError: EVALUATION_RUNTIME_MISMATCH",
+      "module_involved": "examples.run_batch_07_post_gate_refinement_full_stack.verify_runtime",
+      "phase": "SETUP",
+      "classification": "SETUP_CONTRACT_DRIFT"
+    },
+    {
+      "test_path": "tests/test_batch_07_post_gate_refinement_full_stack.py",
+      "test_name": "test_new_false_positives_and_provider_delta_are_derived",
+      "failure_type": "FIXTURE_SETUP_ERROR",
+      "first_relevant_assertion_or_exception": "RuntimeError: EVALUATION_RUNTIME_MISMATCH",
+      "module_involved": "examples.run_batch_07_post_gate_refinement_full_stack.verify_runtime",
+      "phase": "SETUP",
+      "classification": "SETUP_CONTRACT_DRIFT"
+    },
+    {
+      "test_path": "tests/test_batch_07_post_gate_refinement_full_stack.py",
+      "test_name": "test_effective_labels_and_change_precision_match_case_records",
+      "failure_type": "FIXTURE_SETUP_ERROR",
+      "first_relevant_assertion_or_exception": "RuntimeError: EVALUATION_RUNTIME_MISMATCH",
+      "module_involved": "examples.run_batch_07_post_gate_refinement_full_stack.verify_runtime",
+      "phase": "SETUP",
+      "classification": "SETUP_CONTRACT_DRIFT"
+    },
+    {
+      "test_path": "tests/test_batch_07_post_gate_refinement_full_stack.py",
+      "test_name": "test_recovered_fn_utility_is_derived",
+      "failure_type": "FIXTURE_SETUP_ERROR",
+      "first_relevant_assertion_or_exception": "RuntimeError: EVALUATION_RUNTIME_MISMATCH",
+      "module_involved": "examples.run_batch_07_post_gate_refinement_full_stack.verify_runtime",
+      "phase": "SETUP",
+      "classification": "SETUP_CONTRACT_DRIFT"
+    },
+    {
+      "test_path": "tests/test_batch_07_post_gate_refinement_full_stack.py",
+      "test_name": "test_provider_contract_and_shadow_safety",
+      "failure_type": "FIXTURE_SETUP_ERROR",
+      "first_relevant_assertion_or_exception": "RuntimeError: EVALUATION_RUNTIME_MISMATCH",
+      "module_involved": "examples.run_batch_07_post_gate_refinement_full_stack.verify_runtime",
+      "phase": "SETUP",
+      "classification": "SETUP_CONTRACT_DRIFT"
+    },
+    {
+      "test_path": "tests/test_batch_07_post_gate_refinement_full_stack.py",
+      "test_name": "test_assessor_remains_diagnostic_and_budget_is_exhausted",
+      "failure_type": "FIXTURE_SETUP_ERROR",
+      "first_relevant_assertion_or_exception": "RuntimeError: EVALUATION_RUNTIME_MISMATCH",
+      "module_involved": "examples.run_batch_07_post_gate_refinement_full_stack.verify_runtime",
+      "phase": "SETUP",
+      "classification": "SETUP_CONTRACT_DRIFT"
+    },
+    {
+      "test_path": "tests/test_batch_07_post_gate_refinement_full_stack.py",
+      "test_name": "test_sanitized_outputs_contain_no_source_secret_or_raw_response",
+      "failure_type": "FIXTURE_SETUP_ERROR",
+      "first_relevant_assertion_or_exception": "RuntimeError: EVALUATION_RUNTIME_MISMATCH",
+      "module_involved": "examples.run_batch_07_post_gate_refinement_full_stack.verify_runtime",
+      "phase": "SETUP",
+      "classification": "SETUP_CONTRACT_DRIFT"
+    }
+  ],
+  "pre_existing_failure_count": 9,
+  "stale_diagnostic_count": 11,
+  "environment_issue_count": 0,
+  "new_regression_count": 0,
+  "unknown_count": 0,
+  "setup_error_root_cause": "DIAGNOSTIC_DEPENDENCY_ORDER",
+  "setup_error_detail": "The Batch 07 final-evaluation fixture invokes a historical runtime-lock check that permits only the old Gate diff; the later authorized HKEI-183 semantic-engine commit makes that historical predicate false before fixture data is created.",
+  "setup_error_shared_count": 9,
+  "setup_error_independent_count": 0,
+  "hkei_183_correlation": {
+    "production_regressions": 0,
+    "diagnostic_contract_drift_issues": 11,
+    "finding": "HKEI-183 is the causal input to an obsolete historical diagnostic lock, but its focused and historical regression tests pass."
+  },
+  "hkei_184_correlation": {
+    "registration_regressions": 0,
+    "test_discovery_issues": 0,
+    "cross_batch_assumption_issues": 0,
+    "finding": "All Batch 08 registration integrity tests pass and no failing test reads Batch 08."
+  },
+  "batch_08_integrity": {
+    "case_ids": [
+      "071",
+      "072",
+      "073",
+      "074",
+      "075",
+      "076",
+      "077",
+      "078",
+      "079",
+      "080"
+    ],
+    "raw_sha256": "451ddb4c75b6b637f0a2b80e47fc51924fa0f30e1c2f139d6c7118bba99c7d32",
+    "raw_sha_matches": true,
+    "expected_labels_frozen": true,
+    "expected_case_count": 10,
+    "scientific_status": "UNTOUCHED_PREREGISTERED_HOLDOUT",
+    "validation_status": "NOT_RUN",
+    "provider_calls": 0
+  },
+  "provider_calls": 0,
+  "prediction_execution": false,
+  "live_evaluation_safety": "SAFE_AFTER_DIAGNOSTIC_TEST_FIX_ONLY",
+  "recommended_next_step": "FIX_DIAGNOSTIC_TESTS_ONLY"
+}
