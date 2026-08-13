@@ -1,0 +1,586 @@
+{
+  "candidate_violation": {
+    "operational": {
+      "articles_processed": 1,
+      "authoritative_topic_overrides": 1,
+      "authority_blocked_by_policy": 0,
+      "candidate_violations": 0,
+      "deterministic_topic_preserved": 0,
+      "fallbacks": 0,
+      "fingerprint_failures": 0,
+      "max_consecutive_provider_validation_failures": 0,
+      "provider_calls": 1,
+      "provider_failures": 0,
+      "provider_validation_failures": 0,
+      "resolver_adjudicated_accepted": 1,
+      "review_required_decisions": 0,
+      "topic_adjudication_requested": 1,
+      "valid_adjudications": 1
+    },
+    "safety": {
+      "accepted_candidate_violation_count": 1,
+      "accepted_fingerprint_violation_count": 0,
+      "audited_correct_override_count": 0,
+      "audited_incorrect_override_count": 0,
+      "audited_override_count": 0,
+      "authority_contract_violation_count": 1,
+      "format_authority_violation_count": 0,
+      "override_precision": null,
+      "reader_intent_authority_violation_count": 0,
+      "rollback_count": 0
+    },
+    "stop": {
+      "reasons": [
+        "AUTHORITY_CONTRACT_VIOLATION",
+        "ACCEPTED_CANDIDATE_VIOLATION"
+      ],
+      "recommended_mode": "SHADOW",
+      "should_stop": true
+    }
+  },
+  "clean": {
+    "operational": {
+      "articles_processed": 35,
+      "authoritative_topic_overrides": 35,
+      "authority_blocked_by_policy": 0,
+      "candidate_violations": 0,
+      "deterministic_topic_preserved": 0,
+      "fallbacks": 0,
+      "fingerprint_failures": 0,
+      "max_consecutive_provider_validation_failures": 0,
+      "provider_calls": 35,
+      "provider_failures": 0,
+      "provider_validation_failures": 0,
+      "resolver_adjudicated_accepted": 35,
+      "review_required_decisions": 0,
+      "topic_adjudication_requested": 35,
+      "valid_adjudications": 35
+    },
+    "safety": {
+      "accepted_candidate_violation_count": 0,
+      "accepted_fingerprint_violation_count": 0,
+      "audited_correct_override_count": 30,
+      "audited_incorrect_override_count": 0,
+      "audited_override_count": 30,
+      "authority_contract_violation_count": 0,
+      "format_authority_violation_count": 0,
+      "override_precision": 1.0,
+      "reader_intent_authority_violation_count": 0,
+      "rollback_count": 0
+    },
+    "stop": {
+      "reasons": [],
+      "recommended_mode": null,
+      "should_stop": false
+    }
+  },
+  "contract_violation": {
+    "operational": {
+      "articles_processed": 1,
+      "authoritative_topic_overrides": 1,
+      "authority_blocked_by_policy": 0,
+      "candidate_violations": 0,
+      "deterministic_topic_preserved": 0,
+      "fallbacks": 0,
+      "fingerprint_failures": 0,
+      "max_consecutive_provider_validation_failures": 0,
+      "provider_calls": 1,
+      "provider_failures": 0,
+      "provider_validation_failures": 0,
+      "resolver_adjudicated_accepted": 1,
+      "review_required_decisions": 0,
+      "topic_adjudication_requested": 1,
+      "valid_adjudications": 1
+    },
+    "safety": {
+      "accepted_candidate_violation_count": 0,
+      "accepted_fingerprint_violation_count": 0,
+      "audited_correct_override_count": 0,
+      "audited_incorrect_override_count": 0,
+      "audited_override_count": 0,
+      "authority_contract_violation_count": 1,
+      "format_authority_violation_count": 0,
+      "override_precision": null,
+      "reader_intent_authority_violation_count": 0,
+      "rollback_count": 0
+    },
+    "stop": {
+      "reasons": [
+        "AUTHORITY_CONTRACT_VIOLATION"
+      ],
+      "recommended_mode": "SHADOW",
+      "should_stop": true
+    }
+  },
+  "distribution": {
+    "operational": {
+      "articles_processed": 75,
+      "authoritative_topic_overrides": 35,
+      "authority_blocked_by_policy": 26,
+      "candidate_violations": 2,
+      "deterministic_topic_preserved": 40,
+      "fallbacks": 3,
+      "fingerprint_failures": 2,
+      "max_consecutive_provider_validation_failures": 2,
+      "provider_calls": 65,
+      "provider_failures": 3,
+      "provider_validation_failures": 3,
+      "resolver_adjudicated_accepted": 62,
+      "review_required_decisions": 11,
+      "topic_adjudication_requested": 65,
+      "valid_adjudications": 62
+    },
+    "safety": {
+      "accepted_candidate_violation_count": 0,
+      "accepted_fingerprint_violation_count": 0,
+      "audited_correct_override_count": 0,
+      "audited_incorrect_override_count": 0,
+      "audited_override_count": 0,
+      "authority_contract_violation_count": 0,
+      "format_authority_violation_count": 0,
+      "override_precision": null,
+      "reader_intent_authority_violation_count": 0,
+      "rollback_count": 0
+    },
+    "stop": {
+      "reasons": [],
+      "recommended_mode": null,
+      "should_stop": false
+    }
+  },
+  "duplicate_audit_rejected": true,
+  "fingerprint_violation": {
+    "operational": {
+      "articles_processed": 1,
+      "authoritative_topic_overrides": 1,
+      "authority_blocked_by_policy": 0,
+      "candidate_violations": 0,
+      "deterministic_topic_preserved": 0,
+      "fallbacks": 0,
+      "fingerprint_failures": 0,
+      "max_consecutive_provider_validation_failures": 0,
+      "provider_calls": 1,
+      "provider_failures": 0,
+      "provider_validation_failures": 0,
+      "resolver_adjudicated_accepted": 1,
+      "review_required_decisions": 0,
+      "topic_adjudication_requested": 1,
+      "valid_adjudications": 1
+    },
+    "safety": {
+      "accepted_candidate_violation_count": 0,
+      "accepted_fingerprint_violation_count": 1,
+      "audited_correct_override_count": 0,
+      "audited_incorrect_override_count": 0,
+      "audited_override_count": 0,
+      "authority_contract_violation_count": 1,
+      "format_authority_violation_count": 0,
+      "override_precision": null,
+      "reader_intent_authority_violation_count": 0,
+      "rollback_count": 0
+    },
+    "stop": {
+      "reasons": [
+        "AUTHORITY_CONTRACT_VIOLATION",
+        "ACCEPTED_FINGERPRINT_VIOLATION"
+      ],
+      "recommended_mode": "SHADOW",
+      "should_stop": true
+    }
+  },
+  "format_violation": {
+    "operational": {
+      "articles_processed": 1,
+      "authoritative_topic_overrides": 1,
+      "authority_blocked_by_policy": 0,
+      "candidate_violations": 0,
+      "deterministic_topic_preserved": 0,
+      "fallbacks": 0,
+      "fingerprint_failures": 0,
+      "max_consecutive_provider_validation_failures": 0,
+      "provider_calls": 1,
+      "provider_failures": 0,
+      "provider_validation_failures": 0,
+      "resolver_adjudicated_accepted": 1,
+      "review_required_decisions": 0,
+      "topic_adjudication_requested": 1,
+      "valid_adjudications": 1
+    },
+    "safety": {
+      "accepted_candidate_violation_count": 0,
+      "accepted_fingerprint_violation_count": 0,
+      "audited_correct_override_count": 0,
+      "audited_incorrect_override_count": 0,
+      "audited_override_count": 0,
+      "authority_contract_violation_count": 1,
+      "format_authority_violation_count": 1,
+      "override_precision": null,
+      "reader_intent_authority_violation_count": 0,
+      "rollback_count": 0
+    },
+    "stop": {
+      "reasons": [
+        "AUTHORITY_CONTRACT_VIOLATION",
+        "FORMAT_AUTHORITY_VIOLATION"
+      ],
+      "recommended_mode": "SHADOW",
+      "should_stop": true
+    }
+  },
+  "minimum_audited_override_sample": 30,
+  "next_step_decision": "READY_FOR_CONTROLLED_TOPIC_AUTHORITY_CANARY_IMPLEMENTATION",
+  "offline_canary_classification": "CANARY_SAFE",
+  "precision_before_minimum": {
+    "operational": {
+      "articles_processed": 29,
+      "authoritative_topic_overrides": 29,
+      "authority_blocked_by_policy": 0,
+      "candidate_violations": 0,
+      "deterministic_topic_preserved": 0,
+      "fallbacks": 0,
+      "fingerprint_failures": 0,
+      "max_consecutive_provider_validation_failures": 0,
+      "provider_calls": 29,
+      "provider_failures": 0,
+      "provider_validation_failures": 0,
+      "resolver_adjudicated_accepted": 29,
+      "review_required_decisions": 0,
+      "topic_adjudication_requested": 29,
+      "valid_adjudications": 29
+    },
+    "safety": {
+      "accepted_candidate_violation_count": 0,
+      "accepted_fingerprint_violation_count": 0,
+      "audited_correct_override_count": 25,
+      "audited_incorrect_override_count": 4,
+      "audited_override_count": 29,
+      "authority_contract_violation_count": 0,
+      "format_authority_violation_count": 0,
+      "override_precision": 0.8620689655172413,
+      "reader_intent_authority_violation_count": 0,
+      "rollback_count": 0
+    },
+    "stop": {
+      "reasons": [],
+      "recommended_mode": null,
+      "should_stop": false
+    }
+  },
+  "precision_failure": {
+    "operational": {
+      "articles_processed": 30,
+      "authoritative_topic_overrides": 30,
+      "authority_blocked_by_policy": 0,
+      "candidate_violations": 0,
+      "deterministic_topic_preserved": 0,
+      "fallbacks": 0,
+      "fingerprint_failures": 0,
+      "max_consecutive_provider_validation_failures": 0,
+      "provider_calls": 30,
+      "provider_failures": 0,
+      "provider_validation_failures": 0,
+      "resolver_adjudicated_accepted": 30,
+      "review_required_decisions": 0,
+      "topic_adjudication_requested": 30,
+      "valid_adjudications": 30
+    },
+    "safety": {
+      "accepted_candidate_violation_count": 0,
+      "accepted_fingerprint_violation_count": 0,
+      "audited_correct_override_count": 26,
+      "audited_incorrect_override_count": 4,
+      "audited_override_count": 30,
+      "authority_contract_violation_count": 0,
+      "format_authority_violation_count": 0,
+      "override_precision": 0.8666666666666667,
+      "reader_intent_authority_violation_count": 0,
+      "rollback_count": 0
+    },
+    "stop": {
+      "reasons": [
+        "OVERRIDE_PRECISION_BELOW_THRESHOLD"
+      ],
+      "recommended_mode": "SHADOW",
+      "should_stop": true
+    }
+  },
+  "production_mutation": false,
+  "provider_failure_only": {
+    "operational": {
+      "articles_processed": 1,
+      "authoritative_topic_overrides": 0,
+      "authority_blocked_by_policy": 1,
+      "candidate_violations": 0,
+      "deterministic_topic_preserved": 1,
+      "fallbacks": 1,
+      "fingerprint_failures": 0,
+      "max_consecutive_provider_validation_failures": 1,
+      "provider_calls": 1,
+      "provider_failures": 1,
+      "provider_validation_failures": 1,
+      "resolver_adjudicated_accepted": 0,
+      "review_required_decisions": 1,
+      "topic_adjudication_requested": 1,
+      "valid_adjudications": 0
+    },
+    "safety": {
+      "accepted_candidate_violation_count": 0,
+      "accepted_fingerprint_violation_count": 0,
+      "audited_correct_override_count": 0,
+      "audited_incorrect_override_count": 0,
+      "audited_override_count": 0,
+      "authority_contract_violation_count": 0,
+      "format_authority_violation_count": 0,
+      "override_precision": null,
+      "reader_intent_authority_violation_count": 0,
+      "rollback_count": 0
+    },
+    "stop": {
+      "reasons": [],
+      "recommended_mode": null,
+      "should_stop": false
+    }
+  },
+  "reader_intent_violation": {
+    "operational": {
+      "articles_processed": 1,
+      "authoritative_topic_overrides": 1,
+      "authority_blocked_by_policy": 0,
+      "candidate_violations": 0,
+      "deterministic_topic_preserved": 0,
+      "fallbacks": 0,
+      "fingerprint_failures": 0,
+      "max_consecutive_provider_validation_failures": 0,
+      "provider_calls": 1,
+      "provider_failures": 0,
+      "provider_validation_failures": 0,
+      "resolver_adjudicated_accepted": 1,
+      "review_required_decisions": 0,
+      "topic_adjudication_requested": 1,
+      "valid_adjudications": 1
+    },
+    "safety": {
+      "accepted_candidate_violation_count": 0,
+      "accepted_fingerprint_violation_count": 0,
+      "audited_correct_override_count": 0,
+      "audited_incorrect_override_count": 0,
+      "audited_override_count": 0,
+      "authority_contract_violation_count": 1,
+      "format_authority_violation_count": 0,
+      "override_precision": null,
+      "reader_intent_authority_violation_count": 1,
+      "rollback_count": 0
+    },
+    "stop": {
+      "reasons": [
+        "AUTHORITY_CONTRACT_VIOLATION",
+        "READER_INTENT_AUTHORITY_VIOLATION"
+      ],
+      "recommended_mode": "SHADOW",
+      "should_stop": true
+    }
+  },
+  "real_provider_calls": 0,
+  "rollback": {
+    "after": {
+      "operational": {
+        "articles_processed": 3,
+        "authoritative_topic_overrides": 0,
+        "authority_blocked_by_policy": 3,
+        "candidate_violations": 0,
+        "deterministic_topic_preserved": 3,
+        "fallbacks": 0,
+        "fingerprint_failures": 0,
+        "max_consecutive_provider_validation_failures": 0,
+        "provider_calls": 3,
+        "provider_failures": 0,
+        "provider_validation_failures": 0,
+        "resolver_adjudicated_accepted": 3,
+        "review_required_decisions": 0,
+        "topic_adjudication_requested": 3,
+        "valid_adjudications": 3
+      },
+      "safety": {
+        "accepted_candidate_violation_count": 0,
+        "accepted_fingerprint_violation_count": 0,
+        "audited_correct_override_count": 0,
+        "audited_incorrect_override_count": 0,
+        "audited_override_count": 0,
+        "authority_contract_violation_count": 0,
+        "format_authority_violation_count": 0,
+        "override_precision": null,
+        "reader_intent_authority_violation_count": 0,
+        "rollback_count": 0
+      },
+      "stop": {
+        "reasons": [],
+        "recommended_mode": null,
+        "should_stop": false
+      }
+    },
+    "at_stop": {
+      "operational": {
+        "articles_processed": 5,
+        "authoritative_topic_overrides": 5,
+        "authority_blocked_by_policy": 0,
+        "candidate_violations": 0,
+        "deterministic_topic_preserved": 0,
+        "fallbacks": 0,
+        "fingerprint_failures": 0,
+        "max_consecutive_provider_validation_failures": 0,
+        "provider_calls": 5,
+        "provider_failures": 0,
+        "provider_validation_failures": 0,
+        "resolver_adjudicated_accepted": 5,
+        "review_required_decisions": 0,
+        "topic_adjudication_requested": 5,
+        "valid_adjudications": 5
+      },
+      "safety": {
+        "accepted_candidate_violation_count": 0,
+        "accepted_fingerprint_violation_count": 0,
+        "audited_correct_override_count": 0,
+        "audited_incorrect_override_count": 1,
+        "audited_override_count": 1,
+        "authority_contract_violation_count": 0,
+        "format_authority_violation_count": 0,
+        "override_precision": 0.0,
+        "reader_intent_authority_violation_count": 0,
+        "rollback_count": 0
+      },
+      "stop": {
+        "reasons": [
+          "REGRESSION_BUDGET_EXCEEDED"
+        ],
+        "recommended_mode": "SHADOW",
+        "should_stop": true
+      }
+    },
+    "before": {
+      "operational": {
+        "articles_processed": 5,
+        "authoritative_topic_overrides": 5,
+        "authority_blocked_by_policy": 0,
+        "candidate_violations": 0,
+        "deterministic_topic_preserved": 0,
+        "fallbacks": 0,
+        "fingerprint_failures": 0,
+        "max_consecutive_provider_validation_failures": 0,
+        "provider_calls": 5,
+        "provider_failures": 0,
+        "provider_validation_failures": 0,
+        "resolver_adjudicated_accepted": 5,
+        "review_required_decisions": 0,
+        "topic_adjudication_requested": 5,
+        "valid_adjudications": 5
+      },
+      "safety": {
+        "accepted_candidate_violation_count": 0,
+        "accepted_fingerprint_violation_count": 0,
+        "audited_correct_override_count": 0,
+        "audited_incorrect_override_count": 0,
+        "audited_override_count": 0,
+        "authority_contract_violation_count": 0,
+        "format_authority_violation_count": 0,
+        "override_precision": null,
+        "reader_intent_authority_violation_count": 0,
+        "rollback_count": 0
+      },
+      "stop": {
+        "reasons": [],
+        "recommended_mode": null,
+        "should_stop": false
+      }
+    },
+    "future_deterministic_topics_preserved": true,
+    "historical_authoritative_overrides": 5,
+    "post_rollback_authoritative_overrides": 0
+  },
+  "scenario_distribution": {
+    "ambiguity": 3,
+    "candidate_failure": 2,
+    "deterministic": 10,
+    "eligible_changed": 35,
+    "fingerprint_failure": 2,
+    "invalid_response": 1,
+    "low_confidence": 5,
+    "provider_failure": 2,
+    "review_required": 5,
+    "same_label": 10
+  },
+  "shadow": {
+    "operational": {
+      "articles_processed": 20,
+      "authoritative_topic_overrides": 0,
+      "authority_blocked_by_policy": 20,
+      "candidate_violations": 0,
+      "deterministic_topic_preserved": 20,
+      "fallbacks": 0,
+      "fingerprint_failures": 0,
+      "max_consecutive_provider_validation_failures": 0,
+      "provider_calls": 20,
+      "provider_failures": 0,
+      "provider_validation_failures": 0,
+      "resolver_adjudicated_accepted": 20,
+      "review_required_decisions": 0,
+      "topic_adjudication_requested": 20,
+      "valid_adjudications": 20
+    },
+    "safety": {
+      "accepted_candidate_violation_count": 0,
+      "accepted_fingerprint_violation_count": 0,
+      "audited_correct_override_count": 0,
+      "audited_incorrect_override_count": 0,
+      "audited_override_count": 0,
+      "authority_contract_violation_count": 0,
+      "format_authority_violation_count": 0,
+      "override_precision": null,
+      "reader_intent_authority_violation_count": 0,
+      "rollback_count": 0
+    },
+    "stop": {
+      "reasons": [],
+      "recommended_mode": null,
+      "should_stop": false
+    }
+  },
+  "simulation_cases": 75,
+  "single_regression": {
+    "operational": {
+      "articles_processed": 1,
+      "authoritative_topic_overrides": 1,
+      "authority_blocked_by_policy": 0,
+      "candidate_violations": 0,
+      "deterministic_topic_preserved": 0,
+      "fallbacks": 0,
+      "fingerprint_failures": 0,
+      "max_consecutive_provider_validation_failures": 0,
+      "provider_calls": 1,
+      "provider_failures": 0,
+      "provider_validation_failures": 0,
+      "resolver_adjudicated_accepted": 1,
+      "review_required_decisions": 0,
+      "topic_adjudication_requested": 1,
+      "valid_adjudications": 1
+    },
+    "safety": {
+      "accepted_candidate_violation_count": 0,
+      "accepted_fingerprint_violation_count": 0,
+      "audited_correct_override_count": 0,
+      "audited_incorrect_override_count": 1,
+      "audited_override_count": 1,
+      "authority_contract_violation_count": 0,
+      "format_authority_violation_count": 0,
+      "override_precision": 0.0,
+      "reader_intent_authority_violation_count": 0,
+      "rollback_count": 0
+    },
+    "stop": {
+      "reasons": [
+        "REGRESSION_BUDGET_EXCEEDED"
+      ],
+      "recommended_mode": "SHADOW",
+      "should_stop": true
+    }
+  }
+}
