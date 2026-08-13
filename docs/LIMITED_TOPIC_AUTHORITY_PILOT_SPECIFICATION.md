@@ -308,6 +308,25 @@ Concurrent requests cannot observe or overwrite one another's trust data.
 
 This specification authorizes no full rollout.
 
+## Operational canary wiring
+
+The operational authority source is `resolver_authority_mode`, parsed strictly as
+`SHADOW` or `LIMITED_TOPIC_AUTHORITY`; a missing value is `SHADOW`. It is resolved
+for each request, and an explicit stop recommendation updates that same source to
+`SHADOW`, so no cached LIMITED decision can survive the kill switch.
+
+Authority consumption is restricted to the explicitly selected
+`INTERNAL_TOPIC_AUTHORITY_CANARY_PATH`. The normal production route and every
+SHADOW execution consume the deterministic Topic. An authority decision may be
+eligible and applied in the canary computation without being consumed downstream.
+
+A sanitized observation is recorded before authority consumption. Observation
+failure adds `AUTHORITY_OBSERVATION_FAILED` and fails closed to the deterministic
+Topic. Observation identities use the decision fingerprint for idempotent duplicate
+handling. The public canary result preserves deterministic, resolved, authoritative,
+and consumer Topic provenance, but excludes article content, source/request/prompt
+objects, provider payloads or exceptions, credentials, and reasoning text.
+
 ## Backward compatibility
 
 Authority output is additive. Existing consumers remain on current Topic by

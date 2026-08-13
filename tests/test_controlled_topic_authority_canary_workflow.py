@@ -26,6 +26,9 @@ from src.resolution import (
     TopicAuthorityMetrics,
     TopicAuthorityProviderFailureCategory,
     TopicAuthoritySafetyMetrics,
+    InMemoryTopicAuthorityObservationSink,
+    TopicAuthorityConsumerRoute,
+    TopicAuthorityRuntimeConfig,
 )
 from src.topic.topic import Topic
 from src.workflows.controlled_topic_authority_canary_result import (
@@ -350,6 +353,44 @@ def test_reader_intent_has_no_authority_field_and_remains_resolver_output() -> N
     names = {item.name for item in fields(ControlledTopicAuthorityCanaryResult)}
     assert "authoritative_reader_intent" not in names
     assert result.resolution_result.reader_intent_resolution is result.shadow_workflow_result.resolution_result.reader_intent_resolution
+
+
+def test_operational_entry_point_runs_fake_provider_and_consumes_only_internal_limited() -> None:
+    provider = FakeProvider()
+    gate = FixedGate()
+    runtime = TopicAuthorityRuntimeConfig()
+    sink = InMemoryTopicAuthorityObservationSink()
+    workflow = ControlledTopicAuthorityCanaryWorkflow(
+        provider=provider,
+        runtime_config=runtime,
+        observation_sink=sink,
+        shadow_workflow=LimitedEditorialResolverShadowWorkflow(
+            provider=provider,
+            adjudication_workflow=ExperimentalSemanticAdjudicationShadowWorkflow(
+                provider=provider, adjudication_gate=gate,
+            ),
+        ),
+    )
+    shadow = workflow.analyze_operational(
+        route=TopicAuthorityConsumerRoute.INTERNAL_TOPIC_AUTHORITY_CANARY_PATH,
+        **ARTICLE,
+    )
+    runtime.set_mode(ResolverAuthorityMode.LIMITED_TOPIC_AUTHORITY)
+    limited = workflow.analyze_operational(
+        route=TopicAuthorityConsumerRoute.INTERNAL_TOPIC_AUTHORITY_CANARY_PATH,
+        **ARTICLE,
+    )
+    runtime.set_mode(ResolverAuthorityMode.SHADOW)
+    future = workflow.analyze_operational(
+        route=TopicAuthorityConsumerRoute.INTERNAL_TOPIC_AUTHORITY_CANARY_PATH,
+        **ARTICLE,
+    )
+    assert not shadow.authority_consumed
+    assert limited.authority_consumed
+    assert not future.authority_consumed
+    assert future.consumer_topic is future.deterministic_topic
+    assert provider.calls == 3 and gate.calls == 3
+    assert len(sink.observations) == 1  # identical fingerprint is idempotent
 
 
 def test_provider_request_and_response_match_runtime_result() -> None:

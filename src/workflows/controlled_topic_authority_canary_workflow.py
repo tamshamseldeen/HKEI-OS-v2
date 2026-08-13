@@ -17,6 +17,14 @@ from src.resolution.topic_authority_provider_failure_category import (
 
 from .controlled_topic_authority_canary_result import ControlledTopicAuthorityCanaryResult
 from .limited_editorial_resolver_shadow_workflow import LimitedEditorialResolverShadowWorkflow
+from src.resolution.controlled_topic_authority_consumer import (
+    ControlledTopicAuthorityConsumerAdapter,
+    TopicAuthorityConsumerRoute,
+)
+from src.resolution.operational_topic_authority_canary import OperationalTopicAuthorityCanary
+from src.resolution.topic_authority_observation_sink import TopicAuthorityObservationSink
+from src.resolution.topic_authority_pilot_stop_decision import TopicAuthorityPilotStopDecision
+from src.resolution.topic_authority_runtime_config import TopicAuthorityRuntimeConfig
 
 
 class ControlledTopicAuthorityCanaryWorkflow:
@@ -32,6 +40,9 @@ class ControlledTopicAuthorityCanaryWorkflow:
         observation_builder: TopicAuthorityObservationBuilder | None = None,
         contract_validator: TopicAuthorityContractValidator | None = None,
         stop_evaluator: TopicAuthorityPilotStopEvaluator | None = None,
+        runtime_config: TopicAuthorityRuntimeConfig | None = None,
+        observation_sink: TopicAuthorityObservationSink | None = None,
+        consumer_adapter: ControlledTopicAuthorityConsumerAdapter | None = None,
     ) -> None:
         if not isinstance(provider, SemanticAdjudicationProvider):
             raise ValueError("provider must implement SemanticAdjudicationProvider")
@@ -46,6 +57,12 @@ class ControlledTopicAuthorityCanaryWorkflow:
         self.observation_builder = observation_builder or TopicAuthorityObservationBuilder()
         self.contract_validator = contract_validator or TopicAuthorityContractValidator()
         self.stop_evaluator = stop_evaluator or TopicAuthorityPilotStopEvaluator()
+        self.runtime_config = runtime_config or TopicAuthorityRuntimeConfig(
+            self.config.authority_mode
+        )
+        self.operational_canary = OperationalTopicAuthorityCanary(
+            self.runtime_config, observation_sink, consumer_adapter
+        )
 
     def analyze(
         self,
@@ -60,11 +77,14 @@ class ControlledTopicAuthorityCanaryWorkflow:
         **article_fields,
     ) -> ControlledTopicAuthorityCanaryResult:
         """Run upstream once, then apply request-local authority policy."""
+        effective_config = replace(
+            self.config, authority_mode=self.runtime_config.resolve()
+        )
         shadow = self.shadow_workflow.analyze(**article_fields)
         actual_response_valid = shadow.response_valid if response_valid is None else response_valid
         decision = self.applicator.apply(
             shadow.resolution_result,
-            self.config,
+            effective_config,
             candidate_compliant,
             fingerprint_valid,
             actual_response_valid,
@@ -72,7 +92,7 @@ class ControlledTopicAuthorityCanaryWorkflow:
         )
         violations = self.contract_validator.validate(
             decision,
-            self.config,
+            effective_config,
             candidate_compliant,
             fingerprint_valid,
             actual_response_valid,
@@ -89,7 +109,7 @@ class ControlledTopicAuthorityCanaryWorkflow:
             )
         observation = self.observation_builder.build(
             effective_decision,
-            self.config.authority_mode,
+            effective_config.authority_mode,
             topic_adjudication_requested=shadow.adjudication_decision.topic_required,
             provider_called=shadow.provider_called,
             provider_valid=actual_response_valid,
@@ -102,7 +122,7 @@ class ControlledTopicAuthorityCanaryWorkflow:
             raise ValueError("operational_metrics and safety_metrics must be supplied together")
         if operational_metrics is not None and safety_metrics is not None:
             stop_decision = self.stop_evaluator.evaluate(
-                operational_metrics, safety_metrics, self.config
+                operational_metrics, safety_metrics, effective_config
             )
         return ControlledTopicAuthorityCanaryResult(
             shadow_workflow_result=shadow,
@@ -119,6 +139,23 @@ class ControlledTopicAuthorityCanaryWorkflow:
             warnings=effective_decision.warnings,
         )
 
+    def analyze_operational(
+        self,
+        *,
+        route: TopicAuthorityConsumerRoute = TopicAuthorityConsumerRoute.NORMAL_PRODUCTION_PATH,
+        stop_signal: TopicAuthorityPilotStopDecision | None = None,
+        **analysis_fields,
+    ):
+        """Run once and return only the sanitized operational consumer boundary."""
+        self.runtime_config.apply_stop_signal(stop_signal)
+        result = self.analyze(**analysis_fields)
+        return self.operational_canary.execute(
+            result.authority_decision,
+            result.authority_observation,
+            route,
+            stop_signal=None,
+        )
+
     def apply_to_resolution(
         self,
         resolution_result,
@@ -131,7 +168,7 @@ class ControlledTopicAuthorityCanaryWorkflow:
         """Apply mode downstream without rerunning any upstream component."""
         return self.applicator.apply(
             resolution_result,
-            self.config,
+            replace(self.config, authority_mode=self.runtime_config.resolve()),
             candidate_compliant,
             fingerprint_valid,
             response_valid,

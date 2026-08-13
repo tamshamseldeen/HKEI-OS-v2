@@ -32,6 +32,19 @@ from .topic_authority_pilot_stop_decision import (
 )
 from .topic_authority_pilot_stop_evaluator import TopicAuthorityPilotStopEvaluator
 from .topic_authority_provider_failure_category import TopicAuthorityProviderFailureCategory
+from .topic_authority_runtime_config import TopicAuthorityRuntimeConfig
+from .topic_authority_observation_sink import (
+    InMemoryTopicAuthorityObservationSink,
+    NoOpTopicAuthorityObservationSink,
+    TopicAuthorityObservationSink,
+)
+from .controlled_topic_authority_consumer import (
+    ControlledTopicAuthorityConsumerAdapter,
+    ControlledTopicAuthorityConsumerResult,
+    TopicAuthorityConsumerRoute,
+)
+from .sanitized_topic_authority_canary_result import SanitizedTopicAuthorityCanaryResult
+from .operational_topic_authority_canary import OperationalTopicAuthorityCanary
 
 __all__ = (
     "EditorialDimensionResolution",
@@ -62,4 +75,13 @@ __all__ = (
     "TopicAuthorityPilotStopReason",
     "TopicAuthorityProviderFailureCategory",
     "TopicAuthoritySafetyMetrics",
+    "TopicAuthorityRuntimeConfig",
+    "TopicAuthorityObservationSink",
+    "InMemoryTopicAuthorityObservationSink",
+    "NoOpTopicAuthorityObservationSink",
+    "ControlledTopicAuthorityConsumerAdapter",
+    "ControlledTopicAuthorityConsumerResult",
+    "TopicAuthorityConsumerRoute",
+    "SanitizedTopicAuthorityCanaryResult",
+    "OperationalTopicAuthorityCanary",
 )
