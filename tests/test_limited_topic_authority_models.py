@@ -52,6 +52,10 @@ def _observation(**overrides) -> TopicAuthorityObservation:
         "authority_source": EditorialResolutionSource.DETERMINISTIC_V1,
         "resolution_status": EditorialResolutionStatus.DETERMINISTIC_ACCEPTED,
         "provider_used": False,
+        "provider_called": False,
+        "provider_valid": False,
+        "topic_adjudication_requested": False,
+        "provider_failure_category": None,
         "provider_confidence": None,
         "ambiguity_remaining": False,
         "review_required": False,
@@ -59,6 +63,7 @@ def _observation(**overrides) -> TopicAuthorityObservation:
         "warnings": (),
         "candidate_compliant": True,
         "fingerprint_valid": True,
+        "decision_fingerprint": "sha256:fixture",
     }
     values.update(overrides)
     return TopicAuthorityObservation(**values)

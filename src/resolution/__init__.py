@@ -22,6 +22,16 @@ from .topic_authority_block_reason import TopicAuthorityBlockReason
 from .topic_authority_decision import TopicAuthorityDecision
 from .topic_authority_metrics import TopicAuthorityMetrics, TopicAuthoritySafetyMetrics
 from .topic_authority_observation import TopicAuthorityObservation
+from .topic_authority_observation_builder import TopicAuthorityObservationBuilder
+from .topic_authority_metrics_aggregator import TopicAuthorityMetricsAggregator
+from .topic_authority_contract_violation import TopicAuthorityContractViolation
+from .topic_authority_contract_validator import TopicAuthorityContractValidator
+from .topic_authority_pilot_stop_decision import (
+    TopicAuthorityPilotStopDecision,
+    TopicAuthorityPilotStopReason,
+)
+from .topic_authority_pilot_stop_evaluator import TopicAuthorityPilotStopEvaluator
+from .topic_authority_provider_failure_category import TopicAuthorityProviderFailureCategory
 
 __all__ = (
     "EditorialDimensionResolution",
@@ -43,5 +53,13 @@ __all__ = (
     "TopicAuthorityDecision",
     "TopicAuthorityMetrics",
     "TopicAuthorityObservation",
+    "TopicAuthorityObservationBuilder",
+    "TopicAuthorityMetricsAggregator",
+    "TopicAuthorityContractViolation",
+    "TopicAuthorityContractValidator",
+    "TopicAuthorityPilotStopDecision",
+    "TopicAuthorityPilotStopEvaluator",
+    "TopicAuthorityPilotStopReason",
+    "TopicAuthorityProviderFailureCategory",
     "TopicAuthoritySafetyMetrics",
 )
