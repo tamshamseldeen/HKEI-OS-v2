@@ -196,6 +196,63 @@ def test_block_reason_enum_contains_specification_contract() -> None:
     assert required <= {item.value for item in TopicAuthorityBlockReason}
 
 
+def test_no_topic_change_has_exact_symbolic_value() -> None:
+    assert TopicAuthorityBlockReason.NO_TOPIC_CHANGE.value == "NO_TOPIC_CHANGE"
+
+
+def test_existing_block_reasons_are_preserved_with_no_duplicates() -> None:
+    existing = {
+        "MODE_SHADOW", "TOPIC_ADJUDICATION_NOT_REQUESTED",
+        "RESOLUTION_NOT_ADJUDICATED", "SOURCE_NOT_ADJUDICATION",
+        "REVIEW_REQUIRED", "AMBIGUITY_REMAINS", "PROVIDER_CONFIDENCE_TOO_LOW",
+        "FINGERPRINT_INVALID", "CANDIDATE_INVALID", "RESPONSE_INVALID",
+        "PROVIDER_UNAVAILABLE",
+    }
+    values = tuple(item.value for item in TopicAuthorityBlockReason)
+    assert existing <= set(values)
+    assert len(values) == 12
+    assert len(values) == len(set(values))
+
+
+def test_valid_same_label_adjudication_is_a_non_error_no_override_decision() -> None:
+    decision = _decision(
+        resolved_topic=Topic.SCIENCE,
+        authoritative_topic=Topic.SCIENCE,
+        authority_applied=False,
+        authority_source=EditorialResolutionSource.DETERMINISTIC_V1,
+        resolution_status=EditorialResolutionStatus.ADJUDICATED_ACCEPTED,
+        provider_confidence=AdjudicationConfidence.HIGH,
+        block_reasons=(TopicAuthorityBlockReason.NO_TOPIC_CHANGE,),
+    )
+    assert decision.authoritative_topic is decision.deterministic_topic
+    assert decision.authority_applied is False
+    assert decision.authority_source is EditorialResolutionSource.DETERMINISTIC_V1
+    assert decision.block_reasons == (TopicAuthorityBlockReason.NO_TOPIC_CHANGE,)
+
+
+def test_no_topic_change_has_no_failure_metric_implication() -> None:
+    metric_fields = {item.name for item in fields(TopicAuthorityMetrics)}
+    safety_fields = {item.name for item in fields(TopicAuthoritySafetyMetrics)}
+    assert "valid_adjudications" in metric_fields
+    assert "resolver_adjudicated_accepted" in metric_fields
+    assert "authoritative_topic_overrides" in metric_fields
+    assert "provider_failures" in metric_fields
+    assert "audited_incorrect_override_count" in safety_fields
+    assert "authority_contract_violation_count" in safety_fields
+    assert TopicAuthorityBlockReason.NO_TOPIC_CHANGE not in {
+        TopicAuthorityBlockReason.PROVIDER_UNAVAILABLE,
+        TopicAuthorityBlockReason.RESPONSE_INVALID,
+    }
+
+
+def test_specification_documents_no_topic_change_contract() -> None:
+    specification = (
+        PROJECT_ROOT / "docs" / "LIMITED_TOPIC_AUTHORITY_PILOT_SPECIFICATION.md"
+    ).read_text(encoding="utf-8")
+    assert "agrees with the deterministic Topic" in specification
+    assert "`NO_TOPIC_CHANGE`" in specification
+
+
 def test_observation_is_frozen() -> None:
     observation = _observation()
     with pytest.raises(FrozenInstanceError):

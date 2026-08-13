@@ -143,6 +143,12 @@ The pilot adds an additive, sanitized result alongside current outputs:
 `authoritative_topic` equals `resolved_topic` only when the complete authority
 eligibility contract passes. Otherwise it equals `deterministic_topic`.
 
+A valid adjudication that agrees with the deterministic Topic does not
+constitute an authoritative override. It is recorded as `NO_TOPIC_CHANGE`, is
+not an error, fallback, provider failure, incorrect override, or authority
+contract violation, and leaves the deterministic production value and source
+authoritative.
+
 Existing consumers continue receiving the current deterministic Topic unless
 their path is explicitly enrolled in `LIMITED_TOPIC_AUTHORITY`. Format and
 Reader Intent contracts do not change.
