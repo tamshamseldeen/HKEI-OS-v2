@@ -10,7 +10,7 @@
     "sanitized_boundary": "PASS",
     "kill_switch": "PASS",
     "stop_signal_consumption": "PASS",
-    "stop_observability": "FAIL",
+    "stop_observability": "PASS",
     "regression_budget": "PASS",
     "precision_threshold": "PASS",
     "human_audit_independence": "PASS",
@@ -37,12 +37,12 @@
     "existing_consumer_safety": "PASS",
     "operational_metrics_readiness": "PASS"
   },
-  "exact_blocker": "ControlledTopicAuthorityCanaryWorkflow.analyze_operational consumes the explicit stop signal through runtime_config, then calls OperationalTopicAuthorityCanary.execute with stop_signal=None; the safe result therefore reports stop_recommended=false even when the supplied stop decision requested SHADOW.",
+  "exact_blocker": "NONE",
   "default_mode": "SHADOW",
   "global_authority_enabled": false,
   "first_real_canary_scope": "INTERNAL_SINGLE_PATH",
   "real_provider_calls": 0,
   "production_mutation": false,
-  "final_safety_classification": "PRE_CANARY_BLOCKED",
-  "final_readiness_decision": "FIX_ONE_OPERATIONAL_BLOCKER_FIRST"
+  "final_safety_classification": "PRE_CANARY_SAFE",
+  "final_readiness_decision": "READY_TO_RUN_INTERNAL_SINGLE_PATH_CANARY"
 }

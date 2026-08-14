@@ -21,7 +21,7 @@ def build_audit() -> dict[str, object]:
         "sanitized_boundary": "PASS",
         "kill_switch": "PASS",
         "stop_signal_consumption": "PASS",
-        "stop_observability": "FAIL",
+        "stop_observability": "PASS",
         "regression_budget": "PASS",
         "precision_threshold": "PASS",
         "human_audit_independence": "PASS",
@@ -52,19 +52,14 @@ def build_audit() -> dict[str, object]:
         "audit_id": "HKEI-210",
         "audit_type": "FINAL_PRE_CANARY_SAFETY_AUDIT",
         "checks": checks,
-        "exact_blocker": (
-            "ControlledTopicAuthorityCanaryWorkflow.analyze_operational consumes the explicit "
-            "stop signal through runtime_config, then calls OperationalTopicAuthorityCanary.execute "
-            "with stop_signal=None; the safe result therefore reports stop_recommended=false even "
-            "when the supplied stop decision requested SHADOW."
-        ),
+        "exact_blocker": "NONE",
         "default_mode": "SHADOW",
         "global_authority_enabled": False,
         "first_real_canary_scope": "INTERNAL_SINGLE_PATH",
         "real_provider_calls": 0,
         "production_mutation": False,
-        "final_safety_classification": "PRE_CANARY_BLOCKED",
-        "final_readiness_decision": "FIX_ONE_OPERATIONAL_BLOCKER_FIRST",
+        "final_safety_classification": "PRE_CANARY_SAFE",
+        "final_readiness_decision": "READY_TO_RUN_INTERNAL_SINGLE_PATH_CANARY",
     }
 
 
@@ -89,9 +84,8 @@ def render_markdown(audit: dict[str, object]) -> str:
     lines.extend(f"- `{name}`: `{status}`" for name, status in checks.items())
     lines.extend([
         "",
-        "The stop recommendation is consumed safely and changes effective mode to SHADOW, but its",
-        "presence is lost at the sanitized result boundary. No real canary should run until that",
-        "single observability blocker is corrected and re-audited.",
+        "The stop recommendation remains visible after it is consumed and changes effective mode",
+        "to SHADOW. The first real canary remains restricted to INTERNAL_SINGLE_PATH.",
         "",
     ])
     return "\n".join(lines)

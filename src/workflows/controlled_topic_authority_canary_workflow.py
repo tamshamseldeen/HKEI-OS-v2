@@ -153,7 +153,7 @@ class ControlledTopicAuthorityCanaryWorkflow:
             result.authority_decision,
             result.authority_observation,
             route,
-            stop_signal=None,
+            stop_signal=stop_signal,
         )
 
     def apply_to_resolution(

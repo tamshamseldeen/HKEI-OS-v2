@@ -95,11 +95,11 @@ def test_existing_consumers_do_not_import_canary_result():
     consumers = [p for p in (ROOT / "src").rglob("*.py") if "resolution" not in p.parts and "controlled_topic_authority_canary_workflow.py" not in p.name]
     assert not any("SanitizedTopicAuthorityCanaryResult" in p.read_text() for p in consumers)
 def test_metrics_require_no_source_data(): assert "source" not in {f.name for f in fields(type(TopicAuthorityMetrics()))}
-def test_stop_observability_blocker_is_detected():
+def test_stop_observability_fix_is_detected():
     source = inspect.getsource(ControlledTopicAuthorityCanaryWorkflow.analyze_operational)
-    assert "apply_stop_signal(stop_signal)" in source and "stop_signal=None" in source
-def test_audit_classification_is_blocked():
-    audit = build_audit(); assert audit["final_safety_classification"] == "PRE_CANARY_BLOCKED" and audit["final_readiness_decision"] == "FIX_ONE_OPERATIONAL_BLOCKER_FIRST"
+    assert "apply_stop_signal(stop_signal)" in source and "stop_signal=stop_signal" in source
+def test_audit_classification_is_ready():
+    audit = build_audit(); assert audit["final_safety_classification"] == "PRE_CANARY_SAFE" and audit["final_readiness_decision"] == "READY_TO_RUN_INTERNAL_SINGLE_PATH_CANARY"
 def test_no_provider_calls_declared(): assert build_audit()["real_provider_calls"] == 0
 def test_no_production_mutation_declared(): assert build_audit()["production_mutation"] is False
 def test_persisted_json_matches_builder(): assert json.loads((ROOT / "benchmark/limited_topic_authority_final_pre_canary_audit.json").read_text()) == build_audit()

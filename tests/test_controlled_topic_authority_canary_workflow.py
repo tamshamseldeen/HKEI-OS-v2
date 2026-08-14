@@ -305,6 +305,35 @@ def test_stop_recommendation_is_exposed_without_mode_mutation() -> None:
     assert workflow.config.authority_mode is ResolverAuthorityMode.LIMITED_TOPIC_AUTHORITY
 
 
+def test_operational_stop_signal_remains_visible_after_consumption() -> None:
+    workflow, _, _ = _workflow(mode=ResolverAuthorityMode.LIMITED_TOPIC_AUTHORITY)
+    signal = workflow.stop_evaluator.evaluate(
+        TopicAuthorityMetrics(),
+        TopicAuthoritySafetyMetrics(authority_contract_violation_count=1),
+        workflow.config,
+    )
+    result = workflow.analyze_operational(
+        route=TopicAuthorityConsumerRoute.INTERNAL_TOPIC_AUTHORITY_CANARY_PATH,
+        stop_signal=signal,
+        **ARTICLE,
+    )
+    assert signal.should_stop is True
+    assert signal.recommended_mode is ResolverAuthorityMode.SHADOW
+    assert result.stop_recommended is True
+    assert result.authority_mode is ResolverAuthorityMode.SHADOW
+    assert result.authority_consumed is False
+    assert result.consumer_topic is result.deterministic_topic
+
+
+def test_operational_result_reports_no_stop_without_signal() -> None:
+    workflow, _, _ = _workflow(mode=ResolverAuthorityMode.LIMITED_TOPIC_AUTHORITY)
+    result = workflow.analyze_operational(
+        route=TopicAuthorityConsumerRoute.INTERNAL_TOPIC_AUTHORITY_CANARY_PATH,
+        **ARTICLE,
+    )
+    assert result.stop_recommended is False
+
+
 class UnsafeApplicator(LimitedTopicAuthorityApplicator):
     def apply(self, resolution, config, *flags):
         normal = super().apply(

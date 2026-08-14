@@ -1,14 +1,14 @@
 # Limited Topic Authority final pre-canary audit
 
-- Final safety classification: `PRE_CANARY_BLOCKED`
-- Final readiness decision: `FIX_ONE_OPERATIONAL_BLOCKER_FIRST`
+- Final safety classification: `PRE_CANARY_SAFE`
+- Final readiness decision: `READY_TO_RUN_INTERNAL_SINGLE_PATH_CANARY`
 - Default mode: `SHADOW`
 - First real canary scope: `INTERNAL_SINGLE_PATH`
 - Real provider calls: `0`
 
 ## Exact blocker
 
-ControlledTopicAuthorityCanaryWorkflow.analyze_operational consumes the explicit stop signal through runtime_config, then calls OperationalTopicAuthorityCanary.execute with stop_signal=None; the safe result therefore reports stop_recommended=false even when the supplied stop decision requested SHADOW.
+NONE
 
 ## Checks
 
@@ -20,7 +20,7 @@ ControlledTopicAuthorityCanaryWorkflow.analyze_operational consumes the explicit
 - `sanitized_boundary`: `PASS`
 - `kill_switch`: `PASS`
 - `stop_signal_consumption`: `PASS`
-- `stop_observability`: `FAIL`
+- `stop_observability`: `PASS`
 - `regression_budget`: `PASS`
 - `precision_threshold`: `PASS`
 - `human_audit_independence`: `PASS`
@@ -47,6 +47,5 @@ ControlledTopicAuthorityCanaryWorkflow.analyze_operational consumes the explicit
 - `existing_consumer_safety`: `PASS`
 - `operational_metrics_readiness`: `PASS`
 
-The stop recommendation is consumed safely and changes effective mode to SHADOW, but its
-presence is lost at the sanitized result boundary. No real canary should run until that
-single observability blocker is corrected and re-audited.
+The stop recommendation remains visible after it is consumed and changes effective mode
+to SHADOW. The first real canary remains restricted to INTERNAL_SINGLE_PATH.
