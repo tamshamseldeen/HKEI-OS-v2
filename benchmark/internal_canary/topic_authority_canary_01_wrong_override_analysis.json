@@ -1,0 +1,131 @@
+{
+  "analysis_id": "topic_authority_canary_01_wrong_override_analysis",
+  "analysis_type": "ONE_TIME_OFFLINE_DIAGNOSTIC",
+  "case_analyzed": "CANARY-003",
+  "provider_calls": 0,
+  "source_or_prediction_mutation": false,
+  "human_expected_topic": "CRIME",
+  "human_correctness": "INCORRECT_OVERRIDE",
+  "deterministic_topic": "CRIME",
+  "authoritative_topic": "HEALTH",
+  "deterministic_confidence": "LOW",
+  "deterministic_evidence": {
+    "reason_codes": [
+      "TITLE_TOPIC_SIGNAL",
+      "BODY_TOPIC_SIGNAL"
+    ],
+    "supporting_signals": [
+      "TITLE_CRIME_SIGNAL",
+      "BODY_CRIME_SIGNAL"
+    ],
+    "warnings": [
+      "LOW_TOPIC_CONFIDENCE"
+    ],
+    "central_enforcement_event_recognized": true,
+    "health_evidence_explicitly_represented": false
+  },
+  "candidate_universe": [
+    "CRIME",
+    "POLITICS",
+    "ECONOMY",
+    "BUSINESS",
+    "TECHNOLOGY",
+    "SPORTS",
+    "GOVERNMENT",
+    "WEATHER",
+    "HEALTH",
+    "CULTURE",
+    "SCIENCE",
+    "EDUCATION",
+    "ENTERTAINMENT",
+    "WORLD",
+    "GENERAL"
+  ],
+  "candidate_universe_assessment": [
+    "EXPECTED_CANDIDATE_PRESENT",
+    "CANDIDATE_UNIVERSE_OVERBROAD"
+  ],
+  "expected_candidate_present": true,
+  "stronger_structured_candidate_present": false,
+  "semantic_evidence": {
+    "contextual_roles": [
+      "CONSEQUENCE"
+    ],
+    "contextual_supports": [
+      "COMPONENT_CAUSE"
+    ],
+    "relationships": [],
+    "primary_domain_candidates": [],
+    "secondary_domain_candidates": [],
+    "subject_consequence_distinction": "NOT_REPRESENTED"
+  },
+  "gate": {
+    "scope": "TOPIC_REQUIRED",
+    "triggers": [
+      "TOPIC_LOW_CONFIDENCE",
+      "NO_PRIMARY_SEMANTIC_DOMAIN",
+      "CONTEXT_PRESENT_BUT_NO_SEMANTIC_RELATIONSHIP",
+      "SPECIFIC_TOPIC_WITH_UNRESOLVED_DOMAIN"
+    ],
+    "assessment": "GATE_APPROPRIATE"
+  },
+  "prompt_input_audit": {
+    "fingerprint_matches_historical_request": true,
+    "central_event_role_emphasized": false,
+    "authority_enforcement_emphasized": false,
+    "food_safety_consequence_emphasized": false,
+    "candidate_definitions_present": true,
+    "raw_prompt_inspected_or_persisted": false
+  },
+  "subject_role_assessment": [
+    "SUBJECT_ROLE_MISASSIGNED",
+    "CONSEQUENCE_PROMOTED_TO_SUBJECT",
+    "AUTHORITY_ACTION_UNDERWEIGHTED"
+  ],
+  "label_semantics_assessment": "LABEL_SEMANTICS_OVERLAP",
+  "consequence_subject_protection": "PROTECTION_MISSING",
+  "provider": {
+    "adjudicated_topic": "HEALTH",
+    "confidence": "HIGH",
+    "ambiguity_remaining": false,
+    "candidate_compliant": true,
+    "response_valid": true
+  },
+  "confidence_policy_assessment": "CONFIDENCE_POLICY_CONTRIBUTING",
+  "resolver_assessment": "RESOLVER_BEHAVIOR_CORRECT_BY_CONTRACT",
+  "applicator_assessment": "APPLICATOR_CORRECT_BY_CONTRACT",
+  "authority_eligibility": {
+    "resolution_status": "ADJUDICATED_ACCEPTED",
+    "source": "ADJUDICATION",
+    "response_valid": true,
+    "candidate_compliant": true,
+    "fingerprint_valid": true,
+    "provider_available": true,
+    "review_required": false,
+    "ambiguity_remaining": false,
+    "topic_changed": true,
+    "observation_succeeded": true
+  },
+  "earliest_failure_stage": "TOPIC_ROLE_ASSIGNMENT",
+  "primary_failure_class": "CONSEQUENCE_PROMOTED_TO_SUBJECT",
+  "secondary_failure_classes": [
+    "CENTRAL_EVENT_UNDERWEIGHTED",
+    "STRUCTURED_EVIDENCE_INCOMPLETE",
+    "PROVIDER_OVERRULED_CORRECT_BASELINE",
+    "FALSE_CONFIDENCE",
+    "AMBIGUITY_FALSE_NEGATIVE",
+    "CRIME_HEALTH_BOUNDARY_UNDERSPECIFIED",
+    "CANDIDATE_SET_TOO_BROAD"
+  ],
+  "safest_generic_counterfactual": "A. consequence-vs-subject semantic protection",
+  "counterfactual_rationale": "Represent consequence separately from the primary subject and require central-event evidence before promoting a consequence domain. This preserves HEALTH when the hazard, disease, or public-health response is itself central.",
+  "overcorrection_risk": "LOW",
+  "historical_similar_cases": {
+    "count": 0,
+    "case_ids": []
+  },
+  "pilot_implication": "ONE_GENERIC_SEMANTIC_FIX_REQUIRED_BEFORE_NEW_CANARY",
+  "pilot_stopped": true,
+  "new_holdout_required_after_any_fix": true,
+  "source_specific_fix_proposed": false
+}
