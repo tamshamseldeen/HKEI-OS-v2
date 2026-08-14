@@ -10,6 +10,7 @@ from .editorial_resolution_status import EditorialResolutionStatus
 from .editorial_resolution_warning import EditorialResolutionWarning
 from .resolver_authority_mode import ResolverAuthorityMode
 from .topic_authority_block_reason import TopicAuthorityBlockReason
+from .controlled_topic_authority_consumer import TopicAuthorityConsumerRoute
 
 
 @dataclass(frozen=True)
@@ -18,6 +19,7 @@ class SanitizedTopicAuthorityCanaryResult:
     resolved_topic: Topic | None
     authoritative_topic: Topic
     consumer_topic: Topic
+    route: TopicAuthorityConsumerRoute
     authority_mode: ResolverAuthorityMode
     authority_applied: bool
     authority_consumed: bool

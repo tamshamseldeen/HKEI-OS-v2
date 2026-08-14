@@ -57,6 +57,7 @@ class OperationalTopicAuthorityCanary:
             resolved_topic=decision.resolved_topic,
             authoritative_topic=decision.authoritative_topic,
             consumer_topic=consumer_topic,
+            route=route,
             authority_mode=mode,
             authority_applied=decision.authority_applied,
             authority_consumed=consumed,

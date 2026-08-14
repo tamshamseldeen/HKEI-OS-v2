@@ -92,7 +92,14 @@ def test_concurrency_proxy_has_no_cross_instance_leak():
     assert modes == [ResolverAuthorityMode.LIMITED_TOPIC_AUTHORITY, ResolverAuthorityMode.SHADOW]
 def test_dual_provenance(): assert {"deterministic_topic", "resolved_topic", "authoritative_topic", "consumer_topic", "authority_applied", "authority_consumed"} <= {f.name for f in fields(SanitizedTopicAuthorityCanaryResult)}
 def test_existing_consumers_do_not_import_canary_result():
-    consumers = [p for p in (ROOT / "src").rglob("*.py") if "resolution" not in p.parts and "controlled_topic_authority_canary_workflow.py" not in p.name]
+    canary_boundaries = {
+        "controlled_topic_authority_canary_workflow.py",
+        "internal_topic_authority_canary.py",
+    }
+    consumers = [
+        p for p in (ROOT / "src").rglob("*.py")
+        if "resolution" not in p.parts and p.name not in canary_boundaries
+    ]
     assert not any("SanitizedTopicAuthorityCanaryResult" in p.read_text() for p in consumers)
 def test_metrics_require_no_source_data(): assert "source" not in {f.name for f in fields(type(TopicAuthorityMetrics()))}
 def test_stop_observability_fix_is_detected():

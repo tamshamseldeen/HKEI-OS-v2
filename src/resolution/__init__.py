@@ -45,6 +45,7 @@ from .controlled_topic_authority_consumer import (
 )
 from .sanitized_topic_authority_canary_result import SanitizedTopicAuthorityCanaryResult
 from .operational_topic_authority_canary import OperationalTopicAuthorityCanary
+from .topic_authority_canary_route_config import TopicAuthorityCanaryRouteConfig
 
 __all__ = (
     "EditorialDimensionResolution",
@@ -84,4 +85,5 @@ __all__ = (
     "TopicAuthorityConsumerRoute",
     "SanitizedTopicAuthorityCanaryResult",
     "OperationalTopicAuthorityCanary",
+    "TopicAuthorityCanaryRouteConfig",
 )
