@@ -1,0 +1,71 @@
+{
+  "audit_id": "topic_authority_canary_01_human_audit_result",
+  "judgment_source": "INDEPENDENT_HUMAN_REVIEW",
+  "reviewed_count": 3,
+  "correct_count": 2,
+  "incorrect_count": 1,
+  "unsure_count": 0,
+  "audited_override_count": 3,
+  "override_precision": 0.6666666666666666,
+  "minimum_precision_sample": 30,
+  "precision_threshold": 0.9,
+  "precision_threshold_evaluable": false,
+  "precision_stop_triggered": false,
+  "regression_budget": 0,
+  "regression_count": 1,
+  "regression_budget_exceeded": true,
+  "authority_contract_violations": 0,
+  "stop_evaluator_executed": true,
+  "stop_decision": {
+    "should_stop": true,
+    "reasons": [
+      "REGRESSION_BUDGET_EXCEEDED"
+    ],
+    "recommended_mode": "SHADOW"
+  },
+  "effective_authority_mode_after_stop": "SHADOW",
+  "kill_switch_status": "ALREADY_SHADOW",
+  "internal_route_state_after_stop": "DISABLED_DEFAULT",
+  "post_stop_authority_consumed": false,
+  "post_stop_consumer_topic": "ECONOMY",
+  "post_stop_deterministic_topic": "ECONOMY",
+  "canary_continuation_allowed": false,
+  "safety_classification": "PILOT_STOPPED_AS_DESIGNED",
+  "audit_outcome_classification": "FIRST_CANARY_AUDIT_MIXED",
+  "next_recommended_step": "ANALYZE_FIRST_CANARY_WRONG_OVERRIDE_ONCE",
+  "provider_calls": 0,
+  "production_wide_authority_enabled": false,
+  "historical_canary_sha256": "145d6de20e2764f4c01b74b54274b7f758a8e40340183b3f0b8be2b7222e2295",
+  "records": [
+    {
+      "canary_id": "CANARY-002",
+      "audit_identity": "7d8408b9adafb4dc9774c9ebb1c7b12c01260e16fdad545934dc3973ee7f1d03",
+      "deterministic_topic": "ECONOMY",
+      "authoritative_topic": "POLITICS",
+      "human_expected_topic": "POLITICS",
+      "human_correctness": "CORRECT_OVERRIDE",
+      "review_timestamp": "2026-08-14T20:43:04Z",
+      "reviewer_notes": "The central editorial subject is United States policy toward Iran and the escalation between Washington and Tehran. Economic pressure is an instrument of that policy rather than the primary editorial subject. POLITICS is therefore more appropriate than ECONOMY."
+    },
+    {
+      "canary_id": "CANARY-003",
+      "audit_identity": "45f33c54139806b8cf9b53ec42f2e14b3dbd90a8ff71c1b7f2cb30869c4d49c7",
+      "deterministic_topic": "CRIME",
+      "authoritative_topic": "HEALTH",
+      "human_expected_topic": "CRIME",
+      "human_correctness": "INCORRECT_OVERRIDE",
+      "review_timestamp": "2026-08-14T20:43:04Z",
+      "reviewer_notes": "The central event is the authorities discovering and seizing a food-production facility because of an alleged unlawful or fraudulent manufacturing practice. Food safety is an important consequence, but the article is organized around the enforcement/seizure event rather than medical or public-health treatment. CRIME is therefore more appropriate than HEALTH."
+    },
+    {
+      "canary_id": "CANARY-005",
+      "audit_identity": "d12eb8af291a5b0963cee5730c5231abf4e1eb7897f3fd1821c955ba08d160a7",
+      "deterministic_topic": "GOVERNMENT",
+      "authoritative_topic": "EDUCATION",
+      "human_expected_topic": "EDUCATION",
+      "human_correctness": "CORRECT_OVERRIDE",
+      "review_timestamp": "2026-08-14T20:43:04Z",
+      "reviewer_notes": "The article's subject is the school-year start date, student holiday period, and official academic calendar. The ministry is the authority providing the information, not the editorial subject. EDUCATION is therefore more appropriate than GOVERNMENT."
+    }
+  ]
+}

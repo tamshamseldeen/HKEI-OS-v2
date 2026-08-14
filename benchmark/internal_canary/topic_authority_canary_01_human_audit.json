@@ -1,6 +1,7 @@
 {
   "audit_id": "topic_authority_canary_01_human_audit",
   "audit_type": "INDEPENDENT_HUMAN_TOPIC_OVERRIDE_REVIEW",
+  "judgment_source": "INDEPENDENT_HUMAN_REVIEW",
   "independence_statement": "The reviewer must determine the best Topic from the article itself and must not assume either deterministic_topic or authoritative_topic is correct.",
   "allowed_human_correctness_states": [
     "CORRECT_OVERRIDE",
@@ -27,9 +28,9 @@
   ],
   "metrics": {
     "audit_records_prepared": 3,
-    "reviewed": 0,
-    "correct": 0,
-    "incorrect": 0,
+    "reviewed": 3,
+    "correct": 2,
+    "incorrect": 1,
     "unsure": 0,
     "provider_calls": 0
   },
@@ -51,10 +52,10 @@
         "title": "وزير الخزانة الأميركي: سنفرض على إيران تدابير «غير مسبوقة»",
         "faithful_excerpt": "أعلن وزير الخزانة الأميركي أن الولايات المتحدة تتجه إلى فرض إجراءات وصفها بأنها «غير مسبوقة» على إيران، في ظل استمرار التصعيد بين واشنطن وطهران وتزايد الضغوط الاقتصادية الأميركية.\n\nوتأتي التصريحات بعدما هددت الولايات المتحدة بمواصلة الحصار البحري المفروض على إيران إلى أجل غير مسمى، بالتزامن مع تحركات تستهدف زيادة الضغوط على الاقتصاد الإيراني."
       },
-      "human_correctness": "UNREVIEWED",
-      "human_expected_topic": "UNREVIEWED",
-      "reviewer_notes": "UNREVIEWED",
-      "review_timestamp": "UNREVIEWED"
+      "human_correctness": "CORRECT_OVERRIDE",
+      "human_expected_topic": "POLITICS",
+      "reviewer_notes": "The central editorial subject is United States policy toward Iran and the escalation between Washington and Tehran. Economic pressure is an instrument of that policy rather than the primary editorial subject. POLITICS is therefore more appropriate than ECONOMY.",
+      "review_timestamp": "2026-08-14T20:43:04Z"
     },
     {
       "canary_id": "CANARY-003",
@@ -73,10 +74,10 @@
         "title": "صدمة في مصر.. ضبط مصنع يستخدم الفحم النباتي بدلًا من الكاكاو في إنتاج البسكويت",
         "faithful_excerpt": "كشفت السلطات المصرية عن واقعة تتعلق بمصنع للمواد الغذائية استخدم مادة الفحم النباتي في إنتاج البسكويت بدلًا من الكاكاو، في قضية أثارت اهتمامًا واسعًا بسبب ارتباطها بسلامة المنتجات الغذائية.\n\nوبحسب المعلومات المنشورة، تمكنت الجهات المختصة من ضبط المصنع بعد اكتشاف استخدام الفحم النباتي لتلوين المنتج وإكسابه مظهرًا قريبًا من المنتجات المصنوعة باستخدام الكاكاو."
       },
-      "human_correctness": "UNREVIEWED",
-      "human_expected_topic": "UNREVIEWED",
-      "reviewer_notes": "UNREVIEWED",
-      "review_timestamp": "UNREVIEWED"
+      "human_correctness": "INCORRECT_OVERRIDE",
+      "human_expected_topic": "CRIME",
+      "reviewer_notes": "The central event is the authorities discovering and seizing a food-production facility because of an alleged unlawful or fraudulent manufacturing practice. Food safety is an important consequence, but the article is organized around the enforcement/seizure event rather than medical or public-health treatment. CRIME is therefore more appropriate than HEALTH.",
+      "review_timestamp": "2026-08-14T20:43:04Z"
     },
     {
       "canary_id": "CANARY-005",
@@ -95,10 +96,10 @@
         "title": "حقيقة تأجيل بدء العام الدراسي الجديد 2026-2027 ومد إجازة الطلاب",
         "faithful_excerpt": "حسمت وزارة التربية والتعليم والتعليم الفني الجدل الذي أثير خلال الأيام الماضية بشأن تأجيل موعد انطلاق العام الدراسي الجديد 2026-2027 ومد فترة الإجازة الصيفية للطلاب.\n\nوأكدت الوزارة استمرار العمل بالخريطة الزمنية المحددة للعام الدراسي، وعدم وجود تغيير في موعد بدء الدراسة المعلن."
       },
-      "human_correctness": "UNREVIEWED",
-      "human_expected_topic": "UNREVIEWED",
-      "reviewer_notes": "UNREVIEWED",
-      "review_timestamp": "UNREVIEWED"
+      "human_correctness": "CORRECT_OVERRIDE",
+      "human_expected_topic": "EDUCATION",
+      "reviewer_notes": "The article's subject is the school-year start date, student holiday period, and official academic calendar. The ministry is the authority providing the information, not the editorial subject. EDUCATION is therefore more appropriate than GOVERNMENT.",
+      "review_timestamp": "2026-08-14T20:43:04Z"
     }
   ]
 }

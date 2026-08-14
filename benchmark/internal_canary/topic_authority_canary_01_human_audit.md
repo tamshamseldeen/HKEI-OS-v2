@@ -13,10 +13,10 @@ packet. Set `human_correctness` to `CORRECT_OVERRIDE`, `INCORRECT_OVERRIDE`, or
 - Deterministic / authoritative Topic: `ECONOMY` / `POLITICS`
 - Title: وزير الخزانة الأميركي: سنفرض على إيران تدابير «غير مسبوقة»
 - Faithful excerpt: أعلن وزير الخزانة الأميركي أن الولايات المتحدة تتجه إلى فرض إجراءات وصفها بأنها «غير مسبوقة» على إيران، في ظل استمرار التصعيد بين واشنطن وطهران وتزايد الضغوط الاقتصادية الأميركية. وتأتي التصريحات بعدما هددت الولايات المتحدة بمواصلة الحصار البحري المفروض على إيران إلى أجل غير مسمى، بالتزامن مع تحركات تستهدف زيادة الضغوط على الاقتصاد الإيراني.
-- Human correctness: `UNREVIEWED`
-- Human expected Topic: `UNREVIEWED`
-- Reviewer notes: `UNREVIEWED`
-- Review timestamp: `UNREVIEWED`
+- Human correctness: `CORRECT_OVERRIDE`
+- Human expected Topic: `POLITICS`
+- Reviewer notes: The central editorial subject is United States policy toward Iran and the escalation between Washington and Tehran. Economic pressure is an instrument of that policy rather than the primary editorial subject. POLITICS is therefore more appropriate than ECONOMY.
+- Review timestamp: `2026-08-14T20:43:04Z`
 
 ## CANARY-003
 
@@ -24,10 +24,10 @@ packet. Set `human_correctness` to `CORRECT_OVERRIDE`, `INCORRECT_OVERRIDE`, or
 - Deterministic / authoritative Topic: `CRIME` / `HEALTH`
 - Title: صدمة في مصر.. ضبط مصنع يستخدم الفحم النباتي بدلًا من الكاكاو في إنتاج البسكويت
 - Faithful excerpt: كشفت السلطات المصرية عن واقعة تتعلق بمصنع للمواد الغذائية استخدم مادة الفحم النباتي في إنتاج البسكويت بدلًا من الكاكاو، في قضية أثارت اهتمامًا واسعًا بسبب ارتباطها بسلامة المنتجات الغذائية. وبحسب المعلومات المنشورة، تمكنت الجهات المختصة من ضبط المصنع بعد اكتشاف استخدام الفحم النباتي لتلوين المنتج وإكسابه مظهرًا قريبًا من المنتجات المصنوعة باستخدام الكاكاو.
-- Human correctness: `UNREVIEWED`
-- Human expected Topic: `UNREVIEWED`
-- Reviewer notes: `UNREVIEWED`
-- Review timestamp: `UNREVIEWED`
+- Human correctness: `INCORRECT_OVERRIDE`
+- Human expected Topic: `CRIME`
+- Reviewer notes: The central event is the authorities discovering and seizing a food-production facility because of an alleged unlawful or fraudulent manufacturing practice. Food safety is an important consequence, but the article is organized around the enforcement/seizure event rather than medical or public-health treatment. CRIME is therefore more appropriate than HEALTH.
+- Review timestamp: `2026-08-14T20:43:04Z`
 
 ## CANARY-005
 
@@ -35,9 +35,11 @@ packet. Set `human_correctness` to `CORRECT_OVERRIDE`, `INCORRECT_OVERRIDE`, or
 - Deterministic / authoritative Topic: `GOVERNMENT` / `EDUCATION`
 - Title: حقيقة تأجيل بدء العام الدراسي الجديد 2026-2027 ومد إجازة الطلاب
 - Faithful excerpt: حسمت وزارة التربية والتعليم والتعليم الفني الجدل الذي أثير خلال الأيام الماضية بشأن تأجيل موعد انطلاق العام الدراسي الجديد 2026-2027 ومد فترة الإجازة الصيفية للطلاب. وأكدت الوزارة استمرار العمل بالخريطة الزمنية المحددة للعام الدراسي، وعدم وجود تغيير في موعد بدء الدراسة المعلن.
-- Human correctness: `UNREVIEWED`
-- Human expected Topic: `UNREVIEWED`
-- Reviewer notes: `UNREVIEWED`
-- Review timestamp: `UNREVIEWED`
+- Human correctness: `CORRECT_OVERRIDE`
+- Human expected Topic: `EDUCATION`
+- Reviewer notes: The article's subject is the school-year start date, student holiday period, and official academic calendar. The ministry is the authority providing the information, not the editorial subject. EDUCATION is therefore more appropriate than GOVERNMENT.
+- Review timestamp: `2026-08-14T20:43:04Z`
 
-Prepared: 3. Reviewed: 0. Correct: 0. Incorrect: 0. Unsure: 0.
+Judgment source: `INDEPENDENT_HUMAN_REVIEW`.
+
+Prepared: 3. Reviewed: 3. Correct: 2. Incorrect: 1. Unsure: 0.

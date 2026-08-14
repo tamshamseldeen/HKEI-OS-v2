@@ -29,7 +29,8 @@ def test_article_context_available_and_faithful():
 def test_no_provider_raw_response(): assert "raw_response" not in AUDIT.read_text(encoding="utf-8").lower()
 def test_no_provider_prompt(): assert "raw_prompt" not in AUDIT.read_text(encoding="utf-8").lower()
 def test_no_chain_of_thought(): assert "chain-of-thought" not in AUDIT.read_text(encoding="utf-8").lower()
-def test_correctness_fields_unreviewed(): assert all(item["human_correctness"] == item["human_expected_topic"] == item["reviewer_notes"] == item["review_timestamp"] == "UNREVIEWED" for item in packet()["records"])
+def test_human_judgments_recorded_exactly(): assert {item["canary_id"]:item["human_correctness"] for item in packet()["records"]} == {"CANARY-002":"CORRECT_OVERRIDE", "CANARY-003":"INCORRECT_OVERRIDE", "CANARY-005":"CORRECT_OVERRIDE"}
 def test_legal_topic_contract_exact(): assert set(packet()["legal_topic_values"]) == {item.value for item in Topic}
-def test_no_automatic_correctness_inference(): assert packet()["metrics"] == {"audit_records_prepared":3,"reviewed":0,"correct":0,"incorrect":0,"unsure":0,"provider_calls":0}
+def test_independent_human_source(): assert packet()["judgment_source"] == "INDEPENDENT_HUMAN_REVIEW"
+def test_recorded_metrics(): assert packet()["metrics"] == {"audit_records_prepared":3,"reviewed":3,"correct":2,"incorrect":1,"unsure":0,"provider_calls":0}
 def test_provider_calls_zero(): assert packet()["metrics"]["provider_calls"] == 0
