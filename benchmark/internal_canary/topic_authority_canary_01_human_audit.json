@@ -1,0 +1,104 @@
+{
+  "audit_id": "topic_authority_canary_01_human_audit",
+  "audit_type": "INDEPENDENT_HUMAN_TOPIC_OVERRIDE_REVIEW",
+  "independence_statement": "The reviewer must determine the best Topic from the article itself and must not assume either deterministic_topic or authoritative_topic is correct.",
+  "allowed_human_correctness_states": [
+    "CORRECT_OVERRIDE",
+    "INCORRECT_OVERRIDE",
+    "UNSURE",
+    "UNREVIEWED"
+  ],
+  "legal_topic_values": [
+    "POLITICS",
+    "ECONOMY",
+    "BUSINESS",
+    "TECHNOLOGY",
+    "SPORTS",
+    "GOVERNMENT",
+    "WEATHER",
+    "HEALTH",
+    "CULTURE",
+    "SCIENCE",
+    "EDUCATION",
+    "CRIME",
+    "ENTERTAINMENT",
+    "WORLD",
+    "GENERAL"
+  ],
+  "metrics": {
+    "audit_records_prepared": 3,
+    "reviewed": 0,
+    "correct": 0,
+    "incorrect": 0,
+    "unsure": 0,
+    "provider_calls": 0
+  },
+  "records": [
+    {
+      "canary_id": "CANARY-002",
+      "audit_identity": "7d8408b9adafb4dc9774c9ebb1c7b12c01260e16fdad545934dc3973ee7f1d03",
+      "deterministic_topic": "ECONOMY",
+      "resolved_topic": "POLITICS",
+      "authoritative_topic": "POLITICS",
+      "authority_source": "ADJUDICATION",
+      "resolution_status": "ADJUDICATED_ACCEPTED",
+      "provider_confidence": "HIGH",
+      "ambiguity_remaining": false,
+      "review_required": false,
+      "block_reasons": [],
+      "warnings": [],
+      "human_review_context": {
+        "title": "وزير الخزانة الأميركي: سنفرض على إيران تدابير «غير مسبوقة»",
+        "faithful_excerpt": "أعلن وزير الخزانة الأميركي أن الولايات المتحدة تتجه إلى فرض إجراءات وصفها بأنها «غير مسبوقة» على إيران، في ظل استمرار التصعيد بين واشنطن وطهران وتزايد الضغوط الاقتصادية الأميركية.\n\nوتأتي التصريحات بعدما هددت الولايات المتحدة بمواصلة الحصار البحري المفروض على إيران إلى أجل غير مسمى، بالتزامن مع تحركات تستهدف زيادة الضغوط على الاقتصاد الإيراني."
+      },
+      "human_correctness": "UNREVIEWED",
+      "human_expected_topic": "UNREVIEWED",
+      "reviewer_notes": "UNREVIEWED",
+      "review_timestamp": "UNREVIEWED"
+    },
+    {
+      "canary_id": "CANARY-003",
+      "audit_identity": "45f33c54139806b8cf9b53ec42f2e14b3dbd90a8ff71c1b7f2cb30869c4d49c7",
+      "deterministic_topic": "CRIME",
+      "resolved_topic": "HEALTH",
+      "authoritative_topic": "HEALTH",
+      "authority_source": "ADJUDICATION",
+      "resolution_status": "ADJUDICATED_ACCEPTED",
+      "provider_confidence": "HIGH",
+      "ambiguity_remaining": false,
+      "review_required": false,
+      "block_reasons": [],
+      "warnings": [],
+      "human_review_context": {
+        "title": "صدمة في مصر.. ضبط مصنع يستخدم الفحم النباتي بدلًا من الكاكاو في إنتاج البسكويت",
+        "faithful_excerpt": "كشفت السلطات المصرية عن واقعة تتعلق بمصنع للمواد الغذائية استخدم مادة الفحم النباتي في إنتاج البسكويت بدلًا من الكاكاو، في قضية أثارت اهتمامًا واسعًا بسبب ارتباطها بسلامة المنتجات الغذائية.\n\nوبحسب المعلومات المنشورة، تمكنت الجهات المختصة من ضبط المصنع بعد اكتشاف استخدام الفحم النباتي لتلوين المنتج وإكسابه مظهرًا قريبًا من المنتجات المصنوعة باستخدام الكاكاو."
+      },
+      "human_correctness": "UNREVIEWED",
+      "human_expected_topic": "UNREVIEWED",
+      "reviewer_notes": "UNREVIEWED",
+      "review_timestamp": "UNREVIEWED"
+    },
+    {
+      "canary_id": "CANARY-005",
+      "audit_identity": "d12eb8af291a5b0963cee5730c5231abf4e1eb7897f3fd1821c955ba08d160a7",
+      "deterministic_topic": "GOVERNMENT",
+      "resolved_topic": "EDUCATION",
+      "authoritative_topic": "EDUCATION",
+      "authority_source": "ADJUDICATION",
+      "resolution_status": "ADJUDICATED_ACCEPTED",
+      "provider_confidence": "HIGH",
+      "ambiguity_remaining": false,
+      "review_required": false,
+      "block_reasons": [],
+      "warnings": [],
+      "human_review_context": {
+        "title": "حقيقة تأجيل بدء العام الدراسي الجديد 2026-2027 ومد إجازة الطلاب",
+        "faithful_excerpt": "حسمت وزارة التربية والتعليم والتعليم الفني الجدل الذي أثير خلال الأيام الماضية بشأن تأجيل موعد انطلاق العام الدراسي الجديد 2026-2027 ومد فترة الإجازة الصيفية للطلاب.\n\nوأكدت الوزارة استمرار العمل بالخريطة الزمنية المحددة للعام الدراسي، وعدم وجود تغيير في موعد بدء الدراسة المعلن."
+      },
+      "human_correctness": "UNREVIEWED",
+      "human_expected_topic": "UNREVIEWED",
+      "reviewer_notes": "UNREVIEWED",
+      "review_timestamp": "UNREVIEWED"
+    }
+  ]
+}
