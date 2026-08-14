@@ -14,6 +14,7 @@ from .compositional_semantic_evidence import CompositionalSemanticEvidence
 from .semantic_component import SemanticComponent
 from .semantic_relationship import SemanticRelationship
 from .semantic_relationship_type import SemanticRelationshipType
+from .topic_consequence_subject_protection import TopicConsequenceSubjectProtector
 
 
 _SENTENCE_BOUNDARY = re.compile(r"[.؟!؛\n]+")
@@ -554,6 +555,27 @@ class DeterministicCompositionalSemanticEngine:
         """
         indexed_items = tuple(enumerate(contextual_evidence.all_items))
         relationships: list[SemanticRelationship] = []
+        role_relationships = TopicConsequenceSubjectProtector().compose(source)
+        central_domains = {
+            support.removeprefix("PRIMARY_DOMAIN_")
+            for relationship in role_relationships
+            for support in relationship.supports
+            if support.startswith("PRIMARY_DOMAIN_")
+        }
+        contextual_domains = {
+            support.removeprefix("TOPIC_")
+            for item in contextual_evidence.all_items
+            for support in item.supports
+            if support.startswith("TOPIC_")
+        }
+        relationships.extend(
+            relationship
+            for relationship in role_relationships
+            if relationship.relationship_type
+            is SemanticRelationshipType.CONSEQUENCE_OF_EVENT
+            and relationship.object_text not in central_domains
+            and relationship.object_text not in contextual_domains
+        )
         for source_section, sentence_index, text in self._source_units(source):
             local_items = tuple(
                 (index, item)

@@ -313,8 +313,18 @@ class DeterministicSemanticCandidateAssessor:
                     warnings.append(f"{role}_DOMINATED")
         if supports and not central:
             warnings.append("SUBJECT_ROLE_UNRESOLVED")
-        if any(record.secondary for record in supports):
+        consequence_only = family == "DOMAIN" and bool(supports) and all(
+            record.secondary
+            or (
+                "EFFECT" in record.roles
+                and "SUBJECT" not in record.roles
+                and "DOMAIN" not in record.roles
+            )
+            for record in supports
+        )
+        if consequence_only:
             warnings.append("SUBJECT_ROLE_UNRESOLVED")
+            warnings.append("CONSEQUENCE_ONLY_SUPPORT")
         structure_complete = True
         if family == "FORMAT":
             structure_complete = self._format_structure_complete(
