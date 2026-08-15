@@ -93,7 +93,7 @@ def test_no_hkei_223_duplicates(): assert_no_exact_duplicates([ROOT / "tests/fix
 
 def test_freshness_counts_and_status():
     data = manifest()
-    assert data["freshness_status"] == "VERIFIED_NEW_OPERATIONAL_INPUTS"
+    assert data["freshness_status"] == "CONSUMED_FOR_EVALUATION"
     assert all(data[key] == 0 for key in (
         "duplicates_with_canary_01", "duplicates_with_canary_02",
         "duplicates_with_benchmark_batches", "duplicates_with_HKEI_216_fixtures",
@@ -106,20 +106,21 @@ def test_registration_and_operational_status():
     assert manifest()["operational_status"] == "CONTROLLED_INTERNAL_OPERATIONAL_CANARY_SOURCE"
 
 
-def test_execution_remains_not_run():
+def test_registration_lifecycle_records_completed_evaluation():
     data = manifest()
-    assert data["evaluation_status"] == "NOT_RUN"
-    assert all(data[key] == "NO" for key in (
+    assert data["evaluation_status"] == "COMPLETED_AWAITING_HUMAN_AUDIT"
+    assert all(data[key] == "YES" for key in (
         "classifier_execution", "semantic_execution", "Gate_execution",
-        "Resolver_execution", "authority_execution",
+        "Resolver_execution",
     ))
-    assert data["provider_calls"] == 0
+    assert data["authority_execution"] == "YES_REQUEST_LOCAL_ONLY"
+    assert data["provider_calls"] == 4
 
 
-def test_no_evaluation_or_human_audit_artifacts():
+def test_evaluation_exists_without_human_audit_artifacts():
+    assert (ROOT / "benchmark/internal_canary/topic_authority_canary_03.json").is_file()
+    assert (ROOT / "benchmark/internal_canary/topic_authority_canary_03.md").is_file()
     forbidden = (
-        ROOT / "benchmark/internal_canary/topic_authority_canary_03.json",
-        ROOT / "benchmark/internal_canary/topic_authority_canary_03.md",
         ROOT / "benchmark/internal_canary/topic_authority_canary_03_human_audit.json",
         ROOT / "benchmark/internal_canary/topic_authority_canary_03_human_audit.md",
     )
@@ -134,4 +135,4 @@ def test_pilot_remains_shadow():
 def test_internal_route_remains_disabled():
     assert TopicAuthorityCanaryRouteConfig().resolve_route() is TopicAuthorityConsumerRoute.NORMAL_PRODUCTION_PATH
     assert manifest()["internal_route_state"] == "DISABLED_DEFAULT"
-    assert manifest()["canary_continuation"] == "NOT_STARTED"
+    assert manifest()["canary_continuation"] == "CONSUMED"
