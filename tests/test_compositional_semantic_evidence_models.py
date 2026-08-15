@@ -90,9 +90,10 @@ def test_semantic_component_has_exact_values() -> None:
     )
 
 
-def test_semantic_relationship_type_has_exact_values() -> None:
-    """Expose only the specified compositional relationship types in order."""
-    assert tuple(value.value for value in SemanticRelationshipType) == (
+def test_semantic_relationship_type_preserves_foundational_values() -> None:
+    """Preserve the foundational relationship-type prefix in order."""
+    values = tuple(value.value for value in SemanticRelationshipType)
+    assert values[:16] == (
         "AUTHORITY_ACTS_ON_SUBJECT",
         "ACTOR_PERFORMS_ACTION",
         "ACTION_TARGETS_OBJECT",

@@ -15,6 +15,7 @@ from .semantic_component import SemanticComponent
 from .semantic_relationship import SemanticRelationship
 from .semantic_relationship_type import SemanticRelationshipType
 from .topic_consequence_subject_protection import TopicConsequenceSubjectProtector
+from .topic_ontology_boundary_protection import TopicOntologyBoundaryProtector
 
 
 _SENTENCE_BOUNDARY = re.compile(r"[.؟!؛\n]+")
@@ -538,6 +539,10 @@ _PRICE_SUBJECTS = (
 class DeterministicCompositionalSemanticEngine:
     """Compose foundational semantic relationships from local source evidence."""
 
+    def __init__(self, *, topic_ontology_boundary_protection: bool = False) -> None:
+        """Keep ontology activation explicit while workflow contracts are frozen."""
+        self.topic_ontology_boundary_protection = topic_ontology_boundary_protection
+
     def compose(
         self,
         *,
@@ -556,6 +561,11 @@ class DeterministicCompositionalSemanticEngine:
         indexed_items = tuple(enumerate(contextual_evidence.all_items))
         relationships: list[SemanticRelationship] = []
         role_relationships = TopicConsequenceSubjectProtector().compose(source)
+        ontology_relationships = (
+            TopicOntologyBoundaryProtector().compose(source)
+            if self.topic_ontology_boundary_protection
+            else ()
+        )
         central_domains = {
             support.removeprefix("PRIMARY_DOMAIN_")
             for relationship in role_relationships
@@ -576,6 +586,7 @@ class DeterministicCompositionalSemanticEngine:
             and relationship.object_text not in central_domains
             and relationship.object_text not in contextual_domains
         )
+        relationships.extend(ontology_relationships)
         for source_section, sentence_index, text in self._source_units(source):
             local_items = tuple(
                 (index, item)

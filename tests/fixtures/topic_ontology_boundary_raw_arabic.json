@@ -1,0 +1,761 @@
+{
+  "fixture_set": "topic_ontology_boundary_raw_arabic_v1",
+  "authorship": "NEWLY_AUTHORED_HKEI_223",
+  "case_count": 52,
+  "fixtures": [
+    {
+      "id": "W-01",
+      "title": "هجوم دولي يستهدف ناقلة تملكها شركة قرب ممر حدودي",
+      "body": "أصاب هجوم أمني ناقلة تملكها شركة نقل في منطقة دولية، وأعلنت الشركة وقوع الحادث. ويتابع التقرير النزاع الدولي وأمن الممر البحري والتحركات الدبلوماسية بعد الهجوم.",
+      "expected_state": "WORLD_PRIMARY",
+      "expected_primary": [
+        "WORLD"
+      ],
+      "tags": [
+        "world_primary",
+        "external_event",
+        "entity_protection",
+        "source_protection",
+        "cross_sentence",
+        "owner_protection",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "W-02",
+      "title": "هجوم دولي يستهدف طائرة شحن تملكها شركة قرب ممر حدودي",
+      "body": "أصاب هجوم أمني طائرة شحن تملكها شركة نقل في منطقة دولية، وأعلنت الشركة وقوع الحادث. ويتابع التقرير النزاع الدولي وأمن الممر البحري والتحركات الدبلوماسية بعد الهجوم.",
+      "expected_state": "WORLD_PRIMARY",
+      "expected_primary": [
+        "WORLD"
+      ],
+      "tags": [
+        "world_primary",
+        "external_event",
+        "entity_protection",
+        "source_protection",
+        "cross_sentence",
+        "owner_protection",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "W-03",
+      "title": "هجوم دولي يستهدف مستودع تملكها شركة قرب ممر حدودي",
+      "body": "أصاب هجوم أمني مستودع تملكها شركة نقل في منطقة دولية، وأعلنت الشركة وقوع الحادث. ويتابع التقرير النزاع الدولي وأمن الممر البحري والتحركات الدبلوماسية بعد الهجوم.",
+      "expected_state": "WORLD_PRIMARY",
+      "expected_primary": [
+        "WORLD"
+      ],
+      "tags": [
+        "world_primary",
+        "external_event",
+        "entity_protection",
+        "source_protection",
+        "cross_sentence",
+        "owner_protection",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "W-04",
+      "title": "هجوم دولي يستهدف منصة بحرية تملكها شركة قرب ممر حدودي",
+      "body": "أصاب هجوم أمني منصة بحرية تملكها شركة نقل في منطقة دولية، وأعلنت الشركة وقوع الحادث. ويتابع التقرير النزاع الدولي وأمن الممر البحري والتحركات الدبلوماسية بعد الهجوم.",
+      "expected_state": "WORLD_PRIMARY",
+      "expected_primary": [
+        "WORLD"
+      ],
+      "tags": [
+        "world_primary",
+        "external_event",
+        "entity_protection",
+        "source_protection",
+        "cross_sentence",
+        "owner_protection",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "W-05",
+      "title": "هجوم دولي يستهدف قطار بضائع تملكها شركة قرب ممر حدودي",
+      "body": "أصاب هجوم أمني قطار بضائع تملكها شركة نقل في منطقة دولية، وأعلنت الشركة وقوع الحادث. ويتابع التقرير النزاع الدولي وأمن الممر البحري والتحركات الدبلوماسية بعد الهجوم.",
+      "expected_state": "WORLD_PRIMARY",
+      "expected_primary": [
+        "WORLD"
+      ],
+      "tags": [
+        "world_primary",
+        "external_event",
+        "entity_protection",
+        "source_protection",
+        "cross_sentence",
+        "owner_protection",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "W-06",
+      "title": "هجوم دولي يستهدف مركز اتصالات تملكها شركة قرب ممر حدودي",
+      "body": "أصاب هجوم أمني مركز اتصالات تملكها شركة نقل في منطقة دولية، وأعلنت الشركة وقوع الحادث. ويتابع التقرير النزاع الدولي وأمن الممر البحري والتحركات الدبلوماسية بعد الهجوم.",
+      "expected_state": "WORLD_PRIMARY",
+      "expected_primary": [
+        "WORLD"
+      ],
+      "tags": [
+        "world_primary",
+        "external_event",
+        "entity_protection",
+        "source_protection",
+        "cross_sentence",
+        "owner_protection"
+      ]
+    },
+    {
+      "id": "W-07",
+      "title": "هجوم دولي يستهدف مصنع حدودي تملكها شركة قرب ممر حدودي",
+      "body": "أصاب هجوم أمني مصنع حدودي تملكها شركة نقل في منطقة دولية، وأعلنت الشركة وقوع الحادث. ويتابع التقرير النزاع الدولي وأمن الممر البحري والتحركات الدبلوماسية بعد الهجوم.",
+      "expected_state": "WORLD_PRIMARY",
+      "expected_primary": [
+        "WORLD"
+      ],
+      "tags": [
+        "world_primary",
+        "external_event",
+        "entity_protection",
+        "source_protection",
+        "cross_sentence",
+        "owner_protection"
+      ]
+    },
+    {
+      "id": "W-08",
+      "title": "هجوم دولي يستهدف حافلة ركاب تملكها شركة قرب ممر حدودي",
+      "body": "أصاب هجوم أمني حافلة ركاب تملكها شركة نقل في منطقة دولية، وأعلنت الشركة وقوع الحادث. ويتابع التقرير النزاع الدولي وأمن الممر البحري والتحركات الدبلوماسية بعد الهجوم.",
+      "expected_state": "WORLD_PRIMARY",
+      "expected_primary": [
+        "WORLD"
+      ],
+      "tags": [
+        "world_primary",
+        "external_event",
+        "entity_protection",
+        "source_protection",
+        "cross_sentence",
+        "owner_protection"
+      ]
+    },
+    {
+      "id": "W-09",
+      "title": "هجوم دولي يستهدف محطة شحن تملكها شركة قرب ممر حدودي",
+      "body": "أصاب هجوم أمني محطة شحن تملكها شركة نقل في منطقة دولية، وأعلنت الشركة وقوع الحادث. ويتابع التقرير النزاع الدولي وأمن الممر البحري والتحركات الدبلوماسية بعد الهجوم.",
+      "expected_state": "WORLD_PRIMARY",
+      "expected_primary": [
+        "WORLD"
+      ],
+      "tags": [
+        "world_primary",
+        "external_event",
+        "entity_protection",
+        "source_protection",
+        "cross_sentence"
+      ]
+    },
+    {
+      "id": "W-10",
+      "title": "هجوم دولي يستهدف سفينة إمداد تملكها شركة قرب ممر حدودي",
+      "body": "أصاب هجوم أمني سفينة إمداد تملكها شركة نقل في منطقة دولية، وأعلنت الشركة وقوع الحادث. ويتابع التقرير النزاع الدولي وأمن الممر البحري والتحركات الدبلوماسية بعد الهجوم.",
+      "expected_state": "WORLD_PRIMARY",
+      "expected_primary": [
+        "WORLD"
+      ],
+      "tags": [
+        "world_primary",
+        "external_event",
+        "entity_protection",
+        "source_protection",
+        "cross_sentence"
+      ]
+    },
+    {
+      "id": "B-01",
+      "title": "شركة دولية تعلن توسيع شبكة التوزيع ضمن استراتيجيتها التجارية",
+      "body": "أعلنت شركة صناعية توسيع شبكة التوزيع في سوق أجنبية وشرحت أثر الخطوة على عمليات الشركة. وتفصل المادة استراتيجية الإدارة والإنتاج والمبيعات واستمرارية الأعمال في الفروع الدولية.",
+      "expected_state": "BUSINESS_PRIMARY",
+      "expected_primary": [
+        "BUSINESS"
+      ],
+      "tags": [
+        "business_primary",
+        "company_centric",
+        "external_context",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "B-02",
+      "title": "شركة دولية تعلن إعادة تشغيل مصنعها ضمن استراتيجيتها التجارية",
+      "body": "أعلنت شركة صناعية إعادة تشغيل مصنعها في سوق أجنبية وشرحت أثر الخطوة على عمليات الشركة. وتفصل المادة استراتيجية الإدارة والإنتاج والمبيعات واستمرارية الأعمال في الفروع الدولية.",
+      "expected_state": "BUSINESS_PRIMARY",
+      "expected_primary": [
+        "BUSINESS"
+      ],
+      "tags": [
+        "business_primary",
+        "company_centric",
+        "external_context",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "B-03",
+      "title": "شركة دولية تعلن خفض تكاليف التشغيل ضمن استراتيجيتها التجارية",
+      "body": "أعلنت شركة صناعية خفض تكاليف التشغيل في سوق أجنبية وشرحت أثر الخطوة على عمليات الشركة. وتفصل المادة استراتيجية الإدارة والإنتاج والمبيعات واستمرارية الأعمال في الفروع الدولية.",
+      "expected_state": "BUSINESS_PRIMARY",
+      "expected_primary": [
+        "BUSINESS"
+      ],
+      "tags": [
+        "business_primary",
+        "company_centric",
+        "external_context",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "B-04",
+      "title": "شركة دولية تعلن تغيير الإدارة التنفيذية ضمن استراتيجيتها التجارية",
+      "body": "أعلنت شركة صناعية تغيير الإدارة التنفيذية في سوق أجنبية وشرحت أثر الخطوة على عمليات الشركة. وتفصل المادة استراتيجية الإدارة والإنتاج والمبيعات واستمرارية الأعمال في الفروع الدولية.",
+      "expected_state": "BUSINESS_PRIMARY",
+      "expected_primary": [
+        "BUSINESS"
+      ],
+      "tags": [
+        "business_primary",
+        "company_centric",
+        "external_context",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "B-05",
+      "title": "شركة دولية تعلن إطلاق خدمة مدفوعة ضمن استراتيجيتها التجارية",
+      "body": "أعلنت شركة صناعية إطلاق خدمة مدفوعة في سوق أجنبية وشرحت أثر الخطوة على عمليات الشركة. وتفصل المادة استراتيجية الإدارة والإنتاج والمبيعات واستمرارية الأعمال في الفروع الدولية.",
+      "expected_state": "BUSINESS_PRIMARY",
+      "expected_primary": [
+        "BUSINESS"
+      ],
+      "tags": [
+        "business_primary",
+        "company_centric",
+        "external_context",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "B-06",
+      "title": "شركة دولية تعلن زيادة إنتاجها ضمن استراتيجيتها التجارية",
+      "body": "أعلنت شركة صناعية زيادة إنتاجها في سوق أجنبية وشرحت أثر الخطوة على عمليات الشركة. وتفصل المادة استراتيجية الإدارة والإنتاج والمبيعات واستمرارية الأعمال في الفروع الدولية.",
+      "expected_state": "BUSINESS_PRIMARY",
+      "expected_primary": [
+        "BUSINESS"
+      ],
+      "tags": [
+        "business_primary",
+        "company_centric",
+        "external_context",
+        "cross_sentence"
+      ]
+    },
+    {
+      "id": "B-07",
+      "title": "شركة دولية تعلن دمج فرعين ضمن استراتيجيتها التجارية",
+      "body": "أعلنت شركة صناعية دمج فرعين في سوق أجنبية وشرحت أثر الخطوة على عمليات الشركة. وتفصل المادة استراتيجية الإدارة والإنتاج والمبيعات واستمرارية الأعمال في الفروع الدولية.",
+      "expected_state": "BUSINESS_PRIMARY",
+      "expected_primary": [
+        "BUSINESS"
+      ],
+      "tags": [
+        "business_primary",
+        "company_centric",
+        "external_context",
+        "cross_sentence"
+      ]
+    },
+    {
+      "id": "B-08",
+      "title": "شركة دولية تعلن تطوير منتج جديد ضمن استراتيجيتها التجارية",
+      "body": "أعلنت شركة صناعية تطوير منتج جديد في سوق أجنبية وشرحت أثر الخطوة على عمليات الشركة. وتفصل المادة استراتيجية الإدارة والإنتاج والمبيعات واستمرارية الأعمال في الفروع الدولية.",
+      "expected_state": "BUSINESS_PRIMARY",
+      "expected_primary": [
+        "BUSINESS"
+      ],
+      "tags": [
+        "business_primary",
+        "company_centric",
+        "external_context",
+        "cross_sentence"
+      ]
+    },
+    {
+      "id": "B-09",
+      "title": "شركة دولية تعلن استعادة استمرارية الأعمال ضمن استراتيجيتها التجارية",
+      "body": "أعلنت شركة صناعية استعادة استمرارية الأعمال في سوق أجنبية وشرحت أثر الخطوة على عمليات الشركة. وتفصل المادة استراتيجية الإدارة والإنتاج والمبيعات واستمرارية الأعمال في الفروع الدولية.",
+      "expected_state": "BUSINESS_PRIMARY",
+      "expected_primary": [
+        "BUSINESS"
+      ],
+      "tags": [
+        "business_primary",
+        "company_centric",
+        "external_context",
+        "cross_sentence"
+      ]
+    },
+    {
+      "id": "B-10",
+      "title": "شركة دولية تعلن شراء شركة منافسة ضمن استراتيجيتها التجارية",
+      "body": "أعلنت شركة صناعية شراء شركة منافسة في سوق أجنبية وشرحت أثر الخطوة على عمليات الشركة. وتفصل المادة استراتيجية الإدارة والإنتاج والمبيعات واستمرارية الأعمال في الفروع الدولية.",
+      "expected_state": "BUSINESS_PRIMARY",
+      "expected_primary": [
+        "BUSINESS"
+      ],
+      "tags": [
+        "business_primary",
+        "company_centric",
+        "external_context",
+        "cross_sentence"
+      ]
+    },
+    {
+      "id": "E-01",
+      "title": "التضخم يتغير مع بيانات شركات القطاع بأكمله",
+      "body": "أظهرت بيانات الشركات تغير التضخم على مستوى القطاع بأكمله ومؤشر الأسعار في الأسواق. ويحلل التقرير الأثر الاقتصادي والعرض والطلب والتجارة الخارجية بعيدًا عن أداء شركة منفردة.",
+      "expected_state": "ECONOMY_PRIMARY",
+      "expected_primary": [
+        "ECONOMY"
+      ],
+      "tags": [
+        "economy_primary",
+        "company_involved",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "E-02",
+      "title": "مؤشر الأسعار يتغير مع بيانات شركات القطاع بأكمله",
+      "body": "أظهرت بيانات الشركات تغير مؤشر الأسعار على مستوى القطاع بأكمله ومؤشر الأسعار في الأسواق. ويحلل التقرير الأثر الاقتصادي والعرض والطلب والتجارة الخارجية بعيدًا عن أداء شركة منفردة.",
+      "expected_state": "ECONOMY_PRIMARY",
+      "expected_primary": [
+        "ECONOMY"
+      ],
+      "tags": [
+        "economy_primary",
+        "company_involved",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "E-03",
+      "title": "ميزان التجارة يتغير مع بيانات شركات القطاع بأكمله",
+      "body": "أظهرت بيانات الشركات تغير ميزان التجارة على مستوى القطاع بأكمله ومؤشر الأسعار في الأسواق. ويحلل التقرير الأثر الاقتصادي والعرض والطلب والتجارة الخارجية بعيدًا عن أداء شركة منفردة.",
+      "expected_state": "ECONOMY_PRIMARY",
+      "expected_primary": [
+        "ECONOMY"
+      ],
+      "tags": [
+        "economy_primary",
+        "company_involved",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "E-04",
+      "title": "سوق العمل يتغير مع بيانات شركات القطاع بأكمله",
+      "body": "أظهرت بيانات الشركات تغير سوق العمل على مستوى القطاع بأكمله ومؤشر الأسعار في الأسواق. ويحلل التقرير الأثر الاقتصادي والعرض والطلب والتجارة الخارجية بعيدًا عن أداء شركة منفردة.",
+      "expected_state": "ECONOMY_PRIMARY",
+      "expected_primary": [
+        "ECONOMY"
+      ],
+      "tags": [
+        "economy_primary",
+        "company_involved",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "E-05",
+      "title": "العرض والطلب يتغير مع بيانات شركات القطاع بأكمله",
+      "body": "أظهرت بيانات الشركات تغير العرض والطلب على مستوى القطاع بأكمله ومؤشر الأسعار في الأسواق. ويحلل التقرير الأثر الاقتصادي والعرض والطلب والتجارة الخارجية بعيدًا عن أداء شركة منفردة.",
+      "expected_state": "ECONOMY_PRIMARY",
+      "expected_primary": [
+        "ECONOMY"
+      ],
+      "tags": [
+        "economy_primary",
+        "company_involved",
+        "cross_sentence"
+      ]
+    },
+    {
+      "id": "E-06",
+      "title": "الناتج المحلي يتغير مع بيانات شركات القطاع بأكمله",
+      "body": "أظهرت بيانات الشركات تغير الناتج المحلي على مستوى القطاع بأكمله ومؤشر الأسعار في الأسواق. ويحلل التقرير الأثر الاقتصادي والعرض والطلب والتجارة الخارجية بعيدًا عن أداء شركة منفردة.",
+      "expected_state": "ECONOMY_PRIMARY",
+      "expected_primary": [
+        "ECONOMY"
+      ],
+      "tags": [
+        "economy_primary",
+        "company_involved",
+        "cross_sentence"
+      ]
+    },
+    {
+      "id": "E-07",
+      "title": "السياسة النقدية يتغير مع بيانات شركات القطاع بأكمله",
+      "body": "أظهرت بيانات الشركات تغير السياسة النقدية على مستوى القطاع بأكمله ومؤشر الأسعار في الأسواق. ويحلل التقرير الأثر الاقتصادي والعرض والطلب والتجارة الخارجية بعيدًا عن أداء شركة منفردة.",
+      "expected_state": "ECONOMY_PRIMARY",
+      "expected_primary": [
+        "ECONOMY"
+      ],
+      "tags": [
+        "economy_primary",
+        "company_involved",
+        "cross_sentence"
+      ]
+    },
+    {
+      "id": "E-08",
+      "title": "إجمالي الإنتاج يتغير مع بيانات شركات القطاع بأكمله",
+      "body": "أظهرت بيانات الشركات تغير إجمالي الإنتاج على مستوى القطاع بأكمله ومؤشر الأسعار في الأسواق. ويحلل التقرير الأثر الاقتصادي والعرض والطلب والتجارة الخارجية بعيدًا عن أداء شركة منفردة.",
+      "expected_state": "ECONOMY_PRIMARY",
+      "expected_primary": [
+        "ECONOMY"
+      ],
+      "tags": [
+        "economy_primary",
+        "company_involved",
+        "cross_sentence"
+      ]
+    },
+    {
+      "id": "A-WB-01",
+      "title": "هجوم دولي يعطل عمليات شركة وخطة استعادة التشغيل",
+      "body": "أصاب هجوم أمني منشأة شركة خلال نزاع دولي وتعطل الإنتاج وعمليات الشركة. ويتابع التقرير بالتساوي التحركات الدبلوماسية وخسائر الشركة واستراتيجية الإدارة لاستعادة التشغيل.",
+      "expected_state": "GENUINELY_AMBIGUOUS",
+      "expected_primary": [
+        "WORLD",
+        "BUSINESS"
+      ],
+      "tags": [
+        "boundary_competing",
+        "world_business",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "A-WB-02",
+      "title": "هجوم دولي يعطل عمليات شركة وخطة استعادة التشغيل",
+      "body": "أصاب هجوم أمني منشأة شركة خلال نزاع دولي وتعطل الإنتاج وعمليات الشركة. ويتابع التقرير بالتساوي التحركات الدبلوماسية وخسائر الشركة واستراتيجية الإدارة لاستعادة التشغيل.",
+      "expected_state": "GENUINELY_AMBIGUOUS",
+      "expected_primary": [
+        "WORLD",
+        "BUSINESS"
+      ],
+      "tags": [
+        "boundary_competing",
+        "world_business",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "A-WB-03",
+      "title": "هجوم دولي يعطل عمليات شركة وخطة استعادة التشغيل",
+      "body": "أصاب هجوم أمني منشأة شركة خلال نزاع دولي وتعطل الإنتاج وعمليات الشركة. ويتابع التقرير بالتساوي التحركات الدبلوماسية وخسائر الشركة واستراتيجية الإدارة لاستعادة التشغيل.",
+      "expected_state": "GENUINELY_AMBIGUOUS",
+      "expected_primary": [
+        "WORLD",
+        "BUSINESS"
+      ],
+      "tags": [
+        "boundary_competing",
+        "world_business",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "A-WB-04",
+      "title": "هجوم دولي يعطل عمليات شركة وخطة استعادة التشغيل",
+      "body": "أصاب هجوم أمني منشأة شركة خلال نزاع دولي وتعطل الإنتاج وعمليات الشركة. ويتابع التقرير بالتساوي التحركات الدبلوماسية وخسائر الشركة واستراتيجية الإدارة لاستعادة التشغيل.",
+      "expected_state": "GENUINELY_AMBIGUOUS",
+      "expected_primary": [
+        "WORLD",
+        "BUSINESS"
+      ],
+      "tags": [
+        "boundary_competing",
+        "world_business",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "A-BE-01",
+      "title": "أرباح شركة ومؤشر الأسعار يتصدران قراءة السوق",
+      "body": "أعلنت شركة نتائج أعمالها وأرباحها بالتزامن مع تغير مؤشر الأسعار والتضخم على مستوى القطاع بأكمله. ويوازن التقرير بين عمليات الشركة والمبيعات وبين الأسواق والعرض والطلب والاقتصاد الكلي.",
+      "expected_state": "GENUINELY_AMBIGUOUS",
+      "expected_primary": [
+        "BUSINESS",
+        "ECONOMY"
+      ],
+      "tags": [
+        "boundary_competing",
+        "business_economy",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "A-BE-02",
+      "title": "أرباح شركة ومؤشر الأسعار يتصدران قراءة السوق",
+      "body": "أعلنت شركة نتائج أعمالها وأرباحها بالتزامن مع تغير مؤشر الأسعار والتضخم على مستوى القطاع بأكمله. ويوازن التقرير بين عمليات الشركة والمبيعات وبين الأسواق والعرض والطلب والاقتصاد الكلي.",
+      "expected_state": "GENUINELY_AMBIGUOUS",
+      "expected_primary": [
+        "BUSINESS",
+        "ECONOMY"
+      ],
+      "tags": [
+        "boundary_competing",
+        "business_economy",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "A-BE-03",
+      "title": "أرباح شركة ومؤشر الأسعار يتصدران قراءة السوق",
+      "body": "أعلنت شركة نتائج أعمالها وأرباحها بالتزامن مع تغير مؤشر الأسعار والتضخم على مستوى القطاع بأكمله. ويوازن التقرير بين عمليات الشركة والمبيعات وبين الأسواق والعرض والطلب والاقتصاد الكلي.",
+      "expected_state": "GENUINELY_AMBIGUOUS",
+      "expected_primary": [
+        "BUSINESS",
+        "ECONOMY"
+      ],
+      "tags": [
+        "boundary_competing",
+        "business_economy",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "A-BE-04",
+      "title": "أرباح شركة ومؤشر الأسعار يتصدران قراءة السوق",
+      "body": "أعلنت شركة نتائج أعمالها وأرباحها بالتزامن مع تغير مؤشر الأسعار والتضخم على مستوى القطاع بأكمله. ويوازن التقرير بين عمليات الشركة والمبيعات وبين الأسواق والعرض والطلب والاقتصاد الكلي.",
+      "expected_state": "GENUINELY_AMBIGUOUS",
+      "expected_primary": [
+        "BUSINESS",
+        "ECONOMY"
+      ],
+      "tags": [
+        "boundary_competing",
+        "business_economy",
+        "cross_sentence",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "N-01",
+      "title": "شركة الأفق في بيان مقتضب",
+      "body": "ورد اسم شركة الأفق في بيان عن فعالية محلية دون شرح لعملياتها أو نشاطها التجاري.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "entity_protection",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "N-02",
+      "title": "مملوكة لشركة ولكن الحدث صحي",
+      "body": "استقبلت عيادة مملوكة لشركة مرضى للعلاج، ويركز الخبر على الرعاية الصحية.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "owner_protection",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "N-03",
+      "title": "الشركة مصدر الإعلان فقط",
+      "body": "أعلنت شركة وقوع عاصفة قوية، وتتناول المادة الأمطار والرياح لا أعمال الشركة.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "source_protection",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "N-04",
+      "title": "وزارة تذكر مشروعًا رياضيًا",
+      "body": "أعلنت وزارة نتيجة مباراة، ويتابع الخبر الفريق والبطولة دون معالجة حكومية.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "entity_protection",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "N-05",
+      "title": "دولة أجنبية تستضيف معرضًا تقنيًا",
+      "body": "يقام المعرض في دولة أجنبية، وتشرح المادة البرمجيات والابتكار فقط.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "negative_control",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "N-06",
+      "title": "احتمال أثر في السوق",
+      "body": "تعرض مبنى شركة لحادث، وقد ينعكس ذلك على السوق لاحقًا دون بيانات اقتصادية.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "negative_control",
+        "arabic_variation"
+      ]
+    },
+    {
+      "id": "N-07",
+      "title": "متحدث الشركة يصف واقعة تعليمية",
+      "body": "قال متحدث شركة إن مدرسة بدأت امتحاناتها، ويركز الخبر على الطلاب والتعليم.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "source_protection"
+      ]
+    },
+    {
+      "id": "N-08",
+      "title": "حكومة تملك ناديًا فائزًا",
+      "body": "فاز ناد تملكه الحكومة بالبطولة، وتتمحور المادة حول المباراة واللاعبين.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "owner_protection"
+      ]
+    },
+    {
+      "id": "N-09",
+      "title": "شركة مذكورة في تحقيق جنائي",
+      "body": "تحقق الشرطة في تزوير داخل شركة، ويركز الخبر على الأدلة والمتهم.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "entity_protection"
+      ]
+    },
+    {
+      "id": "N-10",
+      "title": "منشأة تابعة لمؤسسة في عاصفة",
+      "body": "تضررت منشأة تابعة لمؤسسة بسبب عاصفة، وتتابع المادة الطقس والرياح.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "owner_protection"
+      ]
+    },
+    {
+      "id": "N-11",
+      "title": "المستشفى يعلن تحقيقًا",
+      "body": "أعلن مستشفى بدء تحقيق جنائي، وتعرض المادة المخالفة والأدلة.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "source_protection"
+      ]
+    },
+    {
+      "id": "N-12",
+      "title": "شركة كبيرة بلا معالجة اقتصادية",
+      "body": "وقع حادث في شركة كبيرة ذات أهمية استراتيجية دون أسعار أو أسواق أو مؤشرات.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "negative_control"
+      ]
+    },
+    {
+      "id": "N-13",
+      "title": "فرع أجنبي في خبر ثقافي",
+      "body": "استضاف فرع شركة أجنبية معرضًا للتراث، وتتناول المادة الفنون والثقافة.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "negative_control"
+      ]
+    },
+    {
+      "id": "N-14",
+      "title": "مدرسة خاصة تملكها مجموعة",
+      "body": "بدأ الطلاب الدراسة في مدرسة تملكها مجموعة، ويركز الخبر على المناهج.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "owner_protection"
+      ]
+    },
+    {
+      "id": "N-15",
+      "title": "شركة تعلن اكتشافًا علميًا",
+      "body": "أعلنت شركة اكتشافًا علميًا، وتشرح المادة البحث والتجربة والنتائج.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "source_protection"
+      ]
+    },
+    {
+      "id": "N-16",
+      "title": "مؤسسة أجنبية في موقع الحدث",
+      "body": "ذُكرت مؤسسة أجنبية بوصفها موقعًا لفعالية رياضية دون شأن دولي أو تجاري.",
+      "expected_state": "OTHER",
+      "expected_primary": [],
+      "tags": [
+        "negative_control",
+        "negative_control"
+      ]
+    }
+  ]
+}
