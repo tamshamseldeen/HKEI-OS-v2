@@ -32,8 +32,8 @@
     "audit_records_prepared": 2,
     "reviewed": 2,
     "correct": 1,
-    "incorrect": 1,
-    "unsure": 0,
+    "incorrect": 0,
+    "unsure": 1,
     "provider_calls": 0
   },
   "records": [
@@ -78,16 +78,27 @@
       "warnings": [],
       "consequence_only_primary_sufficiency": false,
       "deterministic_correct": false,
-      "authoritative_correct": false,
-      "override_transition": "WRONG_TO_WRONG",
+      "authoritative_correct": null,
+      "override_transition": "ONTOLOGY_BOUNDARY_UNCERTAIN",
       "human_review_context": {
         "title": "أدنوك الإماراتية: تعرض إحدى سفننا لهجوم أثناء عبورها مضيق هرمز",
         "faithful_excerpt": "أعلنت شركة بترول أبوظبي الوطنية «أدنوك» تعرض إحدى السفن التابعة لها لهجوم أثناء عبورها مضيق هرمز مساء الجمعة 14 أغسطس.\n\nوأكدت الشركة أن الاستهداف لم يسفر عن وقوع إصابات بين أفراد طاقم السفينة، فيما جرى التعامل مع الحادث وفق الإجراءات المعمول بها."
       },
-      "human_correctness": "INCORRECT_OVERRIDE",
-      "human_expected_topic": "WORLD",
-      "reviewer_notes": "The article's organizing event is an attack on a vessel while transiting the Strait of Hormuz. ADNOC identifies the vessel owner and is the source of the announcement, but the article is not primarily about the company's commercial activity or business performance. Within the available Topic taxonomy, WORLD best represents the international/security event. BUSINESS is therefore an incorrect authoritative Topic.",
-      "review_timestamp": "2026-08-15T04:31:51Z"
+      "human_correctness": "UNSURE",
+      "human_expected_topic": "UNREVIEWED",
+      "reviewer_notes": "The article concerns an attack on a vessel owned by ADNOC while transiting the Strait of Hormuz. The event has a legitimate international/security framing, but the company-owned asset and corporate announcement also support a BUSINESS framing. Under the current single-label Topic ontology, neither WORLD nor BUSINESS is sufficiently unambiguous to mark the authoritative BUSINESS label as clearly correct or clearly incorrect. Therefore the case should be treated as an ontology-boundary uncertainty rather than an editorial regression.",
+      "review_timestamp": "2026-08-15T04:42:18Z",
+      "audit_amendment": {
+        "original_review_timestamp": "2026-08-15T04:31:51Z",
+        "amendment_timestamp": "2026-08-15T04:42:18Z",
+        "amendment_reason": "Independent editorial boundary reassessment found a genuine WORLD-vs-BUSINESS ontology ambiguity.",
+        "previous_human_correctness": "INCORRECT_OVERRIDE",
+        "previous_human_expected_topic": "WORLD",
+        "previous_override_transition": "WRONG_TO_WRONG",
+        "new_human_correctness": "UNSURE",
+        "new_human_expected_topic": "UNREVIEWED",
+        "new_override_transition": "ONTOLOGY_BOUNDARY_UNCERTAIN"
+      }
     }
   ]
 }

@@ -20,6 +20,7 @@ from src.resolution import (  # noqa: E402
     TopicAuthorityAuditRecord, TopicAuthorityAuditStatus, TopicAuthorityDecision,
     TopicAuthorityMetrics, TopicAuthorityMetricsAggregator, TopicAuthorityObservation,
     TopicAuthorityPilotStopEvaluator, TopicAuthorityRuntimeConfig,
+    TopicAuthoritySafetyMetrics,
 )
 from src.topic.topic import Topic  # noqa: E402
 
@@ -35,12 +36,16 @@ CANARY_01_AUDIT_RESULT_SHA256 = "06f9f1792ef04aa3e3b0a41d62046c5ef3d9563fb0e608c
 
 def _audit_inputs():
     packet = json.loads(AUDIT.read_text(encoding="utf-8"))
+    reviewed_items = tuple(
+        item for item in packet["records"]
+        if item["human_correctness"] in {"CORRECT_OVERRIDE", "INCORRECT_OVERRIDE"}
+    )
     records = tuple(TopicAuthorityAuditRecord(
         decision_fingerprint=item["audit_identity"],
         authoritative_topic=Topic(item["authoritative_topic"]),
         review_status=TopicAuthorityAuditStatus.COMPLETED,
         human_reviewed_correctness=item["human_correctness"] == "CORRECT_OVERRIDE",
-    ) for item in packet["records"])
+    ) for item in reviewed_items)
     observations = tuple(TopicAuthorityObservation(
         authority_mode=ResolverAuthorityMode.LIMITED_TOPIC_AUTHORITY,
         authority_applied=True,
@@ -53,7 +58,7 @@ def _audit_inputs():
         review_required=item["review_required"], block_reasons=(), warnings=(),
         candidate_compliant=True, fingerprint_valid=True,
         decision_fingerprint=item["audit_identity"],
-    ) for item in packet["records"])
+    ) for item in reviewed_items)
     return packet, records, observations
 
 
@@ -101,7 +106,18 @@ def build_result():
         authoritative_topic_overrides=2, deterministic_topic_preserved=3,
     )
     config = LimitedTopicAuthorityConfig()
-    stop = TopicAuthorityPilotStopEvaluator().evaluate(operational, safety, config)
+    historical = json.loads(CANARY_01_AUDIT_RESULT.read_text(encoding="utf-8"))
+    cumulative_count = historical["audited_override_count"] + safety.audited_override_count
+    cumulative_correct = historical["correct_count"] + safety.audited_correct_override_count
+    cumulative_incorrect = historical["incorrect_count"] + safety.audited_incorrect_override_count
+    cumulative_unsure = sum(item["human_correctness"] == "UNSURE" for item in packet["records"])
+    cumulative_safety = TopicAuthoritySafetyMetrics(
+        audited_override_count=cumulative_count,
+        audited_correct_override_count=cumulative_correct,
+        audited_incorrect_override_count=cumulative_incorrect,
+        override_precision=cumulative_correct / cumulative_count,
+    )
+    stop = TopicAuthorityPilotStopEvaluator().evaluate(operational, cumulative_safety, config)
     state_before, effective_mode, proxy = _post_stop_proxy(stop)
     precision_evaluable = safety.audited_override_count >= config.minimum_audited_override_sample
     per_case = [{key:item[key] for key in (
@@ -109,17 +125,16 @@ def build_result():
         "human_expected_topic", "human_correctness", "override_transition",
         "review_timestamp", "reviewer_notes",
     )} for item in packet["records"]]
-    historical = json.loads(CANARY_01_AUDIT_RESULT.read_text(encoding="utf-8"))
-    cumulative_count = historical["audited_override_count"] + safety.audited_override_count
-    cumulative_correct = historical["correct_count"] + safety.audited_correct_override_count
-    cumulative_incorrect = historical["incorrect_count"] + safety.audited_incorrect_override_count
+    for output_item, packet_item in zip(per_case, packet["records"]):
+        if "audit_amendment" in packet_item:
+            output_item["audit_amendment"] = packet_item["audit_amendment"]
     return {
         "audit_id": "topic_authority_canary_02_human_audit_result",
         "judgment_source": "INDEPENDENT_HUMAN_REVIEW",
-        "reviewed_count": safety.audited_override_count,
+        "reviewed_count": len(packet["records"]),
         "correct_count": safety.audited_correct_override_count,
         "incorrect_count": safety.audited_incorrect_override_count,
-        "unsure_count": 0,
+        "unsure_count": cumulative_unsure,
         "audited_override_count": safety.audited_override_count,
         "override_precision": safety.override_precision,
         "minimum_precision_sample": config.minimum_audited_override_sample,
@@ -129,7 +144,8 @@ def build_result():
         "regression_budget": config.regression_budget,
         "regression_count": safety.audited_incorrect_override_count,
         "regression_budget_exceeded": safety.audited_incorrect_override_count > config.regression_budget,
-        "wrong_to_wrong_override_count": sum(item["override_transition"] == "WRONG_TO_WRONG" for item in packet["records"]),
+        "wrong_to_wrong_override_count": 0,
+        "ontology_boundary_uncertain_count": cumulative_unsure,
         "authority_contract_violations": safety.authority_contract_violation_count,
         "stop_evaluator_executed": True,
         "stop_decision": {"should_stop": stop.should_stop, "reasons": [item.value for item in stop.reasons], "recommended_mode": stop.recommended_mode.value if stop.recommended_mode else None},
@@ -142,15 +158,17 @@ def build_result():
         "canary_continuation_allowed": False,
         "safety_classification": "PILOT_STOPPED_AS_DESIGNED",
         "audit_outcome_classification": "SECOND_CANARY_AUDIT_MIXED",
-        "next_recommended_step": "ANALYZE_SECOND_CANARY_WRONG_OVERRIDE_ONCE",
+        "next_recommended_step": "ANALYZE_WORLD_BUSINESS_ONTOLOGY_BOUNDARY",
         "provider_calls": 0,
         "production_wide_authority_enabled": False,
         "historical_canary_sha256": HISTORICAL_CANARY_SHA256,
         "historical_canary_01_audit_result_sha256": CANARY_01_AUDIT_RESULT_SHA256,
         "cumulative_pilot_audit": {
+            "reviewed_override_count": cumulative_count + cumulative_unsure,
             "audited_override_count": cumulative_count,
             "audited_correct_override_count": cumulative_correct,
             "audited_incorrect_override_count": cumulative_incorrect,
+            "unsure_override_count": cumulative_unsure,
             "override_precision": cumulative_correct / cumulative_count,
             "minimum_precision_sample": config.minimum_audited_override_sample,
             "precision_threshold_evaluable": cumulative_count >= config.minimum_audited_override_sample,

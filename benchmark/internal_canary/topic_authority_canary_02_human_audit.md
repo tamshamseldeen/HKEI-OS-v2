@@ -27,14 +27,17 @@ chain-of-thought is included.
 - Deterministic / authoritative Topic: `ECONOMY` / `BUSINESS`
 - Title: أدنوك الإماراتية: تعرض إحدى سفننا لهجوم أثناء عبورها مضيق هرمز
 - Faithful excerpt: أعلنت شركة بترول أبوظبي الوطنية «أدنوك» تعرض إحدى السفن التابعة لها لهجوم أثناء عبورها مضيق هرمز مساء الجمعة 14 أغسطس. وأكدت الشركة أن الاستهداف لم يسفر عن وقوع إصابات بين أفراد طاقم السفينة، فيما جرى التعامل مع الحادث وفق الإجراءات المعمول بها.
-- Human correctness: `INCORRECT_OVERRIDE`
-- Human expected Topic: `WORLD`
-- Override transition: `WRONG_TO_WRONG`
-- Reviewer notes: The article's organizing event is an attack on a vessel while transiting the Strait of Hormuz. ADNOC identifies the vessel owner and is the source of the announcement, but the article is not primarily about the company's commercial activity or business performance. Within the available Topic taxonomy, WORLD best represents the international/security event. BUSINESS is therefore an incorrect authoritative Topic.
-- Review timestamp: `2026-08-15T04:31:51Z`
+- Human correctness: `UNSURE`
+- Human expected Topic: `UNREVIEWED`
+- Override transition: `ONTOLOGY_BOUNDARY_UNCERTAIN`
+- Reviewer notes: The article concerns an attack on a vessel owned by ADNOC while transiting the Strait of Hormuz. The event has a legitimate international/security framing, but the company-owned asset and corporate announcement also support a BUSINESS framing. Under the current single-label Topic ontology, neither WORLD nor BUSINESS is sufficiently unambiguous to mark the authoritative BUSINESS label as clearly correct or clearly incorrect. Therefore the case should be treated as an ontology-boundary uncertainty rather than an editorial regression.
+- Original review timestamp: `2026-08-15T04:31:51Z`
+- Amendment timestamp: `2026-08-15T04:42:18Z`
+- Previous judgment / expected Topic: `INCORRECT_OVERRIDE` / `WORLD`
+- Amendment reason: Independent editorial boundary reassessment found a genuine WORLD-vs-BUSINESS ontology ambiguity.
 
 Judgment source: `INDEPENDENT_HUMAN_REVIEW`.
 
-Prepared: 2. Reviewed: 2. Correct: 1. Incorrect: 1. Unsure: 0.
+Prepared: 2. Reviewed: 2. Correct: 1. Incorrect: 0. Unsure: 1.
 
 Pilot mode: `SHADOW`. Canary continuation: `PAUSED_FOR_HUMAN_AUDIT`.

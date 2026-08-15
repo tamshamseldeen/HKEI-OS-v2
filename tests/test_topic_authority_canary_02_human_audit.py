@@ -34,8 +34,9 @@ def test_audit_identities_match_queue_exactly():
 def test_deterministic_topics_preserved(): assert {key:value["deterministic_topic"] for key,value in records_by_id().items()} == {item["canary_id"]:item["deterministic_topic"] for item in consumed()}
 def test_authoritative_topics_preserved(): assert {key:value["authoritative_topic"] for key,value in records_by_id().items()} == {item["canary_id"]:item["authoritative_topic"] for item in consumed()}
 def test_human_fields_recorded_from_independent_review():
-    assert {key:value["human_correctness"] for key,value in records_by_id().items()} == {"CANARY2-001":"CORRECT_OVERRIDE", "CANARY2-002":"INCORRECT_OVERRIDE"}
-    assert all(record["human_expected_topic"] in packet()["legal_topic_values"] for record in packet()["records"])
+    assert {key:value["human_correctness"] for key,value in records_by_id().items()} == {"CANARY2-001":"CORRECT_OVERRIDE", "CANARY2-002":"UNSURE"}
+    assert records_by_id()["CANARY2-001"]["human_expected_topic"] in packet()["legal_topic_values"]
+    assert records_by_id()["CANARY2-002"]["human_expected_topic"] == "UNREVIEWED"
     assert all(record["reviewer_notes"] != "UNREVIEWED" and record["review_timestamp"] != "UNREVIEWED" for record in packet()["records"])
 def test_legal_topic_contract_exact(): assert set(packet()["legal_topic_values"]) == {item.value for item in Topic}
 def test_article_context_available_and_faithful():
@@ -54,4 +55,4 @@ def test_independence_statement_complete():
     assert "must not assume either deterministic_topic or authoritative_topic is correct" in statement
     assert "Provider output is not ground truth" in statement
 def test_metrics_before_review_exact():
-    assert packet()["metrics"] == {"audit_records_prepared":2,"reviewed":2,"correct":1,"incorrect":1,"unsure":0,"provider_calls":0}
+    assert packet()["metrics"] == {"audit_records_prepared":2,"reviewed":2,"correct":1,"incorrect":0,"unsure":1,"provider_calls":0}
