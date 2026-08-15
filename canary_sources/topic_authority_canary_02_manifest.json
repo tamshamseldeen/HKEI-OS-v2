@@ -1,0 +1,28 @@
+{
+  "canary_id": "topic_authority_canary_02",
+  "case_ids": [
+    "CANARY2-001",
+    "CANARY2-002",
+    "CANARY2-003",
+    "CANARY2-004",
+    "CANARY2-005"
+  ],
+  "case_count": 5,
+  "raw_source_path": "canary_sources/topic_authority_canary_02_raw.txt",
+  "registered_source_path": "canary_sources/topic_authority_canary_02.txt",
+  "raw_source_sha256": "a9c1484c2cd1c0d2b5c2d7eda9f46da84e5eaf1a4808517f432ad03ca97d73a9",
+  "registered_source_sha256": "06ac5eff8fb27212ec06351f056d9911d47bd739fe29e27b81844a1519e2cb04",
+  "source_integrity": "VERIFIED_FAITHFUL_REGISTRATION",
+  "freshness_status": "VERIFIED_NEW_OPERATIONAL_INPUTS",
+  "duplicate_with_canary_01": 0,
+  "duplicate_with_benchmark_batches": 0,
+  "duplicate_with_generic_HKEI_216_fixtures": 0,
+  "registration_status": "REGISTERED",
+  "operational_status": "CONTROLLED_INTERNAL_OPERATIONAL_CANARY_SOURCE",
+  "evaluation_status": "NOT_RUN",
+  "classifier_execution": "NO",
+  "Gate_execution": "NO",
+  "Resolver_execution": "NO",
+  "authority_execution": "NO",
+  "provider_calls": 0
+}
