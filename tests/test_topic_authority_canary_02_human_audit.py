@@ -1,4 +1,4 @@
-"""Integrity contract for the unreviewed HKEI-219 human-audit packet."""
+"""Integrity contract for the HKEI-219/HKEI-220 human-audit packet."""
 
 import json
 from pathlib import Path
@@ -33,7 +33,10 @@ def test_audit_identities_match_queue_exactly():
     assert {item["audit_identity"] for item in packet()["records"]} == {item["decision_fingerprint"] for item in queue}
 def test_deterministic_topics_preserved(): assert {key:value["deterministic_topic"] for key,value in records_by_id().items()} == {item["canary_id"]:item["deterministic_topic"] for item in consumed()}
 def test_authoritative_topics_preserved(): assert {key:value["authoritative_topic"] for key,value in records_by_id().items()} == {item["canary_id"]:item["authoritative_topic"] for item in consumed()}
-def test_all_human_fields_unreviewed(): assert all(record[field] == "UNREVIEWED" for record in packet()["records"] for field in HUMAN_FIELDS)
+def test_human_fields_recorded_from_independent_review():
+    assert {key:value["human_correctness"] for key,value in records_by_id().items()} == {"CANARY2-001":"CORRECT_OVERRIDE", "CANARY2-002":"INCORRECT_OVERRIDE"}
+    assert all(record["human_expected_topic"] in packet()["legal_topic_values"] for record in packet()["records"])
+    assert all(record["reviewer_notes"] != "UNREVIEWED" and record["review_timestamp"] != "UNREVIEWED" for record in packet()["records"])
 def test_legal_topic_contract_exact(): assert set(packet()["legal_topic_values"]) == {item.value for item in Topic}
 def test_article_context_available_and_faithful():
     source = SOURCE.read_text(encoding="utf-8")
@@ -42,9 +45,7 @@ def test_no_provider_prompt_field(): assert all("provider_prompt" not in item an
 def test_no_raw_provider_response_field(): assert all("provider_response" not in item and "raw_response" not in item for item in packet()["records"])
 def test_no_provider_reasoning_field(): assert all("provider_reasoning" not in item and "reasoning" not in item for item in packet()["records"])
 def test_no_chain_of_thought_field(): assert all("chain_of_thought" not in item for item in packet()["records"])
-def test_no_automatic_correctness_inference():
-    assert packet()["judgment_source"] == "INDEPENDENT_HUMAN_REVIEW_PENDING"
-    assert packet()["metrics"]["reviewed"] == packet()["metrics"]["correct"] == packet()["metrics"]["incorrect"] == packet()["metrics"]["unsure"] == 0
+def test_no_automatic_correctness_inference(): assert packet()["judgment_source"] == "INDEPENDENT_HUMAN_REVIEW"
 def test_provider_calls_zero(): assert packet()["metrics"]["provider_calls"] == 0
 def test_pilot_remains_shadow(): assert packet()["pilot_effective_mode"] == "SHADOW"
 def test_canary_continuation_paused(): assert packet()["canary_continuation"] == "PAUSED_FOR_HUMAN_AUDIT"
@@ -53,4 +54,4 @@ def test_independence_statement_complete():
     assert "must not assume either deterministic_topic or authoritative_topic is correct" in statement
     assert "Provider output is not ground truth" in statement
 def test_metrics_before_review_exact():
-    assert packet()["metrics"] == {"audit_records_prepared":2,"reviewed":0,"correct":0,"incorrect":0,"unsure":0,"provider_calls":0}
+    assert packet()["metrics"] == {"audit_records_prepared":2,"reviewed":2,"correct":1,"incorrect":1,"unsure":0,"provider_calls":0}

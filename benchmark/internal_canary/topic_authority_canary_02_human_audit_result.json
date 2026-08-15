@@ -1,0 +1,80 @@
+{
+  "audit_id": "topic_authority_canary_02_human_audit_result",
+  "judgment_source": "INDEPENDENT_HUMAN_REVIEW",
+  "reviewed_count": 2,
+  "correct_count": 1,
+  "incorrect_count": 1,
+  "unsure_count": 0,
+  "audited_override_count": 2,
+  "override_precision": 0.5,
+  "minimum_precision_sample": 30,
+  "precision_threshold": 0.9,
+  "precision_threshold_evaluable": false,
+  "precision_stop_triggered": false,
+  "regression_budget": 0,
+  "regression_count": 1,
+  "regression_budget_exceeded": true,
+  "wrong_to_wrong_override_count": 1,
+  "authority_contract_violations": 0,
+  "stop_evaluator_executed": true,
+  "stop_decision": {
+    "should_stop": true,
+    "reasons": [
+      "REGRESSION_BUDGET_EXCEEDED"
+    ],
+    "recommended_mode": "SHADOW"
+  },
+  "effective_authority_mode_after_stop": "SHADOW",
+  "kill_switch_status": "ALREADY_SHADOW",
+  "internal_route_state_after_stop": "DISABLED_DEFAULT",
+  "post_stop_authority_consumed": false,
+  "post_stop_consumer_topic": "ECONOMY",
+  "post_stop_deterministic_topic": "ECONOMY",
+  "canary_continuation_allowed": false,
+  "safety_classification": "PILOT_STOPPED_AS_DESIGNED",
+  "audit_outcome_classification": "SECOND_CANARY_AUDIT_MIXED",
+  "next_recommended_step": "ANALYZE_SECOND_CANARY_WRONG_OVERRIDE_ONCE",
+  "provider_calls": 0,
+  "production_wide_authority_enabled": false,
+  "historical_canary_sha256": "c6112cedf30edf23085b6937fdacc30f5c878f65526515cb9b0830e2de24370e",
+  "historical_canary_01_audit_result_sha256": "06f9f1792ef04aa3e3b0a41d62046c5ef3d9563fb0e608cb9d9fff6fcb7a8822",
+  "cumulative_pilot_audit": {
+    "audited_override_count": 5,
+    "audited_correct_override_count": 3,
+    "audited_incorrect_override_count": 2,
+    "override_precision": 0.6,
+    "minimum_precision_sample": 30,
+    "precision_threshold_evaluable": false,
+    "regression_budget": 0,
+    "regression_budget_exceeded": true
+  },
+  "hkei_216_diagnostic": {
+    "consequence_only_primary_sufficiency_count": 0,
+    "generalization_signal": "NO_NEW_CONSEQUENCE_SUBJECT_REGRESSION_OBSERVED",
+    "canary2_002_potential_boundary": "ENTITY_OWNER_SOURCE_ROLE_VS_PRIMARY_EVENT_SUBJECT"
+  },
+  "records": [
+    {
+      "canary_id": "CANARY2-001",
+      "audit_identity": "105cb08f0553979ac022501fc8a9e16b9cf5aa9b73575b3d34a6383b9cd1116c",
+      "deterministic_topic": "GENERAL",
+      "authoritative_topic": "WORLD",
+      "human_expected_topic": "WORLD",
+      "human_correctness": "CORRECT_OVERRIDE",
+      "override_transition": "WRONG_TO_RIGHT",
+      "review_timestamp": "2026-08-15T04:31:51Z",
+      "reviewer_notes": "The article is centrally about a major earthquake off Indonesia and the resulting tsunami warning. The available Topic taxonomy has no dedicated earthquake or natural-disaster label, and WEATHER is not appropriate for a geological event. WORLD is therefore more specific and editorially appropriate than GENERAL."
+    },
+    {
+      "canary_id": "CANARY2-002",
+      "audit_identity": "218688620285f5c799caff2c31a5c88f4d5886b143e288ff2dbad7cb12272b9f",
+      "deterministic_topic": "ECONOMY",
+      "authoritative_topic": "BUSINESS",
+      "human_expected_topic": "WORLD",
+      "human_correctness": "INCORRECT_OVERRIDE",
+      "override_transition": "WRONG_TO_WRONG",
+      "review_timestamp": "2026-08-15T04:31:51Z",
+      "reviewer_notes": "The article's organizing event is an attack on a vessel while transiting the Strait of Hormuz. ADNOC identifies the vessel owner and is the source of the announcement, but the article is not primarily about the company's commercial activity or business performance. Within the available Topic taxonomy, WORLD best represents the international/security event. BUSINESS is therefore an incorrect authoritative Topic."
+    }
+  ]
+}
