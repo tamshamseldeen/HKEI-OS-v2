@@ -1,0 +1,314 @@
+{
+  "analysis_id": "topic_world_business_ontology_boundary_analysis",
+  "analysis_type": "OFFLINE_ONTOLOGY_DIAGNOSTIC",
+  "case_status": "ONTOLOGY_BOUNDARY_REQUIRES_ANALYSIS",
+  "canary2_002_human_status": "UNSURE",
+  "canary2_002_expected_topic": "UNREVIEWED",
+  "concept_distinctions": {
+    "ENTITY_IDENTITY": "Who or what legal/organizational entity appears or owns the affected asset.",
+    "EVENT_SUBJECT": "The event or condition the headline and lead primarily report.",
+    "EDITORIAL_TREATMENT": "The sustained angle, evidence, and explanatory weight given across the article.",
+    "DOWNSTREAM_IMPACT": "Consequences that follow from the event but do not become primary merely by being important."
+  },
+  "world_semantics_assessment": {
+    "intended": "International affairs are central and no more specific supported Topic applies.",
+    "coverage": [
+      "international events",
+      "cross-border security",
+      "geopolitical incidents",
+      "international conflict"
+    ],
+    "finding": "NOT_MERELY_GEOGRAPHIC_BUT_OPERATIONALLY_UNDERSPECIFIED",
+    "ambiguity": "The fallback clause conflicts with BUSINESS when a company is central as an affected entity but corporate activity is not the treatment."
+  },
+  "business_semantics_assessment": {
+    "intended": "Company or corporate activity is central: operations, strategy, performance, transactions, management, products, services, or commercial assets treated commercially.",
+    "rejected_interpretation": "Any event involving a company.",
+    "finding": "CONCEPTUALLY_NARROW_BUT_OPERATIONAL_WORDING_AND_SIGNALS_OVERBROAD"
+  },
+  "economy_boundary_assessment": {
+    "finding": "NO_PRIMARY_SUPPORT_WITHOUT_MACRO_OR_MARKET_TREATMENT",
+    "required_treatment": [
+      "markets",
+      "prices",
+      "trade",
+      "economic indicators",
+      "aggregate supply or production",
+      "financial consequences"
+    ],
+    "entity_presence_sufficient": false
+  },
+  "role_protection": {
+    "entity_vs_subject": "PROTECTION_EXISTS_BUT_INCOMPLETE",
+    "owner_vs_subject": "OWNER_ROLE_NOT_PROTECTED",
+    "source_vs_subject": "SOURCE_ROLE_PARTIALLY_PROTECTED",
+    "event_centrality": "REPRESENTED_BUT_NOT_STRONG_ENOUGH_FOR_EXTERNAL_EVENTS",
+    "evidence": [
+      "Company tokens are weak ACTOR evidence and tests prevent company actor alone from composing PRIMARY_DOMAIN_BUSINESS.",
+      "The lexical Topic classifier still awards BUSINESS support for generic company mentions.",
+      "No explicit asset-owner semantic role exists.",
+      "Attribution distinguishes announcement structure, but company-as-source still emits BUSINESS support.",
+      "Headline/lead primary-subject rules exist, while WORLD security-event vocabulary is sparse."
+    ]
+  },
+  "treatment_tests": {
+    "business_primary": [
+      "operational disruption dominates",
+      "financial loss or performance dominates",
+      "production or commercial continuity dominates",
+      "management response dominates",
+      "corporate asset consequences receive sustained commercial treatment"
+    ],
+    "world_primary": [
+      "international or security event organizes the story",
+      "geopolitical context dominates",
+      "company is an incidental affected participant or source",
+      "event and location significance dominate commercial implications"
+    ],
+    "genuine_ambiguity": "International/security centrality and sustained corporate operations or commercial consequences receive comparable editorial weight."
+  },
+  "historical_corpus_audit": {
+    "method": "Static keyword-assisted candidate retrieval followed by title/body inspection; no labels changed and no classifier executed.",
+    "pattern_case_ids": {
+      "WORLD_BUSINESS": [
+        "016",
+        "055",
+        "058",
+        "060",
+        "064",
+        "CANARY2-002"
+      ],
+      "WORLD_ECONOMY": [
+        "022",
+        "055",
+        "058",
+        "074",
+        "082",
+        "086",
+        "089"
+      ],
+      "BUSINESS_POLITICS_GOVERNMENT": [
+        "005",
+        "015",
+        "040",
+        "060",
+        "064",
+        "CANARY-004"
+      ],
+      "COMPANY_ENTITY_EXTERNAL_EVENT": [
+        "055",
+        "060",
+        "064",
+        "089",
+        "CANARY2-002"
+      ]
+    },
+    "pattern_counts": {
+      "WORLD_BUSINESS": 6,
+      "WORLD_ECONOMY": 7,
+      "BUSINESS_POLITICS_GOVERNMENT": 6,
+      "COMPANY_ENTITY_EXTERNAL_EVENT": 5
+    },
+    "unique_similar_case_ids": [
+      "005",
+      "015",
+      "016",
+      "022",
+      "040",
+      "055",
+      "058",
+      "060",
+      "064",
+      "074",
+      "082",
+      "086",
+      "089",
+      "CANARY-004",
+      "CANARY2-002"
+    ],
+    "unique_similar_case_count": 15,
+    "historical_relabeling": false
+  },
+  "synthetic_boundary_set": [
+    {
+      "scenario_id": "WB-001",
+      "text": "احتجزت جماعة مسلحة طائرة شحن مملوكة لشركة خاصة قرب حدود دولتين، وتركز التغطية على الأزمة الأمنية وجهود الوساطة الدولية.",
+      "human_conceptual_expected_state": "WORLD_PRIMARY",
+      "representability": "REPRESENTABLE_SECONDARY_DIMENSION_LOST"
+    },
+    {
+      "scenario_id": "WB-002",
+      "text": "أجلت سفارة أجنبية رعاياها بحافلات تابعة لشركة سياحية بعد اندلاع اشتباكات، ويتابع الخبر مسار الإجلاء والتصعيد الحدودي.",
+      "human_conceptual_expected_state": "WORLD_PRIMARY",
+      "representability": "REPRESENTABLE_SECONDARY_DIMENSION_LOST"
+    },
+    {
+      "scenario_id": "WB-003",
+      "text": "أنقذت قوة بحرية دولية ناقلة تملكها مؤسسة تجارية من محاولة قرصنة، وتتناول المادة أمن الممر البحري والتنسيق بين الدول.",
+      "human_conceptual_expected_state": "WORLD_PRIMARY",
+      "representability": "REPRESENTABLE_SECONDARY_DIMENSION_LOST"
+    },
+    {
+      "scenario_id": "WB-004",
+      "text": "جمّدت دولتان أصول شركة اتصالات ضمن نزاع دبلوماسي، ويشرح التقرير الخلاف بين الحكومتين ومسار العقوبات.",
+      "human_conceptual_expected_state": "WORLD_PRIMARY",
+      "representability": "REPRESENTABLE_SECONDARY_DIMENSION_LOST"
+    },
+    {
+      "scenario_id": "WB-005",
+      "text": "أصاب صاروخ عابر للحدود مصنعًا تديره مجموعة صناعية، بينما تركز المعالجة على تطور النزاع والتحركات الدولية لوقفه.",
+      "human_conceptual_expected_state": "WORLD_PRIMARY",
+      "representability": "REPRESENTABLE_SECONDARY_DIMENSION_LOST"
+    },
+    {
+      "scenario_id": "WB-006",
+      "text": "علقت دولة امتياز شركة أجنبية عقب أزمة بين البلدين، ويتصدر الخبر أثر القرار في العلاقات الدولية لا تفاصيل تشغيل الامتياز.",
+      "human_conceptual_expected_state": "WORLD_PRIMARY",
+      "representability": "REPRESENTABLE_SECONDARY_DIMENSION_LOST"
+    },
+    {
+      "scenario_id": "WB-007",
+      "text": "افتتحت شركة لوجستية مركزًا إقليميًا جديدًا وشرحت خطة التوسع وعدد الوظائف واستراتيجية خدمة العملاء في أسواق عدة.",
+      "human_conceptual_expected_state": "BUSINESS_PRIMARY",
+      "representability": "CLEARLY_REPRESENTABLE"
+    },
+    {
+      "scenario_id": "WB-008",
+      "text": "أعلنت مجموعة طيران نتائجها السنوية وهوامش الربح وخطة تحديث الأسطول بعد نمو الطلب على الرحلات الدولية.",
+      "human_conceptual_expected_state": "BUSINESS_PRIMARY",
+      "representability": "CLEARLY_REPRESENTABLE"
+    },
+    {
+      "scenario_id": "WB-009",
+      "text": "استحوذت شركة أغذية على منافس أجنبي، وتفصل المادة قيمة الصفقة وتمويلها وخطة دمج العمليات.",
+      "human_conceptual_expected_state": "BUSINESS_PRIMARY",
+      "representability": "REPRESENTABLE_SECONDARY_DIMENSION_LOST"
+    },
+    {
+      "scenario_id": "WB-010",
+      "text": "قرر مجلس إدارة شركة صناعية إعادة هيكلة فروعها الخارجية وخفض التكاليف وتغيير الإدارة التنفيذية.",
+      "human_conceptual_expected_state": "BUSINESS_PRIMARY",
+      "representability": "CLEARLY_REPRESENTABLE"
+    },
+    {
+      "scenario_id": "WB-011",
+      "text": "أطلقت شركة برمجيات خدمة مدفوعة في أربع دول، وتتمحور التغطية حول المنتج والتسعير وقنوات البيع.",
+      "human_conceptual_expected_state": "BUSINESS_PRIMARY",
+      "representability": "REPRESENTABLE_SECONDARY_DIMENSION_LOST"
+    },
+    {
+      "scenario_id": "WB-012",
+      "text": "عدلت شركة تأمين شروط وثائقها لمحفظة دولية، وتركز المادة على إدارة المخاطر التجارية وربحية النشاط.",
+      "human_conceptual_expected_state": "BUSINESS_PRIMARY",
+      "representability": "CLEARLY_REPRESENTABLE"
+    },
+    {
+      "scenario_id": "WB-013",
+      "text": "خفضت شركات كبرى إنتاجها، لكن التقرير يقيس الأثر المجمع على التضخم والناتج المحلي ومستوى الأسعار في الاقتصاد.",
+      "human_conceptual_expected_state": "ECONOMY_PRIMARY",
+      "representability": "REPRESENTABLE_SECONDARY_DIMENSION_LOST"
+    },
+    {
+      "scenario_id": "WB-014",
+      "text": "رفعت شركات شحن رسومها، وتتابع المادة مؤشر تكلفة النقل وانعكاسه على التجارة وأسعار المستهلكين.",
+      "human_conceptual_expected_state": "ECONOMY_PRIMARY",
+      "representability": "REPRESENTABLE_SECONDARY_DIMENSION_LOST"
+    },
+    {
+      "scenario_id": "WB-015",
+      "text": "أظهرت بيانات آلاف الشركات تباطؤ التوظيف، ويحلل الخبر البطالة وسوق العمل على المستوى الوطني.",
+      "human_conceptual_expected_state": "ECONOMY_PRIMARY",
+      "representability": "CLEARLY_REPRESENTABLE"
+    },
+    {
+      "scenario_id": "WB-016",
+      "text": "زادت شركات الطاقة صادراتها، ويركز التقرير على ميزان التجارة وإيرادات الدولة وأسعار النفط العالمية.",
+      "human_conceptual_expected_state": "ECONOMY_PRIMARY",
+      "representability": "REPRESENTABLE_SECONDARY_DIMENSION_LOST"
+    },
+    {
+      "scenario_id": "WB-017",
+      "text": "استهدف هجوم دولي خط أنابيب تابعًا لشركة، وتوزعت المعالجة بالتساوي بين التصعيد الأمني وتعطل الإنتاج وخطة استعادة التشغيل.",
+      "human_conceptual_expected_state": "GENUINELY_AMBIGUOUS",
+      "representability": "GENUINELY_FORCED_CHOICE_AMBIGUOUS"
+    },
+    {
+      "scenario_id": "WB-018",
+      "text": "فرضت دولة عقوبات على مجموعة صناعية فأغلقت مصانعها الخارجية، ويوازن التقرير بين الصراع السياسي واستمرار أعمال الشركة.",
+      "human_conceptual_expected_state": "GENUINELY_AMBIGUOUS",
+      "representability": "GENUINELY_FORCED_CHOICE_AMBIGUOUS"
+    },
+    {
+      "scenario_id": "WB-019",
+      "text": "احتجزت سلطات أجنبية سفينة لشركة نقل، وتمنح المادة وزنًا متساويًا للنزاع الدولي والخسائر والعقود المتوقفة.",
+      "human_conceptual_expected_state": "GENUINELY_AMBIGUOUS",
+      "representability": "GENUINELY_FORCED_CHOICE_AMBIGUOUS"
+    },
+    {
+      "scenario_id": "WB-020",
+      "text": "تعرضت شركة بنية تحتية لهجوم سيبراني منسوب إلى دولة، ويتساوى شرح التوتر الدولي مع أثره التشغيلي والتجاري.",
+      "human_conceptual_expected_state": "GENUINELY_AMBIGUOUS",
+      "representability": "GENUINELY_FORCED_CHOICE_AMBIGUOUS"
+    },
+    {
+      "scenario_id": "WB-021",
+      "text": "عالج مستشفى تملكه شركة خاصة مرضى بعد تفشي عدوى، وتتمحور المادة حول التشخيص والرعاية الصحية.",
+      "human_conceptual_expected_state": "OTHER",
+      "representability": "CLEARLY_REPRESENTABLE"
+    },
+    {
+      "scenario_id": "WB-022",
+      "text": "فاز نادٍ مسجل كشركة بمباراة نهائية، ويركز الخبر على أداء اللاعبين والنتيجة الرياضية.",
+      "human_conceptual_expected_state": "OTHER",
+      "representability": "CLEARLY_REPRESENTABLE"
+    },
+    {
+      "scenario_id": "WB-023",
+      "text": "اكتشف باحثون ثغرة في منصة لشركة تقنية، وتشرح المادة الخلل البرمجي وطرق الحماية لا أداء الشركة التجاري.",
+      "human_conceptual_expected_state": "OTHER",
+      "representability": "CLEARLY_REPRESENTABLE"
+    },
+    {
+      "scenario_id": "WB-024",
+      "text": "أحالت النيابة مدير شركة إلى المحاكمة في قضية تزوير، ويتصدر التحقيق الجنائي والأدلة معالجة الخبر.",
+      "human_conceptual_expected_state": "OTHER",
+      "representability": "CLEARLY_REPRESENTABLE"
+    }
+  ],
+  "scenario_distribution": {
+    "WORLD_PRIMARY": 6,
+    "BUSINESS_PRIMARY": 6,
+    "ECONOMY_PRIMARY": 4,
+    "GENUINELY_AMBIGUOUS": 4,
+    "OTHER": 4
+  },
+  "representability_counts": {
+    "REPRESENTABLE_SECONDARY_DIMENSION_LOST": 11,
+    "CLEARLY_REPRESENTABLE": 9,
+    "GENUINELY_FORCED_CHOICE_AMBIGUOUS": 4
+  },
+  "single_label_sufficiency_assessment": "SINGLE_LABEL_ADEQUATE_WITH_CLEARER_RULES",
+  "primary_secondary_model_evidence": "MIXED_STORIES_SHOW_INFORMATION_LOSS_BUT_CURRENT_EVIDENCE_SUPPORTS_RESEARCH_NOT_IMPLEMENTATION",
+  "boundary_failure_types": [
+    "ENTITY_TYPE_DOMINANCE",
+    "OWNER_ROLE_DOMINANCE",
+    "SOURCE_ROLE_DOMINANCE",
+    "EVENT_CENTRALITY_UNDERWEIGHTED",
+    "BUSINESS_DEFINITION_OVERBROAD",
+    "SINGLE_LABEL_INFORMATION_LOSS"
+  ],
+  "dominant_boundary_failure_type": "EVENT_CENTRALITY_UNDERWEIGHTED",
+  "authority_implications": [
+    "AMBIGUOUS_BOUNDARY_BLOCK",
+    "PRIMARY_TOPIC_ONLY_AUTHORITY",
+    "SECONDARY_DOMAIN_DIAGNOSTIC"
+  ],
+  "provider_confidence_implication": "CONFIDENCE_INSUFFICIENT_FOR_ONTOLOGY_BOUNDARY",
+  "human_unsure_semantics": "Insufficient basis to mark an override correct or incorrect under the current ontology; it is neither success, regression, correct, nor incorrect.",
+  "recommended_architecture_direction": "D. COMBINE_SEMANTIC_CLARIFICATION_AND_ROLE_PROTECTION",
+  "pilot_implication": "TOPIC_ONTOLOGY_SPECIFICATION_REQUIRED_BEFORE_PILOT",
+  "pilot_effective_mode": "SHADOW",
+  "pilot_state": "STOPPED",
+  "provider_calls": 0,
+  "production_files_modified": []
+}
