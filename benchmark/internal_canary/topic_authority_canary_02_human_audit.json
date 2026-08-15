@@ -1,0 +1,87 @@
+{
+  "audit_id": "topic_authority_canary_02_human_audit",
+  "audit_type": "INDEPENDENT_HUMAN_TOPIC_OVERRIDE_REVIEW",
+  "judgment_source": "INDEPENDENT_HUMAN_REVIEW_PENDING",
+  "independence_statement": "The reviewer must determine the best Topic from the article itself and must not assume either deterministic_topic or authoritative_topic is correct. Provider output is not ground truth.",
+  "allowed_human_correctness_states": [
+    "CORRECT_OVERRIDE",
+    "INCORRECT_OVERRIDE",
+    "UNSURE",
+    "UNREVIEWED"
+  ],
+  "legal_topic_values": [
+    "POLITICS",
+    "ECONOMY",
+    "BUSINESS",
+    "TECHNOLOGY",
+    "SPORTS",
+    "GOVERNMENT",
+    "WEATHER",
+    "HEALTH",
+    "CULTURE",
+    "SCIENCE",
+    "EDUCATION",
+    "CRIME",
+    "ENTERTAINMENT",
+    "WORLD",
+    "GENERAL"
+  ],
+  "pilot_effective_mode": "SHADOW",
+  "canary_continuation": "PAUSED_FOR_HUMAN_AUDIT",
+  "metrics": {
+    "audit_records_prepared": 2,
+    "reviewed": 0,
+    "correct": 0,
+    "incorrect": 0,
+    "unsure": 0,
+    "provider_calls": 0
+  },
+  "records": [
+    {
+      "canary_id": "CANARY2-001",
+      "audit_identity": "105cb08f0553979ac022501fc8a9e16b9cf5aa9b73575b3d34a6383b9cd1116c",
+      "deterministic_topic": "GENERAL",
+      "resolved_topic": "WORLD",
+      "authoritative_topic": "WORLD",
+      "authority_source": "ADJUDICATION",
+      "resolution_status": "ADJUDICATED_ACCEPTED",
+      "provider_confidence": "HIGH",
+      "ambiguity_remaining": false,
+      "review_required": false,
+      "block_reasons": [],
+      "warnings": [],
+      "consequence_only_primary_sufficiency": false,
+      "human_review_context": {
+        "title": "زلزال بقوة 7.7 درجات يضرب سواحل إندونيسيا وتحذير من تسونامي",
+        "faithful_excerpt": "ضرب زلزال قوي بلغت شدته 7.7 درجات على مقياس ريختر قبالة سواحل إندونيسيا، السبت، ما أدى إلى إطلاق تحذيرات من احتمال تشكل أمواج مد عاتية «تسونامي» في بعض المناطق الساحلية.\n\nوأعلن المركز الأورومتوسطي لرصد الزلازل وقوع الهزة القوية، فيما أشارت هيئة المسح الجيولوجي الأميركية كذلك إلى تسجيل زلزال كبير قبالة السواحل الإندونيسية."
+      },
+      "human_correctness": "UNREVIEWED",
+      "human_expected_topic": "UNREVIEWED",
+      "reviewer_notes": "UNREVIEWED",
+      "review_timestamp": "UNREVIEWED"
+    },
+    {
+      "canary_id": "CANARY2-002",
+      "audit_identity": "218688620285f5c799caff2c31a5c88f4d5886b143e288ff2dbad7cb12272b9f",
+      "deterministic_topic": "ECONOMY",
+      "resolved_topic": "BUSINESS",
+      "authoritative_topic": "BUSINESS",
+      "authority_source": "ADJUDICATION",
+      "resolution_status": "ADJUDICATED_ACCEPTED",
+      "provider_confidence": "HIGH",
+      "ambiguity_remaining": false,
+      "review_required": false,
+      "block_reasons": [],
+      "warnings": [],
+      "consequence_only_primary_sufficiency": false,
+      "human_review_context": {
+        "title": "أدنوك الإماراتية: تعرض إحدى سفننا لهجوم أثناء عبورها مضيق هرمز",
+        "faithful_excerpt": "أعلنت شركة بترول أبوظبي الوطنية «أدنوك» تعرض إحدى السفن التابعة لها لهجوم أثناء عبورها مضيق هرمز مساء الجمعة 14 أغسطس.\n\nوأكدت الشركة أن الاستهداف لم يسفر عن وقوع إصابات بين أفراد طاقم السفينة، فيما جرى التعامل مع الحادث وفق الإجراءات المعمول بها."
+      },
+      "human_correctness": "UNREVIEWED",
+      "human_expected_topic": "UNREVIEWED",
+      "reviewer_notes": "UNREVIEWED",
+      "review_timestamp": "UNREVIEWED"
+    }
+  ]
+}
